@@ -2,7 +2,7 @@
 
 require_once(dirname(__FILE__).'/tag_open.class.php');
 
-class Decorator_HTML_Body_Start extends Decorator_HTML_Tag_Open
+class Body_Start_HTML_Decorator extends Tag_Open_HTML_Decorator
 {
     public function __construct($params = array())
     {

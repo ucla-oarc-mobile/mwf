@@ -2,7 +2,7 @@
 
 require_once(dirname(dirname(dirname(__FILE__))).'/decorator.class.php');
 
-class Decorator_Site_Content_Full extends Decorator
+class Content_Full_Site_Decorator extends Site_Decorator
 {
     private $_tags = array();
     private $_padded = false;

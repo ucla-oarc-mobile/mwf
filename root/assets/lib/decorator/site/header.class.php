@@ -3,7 +3,7 @@
 require_once(dirname(dirname(dirname(__FILE__))).'/decorator.class.php');
 require_once(dirname(dirname(dirname(__FILE__))).'/config.class.php');
 
-class Decorator_Site_Header extends Decorator
+class Header_Site_Decorator extends Site_Decorator
 {
     private $_title = false;
     private $_title_path = false;
