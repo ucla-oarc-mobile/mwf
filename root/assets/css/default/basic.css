@@ -3,7 +3,8 @@
  *******************************************************/
 
 .not-basic,
-.only-webkit {
+.only-webkit,
+.only-full {
 	display: none;
 }
 

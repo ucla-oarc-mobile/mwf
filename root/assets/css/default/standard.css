@@ -3,13 +3,15 @@
  */
 
 .not-basic,
-.not-webkit {
+.not-webkit,
+.not-full {
 	display: block;
 }
 
 .basic-only,
 .only-basic,
-.only-webkit {
+.only-webkit
+.only-full {
     display: none;
 }
 

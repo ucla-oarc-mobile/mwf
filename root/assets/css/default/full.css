@@ -10,8 +10,8 @@
  *
  */
 
-.only-webkit { display: block; }
-.not-webkit { display: none; }
+.only-webkit, .only-full { display: block; }
+.not-webkit, .not-full { display: none; }
 
 /********************************************************
  * MENUS
