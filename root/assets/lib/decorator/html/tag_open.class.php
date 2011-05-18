@@ -2,7 +2,7 @@
 
 require_once(dirname(dirname(dirname(__FILE__))).'/decorator.class.php');
 
-class Tag_Open_HTML_Decorator extends HTML_Decorator
+class Tag_Open_HTML_Decorator extends Decorator
 {
     private $_tag;
     private $_params;
@@ -22,6 +22,31 @@ class Tag_Open_HTML_Decorator extends HTML_Decorator
     public function &set_params($params)
     {
         $this->_params = array_merge($this->_params, $params);
+        return $this;
+    }
+
+    public function &add_class($class)
+    {
+        if(!isset($this->_params['class']))
+            $this->_params['class'] = $class;
+        else if(!in_array($class, explode(' ', $this->_params['class'])))
+            $this->_params['class'] .= ' '.$class;
+        return $this;
+    }
+
+    public function &remove_class($class)
+    {
+        if(isset($this->_params['class']))
+        {
+            $classes = explode(' ', $this->_params['class']);
+            if(($i = array_search($class, $classes)) !== false)
+            {
+                $classes[$i] = $classes[count($classes)-1];
+                array_pop($classes);
+                $this->_params['class'] = implode(' ', $classes);
+            }
+        }
+
         return $this;
     }
 

@@ -2,7 +2,7 @@
 
 require_once(dirname(dirname(dirname(__FILE__))).'/decorator.class.php');
 
-class Tag_Close_HTML_Decorator extends HTML_Decorator
+class Tag_Close_HTML_Decorator extends Decorator
 {
     private $_tag;
 

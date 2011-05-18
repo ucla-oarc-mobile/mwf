@@ -2,10 +2,15 @@
 
 require_once(dirname(dirname(dirname(__FILE__))).'/decorator.class.php');
 
-class Content_Full_Site_Decorator extends Site_Decorator
+class Content_Full_Site_Decorator extends Tag_HTML_Decorator
 {
-    private $_tags = array();
     private $_padded = false;
+
+    public function __construct($inner = array(), $params = array())
+    {
+        parent::__construct('div', $inner, $params);
+        $this->add_class('content-full');
+    }
 
     public function &set_padded($val = true)
     {
@@ -13,59 +18,42 @@ class Content_Full_Site_Decorator extends Site_Decorator
         return $this;
     }
 
-    public function &add($tag)
-    {
-        $this->_tags[] = $tag;
-        return $this;
-    }
-
-    public function &add_tag($tag, $inner = '', $params = array())
-    {
-        return $this->add(HTML_Decorator::tag($tag, $inner, $params));
-    }
-
     public function &add_header($inner, $params = array())
     {
-        return $this->add_tag('h1', $inner, $params);
+        return $this->add_inner_tag('h1', $inner, $params);
     }
 
     public function &add_header_light($inner, $params = array())
     {
         if(!isset($params['class']))
             $params['class'] = 'light';
-        elseif(!strpos($params['class'], ' light ')
-                    && substr($params['class'], 0, 6) != 'light '
-                    && substr($params['class'], strlen($params['class'])-6, 6) != ' light'
-                    && trim($params['class']) != 'light')
+        elseif(!in_array('light', explode(' ', $params['class'])))
             $params['class'] .= ' light';
-            
+
         return $this->add_header($inner, $params);
     }
 
     public function &add_subheader($inner, $params = array())
     {
-        return $this->add_tag('h4', $inner, $params);
+        return $this->add_inner_tag('h4', $inner, $params);
     }
 
     public function &add_paragraph($inner, $params = array())
     {
-        return $this->add_tag('p', $inner, $params);
+        return $this->add_inner_tag('p', $inner, $params);
     }
 
     public function &add_section($inner, $params = array())
     {
-        return $this->add_tag('div', $inner, $params);
+        return $this->add_inner_tag('div', $inner, $params);
     }
 
     public function render()
     {
-        $str = '<div class="content-full'.($this->_padded ? ' content-padded' : '').'">
-';
-        $str .= implode('
-', $this->_tags);
-        $str .= '</div>
-';
-        return $str;
+        if($this->_padded)
+            $this->add_class('content-padded');
+
+        return parent::render();
     }
 }
 
