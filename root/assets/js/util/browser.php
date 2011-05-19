@@ -9,7 +9,12 @@
  *
  * These cookies are used by User_Browser class after the first page load.
  *
+ * @package core
+ * @subpackage js
+ *
  * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
  * @version 20101021
  *
  * @uses Config

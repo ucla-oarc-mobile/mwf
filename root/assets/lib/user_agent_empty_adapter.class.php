@@ -4,8 +4,13 @@
  * An adapter class used by the User_Agent when it does not detect a user agent
  * for the client that responds as though its is a "basic" device.
  *
+ * @package core
+ * @subpackage user_agent
+ *
  * @author ebollens
- * @version 20101220
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20110510
  *
  * @uses User_Agent_Adapter_Interface
  */

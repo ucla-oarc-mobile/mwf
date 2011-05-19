@@ -3,7 +3,12 @@
 /**
  * Javascript file that defines the functions of mwf.user_agent.
  *
+ * @package core
+ * @subpackage js
+ *
  * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
  * @version 20101021
  *
  * @uses User_Agent

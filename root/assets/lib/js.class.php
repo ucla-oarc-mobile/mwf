@@ -4,6 +4,9 @@
  * Singleton that provides a variety of utility functions for working
  * with framework and external Javascript.
  *
+ * @package core
+ * @subpackage handler
+ * 
  * @author ebollens
  * @version 20101021
  *

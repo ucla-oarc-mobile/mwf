@@ -7,24 +7,40 @@
  *
  * This file should be included on all pages that use the mobile framework.
  *
- * To avoid CSS collisions with @import rules versus direct definitions, this
- * script should only use @import, and should use as minimally a subset of
- * stylesheets as possible.
+ * @package core
+ * @subpackage handler
  *
  * @author ebollens
- * @version 20101021
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20110512
  *
  * @uses User_Agent
+ * @uses CSS
+ * @uses CSSMin
+ * @uses Path_Validator
  */
 
-/** Defines the file to be parsed as a CSS file. */
+/**
+ * Defines the file to be parsed as a CSS file.
+ */
+
 header("Content-Type: text/css");
 
-/** Include necessary library. */
+/**
+ * Include necessary libraries.
+ */
+
 include_once(dirname(__FILE__).'/lib/user_agent.class.php');
 include_once(dirname(__FILE__).'/lib/config.class.php');
 require_once(dirname(__FILE__).'/lib/cssmin.class.php');
 require_once(dirname(__FILE__).'/lib/path.class.php');
+
+/**
+ * Get custom CSS classes from {'css':'custom'} config variable.
+ *
+ * @link /config/css.php
+ */
 
 $custom = Config::get('css', 'custom');
 
@@ -33,10 +49,18 @@ if(!$custom)
 elseif(!is_array($custom))
     $custom = array($custom);
 
+/**
+ * Load all basic.css stylesheets under the default and custom directories.
+ */
+
 require_once(dirname(__FILE__).'/css/default/basic.css');
 foreach($custom as $dir)
     if(file_exists(dirname(__FILE__).'/css/'.$dir.'/basic.css'))
         include_once(dirname(__FILE__).'/css/'.$dir.'/basic.css');
+
+/**
+ * Load all standard.css stylesheets under the default and custom directories.
+ */
 
 if(User_Agent::is_standard())
 {
@@ -45,6 +69,10 @@ if(User_Agent::is_standard())
         if(file_exists(dirname(__FILE__).'/css/'.$dir.'/standard.css'))
             include_once(dirname(__FILE__).'/css/'.$dir.'/standard.css');
 }
+
+/**
+ * Load all full.css stylesheets under the default and custom directories.
+ */
 
 if(User_Agent::is_full())
 {
@@ -72,6 +100,3 @@ if(User_Agent::is_full() && isset($_GET['full']))
     foreach(explode(' ', $_GET['full']) as $file)
         if(Path_Validator::is_safe($file, 'css') && $contents = Path::get_contents($file))
             echo ' ' . CSSMin::minify($contents);
-        
-
-?>

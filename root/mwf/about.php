@@ -1,6 +1,33 @@
 <?php
 
-require_once(dirname(dirname(__FILE__)).'/assets/config.php');
+/**
+ * The front page when the user arrives at the mobile site on a mobile device.
+ * If the user is on a non-mobile device and {'global':'site_nonmobile_url'} is
+ * set in config/global.php, then they will be redirected.
+ *
+ * This page throws a fatal error if either {'global':'site_url'} or
+ * {'global':'site_assets_url'} are not set in /config/global.php.
+ *
+ * @package mwf
+ *
+ * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20110518
+ *
+ * @uses Decorator
+ * @uses Site_Decorator
+ * @uses HTML_Decorator
+ * @uses HTML_Start_HTML_Decorator
+ * @uses Head_Site_Decorator
+ * @uses Body_Start_HTML_Decorator
+ * @uses Header_Site_Decorator
+ * @uses Content_Full_Site_Decorator
+ * @uses Footer_Site_Decorator
+ * @uses Body_End_HTML_Decorator
+ * @uses HTML_End_HTML_Decorator
+ */
+
 require_once(dirname(dirname(__FILE__)).'/assets/lib/decorator.class.php');
 
 echo HTML_Decorator::html_start();

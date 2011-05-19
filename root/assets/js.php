@@ -7,11 +7,18 @@
  *
  * This file should be included on all pages that use the mobile framework.
  *
+ * @package core
+ * @subpackage handler
+ *
  * @author ebollens
- * @version 20110510
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20110512
  *
  * @uses User_Agent
  * @uses JS
+ * @uses JSMin
+ * @uses Path_Validator
  */
 
 /**
@@ -135,6 +142,3 @@ if(User_Agent::is_full() && isset($_GET['full']))
     foreach(explode(' ', $_GET['full']) as $file)
         if(Path_Validator::is_safe($file, 'css') && $contents = Path::get_contents($file))
             echo ' ' . JSMin::minify($contents);
-
-
-?>
