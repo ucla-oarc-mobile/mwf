@@ -1,13 +1,7 @@
 <?php
 
 /**
- * The front page when the user arrives at the mobile site on a mobile device.
- * If the user is on a non-mobile device and {'global':'site_nonmobile_url'} is
- * set in config/global.php, then they will be redirected.
- *
- * This page throws a fatal error if either {'global':'site_url'} or
- * {'global':'site_assets_url'} are not set in /config/global.php.
- *
+ * 
  * @package mwf
  *
  * @author ebollens
@@ -50,9 +44,21 @@ echo Site_Decorator::content_full()
             ->add_paragraph('The framework project began in early 2010 as a joint venture between the UCLA Office of Information Technology and UCLA Communications as a means to reach the vast majority of campus mobile users via a single platform in a reasonable and cost-effective manner. The framework first went into production at the beginning of Fall 2010 with the launch of UCLA Mobile.')
             ->add_paragraph('More than ten campus units are now participating at UCLA, four other campuses in the UC system have launched production mobile applications using the framework, and several other campuses both in the UC and beyond are looking at it as an option to deploy a mobile web presence.');
 
+
+echo Site_Decorator::button_full()
+                ->set_padded()
+                ->add_option(Config::get('global', 'back_to_home_text'), Config::get('global', 'site_url'));
+
+$footer = Site_Decorator::footer();
+
+if($full_site_url = Config::get('frontpage', 'full_site_url'))
+    $footer->set_full_site('Full Site', Config::get('frontpage', 'full_site_url'));
+
+if($help_site_url = Config::get('frontpage', 'help_site_url'))
+    $footer->set_help_site('Help', Config::get('frontpage', 'help_site_url'));
+
+echo $footer;
+
 echo HTML_Decorator::body_end();
 
 echo HTML_Decorator::html_end();
-
-?>
-
