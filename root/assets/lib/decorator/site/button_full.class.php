@@ -1,6 +1,22 @@
 <?php
 
+/**
+ *
+ *
+ * @package decorator
+ * @subpackage site_decorator
+ *
+ * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20110518
+ *
+ * @uses Decorator
+ * @uses Tag_HTML_Decorator
+ */
+
 require_once(dirname(dirname(dirname(__FILE__))).'/decorator.class.php');
+require_once(dirname(dirname(__FILE__)).'/html/tag.class.php');
 
 class Button_Full_Site_Decorator extends Tag_HTML_Decorator
 {
@@ -78,5 +94,3 @@ class Button_Full_Site_Decorator extends Tag_HTML_Decorator
         return parent::render();
     }
 }
-
-?>

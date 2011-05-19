@@ -1,5 +1,19 @@
 <?php
 
+/**
+ *
+ *
+ * @package decorator
+ * @subpackage html_decorator
+ *
+ * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20110518
+ *
+ * @uses Decorator
+ */
+
 require_once(dirname(dirname(dirname(__FILE__))).'/decorator.class.php');
 
 class Tag_HTML_Decorator extends Decorator
@@ -80,5 +94,3 @@ class Tag_HTML_Decorator extends Decorator
         return $this->_tag_open . ($this->_inner && count($this->_inner) !== 0 ? (implode('', $this->_inner) . $this->_tag_close) : '');
     }
 }
-
-?>

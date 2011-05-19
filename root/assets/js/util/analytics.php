@@ -5,7 +5,12 @@
  * analytics config file (/assets/config/analytics.php). This requires DOM
  * write capabilities.
  *
+ * @package core
+ * @subpackage js
+ *
  * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
  * @version 20101021
  *
  * @uses Config

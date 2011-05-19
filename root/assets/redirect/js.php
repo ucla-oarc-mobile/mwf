@@ -8,7 +8,12 @@
  * This script file should NOT be included on the same page as /assets/js.php,
  * as /assets/js.php unsets the redirection override preference.
  *
+ * @package core
+ * @subpackage redirect
+ *
  * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
  * @version 20101220
  *
  * @uses Config

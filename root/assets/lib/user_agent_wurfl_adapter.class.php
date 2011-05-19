@@ -4,8 +4,13 @@
  * An adapter class used by the User_Agent so that it can leverage the WURFL
  * PHP API for mobile device capabilities.
  *
+ * @package core
+ * @subpackage user_agent
+ *
  * @author ebollens
- * @version 20101021
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20110510
  *
  * @uses User_Agent_Adapter_Interface
  * @uses Config

@@ -4,7 +4,12 @@
  * A library included by assets/js.php for desktops that contains information
  * that the preview.js file will use.
  *
+ * @package core
+ * @subpackage js
+ *
  * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
  * @version 20101021
  *
  * @uses Config
