@@ -69,15 +69,12 @@ Config::set('frontpage', 'menu',
         array('name'=>'About',
               'id'=>'about',
               'url'=>'mwf/about.php')
-        /*,array('name'=>'Showcase',
-              'id'=>'showcase',
-              'url'=>'index.php?s=showcase')*/
         ,array('name'=>'Getting Started',
               'id'=>'getting-started',
               'url'=>'mwf/getting_started.php')
-        ,array('name'=>'Collaboration Site',
-              'id'=>'mwf',
-              'url'=>'http://mwf.ucla.edu')
+        ,array('name'=>'Collaboration',
+              'id'=>'showcase',
+              'url'=>'index.php?s=collaboration')
         ,array('name'=>'License',
               'id'=>'license',
               'url'=>'mwf/license.php')
@@ -85,13 +82,17 @@ Config::set('frontpage', 'menu',
               'id'=>'credits',
               'url'=>'mwf/credits.php')
         )
-    /*,'showcase'=>array(
-        array('name'=>'Touch Transitions',
-              'url'=>'mwf/showcase/touch-transitions.php'),
-        array('name'=>'Geolocation &amp; Maps API',
-              'url'=>'mwf/showcase/geolocation_and_feeds-api.php'),
-        array('name'=>'Feeds API',
-              'url'=>'mwf/showcase/feeds-api.php')
-        )*/
+    ,'collaboration'=>array(
+        array('name'=>'News',
+              'url'=>'http://mwf.ucla.edu/news'),
+        array('name'=>'Documentation',
+              'url'=>'https://github.com/ucla/mwf/wiki'),
+        array('name'=>'Forums',
+              'url'=>'http://mwf.ucla.edu/forum'),
+        array('name'=>'Git Repository',
+              'url'=>'https://github.com/ucla/mwf'),
+        array('name'=>'JIRA Issue Tracker',
+              'url'=>'https://jira.ats.ucla.edu:8443/')
+        )
     )
 );

@@ -1,9 +1,112 @@
 <?php
 
 require_once(dirname(dirname(dirname(__FILE__))).'/decorator.class.php');
+require_once(dirname(dirname(__FILE__)).'/html/tag.class.php');
 require_once(dirname(dirname(dirname(__FILE__))).'/config.class.php');
 
-class Decorator_Site_Head extends Decorator
+class Head_Site_Decorator extends Tag_HTML_Decorator
+{
+    private $_title = '';
+    private $_handler_css = false;
+    private $_handler_css_params = array();
+    private $_handler_js = false;
+    private $_handler_js_params = array();
+
+    public function __construct()
+    {
+        parent::__construct('head');
+    }
+
+    public function &set_title($title)
+    {
+        $this->_title = $title;
+        return $this;
+    }
+
+    public function &set_css_handler($path)
+    {
+        $this->_handler_css = $path;
+        return $this;
+    }
+
+    public function &set_css_handler_params($params = array())
+    {
+        $this->_handler_css_params = array_merge($this->_handler_css_params, $params);
+        return $this;
+    }
+
+    public function &add_css_handler_library($type, $library)
+    {
+        if(is_array($library))
+            foreach($library as $l)
+                $this->add_css_handler_library($type, $l);
+        elseif(!isset($this->_handler_css_params[$type]))
+            $this->_handler_css_params[$type] = $library;
+        elseif(!in_array($library, explode('+', $this->_handler_css_params[$type])))
+            $this->_handler_css_params[$type] .= '+'.$library;
+
+        return $this;
+    }
+
+    public function &set_js_handler($path)
+    {
+        $this->_handler_js = $path;
+        return $this;
+    }
+
+    public function &set_js_handler_params($params = array())
+    {
+        $this->_handler_js_params = array_merge($this->_handler_js_params, $params);
+        return $this;
+    }
+
+    public function &add_js_handler_library($type, $library)
+    {
+        if(is_array($library))
+            foreach($library as $l)
+                $this->add_js_handler_library($type, $l);
+        elseif(!isset($this->_handler_js_params[$type]))
+            $this->_handler_js_params[$type] = $library;
+        elseif(!in_array($library, explode('+', $this->_handler_js_params[$type])))
+            $this->_handler_js_params[$type] .= '+'.$library;
+
+        return $this;
+    }
+
+    public function &add_stylesheet($href, $media = 'screen')
+    {
+        return $this->add_inner_tag('link', false, array('rel'=>'stylesheet', 'type'=>'text/css', 'href'=>$href, 'media'=>$media));
+    }
+
+    public function &add_javascript($src)
+    {
+        return $this->add_inner_tag('script', '', array('type'=>'text/javascript', 'src'=>$src));
+    }
+
+    public function render()
+    {
+        $handler_css = $this->_handler_css ? $this->_handler_css : Config::get('global', 'site_assets_url').'/css.php?';
+        foreach($this->_handler_css_params as $key=>$val)
+            $handler_css .= is_int($key) ? $val.'&' : $key.'='.$val.'&';
+        $handler_css = substr($handler_css, 0, strlen($handler_css)-1);
+
+        $handler_js = $this->_handler_js ? $this->_handler_js : Config::get('global', 'site_assets_url').'/js.php?';
+        foreach($this->_handler_js_params as $key=>$val)
+            $handler_js .= is_int($key) ? $val.'&' : $key.'='.$val.'&';
+        $handler_js = substr($handler_js, 0, strlen($handler_js)-1);
+
+        $this->add_inner_tag_front('meta', false, array('name'=>'viewport', 'content'=>'height=device-height,width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;'));
+        $this->add_inner_tag_front('script', null, array('type'=>'text/javascript', 'src'=>$handler_js));
+        $this->add_inner_tag_front('link', false, array('rel'=>'stylesheet', 'type'=>'text/css', 'href'=>$handler_css, 'media'=>'screen'));
+        $this->add_inner_tag_front('title', $this->_title);
+
+        return parent::render();
+    }
+}
+
+/*
+
+class Head_Site_Decorator extends Decorator
 {
     private $_title = '';
     private $_tags = array();
@@ -128,5 +231,7 @@ class Decorator_Site_Head extends Decorator
         return $str;
     }
 }
+
+ */
 
 ?>

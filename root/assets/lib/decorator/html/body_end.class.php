@@ -2,7 +2,7 @@
 
 require_once(dirname(__FILE__).'/tag_close.class.php');
 
-class Decorator_HTML_Body_End extends Decorator_HTML_Tag_Close
+class Body_End_HTML_Decorator extends Tag_Close_HTML_Decorator
 {
     public function __construct()
     {

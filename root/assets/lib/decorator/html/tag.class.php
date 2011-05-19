@@ -2,17 +2,17 @@
 
 require_once(dirname(dirname(dirname(__FILE__))).'/decorator.class.php');
 
-class Decorator_HTML_Tag extends Decorator
+class Tag_HTML_Decorator extends Decorator
 {
     private $_tag_open;
     private $_tag_close;
-    private $_inner;
+    private $_inner = array();
 
     public function __construct($tag, $inner = '', $params = array())
     {
         $this->_tag_open = HTML_Decorator::tag_open($tag, $params);
-        $this->_tag_close = $inner !== false ? HTML_Decorator::tag_close($tag) : false;
-        $this->_inner = $inner;
+        $this->_tag_close = HTML_Decorator::tag_close($tag);
+        $this->add_inner($inner);
     }
 
     public function &set_param($key, $val)
@@ -27,9 +27,57 @@ class Decorator_HTML_Tag extends Decorator
         return $this;
     }
 
+    public function &add_class($class)
+    {
+        $this->_tag_open->add_class($class);
+        return $this;
+    }
+
+    public function &remove_class($class)
+    {
+        $this->_tag_open->remove_class($class);
+        return $this;
+    }
+
+    public function &add_inner_tag($tag, $inner = '', $params = array())
+    {
+        return $this->add_inner(new Tag_HTML_Decorator($tag, $inner, $params));
+    }
+
+    public function &add_inner_tag_front($tag, $inner = '', $params = array())
+    {
+        return $this->add_inner_front(new Tag_HTML_Decorator($tag, $inner, $params));
+    }
+
+    public function &add_inner($content)
+    {
+        if(is_array($content))
+            foreach($content as $c)
+                $this->add_inner($c);
+        else if($content !== false)
+            $this->_inner[] = $content;
+        return $this;
+    }
+
+    public function &add_inner_front($content)
+    {
+        if(is_array($content))
+            for($i=count($content)-1; $i <= 0; $i--)
+                $this->add_inner_front($content[$i]);
+        elseif($content !== false)
+            array_unshift($this->_inner, $content);
+        return $this;
+    }
+
+    public function &flush_inner()
+    {
+        $this->_inner = array();
+        return $this;
+    }
+
     public function render()
     {
-        return $this->_tag_open . ($this->_inner !== false ? ($this->_inner . $this->_tag_close) : '');
+        return $this->_tag_open . ($this->_inner && count($this->_inner) !== 0 ? (implode('', $this->_inner) . $this->_tag_close) : '');
     }
 }
 

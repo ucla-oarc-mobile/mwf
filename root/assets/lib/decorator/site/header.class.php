@@ -3,11 +3,16 @@
 require_once(dirname(dirname(dirname(__FILE__))).'/decorator.class.php');
 require_once(dirname(dirname(dirname(__FILE__))).'/config.class.php');
 
-class Decorator_Site_Header extends Decorator
+class Header_Site_Decorator extends Tag_HTML_Decorator
 {
     private $_title = false;
     private $_title_path = false;
     private $_image = false;
+
+    public function __construct()
+    {
+        parent::__construct('h1');
+    }
 
     public function &set_title($title)
     {
@@ -34,7 +39,7 @@ class Decorator_Site_Header extends Decorator
         if(!$this->_image)
             $this->_image = array('src'=>Config::get('global', 'header_home_button'),
                                   'alt'=>Config::get('global', 'header_home_button_alt'));
-        
+
         $image = HTML_Decorator::tag('img', false, $this->_image);
         $home_button = HTML_Decorator::tag('a', $image, array('href'=>Config::get('global', 'site_url')));
 
@@ -45,6 +50,9 @@ class Decorator_Site_Header extends Decorator
 
         $title_span = $title ? HTML_Decorator::tag('span', $title) : '';
 
-        return HTML_Decorator::tag('h1', $home_button.$title_span, array('id'=>'header'))->render();
+        $this->set_param('id', 'header');
+        $this->add_inner_front($home_button.$title_span);
+        
+        return parent::render();
     }
 }
