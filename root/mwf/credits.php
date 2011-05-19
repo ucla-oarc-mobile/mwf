@@ -75,7 +75,7 @@ echo Site_Decorator::content_full()
 $contributions = Site_Decorator::content_full()
                     ->set_padded()
                     ->add_header('Contributors')
-                    ->add_paragraph('In addition to their own mobile applications, a number of developers have contributed code directly to the UCLA Mobile Web Framework.', array('style'=>'font-style:italic;'));
+                    ->add_paragraph('In addition to their own mobile applications, a number of participants have contributed code directly to the UCLA Mobile Web Framework.', array('style'=>'font-style:italic;'));
 
 foreach($contributors as $campus=>$people)
 {
