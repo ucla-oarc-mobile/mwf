@@ -83,43 +83,31 @@ if($main_menu)
 else
     echo Site_Decorator::header()->set_title(ucwords(str_replace('_', ' ', $_GET['s'])));
 
+
+$menu = Site_Decorator::menu_full()->set_padded()->set_detailed();
+
+if($main_menu)
+    $menu->add_class('menu-front');
+
+for($i = 0; $i < count($menu_items); $i++)
+{
+    $menu_item = $menu_items[$i];
+
+    if(isset($menu_item['restriction']))
+    {
+        $function = $menu_item['restriction'];
+        if(!User_Agent::$function())
+            continue;
+    }
+
+    $menu->add_item($menu_item['name'],$menu_item['url'],isset($menu_item['id'])?array('id'=>$menu_item['id']):array());
+}
+
+echo $menu;
+
+
 ?>
 
-    <div class="menu-full menu-detailed menu-padded<?php if($main_menu){ ?> menu-front<?php } ?>">
-
-         <ol>
-            <?php
-
-            for($i = 0; $i < count($menu_items); $i++)
-            {
-                $menu_item = $menu_items[$i];
-
-                if(isset($menu_item['restriction']))
-                {
-                    $function = $menu_item['restriction'];
-                    if(!User_Agent::$function())
-                        continue;
-                }
-
-                $class_name = '';
-                if($i == 0)
-                    $class_name .= 'menu-first ';
-                if($i == count($menu_items) - 1)
-                    $class_name .= 'menu-last';
-                $attrs = strlen($class_name) > 0 ? ' class="' . trim($class_name) . '"' : '';
-
-                if(!isset($menu_item['url']))
-                    $menu_item['url'] = '#';
-                if(!isset($menu_item['name']))
-                    $menu_item['name'] = '';
-
-                echo isset($menu_item['id']) ? '<li id="'.$menu_item['id'].'"'.$attrs.'>' : '<li'.$attrs.'>';
-                echo '<a href="'.$menu_item['url'].'">'.$menu_item['name'].'</a></li>';
-            }
-
-            ?>
-         </ol>
-    </div>
 
     <?php if(!$main_menu){ ?>
     <div class="button-full button-padded"><a href="index.php"><?php echo Config::get('global', 'back_to_home_text') ?></a></div>
