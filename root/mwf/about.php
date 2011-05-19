@@ -7,7 +7,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110518
+ * @version 20110519
  *
  * @uses Decorator
  * @uses Site_Decorator
@@ -17,7 +17,8 @@
  * @uses Body_Start_HTML_Decorator
  * @uses Header_Site_Decorator
  * @uses Content_Full_Site_Decorator
- * @uses Footer_Site_Decorator
+ * @uses Button_Full_Site_Decorator
+ * @uses Default_Footer_Site_Decorator
  * @uses Body_End_HTML_Decorator
  * @uses HTML_End_HTML_Decorator
  */
@@ -49,15 +50,7 @@ echo Site_Decorator::button_full()
                 ->set_padded()
                 ->add_option(Config::get('global', 'back_to_home_text'), Config::get('global', 'site_url'));
 
-$footer = Site_Decorator::footer();
-
-if($full_site_url = Config::get('frontpage', 'full_site_url'))
-    $footer->set_full_site('Full Site', Config::get('frontpage', 'full_site_url'));
-
-if($help_site_url = Config::get('frontpage', 'help_site_url'))
-    $footer->set_help_site('Help', Config::get('frontpage', 'help_site_url'));
-
-echo $footer;
+echo Site_Decorator::default_footer();
 
 echo HTML_Decorator::body_end();
 
