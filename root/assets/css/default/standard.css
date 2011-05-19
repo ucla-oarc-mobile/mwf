@@ -316,7 +316,8 @@ form.form-full > input[type=reset] {
 /*-------------------------------------------------
   Headings
   ------------------------------------------------*/
-.content-elements > h1, .content-full > h1 {
+.content-elements > h1, .content-full > h1,
+.content-elements > h4, .content-full > h4 {
         padding: .4em;
         margin: 0;
         text-align: center;

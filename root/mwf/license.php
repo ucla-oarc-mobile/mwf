@@ -28,12 +28,12 @@ require_once(dirname(dirname(__FILE__)).'/assets/config.php');
 
 echo HTML_Decorator::html_start();
 
-echo Site_Decorator::head()->set_title('License');
+echo Site_Decorator::head()->set_title('MWF License');
 
 echo HTML_Decorator::body_start();
 
 echo Site_Decorator::header()
-        ->set_title('License');
+        ->set_title('MWF License');
 
 $terms = array(
 'To share all Derivative Works you create of the Software (the Mobile Web
@@ -129,7 +129,7 @@ echo Site_Decorator::content_full()
         ->add_header('Disclaimer')
         ->add_paragraph('UCLA reserves the right to modify this license at any
 time. Therefore, although this represents a working copy of the UCLA Mobile
-Web Framework license, the latest version is available on the MWF site.')
+Web Framework license, the latest version exists on the MWF site.')
         ->add_paragraph(HTML_Decorator::tag('a', 'http://mwf.ucla.edu/license', array('href'=>'http://mwf.ucla.edu/license')), array('style'=>'text-align:center;'));
 
 echo Site_Decorator::button_full()
