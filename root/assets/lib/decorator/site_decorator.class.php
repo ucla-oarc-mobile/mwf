@@ -14,7 +14,7 @@
  * @uses Decorator
  */
 
-require_once(dirname(dirname(__FILE__)).'decorator.class.php');
+require_once(dirname(dirname(__FILE__)).'/decorator.class.php');
 
 class Site_Decorator extends Decorator
 {
