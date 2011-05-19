@@ -20,8 +20,8 @@ require_once(dirname(dirname(__FILE__)).'/root/assets/lib/config.class.php');
  *
  * @link index.php
  */
-Config::set('frontpage', 'full_site_url', false);
-Config::set('frontpage', 'help_site_url', false);
+Config::set('frontpage', 'full_site_url', Config::get('global', 'full_site_url'));
+Config::set('frontpage', 'help_site_url', Config::get('global', 'help_site_url'));
 
 /**
  * header_image_main
