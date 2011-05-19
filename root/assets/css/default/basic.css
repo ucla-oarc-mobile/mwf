@@ -214,7 +214,7 @@ Lists
  * LISTS
  *******************************************************/
 
-li {
+.front-page li, .menu-full li {
     font-weight: bold;
 }
 
@@ -434,6 +434,11 @@ form.form-full > input[type=reset]:hover {
   ------------------------------------------------*/
 .content-elements, .content-full {
     margin: 0;
+}
+
+.content-elements div ol, .content-full div ol {
+    margin: 0 1.5em;
+    position: relative;
 }
 
 .content-elements > * p, .content-full > * p {
