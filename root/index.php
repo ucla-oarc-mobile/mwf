@@ -6,11 +6,22 @@
  * set in config/global.php, then they will be redirected.
  *
  * @author ebollens
- * @version 20110510
+ * @version 20110518
  *
  * @uses Config
  * @uses User_Agent
  * @uses JS
+ * @uses Site_Decorator
+ * @uses HTML_Decorator
+ * @uses HTML_Start_HTML_Decorator
+ * @uses Head_Site_Decorator
+ * @uses Body_Start_HTML_Decorator
+ * @uses Header_Site_Decorator
+ * @uses Menu_Full_Site_Decorator
+ * @uses Button_Full_Site_Decorator
+ * @uses Footer_Site_Decorator
+ * @uses Body_End_HTML_Decorator
+ * @uses HTML_End_HTML_Decorator
  */
 
 /**
@@ -71,6 +82,9 @@ else
     $main_menu = true;
 }
 
+/**
+ * Start page
+ */
 
 echo HTML_Decorator::html_start();
 
@@ -78,11 +92,18 @@ echo Site_Decorator::head()->set_title(Config::get('global', 'title_text'));
 
 echo HTML_Decorator::body_start($main_menu ? array('class'=>'front-page') : array());
 
+/*
+ * Header
+ */
+
 if($main_menu)
     echo '<h1 id="header"><img src="'.Config::get('frontpage', 'header_image_main').'" alt="'.Config::get('frontpage', 'header_image_main_alt').'"><span>'.Config::get('frontpage', 'header_main_text').'</span></h1>';
 else
     echo Site_Decorator::header()->set_title(ucwords(str_replace('_', ' ', $_GET['s'])));
 
+/*
+ * Menu
+ */
 
 $menu = Site_Decorator::menu_full()->set_padded()->set_detailed();
 
@@ -105,37 +126,32 @@ for($i = 0; $i < count($menu_items); $i++)
 
 echo $menu;
 
+/**
+ * Back button
+ */
+
 if(!$main_menu)
     echo Site_Decorator::button_full()
                 ->set_padded()
                 ->add_option(Config::get('global', 'back_to_home_text'), 'index.php');
 
-?>
+/**
+ * Footer
+ */
 
+$footer = Site_Decorator::footer();
 
-    <div id="footer">
-        <p><?php 
+if($full_site_url = Config::get('frontpage', 'full_site_url'))
+    $footer->set_full_site('Full Site', Config::get('frontpage', 'full_site_url'));
 
-            if($copyright_text = Config::get('global', 'copyright_text'))
-                echo $copyright_text;
+if($help_site_url = Config::get('frontpage', 'help_site_url'))
+    $footer->set_help_site('Help', Config::get('frontpage', 'help_site_url'));
 
-            if($copyright_text && ($help_site_url = Config::get('frontpage', 'help_site_url') || $full_site_url = Config::get('frontpage', 'full_site_url')))
-                echo '<br>';
+echo $footer;
 
-            if($help_site_url)
-                echo '<a href="'.$help_site_url.'">Help</a>';
-
-            if($help_site_url && $full_site_url)
-                echo '&nbsp;|&nbsp;';
-
-            if($full_site_url)
-                echo '<a href="'.$full_site_url.'">Full Site</a>';
-
-            ?></p>
-        <p><strong><em>Powered by the<br><a href="" target="_blank">UCLA Mobile Web Framework</a></em></strong></p>
-    </div>
-
-<?php
+/**
+ * End page
+ */
 
 echo HTML_Decorator::body_end();
 
