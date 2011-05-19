@@ -1,7 +1,24 @@
 <?php
 
+/**
+ *
+ *
+ * @package decorator
+ * @subpackage site_decorator
+ *
+ * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20110518
+ *
+ * @uses Decorator
+ * @uses Tag_HTML_Decorator
+ * @uses Config
+ */
+
 require_once(dirname(dirname(dirname(__FILE__))).'/decorator.class.php');
 require_once(dirname(dirname(dirname(__FILE__))).'/config.class.php');
+require_once(dirname(dirname(__FILE__)).'/html/tag.class.php');
 
 class Header_Site_Decorator extends Tag_HTML_Decorator
 {

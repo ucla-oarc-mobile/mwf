@@ -7,7 +7,12 @@
  * through $_GET parameters. This script outputs Javascript and thus can be
  * directly included via <script>.
  *
+ * @package core
+ * @subpackage min
+ *
  * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
  * @version 20110510
  *
  * @uses User_Agent
@@ -82,5 +87,3 @@ if(User_Agent::is_full() && (isset($_GET['full']) || isset($_GET['webkit'])) )
             echo JSMin::minify($contents);
     }
 }
-
-?>

@@ -4,7 +4,12 @@
  * Javascript file that defines the basic mwf object and libraries. This should
  * be included before any other JS scripts.
  *
+ * @package core
+ * @subpackage js
+ *
  * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
  * @version 20110331
  *
  * @uses Config

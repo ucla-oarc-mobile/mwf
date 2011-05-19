@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * An interface for user agent adapters that may be used with User_Agent as
+ * specified in the {'user_agent':'adapter'} config setting.
+ *
+ * @package core
+ * @subpackage user_agent
+ *
+ * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20110510
+ */
+
 interface User_Agent_Adapter_Interface
 {
     /**

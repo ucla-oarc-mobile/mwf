@@ -7,7 +7,12 @@
  * config files only when a user attempts to access a configuration variable
  * within the namespace of the particular file.
  *
+ * @package core
+ * @subpackage config
+ *
  * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
  * @version 20101021
  */
 

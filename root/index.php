@@ -5,7 +5,14 @@
  * If the user is on a non-mobile device and {'global':'site_nonmobile_url'} is
  * set in config/global.php, then they will be redirected.
  *
+ * This page throws a fatal error if either {'global':'site_url'} or
+ * {'global':'site_assets_url'} are not set in /config/global.php.
+ *
+ * @package frontpage
+ *
  * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
  * @version 20110518
  *
  * @uses Config
@@ -22,6 +29,9 @@
  * @uses Footer_Site_Decorator
  * @uses Body_End_HTML_Decorator
  * @uses HTML_End_HTML_Decorator
+ * 
+ * @link /config/global.php
+ * @link assets/redirect/unset_override.php
  */
 
 /**
@@ -68,7 +78,8 @@ else if(!User_Agent::is_mobile() && $nonmobile_url = Config::get('global', 'site
 $menu = Config::get('frontpage', 'menu');
 
 /**
- * Handle differences between a subsection and the top-level menu.
+ * Handle differences between a subsection and the top-level menu, using key
+ * 'default' if on the front page or otherwise the $_GET['s'] parameter.
  */
 
 if(isset($_GET['s']) && isset($menu[$_GET['s']]))
@@ -156,5 +167,3 @@ echo $footer;
 echo HTML_Decorator::body_end();
 
 echo HTML_Decorator::html_end();
-
-?>

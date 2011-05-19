@@ -5,7 +5,12 @@
  * the specified image file and then outputting it as the binary content of this
  * file. This script can be included directly via <img>.
  *
+ * @package core
+ * @subpackage min
+ *
  * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
  * @version 20101021
  *
  * @uses User_Agent
@@ -13,7 +18,9 @@
  * @uses Local_Image
  */
 
-/** Require necessary libraries. */
+/**
+ * Require necessary libraries. 
+ */
 include_once(dirname(dirname(__FILE__)).'/lib/user_agent.class.php');
 include_once(dirname(dirname(__FILE__)).'/lib/user_browser.class.php');
 include_once(dirname(dirname(__FILE__)).'/lib/local_image.class.php');
@@ -101,5 +108,3 @@ $image->output_header();
 
 /** Output the binary content of the image in its compressed state. */
 $image->output_image();
-
-?>

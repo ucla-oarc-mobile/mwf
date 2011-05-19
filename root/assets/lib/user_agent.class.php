@@ -5,12 +5,15 @@
  * employing the facade pattern for deriving capability information from an
  * adapter provided with the user agent string by this class.
  *
+ * @package core
+ * @subpackage user_agent
+ *
  * @author ebollens
- * @version 20101220
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20110510
  *
  * @uses Config
- *
- * @todo This file needs comments for methods and variables.
  */
 
 require_once(dirname(dirname(__FILE__)).'/config.php');
@@ -123,7 +126,7 @@ class User_Agent
         return self::adapter()->is_full();
     }
 
-	/**
+    /**
      * Accessor to determine if user agent denotes a standard browser.
      *
      * @return bool
@@ -170,7 +173,7 @@ class User_Agent
     /**
      * Accessor to determine if user agent has the capability $capability.
      *
-     * @param stirng $capability
+     * @param string $capability
      * @return bool
      */
     public static function has_capability($capability)
@@ -178,26 +181,52 @@ class User_Agent
         return self::adapter()->has_capability($capability);
     }
 
+    /**
+     * Accessor to determine capability $capability if the adapter provides it.
+     *
+     * @param string $capability
+     * @return mixed
+     */
     public static function get_capability($capability)
     {
         return self::adapter()->get_capability($capability);
     }
 
+    /**
+     * Accessor to get the operating system name if the adapter provides it.
+     *
+     * @return string
+     */
     public static function get_os()
     {
         return self::get_capability('device_os');
     }
 
+    /**
+     * Accessor to get the operating system version if the adapter provides it.
+     *
+     * @return string
+     */
     public static function get_os_version()
     {
         return self::get_capability('device_os_version');
     }
 
+    /**
+     * Accessor to get the browser name if the adapter provides it.
+     *
+     * @return string
+     */
     public static function get_browser()
     {
         return self::get_capability('mobile_browser');
     }
 
+    /**
+     * Accessor to get the browser version if the adapter provides it.
+     *
+     * @return string
+     */
     public static function get_browser_version()
     {
         return self::get_capability('mobile_browser_version');
@@ -218,11 +247,21 @@ class User_Agent
             return false;
     }
 
+    /**
+     * Expires the override cookie by setting the value before current time.
+     *
+     * @return bool
+     */
     public static function unset_override()
     {
         return setcookie(Config::get('global', 'cookie_prefix').'ovrcls', '', time()-86400, '/');
     }
 
+    /**
+     * Returns true if the user agent is overridden, or false otherwise.
+     *
+     * @return bool
+     */
     public static function is_overridden()
     {
         return isset($_COOKIE[Config::get('global', 'cookie_prefix').'ovrcls'])
@@ -230,6 +269,16 @@ class User_Agent
                && $_COOKIE[Config::get('global', 'cookie_prefix').'ovrcls'] >= 0;
     }
 
+    /**
+     * Returns true if the user agent is overridden and the classification is
+     * the same as $classification. The $absolute flag determines if it will
+     * return true if the classification overridden is higher than the
+     * classification $classfication with priority by $_uamap.
+     *
+     * @param string $classification
+     * @param bool $absolute_only
+     * @return bool
+     */
     public static function overriden_as($classification, $absolute_only = false)
     {
         if(!self::is_overridden())
@@ -245,11 +294,23 @@ class User_Agent
             return false;
     }
 
+    /**
+     * Rturns true if the user agent not mobile by default but is overridden
+     * to be a mobile user agent as in preview mode, or false otherwise.
+     *
+     * @return bool
+     */
     public static function is_preview()
     {
         return !self::adapter()->is_mobile() && self::overriden_as('mobile');
     }
 
+    /**
+     * Returns true if the user agent is driven by the Webkit engine, or false
+     * otherwise. This ignores overrides.
+     *
+     * @return bool
+     */
     public static function is_webkit_engine()
     {
         return self::adapter()->is_webkit_engine();
@@ -260,13 +321,13 @@ class User_Agent
      * DEPRECTED
      */
 
-	/**
+    /**
      * Accessor to determine if user agent denotes a Webkit-based browser.
      *
      * @return bool
      */
     public static function is_webkit($consider_override = true)
-	{
+    {
         if($consider_override && self::is_overridden())
         {
             if(self::overriden_as('webkit'))
@@ -275,16 +336,16 @@ class User_Agent
                 return false;
         }
 
-		return self::adapter()->is_webkit();
-	}
+        return self::adapter()->is_webkit();
+    }
 
-	/**
+    /**
      * Accessor to determine if user agent denotes a rich interface device.
      *
      * @return bool
      */
     public static function is_touch($consider_override = true)
-	{
+    {
         if($consider_override && self::is_overridden())
         {
             if(self::overriden_as('touch'))
@@ -293,8 +354,6 @@ class User_Agent
                 return false;
         }
 
-		return self::adapter()->is_touch();
-	}
+        return self::adapter()->is_touch();
+    }
 }
-
-?>

@@ -5,12 +5,18 @@
  * allows for transformations of extension and dimensions, handles caching
  * and produces image headers and output.
  *
+ * @package core
+ * @subpackage path
+ *
  * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
  * @version 20101021
  *
  * @uses Path_Validator
  *
- * @todo This file needs comments for methods and variables.
+ * @todo Comments
+ * @todo Refactor
  */
 
 require_once(dirname(dirname(__FILE__)).'/config.php');
@@ -73,9 +79,9 @@ class Local_Image
 			$ext = $this->_ext_force;
 		}else{
 			$extt = strtolower(substr($this->_image_path, 
-							 		 strrpos($this->_image_path, '.')+1, 
-							  		 strlen($this->_image_path)-strrpos($this->_image_path, '.')+1
-							  		 ));
+                                                 strrpos($this->_image_path, '.')+1,
+                                                 strlen($this->_image_path)-strrpos($this->_image_path, '.')+1
+                                                 ));
 			if(in_array($extt, $this->_ext_allowed))
 				$ext = $extt;
 			else

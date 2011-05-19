@@ -1,5 +1,19 @@
 <?php
 
+/**
+ *
+ *
+ * @package decorator
+ * @subpackage html_decorator
+ *
+ * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20110518
+ *
+ * @uses Decorator
+ */
+
 require_once(dirname(dirname(dirname(__FILE__))).'/decorator.class.php');
 
 class Tag_Open_HTML_Decorator extends Decorator
@@ -61,5 +75,3 @@ class Tag_Open_HTML_Decorator extends Decorator
 ';
     }
 }
-
-?>
