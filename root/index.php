@@ -105,13 +105,13 @@ for($i = 0; $i < count($menu_items); $i++)
 
 echo $menu;
 
+if(!$main_menu)
+    echo Site_Decorator::button_full()
+                ->set_padded()
+                ->add_option(Config::get('global', 'back_to_home_text'), 'index.php');
 
 ?>
 
-
-    <?php if(!$main_menu){ ?>
-    <div class="button-full button-padded"><a href="index.php"><?php echo Config::get('global', 'back_to_home_text') ?></a></div>
-    <?php } ?>
 
     <div id="footer">
         <p><?php 
