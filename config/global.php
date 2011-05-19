@@ -20,6 +20,8 @@ require_once(dirname(dirname(__FILE__)).'/root/assets/lib/config.class.php');
  * - site_url           URL of the mobile site home page in mwf.site.webroot().
  * - site_assets_url    URL of the assets folder in mwf.site.webassetroot().
  * - site_nonmobile_url URL to redirect non-mobile (or FALSE to not redirect).
+ * - full_site_url    URL of non-mobile site link on front page for mobile devices.
+ * - help_site_url    URL of the help site or FALSE if there is none.
  *
  * DO NOT INCLUDE A TRAILING SLASH
  */
@@ -27,6 +29,8 @@ require_once(dirname(dirname(__FILE__)).'/root/assets/lib/config.class.php');
 Config::set('global', 'site_url', false);
 Config::set('global', 'site_assets_url', false);
 Config::set('global', 'site_nonmobile_url', false);
+Config::set('global', 'full_site_url', false);
+Config::set('global', 'help_site_url', false);
 
 /**
  * CORE
