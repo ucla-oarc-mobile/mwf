@@ -1,0 +1,124 @@
+
+   //////////  //  //  //  //////
+  //  //  //  //  //  //  //
+ //  //  //  //  //  //  //////
+//  //  //  //////////  //
+
+THE UCLA MOBILE WEB FRAMEWORK
+
+==============================================================================
+
+Copyright:
+
+    Copyright (c) 2010-11 UC Regents
+
+License:
+
+    http://mwf.ucla.edu/license
+
+==============================================================================
+
+TABLE OF CONTENTS
+
+1. FRAMEWORK
+2. INITIATIVE
+3. COLLABORATION
+4. LICENSE
+5. CREDITS
+
+==============================================================================
+
+1. FRAMEWORK
+
+The UCLA Mobile Web Framework is a cross-platform web framework that focuses
+on mobile web standards, semantic markup, device agnosticism and graceful
+degradation, providing a robust presentation layer that allows applications
+to define a single set of markup optimized for HTML 5 capable devices that
+degrades gracefully to any HTML 4.01 or XHTML MP compliant device
+including Blackberry, Windows Mobile and even T9 phones.
+
+==============================================================================
+
+2. INITIATIVE
+
+The framework project began in early 2010 as a joint venture between the UCLA
+Office of Information Technology and UCLA Communications as a means to reach
+all campus mobile users via a single platform in a reasonable and cost-
+effective manner.
+
+The framework first went into production at the beginning of Fall 2010 with
+the launch of UCLA Mobile. Over ten campus units are now participating at UCLA
+and four other campuses in the UC system have launched production applications
+using the framework.
+
+A number of other institutions both in the UC and beyond are currently
+involved in the initiative.
+
+More information is online at the collaboration site: http://mwf.ucla.edu
+
+==============================================================================
+
+3. COLLABORATION
+
+To get involved with the UCLA Mobile Web Framework project, please see the
+following links:
+
+    Home                http://mwf.ucla.edu
+
+    Code Repository     https://github.com/ucla/mwf
+
+    Documentation       https://github.com/ucla/mwf/wiki
+
+    Forum               http://mwf.ucla.edu/forum
+
+    Issue Tracker       https://jira.ats.ucla.edu:8443/
+
+==============================================================================
+
+4. LICENSE
+
+The UCLA Mobile Web Framework is licensed under a source-available license
+that supports both commercial and non-commercial development.
+
+For the full text of the license, please see the online version:
+
+    http://mwf.ucla.edu/license
+
+A copy of this license is also available in the LICENSE file.
+
+==============================================================================
+
+5. CREDITS
+
+5.1 PROJECT
+
+    Project Lead        Rose Rocchio 
+                        rrocchio@oit.ucla.edu
+
+    Development Lead    Eric Bollens 
+                        ebollens@oit.ucla.edu
+
+    Systems Lead        Ed Sakabu
+                        sakabu@ats.ucla.edu
+
+5.2 CONTRIBUTORS
+
+In addition to their own mobile applications, a number of participants have
+contributed code directly to the UCLA Mobile Web Framework.
+
+    UC Los Angeles      Eric Bollens
+                        Ed Sakabu
+                        Mike Takahashi
+                        Joseph Madella
+                        Nate Emerson
+                        Zorayr Khalapyan
+
+    UC Berkeley         Sara Leavitt
+
+    UC San Diego        Mojgan Amini
+                        Ike Lin
+
+    UC San Francisco    Richard Trott
+
+Beyond direct contributions, the input and suggestions of numerous others
+have made the UCLA Mobile Web Framework possible.
