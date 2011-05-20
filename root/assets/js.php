@@ -98,9 +98,9 @@ if(User_Agent::is_preview())
  * Load all standard (and touch_lib for compat) libraries specified in the URI.
  */
 
-if(User_Agent::is_full() && (isset($_GET['standard']) || isset($_GET['touch_libs'])) )
+if(User_Agent::is_full() && (isset($_GET['standard_libs']) || isset($_GET['touch_libs'])) )
 {
-    $loadarr = isset($_GET['standard']) ? explode(' ', $_GET['standard']) : array();
+    $loadarr = isset($_GET['standard_libs']) ? explode(' ', $_GET['standard_libs']) : array();
 
     if(isset($_GET['touch_libs']))
         $loadarr = array_merge(explode(' ', $_GET['touch_libs']), $loadarr);
@@ -113,9 +113,9 @@ if(User_Agent::is_full() && (isset($_GET['standard']) || isset($_GET['touch_libs
  * Load all full (and webkit_lib for compat) libraries specified in the URI.
  */
 
-if(User_Agent::is_full() && (isset($_GET['full']) || isset($_GET['webkit_libs'])) )
+if(User_Agent::is_full() && (isset($_GET['full_libs']) || isset($_GET['webkit_libs'])) )
 {
-    $loadarr = isset($_GET['full']) ? explode(' ', $_GET['full']) : array();
+    $loadarr = isset($_GET['full_libs']) ? explode(' ', $_GET['full_libs']) : array();
 
     if(isset($_GET['webkit_libs']))
         $loadarr = array_merge(explode(' ', $_GET['webkit_libs']), $loadarr);
