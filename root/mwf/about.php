@@ -43,7 +43,7 @@ echo Site_Decorator::content_full()
             ->set_padded()
             ->add_header('The Initiative')
             ->add_paragraph('The framework project began in early 2010 as a joint venture between the UCLA Office of Information Technology and UCLA Communications as a means to reach all campus mobile users via a single platform in a reasonable and cost-effective manner. The framework first went into production at the beginning of Fall 2010 with the launch of UCLA Mobile.')
-            ->add_paragraph('Over ten campus units are now participating at UCLA, four other campuses in the UC system have launched production applications using the framework, and a number of other instututions both in the UC and beyond are currently involved in the initiative.');
+            ->add_paragraph('Over ten campus units are now participating at UCLA, four other campuses in the UC system have launched production applications using the framework, and a number of other institutions both in the UC and beyond are currently involved in the initiative.');
 
 echo Site_Decorator::button_full()
                 ->set_padded()
