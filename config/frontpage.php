@@ -80,15 +80,15 @@ Config::set('frontpage', 'menu',
               'url'=>'mwf/credits.php')
         )
     ,'collaboration'=>array(
-        array('name'=>'News',
-              'url'=>'http://mwf.ucla.edu/news'),
+        array('name'=>'Home',
+              'url'=>'http://mwf.ucla.edu'),
+        array('name'=>'Repository',
+              'url'=>'https://github.com/ucla/mwf'),
         array('name'=>'Documentation',
               'url'=>'https://github.com/ucla/mwf/wiki'),
         array('name'=>'Forums',
               'url'=>'http://mwf.ucla.edu/forum'),
-        array('name'=>'Git Repository',
-              'url'=>'https://github.com/ucla/mwf'),
-        array('name'=>'JIRA Issue Tracker',
+        array('name'=>'Issue Tracker',
               'url'=>'https://jira.ats.ucla.edu:8443/')
         )
     )
