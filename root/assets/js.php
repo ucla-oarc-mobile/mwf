@@ -98,7 +98,7 @@ if(User_Agent::is_preview())
  * Load all standard (and touch_lib for compat) libraries specified in the URI.
  */
 
-if(User_Agent::is_full() && (isset($_GET['standard_libs']) || isset($_GET['touch_libs'])) )
+if(User_Agent::is_standard() && (isset($_GET['standard_libs']) || isset($_GET['touch_libs'])) )
 {
     $loadarr = isset($_GET['standard_libs']) ? explode(' ', $_GET['standard_libs']) : array();
 
