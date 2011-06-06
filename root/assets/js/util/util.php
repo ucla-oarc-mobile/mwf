@@ -43,6 +43,7 @@ mwf.ext.iphone=new function(){};
 
 mwf.util=new function(){
     this.importJS=function(jsFile){document.write('<script type="text/javascript" src="'+jsFile+'"></scr'+'ipt>');}
+    this.importCSS=function(cssFile){document.write('<link rel="stylesheet" type="text/css" href="'+cssFile+'" media="screen">');}
 };
 mwf.site=new function(){
     this.webroot=function(){return '<?php echo Config::get('global', 'site_url'); ?>';}
