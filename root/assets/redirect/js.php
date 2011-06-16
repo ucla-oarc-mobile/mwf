@@ -26,7 +26,7 @@ header("Cache-Control: max-age=0");
 
 /** User_Agent is required to determine visitor device type. */
 @require_once('../lib/user_agent.class.php');
-include_once(dirname(dirname(__FILE__)).'/config.php');
+@include_once(dirname(dirname(__FILE__)).'/config.php');
 
 /**
  * Script does nothing if class can't load, user isn't mobile, or the GET 'm'
@@ -80,7 +80,66 @@ $override = $uri_override !== false ? $uri_override : $cookie_override;
 if($override)
     die();
 
-/** Redirect code is the only code written to page if redirect is needed. */
-echo 'window.location = "' . $mobile_page , '";';
+if(isset($_GET['prompt']))
+{
+    $prompt = strlen($_GET['prompt']) > 0 ? strip_tags($_GET['prompt']) : 'Select a browsing mode:';
+    $max = mt_getrandmax();
+    $rand = 'prompt-'.mt_rand($max/2, $max);
+    ?>if(typeof(window.addEventListener) == 'undefined' || typeof(document.createElement) == 'undefined'){
+    window.location = '<?php echo $mobile_page; ?>';
+}else{
+    window.addEventListener('load', function(){
 
-?>
+        var o = document.createElement('div');
+        o.id = '<?php echo 'o-'.$rand; ?>';
+        o.style.position = 'absolute';
+        o.style.top = 0;
+        o.style.bottom = 0;
+        o.style.left = 0;
+        o.style.right = 0;
+        o.style.background = '#000';
+        o.style.opacity = '.4';
+        o.style.zIndex = 0;
+
+        var w = document.createElement('div');
+        w.id = '<?php echo $rand; ?>';
+        w.style.position = 'absolute';
+        w.style.background = '#fff';
+        w.style.zIndex = 1;
+        w.style.textAlign = 'center';
+        w.style.width = '80%';
+        w.style.margin = '20px 10%';
+        w.style.padding = '12px 8px';
+        w.style.WebkitBorderRadius = '8px';
+        w.style.MozBorderRadius = '8px';
+        w.style.OBorderRadius = '8px';
+        w.style.borderRadius = '8px';
+        w.innerHTML = '<div><?php echo $prompt; ?></div><div><a href="<?php echo $mobile_page; ?>">Mobile Site</a> | <a href="#" id="<?php echo 'c-'.$rand; ?>">Full Site</a></div>';
+
+        var b = document.body;
+        var fc = b.firstChild;
+        b.insertBefore(w, fc);
+        b.insertBefore(o, fc);
+
+        document.getElementById('<?php echo 'c-'.$rand; ?>').addEventListener('click', function(){
+            var c = '<?php echo Config::get('global', 'cookie_prefix').'ovrrdr'.$domain_key; ?>=1;path=/;';
+            <?php if($expiry_time){ ?>
+            var ex= new Date();
+            ex.setTime(ex.getTime()+<?php echo $expiry_time*1000; ?>);
+            c += 'expires='+ex.toUTCString()+';';
+            <?php } ?>
+            document.cookie = c;
+            var w = document.getElementById('<?php echo 'o-'.$rand; ?>');
+            var o = document.getElementById('<?php echo $rand; ?>');
+            w.parentNode.removeChild(w);
+            o.parentNode.removeChild(o);
+        }, false);
+    }, false);
+
+}<?php
+}
+else
+{
+    /** Redirect code is the only code written to page if redirect is needed. */
+    echo 'window.location = "' . $mobile_page , '";';
+}

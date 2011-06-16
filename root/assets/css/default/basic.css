@@ -140,6 +140,11 @@ h1, h2, h3, h4, h5, h6 {
     text-align: center;
 }
 
+.menu-full li > p {
+    margin: 0;
+    font-weight: normal;
+}
+
 .menu-full > h1.light {
     background-color: #f6f6f6;
     color: #555;

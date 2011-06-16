@@ -54,9 +54,9 @@
   Lists
   ------------------------------------------------*/
 
-.menu-full li:hover,
-.menu-full li:focus,
-.menu-full li:active {
+.menu-full li a:hover,
+.menu-full li a:focus,
+.menu-full li a:active {
         background-color: #eaf2fa;
 }
 
