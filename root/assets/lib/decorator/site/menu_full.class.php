@@ -47,7 +47,7 @@ class Menu_Full_Site_Decorator extends Tag_HTML_Decorator
 
     public function &set_title($inner, $params = array())
     {
-        $this->_inner = $inner === false ? false : HTML_Decorator::tag('h1', $inner, $params);
+        $this->_title = $inner === false ? false : HTML_Decorator::tag('h1', $inner, $params);
         return $this;
     }
 
@@ -68,10 +68,25 @@ class Menu_Full_Site_Decorator extends Tag_HTML_Decorator
         if(!is_array($li_params))
             $li_parays = array();
         if(!is_array($a_params))
-            $li_parays = array();
+            $a_parays = array();
 
         $link = HTML_Decorator::tag('a', $name?$name:'', array_merge($a_params, array('href'=>$url?$url:'#')));
         $this->_list[] = HTML_Decorator::tag('li', $link, $li_params);
+
+        return $this;
+    }
+
+    public function &add_text($text, $li_params = array(), $p_params = array())
+    {
+        if(!is_array($this->_list))
+            $this->_list = array();
+        if(!is_array($li_params))
+            $li_parays = array();
+        if(!is_array($p_params))
+            $p_parays = array();
+
+        $p = HTML_Decorator::tag('p', $text?$text:'', $p_params);
+        $this->_list[] = HTML_Decorator::tag('li', $p, $li_params);
 
         return $this;
     }
@@ -87,7 +102,7 @@ class Menu_Full_Site_Decorator extends Tag_HTML_Decorator
 
         if($count > 0)
             $this->_list[$count-1]->add_class('menu-last');
-        else
+        else if($this->_title)
             $this->_title->add_class('menu-last');
 
         if($this->_detailed)
