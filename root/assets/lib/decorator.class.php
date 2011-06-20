@@ -22,6 +22,8 @@ class Decorator
 
     public function __toString()
     {
+        echo '[debug] Using __toString.<br>';
+        echo debug_print_backtrace().'<br><br>';
         return $this->render();
     }
 }

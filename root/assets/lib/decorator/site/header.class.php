@@ -57,15 +57,15 @@ class Header_Site_Decorator extends Tag_HTML_Decorator
             $this->_image = array('src'=>Config::get('global', 'header_home_button'),
                                   'alt'=>Config::get('global', 'header_home_button_alt'));
 
-        $image = HTML_Decorator::tag('img', false, $this->_image);
-        $home_button = HTML_Decorator::tag('a', $image, array('href'=>Config::get('global', 'site_url')));
+        $image = HTML_Decorator::tag('img', false, $this->_image)->render();
+        $home_button = HTML_Decorator::tag('a', $image, array('href'=>Config::get('global', 'site_url')))->render();
 
         if($this->_title_path)
             $title = $this->_title ? HTML_Decorator::tag('a', $this->_title, array('href'=>$this->_title_path)) : false;
         else
             $title = $this->_title ? $this->_title : '';
 
-        $title_span = $title ? HTML_Decorator::tag('span', $title) : '';
+        $title_span = $title ? HTML_Decorator::tag('span', $title)->render() : '';
 
         $this->set_param('id', 'header');
         $this->add_inner_front($home_button.$title_span);

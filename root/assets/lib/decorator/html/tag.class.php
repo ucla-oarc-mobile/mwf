@@ -9,7 +9,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110518
+ * @version 20110620
  *
  * @uses Decorator
  */
@@ -91,6 +91,15 @@ class Tag_HTML_Decorator extends Decorator
 
     public function render()
     {
-        return $this->_tag_open . ($this->_inner && count($this->_inner) !== 0 ? (implode('', $this->_inner) . $this->_tag_close) : '');
+        $str = $this->_tag_open->render();
+
+        if($this->_inner && count($this->_inner) === 0)
+            return $str;
+
+        foreach($this->_inner as $inner)
+            $str .= is_a($inner, 'Decorator') ? $inner->render() : $inner;
+
+        $str .= $this->_tag_close->render();
+        return $str;
     }
 }

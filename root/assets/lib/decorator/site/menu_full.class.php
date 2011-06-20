@@ -115,9 +115,18 @@ class Menu_Full_Site_Decorator extends Tag_HTML_Decorator
         elseif($this->_padded === false)
             $this->remove_class('menu-padded');
 
-        $list = $count > 0 ? HTML_Decorator::tag('ol',implode('',$this->_list)) : '';
+        $list = '';
+        if($count > 0)
+        {
+            $inner = '';
+            foreach($this->_list as $list_item)
+                $inner .= $list_item->render();
+            $list = HTML_Decorator::tag('ol', $inner)->render();
+        }
 
-        $this->add_inner_front($this->_title.$list);
+        $title = is_a($this->_title, 'Decorator') ? $this->_title->render() : ($this->_title ? $this->_title : '');
+
+        $this->add_inner_front($title.$list);
         return parent::render();
     }
 }

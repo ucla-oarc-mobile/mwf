@@ -13,7 +13,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110518
+ * @version 20110620
  *
  * @uses Config
  * @uses User_Agent
@@ -97,11 +97,11 @@ else
  * Start page
  */
 
-echo HTML_Decorator::html_start();
+echo HTML_Decorator::html_start()->render();
 
-echo Site_Decorator::head()->set_title(Config::get('global', 'title_text'));
+echo Site_Decorator::head()->set_title(Config::get('global', 'title_text'))->render();
 
-echo HTML_Decorator::body_start($main_menu ? array('class'=>'front-page') : array());
+echo HTML_Decorator::body_start($main_menu ? array('class'=>'front-page') : array())->render();
 
 /*
  * Header
@@ -110,7 +110,7 @@ echo HTML_Decorator::body_start($main_menu ? array('class'=>'front-page') : arra
 if($main_menu)
     echo '<h1 id="header"><img src="'.Config::get('frontpage', 'header_image_main').'" alt="'.Config::get('frontpage', 'header_image_main_alt').'"><span>'.Config::get('frontpage', 'header_main_text').'</span></h1>';
 else
-    echo Site_Decorator::header()->set_title(ucwords(str_replace('_', ' ', $_GET['s'])));
+    echo Site_Decorator::header()->set_title(ucwords(str_replace('_', ' ', $_GET['s'])))->render();
 
 /*
  * Menu
@@ -135,7 +135,7 @@ for($i = 0; $i < count($menu_items); $i++)
     $menu->add_item($menu_item['name'],$menu_item['url'],isset($menu_item['id'])?array('id'=>$menu_item['id']):array());
 }
 
-echo $menu;
+echo $menu->render();
 
 /**
  * Back button
@@ -144,7 +144,8 @@ echo $menu;
 if(!$main_menu)
     echo Site_Decorator::button_full()
                 ->set_padded()
-                ->add_option(Config::get('global', 'back_to_home_text'), 'index.php');
+                ->add_option(Config::get('global', 'back_to_home_text'), 'index.php')
+                ->render();
 
 /**
  * Footer
@@ -158,12 +159,12 @@ if($full_site_url = Config::get('frontpage', 'full_site_url'))
 if($help_site_url = Config::get('frontpage', 'help_site_url'))
     $footer->set_help_site('Help', Config::get('frontpage', 'help_site_url'));
 
-echo $footer;
+echo $footer->render();
 
 /**
  * End page
  */
 
-echo HTML_Decorator::body_end();
+echo HTML_Decorator::body_end()->render();
 
-echo HTML_Decorator::html_end();
+echo HTML_Decorator::html_end()->render();
