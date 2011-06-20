@@ -26,14 +26,15 @@
 require_once(dirname(dirname(__FILE__)).'/assets/lib/decorator.class.php');
 require_once(dirname(dirname(__FILE__)).'/assets/config.php');
 
-echo HTML_Decorator::html_start();
+echo HTML_Decorator::html_start()->render();
 
-echo Site_Decorator::head()->set_title('MWF License');
+echo Site_Decorator::head()->set_title('MWF License')->render();
 
-echo HTML_Decorator::body_start();
+echo HTML_Decorator::body_start()->render();
 
 echo Site_Decorator::header()
-        ->set_title('MWF License');
+        ->set_title('MWF License')
+        ->render();
 
 $terms = array(
 'To share all Derivative Works you create of the Software (the Mobile Web
@@ -122,7 +123,8 @@ Information Technology Academic Application Architecture Group.  You may not
 grant rights to the Software or Derivative Works to this software under this
 License. For example, you may not distribute modifications of the Software under
 any terms, or sublicense this software to others.')
-            ->add_section(HTML_Decorator::tag('p', 'You agree:') . $ol);
+            ->add_section(HTML_Decorator::tag('p', 'You agree:')->render() . $ol->render())
+            ->render();
 
 echo Site_Decorator::content_full()
         ->set_padded()
@@ -130,14 +132,16 @@ echo Site_Decorator::content_full()
         ->add_paragraph('UCLA reserves the right to modify this license at any
 time. Therefore, although this represents a working copy of the UCLA Mobile
 Web Framework license, the latest version exists on the MWF site.')
-        ->add_paragraph(HTML_Decorator::tag('a', 'http://mwf.ucla.edu/license', array('href'=>'http://mwf.ucla.edu/license')), array('style'=>'text-align:center;'));
+        ->add_paragraph(HTML_Decorator::tag('a', 'http://mwf.ucla.edu/license', array('href'=>'http://mwf.ucla.edu/license')), array('style'=>'text-align:center;'))
+        ->render();
 
 echo Site_Decorator::button_full()
                 ->set_padded()
-                ->add_option(Config::get('global', 'back_to_home_text'), Config::get('global', 'site_url'));
+                ->add_option(Config::get('global', 'back_to_home_text'), Config::get('global', 'site_url'))
+                ->render();
 
-echo Site_Decorator::default_footer();
+echo Site_Decorator::default_footer()->render();
 
-echo HTML_Decorator::body_end();
+echo HTML_Decorator::body_end()->render();
 
-echo HTML_Decorator::html_end();
+echo HTML_Decorator::html_end()->render();
