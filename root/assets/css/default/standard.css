@@ -69,21 +69,9 @@
     margin-right: 10px !important;
 }
 
-.menu-padded > h1,
-.menu-padded > h1.light,
 .menu-padded > *:first-child,
 .menu-padded .menu-first {
     margin-top: 10px !important;
-	-moz-border-radius-topleft: .5em;
-	-moz-border-radius-topright: .5em;
-}
-
-.menu-padded li:last-child,
-.menu-padded a:last-child li,
-.menu-padded > *:last-child,
-.menu-padded .menu-last {
-	-moz-border-radius-bottomleft: .5em;
-	-moz-border-radius-bottomright: .5em;
 }
 
 .menu-padded > *:first-child,
