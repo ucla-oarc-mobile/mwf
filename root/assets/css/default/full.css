@@ -21,11 +21,6 @@
   Headings
   ------------------------------------------------*/
 
-.menu-padded > *:last-child,
-.menu-padded .content-last {
-    margin-bottom: 6px;
-}
-
 .menu-full > h1 {
     background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5), color-stop(1, #fff));
         -webkit-background-origin: padding-box;
@@ -42,9 +37,7 @@
     background: -webkit-gradient(linear, left top, left bottom, from(#809FE2), to(#637CB0), color-stop(1, #fff));
 }
 
-.menu-padded > h1,
-.menu-padded > h1.light,
-.menu-padded > *:first-child,
+.menu-padded li:first-child a,
 .menu-padded .menu-first {
     -moz-border-radius-topleft: .5em;
     -moz-border-radius-topright: .5em;
@@ -52,13 +45,14 @@
     -webkit-border-top-right-radius: .5em;
 }
 
-.menu-padded li:last-child,
-.menu-padded a:last-child li,
-.menu-padded > *:last-child,
+.menu-padded li:last-child a,
 .menu-padded .menu-last {
     -webkit-border-bottom-left-radius: .5em;
     -webkit-border-bottom-right-radius: .5em;
+    -moz-border-radius-bottomleft: .5em;
+    -moz-border-radius-bottomright: .5em;
     z-index: -100;
+    margin-bottom: 6px;
 }
 
 /********************************************************

@@ -44,14 +44,15 @@ $contributors = array(
                                      )
                     );
 
-echo HTML_Decorator::html_start();
+echo HTML_Decorator::html_start()->render();
 
-echo Site_Decorator::head()->set_title('MWF Credits');
+echo Site_Decorator::head()->set_title('MWF Credits')->render();
 
-echo HTML_Decorator::body_start();
+echo HTML_Decorator::body_start()->render();
 
 echo Site_Decorator::header()
-        ->set_title('MWF Credits');
+        ->set_title('MWF Credits')
+        ->render();
 
 echo Site_Decorator::content_full()
             ->set_padded()
@@ -70,7 +71,8 @@ echo Site_Decorator::content_full()
                                 Ed Sakabu (UCLA)<br>'
                                 .HTML_Decorator::tag('a', 'sakabu@ats.ucla.edu',
                                     array('href'=>'mailto:sakabu@ats.ucla.edu')),
-                            array('style'=>'text-align:center;'));
+                            array('style'=>'text-align:center;'))
+            ->render();
 
 $contributions = Site_Decorator::content_full()
                     ->set_padded()
@@ -88,14 +90,15 @@ foreach($contributors as $campus=>$people)
 
 $contributions->add_paragraph('Beyond direct contributions, the input and suggestions of numerous others have made the UCLA Mobile Web Framework possible.', array('style'=>'font-style:italic;'));
 
-echo $contributions;
+echo $contributions->render();
 
 echo Site_Decorator::button_full()
                 ->set_padded()
-                ->add_option(Config::get('global', 'back_to_home_text'), Config::get('global', 'site_url'));
+                ->add_option(Config::get('global', 'back_to_home_text'), Config::get('global', 'site_url'))
+                ->render();
 
-echo Site_Decorator::default_footer();
+echo Site_Decorator::default_footer()->render();
 
-echo HTML_Decorator::body_end();
+echo HTML_Decorator::body_end()->render();
 
-echo HTML_Decorator::html_end();
+echo HTML_Decorator::html_end()->render();

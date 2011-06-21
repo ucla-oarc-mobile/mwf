@@ -25,32 +25,36 @@
 
 require_once(dirname(dirname(__FILE__)).'/assets/lib/decorator.class.php');
 
-echo HTML_Decorator::html_start();
+echo HTML_Decorator::html_start()->render();
 
-echo Site_Decorator::head()->set_title('MWF About');
+echo Site_Decorator::head()->set_title('MWF About')->render();
 
-echo HTML_Decorator::body_start();
+echo HTML_Decorator::body_start()->render();
 
 echo Site_Decorator::header()
-        ->set_title('MWF About');
+        ->set_title('MWF About')
+        ->render();
 
 echo Site_Decorator::content_full()
             ->set_padded()
             ->add_header('The Framework')
-            ->add_paragraph('The UCLA Mobile Web Framework is a cross-platform web framework that focuses on mobile web standards, semantic markup, device agnosticism and graceful degradation, providing a robust presentation layer that allows applications to define a single set of markup optimized for HTML 5 capable devices that degrades gracefully to any HTML 4.01 or XHTML MP 2.0 compliant device including Blackberry, Windows Mobile and even T9 phones.');
+            ->add_paragraph('The UCLA Mobile Web Framework is a cross-platform web framework that focuses on mobile web standards, semantic markup, device agnosticism and graceful degradation, providing a robust presentation layer that allows applications to define a single set of markup optimized for HTML 5 capable devices that degrades gracefully to any HTML 4.01 or XHTML MP 2.0 compliant device including Blackberry, Windows Mobile and even T9 phones.')
+            ->render();
 
 echo Site_Decorator::content_full()
             ->set_padded()
             ->add_header('The Initiative')
             ->add_paragraph('The framework project began in early 2010 as a joint venture between the UCLA Office of Information Technology and UCLA Communications as a means to reach all campus mobile users via a single platform in a reasonable and cost-effective manner. The framework first went into production at the beginning of Fall 2010 with the launch of UCLA Mobile.')
-            ->add_paragraph('Over ten campus units are now participating at UCLA, four other campuses in the UC system have launched production applications using the framework, and a number of other institutions both in the UC and beyond are currently involved in the initiative.');
+            ->add_paragraph('Over ten campus units are now participating at UCLA, four other campuses in the UC system have launched production applications using the framework, and a number of other institutions both in the UC and beyond are currently involved in the initiative.')
+            ->render();
 
 echo Site_Decorator::button_full()
                 ->set_padded()
-                ->add_option(Config::get('global', 'back_to_home_text'), Config::get('global', 'site_url'));
+                ->add_option(Config::get('global', 'back_to_home_text'), Config::get('global', 'site_url'))
+                ->render();
 
-echo Site_Decorator::default_footer();
+echo Site_Decorator::default_footer()->render();
 
-echo HTML_Decorator::body_end();
+echo HTML_Decorator::body_end()->render();
 
-echo HTML_Decorator::html_end();
+echo HTML_Decorator::html_end()->render();

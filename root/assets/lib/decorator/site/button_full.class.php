@@ -9,7 +9,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110518
+ * @version 20110620
  *
  * @uses Decorator
  * @uses Tag_HTML_Decorator
@@ -90,7 +90,12 @@ class Button_Full_Site_Decorator extends Tag_HTML_Decorator
 
         $this->_options[0]->add_class('button-first');
         $this->_options[$this->_options_count-1]->add_class('button-last');
-        $this->add_inner_front(implode('', $this->_options));
+
+        $options = '';
+        foreach($this->_options as $option)
+            $options .= is_a($option, 'Decorator') ? $option->render() : $option;
+
+        $this->add_inner_front($options);
         return parent::render();
     }
 }
