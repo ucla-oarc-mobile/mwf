@@ -1,0 +1,157 @@
+
+   //////////  //  //  //  //////
+  //  //  //  //  //  //  //
+ //  //  //  //  //  //  //////
+//  //  //  //////////  //
+
+THE UCLA MOBILE WEB FRAMEWORK
+
+==============================================================================
+
+Copyright:
+
+    Copyright (c) 2010-11 UC Regents
+
+License:
+
+    http://mwf.ucla.edu/license
+
+==============================================================================
+
+TABLE OF CONTENTS
+
+Version 1.1.02.alpha    -
+Version 1.1.01.alpha    June 16, 2011
+Version 1.1.00.alpha    May 20, 2011
+
+==============================================================================
+
+Version 1.1.02.alpha
+
+
+* Add compatibility for PHP 5 < 5.3 [MWF-52, MWF-53]
+
+    * Remove __callStatic requirement for Decorator factories
+    * Remove __toString uses of Decorator in other Decorators and MWF content
+
+* Fix of .menu_full:hover override of full classification border radius [MWF-51]
+
+* Addition of RELEASE file.
+
+==============================================================================
+
+Version 1.1.00.alpha
+June 16, 2011
+
+
+* Addition of Feed API in /aux/feed [MWF-41]
+
+* Addition of redirect prompt functionality [MWF-32]
+
+* Addition of mwf.util.importCSS function [MWF-39]
+
+* Addition of ".menu_full li p" support for text items in menu [MWF-49]
+
+* Fix in .menu_full for an issue with headings
+
+* Fix in .menu_full to avoid hover change on text items [MWF-49]
+
+* Fix an issue with mwf.standard namespace [MWF-39]
+
+* Fix typo in README file
+
+* Note: touch/touch_transition unchanged (mwf.webkit namespace) [MWF-37, MWF-38]
+
+==============================================================================
+
+Version 1.1.00.alpha
+May 20, 2011
+
+* Base directory reorganization [MWF-2, MWF-3, MWF-4, MWF-5]
+
+    * /root - Web accessible directory - deprecates /
+    * /config - Configuration files - deprecates /assets/config
+    * /install - Installation scripts - deprecates /assets/install
+    * /aux - Auxiliary modules - deprecates /assets/ext
+
+* Addition of LICENSE file [MWF-14]
+
+* Addition of README file [MWF-15]
+
+* Excision of UCLA-specific theme [MWF-6]
+
+    * CSS definitions.
+    * Header and front page header.
+    * Favicon and appicons.
+
+* New classification scheme [MWF-8]
+
+    * Defined as:
+        * Basic - XHTML MP 1.0, WCC
+        * Standard - HTML 4.01, CSS 2.1, JS 1.5
+        * Full - HTML 5, CSS 3
+
+    * GET param changes:
+        * standard_libs in CSS/JS handlers deprecates touch_libs.
+        * full_libs in CSS/JS handlers deprecates webkit_libs.
+        * standard in CSS/JS minifiers deprecates touch.
+        * full in CSS/JS minifiers deprecates webkit.
+
+   * Changes to CSS definitions and JS libraries for new classification scheme.
+   * Changes to preview mode.
+   * Additions to JS util.
+   * Changes to image compressor.
+
+* Refactor CSS handler [MWF-10, MWF-11, MWF-18]
+
+    * Condense all sheets into one response rather than using @import.
+    * Refactor /assets/css layout for default and campus-specific directories.
+    * Add configuration variable to include campus-specific directories.
+    * Include minifier functionality (same params) to reduce HTTP requests.
+
+* Refactor JS handler [MWF-16, MWF-19]
+
+    * Condense most sheets into one response rather than writing script tags.
+    * Include minifier functioality (same params) to reduce HTTP requests.
+
+* PHP HTML decorators by including assets/lib/decorator.class.php [MWF-13]
+
+    * HTML_Decorator::tag()             -> class Tag_HTML_Decorator
+    * HTML_Decorator::tag_open()        -> class Tag_Open_HTML_Decorator
+    * HTML_Decorator::tag_close()       -> class Tag_Close_HTML_Decorator
+    * HTML_Decorator::html_start()      -> class HTML_Start_HTML_Decorator
+    * HTML_Decorator::html_end()        -> class HTML_End_HTML_Decorator
+    * HTML_Decorator::body_start()      -> class Body_Start_HTML_Decorator
+    * HTML_Decorator::body_end()        -> class Body_End_HTML_Decorator
+
+* PHP Site decorators by including assets/lib/decorator.class.php [MWF-13]
+
+    * Site_Decorator::content_full()    -> class Content_Full_Site_Decorator
+    * Site_Decorator::menu_full()       -> class Menu_Full_Site_Decorator
+    * Site_Decorator::button_full()     -> class Button_Full_Site_Decorator
+    * Site_Decorator::head()            -> class Head_Site_Decorator
+    * Site_Decorator::header()          -> class Heaer_Site_Decorator
+    * Site_Decorator::default_footer()  -> class Default_Footer_Site_Decorator
+    * Site_Decorator::footer()          -> class Footer_Site_Decorator
+
+* Add browser and device OS name and version JS accessors [MWF-9, MWF-24]
+
+* Dynamic writing of additional BODY tag classes [MWF-9]
+
+    * body.mwf - If this functionality is run at all.
+    * body.mwf_mobile - If device is regarded as mobile.
+    * body.mwf_notmobile - If device is regarded as non-mobile.
+    * body.mwf_standard - If device qualifies under "standard" classification.
+    * body.mwf_full - If device qualifies under "full" classification.
+    * body.mwf_browser_{name} - Browser name.
+    * body.mwf_browser_{name}_{version} - Browser name and version.
+    * body.mwf_os_{name} - Device OS name.
+    * body.mwf_os_{name}_{version} - Device OS name and version.
+
+* Configuration settings for favicon and appicon [MWF-6, MWF-22]
+
+* Configuration setting for non-mobile redirect [MWF-20]
+
+* Addition of base content pages for MWF content [MWF-11]
+
+* Inline PHPDoc comments.
