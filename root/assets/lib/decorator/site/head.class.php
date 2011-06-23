@@ -42,6 +42,8 @@ class Head_Site_Decorator extends Tag_HTML_Decorator
     public function &set_css_handler($path)
     {
         $this->_handler_css = $path;
+        if(strpos($path, '?') === false)
+            $this->_handler_css .= '?';
         return $this;
     }
 
@@ -67,6 +69,8 @@ class Head_Site_Decorator extends Tag_HTML_Decorator
     public function &set_js_handler($path)
     {
         $this->_handler_js = $path;
+        if(strpos($path, '?') === false)
+            $this->_handler_js .= '?';
         return $this;
     }
 

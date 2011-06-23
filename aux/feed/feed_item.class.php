@@ -14,6 +14,8 @@ class Feed_Item
         $this->_title = $array['title'];
         $this->_link = isset($array['link']) ? $array['link'] : false;
         $this->_description = isset($array['description']) ? $array['description'] : false;
+        $this->_date = date('F j, Y', $array['date_timestamp']);
+        $this->_author = $array['author'];
     }
 
     public function get_feed()
@@ -34,6 +36,16 @@ class Feed_Item
     public function get_link()
     {
         return $this->_link;
+    }
+
+    public function get_date()
+    {
+        return $this->_date;
+    }
+
+    public function get_author()
+    {
+        return $this->_author;
     }
 
     public function get_description()
