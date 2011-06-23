@@ -35,7 +35,7 @@ $contributors = array(
                                       'Nate Emerson',
                                       'Zorayr Khalapyan'
                                      ),
-                        'UC Berkeley'=>array('Sara Leavit'
+                        'UC Berkeley'=>array('Sara Leavitt'
                                      ),
                         'UC San Diego'=>array('Mojgan Amini',
                                               'Ike Lin'
