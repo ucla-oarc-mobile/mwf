@@ -171,6 +171,14 @@ div.button-full a.button-last {
     width: 50%;
 }
 
+div.button-full a:first-child:last-child,
+div.button-full a.button-first.button-last
+{
+    width: 100%;
+    left: 0;
+    right: 0;
+}
+
 div.button-full.button-padded a:first-child,
 div.button-full.button-padded a.button-first {
     left: 10px;
