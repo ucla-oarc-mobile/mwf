@@ -39,3 +39,15 @@ Config::set('user_agent', 'adapter', 'User_Agent_WURFL_Adapter');
  * @link /assets/lib/user_agent_wurfl_adapter.class.php
  */
 Config::set('user_agent', 'wurfl_config_path', '/var/mobile/wurfl/wurfl-config.xml');
+
+
+/**
+ * user_agent_adapter_wurlf_php_api_path
+ *
+ * Path of the WURFL PHP API directory.
+ *
+ * Default: /var/mobile/wurfl/api/WURFL
+ *
+ * @link /assets/lib/user_agent_wurfl_adapter.class.php
+ */
+Config::set('user_agent', 'wurfl_php_api_path', '/var/mobile/wurfl/api/WURFL');

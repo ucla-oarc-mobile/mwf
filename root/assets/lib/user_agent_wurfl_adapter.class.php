@@ -20,7 +20,7 @@
  */
 
 require_once(dirname(dirname(__FILE__)).'/config.php');
-require_once('wurfl/Application.php');
+require_once(Config::get('user_agent', 'wurfl_php_api_path').'/Application.php');
 require_once('user_agent_adapter.interface.php');
 
 class User_Agent_WURFL_Adapter implements User_Agent_Adapter_Interface
