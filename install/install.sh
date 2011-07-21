@@ -1,3 +1,11 @@
+# This installation script from RHEL, CentOS and Fedora configures default
+# location files and directories for the MWF. It also fetches the latest copy
+# of the WURFL metadata file. This should be run first when installing the MWF
+# on a new server.
+#
+# Please note that this file does not include the WURFL PHP API. Please see
+# install-wurfl-api.sh for more information about it.
+
 script_dir="$(dirname "$(readlink -f ${BASH_SOURCE[0]})")"
 install_dir="/var/mobile"
 
@@ -23,9 +31,5 @@ sudo cp -a ${script_dir}/components/wurfl-web_browsers_patch.xml ${install_dir}/
 sudo wget -P ${install_dir}/temp/ http://sourceforge.net/projects/wurfl/files/WURFL/latest/wurfl-latest.xml.gz/download
 sudo gunzip -c ${install_dir}/temp/wurfl-latest.xml.gz | sudo tee ${install_dir}/temp/wurfl-latest.xml > /dev/null
 sudo mv ${install_dir}/temp/wurfl-latest.xml ${install_dir}/wurfl/wurfl.xml
-
-sudo wget -P ${install_dir}/temp/ http://mwf.ucla.edu/wurfl-php-api-1.2.1.tgz
-sudo tar -xvzf ${install_dir}/temp/wurfl-php-api-1.2.1.tgz
-sudo mv api ${install_dir}/wurfl/
 
 sudo rm -rf ${install_dir}/temp
