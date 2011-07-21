@@ -24,4 +24,8 @@ sudo wget -P ${install_dir}/temp/ http://sourceforge.net/projects/wurfl/files/WU
 sudo gunzip -c ${install_dir}/temp/wurfl-latest.xml.gz | sudo tee ${install_dir}/temp/wurfl-latest.xml > /dev/null
 sudo mv ${install_dir}/temp/wurfl-latest.xml ${install_dir}/wurfl/wurfl.xml
 
+sudo wget -P ${install_dir}/temp/ http://mwf.ucla.edu/wurfl-php-api-1.2.1.tgz
+sudo tar -xvzf ${install_dir}/temp/wurfl-php-api-1.2.1.tgz
+sudo mv api ${install_dir}/wurfl/
+
 sudo rm -rf ${install_dir}/temp
