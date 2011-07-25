@@ -210,6 +210,11 @@ Lists
     text-align: left;
 }
 
+.menu-detailed li a, .menu-detailed li p
+{
+    padding: .6em 2em .6em .6em;
+}
+
 .menu-button a {
     color: #2685BB;
 }
@@ -229,7 +234,7 @@ li .smallprint {
 
 li a, li p {
     display: block;
-    padding: .6em 2em .6em .6em;
+    padding: .6em 2em;
 }
 
 li a {
