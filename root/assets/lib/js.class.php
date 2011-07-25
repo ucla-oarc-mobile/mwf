@@ -34,7 +34,7 @@ class JS
         $this->_ext = '.js';
 
         $this->_map = array('jquery'=>'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js',
-                            'jquery.swipe'=>$this->_webroot.'js/webkit/jquery.swipe.js');
+                            'jquery.swipe'=>$this->_webroot.'js/full/jquery.swipe.js');
 
         $this->_extern = array('standard'  => array('jquery'=>$this->_map['jquery']),
                                'full' => array('jquery.swipe'=>$this->_map['jquery.swipe']));
