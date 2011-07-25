@@ -37,7 +37,8 @@
     background: -webkit-gradient(linear, left top, left bottom, from(#809FE2), to(#637CB0), color-stop(1, #fff));
 }
 
-.menu-padded li:first-child a,
+.menu-padded > :first-child:last-child li:first-child,
+.menu-padded > :first-child,
 .menu-padded .menu-first {
     -moz-border-radius-topleft: .5em;
     -moz-border-radius-topright: .5em;
@@ -45,8 +46,37 @@
     -webkit-border-top-right-radius: .5em;
 }
 
-.menu-padded li:last-child a,
+.menu-padded li:last-child,
 .menu-padded .menu-last {
+    -webkit-border-bottom-left-radius: .5em;
+    -webkit-border-bottom-right-radius: .5em;
+    -moz-border-radius-bottomleft: .5em;
+    -moz-border-radius-bottomright: .5em;
+    z-index: -100;
+    margin-bottom: 6px;
+}
+
+.menu-padded > :first-child:last-child li:first-child a:hover,
+.menu-padded > :first-child:last-child li:first-child a:focus,
+.menu-padded > :first-child:last-child li:first-child a:active,
+.menu-padded > :first-child a:hover,
+.menu-padded > :first-child a:focus,
+.menu-padded > :first-child a:active,
+.menu-padded .menu-first a:hover,
+.menu-padded .menu-first a:focus,
+.menu-padded .menu-first a:active {
+    -moz-border-radius-topleft: .5em;
+    -moz-border-radius-topright: .5em;
+    -webkit-border-top-left-radius: .5em;
+    -webkit-border-top-right-radius: .5em;
+}
+
+.menu-padded li:last-child a:hover,
+.menu-padded li:last-child a:focus,
+.menu-padded li:last-child a:active,
+.menu-padded .menu-last a:hover,
+.menu-padded .menu-last a:focus,
+.menu-padded .menu-last a:active {
     -webkit-border-bottom-left-radius: .5em;
     -webkit-border-bottom-right-radius: .5em;
     -moz-border-radius-bottomleft: .5em;
