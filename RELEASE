@@ -50,7 +50,7 @@ Version 1.1.01.alpha
 June 16, 2011
 
 
-* Addition of Feed API in /aux/feed [MWF-41]
+* Addition of Feed API in /auxiliary/feed [MWF-41]
 
 * Addition of redirect prompt functionality [MWF-32]
 
@@ -78,7 +78,7 @@ May 20, 2011
     * /root - Web accessible directory - deprecates /
     * /config - Configuration files - deprecates /assets/config
     * /install - Installation scripts - deprecates /assets/install
-    * /aux - Auxiliary modules - deprecates /assets/ext
+    * /auxiliary - Auxiliary modules - deprecates /assets/ext
 
 * Addition of LICENSE file [MWF-14]
 
