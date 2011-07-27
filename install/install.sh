@@ -13,18 +13,18 @@ sudo mkdir ${install_dir}
 sudo mkdir ${install_dir}/cache
 sudo mkdir ${install_dir}/cache/img
 sudo mkdir ${install_dir}/cache/wurfl
-sudo mkdir ${install_dir}/cache/magpierss
+sudo mkdir ${install_dir}/cache/simplepie
 sudo mkdir ${install_dir}/wurfl
 
 sudo mkdir ${install_dir}/temp
 
 sudo chmod 755 ${install_dir}/cache/img
 sudo chmod 755 ${install_dir}/cache/wurfl
-sudo chmod 755 ${install_dir}/cache/magpierss
+sudo chmod 755 ${install_dir}/cache/simplepie
 
 sudo chown apache.apache ${install_dir}/cache/img
 sudo chown apache.apache ${install_dir}/cache/wurfl
-sudo chown apache.apache ${install_dir}/cache/magpierss
+sudo chown apache.apache ${install_dir}/cache/simplepie
 
 sudo cp -a ${script_dir}/components/wurfl-config.xml ${install_dir}/wurfl/wurfl-config.xml
 sudo cp -a ${script_dir}/components/wurfl-web_browsers_patch.xml ${install_dir}/wurfl/wurfl-web_browsers_patch.xml

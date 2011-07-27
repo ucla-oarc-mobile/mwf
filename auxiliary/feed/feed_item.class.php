@@ -6,16 +6,19 @@ class Feed_Item
     private $_link;
     private $_description;
     private $_feed;
+    private $_author;
 
-    public function __construct($feed, $array)
+    public function __construct($feed, $item)
     {
         $this->_feed = $feed;
-        $this->_name = $array['title'];
-        $this->_title = $array['title'];
-        $this->_link = isset($array['link']) ? $array['link'] : false;
-        $this->_description = isset($array['description']) ? $array['description'] : false;
-        $this->_date = date('F j, Y', $array['date_timestamp']);
-        $this->_author = $array['author'];
+        $this->_name = $item->get_title();
+        $this->_title = $item->get_title();
+        $this->_link = $item->get_permalink();
+        $this->_description = $item->get_content();
+        $this->_date = $item->get_date('F j, Y');
+        $author = $item->get_author();
+        $author_name = $author->get_name();
+        $this->_author = empty($author_name) ? $author->get_email() : $author_name;
     }
 
     public function get_feed()
@@ -86,5 +89,3 @@ class Feed_Item
         return $signature == md5($salt.$this->get_feed()->get_name().$this->get_feed()->get_path().$this->get_title());
     }
 }
-
-?>

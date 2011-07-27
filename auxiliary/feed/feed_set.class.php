@@ -79,5 +79,3 @@ class Feed_Set implements Iterator
         return isset($this->_set[$this->_pos]);
     }
 }
-
-?>

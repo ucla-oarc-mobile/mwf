@@ -1,10 +1,6 @@
 <?php
 
-define('MAGPIE_INPUT_ENCODING', 'UTF-8');
-define('MAGPIE_OUTPUT_ENCODING', 'UTF-8');
-
-require_once(dirname(__FILE__).'/magpierss/rss_fetch.inc');
-
+require_once(dirname(__FILE__).'/simplepie.php');
 require_once(dirname(__FILE__).'/feed_item.class.php');
 
 class Feed
@@ -38,7 +34,11 @@ class Feed
     {
         try
         {
-            $rss = fetch_rss($this->get_path());
+            $feed = new SimplePie();
+            $feed->set_feed_url($this->get_path());
+            $feed->set_cache_location('/var/mobile/cache/simplepie');
+            $feed->init();
+            $feed->handle_content_type();
         }
         catch(Exception $e)
         {
@@ -46,7 +46,7 @@ class Feed
         }
 
         $this->_items = array();
-        foreach($rss->items as $item)
+        foreach($feed->get_items() as $item)
             $this->_items[] = new Feed_Item($this, $item);
         return $this->_items;
     }
@@ -87,5 +87,3 @@ class Feed
         return new Feed($_GET['name'], $_GET['path']);
     }
 }
-
-?>
