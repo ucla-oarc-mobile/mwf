@@ -19,9 +19,39 @@ License:
 
 TABLE OF CONTENTS
 
-Version 1.1.02.alpha    -
+Version 1.1.04.gm       July 27, 2011
+Version 1.1.03.alpha    July 20, 2011
+Version 1.1.02.alpha    June 23, 2011
 Version 1.1.01.alpha    June 16, 2011
 Version 1.1.00.alpha    May 20, 2011
+
+==============================================================================
+
+Version 1.1.04.rc
+July 27, 2011
+
+
+* Fix to touch_transitions by resolving jQuery Swipe definition [MWF-90]
+
+* Fix to .menu-full first and last element rounded corners [MWF-66]
+
+* Fix to alignment of elements under .menu-full [MWF-80]
+
+* Fix to tag decorator for void element [MWF-91]
+
+==============================================================================
+
+Version 1.1.03.alpha
+July 20, 2011
+
+
+* Removal of the WURFL PHP API from MWF repository [MWF-84]
+
+* Addition of /install/install-wurfl-api.sh with install instructions [MWF-84]
+
+* Renamed /aux to /auxiliary due to bug in Windows file system [MWF-62]
+
+* Refactored core files to reflect /auxiliary directory [MWF-65]
 
 ==============================================================================
 
