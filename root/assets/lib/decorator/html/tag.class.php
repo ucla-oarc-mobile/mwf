@@ -93,7 +93,7 @@ class Tag_HTML_Decorator extends Decorator
     {
         $str = $this->_tag_open->render();
 
-        if($this->_inner && count($this->_inner) === 0)
+        if(count($this->_inner) === 0)
             return $str;
 
         foreach($this->_inner as $inner)
