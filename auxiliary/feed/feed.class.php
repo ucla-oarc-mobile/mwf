@@ -95,7 +95,7 @@ class Feed
         {
             $feed = new SimplePie();
             $feed->set_feed_url($this->get_path());
-            $feed->set_cache_location(Config::get('feed', 'cache_path'));
+            $feed->set_cache_location(Config::get('auxiliary/feed', 'cache_path'));
             $feed->init();
             $feed->handle_content_type();
         }
