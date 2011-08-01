@@ -19,7 +19,8 @@ License:
 
 TABLE OF CONTENTS
 
-Version 1.1.04.gm       July 27, 2011
+Version 1.1.05.gm       August 1, 2011
+Version 1.1.04.rc       July 27, 2011
 Version 1.1.03.alpha    July 20, 2011
 Version 1.1.02.alpha    June 23, 2011
 Version 1.1.01.alpha    June 16, 2011
@@ -27,9 +28,15 @@ Version 1.1.00.alpha    May 20, 2011
 
 ==============================================================================
 
+Version 1.1.05.gm
+August 1, 2011
+
+* Replace MagpieRSS with SimplePie in Feeds API [MWF-102]
+
+==============================================================================
+
 Version 1.1.04.rc
 July 27, 2011
-
 
 * Fix to touch_transitions by resolving jQuery Swipe definition [MWF-90]
 
@@ -44,7 +51,6 @@ July 27, 2011
 Version 1.1.03.alpha
 July 20, 2011
 
-
 * Removal of the WURFL PHP API from MWF repository [MWF-84]
 
 * Addition of /install/install-wurfl-api.sh with install instructions [MWF-84]
@@ -57,7 +63,6 @@ July 20, 2011
 
 Version 1.1.02.alpha
 June 23, 2011
-
 
 * Add compatibility for PHP 5 < 5.3 [MWF-52, MWF-53]
 
@@ -78,7 +83,6 @@ June 23, 2011
 
 Version 1.1.01.alpha
 June 16, 2011
-
 
 * Addition of Feed API in /auxiliary/feed [MWF-41]
 
