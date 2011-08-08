@@ -1,7 +1,7 @@
 <?php
 
 /**
- * A class that represents an set of feeds. A Feed Set can be populated with an
+ * A class that represents a set of feeds. A Feed Set can be populated with an
  * associative array of paths keyed by name, or by an XML file that contains
  * feed information.
  *

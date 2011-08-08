@@ -60,9 +60,9 @@ class Feed_Item
         $this->_link = $item->get_permalink();
         $this->_description = $item->get_content();
         $this->_date = $item->get_date('F j, Y');
-        $author = $item->get_author();
-        $author_name = $author->get_name();
-        $this->_author = empty($author_name) ? $author->get_email() : $author_name;
+        $author = $item->get_author();  
+        $author_name = $author ? $author->get_name() : NULL;
+        $this->_author = $author && empty($author_name) ? $author->get_email() : $author_name;
     }
 
     /**
