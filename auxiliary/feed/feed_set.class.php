@@ -96,13 +96,6 @@ class Feed_Set implements Iterator
         $this->_set = array();
     }
 
-    /*public function get_all()
-    {
-        $array = array();
-        foreach($this->_set as $item)
-            $array[] =
-    }*/
-
     /**
      * The following functions are those required by the Iterable interface for
      * use when iterating.
