@@ -188,6 +188,11 @@ h1, h2, h3, h4, h5, h6 {
     color: #555;
 }
 
+.menu-full img {
+    max-width: 100%;
+    height: auto;
+}
+
 /*-------------------------------------------------
 Lists
 ------------------------------------------------*/
@@ -368,6 +373,12 @@ form.form-full > input[type=reset]:hover {
 .content-elements > h4 {
     padding: 0;
     margin: 0;
+}
+
+.content-full img,
+.content-elements img {
+    max-width: 100%;
+    height: auto;
 }
 
  .content-elements p, .content-full p {
