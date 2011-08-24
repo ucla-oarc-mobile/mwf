@@ -71,7 +71,6 @@ class Tag_Open_HTML_Decorator extends Decorator
             foreach($this->_params as $name=>$val)
                 $str .= ' '.$name.($val ? '="'.$val.'"' : '');
         $str .= '>';
-        return $str.'
-';
+        return $str;
     }
 }

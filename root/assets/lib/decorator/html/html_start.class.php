@@ -18,9 +18,9 @@ require_once(dirname(__FILE__).'/tag_open.class.php');
 
 class HTML_Start_HTML_Decorator extends Tag_Open_HTML_Decorator
 {
-    public function __construct()
+    public function __construct($params = array())
     {
-        parent::__construct('html');
+        parent::__construct('html', $params);
     }
 
     public function render()
