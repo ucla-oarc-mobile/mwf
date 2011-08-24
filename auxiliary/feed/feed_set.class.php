@@ -1,7 +1,7 @@
 <?php
 
 /**
- * A class that represents an set of feeds. A Feed Set can be populated with an
+ * A class that represents a set of feeds. A Feed Set can be populated with an
  * associative array of paths keyed by name, or by an XML file that contains
  * feed information.
  *
@@ -95,13 +95,6 @@ class Feed_Set implements Iterator
     {
         $this->_set = array();
     }
-
-    /*public function get_all()
-    {
-        $array = array();
-        foreach($this->_set as $item)
-            $array[] =
-    }*/
 
     /**
      * The following functions are those required by the Iterable interface for

@@ -40,6 +40,13 @@ class Feed_Item
     private $_feed;
     
     /**
+     * The date of the item
+     * 
+     * @var string
+     */
+    private $_date;
+    
+    /**
      * The author of the item
      * 
      * @var string 
@@ -59,10 +66,10 @@ class Feed_Item
         $this->_title = $item->get_title();
         $this->_link = $item->get_permalink();
         $this->_description = $item->get_content();
-        $this->_date = $item->get_date('F j, Y');
-        $author = $item->get_author();
-        $author_name = $author->get_name();
-        $this->_author = empty($author_name) ? $author->get_email() : $author_name;
+        $this->_date = $item->get_date('U');
+        $author = $item->get_author();  
+        $author_name = $author ? $author->get_name() : NULL;
+        $this->_author = $author && empty($author_name) ? $author->get_email() : $author_name;
     }
 
     /**
@@ -110,9 +117,9 @@ class Feed_Item
      * 
      * @return string 
      */
-    public function get_date()
+    public function get_date($format='F j, Y')
     {
-        return $this->_date;
+        return date($format, $this->_date);
     }
 
     /**

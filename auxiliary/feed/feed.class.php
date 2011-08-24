@@ -94,6 +94,7 @@ class Feed
         try
         {
             $feed = new SimplePie();
+            $feed->enable_order_by_date(false);
             $feed->set_feed_url($this->get_path());
             $feed->set_cache_location(Config::get('auxiliary/feed', 'cache_path'));
             $feed->init();
