@@ -73,7 +73,7 @@ class Footer_Site_Decorator extends Tag_HTML_Decorator
             if($this->_copyright)
                 $p->add_inner($this->_copyright);
             if($this->_copyright && ($this->_full_title || $this->_help_title))
-                $p->add_inner_tag('br');
+                $p->add_inner_tag('br',false);
             if($this->_full_title)
                 $p->add_inner_tag('a', $this->_full_title, array('href'=>$this->_full_url));
             if($this->_full_title && $this->_help_title)
