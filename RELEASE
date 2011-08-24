@@ -19,12 +19,27 @@ License:
 
 TABLE OF CONTENTS
 
-Version 1.1.05.gm       August 1, 2011
+Version 1.1.06          August 24, 2011
+Version 1.1.05          August 1, 2011
 Version 1.1.04.rc       July 27, 2011
 Version 1.1.03.alpha    July 20, 2011
 Version 1.1.02.alpha    June 23, 2011
 Version 1.1.01.alpha    June 16, 2011
 Version 1.1.00.alpha    May 20, 2011
+
+==============================================================================
+
+Version 1.1.05.gm
+August 24, 2011
+
+* Minified statically-defined default MWF CSS [MWF-143]
+* Added CSS definitions to prevent image overflow [MWF-130]
+* Resolved invalid syntax in Footer decorator [MWF-
+* Removed whitespace from decorators [MWF-124 & MWF-147]
+* Updated Feed API to handle missing author field [MWF-127]
+* Corrected ordering of feed items in Feed API [MWF-129]
+* Added date selection capabilities to Feed API [MWF-132]
+* Removed old commented out code in Feed API [MWF-132]
 
 ==============================================================================
 
