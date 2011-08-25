@@ -42,7 +42,7 @@ August 24, 2011
 
 * Minified statically-defined default MWF CSS [MWF-143]
 * Added CSS definitions to prevent image overflow [MWF-130]
-* Resolved invalid syntax in Footer decorator [MWF-
+* Resolved invalid syntax in Footer decorator [MWF-126]
 * Removed whitespace from decorators [MWF-124 & MWF-147]
 * Updated Feed API to handle missing author field [MWF-127]
 * Corrected ordering of feed items in Feed API [MWF-129]
