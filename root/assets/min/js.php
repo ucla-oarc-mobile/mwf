@@ -13,10 +13,11 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110510
+ * @version 20110827
  *
- * @uses User_Agent
+ * @uses Device
  * @uses JSMin
+ * @uses Path
  * @uses Path_Validator
  */
 
@@ -31,8 +32,9 @@ header('Content-Type: text/javascript');
  */
 
 require_once(dirname(dirname(__FILE__)).'/lib/'.'jsmin.class.php');
-require_once(dirname(dirname(__FILE__)).'/lib/'.'user_agent.class.php');
+require_once(dirname(dirname(__FILE__)).'/lib/'.'device.class.php');
 require_once(dirname(dirname(__FILE__)).'/lib/'.'path.class.php');
+require_once(dirname(dirname(__FILE__)).'/lib/'.'path_validator.class.php');
 
 /**
  * Scripts that will be minified and included at the BASIC level and above.
@@ -56,7 +58,7 @@ if(isset($_GET['basic']) || isset($_GET['paths']))
  * Scripts that will be minified and included at the STANDARD level and above.
  */
 
-if(User_Agent::is_standard() && (isset($_GET['standard']) || isset($_GET['touch'])) )
+if(Device::is_standard() && (isset($_GET['standard']) || isset($_GET['touch'])) )
 {
     $loadarr = isset($_GET['standard']) ? explode(' ', $_GET['standard']) : array();
 
@@ -74,7 +76,7 @@ if(User_Agent::is_standard() && (isset($_GET['standard']) || isset($_GET['touch'
  * Scripts that will be minified and included at the FULL level only.
  */
 
-if(User_Agent::is_full() && (isset($_GET['full']) || isset($_GET['webkit'])) )
+if(Device::is_full() && (isset($_GET['full']) || isset($_GET['webkit'])) )
 {
     $loadarr = isset($_GET['full']) ? explode(' ', $_GET['full']) : array();
 

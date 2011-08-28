@@ -42,4 +42,4 @@ mwf.webkit.transitions = new function() {
     }
 }
 
-$(document).ready(mwf.webkit.transitions.init);
+document.addEventListener('load', mwf.webkit.transitions.init, false);

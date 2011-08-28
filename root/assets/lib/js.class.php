@@ -1,124 +1,272 @@
 <?php
 
 /**
- * Singleton that provides a variety of utility functions for working
- * with framework and external Javascript.
+ * Static loader that manages Javascript assets. For local assets, it provides
+ * ways to both include a script directly and to write it into the DOM via a
+ * script tag. For remote assets, it only provides the latter, requiring such
+ * assets to be loaded into the DOM and not included directly. This promotes
+ * better caching properties among externally-hosted files that may be cached.
+ * This loader also includes several key functions that load assets either
+ * externally based on $_external[$key] or else from within the Javascript
+ * asset folder.
  *
  * @package core
  * @subpackage handler
- * 
- * @author ebollens
- * @version 20101021
  *
- * @todo This file needs comments for methods and variables.
+ * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20110827
  */
 
 class JS
 {
-    private $_ext;
-    private $_webroot;
-    private $_fileroot;
-    private $_map;
-    private $_req;
-    private $_imp;
-    private $_extern;
-
-    private static $_instance = null;
-
-    private function __construct()
-    {
-        $this->_webroot = !isset($_SERVER['SERVER_PORT']) || $_SERVER['SERVER_PORT'] == 80 || $_SERVER['SERVER_PORT'] == 443 || !$_SERVER['SERVER_PORT']
-                ? 'http://'.$_SERVER['SERVER_NAME'].dirname($_SERVER['SCRIPT_NAME']).'/'
-                : 'http://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].dirname($_SERVER['SCRIPT_NAME']).'/';
-        $this->_fileroot = dirname($_SERVER['SCRIPT_FILENAME']).'/';
-        $this->_ext = '.js';
-
-        $this->_map = array('jquery'=>'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js',
-                            'jquery.swipe'=>$this->_webroot.'js/full/jquery.swipe.js');
-
-        $this->_extern = array('standard'  => array('jquery'=>$this->_map['jquery']),
-                               'full' => array('jquery.swipe'=>$this->_map['jquery.swipe']));
-
-        $this->_req = array('standard'  => array('geolocation'=>array()),
-                            'full' => array('transitions'=>array('jquery'),
-                                              'touch_transitions'=>array('jquery', 'jquery.swipe')),
-                            'iphone' => array('orientation'=>array()),
-                            'desktop'=> array('preview'=>array('jquery')));
-
-        $this->_imp = array();
-    }
-
-    public static function library_path($item)
-    {
-        return self::instance()->_map[$item];
-    }
-
     /**
-     *
-     * @return JS
+     * Boolean that denotes if init() has been invoked.
+     * 
+     * @var bool
      */
-    public static function &instance()
+    private static $_init = false;
+    
+    /**
+     * A mapping defined in init() of keys to external script files.
+     * 
+     * @var array
+     */
+    private static $_external;
+    
+    /**
+     * Stores a set of loaded external scripts to prevent multiple imports.
+     * 
+     * @var array 
+     */
+    private static $_external_loaded = array();
+    
+    /**
+     * An array by key that contains arrays of libraries that they library
+     * by key name depends on.
+     * 
+     * @var array
+     */
+    private static $_dependencies;
+    
+    /**
+     * Extensions that import_key() will try to use for script inclusion.
+     * 
+     * @var type 
+     */
+    private static $_exts = array('.php', '.js');
+    
+    /**
+     * Static, one-time firing initializer that defines the mappings for
+     * external libraries and for dependencies.
+     * 
+     * @return type 
+     */
+    public static function init()
     {
-        if(self::$_instance === null)
-            self::$_instance = new JS();
-        return self::$_instance;
-    }
-
-    public static function include_library($name, $type, $ext = false)
-    {
-        if(!$ext)
-            $ext = self::instance()->_ext;
-        else
-            $ext = '.'.$ext;
+        if(self::$_init)
+            return;
         
-        if(file_exists(self::instance()->_fileroot.'js/'.$type.'/'.$name.$ext))
-            include(self::instance()->_fileroot.'js/'.$type.'/'.$name.$ext);
-        else
-            echo '/* failed to include "'.self::instance()->_fileroot.'js/'.$type.'/'.$name.$ext.'"*/';
+        /**
+         * External libraries by key
+         */
+        self::$_external['jquery'] = 'https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js';
+        self::$_external['jquery_ui'] = 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js';
+    
+        /**
+         * Dependencies by key
+         */
+        self::$_dependencies['jquery_ui'] = array('jquery');
+        self::$_dependencies['transitions'] = array('jquery');
+        self::$_dependencies['touch_transitions'] = array('transitions', 'jquery.swipe');
     }
-
-    public static function import_file($file, $localpath = null)
+    
+    /**
+     * Loads a file under assets/js and returns true or else it returns false.
+     * Unless $allow_multiple is set true, it will otherwise only include the
+     * file once.
+     * 
+     * @param string $filename
+     * @param bool $allow_multiple
+     * @return bool 
+     */
+    public static function load($filename, $allow_multiple = false)
     {
-        if(in_array($file, self::instance()->_imp))
-            return;
-
-        if(!($f = @fopen($file, "r")))
-        {
-            return;
-        }
-        fclose($f);
-
-        if(User_Agent::has_capability('ajax_manipulate_dom') || User_Agent::is_preview())
-            echo 'mwf.util.importJS(\''.$file.'\');';
-        elseif($localpath !== null && file_exists($localpath))
-            include($localpath);
+        /**
+         * $filename is under assets/js
+         */
+        $filename = dirname(dirname(__FILE__)).'/js/'.$filename;
+        
+        /**
+         * File must exist or else return false.
+         */
+        if(!file_exists($filename))
+            return false;
+        
+        /**
+         * Use include() if multiple allowed, or include_once() otherwise.
+         */
+        if($allow_multiple)
+            include($filename);
         else
-            return;
-
-        self::instance()->_imp[] = $file;
+            include_once($filename);
+        
+        return true;
+        
     }
-
-    public static function import_library($alias, $type)
+    
+    /**
+     * Load a Javascript file for a given $key based on device classification.
+     * If full, then $key may be assets/js/full/{$key}{$ext} for any extension
+     * $ext defined in the array $_exts. If standard, or if full and not in 
+     * assets/js/full, then it may be assets/js/standard/{$key}{$ext} for any
+     * extension $ext in $_exts. This returns false if no matching file found.
+     * 
+     * @param string $key
+     * @return bool 
+     */
+    public static function load_key($key)
     {
-        $req =& self::instance()->_req;
-        if(isset($req[$type]) && isset($req[$type][$alias]) && is_array($req[$type][$alias]))
-        {
-            $map =& self::instance()->_map;
-            $req_libs = self::instance()->_req[$type][$alias];
-            foreach($req_libs as $req_lib)
-            {
-                if(isset($map[$req_lib]))
-                    self::import_file($map[$req_lib]);
-            }
-        }
-
-        $extern =& self::instance()->_extern;
-        if(isset($extern[$type][$alias]))
-            self::import_file($extern[$type][$alias]);
+        /**
+         * If full device, check each $_exts as assets/js/full/{$key}{$ext}.
+         * If found, use load() to include the file.
+         */
+        if(Device::is_full())
+            foreach(self::$_exts as $ext)
+                if(self::load('full/'.$key.$ext))
+                    return true;
+                
+        /**
+         * If standard device, or if full device and not already returned, check
+         * each $_exts as assets/js/full/{$key}{$ext}. If found, then use load()
+         * to include the file.
+         */
+        if(Device::is_standard())
+            foreach(self::$_exts as $ext)
+                if(self::load('standard/'.$key.$ext))
+                    return true;
+                
+       return false;
+    }
+    
+    /**
+     * Imports a Javascript file (live DOM write of a new script tag) for a
+     * given $key based on device classification. If full, then $key may be 
+     * assets/js/full/{$key}{$ext} for any extension $ext in the array $_exts.
+     * If standard, or if full and not in assets/js/full, this it may under
+     * assets/js/standard/{$key}{$ext} for any extension $ext in $_exts. This
+     * returns false if no matching file found.
+     * 
+     * 
+     * @param string $key
+     * @return bool 
+     */
+    public static function import_key($key)
+    {
+        /**
+         * If full device, check each $_exts as assets/js/full/{$key}{$ext}.
+         * If found, then use import_file() to write a script tag via a live
+         * DOM write.
+         */
+        if(Device::is_full())
+            foreach(self::$_exts as $ext)
+                if(self::import_file('full/'.$key.$ext))
+                    return true;
+                
+        /**
+         * If standard device, or if full device and not already returned, check
+         * each $_exts as assets/js/full/{$key}{$ext}. If found, then use
+         * import_file() to write a script tag via a live DOM write.
+         */
+        if(Device::is_standard())
+            foreach(self::$_exts as $ext)
+                if(self::import_file('standard/'.$key.$ext))
+                    return true;
+                
+       return false;
+    }
+    
+    /**
+     * Imports a file under assets/js and returns true or else it returns false.
+     * Unless $allow_multiple is set true, it will otherwise only include the
+     * file once.
+     * 
+     * @param string $filename
+     * @return bool 
+     */
+    public static function import_file($filename)
+    {
+        /**
+         * $filename is under assets/js
+         */
+        $filepath = dirname(dirname(__FILE__)).'/js/'.$filename;
+        
+        if(!file_exists($filepath))
+            return false;
+        
+        self::import_external(Config::get('global', 'site_assets_url').'/js/'.$filename);
+        return true;
+    }
+    
+    /**
+     * Echo a call to mwf.util.importJS such that a new script tag is added to
+     * the DOM for $url. Returns true if the import is successful, or false
+     * if the file has already been loaded. The $allow_multiple boolean, if
+     * set true, allows one to make the same call multiple times.
+     * 
+     * @param string $url
+     * @param bool $allow_multiple
+     * @return bool 
+     */
+    public static function import_external($url, $allow_multiple = false)
+    {
+        /**
+         * Return false if $url has already been loaded and $allow_multiple
+         * is false, thus not allowing for multiple loads of the same file.
+         */
+        if(in_array($url, self::$_external_loaded) && !$allow_multiple)
+            return false;
+        
+        /**
+         * Output a call to mwf.util.importJS and return true after storing
+         * the $url under $_external_loaded to prevent multiple inclusion.
+         */
+        echo 'mwf.util.importJS(\''.$url.'\');';
+        self::$_external_loaded[] = $url;
+        return true;
+    }
+    
+    /**
+     * Load a library based on key (such as passed as a get parameter to
+     * assets/js.php). This uses import_external() if the file is mapped to
+     * an external file under $_external or else it uses import_key() to 
+     * import the file from under assets/js if the file exists. This function
+     * is also aware of dependencies and consults $_dependencies to load
+     * necessary files first. All inclusion from this call is done via live
+     * DOM writes of additional script tags.
+     * 
+     * @param string $key 
+     */
+    public static function load_from_key($key)
+    {
+        self::init();
+        
+        /**
+         * Recursively call load_from_key() to import all dependencies as 
+         * defined under $_dependencies.
+         */
+        if(array_key_exists($key, self::$_dependencies))
+            foreach(self::$_dependencies[$key] as $dependency_key)
+                self::load_from_key($dependency_key);
+        
+        /**
+         * If an external mapping exists, load externally. Otherwise, load from
+         * under assets/js.
+         */
+        if(array_key_exists($key, self::$_external))
+            self::import_external(self::$_external[$key]);
         else
-            self::import_file(self::instance()->_webroot.'js/'.$type.'/'.$alias.self::instance()->_ext,
-                              self::instance()->_fileroot.'/js/'.$type.'/'.$alias.self::instance()->_ext);
+            self::import_key($key);
     }
 }
-
-?>

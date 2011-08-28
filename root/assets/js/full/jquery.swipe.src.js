@@ -19,74 +19,79 @@
  * $Date: 2010-07-06
  * $version 0.1(a)
  */
-(function($) {
-	$.fn.swipe = function(options) {
 
-		// Default thresholds & swipe functions
-		var defaults = {
-			threshold: {
-				x: 140,
-				y: 200
-			},
-			swipeLeft: function() { alert('swiped left') },
-			swipeRight: function() { alert('swiped right') }
-		};
+document.addEventListener('load', function(){
 
-		var options = $.extend(defaults, options);
+    (function($) {
+            $.fn.swipe = function(options) {
 
-		if (!this) return false;
+                    // Default thresholds & swipe functions
+                    var defaults = {
+                            threshold: {
+                                    x: 140,
+                                    y: 200
+                            },
+                            swipeLeft: function() { alert('swiped left') },
+                            swipeRight: function() { alert('swiped right') }
+                    };
 
-		return this.each(function() {
+                    var options = $.extend(defaults, options);
 
-			var me = $(this)
+                    if (!this) return false;
 
-			// Private variables for each element
-			var originalCoord = { x: 0, y: 0 }
-			var finalCoord = { x: 0, y: 0 }
+                    return this.each(function() {
 
-			// Screen touched, store the original coordinate
-			function touchStart(event) {
-				console.log('Starting swipe gesture...')
-				originalCoord.x = event.targetTouches[0].pageX
-				originalCoord.y = event.targetTouches[0].pageY
-			}
+                            var me = $(this)
 
-			// Store coordinates as finger is swiping
-			function touchMove(event) {
-			    //event.preventDefault();
-				finalCoord.x = event.targetTouches[0].pageX // Updated X,Y coordinates
-				finalCoord.y = event.targetTouches[0].pageY
-			}
+                            // Private variables for each element
+                            var originalCoord = { x: 0, y: 0 }
+                            var finalCoord = { x: 0, y: 0 }
 
-			// Done Swiping
-			// Swipe should only be on X axis, ignore if swipe on Y axis
-			// Calculate if the swipe was left or right
-			function touchEnd(event) {
-				console.log('Ending swipe gesture...')
-				var changeY = originalCoord.y - finalCoord.y
-				if(changeY < defaults.threshold.y && changeY > (defaults.threshold.y*-1)) {
-					changeX = originalCoord.x - finalCoord.x
+                            // Screen touched, store the original coordinate
+                            function touchStart(event) {
+                                    console.log('Starting swipe gesture...')
+                                    originalCoord.x = event.targetTouches[0].pageX
+                                    originalCoord.y = event.targetTouches[0].pageY
+                            }
 
-					if(changeX > defaults.threshold.x) {
-						defaults.swipeLeft(event)
-					}
-					if(changeX < (defaults.threshold.x*-1)) {
-						defaults.swipeRight(event)
-					}
-				}
-			}
+                            // Store coordinates as finger is swiping
+                            function touchMove(event) {
+                                //event.preventDefault();
+                                    finalCoord.x = event.targetTouches[0].pageX // Updated X,Y coordinates
+                                    finalCoord.y = event.targetTouches[0].pageY
+                            }
 
-			// Swipe was canceled
-			function touchCancel(event) {
-				console.log('Canceling swipe gesture...')
-			}
+                            // Done Swiping
+                            // Swipe should only be on X axis, ignore if swipe on Y axis
+                            // Calculate if the swipe was left or right
+                            function touchEnd(event) {
+                                    console.log('Ending swipe gesture...')
+                                    var changeY = originalCoord.y - finalCoord.y
+                                    if(changeY < defaults.threshold.y && changeY > (defaults.threshold.y*-1)) {
+                                            changeX = originalCoord.x - finalCoord.x
 
-			// Add gestures to all swipable areas
-			this.addEventListener("touchstart", touchStart, false);
-			this.addEventListener("touchmove", touchMove, false);
-			this.addEventListener("touchend", touchEnd, false);
-			this.addEventListener("touchcancel", touchCancel, false);
+                                            if(changeX > defaults.threshold.x) {
+                                                    defaults.swipeLeft(event)
+                                            }
+                                            if(changeX < (defaults.threshold.x*-1)) {
+                                                    defaults.swipeRight(event)
+                                            }
+                                    }
+                            }
 
-		});
-	};
-})(jQuery);
+                            // Swipe was canceled
+                            function touchCancel(event) {
+                                    console.log('Canceling swipe gesture...')
+                            }
+
+                            // Add gestures to all swipable areas
+                            this.addEventListener("touchstart", touchStart, false);
+                            this.addEventListener("touchmove", touchMove, false);
+                            this.addEventListener("touchend", touchEnd, false);
+                            this.addEventListener("touchcancel", touchCancel, false);
+
+                    });
+            };
+    })(jQuery);
+
+}, false);
