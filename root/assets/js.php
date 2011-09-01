@@ -46,7 +46,7 @@ $ext = '.js';
 
 $core_filenames = array('base.php', 
               'modernizr.js', 
-              'capabilities.js', 
+              'capability.js', 
               'classification.js', 
               'user_agent.js',  // deprecated but supported
               'browser.js',

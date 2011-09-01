@@ -19,7 +19,7 @@ mwf.classification=new function(){
      *      - Load Event Listener
      */
     this.isStandard = function(){
-        return mwf.capabilities.hasCookies() && mwf.capabilities.hasWrite() && mwf.capabilities.hasEvents();
+        return mwf.capability.cookie() && mwf.capability.write() && mwf.capability.events();
     }
     
     /**
@@ -31,7 +31,7 @@ mwf.classification=new function(){
      *      - CSS 3 gradients, border radius and box shadow
      */
     this.isFull = function(){
-        return this.isStandard() && mwf.capabilities.hasAJAX() && mwf.capabilities.hasCSS3();
+        return this.isStandard() && mwf.capability.ajax() && mwf.capability.css3();
     }
     
     this.isPreview = function(){

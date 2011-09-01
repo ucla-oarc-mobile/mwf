@@ -1,6 +1,6 @@
 (function(){
     
-    if(!mwf.capabilities.hasCookies())
+    if(!mwf.capability.cookie())
         return;
     
     // Check for if a cookie already exists by mwf_capabilities.

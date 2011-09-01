@@ -1,6 +1,6 @@
 mwf.override = new function(){
     
-    if(!mwf.capabilities.hasCookies()){
+    if(!mwf.capability.cookie()){
         mwf.classification.isOverride = function(){ return false; }
         return;
     }
