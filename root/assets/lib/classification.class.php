@@ -1,22 +1,22 @@
 <?php
 
 /**
- * Static accessor for device capabilities based on the capabilities cookie set 
- * by js/core/server.js based on telemetry from assets/js/core/device.js and 
- * assets/js/core/override.js.
+ * Static accessor for device classification based on the classification cookie 
+ * set by js/core/server.js based on assets/js/core/classification.js and
+ * and assets/js/core/override.js.
  *
  * @package core
- * @package capabilities
+ * @subpackage device
  *
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110827
+ * @version 20110901
  */
 
 require_once(dirname(dirname(__FILE__)).'/config.php');
 
-class Device
+class Classification
 {   
     /**
      * Null until init() fires. True after init() fires if cookie exists, or
@@ -69,7 +69,7 @@ class Device
         /**
          * Define name of the cookie set by asets/js/core/server.js.
          */
-        self::$_name = Config::get('global', 'cookie_prefix').'caps';
+        self::$_name = Config::get('global', 'cookie_prefix').'classification';
         
         /**
          * If cookie is set, extract contents and parse the JSON into a PHP
@@ -79,7 +79,7 @@ class Device
         if(isset($_COOKIE) && isset($_COOKIE[self::$_name]))
         {
             $capabilities = $_COOKIE[self::$_name];
-            self::$_capabilities = self::parse_capabilities($capabilities);
+            self::$_capabilities = self::parse($capabilities);
             self::$_init = true;
         }
         else
@@ -100,7 +100,7 @@ class Device
      * @param string $capabilities
      * @return object 
      */
-    public static function parse_capabilities($capabilities)
+    public static function parse($capabilities)
     {
         include_once(dirname(__FILE__).'/json.php');
         return json_decode(stripslashes($capabilities));
@@ -113,7 +113,7 @@ class Device
      * @param bool $consider_override
      * @return object|false 
      */
-    public static function get_capabilities($consider_override = true)
+    public static function get($consider_override = true)
     {
         /**
          * Initialize if not already initialized.
@@ -153,7 +153,7 @@ class Device
      */
     public static function is_full($consider_override = true)
     {
-        $capabilities = self::get_capabilities($consider_override);
+        $capabilities = self::get($consider_override);
         return $capabilities && $capabilities->full;
     }
 
@@ -167,7 +167,7 @@ class Device
      */
     public static function is_standard($consider_override = true)
     {
-        $capabilities = self::get_capabilities($consider_override);
+        $capabilities = self::get($consider_override);
         return $capabilities && $capabilities->standard;
     }
 
@@ -196,7 +196,7 @@ class Device
      */
     public static function is_mobile($consider_override = true)
     {
-        $capabilities = self::get_capabilities($consider_override);
+        $capabilities = self::get($consider_override);
         return $capabilities && $capabilities->mobile || !isset($_COOKIE) || !isset($_COOKIE[self::$_name]);
     }
     
@@ -263,57 +263,9 @@ class Device
     {
         return self::is_override() && !self::is_mobile(false);
     }
-    
-    /**
-     * @todo
-     */
-    public static function get_os()
-    {
-        return false;
-    }
-    
-    /**
-     * @todo
-     */
-    public static function get_os_version()
-    {
-        return false;
-    }
-    
-    /**
-     * @todo
-     */
-    public static function get_browser()
-    {
-        return false;
-    }
-    
-    /**
-     * @todo
-     */
-    public static function get_browser_version()
-    {
-        return false;
-    }
-    
-    /**
-     * @todo
-     */
-    public static function is_ios($consider_override = true)
-    {
-        return false;
-    }
-    
-    /**
-     * @todo
-     */
-    public static function is_webkit($consider_override = true)
-    {
-        return false;
-    }
 }
 
 /**
  * Initialize the Device static object.
  */
-Device::init();
+Classification::init();

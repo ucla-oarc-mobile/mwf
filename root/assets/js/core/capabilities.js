@@ -1,16 +1,11 @@
-/**
- * mwf.device namespace contains functions related to device capabilities.
- * 
- * This implementation uses Modernizr.
- */
-mwf.device=new function(){
+mwf.capabilities=new function(){
 
     /**
      * Modernizr object reference that mwf.adapter leverages.
      */
     var _modernizr = Modernizr;
     
-    this.cookieName = mwf.site.cookie.prefix+'caps';
+    this.cookieName = mwf.site.cookie.prefix+'capabilities';
     
     this.hasCookies = function(){
         var cookieEnabled = (navigator.cookieEnabled) ? true : false
@@ -103,46 +98,5 @@ mwf.device=new function(){
     
     this.hasCSS3 = function(){
         return this.hasBorderRadius() && this.hasBoxShadow() && this.hasGradients();
-    }
-    
-    this.isMobile = function(){
-        return true; // TODO: Figure out how to determine if mobile
-    }
-    
-    this.isBasic = function(){
-        return true; // TODO: Figure out how to determine if basic
-    }
-    
-    /**
-     * Determine if the device is at least a standard-level device.
-     *
-     * This requires that the device has support for:
-     *      - DOM writing
-     *      - AJAX
-     *      - Load Event Listener
-     */
-    this.isStandard = function(){
-        return this.hasCookies() && this.hasWrite() && this.hasEvents();
-    }
-    
-    /**
-     * Determine if the device is a a full-level device.
-     *
-     * This requires that the device has support for:
-     *      - All standard-level features
-     *      - CSS 2.1 opacity
-     *      - CSS 3 gradients, border radius and box shadow
-     */
-    this.isFull = function(){
-        return this.isStandard() && this.hasAJAX() && this.hasCSS3();
-    }
-    
-    this.getClassification = function(){
-        if(this.isFull())
-            return 'full';
-        else if(this.isStandard())
-            return 'standard';
-        else
-            return 'basic';
     }
 };

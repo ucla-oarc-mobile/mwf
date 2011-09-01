@@ -1,7 +1,9 @@
 mwf.override = new function(){
     
-    if(!mwf.device.hasCookies())
+    if(!mwf.capabilities.hasCookies()){
+        mwf.classification.isOverride = function(){ return false; }
         return;
+    }
     
     this.cookieName = mwf.site.cookie.prefix+'override';
     
@@ -28,7 +30,7 @@ mwf.override = new function(){
                     break;
             }
         }else{
-            mwf.device.isOverride = function(){ return false; }
+            mwf.classification.isOverride = function(){ return false; }
             return;
         }
     }else{
@@ -36,7 +38,7 @@ mwf.override = new function(){
     }
     
     if(override == 'no'){
-        document.cookie = mwf.device.cookieName+'=;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT';
+        document.cookie = mwf.classification.cookieName+'=;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT';
         document.cookie = this.cookieName+'=;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT';
         
         url = document.location.href;
@@ -68,36 +70,36 @@ mwf.override = new function(){
         }
     }
     
-    var _full = mwf.device.isFull();
-    var _standard = mwf.device.isStandard();
-    var _basic = mwf.device.isBasic();
-    var _mobile = mwf.device.isMobile();
+    var _full = mwf.classification.isFull();
+    var _standard = mwf.classification.isStandard();
+    var _basic = mwf.classification.isBasic();
+    var _mobile = mwf.classification.isMobile();
     
-    mwf.device.wasFull = function(){ return _full; }
-    mwf.device.wasStandard = function(){ return _standard; }
-    mwf.device.wasBasic = function(){ return _basic; }
-    mwf.device.wasMobile = function(){ return _mobile; }
+    mwf.classification.wasFull = function(){ return _full; }
+    mwf.classification.wasStandard = function(){ return _standard; }
+    mwf.classification.wasBasic = function(){ return _basic; }
+    mwf.classification.wasMobile = function(){ return _mobile; }
     
     switch(override){
         case 'full':
-            mwf.device.isFull = function(){ return true; }
+            mwf.classification.isFull = function(){ return true; }
         case 'standard':
-            mwf.device.isStandard = function(){ return true; }
+            mwf.classification.isStandard = function(){ return true; }
         case 'basic':
-            mwf.device.isBasic = function(){ return true; }
-            mwf.device.isMobile = function(){ return true; }
+            mwf.classification.isBasic = function(){ return true; }
+            mwf.classification.isMobile = function(){ return true; }
     }
     
     switch(override){
         case 'basic':
-            mwf.device.isStandard = function(){ return false; }
+            mwf.classification.isStandard = function(){ return false; }
         case 'standard':
-            mwf.device.isFull = function(){ return false; }
+            mwf.classification.isFull = function(){ return false; }
     }
     
-    mwf.device.isOverride = function(){ return true; }
+    mwf.classification.isOverride = function(){ return true; }
     
-    document.cookie = mwf.device.cookieName+'=;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT';
+    document.cookie = mwf.classification.cookieName+'=;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT';
     document.cookie = this.cookieName+'='+override+';path=/';
     
 };

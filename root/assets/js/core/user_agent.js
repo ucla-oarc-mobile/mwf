@@ -1,27 +1,28 @@
 mwf.user_agent = new function() {
     
-    // Classification accessors [deprecated by mwf.device]
-    this.is_mobile=function(){ return mwf.device.isMobile() ? 1 : 0; }
-    this.is_basic=function(){ return mwf.device.isBasic() ? 1 : 0; }
-    this.is_standard=function(){ return mwf.device.isStandard() ? 1 : 0; }
-    this.is_full=function(){ return mwf.device.isFull() ? 1 : 0; }
+    this.getOS = function(){ return ''; }
+    this.getOSVersion = function(){ return ''; }
+    this.getBrowser = function(){ return ''; }
+    this.getBrowserVersion = function(){ return ''; }
     
-    // Deprecated classification accessors [deprecated by mwf.device]
-    this.is_touch=function(){ return mwf.device.isStandard() ? 1 : 0; }
-    this.is_overridden=function(){ return mwf.device.isFull() ? 1 : 0; }
-    
-    // Override classification accessor [deprecated by mwf.device]
-    this.is_overridden=function(){ return mwf.device.isOverride() ? 1 : 0; }
-    this.is_preview=function(){ return mwf.device.isOverride() && !mwf.device.isMobile() ? 1 : 0; }
     
     // User agent specific accessors
     this.is_iphone_os=function(){ return navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)/i) != null }
     this.is_webkit_engine=function(){ return navigator.userAgent.match(/(webkit)/i) != null && !navigator.userAgent.match(/(webkit\/41)/i) != null }
-    // TODO
-    this.get_browser=function(){ return ''; }
-    this.get_browser_version=function(){ return ''; }
-    this.get_os=function(){ return ''; }
-    this.get_os_version=function(){ return ''; }
+    
+    // DEPRECATED!!!!
+    this.get_browser=this.getBrowser;
+    this.get_browser_version=this.getBrowserVersion;
+    this.get_os=this.getOS;
+    this.get_os_version=this.getOSVersion;
+    this.is_mobile=function(){ return mwf.classification.isMobile() ? 1 : 0; }
+    this.is_basic=function(){ return mwf.classification.isBasic() ? 1 : 0; }
+    this.is_standard=function(){ return mwf.classification.isStandard() ? 1 : 0; }
+    this.is_full=function(){ return mwf.classification.isFull() ? 1 : 0; }
+    this.is_touch=function(){ return mwf.classification.isStandard() ? 1 : 0; }
+    this.is_overridden=function(){ return mwf.classification.isFull() ? 1 : 0; }
+    this.is_overridden=function(){ return mwf.classification.isOverride() ? 1 : 0; }
+    this.is_preview=function(){ return mwf.classification.isOverride() && !mwf.classification.isMobile() ? 1 : 0; }
 };
 
 (function(){

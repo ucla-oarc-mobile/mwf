@@ -13,10 +13,9 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110620
+ * @version 20110901
  *
  * @uses Config
- * @uses Device
  * @uses JS
  * @uses Site_Decorator
  * @uses HTML_Decorator
@@ -39,7 +38,6 @@
  */
 
 require_once(dirname(__FILE__).'/assets/config.php');
-require_once(dirname(__FILE__).'/assets/lib/device.class.php');
 require_once(dirname(__FILE__).'/assets/lib/decorator.class.php');
 require_once(dirname(__FILE__).'/assets/redirect/unset_override.php');
 

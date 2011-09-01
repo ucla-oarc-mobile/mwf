@@ -13,9 +13,9 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110826
+ * @version 20110901
  *
- * @uses Device
+ * @uses Classification
  * @uses JS
  * @uses JSMin
  * @uses Path
@@ -33,7 +33,7 @@ header("Cache-Control: max-age=3600");
  * Include necessary libraries. 
  */
 
-include_once(dirname(__FILE__).'/lib/device.class.php');
+include_once(dirname(__FILE__).'/lib/classification.class.php');
 include_once(dirname(__FILE__).'/lib/js.class.php');
 require_once(dirname(__FILE__).'/lib/jsmin.class.php');
 require_once(dirname(__FILE__).'/lib/path.class.php');
@@ -46,7 +46,8 @@ $ext = '.js';
 
 $core_filenames = array('base.php', 
               'modernizr.js', 
-              'device.js', 
+              'capabilities.js', 
+              'classification.js', 
               'user_agent.js',  // deprecated but supported
               'browser.js',
               'util.js',
@@ -65,7 +66,7 @@ foreach($core_filenames as $filename)
  * to cause a redirect to return to this page after passing device info.
  */
 
-if(!Device::init())
+if(!Classification::init())
     die();
 
 /**
@@ -82,14 +83,14 @@ if(!isset($_GET['no_favicon']) && !isset($_GET['no_icon']))
  * Writes apple-touch-icon[-precomposed] to the DOM.
  */
 
-if(Device::is_full() && (!Config::get('global', 'appicon_allow_disable_flag') || (!isset($_GET['no_appicon']) && !isset($_GET['no_icon']))))
+if(Classification::is_full() && (!Config::get('global', 'appicon_allow_disable_flag') || (!isset($_GET['no_appicon']) && !isset($_GET['no_icon']))))
     JS::load('iphone/appicon.js');
 
 /**
  * Moves the window below the URL bar and fixes Safari viewport on orientation change.
  */
 
-if(Device::is_ios())
+if(true /* User_Agent::is_ios() */)
 {
     JS::load('iphone/safariurlbar.js');
     JS::load('iphone/orientation.js');
@@ -102,7 +103,7 @@ if(Device::is_ios())
  * @uses /assets/js/desktop/preview.js [import]
  */
 
-if(Device::is_preview())
+if(Classification::is_preview())
 {
     JS::load('desktop/preview_util.php');
     JS::load('desktop/preview_menu.js');
@@ -112,7 +113,7 @@ if(Device::is_preview())
  * Load all standard (and touch_lib for compat) libraries specified in the URI.
  */
 
-if(Device::is_standard() && (isset($_GET['standard_libs']) || isset($_GET['touch_libs'])) )
+if(Classification::is_standard() && (isset($_GET['standard_libs']) || isset($_GET['touch_libs'])) )
 {
     $loadarr = isset($_GET['standard_libs']) ? explode(' ', $_GET['standard_libs']) : array();
 
@@ -127,7 +128,7 @@ if(Device::is_standard() && (isset($_GET['standard_libs']) || isset($_GET['touch
  * Load all full (and webkit_lib for compat) libraries specified in the URI.
  */
 
-if(Device::is_full() && (isset($_GET['full_libs']) || isset($_GET['webkit_libs'])) )
+if(Classification::is_full() && (isset($_GET['full_libs']) || isset($_GET['webkit_libs'])) )
 {
     $loadarr = isset($_GET['full_libs']) ? explode(' ', $_GET['full_libs']) : array();
 
@@ -147,12 +148,12 @@ if(isset($_GET['basic']))
         if(Path_Validator::is_safe($file, 'css') && $contents = Path::get_contents($file))
             echo ' ' . JSMin::minify($contents);
 
-if(Device::is_standard() && isset($_GET['standard']))
+if(Classification::is_standard() && isset($_GET['standard']))
     foreach(explode(' ', $_GET['standard']) as $file)
         if(Path_Validator::is_safe($file, 'css') && $contents = Path::get_contents($file))
             echo ' ' . JSMin::minify($contents);
 
-if(Device::is_full() && isset($_GET['full']))
+if(Classification::is_full() && isset($_GET['full']))
     foreach(explode(' ', $_GET['full']) as $file)
         if(Path_Validator::is_safe($file, 'css') && $contents = Path::get_contents($file))
             echo ' ' . JSMin::minify($contents);
