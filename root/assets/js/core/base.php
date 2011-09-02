@@ -43,6 +43,13 @@ mwf.site=new function(){
     
     }
     
+    this.mobile = new function(){
+    
+        this.maxWidth = <?php echo (Config::get('mobile', 'max_width') ? Config::get('mobile', 'max_width') : 799) ?>;
+        this.maxHeight = <?php echo (Config::get('mobile', 'max_height') ? Config::get('mobile', 'max_height') : 599) ?>;
+    
+    }
+    
     this.domain=function(){
         var temppath = document.URL;
         if(temppath.search('http://') == 0)

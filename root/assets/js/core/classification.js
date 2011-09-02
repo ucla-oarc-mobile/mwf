@@ -3,7 +3,8 @@ mwf.classification=new function(){
     this.cookieName = mwf.site.cookie.prefix+'classification';
 
     this.isMobile = function(){
-        return true; // TODO: Figure out how to determine if mobile
+        return mwf.site.mobile.maxHeight > mwf.screen.getHeight()
+            && mwf.site.mobile.maxWidth  > mwf.screen.getWidth();
     }
     
     this.isBasic = function(){

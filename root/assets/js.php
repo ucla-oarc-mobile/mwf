@@ -47,9 +47,10 @@ $ext = '.js';
 $core_filenames = array('base.php', 
               'modernizr.js', 
               'capability.js', 
-              'classification.js', 
-              'useragent.js',
               'browser.js',
+              'screen.js',
+              'useragent.js',
+              'classification.js', 
               'util.js',
               'override.js',
               'server.js');
