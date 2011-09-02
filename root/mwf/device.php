@@ -25,6 +25,7 @@
 
 require_once(dirname(dirname(__FILE__)).'/assets/lib/decorator.class.php');
 require_once(dirname(dirname(__FILE__)).'/assets/lib/classification.class.php');
+require_once(dirname(dirname(__FILE__)).'/assets/lib/user_agent.class.php');
 
 function label($text)
 {
@@ -36,10 +37,26 @@ function bool2text($text)
     return $text ? 'true' : 'false';
 }
 
+function text2text($text)
+{
+    return $text ? $text : 'false';
+}
+
 function js2bool2text($function)
 {
     return '<script type="text/javascript">
 document.write('.$function.'() ? "true" : "false");
+</script>';
+}
+
+function js2text($function)
+{
+    return '<script type="text/javascript">
+var t;
+if(t = '.$function.'())
+    document.write(t);
+else
+    document.write("false");
 </script>';
 }
 
@@ -56,7 +73,7 @@ echo Site_Decorator::header()
 echo Site_Decorator::content_full()
             ->set_padded()
             ->add_header('The Framework')
-            ->add_subheader('Overview')
+            ->add_subheader('Server Info')
             ->add_section(label('User Agent').$_SERVER['HTTP_USER_AGENT'])
             ->add_section(label('IP Address').$_SERVER['REMOTE_ADDR'])
             ->add_subheader('JS Classification')
@@ -73,6 +90,16 @@ echo Site_Decorator::content_full()
             ->add_section(label('Classification::is_full()').bool2text(Classification::is_full()))
             ->add_section(label('Classification::is_override()').bool2text(Classification::is_override()))
             ->add_section(label('Classification::is_preview()').bool2text(Classification::is_preview()))
+            ->add_subheader('JS User Agent')
+            ->add_section(label('mwf.userAgent.getOS()').js2text('mwf.userAgent.getOS'))
+            ->add_section(label('mwf.userAgent.getOSVersion()').js2text('mwf.userAgent.getOSVersion'))
+            ->add_section(label('mwf.userAgent.getBrowser()').js2text('mwf.userAgent.getBrowser'))
+            ->add_section(label('mwf.userAgent.getBrowserEngine()').js2text('mwf.userAgent.getBrowserEngine'))
+            ->add_subheader('PHP User Agent')
+            ->add_section(label('User_Agent::get_os()').text2text(User_Agent::get_os()))
+            ->add_section(label('User_Agent::get_os_version()').text2text(User_Agent::get_os_version()))
+            ->add_section(label('User_Agent::get_browser()').text2text(User_Agent::get_browser()))
+            ->add_section(label('User_Agent::get_browser_engine()').text2text(User_Agent::get_browser_engine()))
             ->render();
 
 echo Site_Decorator::button_full()
