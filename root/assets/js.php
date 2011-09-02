@@ -44,7 +44,8 @@ $ext = '.js';
  * Core Javascript libraries always included.
  */
 
-$core_filenames = array('base.php', 
+$core_filenames = array('vars.php', 
+              'base.js',
               'modernizr.js', 
               'capability.js', 
               'browser.js',

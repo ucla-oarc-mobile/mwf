@@ -10,7 +10,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110826
+ * @version 20110902
  *
  * @uses Config
  */
@@ -73,22 +73,3 @@ mwf.site=new function(){
         return this.asset.root;
     }
 };
-
-document.write('<script type="text/javascript" src="<?php echo Config::get('global', 'site_assets_url'); ?>/redirect/js_unset_override.php"></scr'+'ipt>');
-
-// Classification namespaces [deprecated]
-mwf.desktop=new function(){};
-mwf.standard=new function(){};
-mwf.full=new function(){};
-mwf.touch=mwf.standard;
-mwf.webkit=mwf.full;
-mwf.iphone=new function(){};
-
-// Classification extension namespaces [deprecated]
-mwf.ext=new function(){};
-mwf.ext.desktop=new function(){};
-mwf.ext.standard=new function(){};
-mwf.ext.full=new function(){};
-mwf.ext.touch=mwf.ext.standard;
-mwf.ext.webkit=mwf.ext.full;
-mwf.ext.iphone=new function(){};
