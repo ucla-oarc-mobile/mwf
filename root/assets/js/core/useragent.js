@@ -1,5 +1,7 @@
 mwf.userAgent = new function() {
     
+    this.cookieName = mwf.site.cookie.prefix+'user_agent';
+    
     this.getOS = function(){ 
         var ua = navigator.userAgent.toLowerCase();
         if(ua.match(/(iphone)|(ipad)|(ipod)/) != null) return 'iphone_os';
