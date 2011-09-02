@@ -48,7 +48,7 @@ $core_filenames = array('base.php',
               'modernizr.js', 
               'capability.js', 
               'classification.js', 
-              'user_agent.js',  // deprecated but supported
+              'useragent.js',
               'browser.js',
               'util.js',
               'override.js',
