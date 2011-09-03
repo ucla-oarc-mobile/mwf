@@ -8,7 +8,7 @@
  * This file should be included on all pages that use the mobile framework.
  *
  * @package core
- * @subpackage handler
+ * @subpackage js
  *
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
@@ -39,6 +39,19 @@ require_once(dirname(__FILE__).'/lib/jsmin.class.php');
 require_once(dirname(__FILE__).'/lib/path.class.php');
 require_once(dirname(__FILE__).'/lib/path_validator.class.php');
 $ext = '.js';
+
+?>/**
+ * Javascript handler.
+ *
+ * @package core
+ * @subpackage js
+ *
+ * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ */
+
+<?php
 
 /**
  * Core Javascript libraries always included.

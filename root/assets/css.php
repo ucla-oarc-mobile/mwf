@@ -8,7 +8,7 @@
  * This file should be included on all pages that use the mobile framework.
  *
  * @package core
- * @subpackage handler
+ * @subpackage css
  *
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
@@ -37,6 +37,19 @@ require_once(dirname(__FILE__).'/lib/config.class.php');
 require_once(dirname(__FILE__).'/lib/cssmin.class.php');
 require_once(dirname(__FILE__).'/lib/path.class.php');
 require_once(dirname(__FILE__).'/lib/path_validator.class.php');
+
+?>/**
+ * Javascript handler.
+ *
+ * @package core
+ * @subpackage js
+ *
+ * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ */
+
+<?php
 
 /**
  * Get custom CSS classes from {'css':'custom'} config variable.

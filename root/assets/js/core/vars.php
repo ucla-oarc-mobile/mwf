@@ -1,8 +1,9 @@
 <?php
 
 /**
- * Defines mwf object and mwf.site, including variables derived from Config.
- * This file should be defined before any other JS scripts.
+ * First script file that should be loaded by any mwf composite, as it defines
+ * the mwf namespace and exposes server-side configuration variables into the
+ * Javascript.
  *
  * @package core
  * @subpackage js
