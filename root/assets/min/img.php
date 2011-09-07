@@ -11,9 +11,9 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20101021
+ * @version 20110827
  *
- * @uses User_Agent
+ * @uses Device
  * @uses User_Browser
  * @uses Local_Image
  */
@@ -21,7 +21,7 @@
 /**
  * Require necessary libraries. 
  */
-include_once(dirname(dirname(__FILE__)).'/lib/user_agent.class.php');
+include_once(dirname(dirname(__FILE__)).'/lib/device.class.php');
 include_once(dirname(dirname(__FILE__)).'/lib/user_browser.class.php');
 include_once(dirname(dirname(__FILE__)).'/lib/local_image.class.php');
 
@@ -91,8 +91,8 @@ $image->set_allowed_extension('gif');
 $image->set_allowed_extension('jpeg');
 $image->set_allowed_extension('jpg');
 
-/** Allow PNG if user agent has capability. */
-if(User_Agent::has_capability('png'))
+/** @todo PNG support for devices that actually have support for it */
+//if(User_Agent::has_capability('png'))
     $image->set_allowed_extension('png');
 
 /** Force max width if $set_width is true. */

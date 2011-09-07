@@ -8,16 +8,17 @@
  * This file should be included on all pages that use the mobile framework.
  *
  * @package core
- * @subpackage handler
+ * @subpackage css
  *
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110512
+ * @version 20110901
  *
- * @uses User_Agent
+ * @uses Classification
  * @uses CSS
  * @uses CSSMin
+ * @uses Path
  * @uses Path_Validator
  */
 
@@ -31,10 +32,24 @@ header("Content-Type: text/css");
  * Include necessary libraries.
  */
 
-include_once(dirname(__FILE__).'/lib/user_agent.class.php');
-include_once(dirname(__FILE__).'/lib/config.class.php');
+require_once(dirname(__FILE__).'/lib/classification.class.php');
+require_once(dirname(__FILE__).'/lib/config.class.php');
 require_once(dirname(__FILE__).'/lib/cssmin.class.php');
 require_once(dirname(__FILE__).'/lib/path.class.php');
+require_once(dirname(__FILE__).'/lib/path_validator.class.php');
+
+?>/**
+ * Javascript handler.
+ *
+ * @package core
+ * @subpackage js
+ *
+ * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ */
+
+<?php
 
 /**
  * Get custom CSS classes from {'css':'custom'} config variable.
@@ -62,7 +77,7 @@ foreach($custom as $dir)
  * Load all standard.css stylesheets under the default and custom directories.
  */
 
-if(User_Agent::is_standard())
+if(Classification::is_standard())
 {
     require_once(dirname(__FILE__).'/css/default/standard.css');
     foreach($custom as $dir)
@@ -74,7 +89,7 @@ if(User_Agent::is_standard())
  * Load all full.css stylesheets under the default and custom directories.
  */
 
-if(User_Agent::is_full())
+if(Classification::is_full())
 {
     require_once(dirname(__FILE__).'/css/default/full.css');
     foreach($custom as $dir)
@@ -91,12 +106,12 @@ if(isset($_GET['basic']))
         if(Path_Validator::is_safe($file, 'css') && $contents = Path::get_contents($file))
             echo ' ' . CSSMin::minify($contents);
 
-if(User_Agent::is_standard() && isset($_GET['standard']))
+if(Classification::is_standard() && isset($_GET['standard']))
     foreach(explode(' ', $_GET['standard']) as $file)
         if(Path_Validator::is_safe($file, 'css') && $contents = Path::get_contents($file))
             echo ' ' . CSSMin::minify($contents);
 
-if(User_Agent::is_full() && isset($_GET['full']))
+if(Classification::is_full() && isset($_GET['full']))
     foreach(explode(' ', $_GET['full']) as $file)
         if(Path_Validator::is_safe($file, 'css') && $contents = Path::get_contents($file))
             echo ' ' . CSSMin::minify($contents);

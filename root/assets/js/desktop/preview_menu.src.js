@@ -53,4 +53,4 @@ mwf.desktop.preview_menu = new function() {
     };
 };
 
-$(document).ready(mwf.desktop.preview_menu.init);
+document.addEventListener('load', mwf.desktop.preview_menu.init, false);
