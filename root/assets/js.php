@@ -84,6 +84,8 @@ foreach($core_filenames as $filename)
 if(!Classification::init())
     die();
 
+JS::load('core/user_agent.js');
+
 /**
  * Include utility libraries.
  */

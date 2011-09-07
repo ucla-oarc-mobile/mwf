@@ -19,6 +19,8 @@ mwf.userAgent = new function() {
      */
     this.cookieName = mwf.site.cookie.prefix+'user_agent';
     
+    var userAgent = navigator.userAgent.toLowerCase();
+    
     /**
      * Determines the operating system from string or else returns an empty 
      * string.
@@ -26,7 +28,7 @@ mwf.userAgent = new function() {
      * @return string
      */
     this.getOS = function(){ 
-        var ua = navigator.userAgent.toLowerCase();
+        var ua = userAgent;
         if(ua.match(/(iphone)|(ipad)|(ipod)/) != null) return 'iphone_os';
         else if(ua.indexOf('android') != -1) return 'android';
         else if(ua.indexOf('blackberry') != -1) return 'blackberry';
@@ -47,7 +49,7 @@ mwf.userAgent = new function() {
      * @return string
      */
     this.getOSVersion = function(){ 
-        var ua = navigator.userAgent.toLowerCase(), s;
+        var ua = userAgent, s;
         switch(this.getOS())
         {
             case 'iphone_os':
@@ -106,29 +108,24 @@ mwf.userAgent = new function() {
     }
     
     /**
-     * Immutable value used by remaining methods.
-     */
-    var ua = navigator.userAgent.toLowerCase();
-    
-    /**
      * Determines the web browser from string or else returns an empty string.
      *
      * @return string
      */
     this.getBrowser = function(){
         
-        if(ua.indexOf('safari') != -1){
+        if(userAgent.indexOf('safari') != -1){
             if(this.getOS() == 'android') return 'android_webkit';
             return 'safari';
         }
         
-        if(ua.indexOf('chrome') != -1) return 'chrome';
-        if(ua.indexOf('iemobile') != -1) return 'iemobile';
-        if(ua.indexOf('camino') != -1) return 'camino';
-        if(ua.indexOf('seamonkey') != -1) return 'seamonkey';
-        if(ua.indexOf('firefox') != -1) return 'firefox';
-        if(ua.indexOf('opera mobi')) return 'opera_mobile';
-        if(ua.indexOf('opera_mini')) return 'opera_mini';
+        if(userAgent.indexOf('chrome') != -1) return 'chrome';
+        if(userAgent.indexOf('iemobile') != -1) return 'iemobile';
+        if(userAgent.indexOf('camino') != -1) return 'camino';
+        if(userAgent.indexOf('seamonkey') != -1) return 'seamonkey';
+        if(userAgent.indexOf('firefox') != -1) return 'firefox';
+        if(userAgent.indexOf('opera mobi')) return 'opera_mobile';
+        if(userAgent.indexOf('opera_mini')) return 'opera_mini';
         
         return '';
     }
@@ -149,11 +146,11 @@ mwf.userAgent = new function() {
      * @return string
      */
     this.getBrowserEngine = function(){
-        if(ua.indexOf('applewebkit') != -1) return 'webkit';
-        if(ua.indexOf('trident') != -1) return 'trident';
-        if(ua.indexOf('gecko') != -1) return 'gecko';
-        if(ua.indexOf('presto') != -1) return 'presto';
-        if(ua.indexOf('khtml') != -1) return 'khtml';
+        if(userAgent.indexOf('applewebkit') != -1) return 'webkit';
+        if(userAgent.indexOf('trident') != -1) return 'trident';
+        if(userAgent.indexOf('gecko') != -1) return 'gecko';
+        if(userAgent.indexOf('presto') != -1) return 'presto';
+        if(userAgent.indexOf('khtml') != -1) return 'khtml';
     }
     
     /**
@@ -181,8 +178,10 @@ mwf.userAgent = new function() {
             return;
         
         written = true;
-        var classes = document.body.className.split(' ');
-        var i = classes.length;
+        var classes = document.body.className.split(' '),
+            i = classes.length,
+            classification = mwf.classification,
+            userAgent = mwf.userAgent;
         
         /**
          * Function that returns true iff class v is not defined in classes.
@@ -204,7 +203,7 @@ mwf.userAgent = new function() {
         /**
          * Add body.mwf_mobile if device is mobile, else add body.mwf_notmobile.
          */
-        if(mwf.classification.isMobile()){
+        if(classification.isMobile()){
             if(nin("mwf_mobile")){
                 classes[i++] = "mwf_mobile";
             }
@@ -217,14 +216,14 @@ mwf.userAgent = new function() {
         /**
          * Add body.mwf_standard if device is classified as standard.
          */
-        if(mwf.classification.isStandard() && nin("mwf_standard")){
+        if(classification.isStandard() && nin("mwf_standard")){
             classes[i++] = "mwf_standard";
         }
         
         /**
          * Add body.mwf_full if device is classified as full.
          */
-        if(mwf.classification.isFull() && nin("mwf_full")){
+        if(classification.isFull() && nin("mwf_full")){
             classes[i++] = "mwf_full";
         }
         
@@ -233,7 +232,7 @@ mwf.userAgent = new function() {
         /**
          * Add body class for mwf_browser_{name} when possible.
          */
-        if((t = mwf.userAgent.getBrowser()).length > 0) {
+        if((t = userAgent.getBrowser()).length > 0) {
             t = "mwf_browser_"+t.toLowerCase().replace(" ","_");
             if(nin(t)) 
                 classes[i++] = t;
@@ -242,7 +241,7 @@ mwf.userAgent = new function() {
         /**
          * Add body class for mwf_browser_{name}_{version} when possible.
          */
-        if((tv = mwf.userAgent.getBrowserVersion()).length > 0) {
+        if((tv = userAgent.getBrowserVersion()).length > 0) {
             tv = t+'_'+tv.toLowerCase().replace(/ /g,"_").replace(/\./g,"_");
             if(nin(tv)) 
                 classes[i++] = tv;
@@ -251,7 +250,7 @@ mwf.userAgent = new function() {
         /**
          * Add body class for mwf_os_{name} when possible.
          */
-        if((t = mwf.userAgent.getOS()).length > 0) {
+        if((t = userAgent.getOS()).length > 0) {
             t = "mwf_os_"+t.toLowerCase().replace(" ","_");
             if(nin(t)) 
                 classes[i++] = t;
@@ -260,7 +259,7 @@ mwf.userAgent = new function() {
         /**
          * Add body class for mwf_os_{name}_{version} when possible.
          */
-        if((tv = mwf.userAgent.getOSVersion()).length > 0) {
+        if((tv = userAgent.getOSVersion()).length > 0) {
             tv = t+'_'+tv.toLowerCase().replace(/ /g,"_").replace(/\./g,"_");
             if(nin(tv)) 
                 classes[i++] = tv;
@@ -280,64 +279,3 @@ mwf.userAgent = new function() {
     document.addEventListener('DOMContentLoaded',writer,false);
     window.addEventListener('load',writer,false);
 })();
-
-/**
- * The mwf.user_agent namespace is deprecated, but still supported for backwards
- * compatibility reasons.
- *
- * @deprecated
- * 
- * @uses mwf.userAgent
- * @uses mwf.classification
- */
-mwf.user_agent = new function(){
-    
-    this.is_iphone_os=function(){
-        return mwf.userAgent.getOS() == 'ios';
-    }
-    
-    this.is_webkit_engine=function(){
-        return navigator.userAgent.match(/(webkit)/i) != null 
-            && !navigator.userAgent.match(/(webkit\/41)/i) != null
-    }
-    
-    this.get_browser=mwf.userAgent.getBrowser;
-    
-    this.get_browser_version=mwf.userAgent.getBrowserVersion;
-    
-    this.get_os=mwf.userAgent.getOS;
-    
-    this.get_os_version=mwf.userAgent.getOSVersion;
-    
-    this.is_mobile=function(){
-        return mwf.classification.isMobile() ? 1 : 0;
-    }
-    
-    this.is_basic=function(){
-        return mwf.classification.isBasic() ? 1 : 0;
-    }
-    
-    this.is_standard=function(){
-        return mwf.classification.isStandard() ? 1 : 0;
-    }
-    
-    this.is_full=function(){
-        return mwf.classification.isFull() ? 1 : 0;
-    }
-    
-    this.is_touch=function(){
-        return mwf.classification.isStandard() ? 1 : 0;
-    }
-    
-    this.is_overridden=function(){
-        return mwf.classification.isFull() ? 1 : 0;
-    }
-    
-    this.is_overridden=function(){
-        return mwf.classification.isOverride() ? 1 : 0;
-    }
-    
-    this.is_preview=function(){
-        return mwf.classification.isOverride() && !mwf.classification.isMobile() ? 1 : 0;
-    }
-};
