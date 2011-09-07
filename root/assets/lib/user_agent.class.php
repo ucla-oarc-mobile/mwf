@@ -10,7 +10,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110902
+ * @version 20110906
  */
 
 require_once(dirname(dirname(__FILE__)).'/config.php');
@@ -92,19 +92,40 @@ class User_Agent
         return self::$_init;
     }
     
-    public static function parse($capabilities)
+    /**
+     * Parses the capabilities cookie by name self::$_name via JSON decode into
+     * an object. 
+     * 
+     * @param string $useragent
+     * @return object 
+     */
+    public static function parse($useragent)
     {
         include_once(dirname(__FILE__).'/json.php');
-        return json_decode(str_replace(array('\\x3B', '\\x2C'), array(';', ','), stripslashes($capabilities)));
+        return json_decode(str_replace(array('\\x3B', '\\x2C'), array(';', ','), stripslashes($useragent)));
     }
     
+    /**
+     * Returns a value from user agent information as determined by 
+     * mwf.userAgent in js/useragent.js and passed via JSON in a cookie by name 
+     * self::$_name.
+     * 
+     * @param bool $val
+     * @return object|false 
+     */
     public static function get($val)
     {
+        /**
+         * Initialize if not already initialized.
+         */
         if(!self::$_init)
         {
             self::init();
         }
         
+        /**
+         * Return $val by property name or else false if not set.
+         */
         if(self::$_user_agent && isset(self::$_user_agent->$val))
         {
             return self::$_user_agent->$val;
@@ -115,26 +136,51 @@ class User_Agent
         }
     }
     
+    /**
+     * Returns the user agent string as determined by mwf.userAgent.
+     * 
+     * @return string 
+     */
     public static function get_user_agent()
     {
         return self::get('s');
     }
 	
+    /**
+     * Returns the operating system as determined by mwf.userAgent.
+     * 
+     * @return string 
+     */
     public static function get_os()
     {
         return self::get('os');
     }
 	
+    /**
+     * Returns the operating system version as determined by mwf.userAgent.
+     * 
+     * @return string 
+     */
     public static function get_os_version()
     {
         return self::get('osv');
     }
 	
+    /**
+     * Returns the browser as determined by mwf.userAgent.
+     * 
+     * @return string 
+     */
     public static function get_browser()
     {
         return self::get('b');
     }
 	
+    /**
+     * Returns the browser engine as determined by mwf.userAgent.
+     * 
+     * @return string 
+     */
     public static function get_browser_engine()
     {
         return self::get('be');

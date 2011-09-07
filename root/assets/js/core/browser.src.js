@@ -8,7 +8,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110902
+ * @version 20110906
  *
  * @requires mwf
  * @requires /root/assets/js/core/vars.php
