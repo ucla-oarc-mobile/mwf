@@ -16,18 +16,21 @@
 
 mwf.browser = new function() {
     
+    var w = window;
+    var d = document;
+    
     /**
      * Width of the web browser, or null if it cannot be determined.
      *
      * @return int|null
      */
     this.getWidth = function(){
-        return window.innerWidth != null 
-            ? window.innerWidth 
-            : document.documentElement && document.documentElement.clientWidth 
-                ? document.documentElement.clientWidth 
-                : document.body != null 
-                    ? document.body.clientWidth 
+        return w.innerWidth != null 
+            ? w.innerWidth 
+            : d.documentElement && d.documentElement.clientWidth 
+                ? d.documentElement.clientWidth 
+                : d.body != null 
+                    ? d.body.clientWidth 
                     : null;
     }
     
@@ -37,12 +40,12 @@ mwf.browser = new function() {
      * @return int|null
      */
     this.getHeight = function(){
-        return  window.innerHeight != null
-            ? window.innerHeight 
-            : document.documentElement && document.documentElement.clientHeight 
-                ?  document.documentElement.clientHeight 
-                : document.body != null
-                    ? document.body.clientHeight 
+        return  w.innerHeight != null
+            ? w.innerHeight 
+            : d.documentElement && d.documentElement.clientHeight 
+                ?  d.documentElement.clientHeight 
+                : d.body != null
+                    ? d.body.clientHeight 
                     : null; 
     }
     
@@ -53,12 +56,12 @@ mwf.browser = new function() {
      */
     this.posLeft = function(){
         
-        return typeof window.pageXOffset != 'undefined' 
-            ? window.pageXOffset 
-            : document.documentElement && document.documentElement.scrollLeft 
-                ? document.documentElement.scrollLeft 
-                : document.body.scrollLeft 
-                    ? document.body.scrollLeft 
+        return typeof w.pageXOffset != 'undefined' 
+            ? w.pageXOffset 
+            : d.documentElement && d.documentElement.scrollLeft 
+                ? d.documentElement.scrollLeft 
+                : d.body.scrollLeft 
+                    ? d.body.scrollLeft 
                     : 0;
                
     }
@@ -69,12 +72,12 @@ mwf.browser = new function() {
      * @return int
      */
     this.posTop = function(){
-        return typeof window.pageYOffset != 'undefined' 
-            ?  window.pageYOffset 
-            : document.documentElement && document.documentElement.scrollTop 
-                ? document.documentElement.scrollTop 
-                : document.body.scrollTop 
-                    ? document.body.scrollTop 
+        return typeof w.pageYOffset != 'undefined' 
+            ?  w.pageYOffset 
+            : d.documentElement && d.documentElement.scrollTop 
+                ? d.documentElement.scrollTop 
+                : d.body.scrollTop 
+                    ? d.body.scrollTop 
                     : 0;
     }
     
