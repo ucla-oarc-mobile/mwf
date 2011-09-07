@@ -130,15 +130,15 @@ if(User_Agent::is_full() && (isset($_GET['full_libs']) || isset($_GET['webkit_li
 
 if(isset($_GET['basic']))
     foreach(explode(' ', $_GET['basic']) as $file)
-        if(Path_Validator::is_safe($file, 'css') && $contents = Path::get_contents($file))
+        if(Path_Validator::is_safe($file, 'js') && $contents = Path::get_contents($file))
             echo ' ' . JSMin::minify($contents);
 
 if(User_Agent::is_standard() && isset($_GET['standard']))
     foreach(explode(' ', $_GET['standard']) as $file)
-        if(Path_Validator::is_safe($file, 'css') && $contents = Path::get_contents($file))
+        if(Path_Validator::is_safe($file, 'js') && $contents = Path::get_contents($file))
             echo ' ' . JSMin::minify($contents);
 
 if(User_Agent::is_full() && isset($_GET['full']))
     foreach(explode(' ', $_GET['full']) as $file)
-        if(Path_Validator::is_safe($file, 'css') && $contents = Path::get_contents($file))
+        if(Path_Validator::is_safe($file, 'js') && $contents = Path::get_contents($file))
             echo ' ' . JSMin::minify($contents);
