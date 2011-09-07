@@ -41,7 +41,8 @@ class JS
 
         $this->_req = array('standard'  => array('geolocation'=>array()),
                             'full' => array('transitions'=>array('jquery'),
-                                              'touch_transitions'=>array('jquery', 'jquery.swipe')),
+                                            'touch_transitions'=>array('jquery', 'jquery.swipe'),
+                                            'messages'=>array('jquery')),
                             'iphone' => array('orientation'=>array()),
                             'desktop'=> array('preview'=>array('jquery')));
 

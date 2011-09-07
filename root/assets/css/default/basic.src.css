@@ -359,6 +359,59 @@ form.form-full > input[type=reset]:hover {
 
 
 /********************************************************
+ * MESSAGES
+ *******************************************************/
+
+.message-full {
+    display: block;
+    font-size: 1em;
+    padding: .5em 0 .5em 1em;
+    text-align: left;
+    margin: .6em 0;
+}
+
+.message-padded {
+    margin: .6em 10px;
+}
+
+.message-full.message-alert {
+    border: thin solid #fa3;
+    background-color: #ffe;
+}
+
+.message-full.message-confirm {
+    border: thin solid #6a3;
+    background-color: #efe;
+}
+
+.message-full.message-error {
+    border: 1px solid #a30;
+    background-color: #fee;
+}
+
+.message-full.message-info {
+    border: 1px solid #6ac;
+    background-color: #eff;
+}
+
+.message-alert {
+    color: #630;
+}
+
+.message-confirm {
+    color: #360;
+}
+
+.message-error {
+    color: #a00;
+}
+
+.message-info {
+    color: #039;
+}
+
+
+/********************************************************
  * CONTENT
  *******************************************************/
 

@@ -305,6 +305,33 @@ form.form-full > input[type=reset] {
     -moz-box-shadow:none;
 }
 
+
+/********************************************************
+ * MESSAGES
+ *******************************************************/
+.message-full {
+    background-position: center right;
+    background-repeat: no-repeat;
+}
+
+.message-full.message-alert {
+    background-image: url("img/message-alert.png");
+
+}
+
+.message-full.message-confirm {
+    background-image: url("img/message-confirm.png");
+}
+
+.message-full.message-error {
+    background-image: url("img/message-error.png");
+}
+
+.message-full.message-info {
+    background-image: url("img/message-info.png");
+}
+
+
 /********************************************************
  * CONTENT
  *******************************************************/
