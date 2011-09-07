@@ -120,6 +120,7 @@ if(true /* User_Agent::is_ios() */)
 
 if(Classification::is_preview())
 {
+    JS::load_from_key('jquery');
     JS::load('desktop/preview_util.php');
     JS::load('desktop/preview_menu.js');
 }
