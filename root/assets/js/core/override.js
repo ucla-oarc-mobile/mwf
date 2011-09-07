@@ -28,11 +28,18 @@
 mwf.override = new function(){
     
     /**
+     * Store reference as local variable as optimized for compression.
+     * 
+     * @var object
+     */
+    var classification = mwf.classification;
+    
+    /**
      * If no support for cookies, then set isOverride false, since override
      * requires a cookie, and then return early from this initialization.
      */
     if(!mwf.capability.cookie()){
-        mwf.classification.isOverride = function(){return false;}
+        classification.isOverride = function(){return false;}
         return;
     }
     
@@ -41,21 +48,28 @@ mwf.override = new function(){
      *
      * @var string
      */
-    this.cookieName = mwf.site.cookie.prefix+'override';
+    
+    /**
+     * Name of the override cookie, stored by reference as local variable as 
+     * optimized for compression.
+     * 
+     * @var string
+     */
+    var cName = (this.cookieName = mwf.site.cookie.prefix+'override');
     
     /**
      * Return if the override cookie is equivalent to the override specified in
      * the query string.
      */
-    var matchingCookie = false;
-    var cookies = document.cookie.split(';');
-    var override = false;
+    var matchingCookie = false,
+        cookies = document.cookie.split(';'),
+        override = false;
     for(i=0; i < cookies.length && override == false; i++){
         x = (cookies[i].substr(0,cookies[i].indexOf("="))).replace(/^\s+|\s+$/g,"");
-        if(x == this.cookieName){
+        if(x == cName){
             var pos = cookies[i].indexOf("=")+1;
             override = cookies[i].substr(pos, cookies[i].length-pos);
-            mwf.classification.isOverride = function(){return true;}
+            classification.isOverride = function(){return true;}
             matchingCookie = true;
         }
     }
@@ -71,7 +85,7 @@ mwf.override = new function(){
     if(results != null){
         override = results[1];
     }else if(!override){
-        mwf.classification.isOverride = function(){return false;}
+        classification.isOverride = function(){return false;}
         return;
     }
     
@@ -83,7 +97,7 @@ mwf.override = new function(){
      */
     if(override == 'no'){
         document.cookie = mwf.classification.cookieName+'=;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT';
-        document.cookie = this.cookieName+'=;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT';
+        document.cookie = cName+'=;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT';
         
         url = document.location.href;
         var urlparts= url.split('?');
@@ -104,18 +118,18 @@ mwf.override = new function(){
     /**
      * Store the old primitives for the mwf.classification.wasX methods.
      */
-    var _full = mwf.classification.isFull();
-    var _standard = mwf.classification.isStandard();
-    var _basic = mwf.classification.isBasic();
-    var _mobile = mwf.classification.isMobile();
+    var _full = classification.isFull(),
+        _standard = classification.isStandard(),
+        _basic = classification.isBasic(),
+        _mobile = classification.isMobile();
     
     /**
      * Define a set of mwf.classification.wasX methods.
      */
-    mwf.classification.wasFull = function(){return _full;}
-    mwf.classification.wasStandard = function(){return _standard;}
-    mwf.classification.wasBasic = function(){return _basic;}
-    mwf.classification.wasMobile = function(){return _mobile;}
+    classification.wasFull = function(){return _full;}
+    classification.wasStandard = function(){return _standard;}
+    classification.wasBasic = function(){return _basic;}
+    classification.wasMobile = function(){return _mobile;}
     
     /**
      * Redefine the mwf.classification.isX methods based on override. This set
@@ -123,12 +137,12 @@ mwf.override = new function(){
      */
     switch(override){
         case 'full':
-            mwf.classification.isFull = function(){return true;}
+            classification.isFull = function(){return true;}
         case 'standard':
-            mwf.classification.isStandard = function(){return true;}
+            classification.isStandard = function(){return true;}
         case 'basic':
-            mwf.classification.isBasic = function(){return true;}
-            mwf.classification.isMobile = function(){return true;}
+            classification.isBasic = function(){return true;}
+            classification.isMobile = function(){return true;}
     }
     
     /**
@@ -137,15 +151,15 @@ mwf.override = new function(){
      */
     switch(override){
         case 'basic':
-            mwf.classification.isStandard = function(){return false;}
+            classification.isStandard = function(){return false;}
         case 'standard':
-            mwf.classification.isFull = function(){return false;}
+            classification.isFull = function(){return false;}
     }
     
     /**
      * Define the mwf.classification.isOverride() method as true.
      */
-    mwf.classification.isOverride = function(){return true;}
+    classification.isOverride = function(){return true;}
     
     /**
      * If there was a 
@@ -157,11 +171,11 @@ mwf.override = new function(){
      * Expire the existing classification cookie. This will cause server.js
      * to redefine this cookie based on the modified mwf.classification methods.
      */
-    document.cookie = mwf.classification.cookieName+'=;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT';
+    document.cookie = classification.cookieName+'=;path=/;expires=Thu, 01-Jan-1970 00:00:01 GMT';
     
     /**
      * Define the override cookie.
      */
-    document.cookie = this.cookieName+'='+override+';path=/';
+    document.cookie = cName+'='+override+';path=/';
     
 };
