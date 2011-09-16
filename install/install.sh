@@ -12,5 +12,7 @@ sudo mkdir ${install_dir}/cache/simplepie
 sudo chmod 755 ${install_dir}/cache/img
 sudo chmod 755 ${install_dir}/cache/simplepie
 
-sudo chown apache.apache ${install_dir}/cache/img
-sudo chown apache.apache ${install_dir}/cache/simplepie
+web_user=`ps axho user,comm|grep -E "httpd|apache"|uniq|awk 'END {print $1}'`
+
+sudo chown $web_user ${install_dir}/cache/img
+sudo chown $web_user ${install_dir}/cache/simplepie
