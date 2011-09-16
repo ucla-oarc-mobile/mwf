@@ -4,10 +4,8 @@
 
 install_dir="/var/mobile"
 
-sudo mkdir ${install_dir}
-sudo mkdir ${install_dir}/cache
-sudo mkdir ${install_dir}/cache/img
-sudo mkdir ${install_dir}/cache/simplepie
+sudo mkdir -p ${install_dir}/cache/img
+sudo mkdir -p ${install_dir}/cache/simplepie
 
 sudo chmod 755 ${install_dir}/cache/img
 sudo chmod 755 ${install_dir}/cache/simplepie
