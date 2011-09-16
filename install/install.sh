@@ -1,8 +1,7 @@
-# This installation script from RHEL, CentOS and Fedora configures default
-# location files and directories for the MWF. This should be run first when 
+# This installation script for RHEL, CentOS and Fedora configures default
+# location directories for the MWF. This should be run first when 
 # installing the MWF on a new server.
 
-script_dir="$(dirname "$(readlink -f ${BASH_SOURCE[0]})")"
 install_dir="/var/mobile"
 
 sudo mkdir ${install_dir}
