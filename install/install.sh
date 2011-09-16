@@ -4,11 +4,11 @@
 
 install_dir="/var/mobile"
 
+old_umask=`umask`
+umask 0022
 sudo mkdir -p ${install_dir}/cache/img
 sudo mkdir -p ${install_dir}/cache/simplepie
-
-sudo chmod 755 ${install_dir}/cache/img
-sudo chmod 755 ${install_dir}/cache/simplepie
+umask $old_umask
 
 web_user=`ps axho user,comm|grep -E "httpd|apache"|uniq|awk 'END {print $1}'`
 
