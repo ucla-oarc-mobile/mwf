@@ -38,6 +38,7 @@ include_once(dirname(__FILE__).'/lib/js.class.php');
 require_once(dirname(__FILE__).'/lib/jsmin.class.php');
 require_once(dirname(__FILE__).'/lib/path.class.php');
 require_once(dirname(__FILE__).'/lib/path_validator.class.php');
+include_once(dirname(__FILE__).'/lib/user_agent.class.php');
 $ext = '.js';
 
 ?>/**
@@ -106,8 +107,7 @@ if(Classification::is_full() && (!Config::get('global', 'appicon_allow_disable_f
 /**
  * Moves the window below the URL bar and fixes Safari viewport on orientation change.
  */
-
-if(true /* User_Agent::is_ios() */)
+if(User_Agent::get_os() == 'iphone_os')
 {
     JS::load('iphone/safariurlbar.js');
     JS::load('iphone/orientation.js');
