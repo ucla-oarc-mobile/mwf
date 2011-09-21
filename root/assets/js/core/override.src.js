@@ -10,7 +10,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110906
+ * @version 20110921
  *
  * @requires mwf
  * @requires mwf.site
@@ -44,12 +44,6 @@ mwf.override = new function(){
     }
     
     /**
-     * Name of the override cookie.
-     *
-     * @var string
-     */
-    
-    /**
      * Name of the override cookie, stored by reference as local variable as 
      * optimized for compression.
      * 
@@ -70,7 +64,7 @@ mwf.override = new function(){
             var pos = cookies[i].indexOf("=")+1;
             override = cookies[i].substr(pos, cookies[i].length-pos);
             classification.isOverride = function(){return true;}
-            matchingCookie = true;
+            matchingCookie = cookies[i];
         }
     }
     
@@ -87,6 +81,10 @@ mwf.override = new function(){
     }else if(!override){
         classification.isOverride = function(){return false;}
         return;
+    }
+    
+    if(matchingCookie) {
+        matchingCookie = matchingCookie.substr(matchingCookie.indexOf("=")+1) == override ? true : false;
     }
     
     /**
