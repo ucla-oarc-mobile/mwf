@@ -126,18 +126,12 @@ a#button-top:focus{
     color: #fff;
 }
 
-a.button-full {
-	padding: .6em;
-	margin: 0;
-}
-
-a.button-full.button-padded,
 div.button-full.button-padded{
-	margin-top: 10px;
+    margin-top: 10px;
 }
 
 a.button-full.button-padded {
-	margin: 10px 10px 0 10px;
+    margin: 10px 10px 0 10px;
 }
 
 div.button-full {
@@ -209,10 +203,6 @@ div.button-full.button-padded a.button-last {
 
 a.button-full,
 div.button-full a {
-	background-color: #536895;
-	color: #fff;
-	font-size: 1.25em;
-	font-weight: bold;
 	border: none;
 }
 
