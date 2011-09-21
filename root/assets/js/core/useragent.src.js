@@ -286,6 +286,13 @@ mwf.userAgent = new function() {
      * so as to execute as early as when the DOM content is ready, if the device
      * supports it, or else when the DOM content has fully loaded.
      */
-    document.addEventListener('DOMContentLoaded',writer,false);
-    window.addEventListener('load',writer,false);
+    if(document.addEventListener) {
+        document.addEventListener('DOMContentLoaded',writer,false);
+    }
+    
+    if(window.addEventListener) {
+        window.addEventListener('load',writer,false);
+    } else if (window.attachEvent) {
+        window.attachEvent('onload',writer);
+    }
 })();
