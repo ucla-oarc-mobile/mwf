@@ -66,7 +66,11 @@
         }
         cookie += '};path=/';
         document.cookie = cookie;
-        return true;
+        
+        /**
+         * Return true for reload request if cookie has been written.
+         */
+        return document.cookie.indexOf(classification.cookieName) != -1;
 
     })();
             
@@ -106,7 +110,11 @@
             cookie += ',"bev":"'+t+'"';
         cookie += '};path=/';
         document.cookie = cookie;
-        return true;
+        
+        /**
+         * Return true for reload request if cookie has been written.
+         */
+        return document.cookie.indexOf(userAgent.cookieName) != -1;
 
     })() || reload;
             
@@ -127,11 +135,12 @@
                 return false;
         }
 
-        /**
-         * If cookie is not set, set the cookie and reload the page.
-         */
         document.cookie = browser.cookieName+'={"h":"'+browser.getHeight()+'","w":"'+browser.getWidth()+'"};path=/';
-        return true;
+        
+        /**
+         * Return true for reload request if cookie has been written.
+         */
+        return document.cookie.indexOf(browser.cookieName) != -1;
 
     })() || reload;
         

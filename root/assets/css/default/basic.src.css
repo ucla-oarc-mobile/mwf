@@ -253,16 +253,19 @@ li a {
 
 a.button-full, div.button-full {
     width: auto;
-    display: block;
+    margin: 0;
 }
 
 a.button-full, div.button-full a{
+    border: solid #aaa;
+    padding: .6em;
+    background-color: #536895;
+    color: #fff;
+    border-width: 1px 0;
     display: block;
-    color: #1e6a95;
-    font-size: 1.1em;
+    font-size: 1.25em;
     font-weight: bold;
     text-align: center;
-    padding: .4em;
 }
 
 a.button-full:hover,
@@ -271,7 +274,7 @@ a.button-full:active,
 div.button-full a:hover,
 div.button-full a:focus,
 div.button-full a:active{
-	color: #494D69;
+    color: #494D69;
 }
 
 /********************************************************
