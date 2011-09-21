@@ -11,10 +11,10 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110827
+ * @version 20110921
  *
  * @uses Device
- * @uses User_Browser
+ * @uses Browser
  * @uses Local_Image
  */
 
@@ -22,20 +22,20 @@
  * Require necessary libraries. 
  */
 include_once(dirname(dirname(__FILE__)).'/lib/device.class.php');
-include_once(dirname(dirname(__FILE__)).'/lib/user_browser.class.php');
+include_once(dirname(dirname(__FILE__)).'/lib/browser.class.php');
 include_once(dirname(dirname(__FILE__)).'/lib/local_image.class.php');
 
 /**
  * @var int maximum width the image should be as defined first by the browser
  *          width and then more specifically by URI parameters.
  */
-$max_width = User_Browser::width();
+$max_width = Browser::width();
 
 /**
  * @var int maximum height the image should be as defined first by the browser
  *          width and then more specifically by URI parameters.
  */
-$max_height = User_Browser::height();
+$max_height = Browser::height();
 
 /**
  * @var bool true if the image should be compressed based on width.
@@ -90,10 +90,7 @@ $image = new Local_Image($_GET['img']);
 $image->set_allowed_extension('gif');
 $image->set_allowed_extension('jpeg');
 $image->set_allowed_extension('jpg');
-
-/** @todo PNG support for devices that actually have support for it */
-//if(User_Agent::has_capability('png'))
-    $image->set_allowed_extension('png');
+$image->set_allowed_extension('png');
 
 /** Force max width if $set_width is true. */
 if($set_width)

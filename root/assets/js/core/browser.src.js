@@ -1,6 +1,7 @@
 /**
- * Defines methods under mwf.browser related to the web browser and write the
- * height and width cookies that expose these values to User_Browser.
+ * Defines methods under mwf.browser related to the web browser and provides
+ * telemetry accessors. If not already in a cookie, these values are written
+ * out as such by mwf.server.
  *
  * @package core
  * @subpackage js
@@ -8,13 +9,15 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110906
+ * @version 20110921
  *
  * @requires mwf
  * @requires /root/assets/js/core/vars.php
  */
 
 mwf.browser = new function() {
+    
+    this.cookieName = mwf.site.cookie.prefix+"browser";
     
     var w = window;
     var d = document;
@@ -114,11 +117,3 @@ mwf.browser = new function() {
      */
     this.pageHeight = this.getHeight;
 };
-
-/**
- * Expose the browser height and width to the server.
- * 
- * @see /root/assets/lib/user_browser.class.php
- */
-document.cookie=mwf.site.cookie.prefix+'bw='+mwf.browser.getWidth()+';path=/';
-document.cookie=mwf.site.cookie.prefix+'bh='+mwf.browser.getHeight()+';path=/';

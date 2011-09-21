@@ -28,18 +28,19 @@
     if(!mwf.capability.cookie())
         return;
     
+    var i, cookies = document.cookie.split(';');
+    
     /**
      * Anonymous routine for the classification cookie that will return 
      * true if it needs a page reload to pass the cookie to server.
      */
     var reload = (function(){
 
+        var classification = mwf.classification;
+
         /**
          * Exit routine early with false if matching classification cookie.
          */
-        var i, 
-            cookies = document.cookie.split(';'),
-            classification = mwf.classification;
         for(i=0; i < cookies.length; i++){
             x = cookies[i].substr(0,cookies[i].indexOf("="));
             x = x.replace(/^\s+|\s+$/g,"");
@@ -74,13 +75,12 @@
      * true if it needs a page reload to pass the cookie to server.
      */
      reload = (function(){
+         
+        var userAgent = mwf.userAgent;
 
         /**
          * Exit routine early with false if matching classification cookie.
          */
-        var i, 
-            cookies = document.cookie.split(';'), 
-            userAgent = mwf.userAgent;
         for(i=0; i < cookies.length; i++){
             x = cookies[i].substr(0,cookies[i].indexOf("="));
             x = x.replace(/^\s+|\s+$/g,"");
@@ -107,7 +107,35 @@
         return true;
 
     })() || reload;
+            
+    /**
+     * Anonymous routine for the browser dimensions cookie that will return 
+     * true if it needs a page reload to pass the cookie to server.
+     */
+     reload = (function(){
+
+        /**
+         * Exit routine early with false if matching classification cookie.
+         */
+        var browser = mwf.browser;
+        for(i=0; i < cookies.length; i++){
+            x = cookies[i].substr(0,cookies[i].indexOf("="));
+            x = x.replace(/^\s+|\s+$/g,"");
+            if(x == browser.cookieName)
+                return false;
+        }
+
+        /**
+         * If cookie is not set, set the cookie and reload the page.
+         */
+        document.cookie = browser.cookieName+'={"h":"'+browser.getHeight()+'","w":"'+browser.getWidth()+'"};path=/';
+        return true;
+
+    })() || reload;
         
+    /**
+     * Reload the page if needed.
+     */
     if(reload)
         document.location.reload();
      
