@@ -7,7 +7,7 @@ mwf.iphone.orientation = new function() {
             var head= document.getElementsByTagName('head')[0];
             var meta= document.createElement('meta');
             meta.setAttribute('name', 'viewport')
-            meta.setAttribute('content', 'height='+mwf.browser.pageHeight()+',width='+mwf.browser.pageWidth()+'; initial-scale=1.0; maximum-scale=1.0; user-scalable=no;');
+            meta.setAttribute('content', 'height='+mwf.browser.pageHeight()+',width='+mwf.browser.pageWidth()+',initial-scale=1.0,maximum-scale=1.0,user-scalable=no');
             head.appendChild(meta);
         }
     }
