@@ -8,7 +8,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110906
+ * @version 20110921
  */
 
 mwf.userAgent = new function() {
@@ -131,15 +131,6 @@ mwf.userAgent = new function() {
     }
     
     /**
-     * Determines the web browser version from string or else returns an empty 
-     * string.
-     *
-     * @todo
-     * @return string
-     */
-    this.getBrowserVersion = function(){return '';}
-    
-    /**
      * Determines the web browser engine from string or else returns an empty 
      * string.
      *
@@ -160,7 +151,26 @@ mwf.userAgent = new function() {
      * @todo
      * @return string
      */
-    this.getBrowserEngineVersion = function(){return '';}
+    this.getBrowserEngineVersion = function(){
+        var ua = userAgent, s;
+        switch(this.getBrowserEngine())
+        {
+            case 'webkit':
+                s = ua.indexOf('applewebkit/')+12;
+                return ua.substring(s, ua.indexOf(' ', s));
+            case 'trident':
+                s = ua.indexOf('trident/')+8;
+                return ua.substring(s, ua.indexOf(' ', s));
+            case 'gecko':
+                s = ua.indexOf('gecko/')+6;
+                return ua.substring(s, ua.indexOf(' ', s));
+            case 'presto':
+                s = ua.indexOf('presto/')+7;
+                return ua.substring(s, Math.min(ua.indexOf('/', s), ua.indexOf(' ', s), ua.indexOf(')', s)));
+        }
+        
+        return '';
+    }
 };
 
 /**
@@ -239,12 +249,12 @@ mwf.userAgent = new function() {
         }
         
         /**
-         * Add body class for mwf_browser_{name}_{version} when possible.
+         * Add body class for mwf_browser_engine_{name} when possible.
          */
-        if((tv = userAgent.getBrowserVersion()).length > 0) {
-            tv = t+'_'+tv.toLowerCase().replace(/ /g,"_").replace(/\./g,"_");
-            if(nin(tv)) 
-                classes[i++] = tv;
+        if((t = userAgent.getBrowserEngine()).length > 0) {
+            t = "mwf_browser_engine_"+t.toLowerCase().replace(" ","_");
+            if(nin(t)) 
+                classes[i++] = t;
         }
         
         /**

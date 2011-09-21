@@ -185,6 +185,16 @@ class User_Agent
     {
         return self::get('be');
     }
+	
+    /**
+     * Returns the browser engine version as determined by mwf.userAgent.
+     * 
+     * @return string 
+     */
+    public static function get_browser_engine_version()
+    {
+        return self::get('bev');
+    }
 }
 
 /**
