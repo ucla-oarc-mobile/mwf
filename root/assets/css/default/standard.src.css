@@ -69,12 +69,18 @@
     margin-right: 10px !important;
 }
 
-.menu-padded > *:first-child,
+.menu-padded > *:first-child {
+    margin-top: 10px !important;
+}
+
 .menu-padded .menu-first {
     margin-top: 10px !important;
 }
 
-.menu-padded > *:first-child,
+.menu-padded > *:first-child {
+	border-top: none !important;
+}
+
 .menu-padded .menu-first {
 	border-top: none !important;
 }
@@ -152,34 +158,57 @@ div.button-full a.button-light {
     padding: .4em 0 .4em 0;
 }
 
-div.button-full a:first-child,
+div.button-full a:first-child {
+    border-left: 0 !important;
+    right: 50%;
+    width: 50%;
+}
+
 div.button-full a.button-first {
     border-left: 0 !important;
     right: 50%;
     width: 50%;
 }
 
-div.button-full a:last-child,
+div.button-full a:last-child {
+    left: 50%;
+    width: 50%;
+}
+
 div.button-full a.button-last {
     left: 50%;
     width: 50%;
 }
 
-div.button-full a:first-child:last-child,
-div.button-full a.button-first.button-last
+div.button-full a:first-child:last-child
 {
     width: 100%;
     left: 0;
     right: 0;
 }
 
-div.button-full.button-padded a:first-child,
+div.button-full .button-last
+{
+    width: 100%;
+    left: 0;
+    right: 0;
+}
+
+div.button-full.button-padded a:first-child {
+    left: 10px;
+    width: auto;
+}
+
 div.button-full.button-padded a.button-first {
     left: 10px;
     width: auto;
 }
 
-div.button-full.button-padded a:last-child,
+div.button-full.button-padded a:last-child {
+    right: 10px;
+    width: auto;
+}
+
 div.button-full.button-padded a.button-last {
     right: 10px;
     width: auto;
@@ -187,16 +216,24 @@ div.button-full.button-padded a.button-last {
 
 a#button-top,
 a.button-full.button-padded,
-div.button-full.button-padded a:first-child,
 div.button-full.button-padded a.button-first {
+	-moz-border-radius-topleft: .5em;
+	-moz-border-radius-bottomleft: .5em;
+}
+
+div.button-full.button-padded a:first-child {
 	-moz-border-radius-topleft: .5em;
 	-moz-border-radius-bottomleft: .5em;
 }
 
 a#button-top,
 a.button-full.button-padded,
-div.button-full.button-padded a:last-child,
 div.button-full.button-padded a.button-last {
+	-moz-border-radius-topright: .5em;
+	-moz-border-radius-bottomright: .5em;
+}
+
+div.button-full.button-padded a:last-child {
 	-moz-border-radius-topright: .5em;
 	-moz-border-radius-bottomright: .5em;
 }
@@ -322,25 +359,40 @@ form.form-full > input[type=reset] {
     width: 100%;
 }
 
-.content-padded > *:first-child,
+.content-padded > *:first-child {
+    margin-top: 10px !important;
+	-moz-border-radius-topleft: .5em;
+	-moz-border-radius-topright: .5em;
+}
+
 .content-padded .content-first {
     margin-top: 10px !important;
 	-moz-border-radius-topleft: .5em;
 	-moz-border-radius-topright: .5em;
 }
 
-.content-padded > *:last-child,
+.content-padded > *:last-child {
+	-moz-border-radius-bottomleft: .5em;
+	-moz-border-radius-bottomright: .5em;
+}
+
 .content-padded .content-last {
 	-moz-border-radius-bottomleft: .5em;
 	-moz-border-radius-bottomright: .5em;
 }
 
-.content-padded > *:first-child,
+.content-padded > *:first-child {
+	border-top: none !important;
+}
+
 .content-padded .content-first {
 	border-top: none !important;
 }
 
-.content-padded > *:last-child,
+.content-padded > *:last-child {
+	border-bottom: none !important;
+}
+
 .content-padded .content-last {
 	border-bottom: none !important;
 }
