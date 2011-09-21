@@ -29,13 +29,13 @@ include_once(dirname(dirname(__FILE__)).'/lib/local_image.class.php');
  * @var int maximum width the image should be as defined first by the browser
  *          width and then more specifically by URI parameters.
  */
-$max_width = Browser::width();
+$max_width = Browser::get_width();
 
 /**
  * @var int maximum height the image should be as defined first by the browser
  *          width and then more specifically by URI parameters.
  */
-$max_height = Browser::height();
+$max_height = Browser::get_height();
 
 /**
  * @var bool true if the image should be compressed based on width.
