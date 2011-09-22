@@ -23,18 +23,24 @@
 
 .menu-full > h1 {
     background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5), color-stop(1, #fff));
-        -webkit-background-origin: padding-box;
-        -webkit-background-clip: padding-box;
+    -webkit-background-origin: padding-box;
+    -webkit-background-clip: padding-box;
 }
 
 .menu-full > h1.light {
     background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5), color-stop(1, #fff));
-        -webkit-background-origin: padding-box;
-        -webkit-background-clip: padding-box;
+    -webkit-background-origin: padding-box;
+    -webkit-background-clip: padding-box;
 }
 
 .menu-full > h1.blue {
     background: -webkit-gradient(linear, left top, left bottom, from(#809FE2), to(#637CB0), color-stop(1, #fff));
+}
+
+.menu-padded {
+    border-radius: .5em;
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
 }
 
 .menu-padded > :first-child:last-child li:first-child,
@@ -52,16 +58,14 @@
     -webkit-border-bottom-right-radius: .5em;
     -moz-border-radius-bottomleft: .5em;
     -moz-border-radius-bottomright: .5em;
-    z-index: -100;
-    margin-bottom: 6px;
 }
 
 .menu-padded > :first-child:last-child li:first-child a:hover,
 .menu-padded > :first-child:last-child li:first-child a:focus,
 .menu-padded > :first-child:last-child li:first-child a:active,
-.menu-padded > :first-child a:hover,
-.menu-padded > :first-child a:focus,
-.menu-padded > :first-child a:active,
+.menu-padded > :first-child li:first-child a:hover,
+.menu-padded > :first-child li:first-child a:focus,
+.menu-padded > :first-child li:first-child a:active,
 .menu-padded .menu-first a:hover,
 .menu-padded .menu-first a:focus,
 .menu-padded .menu-first a:active {
@@ -81,13 +85,17 @@
     -webkit-border-bottom-right-radius: .5em;
     -moz-border-radius-bottomleft: .5em;
     -moz-border-radius-bottomright: .5em;
-    z-index: -100;
-    margin-bottom: 6px;
 }
 
 /********************************************************
  * BUTTONS
  *******************************************************/
+
+.button-padded {
+    border-radius: .5em;
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+}
 
 a.button-full,
 div.button-full a {
@@ -110,16 +118,22 @@ a#button-top:focus{
 
 a#button-top,
 a.button-full.button-padded,
+div.button-full.button-padded a.button-first,
 div.button-full.button-padded a:first-child {
     -webkit-border-top-left-radius: .5em;
     -webkit-border-bottom-left-radius: .5em;
+    -moz-border-radius-topleft: .5em;
+    -moz-border-radius-bottomleft: .5em;
 }
 
 a#button-top,
 a.button-full.button-padded,
+div.button-full.button-padded a.button-last,
 div.button-full.button-padded a:last-child {
     -webkit-border-top-right-radius: .5em;
     -webkit-border-bottom-right-radius: .5em;
+    -moz-border-radius-topright: .5em;
+    -moz-border-radius-bottomright: .5em;
 }
 
 a.button-full.button-light,
@@ -152,37 +166,54 @@ div.button-full a.button-light:active{
  * CONTENT
  *******************************************************/
 
-.content-padded > *:last-child,
-.content-padded .content-last {
-    margin-bottom: 6px;
+.content-padded {
+    border-radius: .5em;
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
 }
 
 .content-elements > h1, .content-full > h1 {
     background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5), color-stop(1, #fff));
-	-webkit-background-origin: padding-box;
-	-webkit-background-clip: padding-box;
+    -webkit-background-origin: padding-box;
+    -webkit-background-clip: padding-box;
 }
 
 .content-elements > h1.light, .content-full > h1.light {
     background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5), color-stop(1, #fff));
-        -webkit-background-origin: padding-box;
-        -webkit-background-clip: padding-box;
+    -webkit-background-origin: padding-box;
+    -webkit-background-clip: padding-box;
 }
 .content-elements > h1.blue, .content-full > h1.blue {
-	background: -webkit-gradient(linear, left top, left bottom, from(#809FE2), to(#637CB0), color-stop(1, #fff));
+    background: -webkit-gradient(linear, left top, left bottom, from(#809FE2), to(#637CB0), color-stop(1, #fff));
 
 }
 
-.content-padded > *:first-child,
+.content-padded > *:first-child {
+    -webkit-border-top-left-radius: .5em;
+    -webkit-border-top-right-radius: .5em;
+    -moz-border-radius-topleft: .5em;
+    -moz-border-radius-topright: .5em;
+}
+
 .content-padded .content-first {
-	-webkit-border-top-left-radius: .5em;
-	-webkit-border-top-right-radius: .5em;
+    -webkit-border-top-left-radius: .5em;
+    -webkit-border-top-right-radius: .5em;
+    -moz-border-radius-topleft: .5em;
+    -moz-border-radius-topright: .5em;
 }
 
-.content-padded > *:last-child,
+.content-padded > *:last-child {
+    -webkit-border-bottom-left-radius: .5em;
+    -webkit-border-bottom-right-radius: .5em;
+    -moz-border-radius-bottomleft: .5em;
+    -moz-border-radius-bottomright: .5em;
+}
+
 .content-padded .content-last {
-	-webkit-border-bottom-left-radius: .5em;
-	-webkit-border-bottom-right-radius: .5em;
+    -webkit-border-bottom-left-radius: .5em;
+    -webkit-border-bottom-right-radius: .5em;
+    -moz-border-radius-bottomleft: .5em;
+    -moz-border-radius-bottomright: .5em;
 }
 
 /********************************************************
