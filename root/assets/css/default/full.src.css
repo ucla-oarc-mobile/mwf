@@ -22,19 +22,24 @@
   ------------------------------------------------*/
 
 .menu-full > h1 {
-    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5), color-stop(1, #fff));
-    -webkit-background-origin: padding-box;
-    -webkit-background-clip: padding-box;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
+    background: -moz-linear-gradient(#fff, #e5e5e5);
+    background: -o-linear-gradient(top, #fff, #e5e5e5);
+    background: linear-gradient(#fff, #e5e5e5);
 }
 
 .menu-full > h1.light {
-    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5), color-stop(1, #fff));
-    -webkit-background-origin: padding-box;
-    -webkit-background-clip: padding-box;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
+    background: -moz-linear-gradient(#fff, #e5e5e5);
+    background: -o-linear-gradient(top, #fff, #e5e5e5);
+    background: linear-gradient(#fff, #e5e5e5);
 }
 
 .menu-full > h1.blue {
-    background: -webkit-gradient(linear, left top, left bottom, from(#809FE2), to(#637CB0), color-stop(1, #fff));
+    background: -webkit-gradient(linear, left top, left bottom, from(#809FE2), to(#637CB0));
+    background: -moz-linear-gradient(#809FE2, #637CB0);
+    background: -o-linear-gradient(top, #809FE2, #637CB0);
+    background: linear-gradient(#809FE2, #637CB0);
 }
 
 .menu-padded {
@@ -99,21 +104,26 @@
 
 a.button-full,
 div.button-full a {
-    background: -webkit-gradient(linear, left top, left bottom, from(#6883bc), to(#536895), color-stop(1, #fff));
-    -webkit-background-origin: padding-box;
-    -webkit-background-clip: padding-box;
+    background: -webkit-gradient(linear, left top, left bottom, from(#6883bc), to(#536895));
+    background: -moz-linear-gradient(#6883bc, #536895);
+    background: -o-linear-gradient(top, #6883bc, #536895);
+    background: linear-gradient(#6883bc, #536895);
 }
 
 a#button-top {
-    background: -webkit-gradient(linear, left top, left bottom, from(#95aee8), to(#788ebe), color-stop(1, #fff));
-    -webkit-background-origin: padding-box;
-    -webkit-background-clip: padding-box;
+    background: -webkit-gradient(linear, left top, left bottom, from(#95aee8), to(#788ebe));
+    background: -moz-linear-gradient(#95aee8, #788ebe);
+    background: -o-linear-gradient(top, #95aee8, #788ebe);
+    background: linear-gradient(#95aee8, #788ebe);
 }
 
 a#button-top:hover,
 a#button-top:active,
 a#button-top:focus{
-    background: -webkit-gradient(linear, left top, left bottom, from(#8296c0), to(#576c9c), color-stop(1, #fff));
+    background: -webkit-gradient(linear, left top, left bottom, from(#8296c0), to(#576c9c));
+    background: -moz-linear-gradient(#8296c0, #576c9c);
+    background: -o-linear-gradient(top, #8296c0, #576c9c);
+    background: linear-gradient(#8296c0, #576c9c);
 }
 
 a#button-top,
@@ -139,9 +149,10 @@ div.button-full.button-padded a:last-child {
 a.button-full.button-light,
 div.button-full a.button-light,
 div.button-full.button-light a {
-    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5), color-stop(1, #fff));
-    -webkit-background-origin: padding-box;
-    -webkit-background-clip: padding-box;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
+    background: -moz-linear-gradient(#fff, #e5e5e5);
+    background: -o-linear-gradient(top, #fff, #e5e5e5);
+    background: linear-gradient(#fff, #e5e5e5);
     color: #555 !important;
 }
 
@@ -157,9 +168,10 @@ a.button-full.button-light:active,
 div.button-full a.button-light:hover,
 div.button-full a.button-light:focus,
 div.button-full a.button-light:active{
-    background: -webkit-gradient(linear, left top, left bottom, from(#ffc847), to(#ffb300), color-stop(1, #fff));
-    -webkit-background-origin: padding-box;
-    -webkit-background-clip: padding-box;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffc847), to(#ffb300));
+    background: -moz-linear-gradient(#ffc847, #ffb300);
+    background: -o-linear-gradient(top, #ffc847, #ffb300);
+    background: linear-gradient(#ffc847, #ffb300);
 }
 
 /********************************************************
@@ -173,18 +185,23 @@ div.button-full a.button-light:active{
 }
 
 .content-elements > h1, .content-full > h1 {
-    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5), color-stop(1, #fff));
-    -webkit-background-origin: padding-box;
-    -webkit-background-clip: padding-box;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
+    background: -moz-linear-gradient(#fff, #e5e5e5);
+    background: -o-linear-gradient(top, #fff, #e5e5e5);
+    background: linear-gradient(#fff, #e5e5e5);
 }
 
 .content-elements > h1.light, .content-full > h1.light {
-    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5), color-stop(1, #fff));
-    -webkit-background-origin: padding-box;
-    -webkit-background-clip: padding-box;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
+    background: -moz-linear-gradient(#fff, #e5e5e5);
+    background: -o-linear-gradient(top, #fff, #e5e5e5);
+    background: linear-gradient(#fff, #e5e5e5);
 }
 .content-elements > h1.blue, .content-full > h1.blue {
-    background: -webkit-gradient(linear, left top, left bottom, from(#809FE2), to(#637CB0), color-stop(1, #fff));
+    background: -webkit-gradient(linear, left top, left bottom, from(#809FE2), to(#637CB0));
+    background: -moz-linear-gradient(#809FE2, #637CB0);
+    background: -o-linear-gradient(top, #809FE2, #637CB0);
+    background: linear-gradient(#809FE2, #637CB0);
 
 }
 
@@ -226,18 +243,23 @@ form.form-padded > .form-last {
 }
 
 form.form-full > h1 {
-	background: -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#ccc), color-stop(1, #fff));
-	-webkit-background-origin: padding-box;
-	-webkit-background-clip: padding-box;
+	background: -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#ccc));
+    background: -moz-linear-gradient(#efefef, #ccc);
+    background: -o-linear-gradient(top, #efefef, #ccc);
+    background: linear-gradient(#fff, #e5e5e5);
 }
 
 form.form-full > h1.light {
-    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5), color-stop(1, #fff));
-        -webkit-background-origin: padding-box;
-        -webkit-background-clip: padding-box;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
+    background: -moz-linear-gradient(#fff, #e5e5e5);
+    background: -o-linear-gradient(top, #fff, #e5e5e5);
+    background: linear-gradient(#fff, #e5e5e5);
 }
 form.form-full > h1.blue {
-	background: -webkit-gradient(linear, left top, left bottom, from(#809FE2), to(#637CB0), color-stop(1, #fff));
+	background: -webkit-gradient(linear, left top, left bottom, from(#809FE2), to(#637CB0));
+    background: -moz-linear-gradient(#809FE2, #637CB0);
+    background: -o-linear-gradient(top, #809FE2, #637CB0);
+    background: linear-gradient(#809FE2, #637CB0);
 
 }
 
@@ -276,6 +298,9 @@ form.form-full > input[type=submit],
 form.form-full > input[type=reset] {
     -webkit-box-shadow:none;
     background: -webkit-gradient(linear, left top, left bottom, from(#e5e5e5), to(#f1f1f1), color-stop(0.8, #f1f1f1));
+    background: -moz-linear-gradient(#e5e5e5, #f1f1f1);
+    background: -o-linear-gradient(top, #e5e5e5, #f1f1f1);
+    background: linear-gradient(#e5e5e5, #f1f1f1);
 }
 
 form.form-full > input[type=submit]:active,
@@ -285,6 +310,9 @@ form.form-full > input[type=reset]:focus,
 form.form-full > input[type=submit]:hover,
 form.form-full > input[type=reset]:hover {
     background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#f1f1f1), color-stop(0.8, #f1f1f1));
+    background: -moz-linear-gradient(#f9f9f9, #f1f1f1);
+    background: -o-linear-gradient(top, #f9f9f9, #f1f1f1);
+    background: linear-gradient(#f9f9f9, #f1f1f1);
 }
 
 /* default-webkit-transitions
