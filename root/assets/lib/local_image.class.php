@@ -112,7 +112,10 @@ class Local_Image
 			return;
 		}
 			
-		$this->generate_image($filename);
+		if(!$this->generate_image($filename))
+                {
+                    return false;
+                }
 		
 		if(file_exists($filename))
 		{
@@ -153,6 +156,12 @@ class Local_Image
 		}
 			
 		$source =& $this->get_gd_image();
+                
+                if($source === false)
+                {
+                    return false;
+                }
+                
 		$height = imagesy($source);
 		$width = imagesx($source);
 		
@@ -191,6 +200,12 @@ class Local_Image
 	{
 		if($this->_image_gd !== null)
 			return $this->_image_gd;
+                
+                if($this->_image_path === false)
+                {
+                    $this->_image_gd = false;
+                    return $this->_image_gd;
+                }
 		
 		$ext = strtolower(substr($this->_image_path, 
 						 		 strrpos($this->_image_path, '.')+1, 
