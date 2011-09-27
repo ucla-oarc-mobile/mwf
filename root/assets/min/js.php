@@ -49,7 +49,7 @@ if(isset($_GET['basic']) || isset($_GET['paths']))
         $loadarr = array_merge(explode(' ', $_GET['paths']), $loadarr);
     
     foreach($loadarr as $file) {
-        if(Path_Validator::is_safe($file, 'js') && $contents = Path::get_contents(urldecode($file)))
+        if(Path_Validator::is_safe($file, 'js') && $contents = Path::get_contents($file))
             echo JSMin::minify($contents);
     }
 }
