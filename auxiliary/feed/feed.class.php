@@ -137,7 +137,7 @@ class Feed
         if(!isset($_GET['article']))
             return false;
 
-        return $this->get_item(urldecode($_GET['article']));
+        return $this->get_item($_GET['article']);
     }
 
     /**
