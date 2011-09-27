@@ -210,6 +210,7 @@ class Local_Image
                     /* TODO: make max image download size configurable rather than hardcoding to 9,999,999 bytes */
                     /* TODO: need to urlencode() _image_path but only directory and file names */
                     file_put_contents($path, file_get_contents($this->_image_path,FALSE,NULL,-1,9999999));
+                    /* TODO: should weigh the pros and cons of using exif_imagetype() on local files too rather than parsing the filename */
                     $ext = substr(image_type_to_extension(exif_imagetype($path)), 1);
                     $unlink_path = TRUE;
                 } else {
