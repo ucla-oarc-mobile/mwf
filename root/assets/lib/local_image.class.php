@@ -240,7 +240,9 @@ class Local_Image
 				$this->_image_ext = false;
 				break;
 		}
-                unlink($path);
+                if ($unlink_path) {
+                    unlink($path);
+                }
 		return $this->_image_gd;
 	}
 	
