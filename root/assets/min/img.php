@@ -19,6 +19,11 @@
  */
 
 /**
+ * If no img URL is provided, exit
+ */
+if (! isset($_GET['img'])) exit;
+
+/**
  * Require necessary libraries. 
  */
 include_once(dirname(dirname(__FILE__)).'/lib/device.class.php');
