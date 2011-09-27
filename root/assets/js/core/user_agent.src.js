@@ -22,7 +22,7 @@ mwf.user_agent = new function(){
         classification = mwf.classification;
     
     this.is_iphone_os=function(){
-        return userAgent.getOS() == 'ios';
+        return userAgent.getOS() == 'iphone_os';
     }
     
     this.is_webkit_engine=function(){
