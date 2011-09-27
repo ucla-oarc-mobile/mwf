@@ -184,7 +184,7 @@ class Local_Image
 		$new_width = round($width*$scale_factor);
 		
 		$generated = imagecreatetruecolor($new_width, $new_height);
-		imagecopyresized($generated, $source, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+		imagecopyresampled($generated, $source, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
 		
 		if(!is_writable(dirname($savepath)))
 			$savepath = false;
