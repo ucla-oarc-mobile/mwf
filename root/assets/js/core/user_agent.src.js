@@ -26,8 +26,7 @@ mwf.user_agent = new function(){
     }
     
     this.is_webkit_engine=function(){
-        return navigator.userAgent.match(/(webkit)/i) != null 
-            && !navigator.userAgent.match(/(webkit\/41)/i) != null
+        return userAgent.getBrowserEngine() == 'webkit';
     }
     
     this.get_browser=userAgent.getBrowser;
@@ -38,35 +37,19 @@ mwf.user_agent = new function(){
     
     this.get_os_version=userAgent.getOSVersion;
     
-    this.is_mobile=function(){
-        return classification.isMobile() ? 1 : 0;
-    }
+    this.is_mobile=classification.isMobile;
     
-    this.is_basic=function(){
-        return classification.isBasic() ? 1 : 0;
-    }
+    this.is_basic=classification.isBasic;
     
-    this.is_standard=function(){
-        return classification.isStandard() ? 1 : 0;
-    }
+    this.is_standard=classification.isStandard;
     
-    this.is_full=function(){
-        return classification.isFull() ? 1 : 0;
-    }
+    this.is_full=classification.isFull;
     
-    this.is_touch=function(){
-        return classification.isStandard() ? 1 : 0;
-    }
+    this.is_touch=classification.isStandard;
     
-    this.is_overridden=function(){
-        return classification.isFull() ? 1 : 0;
-    }
+    this.is_overridden=classification.isFull;
     
-    this.is_overridden=function(){
-        return classification.isOverride() ? 1 : 0;
-    }
+    this.is_overridden=classification.isOverride;
     
-    this.is_preview=function(){
-        return classification.isOverride() && !classification.isMobile() ? 1 : 0;
-    }
+    this.is_preview=classification.isPreview;
 };

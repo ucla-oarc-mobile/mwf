@@ -21,6 +21,10 @@ mwf.userAgent = new function() {
     
     var userAgent = navigator.userAgent.toLowerCase();
     
+    var userAgentSubstringExists = function(s){
+        return userAgent.indexOf(s) != -1;
+    }
+    
     /**
      * Determines the operating system from string or else returns an empty 
      * string.
@@ -28,18 +32,18 @@ mwf.userAgent = new function() {
      * @return string
      */
     this.getOS = function(){ 
-        var ua = userAgent;
-        if(ua.match(/(iphone)|(ipad)|(ipod)/) != null) return 'iphone_os';
-        else if(ua.indexOf('android') != -1) return 'android';
-        else if(ua.indexOf('blackberry') != -1) return 'blackberry';
-        else if(ua.indexOf('windows phone os') != -1) return 'windows_phone';
-        else if(ua.indexOf('windows mobile') != -1) return 'windows_mobile';
-        else if(ua.indexOf('symbian') != -1) return 'symbian';
-        else if(ua.indexOf('webos') != -1) return 'webos';
-        else if(ua.indexOf('mac os x') != -1) return 'mac_os';
-        else if(ua.indexOf('windows nt') != -1) return 'windows';
-        else if(ua.indexOf('linux') != -1) return 'linux';
-        else return '';
+        if(userAgent.match(/(iphone)|(ipad)|(ipod)/) != null) 
+            return 'iphone_os';
+        
+        var i = 0,
+            osToTest = ['android','blackberry','windows phone os','windows mobile',
+                        'symbian','webos','mac os x','windows nt','linux'];
+                    
+        for(;i<osToTest.length;i++)
+            if(userAgentSubstringExists(osToTest[i]))
+                return osToTest[i];
+        
+        return '';
     }
     
     /**
@@ -49,62 +53,54 @@ mwf.userAgent = new function() {
      * @return string
      */
     this.getOSVersion = function(){ 
-        var ua = userAgent, s;
+        var ua = userAgent, s, r='';
         switch(this.getOS())
         {
             case 'iphone_os':
-                s = ua.indexOf('iPhone OS')+10;
-                ua = ua.substring(s, Math.min(ua.indexOf(' ', s), ua.indexOf('.', ua.indexOf('.', s)+1)));
-                return ua;
+                s = ua.indexOf('iphone os')+10;
+                r = ua.substring(s, ua.indexOf(' ', s));
             case 'blackberry':
-                if(ua.substring(0, 10).toLowerCase() == 'blackberry'){
+                if(ua.substring(0, 10) == 'blackberry'){
                     s = ua.indexOf('/')+1;
-                    ua = ua.substring(s, Math.min(ua.indexOf(' ', s), ua.indexOf('.', ua.indexOf('.', s)+1)));
-                    return ua;
+                    r = ua.substring(s, ua.indexOf(' ', s));
                 }
                 break;
             case 'android':
                 if((s = ua.indexOf('Android ')) != -1){
                     s += 8;
-                    ua = ua.substring(s, Math.min(ua.indexOf(' ', s), ua.indexOf(';', s), ua.indexOf('-', s), ua.indexOf('.', ua.indexOf('.', s)+1)))
-                    return ua;
+                    r = ua.substring(s, Math.min(ua.indexOf(' ', s), ua.indexOf(';', s), ua.indexOf('-', s)));
                 }
                 break;
             case 'windows_phone':
                 if((s = ua.indexOf('Windows Phone OS ')) != -1){
                     s += 17;
-                    ua = ua.substring(s, ua.indexOf(';', s));
-                    return ua;
+                    r = ua.substring(s, ua.indexOf(';', s));
                 }
                 break;
             case 'windows_mobile':
                 if((s = ua.indexOf('Windows Mobile/')) != -1){
                     s += 15;
-                    ua = ua.substring(s, ua.indexOf(';', s));
-                    return ua;
+                    r = ua.substring(s, ua.indexOf(';', s));
                 }
                 break;
             case 'symbian':
                 if((s = ua.indexOf('SymbianOS/')) != -1){
                     s += 10;
-                    ua = ua.substring(s, ua.indexOf(';', s));
-                    return ua;
+                    r = ua.substring(s, ua.indexOf(';', s));
                 }
                 else if((s = ua.indexOf('Symbian/')) != -1){
                     s += 8;
-                    ua = "s"+ua.substring(s, ua.indexOf(';', s));
-                    return ua;
+                    r = "s"+ua.substring(s, ua.indexOf(';', s));
                 }
                 break;
             case 'webos':
                 if((s = ua.indexOf('webOS/')) != -1){
                     s += 6;
-                    ua = ua.substring(s, Math.min(ua.indexOf(';', s), ua.indexOf('.', ua.indexOf('.', s)+1)));
-                    return ua;
+                    r = ua.substring(s, Math.min(ua.indexOf(';', s)));
                 }
                 break;
         }
-        return '';
+        return r.replace(/\_/g,".");
     }
     
     /**
@@ -114,18 +110,15 @@ mwf.userAgent = new function() {
      */
     this.getBrowser = function(){
         
-        if(userAgent.indexOf('safari') != -1){
-            if(this.getOS() == 'android') return 'android_webkit';
-            return 'safari';
-        }
-        
-        if(userAgent.indexOf('chrome') != -1) return 'chrome';
-        if(userAgent.indexOf('iemobile') != -1) return 'iemobile';
-        if(userAgent.indexOf('camino') != -1) return 'camino';
-        if(userAgent.indexOf('seamonkey') != -1) return 'seamonkey';
-        if(userAgent.indexOf('firefox') != -1) return 'firefox';
-        if(userAgent.indexOf('opera mobi')) return 'opera_mobile';
-        if(userAgent.indexOf('opera_mini')) return 'opera_mini';
+        if(userAgentSubstringExists('safari'))
+            return this.getOS() == 'android' ? 'android_webkit' : 'safari';
+
+        var i = 0,
+            browsersToTest = ['chrome','iemobile','camino','seamonkey','firefox','opera_mobi','opera_mini'];
+            
+        for(;i<browsersToTest.length;i++)
+            if(userAgentSubstringExists(browsersToTest[i]))
+                return browsersToTest[i];
         
         return '';
     }
@@ -137,11 +130,16 @@ mwf.userAgent = new function() {
      * @return string
      */
     this.getBrowserEngine = function(){
-        if(userAgent.indexOf('applewebkit') != -1) return 'webkit';
-        if(userAgent.indexOf('trident') != -1) return 'trident';
-        if(userAgent.indexOf('gecko') != -1) return 'gecko';
-        if(userAgent.indexOf('presto') != -1) return 'presto';
-        if(userAgent.indexOf('khtml') != -1) return 'khtml';
+        
+        if(userAgentSubstringExists('applewebkit')) 
+            return 'webkit';
+        
+        var i = 0,
+            browserEnginesToTest = ['trident','gecko','presto','khtml'];
+            
+        for(;i<browserEnginesToTest.length;i++)
+            if(userAgentSubstringExists(browserEnginesToTest[i])) 
+                return browserEnginesToTest[i];
     }
     
     /**
@@ -153,17 +151,18 @@ mwf.userAgent = new function() {
      */
     this.getBrowserEngineVersion = function(){
         var ua = userAgent, s;
+        var userAgentAfterPatternToSpace = function(p){
+            var s = ua.indexOf(p)+p.length;
+            return ua.substring(s, ua.indexOf(' ',s));
+        }
         switch(this.getBrowserEngine())
         {
             case 'webkit':
-                s = ua.indexOf('applewebkit/')+12;
-                return ua.substring(s, ua.indexOf(' ', s));
+                return userAgentAfterPatternToSpace('applewebkit/');
             case 'trident':
-                s = ua.indexOf('trident/')+8;
-                return ua.substring(s, ua.indexOf(' ', s));
+                return userAgentAfterPatternToSpace('trident/');
             case 'gecko':
-                s = ua.indexOf('gecko/')+6;
-                return ua.substring(s, ua.indexOf(' ', s));
+                return userAgentAfterPatternToSpace('gecko/');
             case 'presto':
                 s = ua.indexOf('presto/')+7;
                 return ua.substring(s, Math.min(ua.indexOf('/', s), ua.indexOf(' ', s), ua.indexOf(')', s)));
