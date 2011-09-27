@@ -78,10 +78,7 @@ class Local_Image
 		if($this->_ext_force){
 			$ext = $this->_ext_force;
 		}else{
-			$extt = strtolower(substr($this->_image_path, 
-                                                 strrpos($this->_image_path, '.')+1,
-                                                 strlen($this->_image_path)-strrpos($this->_image_path, '.')+1
-                                                 ));
+			$extt = $this->get_gd_extension();
 			if(in_array($extt, $this->_ext_allowed))
 				$ext = $extt;
 			else
@@ -206,23 +203,35 @@ class Local_Image
                     $this->_image_gd = false;
                     return $this->_image_gd;
                 }
-		
-		$ext = strtolower(substr($this->_image_path, 
-						 		 strrpos($this->_image_path, '.')+1, 
-						  		 strlen($this->_image_path)-strrpos($this->_image_path, '.')+1
+                
+                $unlink_path = FALSE;
+                if (filter_var($this->_image_path, FILTER_VALIDATE_URL)) {
+                    $path = tempnam(sys_get_temp_dir(),'mwf');
+                    /* TODO: make max image download size configurable rather than hardcoding to 9,999,999 bytes */
+                    /* TODO: need to urlencode() _image_path but only directory and file names */
+                    file_put_contents($path, file_get_contents($this->_image_path,FALSE,NULL,-1,9999999));
+                    $ext = substr(image_type_to_extension(exif_imagetype($path)), 1);
+                    $unlink_path = TRUE;
+                } else {
+                    $path = $this->_image_path;
+                    $ext = strtolower(substr($path, 
+						 		 strrpos($path, '.')+1, 
+						  		 strlen($path)-strrpos($path, '.')+1
 						  		 ));
-		switch($ext){
+                }
+                    
+                switch($ext){
 			case 'jpg':
 			case 'jpeg':
-				$this->_image_gd = imagecreatefromjpeg($this->_image_path);
+				$this->_image_gd = imagecreatefromjpeg($path);
 				$this->_image_ext = 'jpeg';
 				break;
 			case 'gif':
-				$this->_image_gd = imagecreatefromgif($this->_image_path);
+				$this->_image_gd = imagecreatefromgif($path);
 				$this->_image_ext = 'gif';
 				break;
 			case 'png':
-				$this->_image_gd = imagecreatefrompng($this->_image_path);
+				$this->_image_gd = imagecreatefrompng($path);
 				$this->_image_ext = 'png';
 				break;
 			default:
@@ -230,6 +239,7 @@ class Local_Image
 				$this->_image_ext = false;
 				break;
 		}
+                unlink($path);
 		return $this->_image_gd;
 	}
 	
