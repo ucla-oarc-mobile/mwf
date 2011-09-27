@@ -124,18 +124,18 @@
      */
      reload = (function(){
 
+        var browser = mwf.browser,
+            cookieContents = browser.cookieName+'={"h":"'+browser.getHeight()+'","w":"'+browser.getWidth()+'"}';
+
         /**
          * Exit routine early with false if matching classification cookie.
          */
-        var browser = mwf.browser;
         for(i=0; i < cookies.length; i++){
-            x = cookies[i].substr(0,cookies[i].indexOf("="));
-            x = x.replace(/^\s+|\s+$/g,"");
-            if(x == browser.cookieName)
+            if(cookies[i].replace(/^\s+|\s+$/g,"") == cookieContents)
                 return false;
         }
-
-        document.cookie = browser.cookieName+'={"h":"'+browser.getHeight()+'","w":"'+browser.getWidth()+'"};path=/';
+        
+        document.cookie = cookieContents+';path=/';
         
         /**
          * Return true for reload request if cookie has been written.
