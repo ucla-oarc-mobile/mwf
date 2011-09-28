@@ -310,13 +310,12 @@ form.form-full > input[type=reset] {
  * MESSAGES
  *******************************************************/
 .message-full {
-    background-position: center right;
+    background-position: 99% 50%;
     background-repeat: no-repeat;
 }
 
 .message-full.message-alert {
     background-image: url("img/message-alert.png");
-
 }
 
 .message-full.message-confirm {
@@ -329,6 +328,16 @@ form.form-full > input[type=reset] {
 
 .message-full.message-info {
     background-image: url("img/message-info.png");
+}
+
+.message-padded {
+    margin: .6em 10px;
+}
+
+.content-full .message-padded,
+.menu-full .message-padded,
+.form-full .message-padded {
+    margin: .6em 0;
 }
 
 
@@ -406,5 +415,3 @@ form.form-full > input[type=reset] {
 .front-page .menu-front li a{
     padding: 1.2em;
 }
-
-

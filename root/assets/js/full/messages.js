@@ -14,16 +14,18 @@
  * <div id="alert" class="message-full message-padded message-alert">[text]</div>
  * 
  * <script type="text/javascript">
- *  $(document).ready(function() {
- *       $("#alert").dialog();
+ *   mwf.messages.modal({
+ *     id: "alert"
  *   });
  * </script>
  * 
  * Second way:
  * 
  * <script type="text/javascript">
- *  $(document).ready(function() {
- *       $('<div class="message-full message-padded message-alert">[text]</div>').dialog();
+ *   mwf.messages.modal({
+ *     text: "This is an error message",
+ *     type: "error",
+ *     padded: true
  *   });
  * </script>
  * 
@@ -34,64 +36,128 @@
  * Pass in a callback function to handle event when user closes the dialog box.
  * 
  * <script type="text/javascript">
- *  $(document).ready(function() {
- *       $("#alert").dialog({
- *           callback: callme
- *       });
+ *   callback_function = function() {
+ *     ...
+ *   }    
+ *
+ *   mwf.messages.modal({
+ *     id: "alert",
+ *     callback: callback_function
  *   });
  * </script>
  * 
  */
-(function($){
-    
-    $.fn.dialog = function(options) {
-            
-        // default settings
-        var settings = {
-            'callback' : null
-        }
+mwf.messages = function() {};
 
-        // return this for chaining
-        return this.each(function() {
+mwf.messages.modal = function(options) {
+    
+    (function($){
+        
+        // sets options and merge with default settings
+        var settings = $.extend( {
+            id: null,
+            text: null,
+            type: null,
+            padded: false,
+            callback: null
+        }, options);
             
-            // if options exist, merge with default settings
-            if (options) {
-                $.extend(settings, options);
+        
+        
+        // validation.  if id is not specified, text and type is required.
+        if (settings.id == null) {
+            if (settings.text == null) {
+                console.error("The text parameter must be specified");
+                return;
             }
             
-            // build the modal dialog with mask, wrapper and button
-            var message = $(this);
-            var mask = $('<div class="message-mask" />');
-            var button = $('<a href="#" class="message-button button-full">OK</a>');
+            if (settings.type == null) {
+                console.error("The type parameter must be specified");
+                return;
+            }
             
-            // remove from DOM and added it back to the beginning of page
-            message.detach();
-            message.addClass("message-modal");
-            message.prependTo("body");
-            
-            // add mask, wrapper and button to dialog
-            message.before(mask);
-            message.wrap('<div class="message-wrapper" />');
-            message.after(button);
-                
-            // handle closing of the dialog
-            button.click(function(e) {
-        
-                e.preventDefault();
-        
-                // clean up
-                message.parent(".message-wrapper").remove();
-                mask.remove();
-
-                // now do call back
-                if (settings.callback != null) {
-                    settings.callback();
+            if (settings.type != null) {
+                settings.type = settings.type.toLowerCase();
+                if (settings.type != "alert" &&
+                    settings.type != "confirm" &&
+                    settings.type != "error" &&
+                    settings.type != "info") {
+                    console.error('Invalid type parameter.  Must be "alert", "confirm", "error" or "info"');
+                    return;
                 }
+            }
+        }
+        
+        // construct the message element.  value of element is either HTML 
+        // markup or element id.
+        var element;
+        if (settings.id == null) {
+            if (settings.text == null) {
+                throw "Text parameter must be specified";
+            }
+        
+            element += '<div class="message-full message-';
             
-            });
+            element += settings.type;
+            
+            if (settings.padded) {
+                element += ' message-padded'
+            }
+            
+            element += '">';
+            element += settings.text;
+            element += '</div>';
+        } else {
+            element = "#" + settings.id;
+        }
+        
+        // build the modal dialog with mask, wrapper and button
+        var message = $(element);
+            
+        if (message == null) {
+            console.error("Cannot find element");
+            return;
+        }
+        
+        if (message.hasClass("message-padded")) {
+            settings.padded = true;
+        }
+            
+        var mask = $('<div class="message-mask" />');
+        var buttonClass = "message-button button-full";
+            
+        if (settings.padded) {
+            buttonClass += " button-padded";
+        }
+            
+        var button = $('<a href="#" class="' + buttonClass + '">OK</a>');
+            
+        // remove from DOM and added it back to the beginning of page
+        message.detach();
+        message.addClass("message-modal");
+        message.prependTo("body");
+            
+        // add mask, wrapper and button to dialog
+        message.before(mask);
+        message.wrap('<div class="message-wrapper" />');
+        message.after(button);
                 
-        });
-  
-    };
+        // handle closing of the dialog
+        button.click(function(e) {
+            e.preventDefault();
+        
+            // clean up
+            message.parent(".message-wrapper").remove();
+            mask.remove();
 
-})(jQuery);
+            // now do call back
+            if (settings.callback != null) {
+                settings.callback();
+            }
+        });
+        
+    
+    })(jQuery);
+}
+
+

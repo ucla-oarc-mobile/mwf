@@ -267,13 +267,16 @@ form.form-full > input[type=reset]:hover {
     right: 10px;
     z-index: 1002;
     background-color: #fff;
-    border: thin solid #666;
+    border: 1px solid #666;
     border-radius: .5em;
-    padding: .6em 10px;
 }
 
-.message-modal {
-    margin: 0 0 .6em 0;
+.message-modal.message-padded {
+    margin: .6em 10px;
+}
+
+a.message-button.button-padded {
+    margin: 10px;
 }
 
 .message-mask {

@@ -38,31 +38,12 @@ echo Site_Decorator::header()
         ->set_title('MWF Demo')
         ->render();
 
-echo Site_Decorator::content_full()
-        ->set_padded()
-        ->add_header('MWF Demo')
-        ->add_paragraph('The following is a kitchen sink collection of MWF styles.')
-        ->render();
-?>
+echo Site_Decorator::menu_full()
+->set_title('MWF Demos')
+->set_padded()
+->add_text('The following is a kitchen sink collection of MWF styles.')
+->add_item('Messages', './demos/messages.php');
 
-<!-- Messages -->
-<div class="content-full content-padded">
-    <h1 class="content-first">Messages</h1>
-    <p>Inline message <span class="message-alert">alert</span>, <span class="message-confirm">confirm</span>, <span class="message-error">error</span>, <span class="message-info">info</span>.</p>
-    <div>
-        <div class="message-full message-alert">This is an alert message</div>
-        <div class="message-full message-confirm">This is a confirm message</div>
-        <div class="message-full message-error">This is an error message</div>
-        <div class="message-full message-info">This is an info message</div>
-    </div>
-</div>
-
-<div class="message-full message-padded message-alert">This is an alert message</div>
-<div class="message-full message-padded message-confirm">This is a confirm message</div>
-<div class="message-full message-padded message-error">This is an error message</div>
-<div class="message-full message-padded message-info">This is an info message</div>
-
-<?php
 echo Site_Decorator::button_full()
         ->set_padded()
         ->add_option(Config::get('global', 'back_to_home_text'), Config::get('global', 'site_url'))
