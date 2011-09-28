@@ -23,6 +23,7 @@
  * @uses HTML_End_HTML_Decorator
  */
 
+require_once(dirname(dirname(__FILE__)).'/assets/config.php');
 require_once(dirname(dirname(__FILE__)).'/assets/lib/decorator.class.php');
 
 echo HTML_Decorator::html_start()->render();
