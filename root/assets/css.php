@@ -39,10 +39,10 @@ require_once(dirname(__FILE__).'/lib/path.class.php');
 require_once(dirname(__FILE__).'/lib/path_validator.class.php');
 
 ?>/**
- * Javascript handler.
+ * CSS handler.
  *
  * @package core
- * @subpackage js
+ * @subpackage css
  *
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
