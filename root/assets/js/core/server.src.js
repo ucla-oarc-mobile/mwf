@@ -119,13 +119,13 @@
     })() || reload;
             
     /**
-     * Anonymous routine for the browser dimensions cookie that will return 
+     * Anonymous routine for the screen dimensions cookie that will return 
      * true if it needs a page reload to pass the cookie to server.
      */
      reload = (function(){
 
-        var browser = mwf.browser,
-            cookieContents = browser.cookieName+'={"h":"'+browser.getHeight()+'","w":"'+browser.getWidth()+'"}';
+        var screen = mwf.screen,
+            cookieContents = screen.cookieName+'={"h":"'+screen.getHeight()+'","w":"'+screen.getWidth()+'","r":"'+screen.getPixelRatio()+'"}';
 
         /**
          * Exit routine early with false if matching classification cookie.
@@ -140,7 +140,7 @@
         /**
          * Return true for reload request if cookie has been written.
          */
-        return document.cookie.indexOf(browser.cookieName) != -1;
+        return document.cookie.indexOf(screen.cookieName) != -1;
 
     })() || reload;
         

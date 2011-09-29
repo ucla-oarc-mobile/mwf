@@ -1,1 +1,1 @@
-mwf.screen=new function(){var a=window.screen;this.getWidth=function(){return a.width?a.width:mwf.browser.getWidth()};this.getHeight=function(){return a.width?a.width:mwf.browser.getWidth()}};
+mwf.screen=new function(){this.cookieName=mwf.site.cookie.prefix+"screen";var a=window.screen;this.getWidth=function(){return a.width?a.width:mwf.browser.getWidth()};this.getHeight=function(){return a.height?a.height:mwf.browser.getHeight()};this.getPixelRatio=function(){return(typeof window.devicePixelRatio!="undefined"&&window.devicePixelRatio)?window.devicePixelRatio:1}};

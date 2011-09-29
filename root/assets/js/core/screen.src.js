@@ -18,6 +18,8 @@
 
 mwf.screen = new function() {
     
+    this.cookieName = mwf.site.cookie.prefix+"screen";
+    
     var ws = window.screen;
     
     /**
@@ -37,8 +39,14 @@ mwf.screen = new function() {
      * @return int|null
      */
     this.getHeight=function(){
-        return ws.width 
-            ? ws.width 
-            : mwf.browser.getWidth();
+        return ws.height 
+            ? ws.height 
+            : mwf.browser.getHeight();
+    }
+    
+    this.getPixelRatio=function(){
+        return (typeof window.devicePixelRatio != 'undefined' && window.devicePixelRatio)
+            ? window.devicePixelRatio
+            : 1;
     }
 }

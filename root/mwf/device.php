@@ -26,7 +26,7 @@
 require_once(dirname(dirname(__FILE__)).'/assets/lib/decorator.class.php');
 require_once(dirname(dirname(__FILE__)).'/assets/lib/classification.class.php');
 require_once(dirname(dirname(__FILE__)).'/assets/lib/user_agent.class.php');
-require_once(dirname(dirname(__FILE__)).'/assets/lib/browser.class.php');
+require_once(dirname(dirname(__FILE__)).'/assets/lib/screen.class.php');
 
 function label($text)
 {
@@ -103,12 +103,14 @@ echo Site_Decorator::content_full()
             ->add_section(label('User_Agent::get_browser()').text2text(User_Agent::get_browser()))
             ->add_section(label('User_Agent::get_browser_engine()').text2text(User_Agent::get_browser_engine()))
             ->add_section(label('User_Agent::get_browser_engine_version()').text2text(User_Agent::get_browser_engine_version()))
-            ->add_subheader('JS Browser')
-            ->add_section(label('mwf.browser.getHeight()').js2text('mwf.browser.getHeight'))
-            ->add_section(label('mwf.browser.getWidth()').js2text('mwf.browser.getWidth'))
-            ->add_subheader('PHP User Browser')
-            ->add_section(label('Browser::get_height()').text2text(Browser::get_height()))
-            ->add_section(label('Browser::get_width()').text2text(Browser::get_width()))
+            ->add_subheader('JS Screen')
+            ->add_section(label('mwf.screen.getHeight()').js2text('mwf.screen.getHeight'))
+            ->add_section(label('mwf.screen.getWidth()').js2text('mwf.screen.getWidth'))
+            ->add_section(label('mwf.screen.getPixelRatio()').js2text('mwf.screen.getPixelRatio'))
+            ->add_subheader('PHP Screen')
+            ->add_section(label('Screen::get_height()').text2text(Screen::get_height()))
+            ->add_section(label('Screen::get_width()').text2text(Screen::get_width()))
+            ->add_section(label('Screen::get_pixel_ratio()').text2text(Screen::get_pixel_ratio()))
             ->render();
 
 echo Site_Decorator::button_full()
