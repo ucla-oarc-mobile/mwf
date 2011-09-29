@@ -35,9 +35,9 @@ class Local_Image
 
 	public function __construct($imagepath)
 	{
-		if(!Path_Validator::is_safe($imagepath))
+		if(!Path_Validator::is_safe($imagepath) && (!Config::get('image', 'tmp_dir') || strpos($imagepath, Config::get('image', 'tmp_dir')) !== 0))
 			$imagepath = false;
-	
+
 		$this->_image_path = $imagepath;
 		$this->_image_file_root = md5($imagepath);
 	}
@@ -203,7 +203,7 @@ class Local_Image
                     $this->_image_gd = false;
                     return $this->_image_gd;
                 }
-                
+
                 $unlink_path = FALSE;
                 if (filter_var($this->_image_path, FILTER_VALIDATE_URL)) {
                     $path = tempnam(sys_get_temp_dir(),'mwf');

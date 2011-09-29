@@ -5,8 +5,9 @@
 install_dir="/var/mobile"
 
 sudo mkdir -m 755 -p ${install_dir}/cache/img
+sudo mkdir -m 755 ${install_dir}/cache/img/tmp
 sudo mkdir -m 755 -p ${install_dir}/cache/simplepie
 
 web_user=`ps axho user,comm|grep -E "httpd|apache"|uniq|awk 'END {print $1}'`
-sudo chown $web_user ${install_dir}/cache/img
+sudo chown -R $web_user ${install_dir}/cache/img
 sudo chown $web_user ${install_dir}/cache/simplepie

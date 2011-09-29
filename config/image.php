@@ -26,3 +26,14 @@ require_once(dirname(dirname(__FILE__)).'/root/assets/lib/config.class.php');
  */
 
 Config::set('image', 'cache_dir', '/var/mobile/cache/img/');
+
+/**
+ * image_tmp_dir
+ *
+ * Name of the directory where images downloaded temporarily will be saved.
+ *
+ * The directory must be writable by the web server process or such 
+ * downloads will fail.
+ */
+
+Config::set('image', 'tmp_dir', '/var/mobile/cache/img/tmp');
