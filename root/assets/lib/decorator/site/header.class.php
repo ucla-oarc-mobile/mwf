@@ -18,6 +18,7 @@
 
 require_once(dirname(dirname(dirname(__FILE__))).'/decorator.class.php');
 require_once(dirname(dirname(dirname(__FILE__))).'/config.class.php');
+require_once(dirname(dirname(dirname(__FILE__))).'/https.class.php');
 require_once(dirname(dirname(__FILE__)).'/html/tag.class.php');
 
 class Header_Site_Decorator extends Tag_HTML_Decorator
@@ -57,8 +58,8 @@ class Header_Site_Decorator extends Tag_HTML_Decorator
             $this->_image = array('src'=>Config::get('global', 'header_home_button'),
                                   'alt'=>Config::get('global', 'header_home_button_alt'));
 
-        $image = HTML_Decorator::tag('img', false, $this->_image)->render();
-        $home_button = HTML_Decorator::tag('a', $image, array('href'=>Config::get('global', 'site_url')))->render();
+        $image = HTML_Decorator::tag('img', false, HTTPS::is_https() ? HTTPS::convert_path($this->_image) : $this->_image)->render();
+        $home_button = HTML_Decorator::tag('a', $image, array('href'=>HTTPS::is_https() ? HTTPS::convert_path(Config::get('global', 'site_url')) : Config::get('global', 'site_url')))->render();
 
         if($this->_title_path)
             $title = $this->_title ? HTML_Decorator::tag('a', $this->_title, array('href'=>$this->_title_path)) : false;
