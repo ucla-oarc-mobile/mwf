@@ -17,6 +17,7 @@
  */
 
 include_once(dirname(dirname(dirname(__FILE__))).'/config.php');
+require_once(dirname(dirname(dirname(__FILE__))).'/lib/https.class.php');
 
 ?>
 
@@ -24,11 +25,11 @@ var mwf=new function(){};
 
 mwf.site=new function(){
     
-    this.root = '<?php echo Config::get('global', 'site_url'); ?>';
+this.root = '<?php echo HTTPS::is_https() ? HTTPS::convert_path(Config::get('global', 'site_url')) : Config::get('global', 'site_url'); ?>';
     
     this.asset = new function(){
         
-        this.root = '<?php echo Config::get('global', 'site_assets_url'); ?>';
+        this.root = '<?php echo HTTPS::is_https() ? HTTPS::convert_path(Config::get('global', 'site_assets_url')) : Config::get('global', 'site_assets_url'); ?>';
         
     };
     
@@ -52,11 +53,17 @@ mwf.site=new function(){
     };
     
     this.domain=function(){
+    
         var temppath = document.URL;
+        
         if(temppath.search('http://') == 0)
             temppath = temppath.substring(7, temppath.length);
+        else if(temppath.search('https://') == 0)
+            temppath = temppath.substring(8, temppath.length);
+            
         if(temppath.search('/') > -1)
             temppath = temppath.substring(0, temppath.search('/'));
+            
         return temppath;
     };
     

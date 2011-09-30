@@ -17,7 +17,11 @@
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
  * @version 20110827
+ * 
+ * @uses HTTPS
  */
+
+require_once(dirname(__FILE__).'/httpsify.php');
 
 class JS
 {
@@ -232,7 +236,7 @@ class JS
          * Output a call to mwf.util.importJS and return true after storing
          * the $url under $_external_loaded to prevent multiple inclusion.
          */
-        echo 'mwf.util.importJS(\''.$url.'\');';
+        echo 'mwf.util.importJS(\''.(HTTPS::is_https() ? HTTPS::convert_path($url) : $url).'\');';
         self::$_external_loaded[] = $url;
         return true;
     }

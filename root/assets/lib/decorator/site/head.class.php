@@ -18,6 +18,7 @@
 
 require_once(dirname(dirname(dirname(__FILE__))).'/decorator.class.php');
 require_once(dirname(dirname(dirname(__FILE__))).'/config.class.php');
+require_once(dirname(dirname(dirname(__FILE__))).'/https.class.php');
 require_once(dirname(dirname(__FILE__)).'/html/tag.class.php');
 
 class Head_Site_Decorator extends Tag_HTML_Decorator
@@ -116,8 +117,8 @@ class Head_Site_Decorator extends Tag_HTML_Decorator
         $handler_js = substr($handler_js, 0, strlen($handler_js)-1);
 
         $this->add_inner_tag_front('meta', false, array('name'=>'viewport', 'content'=>'height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no'));
-        $this->add_inner_tag_front('script', null, array('type'=>'text/javascript', 'src'=>$handler_js));
-        $this->add_inner_tag_front('link', false, array('rel'=>'stylesheet', 'type'=>'text/css', 'href'=>$handler_css, 'media'=>'screen'));
+        $this->add_inner_tag_front('script', null, array('type'=>'text/javascript', 'src'=>(HTTPS::is_https() ? HTTPS::convert_path($handler_js) : $handler_js)));
+        $this->add_inner_tag_front('link', false, array('rel'=>'stylesheet', 'type'=>'text/css', 'href'=>(HTTPS::is_https() ? HTTPS::convert_path($handler_css) : $handler_css), 'media'=>'screen'));
         $this->add_inner_tag_front('title', $this->_title);
 
         return parent::render();
