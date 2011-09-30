@@ -78,6 +78,11 @@ mwf.override = new function(){
     var results = (new RegExp("[\\?&]override=([^&#]*)")).exec( window.location.href );
     if(results != null){
         override = results[1];
+        if(override == 'full' && !mwf.classification.isFull()
+            || override == 'standard' && !mwf.classification.isStandard()){
+            classification.isOverride = function(){return false;}
+            return false;
+        }
     }else if(!override){
         classification.isOverride = function(){return false;}
         return;
