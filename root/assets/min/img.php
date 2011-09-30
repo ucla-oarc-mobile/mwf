@@ -19,7 +19,7 @@
  */
 
 /**
- * If no img URL is provided, exit.
+ * If no img is provided, exit.
  */
 if (! isset($_GET['img'])) {
     error_log('MWF Notice: Required URL parameter "img" not provided to ' . $_SERVER['PHP_SELF'], 0);
@@ -30,8 +30,7 @@ if (! isset($_GET['img'])) {
  * Require necessary libraries. 
  */
 include_once(dirname(dirname(__FILE__)).'/lib/screen.class.php');
-include_once(dirname(dirname(__FILE__)).'/lib/local_image.class.php');
-
+include_once(dirname(dirname(__FILE__)).'/lib/image.class.php');
 /**
  * @var int maximum width the image should be as defined first by the browser
  *          width and then more specifically by URI parameters.
@@ -88,35 +87,10 @@ if(isset($_GET['browser_height_percent']) || isset($_GET['browser_height_force']
 		$max_height = $_GET['max_height'];
 }
 
-if(ini_get('allow_url_fopen') != 1 && (substr($_GET['img'], 0, 7) == 'http://' || substr($_GET['img'], 0, 8) == 'https://'))
-{
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL,$_GET['img']);
-    curl_setopt($ch, CURLOPT_FAILONERROR, 1);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 3);
-    $contents = curl_exec($ch);
-    curl_close($ch);
-   
-    if(strlen(substr($_GET['img'], strrpos($_GET['img'], '.'))) > 4)
-        die();
- 
-    $temp_path = Config::get('image', 'tmp_dir').'/'.md5($_GET['img']).'.'.substr($_GET['img'], strrpos($_GET['img'], '.'));
-    $fh = fopen($temp_path, 'w');
-    fwrite($fh, $contents);
-    fclose($fh);
-    $local_image_path = $temp_path; 
-    $was_downloaded = true;
-}
-else
-{
-    $local_image_path = $_GET['img'];
-}
-
 /**
  * @var Local_Image work with a local version of the image specified in URI.
  */
-$image = new Local_Image($local_image_path);
+$image = Image::factory($_GET['img']);
 
 /** GIF, JPG, and JPEG are within XHTML MP 1.0 specification. */
 $image->set_allowed_extension('gif');
@@ -137,7 +111,3 @@ $image->output_header();
 
 /** Output the binary content of the image in its compressed state. */
 $image->output_image();
-
-if(isset($was_downloaded))
-    unlink($local_image_path);
-
