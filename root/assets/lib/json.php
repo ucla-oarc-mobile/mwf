@@ -41,7 +41,7 @@ if(!function_exists('json_encode') || !function_exists('json_decode'))
     {
         function json_decode($value, $assoc = false)
         {
-            return fromJSON($json, $assoc);
+            return fromJSON($value, $assoc);
         }
     }
 }
