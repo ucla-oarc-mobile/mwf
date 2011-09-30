@@ -10,6 +10,8 @@ class HTTPS
     public static function convert_path($path)
     {
         $pos = strpos($path, '://');
-        return $pos === false ? ('https://'.$path) : substr_replace($path, 'https', 0, $pos);
+        return $pos === false
+            ? (substr($path, 0, 2) != '//' ? 'https://'.$path : $path) 
+            : substr_replace($path, 'https', 0, $pos);
     }
 }
