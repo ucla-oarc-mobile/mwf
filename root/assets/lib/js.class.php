@@ -21,7 +21,7 @@
  * @uses HTTPS
  */
 
-require_once(dirname(__FILE__).'/httpsify.php');
+require_once(dirname(__FILE__).'/https.class.php');
 
 class JS
 {
