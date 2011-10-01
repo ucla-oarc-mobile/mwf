@@ -19,6 +19,9 @@ License:
 
 TABLE OF CONTENTS
 
+Version 1.2.02.rc       October 1, 2011
+Version 1.2.01.alpha    September 29, 2011
+Version 1.2.00.alpha    September 29, 2011
 Version 1.1.07          August 31, 2011
 Version 1.1.06          August 24, 2011
 Version 1.1.05          August 1, 2011
@@ -27,6 +30,104 @@ Version 1.1.03.alpha    July 20, 2011
 Version 1.1.02.alpha    June 23, 2011
 Version 1.1.01.alpha    June 16, 2011
 Version 1.1.00.alpha    May 20, 2011
+
+==============================================================================
+
+Version 1.2.01.alpha
+September 29, 2011
+
+* Add support for HTTPS when handlers are requested via https scheme [MWF-218]
+
+* Prevent override to more capable than actual phone capabilities [MWF-217]
+
+* Refactor image compressor
+
+    * Encapsulate functionality of mwf.screen and mwf.browser [MWF-214]
+
+    * Update min/img.php to use screen dimensions rather than brower [MWF-214]
+
+    * Add Image class and subclasses for remote versus local images [MWF-217]
+
+    * Refactor min/img.php to use the new Image class factory [MWF-217]
+
+* Bug fixes to existing libraries
+
+    * Fix TypeError exception in js/utility/analytics.js [MWF-185]
+
+    * Resolve early return in Path_Validator [MWF-174]
+
+==============================================================================
+
+Version 1.2.00.alpha
+September 29, 2011
+
+* Replace user agent parsing with Javascript capabilities probing [MWF-149]
+
+    * Add mwf.capability object for Javascript capabilities probing
+
+        * Leverage Modernizr internally where possible
+
+        * Develop special detection for AJAX, events and cookies
+
+    * Add mwf.classification object for classifying based on capabilities
+
+    * Add mwf.override object for overriding capability-based classifications
+
+    * Add js/core/server.js to write cookies to transfer telemetry server-side
+
+        * Derive classification cookie from mwf.classification
+
+        * Derive user_agent cookie from mwf.userAgent
+
+        * Derive screen cookie from mwf.screen
+
+    * Add Screen and Classification classes based on js/core/server.js
+
+    * Update User_Agent class based on js/core/server.js
+
+    * Remove WURFL PHP API and related adapters and libraries
+
+* Refactor user agent functionality [MWF-160 & MWF-211]
+
+    * Add mwf.userAgent with internal parsing of user agent string
+
+    * Deprecate mwf.user_agent as alias to other mwf libraries
+
+* Refactor server-side libraries
+
+    * Reorganize and update JS handler for modified core [MWF-164]
+
+    * Rewrite JS dependency loader for better maintainability [MWF-162]
+
+    * Modify redirect script for client-based determination [MWF-173]
+
+    * Resolve image quality degradation in min/img.php [MWF-213]
+
+    * Remove unnecessary installer calls [MWF-186, MWF-187, MWF-188, MWF-189]
+
+* User interface improvements and bug fixes [MWF-200]
+
+    * Modify spacing, font size and other interface properties [MWF-200]
+
+    * Improve definitions of some element implementations [MWF-200]
+
+    * Add gradient/border support for Opera and Mozilla [MWF-196]
+
+    * Fix inconsistencies in border definitions [MWF-199]
+
+    * Fix .button-full background for basic devices [MWF-195]
+
+    * Fix IE one option div.button-full > a width bug [MWF-194]
+
+* Bug fixes to existing libraries
+
+    * Fix warnings and obsolete include in min/img.php [MWF-205 & MWF-207]
+
+    * Fix min/img.php if it cannot identify extension [MWF-184]
+
+    * Fix min/img.php when allow_url_fopen is disabled 
+
+    * Resolve urldecode bug in CSS and JS minifiers [MWF-206]
 
 ==============================================================================
 
@@ -41,12 +142,19 @@ Version 1.1.06
 August 24, 2011
 
 * Minified statically-defined default MWF CSS [MWF-143]
+
 * Added CSS definitions to prevent image overflow [MWF-130]
+
 * Resolved invalid syntax in Footer decorator [MWF-126]
+
 * Removed whitespace from decorators [MWF-124 & MWF-147]
+
 * Updated Feed API to handle missing author field [MWF-127]
+
 * Corrected ordering of feed items in Feed API [MWF-129]
+
 * Added date selection capabilities to Feed API [MWF-132]
+
 * Removed old commented out code in Feed API [MWF-132]
 
 ==============================================================================
@@ -90,6 +198,7 @@ June 23, 2011
 * Add compatibility for PHP 5 < 5.3 [MWF-52, MWF-53]
 
     * Remove __callStatic requirement for Decorator factories
+
     * Remove __toString uses of Decorator in other Decorators and MWF content
 
 * Fix of .menu_full:hover override of full classification border radius [MWF-51]
@@ -133,8 +242,11 @@ May 20, 2011
 * Base directory reorganization [MWF-2, MWF-3, MWF-4, MWF-5]
 
     * /root - Web accessible directory - deprecates /
+
     * /config - Configuration files - deprecates /assets/config
+
     * /install - Installation scripts - deprecates /assets/install
+
     * /auxiliary - Auxiliary modules - deprecates /assets/ext
 
 * Addition of LICENSE file [MWF-14]
@@ -143,58 +255,86 @@ May 20, 2011
 
 * Excision of UCLA-specific theme [MWF-6]
 
-    * CSS definitions.
-    * Header and front page header.
-    * Favicon and appicons.
+    * CSS definitions
+
+    * Header and front page header
+
+    * Favicon and appicons
 
 * New classification scheme [MWF-8]
 
     * Defined as:
+
         * Basic - XHTML MP 1.0, WCC
+
         * Standard - HTML 4.01, CSS 2.1, JS 1.5
+
         * Full - HTML 5, CSS 3
 
     * GET param changes:
+
         * standard_libs in CSS/JS handlers deprecates touch_libs.
+
         * full_libs in CSS/JS handlers deprecates webkit_libs.
+
         * standard in CSS/JS minifiers deprecates touch.
+
         * full in CSS/JS minifiers deprecates webkit.
 
    * Changes to CSS definitions and JS libraries for new classification scheme.
+
    * Changes to preview mode.
+
    * Additions to JS util.
+
    * Changes to image compressor.
 
 * Refactor CSS handler [MWF-10, MWF-11, MWF-18]
 
     * Condense all sheets into one response rather than using @import.
+
     * Refactor /assets/css layout for default and campus-specific directories.
+
     * Add configuration variable to include campus-specific directories.
+
     * Include minifier functionality (same params) to reduce HTTP requests.
 
 * Refactor JS handler [MWF-16, MWF-19]
 
     * Condense most sheets into one response rather than writing script tags.
+
     * Include minifier functioality (same params) to reduce HTTP requests.
 
 * PHP HTML decorators by including assets/lib/decorator.class.php [MWF-13]
 
     * HTML_Decorator::tag()             -> class Tag_HTML_Decorator
+
     * HTML_Decorator::tag_open()        -> class Tag_Open_HTML_Decorator
+
     * HTML_Decorator::tag_close()       -> class Tag_Close_HTML_Decorator
+
     * HTML_Decorator::html_start()      -> class HTML_Start_HTML_Decorator
+
     * HTML_Decorator::html_end()        -> class HTML_End_HTML_Decorator
+
     * HTML_Decorator::body_start()      -> class Body_Start_HTML_Decorator
+
     * HTML_Decorator::body_end()        -> class Body_End_HTML_Decorator
 
 * PHP Site decorators by including assets/lib/decorator.class.php [MWF-13]
 
     * Site_Decorator::content_full()    -> class Content_Full_Site_Decorator
+
     * Site_Decorator::menu_full()       -> class Menu_Full_Site_Decorator
+
     * Site_Decorator::button_full()     -> class Button_Full_Site_Decorator
+
     * Site_Decorator::head()            -> class Head_Site_Decorator
+
     * Site_Decorator::header()          -> class Heaer_Site_Decorator
+
     * Site_Decorator::default_footer()  -> class Default_Footer_Site_Decorator
+
     * Site_Decorator::footer()          -> class Footer_Site_Decorator
 
 * Add browser and device OS name and version JS accessors [MWF-9, MWF-24]
@@ -202,13 +342,21 @@ May 20, 2011
 * Dynamic writing of additional BODY tag classes [MWF-9]
 
     * body.mwf - If this functionality is run at all.
+
     * body.mwf_mobile - If device is regarded as mobile.
+
     * body.mwf_notmobile - If device is regarded as non-mobile.
+
     * body.mwf_standard - If device qualifies under "standard" classification.
+
     * body.mwf_full - If device qualifies under "full" classification.
+
     * body.mwf_browser_{name} - Browser name.
+
     * body.mwf_browser_{name}_{version} - Browser name and version.
+
     * body.mwf_os_{name} - Device OS name.
+
     * body.mwf_os_{name}_{version} - Device OS name and version.
 
 * Configuration settings for favicon and appicon [MWF-6, MWF-22]
