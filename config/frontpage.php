@@ -69,6 +69,9 @@ Config::set('frontpage', 'menu',
         array('name'=>'About',
               'id'=>'about',
               'url'=>'mwf/about.php')
+        ,array('name'=>'Device Telemetry',
+               'id'=>'device',
+               'url'=>'mwf/device.php')
         ,array('name'=>'Collaboration',
               'id'=>'showcase',
               'url'=>'index.php?s=collaboration')

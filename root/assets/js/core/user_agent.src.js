@@ -1,0 +1,55 @@
+/**
+ * Defines methods under mwf.user_agent namespace. These are deprecated, but
+ * still supported for backwards compatibility reasons.
+ *
+ * @package core
+ * @subpackage js
+ *
+ * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20110906
+ * 
+ * @deprecated
+ * 
+ * @uses mwf.userAgent
+ * @uses mwf.classification
+ */
+
+mwf.user_agent = new function(){
+
+    var userAgent = mwf.userAgent,
+        classification = mwf.classification;
+    
+    this.is_iphone_os=function(){
+        return userAgent.getOS() == 'iphone_os';
+    }
+    
+    this.is_webkit_engine=function(){
+        return userAgent.getBrowserEngine() == 'webkit';
+    }
+    
+    this.get_browser=userAgent.getBrowser;
+    
+    this.get_browser_version=userAgent.getBrowserVersion;
+    
+    this.get_os=userAgent.getOS;
+    
+    this.get_os_version=userAgent.getOSVersion;
+    
+    this.is_mobile=classification.isMobile;
+    
+    this.is_basic=classification.isBasic;
+    
+    this.is_standard=classification.isStandard;
+    
+    this.is_full=classification.isFull;
+    
+    this.is_touch=classification.isStandard;
+    
+    this.is_overridden=classification.isFull;
+    
+    this.is_overridden=classification.isOverride;
+    
+    this.is_preview=classification.isPreview;
+};

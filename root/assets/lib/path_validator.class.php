@@ -30,16 +30,16 @@ class Path_Validator
      */
     public static function is_safe($path, $ext = false)
     {
-        if(self::is_remote($path))
-                return true;
-
         if($ext && substr($path, strlen($path) - strlen($ext), strlen($ext)) != $ext)
-                return false;
+            return false;
+        
+        if(self::is_remote($path))
+            return true;
 
         $local = dirname(dirname(dirname(__FILE__)));
 
         if(substr(realpath($path), 0, strlen($local)) == $local)
-                return true;
+            return true;
 
         return false;
     }

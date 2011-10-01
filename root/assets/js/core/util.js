@@ -1,0 +1,1 @@
+mwf.util=new function(){this.importJS=function(a){document.write('<script type="text/javascript" src="'+a+'"><\/script>')};this.importCSS=function(a){document.write('<link rel="stylesheet" type="text/css" href="'+a+'" media="screen">')}};
