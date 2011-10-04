@@ -74,35 +74,35 @@ mwf.userAgent = new function() {
                 }
                 break;
             case 'android':
-                if((s = ua.indexOf('Android ')) != -1){
+                if((s = ua.indexOf('android ')) != -1){
                     s += 8;
                     r = ua.substring(s, Math.min(ua.indexOf(' ', s), ua.indexOf(';', s), ua.indexOf('-', s)));
                 }
                 break;
             case 'windows_phone':
-                if((s = ua.indexOf('Windows Phone OS ')) != -1){
+                if((s = ua.indexOf('windows phone os ')) != -1){
                     s += 17;
                     r = ua.substring(s, ua.indexOf(';', s));
                 }
                 break;
             case 'windows_mobile':
-                if((s = ua.indexOf('Windows Mobile/')) != -1){
+                if((s = ua.indexOf('windows mobile/')) != -1){
                     s += 15;
                     r = ua.substring(s, ua.indexOf(';', s));
                 }
                 break;
             case 'symbian':
-                if((s = ua.indexOf('SymbianOS/')) != -1){
+                if((s = ua.indexOf('symbianos/')) != -1){
                     s += 10;
                     r = ua.substring(s, ua.indexOf(';', s));
                 }
-                else if((s = ua.indexOf('Symbian/')) != -1){
+                else if((s = ua.indexOf('symbian/')) != -1){
                     s += 8;
                     r = "s"+ua.substring(s, ua.indexOf(';', s));
                 }
                 break;
             case 'webos':
-                if((s = ua.indexOf('webOS/')) != -1){
+                if((s = ua.indexOf('webos/')) != -1){
                     s += 6;
                     r = ua.substring(s, Math.min(ua.indexOf(';', s)));
                 }
