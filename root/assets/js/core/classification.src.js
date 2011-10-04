@@ -8,16 +8,12 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110906
+ * @version 20111003
  *
  * @requires mwf
  * @requires mwf.site
  * @requires mwf.screen
  * @requires mwf.capability
- * 
- * @requires /root/assets/js/core/vars.php
- * @requires /root/assets/js/core/screen.js
- * @requires /root/assets/js/core/capability.js
  * 
  * @see /root/assets/js/core/override.js
  * @see /root/assets/js/core/server.js

@@ -7,13 +7,13 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110906
+ * @version 20111003
  *
  * @requires mwf
  * @requires mwf.browser
  * 
- * @requires /root/assets/js/core/vars.php
- * @requires /root/assets/js/core/browser.js
+ * @uses window.screen
+ * @uses window.devicePixelRatio
  */
 
 mwf.screen = new function() {

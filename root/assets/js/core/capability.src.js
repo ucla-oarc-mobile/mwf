@@ -7,13 +7,22 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110906
+ * @version 20111003
  *
  * @requires mwf
- * @requires /root/assets/js/core/vars.php
- * 
+ * @requires mwf.site
  * @requires Modernizr
- * @requires /root/assets/js/core/modernizr.js
+ * 
+ * @uses ActiveXObject
+ * @uses document.addEventListener
+ * @uses document.cookie
+ * @uses document.createElement
+ * @uses document.documentElement
+ * @uses document.write
+ * @uses navigator.cookieEnabled
+ * @uses XMLHttpRequest
+ * 
+ * @see /root/assets/js/core/capability.js
  */
 
 mwf.capability=new function(){

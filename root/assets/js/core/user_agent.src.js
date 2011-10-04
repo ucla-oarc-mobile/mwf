@@ -8,12 +8,12 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110906
+ * @version 20111003
  * 
- * @deprecated
+ * @deprecated in MWF 1.2
  * 
- * @uses mwf.userAgent
- * @uses mwf.classification
+ * @requires mwf.userAgent
+ * @requires mwf.classification
  */
 
 mwf.user_agent = new function(){
@@ -31,7 +31,9 @@ mwf.user_agent = new function(){
     
     this.get_browser=userAgent.getBrowser;
     
-    this.get_browser_version=userAgent.getBrowserVersion;
+    this.get_browser_version=function(){
+        return false;
+    };
     
     this.get_os=userAgent.getOS;
     
@@ -46,8 +48,6 @@ mwf.user_agent = new function(){
     this.is_full=classification.isFull;
     
     this.is_touch=classification.isStandard;
-    
-    this.is_overridden=classification.isFull;
     
     this.is_overridden=classification.isOverride;
     

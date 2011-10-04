@@ -8,7 +8,15 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110921
+ * @version 20111003
+ * 
+ * @requires mwf.site
+ * @requires mwf.classification
+ * 
+ * @uses document.addEventListener
+ * @uses document.body
+ * @uses nagivator.userAgent
+ * @uses window.attachEvent
  */
 
 mwf.userAgent = new function() {

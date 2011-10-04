@@ -10,18 +10,18 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110921
+ * @version 20111003
  *
  * @requires mwf
  * @requires mwf.site
  * @requires mwf.capability
  * @requires mwf.classification
  * 
- * @requires /root/assets/js/core/vars.php
- * @requires /root/assets/js/core/screen.js
- * @requires /root/assets/js/core/capability.js
- * @requires /root/assets/js/core/classification.js
+ * @uses document.cookie
+ * @uses RegExp
+ * @uses window.location
  * 
+ * @see /root/assets/js/core/capability.js
  * @see /root/assets/js/core/server.js
  */
 

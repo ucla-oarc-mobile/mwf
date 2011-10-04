@@ -7,7 +7,9 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110906
+ * @version 20111003
+ * 
+ * @uses document.write
  */
 
 mwf.util=new function(){
