@@ -87,7 +87,7 @@ mwf.server=new function(){
          * Anonymous routine for the classification cookie that will return 
          * true if it needs a page reload to pass the cookie to server.
          */
-         reload = (function(){
+        reload = (function(){
 
             var userAgent = mwf.userAgent;
 
@@ -131,7 +131,7 @@ mwf.server=new function(){
          * Anonymous routine for the screen dimensions cookie that will return 
          * true if it needs a page reload to pass the cookie to server.
          */
-         reload = (function(){
+        reload = (function(){
 
             var screen = mwf.screen,
                 cookieContents = screen.cookieName+'={"h":"'+screen.getHeight()+'","w":"'+screen.getWidth()+'","r":"'+screen.getPixelRatio()+'"}';
@@ -174,7 +174,7 @@ mwf.server=new function(){
 (function(){
     var version = mwf.userAgent.getOSVersion();
     if(mwf.userAgent.getOS() == 'android' && (version.indexOf('2.2') == 0 || version.indexOf('2.3') == 0)) {
-        setTimeout(mwf.server.init, 0);
+        document.addEventListener('load', mwf.server.init, false);
     } else {
         mwf.server.init();
     }
