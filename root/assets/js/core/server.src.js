@@ -10,7 +10,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111005
+ * @version 20110921
  *
  * @requires mwf
  * @requires mwf.capability
@@ -23,159 +23,132 @@
  * @requires /root/assets/js/core/userAgent.js
  */
 
-mwf.server=new function(){
-    
-    var _init = false;
-    
-    this.init = function(){
-        
-        if(mwf.server.isInit())
-            return;
-        else
-            _init = true;
-
-        if(!mwf.capability.cookie())
-            return;
-
-        var i, cookies = document.cookie.split(';');
-
-        /**
-         * Anonymous routine for the classification cookie that will return 
-         * true if it needs a page reload to pass the cookie to server.
-         */
-        var reload = (function(){
-
-            var classification = mwf.classification;
-
-            /**
-             * Exit routine early with false if matching classification cookie.
-             */
-            for(i=0; i < cookies.length; i++){
-                x = cookies[i].substr(0,cookies[i].indexOf("="));
-                x = x.replace(/^\s+|\s+$/g,"");
-                if(x == classification.cookieName)
-                    return false;
-            }
-
-            /**
-             * If cookie is not set, set the cookie and reload the page.
-             */
-            var cookie = classification.cookieName+'={';
-            cookie += '"mobile":'+classification.isMobile();
-            cookie += ',"basic":'+classification.isBasic();
-            cookie += ',"standard":'+classification.isStandard();
-            cookie += ',"full":'+classification.isFull();
-            if(classification.isOverride()){
-                cookie += ',"actual":{';
-                cookie += '"mobile":'+classification.wasMobile();
-                cookie += ',"basic":'+classification.wasBasic();
-                cookie += ',"standard":'+classification.wasStandard();
-                cookie += ',"full":'+classification.wasFull();
-                cookie += '}';
-            }
-            cookie += '};path=/';
-            document.cookie = cookie;
-
-            /**
-             * Return true for reload request if cookie has been written.
-             */
-            return document.cookie.indexOf(classification.cookieName) != -1;
-
-        })();
-
-        /**
-         * Anonymous routine for the classification cookie that will return 
-         * true if it needs a page reload to pass the cookie to server.
-         */
-        reload = (function(){
-
-            var userAgent = mwf.userAgent;
-
-            /**
-             * Exit routine early with false if matching classification cookie.
-             */
-            for(i=0; i < cookies.length; i++){
-                x = cookies[i].substr(0,cookies[i].indexOf("="));
-                x = x.replace(/^\s+|\s+$/g,"");
-                if(x == userAgent.cookieName)
-                    return false;
-            }
-
-            /**
-             * If cookie is not set, set the cookie and reload the page.
-             */
-            var t;
-            var cookie = userAgent.cookieName+'={';
-            cookie += '"s":"'+navigator.userAgent.replace(/\;/g, '\\x3B').replace(/\,/g, '\\x2C')+'"';
-            if(t = userAgent.getOS())
-                cookie += ',"os":"'+t+'"';
-            if(t = userAgent.getOSVersion())
-                cookie += ',"osv":"'+t+'"';
-            if(t = userAgent.getBrowser())
-                cookie += ',"b":"'+t+'"';
-            if(t = userAgent.getBrowserEngine())
-                cookie += ',"be":"'+t+'"';
-            if(t = userAgent.getBrowserEngineVersion())
-                cookie += ',"bev":"'+t+'"';
-            cookie += '};path=/';
-            document.cookie = cookie;
-
-            /**
-             * Return true for reload request if cookie has been written.
-             */
-            return document.cookie.indexOf(userAgent.cookieName) != -1;
-
-        })() || reload;
-
-        /**
-         * Anonymous routine for the screen dimensions cookie that will return 
-         * true if it needs a page reload to pass the cookie to server.
-         */
-        reload = (function(){
-
-            var screen = mwf.screen,
-                cookieContents = screen.cookieName+'={"h":"'+screen.getHeight()+'","w":"'+screen.getWidth()+'","r":"'+screen.getPixelRatio()+'"}';
-
-            /**
-             * Exit routine early with false if matching classification cookie.
-             */
-            for(i=0; i < cookies.length; i++){
-                if(cookies[i].replace(/^\s+|\s+$/g,"") == cookieContents)
-                    return false;
-            }
-
-            document.cookie = cookieContents+';path=/';
-
-            /**
-             * Return true for reload request if cookie has been written.
-             */
-            return document.cookie.indexOf(screen.cookieName) != -1;
-
-        })() || reload;
-
-        /**
-         * Reload the page if needed.
-         */
-        if(reload)
-            document.location.reload();
-
-    };   
-    
-    this.isInit = function(){
-        return _init;
-    }
-};
-
-/**
- * Most browsers can run mwf.server.init() immediately. However, Android 2.2-3
- * have a bug by which window.screen (used by mwf.screen) is not accurate before
- * DOMContentLoaded.
- */
 (function(){
-    var version = mwf.userAgent.getOSVersion();
-    if(mwf.userAgent.getOS() == 'android' && (version.indexOf('2.2') == 0 || version.indexOf('2.3') == 0)) {
-        document.addEventListener('load', mwf.server.init, false);
-    } else {
-        mwf.server.init();
-    }
+    
+    if(!mwf.capability.cookie())
+        return;
+    
+    var i, cookies = document.cookie.split(';');
+    
+    /**
+     * Anonymous routine for the classification cookie that will return 
+     * true if it needs a page reload to pass the cookie to server.
+     */
+    var reload = (function(){
+
+        var classification = mwf.classification;
+
+        /**
+         * Exit routine early with false if matching classification cookie.
+         */
+        for(i=0; i < cookies.length; i++){
+            x = cookies[i].substr(0,cookies[i].indexOf("="));
+            x = x.replace(/^\s+|\s+$/g,"");
+            if(x == classification.cookieName)
+                return false;
+        }
+
+        /**
+         * If cookie is not set, set the cookie and reload the page.
+         */
+        var cookie = classification.cookieName+'={';
+        cookie += '"mobile":'+classification.isMobile();
+        cookie += ',"basic":'+classification.isBasic();
+        cookie += ',"standard":'+classification.isStandard();
+        cookie += ',"full":'+classification.isFull();
+        if(classification.isOverride()){
+            cookie += ',"actual":{';
+            cookie += '"mobile":'+classification.wasMobile();
+            cookie += ',"basic":'+classification.wasBasic();
+            cookie += ',"standard":'+classification.wasStandard();
+            cookie += ',"full":'+classification.wasFull();
+            cookie += '}';
+        }
+        cookie += '};path=/';
+        document.cookie = cookie;
+        
+        /**
+         * Return true for reload request if cookie has been written.
+         */
+        return document.cookie.indexOf(classification.cookieName) != -1;
+
+    })();
+            
+    /**
+     * Anonymous routine for the classification cookie that will return 
+     * true if it needs a page reload to pass the cookie to server.
+     */
+    reload = (function(){
+         
+        var userAgent = mwf.userAgent;
+
+        /**
+         * Exit routine early with false if matching classification cookie.
+         */
+        for(i=0; i < cookies.length; i++){
+            x = cookies[i].substr(0,cookies[i].indexOf("="));
+            x = x.replace(/^\s+|\s+$/g,"");
+            if(x == userAgent.cookieName)
+                return false;
+        }
+
+        /**
+         * If cookie is not set, set the cookie and reload the page.
+         */
+        var t;
+        var cookie = userAgent.cookieName+'={';
+        cookie += '"s":"'+navigator.userAgent.replace(/\;/g, '\\x3B').replace(/\,/g, '\\x2C')+'"';
+        if(t = userAgent.getOS())
+            cookie += ',"os":"'+t+'"';
+        if(t = userAgent.getOSVersion())
+            cookie += ',"osv":"'+t+'"';
+        if(t = userAgent.getBrowser())
+            cookie += ',"b":"'+t+'"';
+        if(t = userAgent.getBrowserEngine())
+            cookie += ',"be":"'+t+'"';
+        if(t = userAgent.getBrowserEngineVersion())
+            cookie += ',"bev":"'+t+'"';
+        cookie += '};path=/';
+        document.cookie = cookie;
+        
+        /**
+         * Return true for reload request if cookie has been written.
+         */
+        return document.cookie.indexOf(userAgent.cookieName) != -1;
+
+    })() || reload;
+            
+    /**
+     * Anonymous routine for the screen dimensions cookie that will return 
+     * true if it needs a page reload to pass the cookie to server.
+     */
+    reload = (function(){
+
+        var screen = mwf.screen
+        
+        cookieContents = screen.cookieName+'={"h":"'+screen.getHeight()+'","w":"'+screen.getWidth()+'","r":"'+screen.getPixelRatio()+'"}';
+
+        /**
+         * Exit routine early with false if matching classification cookie.
+         */
+        for(i=0; i < cookies.length; i++){
+            if(cookies[i].replace(/^\s+|\s+$/g,"") == cookieContents)
+                return false;
+        }
+        
+        document.cookie = cookieContents+';path=/';
+        
+        /**
+         * Return true for reload request if cookie has been written.
+         */
+        return document.cookie.indexOf(screen.cookieName) != -1;
+
+    })() || reload;
+        
+    /**
+     * Reload the page if needed.
+     */
+    if(reload)
+        document.location.reload();
+     
 })();
