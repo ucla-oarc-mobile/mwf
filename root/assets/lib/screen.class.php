@@ -125,14 +125,14 @@ class Screen
     }
 
     /**
-     * Returns the height of the screen from a
+     * Returns the pixel ratio of the screen from a
      * cookie set by mwf.browser or else false
      *
-     * @return int
+     * @return float
      * @return bool
      */
     public static function get_pixel_ratio(){
         $ratio = self::get('r');
-        return is_numeric($ratio) ? intval($ratio) : false;
+        return is_numeric($ratio) ? floatval($ratio) : false;
     }
 }
