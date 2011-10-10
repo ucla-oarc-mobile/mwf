@@ -63,12 +63,13 @@ $core_filenames = array('vars.php',
               'modernizr.js', 
               'capability.js', 
               'browser.js',
-              'screen.js',
               'useragent.js',
+              'screen.js',
               'classification.js', 
               'util.js',
               'override.js',
-              'server.js');
+              'server.js',
+              'telemetry.js');
 
 /**
  * Include each core Javascript library.

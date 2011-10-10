@@ -78,7 +78,7 @@
      * Anonymous routine for the classification cookie that will return 
      * true if it needs a page reload to pass the cookie to server.
      */
-     reload = (function(){
+    reload = (function(){
          
         var userAgent = mwf.userAgent;
 
@@ -122,10 +122,11 @@
      * Anonymous routine for the screen dimensions cookie that will return 
      * true if it needs a page reload to pass the cookie to server.
      */
-     reload = (function(){
+    reload = (function(){
 
-        var screen = mwf.screen,
-            cookieContents = screen.cookieName+'={"h":"'+screen.getHeight()+'","w":"'+screen.getWidth()+'","r":"'+screen.getPixelRatio()+'"}';
+        var screen = mwf.screen
+        
+        cookieContents = screen.cookieName+'={"h":"'+screen.getHeight()+'","w":"'+screen.getWidth()+'","r":"'+screen.getPixelRatio()+'"}';
 
         /**
          * Exit routine early with false if matching classification cookie.

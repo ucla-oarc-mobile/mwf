@@ -9,10 +9,12 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110921
+ * @version 20111003
  *
+ * @requires document
  * @requires mwf
- * @requires /root/assets/js/core/vars.php
+ * @requires mwf.site
+ * @requires window
  */
 
 mwf.browser = new function() {

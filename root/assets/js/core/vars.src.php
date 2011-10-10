@@ -11,9 +11,12 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110906
+ * @version 20111003
  *
  * @uses Config
+ * @uses HTTPS
+ * 
+ * @uses document.URL
  */
 
 include_once(dirname(dirname(dirname(__FILE__))).'/config.php');

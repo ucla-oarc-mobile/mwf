@@ -7,13 +7,14 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110906
+ * @version 20111007
  *
  * @requires mwf
  * @requires mwf.browser
+ * @requires mwf.userAgent
  * 
- * @requires /root/assets/js/core/vars.php
- * @requires /root/assets/js/core/browser.js
+ * @uses window.screen
+ * @uses window.devicePixelRatio
  */
 
 mwf.screen = new function() {
@@ -23,12 +24,23 @@ mwf.screen = new function() {
     var ws = window.screen;
     
     /**
+     * Bug in Android 2.2-3 prevents it from returning accurate screen 
+     * dimensions, so bypass inaccurate values with false instead.
+     * 
+     * @compat Android 2.2-3
+     */
+    var version = mwf.userAgent.getOSVersion();
+    if(typeof mwf.userAgent !== 'undefined' && mwf.userAgent.getOS() == 'android' && (version.indexOf('2.2') == 0 || version.indexOf('2.3') == 0)) {
+        ws = {width:false,height:false,devicePixelRatio:false}
+    }
+    
+    /**
      * Determine device screen width.
      * 
      * @return int|null
      */
     this.getWidth=function(){
-        return ws.width 
+        return typeof ws.width !== 'undefined'
             ? ws.width 
             : mwf.browser.getWidth(); 
     }
@@ -39,7 +51,7 @@ mwf.screen = new function() {
      * @return int|null
      */
     this.getHeight=function(){
-        return ws.height 
+        return typeof ws.height !== 'undefined'
             ? ws.height 
             : mwf.browser.getHeight();
     }

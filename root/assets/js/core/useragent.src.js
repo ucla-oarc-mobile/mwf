@@ -8,7 +8,11 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110921
+ * @version 20111003
+ * 
+ * @requires mwf.site
+ * 
+ * @uses nagivator.userAgent
  */
 
 mwf.userAgent = new function() {
@@ -66,35 +70,35 @@ mwf.userAgent = new function() {
                 }
                 break;
             case 'android':
-                if((s = ua.indexOf('Android ')) != -1){
+                if((s = ua.indexOf('android ')) != -1){
                     s += 8;
                     r = ua.substring(s, Math.min(ua.indexOf(' ', s), ua.indexOf(';', s), ua.indexOf('-', s)));
                 }
                 break;
             case 'windows_phone':
-                if((s = ua.indexOf('Windows Phone OS ')) != -1){
+                if((s = ua.indexOf('windows phone os ')) != -1){
                     s += 17;
                     r = ua.substring(s, ua.indexOf(';', s));
                 }
                 break;
             case 'windows_mobile':
-                if((s = ua.indexOf('Windows Mobile/')) != -1){
+                if((s = ua.indexOf('windows mobile/')) != -1){
                     s += 15;
                     r = ua.substring(s, ua.indexOf(';', s));
                 }
                 break;
             case 'symbian':
-                if((s = ua.indexOf('SymbianOS/')) != -1){
+                if((s = ua.indexOf('symbianos/')) != -1){
                     s += 10;
                     r = ua.substring(s, ua.indexOf(';', s));
                 }
-                else if((s = ua.indexOf('Symbian/')) != -1){
+                else if((s = ua.indexOf('symbian/')) != -1){
                     s += 8;
                     r = "s"+ua.substring(s, ua.indexOf(';', s));
                 }
                 break;
             case 'webos':
-                if((s = ua.indexOf('webOS/')) != -1){
+                if((s = ua.indexOf('webos/')) != -1){
                     s += 6;
                     r = ua.substring(s, Math.min(ua.indexOf(';', s)));
                 }
@@ -171,127 +175,3 @@ mwf.userAgent = new function() {
         return '';
     }
 };
-
-/**
- * Anonymous routine that writes body telemetry classes.
- */
-(function(){
-    var written = false;
-    
-    /**
-     * Telemetry-writing function attached onDOMContentLoaded and onLoad. The
-     */
-    var writer = function(){
-        
-        if(written) 
-            return;
-        
-        written = true;
-        var classes = document.body.className.split(' '),
-            i = classes.length,
-            classification = mwf.classification,
-            userAgent = mwf.userAgent;
-        
-        /**
-         * Function that returns true iff class v is not defined in classes.
-         */
-        var nin = function(v){
-            for(p in classes) 
-                if(v == classes[p]) 
-                    return false; 
-            return true;
-        }
-        
-        /**
-         * Always add body.mwf.
-         */
-        if(nin('mwf')){
-            classes[i++] = 'mwf';
-        }
-        
-        /**
-         * Add body.mwf_mobile if device is mobile, else add body.mwf_notmobile.
-         */
-        if(classification.isMobile()){
-            if(nin("mwf_mobile")){
-                classes[i++] = "mwf_mobile";
-            }
-        }else{
-            if (nin("mwf_notmobile")){
-                classes[i++] = "mwf_notmobile";
-            }
-        }
-        
-        /**
-         * Add body.mwf_standard if device is classified as standard.
-         */
-        if(classification.isStandard() && nin("mwf_standard")){
-            classes[i++] = "mwf_standard";
-        }
-        
-        /**
-         * Add body.mwf_full if device is classified as full.
-         */
-        if(classification.isFull() && nin("mwf_full")){
-            classes[i++] = "mwf_full";
-        }
-        
-        var t,tv;
-        
-        /**
-         * Add body class for mwf_browser_{name} when possible.
-         */
-        if((t = userAgent.getBrowser()).length > 0) {
-            t = "mwf_browser_"+t.toLowerCase().replace(" ","_");
-            if(nin(t)) 
-                classes[i++] = t;
-        }
-        
-        /**
-         * Add body class for mwf_browser_engine_{name} when possible.
-         */
-        if((t = userAgent.getBrowserEngine()).length > 0) {
-            t = "mwf_browser_engine_"+t.toLowerCase().replace(" ","_");
-            if(nin(t)) 
-                classes[i++] = t;
-        }
-        
-        /**
-         * Add body class for mwf_os_{name} when possible.
-         */
-        if((t = userAgent.getOS()).length > 0) {
-            t = "mwf_os_"+t.toLowerCase().replace(" ","_");
-            if(nin(t)) 
-                classes[i++] = t;
-        }
-        
-        /**
-         * Add body class for mwf_os_{name}_{version} when possible.
-         */
-        if((tv = userAgent.getOSVersion()).length > 0) {
-            tv = t+'_'+tv.toLowerCase().replace(/ /g,"_").replace(/\./g,"_");
-            if(nin(tv)) 
-                classes[i++] = tv;
-        }
-        
-        /**
-         * Write classes to the body in one bulk operation.
-         */
-        document.body.className = classes.join(' ');
-    };
-    
-    /**
-     * Attaches the writer to both document onDOMContentLoaded and window onLoad
-     * so as to execute as early as when the DOM content is ready, if the device
-     * supports it, or else when the DOM content has fully loaded.
-     */
-    if(document.addEventListener) {
-        document.addEventListener('DOMContentLoaded',writer,false);
-    }
-    
-    if(window.addEventListener) {
-        window.addEventListener('load',writer,false);
-    } else if (window.attachEvent) {
-        window.attachEvent('onload',writer);
-    }
-})();
