@@ -6,7 +6,7 @@
  * This should NOT be included directly; instead /assets/config.php should be.
  *
  * @author ebollens
- * @version 20110511
+ * @version 20111012
  *
  * @uses Config
  * @link /assets/config.php
@@ -89,8 +89,6 @@ Config::set('frontpage', 'menu',
               'url'=>'https://github.com/ucla/mwf'),
         array('name'=>'Documentation',
               'url'=>'https://github.com/ucla/mwf/wiki'),
-        array('name'=>'Forums',
-              'url'=>'http://mwf.ucla.edu/forum'),
         array('name'=>'Issue Tracker',
               'url'=>'https://jira.ats.ucla.edu:8443/')
         )
