@@ -23,21 +23,7 @@
 require_once(dirname(dirname(__FILE__)).'/config.php');
 
 class Screen
-{
-    /**
-     * Default height if Javascript cannot determine it.
-     *
-     * @var int
-     */
-    private static $_default_height = 480;
-
-    /**
-     * Default width if Javascript cannot determine it.
-     *
-     * @var int
-     */
-    private static $_default_width = 320;
-    
+{   
     private static $_init = null;
     
     private static $_name;
@@ -115,32 +101,38 @@ class Screen
     }
 
     /**
-     * Returns the width of the browser in the following order: (1) from a
-     * cookie set by mwf.browser or (2) the default width.
+     * Returns the width of the browser from a
+     * cookie set by mwf.browser or else false
      * 
      * @return int
+     * @return bool
      */
     public static function get_width(){
-        return ($width = self::get('w')) ? $width : self::$_default_width;
+        $width = self::get('w');
+        return is_numeric($width) ? intval($width) : false;
     }
 
     /**
-     * Returns the height of the screen in the following order: (1) from a
-     * cookie set by mwf.browser or (2) the default height.
+     * Returns the height of the screen from a
+     * cookie set by mwf.browser or else false
      *
      * @return int
+     * @return bool
      */
     public static function get_height(){
-        return ($height = self::get('h')) ? $height : self::$_default_height;
+        $height = self::get('h');
+        return is_numeric($height) ? intval($height) : false;
     }
 
     /**
-     * Returns the height of the screen in the following order: (1) from a
-     * cookie set by mwf.browser or (2) the default height.
+     * Returns the pixel ratio of the screen from a
+     * cookie set by mwf.browser or else false
      *
-     * @return int
+     * @return float
+     * @return bool
      */
     public static function get_pixel_ratio(){
-        return ($ratio = self::get('r')) ? $ratio : 1;
+        $ratio = self::get('r');
+        return is_numeric($ratio) ? floatval($ratio) : false;
     }
 }

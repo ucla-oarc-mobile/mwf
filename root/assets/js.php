@@ -41,16 +41,7 @@ require_once(dirname(__FILE__).'/lib/path_validator.class.php');
 include_once(dirname(__FILE__).'/lib/user_agent.class.php');
 $ext = '.js';
 
-?>/**
- * Javascript handler.
- *
- * @package core
- * @subpackage js
- *
- * @author ebollens
- * @copyright Copyright (c) 2010-11 UC Regents
- * @license http://mwf.ucla.edu/license
- */
+?>/** Mobile Web Framework | http://mwf.ucla.edu */
 
 <?php
 
