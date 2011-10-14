@@ -19,6 +19,8 @@ License:
 
 TABLE OF CONTENTS
 
+Version 1.2.04          October 14, 2011
+Version 1.2.03.rc       October 10, 2011
 Version 1.2.02.rc       October 1, 2011
 Version 1.2.01.alpha    September 29, 2011
 Version 1.2.00.alpha    September 29, 2011
@@ -30,6 +32,34 @@ Version 1.1.03.alpha    July 20, 2011
 Version 1.1.02.alpha    June 23, 2011
 Version 1.1.01.alpha    June 16, 2011
 Version 1.1.00.alpha    May 20, 2011
+
+==============================================================================
+
+Version 1.2.04
+October 14, 2011
+
+* Reduce CSS and JS handler size by shortening comment block [MWF-232]
+
+* Bug fixes due to refression from MWF-228
+
+    * Fix to support max-height/width GET param in image compressor [MWF-230]
+
+    * Fix to Screen class for height/width on false determination [MWF-231]
+
+* Remove forum broken link from MWF pre-installed content module [MWF-33]
+
+==============================================================================
+
+Version 1.2.03.rc
+October 10, 2011
+
+* Fix to prevent Android 2.2-2.3 window.screen race condition [MWF-228]
+
+* Fix to mwf.userAgent.getOSVersion() string processing [MWF-229]
+
+* Reduce payload size of redirect/js.php by 80% [MWF-225]
+
+* Add minification to vars.php included by JS handler [MWF-226]
 
 ==============================================================================
 
