@@ -77,7 +77,7 @@ this.root = '<?php echo HTTPS::is_https() ? HTTPS::convert_path(Config::get('glo
     };
     
     this.frontpage=function(){
-        return this.root()+'/index.php';
+        return this.root+'/index.php';
     };
     
     this.webassetroot=function(){
