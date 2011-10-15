@@ -1,3 +1,17 @@
+/**
+ * Unit tests for mwf.capability
+ *
+ * @author trott
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20111015
+ *
+ * @requires mwf
+ * @requires mwf.capablity
+ * @requires qunit
+ * 
+ */
+
 module("core/capability.js"); 
             
 test("mwf.capability.ajax()", function()

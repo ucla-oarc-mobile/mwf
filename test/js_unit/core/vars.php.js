@@ -1,3 +1,17 @@
+/**
+ * Unit tests for JS loaded via vars.php
+ *
+ * @author trott
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20111015
+ *
+ * @requires mwf
+ * @requires mwf.site
+ * @requires qunit
+ * 
+ */
+
 module("core/vars.php"); 
             
 test("mwf.site.root", function()
