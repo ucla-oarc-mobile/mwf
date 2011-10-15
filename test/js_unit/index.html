@@ -1,16 +1,18 @@
 <!DOCTYPE html> 
-<!-- Before running these tests, you need to symlink root/test to 
+<!-- @todo Before running these tests, you need to symlink root/test to 
      to the /test dir so you can open /test/js_unit/index.html in a web browser.
-     Also, you need to configure the two required entries in config/global.php -->
+     Also, you need to configure the two required entries in config/global.php.
+     A script could probably do this nicely, but a Make or Ant file would probably be better. -->
 <html>  
     <head>
         <title>MWF JS unit tests</title>
         <link rel="stylesheet" href="qunit/qunit.css" type="text/css"/>  
-        <script type="text/javascript" src="http://localhost/assets/js.php"></script>
+        <script type="text/javascript" src="../../assets/js.php"></script>
         <script type="text/javascript" src="qunit/qunit.js"></script>  
 
         <!-- JS files below contain the unit tests for the files that share their names -->
-        <script type="text/javascript" src="core/vars.php"></script>  
+        <script type="text/javascript" src="core/vars.php"></script>
+        <script type="text/javascript" src="core/capability.js"></script>
     </head>  
     <body>  
         <h1 id="qunit-header">MWF JS unit tests</h1>  
