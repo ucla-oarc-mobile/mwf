@@ -136,7 +136,7 @@ class JS
          * If full device, check each $_exts as assets/js/full/{$key}{$ext}.
          * If found, use load() to include the file.
          */
-        if(Device::is_full())
+        if(Classification::is_full())
             foreach(self::$_exts as $ext)
                 if(self::load('full/'.$key.$ext))
                     return true;
@@ -146,7 +146,7 @@ class JS
          * each $_exts as assets/js/full/{$key}{$ext}. If found, then use load()
          * to include the file.
          */
-        if(Device::is_standard())
+        if(Classification::is_standard())
             foreach(self::$_exts as $ext)
                 if(self::load('standard/'.$key.$ext))
                     return true;
@@ -173,7 +173,7 @@ class JS
          * If found, then use import_file() to write a script tag via a live
          * DOM write.
          */
-        if(Device::is_full())
+        if(Classification::is_full())
             foreach(self::$_exts as $ext)
                 if(self::import_file('full/'.$key.$ext))
                     return true;
@@ -183,7 +183,7 @@ class JS
          * each $_exts as assets/js/full/{$key}{$ext}. If found, then use
          * import_file() to write a script tag via a live DOM write.
          */
-        if(Device::is_standard())
+        if(Classification::is_standard())
             foreach(self::$_exts as $ext)
                 if(self::import_file('standard/'.$key.$ext))
                     return true;
