@@ -8,6 +8,7 @@
  *
  * @requires mwf
  * @requires mwf.capablity
+ * @requires mwf.userAgent
  * @requires qunit
  * 
  */
@@ -178,7 +179,11 @@ test("mwf.capability.inlinesvg()", function()
     expect(2);
     var inlinesvg = mwf.capability.inlinesvg();
     equal(typeof inlinesvg, 'boolean', 'mwf.capability.inlinesvg() should return a boolean');
-    equal(inlinesvg, true, 'iOS 5 and Android 3 support inline SVG. otherwise, not so much...');
+    var os = mwf.userAgent.getOS();
+    var osVersion = parseInt(mwf.userAgent.getOSVersion());
+    var supports = (os == 'iphone_os' && osVersion >= 5) || (os == 'android' && osVersion >= 3);
+    
+    equal(inlinesvg, supports, 'iOS 5 and Android 3 support inline SVG. otherwise, not so much...');
 });
 
 
