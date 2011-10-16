@@ -31,13 +31,13 @@ mwf.screen = new function() {
      */
     var version = mwf.userAgent.getOSVersion();
     if(typeof mwf.userAgent !== 'undefined' && mwf.userAgent.getOS() == 'android' && (version.indexOf('2.2') == 0 || version.indexOf('2.3') == 0)) {
-        ws = {width:false,height:false,devicePixelRatio:false}
+        ws = {width:false,height:false}
     }
     
     /**
      * Determine device screen width.
      * 
-     * @return int|null
+     * @return int|bool
      */
     this.getWidth=function(){
         return typeof ws.width !== 'undefined'
@@ -48,7 +48,7 @@ mwf.screen = new function() {
     /**
      * Determine device screen height.
      * 
-     * @return int|null
+     * @return int|bool
      */
     this.getHeight=function(){
         return typeof ws.height !== 'undefined'
@@ -56,6 +56,11 @@ mwf.screen = new function() {
             : mwf.browser.getHeight();
     }
     
+    /**
+     * Determine device screen pixel ratio.
+     * 
+     * @return float|bool
+     */
     this.getPixelRatio=function(){
         return (typeof window.devicePixelRatio != 'undefined' && window.devicePixelRatio)
             ? window.devicePixelRatio
