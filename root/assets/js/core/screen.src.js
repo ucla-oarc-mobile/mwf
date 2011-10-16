@@ -59,7 +59,7 @@ mwf.screen = new function() {
     /**
      * Determine device screen pixel ratio.
      * 
-     * @return float|bool
+     * @return float
      */
     this.getPixelRatio=function(){
         return (typeof window.devicePixelRatio != 'undefined' && window.devicePixelRatio)
