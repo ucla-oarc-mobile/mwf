@@ -107,6 +107,7 @@ mwf.browser = new function() {
     /**
      * Width of the web browser, or null if it cannot be determined.
      *
+     * @deprecated 1.2.00
      * @return int|null
      */
     this.pageWidth = this.getWidth;
