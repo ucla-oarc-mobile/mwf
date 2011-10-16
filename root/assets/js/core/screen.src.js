@@ -31,7 +31,7 @@ mwf.screen = new function() {
      */
     var version = mwf.userAgent.getOSVersion();
     if(typeof mwf.userAgent !== 'undefined' && mwf.userAgent.getOS() == 'android' && (version.indexOf('2.2') == 0 || version.indexOf('2.3') == 0)) {
-        ws = {width:false,height:false,devicePixelRatio:false}
+        ws = {width:false,height:false}
     }
     
     /**
