@@ -84,7 +84,7 @@ mwf.capability=new function(){
      * @return bool
      */
     this.audio = function(){
-        return _m.audio;
+        return !! _m.audio;
     }
     
     /**
@@ -319,7 +319,7 @@ mwf.capability=new function(){
      * @return bool
      */
     this.video = function(){
-        return _m.video;
+        return !! _m.video;
     }
     
     /**
