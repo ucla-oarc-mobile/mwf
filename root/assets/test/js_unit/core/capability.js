@@ -165,11 +165,11 @@ test("mwf.capability.events()", function()
 test("mwf.capability.css.event()", function()
 {
     expect(4);
-    var event = mwf.capability.event('gesturestart');
-    equal(typeof event, 'boolean', 'mwf.capability.event() should return a boolean true');
-    equal(event, true, 'browser supports gesturestart event');
+    var event = mwf.capability.event('touchstart');
+    equal(typeof event, 'boolean', 'mwf.capability.event() should return a boolean');
+    equal(event, true, 'browser supports touchstart event');
     event = mwf.capability.event('nonexistent');
-    equal(typeof event, 'boolean', 'mwf.capability.event() should return a boolean false');
+    equal(typeof event, 'boolean', 'mwf.capability.event() should return a boolean');
     equal(event, false, 'browser does not support nonexistent event')
 });
 
