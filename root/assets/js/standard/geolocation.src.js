@@ -75,7 +75,7 @@ mwf.touch.geolocation = new function()
 
             }, function() {
                 if(typeof onError != 'undefined')
-                    onError('Google Gears Geolocation failure.');
+                    onError('Geolocation failure.');
             },
             {enableHighAccuracy:highAccuracy, maximumAge:timeout});
 
