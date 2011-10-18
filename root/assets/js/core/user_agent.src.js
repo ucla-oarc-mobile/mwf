@@ -21,7 +21,7 @@ mwf.user_agent = new function(){
     var userAgent = mwf.userAgent,
         classification = mwf.classification;
     
-    this.is_iphone_os=function(){
+    this.is_iphone_os=function() {
         return userAgent.getOS() == 'iphone_os';
     }
     
@@ -29,7 +29,9 @@ mwf.user_agent = new function(){
         return userAgent.getBrowserEngine() == 'webkit';
     }
     
-    this.get_browser=userAgent.getBrowser;
+    this.get_browser=function() {
+        return userAgent.getBrowser.call(userAgent);
+    }
     
     this.get_browser_version=function(){
         return false;
@@ -37,7 +39,9 @@ mwf.user_agent = new function(){
     
     this.get_os=userAgent.getOS;
     
-    this.get_os_version=userAgent.getOSVersion;
+    this.get_os_version=function() {
+        return userAgent.getOSVersion.call(userAgent);
+    }
     
     this.is_mobile=classification.isMobile;
     
@@ -45,11 +49,15 @@ mwf.user_agent = new function(){
     
     this.is_standard=classification.isStandard;
     
-    this.is_full=classification.isFull;
+    this.is_full=function() {
+        return classification.isFull.call(classification);
+    }
     
     this.is_touch=classification.isStandard;
     
     this.is_overridden=classification.isOverride;
     
-    this.is_preview=classification.isPreview;
+    this.is_preview=function() {
+        return classification.isPreview.call(classification);
+    }
 };
