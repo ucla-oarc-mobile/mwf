@@ -1,10 +1,10 @@
 /**
- * Unit tests for mwf.browser
+ * Unit tests for mwf.touch.geolocation
  *
  * @author trott
- * @copyright Copyright (c) 2010-11 UC Regents
+ * @copyright Copyright (c) 2011 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111015
+ * @version 20111018
  *
  * @requires mwf
  * @requires mwf.touch.geolocation
