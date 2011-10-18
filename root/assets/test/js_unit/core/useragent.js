@@ -1,5 +1,5 @@
 /**
- * Unit tests for mwf.useragent
+ * Unit tests for mwf.userAgent
  *
  * @author trott
  * @copyright Copyright (c) 2010-11 UC Regents
