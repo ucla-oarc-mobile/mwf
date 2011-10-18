@@ -92,7 +92,11 @@ test("mwf.capability.css.transforms()", function()
     expect(2);
     var transforms = mwf.capability.css.transforms();
     equal(typeof transforms, 'boolean', 'mwf.capability.css.transforms() should return a boolean');
-    equal(transforms, true, 'browser supports transforms');
+
+    var os = mwf.userAgent.getOS();
+    var osVersion = parseInt(mwf.userAgent.getOSVersion());
+    var supports = (os == 'iphone_os') || (os == 'android' && osVersion >= 3);
+    equal(transforms, supports, 'iOS supports transforms, Android only from version 3');
 });
 
 test("mwf.capability.css.transforms2d()", function()
@@ -108,7 +112,11 @@ test("mwf.capability.css.transforms3d()", function()
     expect(2);
     var transforms3d = mwf.capability.css.transforms3d();
     equal(typeof transforms3d, 'boolean', 'mwf.capability.css.transforms3d() should return a boolean');
-    equal(transforms3d, true, 'browser supports transforms3d');
+    
+    var os = mwf.userAgent.getOS();
+    var osVersion = parseInt(mwf.userAgent.getOSVersion());
+    var supports = (os == 'iphone_os') || (os == 'android' && osVersion >= 3);
+    equal(transforms3d, supports, 'iOS supports transforms3d, Android only from version 3');
 });
 
 test("mwf.capability.css.transitions()", function()
