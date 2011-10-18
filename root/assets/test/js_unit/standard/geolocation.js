@@ -33,10 +33,10 @@ test("mwf.touch.geolocation.getPosition(onSuccess,onError)", function() {
     // TODO: Is this the way to do a timeout?
     QUnit.config.testTimeout = 3000;
     stop();
-    mwf.touch.geolocation.getPosition(function() {
-        equal(typeof latitude, 'number', 'latitude should be a number');
-        equal(typeof longitude, 'number', 'longitude should be a number');
-        equal(typeof accuracy, 'number', 'accuracy should be a number');
+    mwf.touch.geolocation.getPosition(function(pos) {
+        equal(typeof pos['latitude'], 'number', 'latitude should be a number');
+        equal(typeof pos['longitude'], 'number', 'longitude should be a number');
+        equal(typeof pos['accuracy'], 'number', 'accuracy should be a number');
         start();
     }, function(errorMsg) {
         ok(false,'getPosition() error: ' + errorMsg);
@@ -49,10 +49,10 @@ test("mwf.touch.geolocation.getPosition(onSuccess)", function() {
     // TODO: Is this the way to do a timeout?
     QUnit.config.testTimeout = 3000;
     stop();
-    mwf.touch.geolocation.getPosition(function() {
-        equal(typeof latitude, 'number', 'latitude should be a number');
-        equal(typeof longitude, 'number', 'longitude should be a number');
-        equal(typeof accuracy, 'number', 'accuracy should be a number');
+    mwf.touch.geolocation.getPosition(function(pos) {
+        equal(typeof pos['latitude'], 'number', 'latitude should be a number');
+        equal(typeof pos['longitude'], 'number', 'longitude should be a number');
+        equal(typeof pos['accuracy'], 'number', 'accuracy should be a number');
         start();
     });
     
