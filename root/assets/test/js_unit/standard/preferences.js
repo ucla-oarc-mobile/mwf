@@ -21,8 +21,9 @@ test("mwf.standard.preferences.isSupported()", function()
 
 test("mwf.standard.preferences.get()", function()
 {
-    equal(typeof mwf.standard.preferences.get('test'), 'string', 'get() should return a string');
-})
+    var gotten = mwf.standard.preferences.get('test');
+    ok(gotten === null || typeof gotten === 'string', "get() returns string or null: " + gotten);
+});
 
 test("mwf.standard.preferences.set()", function()
 {
@@ -30,9 +31,16 @@ test("mwf.standard.preferences.set()", function()
     equal(mwf.standard.preferences.get('test'), 'a test value', 'set() can change the setting');
 });
 
-test("mwf.standard,preferences.reset()", function()
+test("mwf.standard,preferences.clearAll()", function()
 {
     mwf.standard.preferences.set("test", "a temporary value");
-    mwf.standard.preferences.reset();
-    equal(mwf.standard.preferences.get("test"), "", "reset() erases previous values");
+    mwf.standard.preferences.clearAll();
+    equal(mwf.standard.preferences.get("test"), null, "clearAll() erases previous values");
+})
+
+test("mwf.standard.preferences.clear()", function()
+{
+    mwf.standard.preferences.set("test", "just another temporary value from LA");
+    mwf.standard.preferences.clear("test");
+    equal(mwf.standard.preferences.get("test"), null, "clear() erases previous value");
 })

@@ -33,15 +33,15 @@ mwf.standard.preferences=new function(){
     /**
      * Returns the value for the requested preferences key. 
      * 
-     * It will always be a string.  Caller will need to use parseInt() etc. to
+     * It will always be a string (or null).  Caller will need to use parseInt() etc. to
      * cast to other types.
      * 
      * Caller is responseible for checking isSupported() first.
      * 
-     * @return string
+     * @return string|null
      */
     this.get = function(key){
-        return localStorage[_localStorageName+key]!=null ? localStorage[_localStorageName+key] : '';
+        return localStorage.getItem(_localStorageName+key);
     }
     
     /**
@@ -54,7 +54,18 @@ mwf.standard.preferences=new function(){
      * @return void
      */
     this.set = function(key,value){
-        localStorage[_localStorageName+key]=value;
+        localStorage.setItem(_localStorageName+key, value);
+    }
+    
+    /**
+     * Resets a specific preference setting to default value (i.e., empty string). 
+     * 
+     * Caller is responsible for checking isSupported() first.
+     * 
+     * @return void
+     */
+    this.clear = function(key){
+          localStorage.removeItem(_localStorageName+key);
     }
     
     /**
@@ -68,7 +79,10 @@ mwf.standard.preferences=new function(){
      * 
      * @return void
      */
-    this.reset = function(){
-
+    this.clearAll = function(){
+          for (var i=0; i<localStorage.length; i++) 
+              if (localStorage.key(i).indexOf(_localStorageName) == 0)
+                localStorage.removeItem(localStorage.key(i));
+          
     }
 };
