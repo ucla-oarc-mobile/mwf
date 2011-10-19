@@ -29,3 +29,10 @@ test("mwf.standard.preferences.set()", function()
     mwf.standard.preferences.set('test', 'a test value');
     equal(mwf.standard.preferences.get('test'), 'a test value', 'set() can change the setting');
 });
+
+test("mwf.standard,preferences.reset()", function()
+{
+    mwf.standard.preferences.set("test", "a temporary value");
+    mwf.standard.preferences.reset();
+    equal(mwf.standard.preferences.get("test"), "", "reset() erases previous values");
+})
