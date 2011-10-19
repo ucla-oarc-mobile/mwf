@@ -217,7 +217,10 @@ test("mwf.capability.svg()", function()
     expect(2);
     var svg = mwf.capability.svg();
     equal(typeof svg, 'boolean', 'mwf.capability.svg() should return a boolean');
-    equal(svg, true, 'browser supports SVG');
+    var os = mwf.userAgent.getOS();
+    var osVersion = parseInt(mwf.userAgent.getOSVersion());
+    var supports = (os == 'iphone_os') || (os == 'android' && osVersion >= 3);
+    equal(svg, supports, 'iOS (all versions) and Android 3 and above support SVG');
 });
 
 test("mwf.capability.touch()", function()
