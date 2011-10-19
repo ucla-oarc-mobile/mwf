@@ -42,6 +42,10 @@ this.root = '<?php echo HTTPS::is_https() ? HTTPS::convert_path(Config::get('glo
         
     };
     
+    this.localStorage = new function(){
+        this.prefix = '<?php echo Config::get('global', 'local_storage_prefix'); ?>';
+    };
+    
     this.analytics = new function(){
     
         this.key = <?php echo (Config::get('analytics', 'account') ? ('\''.Config::get('analytics', 'account').'\'') : 'null') ?>;

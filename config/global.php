@@ -35,10 +35,12 @@ Config::set('global', 'help_site_url', false);
 /**
  * CORE
  *
- * - cookie_prefix :: The prefix attached to all cookies that the framework writes.
+ * - cookie_prefix :: Prefix attached to all cookies that the framework writes
+ * - local_storage_prefix :: Prefix attached to all HTML5 LocalStorage that the framework writes
  */
 
 Config::set('global', 'cookie_prefix', 'mwf_');
+Config::set('global', 'local_storage_prefix', 'mwf_');
 
 /**
  * TEXT AND IMAGES

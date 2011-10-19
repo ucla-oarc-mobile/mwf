@@ -1,6 +1,6 @@
 /**
- * Defines methods under mwf.standard.layoutPreferences that create, read, and 
- * update layout preferences.
+ * Defines methods under mwf.standard.preferences that create, read, and update 
+ * preferences.
  *
  * @package standard
  * @subpackage js
@@ -15,10 +15,14 @@
  * 
  */
 
-mwf.standard.layoutPreferences=new function(){
+mwf.standard.preferences=new function(){
     /**
-     * Determine if the device has sufficient capabilities to support layout 
-     * preferences.
+     * Prefix for the preferences data in localStorage
+     */
+    var _localStorageName = mwf.site.localStorage.prefix+'prefs';
+
+    /**
+     * Determine if the device has sufficient capabilities to support preferences.
      * 
      * @return bool
      */
