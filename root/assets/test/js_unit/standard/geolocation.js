@@ -62,6 +62,6 @@ test("mwf.touch.geolocation.setTimeout()", function() {
     equal(typeof mwf.touch.geolocation.setTimeout(3000), 'undefined', 'setter should not return a value');
 })
 
-test("mwf.touch.geolocation.setHighSccuracy()", function() {
+test("mwf.touch.geolocation.setHighAccuracy()", function() {
     equal(typeof mwf.touch.geolocation.setHighAccuracy(true), 'undefined', 'setter should not return a value');
 })
