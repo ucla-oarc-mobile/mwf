@@ -252,7 +252,11 @@ test("mwf.capability.websockets()", function()
     expect(2);
     var websockets = mwf.capability.websockets();
     equal(typeof websockets, 'boolean', 'mwf.capability.websockets() should return a boolean');
-    equal(websockets, true, 'browser supports web sockets');
+    var os = mwf.userAgent.getOS();
+    var osVersion = mwf.userAgent.getOSVersion();
+    var supports = (os == 'iphone_os' && 
+        (parseInt(osVersion) > 4 || osVersion.indexOf('4.2')==0 || osVersion.indexOf('4.3')==0));
+    equal(websockets, supports, 'browser supports web sockets');
 });
 
 test("mwf.capability.write()", function()
