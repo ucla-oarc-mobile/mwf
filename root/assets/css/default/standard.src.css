@@ -95,6 +95,11 @@ div.button-full.button-padded{
     margin-top: 10px;
 }
 
+div.button-full.button-padded {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 a.button-full.button-padded {
     margin: 10px 10px 0 10px;
 }
@@ -104,8 +109,6 @@ div.button-full {
     position: relative !important;
     height: 2.8em;
     width: auto;
-    margin-left: 10px;
-    margin-right: 10px;
     overflow: hidden;
 }
 
