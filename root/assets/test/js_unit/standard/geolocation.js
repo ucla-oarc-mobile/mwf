@@ -30,7 +30,6 @@ test("mwf.touch.geolocation.isSupported()", function() {
 
 test("mwf.touch.geolocation.getPosition(onSuccess,onError)", function() {
     expect(3);
-    // TODO: Is this the way to do a timeout?
     QUnit.config.testTimeout = 3000;
     stop();
     mwf.touch.geolocation.getPosition(function(pos) {
@@ -46,7 +45,6 @@ test("mwf.touch.geolocation.getPosition(onSuccess,onError)", function() {
 
 test("mwf.touch.geolocation.getPosition(onSuccess)", function() {
     expect(3);
-    // TODO: Is this the way to do a timeout?
     QUnit.config.testTimeout = 3000;
     stop();
     mwf.touch.geolocation.getPosition(function(pos) {
