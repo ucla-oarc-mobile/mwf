@@ -239,14 +239,6 @@ test("mwf.capability.video()", function()
     equal(video, true, 'browser supports HTML5 video tag');
 });
 
-test("mwf.capability.webgl()", function()
-{
-    expect(2);
-    var webgl = mwf.capability.webgl();
-    equal(typeof webgl, 'boolean', 'mwf.capability.webgl() should return a boolean');
-    equal(webgl, false, 'mobile browser does not support WebGL');
-});
-
 test("mwf.capability.websockets()", function()
 {
     expect(2);
