@@ -21,6 +21,7 @@
  */
 
 header('Content-Type: text/javascript');
+header('Cache-Control: max-age=0');
 
 include_once(dirname(dirname(__FILE__)).'/config.php');
 
