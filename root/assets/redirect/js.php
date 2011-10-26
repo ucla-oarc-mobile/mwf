@@ -89,7 +89,7 @@ if($override)
  */
 $core_dir = dirname(dirname(__FILE__)).'/js/core/';
 $core_filenames = array('vars.php', 
-                        'userAgent.js',
+                        'useragent.js',
                         'screen.js');
 foreach($core_filenames as $core_filename)
     include_once($core_dir.$core_filename);
