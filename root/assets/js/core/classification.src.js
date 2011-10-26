@@ -38,8 +38,14 @@ mwf.classification=new function(){
             && mwf.site.mobile.maxWidth  > mwf.screen.getWidth();
     }
     
+    /**
+     * Determine if the device is at least a basic-level device. All devices are
+     * of the basic classification.
+     * 
+     * @return bool
+     */ 
     this.isBasic = function(){
-        return true; // TODO: Figure out how to determine if basic
+        return true;
     }
     
     /**
@@ -54,7 +60,7 @@ mwf.classification=new function(){
     }
     
     /**
-     * Determine if the device is a a full-level device. This requires that the 
+     * Determine if the device is a full-level device. This requires that the 
      * device has support for all standard-level features, CSS 2.1 opacity and
      * CSS 3 gradients, border radius and box shadow.
      * 

@@ -37,7 +37,7 @@ mwf.screen = new function() {
     /**
      * Determine device screen width.
      * 
-     * @return int|null
+     * @return int|bool
      */
     this.getWidth=function(){
         return typeof ws.width !== 'undefined'
@@ -48,7 +48,7 @@ mwf.screen = new function() {
     /**
      * Determine device screen height.
      * 
-     * @return int|null
+     * @return int|bool
      */
     this.getHeight=function(){
         return typeof ws.height !== 'undefined'
@@ -56,6 +56,11 @@ mwf.screen = new function() {
             : mwf.browser.getHeight();
     }
     
+    /**
+     * Determine device screen pixel ratio.
+     * 
+     * @return float
+     */
     this.getPixelRatio=function(){
         return (typeof window.devicePixelRatio != 'undefined' && window.devicePixelRatio)
             ? window.devicePixelRatio

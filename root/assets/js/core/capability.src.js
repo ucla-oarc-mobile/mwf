@@ -84,7 +84,7 @@ mwf.capability=new function(){
      * @return bool
      */
     this.audio = function(){
-        return _m.audio;
+        return !! _m.audio;
     }
     
     /**
@@ -319,16 +319,7 @@ mwf.capability=new function(){
      * @return bool
      */
     this.video = function(){
-        return _m.video;
-    }
-    
-    /**
-     * Determine if the device browser supports WebGL.
-     * 
-     * @return bool
-     */
-    this.webgl = function(){
-        return _m.webgl;
+        return !! _m.video;
     }
     
     /**
