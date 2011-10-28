@@ -313,7 +313,9 @@ form.form-full > input[type=reset] {
 .message.full {
     background-position: 99% 50%;
     background-repeat: no-repeat;
-    margin: .6em 10px;
+    margin-top: .6em;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .message.full.alert {
@@ -340,7 +342,9 @@ form.form-full > input[type=reset] {
 .menu-full .message,
 .form-full .message,
 .full .message {
-    margin: .6em 0;
+    margin-top: .6em;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 

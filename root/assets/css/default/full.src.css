@@ -272,7 +272,9 @@ form.form-full > input[type=reset]:hover {
 }
 
 .message-modal.message {
-    margin: .6em 10px;
+    margin-top: .6em;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .message-modal.message.not-padded {
