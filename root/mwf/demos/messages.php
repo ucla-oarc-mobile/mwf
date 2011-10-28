@@ -54,17 +54,17 @@ echo Site_Decorator::content_full()
     <div>
         <div class="message full alert">This is an alert message</div>
         <div class="message full confirm">This is a confirm message</div>
-        <div class="message full padded error">This is a padded error message</div>
-        <div class="message full padded info">This is a padded info message</div>
+        <div class="message full not-padded error">This is a not-padded error message</div>
+        <div class="message full not-padded info">This is a not-padded info message</div>
     </div>
 </div>
 
 <div class="message full alert">This is an alert message</div>
 <div class="message full confirm">This is a confirm message</div>
-<div class="message full padded error">This is a padded error message</div>
-<div class="message full padded info">This is a padded info message</div>
+<div class="message full not-padded error">This is a not-padded error message</div>
+<div class="message full not-padded info">This is a not-padded info message</div>
 
-<div id="alert-msg" class="message full padded alert">This is a padded alert message from existing markup</div>
+<div id="alert-msg" class="message full alert">This is an alert message from existing markup</div>
 
 <?php
 echo Site_Decorator::button_full()
@@ -83,9 +83,8 @@ echo Site_Decorator::default_footer()->render();
     
     // a dynamic info message from dynamic markup
     mwf.messages.modal({
-        text: "An dynamic info message, with padding",
-        type: "info",
-        padded: true
+        text: "An dynamic info message",
+        type: "info"
     });
     
     // a dynamic confirm message with callback
@@ -94,8 +93,9 @@ echo Site_Decorator::default_footer()->render();
     }
     
     mwf.messages.modal({
-        text: "A non-padded confirm message with call back",
+        text: "A not-padded confirm message with call back",
         type: "confirm",
+        padded: false,
         callback: cb
     });
 </script>

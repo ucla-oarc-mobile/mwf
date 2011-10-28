@@ -271,12 +271,20 @@ form.form-full > input[type=reset]:hover {
     border-radius: .5em;
 }
 
-.message-modal.message.padded {
+.message-modal.message {
     margin: .6em 10px;
 }
 
-a.message-button.button-padded {
+.message-modal.message.not-padded {
+    margin: 0;
+}
+
+a.message-button {
     margin: 10px;
+}
+
+a.message-button.not-padded {
+    margin: 0;
 }
 
 .message-mask {

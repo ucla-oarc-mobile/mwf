@@ -25,7 +25,7 @@
  *   mwf.messages.modal({
  *     text: "This is an error message",
  *     type: "error",
- *     padded: true
+ *     padded: false
  *   });
  * </script>
  * 
@@ -58,7 +58,7 @@ mwf.messages.modal = function(options) {
             id: null,
             text: null,
             type: null,
-            padded: false,
+            padded: true,
             callback: null
         }, options);
             
@@ -107,8 +107,8 @@ mwf.messages.modal = function(options) {
             
             element += settings.type;
             
-            if (settings.padded) {
-                element += ' padded'
+            if (!settings.padded) {
+                element += ' not-padded'
             }
             
             element += '">';
@@ -126,15 +126,15 @@ mwf.messages.modal = function(options) {
             return;
         }
         
-        if (message.hasClass("padded")) {
-            settings.padded = true;
+        if (message.hasClass("not-padded")) {
+            settings.padded = false;
         }
             
         var mask = $('<div class="message-mask" />');
         var buttonClass = "message-button button-full";
             
-        if (settings.padded) {
-            buttonClass += " button-padded";
+        if (!settings.padded) {
+            buttonClass += " not-padded";
         }
             
         var button = $('<a href="#" class="' + buttonClass + '">OK</a>');

@@ -309,9 +309,11 @@ form.form-full > input[type=reset] {
 /********************************************************
  * MESSAGES
  *******************************************************/
+
 .message.full {
     background-position: 99% 50%;
     background-repeat: no-repeat;
+    margin: .6em 10px;
 }
 
 .message.full.alert {
@@ -330,13 +332,14 @@ form.form-full > input[type=reset] {
     background-image: url("img/message-info.png");
 }
 
-.message.padded {
-    margin: .6em 10px;
+.message.full.not-padded {
+    margin: 0;
 }
 
-.content-full .message.padded,
-.menu-full .message.padded,
-.form-full .message.padded {
+.content-full .message,
+.menu-full .message,
+.form-full .message,
+.full .message {
     margin: .6em 0;
 }
 
