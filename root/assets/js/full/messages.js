@@ -11,7 +11,7 @@
  * 
  * First way:
  * 
- * <div id="alert" class="message-full message-padded message-alert">[text]</div>
+ * <div id="alert" class="message  padded alert">[text]</div>
  * 
  * <script type="text/javascript">
  *   mwf.messages.modal({
@@ -86,6 +86,13 @@ mwf.messages.modal = function(options) {
                     return;
                 }
             }
+            
+            if (settings.callback != null) {
+                if (typeof(settings.callback) != "function") {
+                    console.error("Callback " + settings.callback + " is not a function");
+                    return;
+                }
+            }
         }
         
         // construct the message element.  value of element is either HTML 
@@ -96,12 +103,12 @@ mwf.messages.modal = function(options) {
                 throw "Text parameter must be specified";
             }
         
-            element += '<div class="message-full message-';
+            element += '<div class="message full ';
             
             element += settings.type;
             
             if (settings.padded) {
-                element += ' message-padded'
+                element += ' padded'
             }
             
             element += '">';
@@ -119,7 +126,7 @@ mwf.messages.modal = function(options) {
             return;
         }
         
-        if (message.hasClass("message-padded")) {
+        if (message.hasClass("padded")) {
             settings.padded = true;
         }
             

@@ -42,29 +42,29 @@ echo Site_Decorator::header()
 
 echo Site_Decorator::content_full()
         ->set_padded()
-        ->add_header('MWF Demo')
-        ->add_paragraph('The following is a kitchen sink collection of MWF styles.')
+        ->add_header('MWF Message Demo')
+        ->add_paragraph('The following is a demo of MWF Messages.')
         ->render();
 ?>
 
 <!-- Messages -->
 <div class="content-full content-padded">
-    <h1 class="content-first">Messages</h1>
-    <p>Inline message <span class="message-alert">alert</span>, <span class="message-confirm">confirm</span>, <span class="message-error">error</span>, <span class="message-info">info</span>.</p>
+    <h1 class="content-first">Content Messages</h1>
+    <p>Inline message <span class="message alert">alert</span>, <span class="message confirm">confirm</span>, <span class="message error">error</span>, <span class="message info">info</span>.</p>
     <div>
-        <div class="message-full message-alert">This is an alert message</div>
-        <div class="message-full message-confirm">This is a confirm message</div>
-        <div class="message-full message-padded message-error">This is a padded error message</div>
-        <div class="message-full message-padded message-info">This is a padded info message</div>
+        <div class="message full alert">This is an alert message</div>
+        <div class="message full confirm">This is a confirm message</div>
+        <div class="message full padded error">This is a padded error message</div>
+        <div class="message full padded info">This is a padded info message</div>
     </div>
 </div>
 
-<div class="message-full message-alert">This is an alert message</div>
-<div class="message-full message-confirm">This is a confirm message</div>
-<div class="message-full message-padded message-error">This is a padded error message</div>
-<div class="message-full message-padded message-info">This is a padded info message</div>
+<div class="message full alert">This is an alert message</div>
+<div class="message full confirm">This is a confirm message</div>
+<div class="message full padded error">This is a padded error message</div>
+<div class="message full padded info">This is a padded info message</div>
 
-<div id="alert-msg" class="message-full message-padded message-alert">This is a padded alert message from existing markup</div>
+<div id="alert-msg" class="message full padded alert">This is a padded alert message from existing markup</div>
 
 <?php
 echo Site_Decorator::button_full()

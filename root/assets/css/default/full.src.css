@@ -271,7 +271,7 @@ form.form-full > input[type=reset]:hover {
     border-radius: .5em;
 }
 
-.message-modal.message-padded {
+.message-modal.message.padded {
     margin: .6em 10px;
 }
 

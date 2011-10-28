@@ -309,34 +309,34 @@ form.form-full > input[type=reset] {
 /********************************************************
  * MESSAGES
  *******************************************************/
-.message-full {
+.message.full {
     background-position: 99% 50%;
     background-repeat: no-repeat;
 }
 
-.message-full.message-alert {
+.message.full.alert {
     background-image: url("img/message-alert.png");
 }
 
-.message-full.message-confirm {
+.message.full.confirm {
     background-image: url("img/message-confirm.png");
 }
 
-.message-full.message-error {
+.message.full.error {
     background-image: url("img/message-error.png");
 }
 
-.message-full.message-info {
+.message.full.info {
     background-image: url("img/message-info.png");
 }
 
-.message-padded {
+.message.padded {
     margin: .6em 10px;
 }
 
-.content-full .message-padded,
-.menu-full .message-padded,
-.form-full .message-padded {
+.content-full .message.padded,
+.menu-full .message.padded,
+.form-full .message.padded {
     margin: .6em 0;
 }
 
