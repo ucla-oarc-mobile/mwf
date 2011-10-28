@@ -323,15 +323,6 @@ mwf.capability=new function(){
     }
     
     /**
-     * Determine if the device browser supports WebGL.
-     * 
-     * @return bool
-     */
-    this.webgl = function(){
-        return _m.webgl;
-    }
-    
-    /**
      * Determine if the device browser supports web sockets.
      * 
      * @return bool

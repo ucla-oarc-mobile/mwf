@@ -19,6 +19,7 @@ License:
 
 TABLE OF CONTENTS
 
+Version 1.2.05          October 26, 2011
 Version 1.2.04          October 14, 2011
 Version 1.2.03.rc       October 10, 2011
 Version 1.2.02.rc       October 1, 2011
@@ -32,6 +33,47 @@ Version 1.1.03.alpha    July 20, 2011
 Version 1.1.02.alpha    June 23, 2011
 Version 1.1.01.alpha    June 16, 2011
 Version 1.1.00.alpha    May 20, 2011
+
+==============================================================================
+
+Version 1.2.05
+October 26, 2011
+
+* Modifications to the redirect script (redirect/js.php)
+
+    * Resolve case-sensitive bug in file inclusion [MWF-227]
+
+    * Set HTTP header to not cache file [MWF-278]
+
+* Modifications to the mwf.capability API:
+
+    * Removed mwf.capability.webgl() because indeterminable accurately [MWF-272]
+
+    * Bool cast from Modernizr result so audio() always return bool [MWF-261]
+
+    * Bool cast from Modernizr result so video() always return bool [MWF-262]
+
+* Fix to standard classification .button-full definition [MWF-275]
+
+* Resolve reference to deprecated class in JS dependency loader [MWF-267]
+
+* Fixes for deprecated support in mwf.user_agent functions [MWF-268]
+
+* Fix for deprecated support in mwf.site.frontpage() function [MWF-259]
+
+* Minified js/core/telemetry.js [MWF-274]
+
+* Fix to Geolocation error message text [MWF-271]
+
+* Textual fix in config/css.php [MWF-276]
+
+* Textual fix in js/core/classification.src.js [MWF-266]
+
+* Textual fix in js/browser/browser.src.js [MWF-263]
+
+* Textual fixes in js/browser/screen.src.js [MWF-264]
+
+* Update README with new contact details [MWF-279]
 
 ==============================================================================
 

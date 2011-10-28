@@ -94,7 +94,7 @@ if(!isset($_GET['no_favicon']) && !isset($_GET['no_icon']))
  */
 
 if(Classification::is_full() && (!Config::get('global', 'appicon_allow_disable_flag') || (!isset($_GET['no_appicon']) && !isset($_GET['no_icon']))))
-    JS::load('iphone/appicon.js');
+    JS::load('full/appicon.php');
 
 /**
  * Moves the window below the URL bar and fixes Safari viewport on orientation change.
