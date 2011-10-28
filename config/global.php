@@ -44,6 +44,11 @@ Config::set('global', 'cookie_prefix', 'mwf_');
  * TEXT AND IMAGES
  *
  * - back_to_home_text      The text of a go back to home button.
+ * - charset                Character set (e.g., "utf-8") to be specified in meta tag.
+ *                              Useful if you do not have sufficient control over your
+ *                              web server to configure the HTTP headers to specify
+ *                              a character set.  (For Apache, this can be done
+ *                              with the AddDefaultCharset directive.)
  * - copyright_text         The footer copyright notice written by decorator.
  * - header_home_button     Full image path for the header home button image.
  * - header_home_button_alt Alternate text for the header home button image.
@@ -54,6 +59,7 @@ Config::set('global', 'appicon_img',                Config::get('global', 'site_
 Config::set('global', 'appicon_img_precomposed',    Config::get('global', 'site_assets_url').'/img/mwf-appicon-precomposed.png');
 Config::set('global', 'appicon_allow_disable_flag', true);
 Config::set('global', 'back_to_home_text',          'Go Back to Home');
+Config::set('global', 'charset',                    false);
 Config::set('global', 'copyright_text',             'University of California &copy; 2010 UC Regents');
 Config::set('global', 'header_home_button',         Config::get('global', 'site_assets_url').'/img/mwf-header.gif');
 Config::set('global', 'header_home_button_alt',     'MWF');
