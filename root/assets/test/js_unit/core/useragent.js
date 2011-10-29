@@ -16,15 +16,18 @@ module("core/useragent.js");
             
 test("mwf.userAgent.getOS()", function()
 {
-    expect(1); 
     var os = mwf.userAgent.getOS();
     
     ok(typeof os === 'string','getOS() should return a string');
+    
+    var expected_results = ['iphone_os', 'android','blackberry','windows phone os','windows mobile',
+        'symbian','webos','mac os x','windows nt','linux', ''];
+    
+    ok(expected_results.indexOf(os) > -1, 'getOS() should be expected value: ' + os);
 });
 
 test("mwf.userAgent.getOSVersion()", function()
 {
-    expect(1); 
     var osVersion = mwf.userAgent.getOSVersion();
     
     ok(typeof osVersion === 'string','getOSVersion() should return a string');
@@ -32,7 +35,6 @@ test("mwf.userAgent.getOSVersion()", function()
 
 test("mwf.userAgent.getBrowser()", function()
 {
-    expect(1); 
     var browser = mwf.userAgent.getBrowser();
     
     ok(typeof browser === 'string','getBrowser() should return a string');
@@ -40,7 +42,6 @@ test("mwf.userAgent.getBrowser()", function()
 
 test("mwf.userAgent.getBrowserEngine()", function()
 {
-    expect(1); 
     var browserEngine = mwf.userAgent.getBrowserEngine();
     
     ok(typeof browserEngine === 'string','getBrowserEngine() should return a string');
@@ -48,7 +49,6 @@ test("mwf.userAgent.getBrowserEngine()", function()
 
 test("mwf.userAgent.getBrowserEngineVersion()", function()
 {
-    expect(1); 
     var browserEngineVersion = mwf.userAgent.getBrowserEngineVersion();
     
     ok(typeof browserEngineVersion === 'string','getBrowserEngineVersion() should return a string');
