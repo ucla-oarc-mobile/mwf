@@ -130,7 +130,7 @@ test("mwf.capability.css.transitions()", function()
 test("mwf.capability.css.prop()", function()
 {
     expect(4);
-    var prop = mwf.capability.css.prop('pointerEvents');
+    var prop = mwf.capability.css.prop('background');
     equal(typeof prop, 'boolean', 'mwf.capability.css.prop() should return a boolean true');
     equal(prop, true, 'browser supports pointerEvents property');
     prop = mwf.capability.css.prop('nonexistentProperty');
