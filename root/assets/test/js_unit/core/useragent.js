@@ -61,6 +61,7 @@ test("mwf.userAgent.getBrowserEngine()", function()
     Object.defineProperty(navigator, 'userAgent', { get: function() { return "unknown user agent"; }});
     var newUserAgent = new mwf.userAgent.constructor;
     var newBrowserEngine = newUserAgent.getBrowserEngine();
+
     strictEqual(newBrowserEngine, '', 'Unknown user agent should result in empty browserEngine: ' + newBrowserEngine);
 
     navigator = saveNavigator;
