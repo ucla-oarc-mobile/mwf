@@ -144,6 +144,8 @@ mwf.userAgent = new function() {
         for(;i<browserEnginesToTest.length;i++)
             if(userAgentSubstringExists(browserEnginesToTest[i])) 
                 return browserEnginesToTest[i];
+        
+        return '';
     }
     
     /**
