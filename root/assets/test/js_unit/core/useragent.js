@@ -38,6 +38,11 @@ test("mwf.userAgent.getBrowser()", function()
     var browser = mwf.userAgent.getBrowser();
     
     ok(typeof browser === 'string','getBrowser() should return a string');
+    
+    var expected_results = ['android_webkit', 'safari', 'chrome', 'iemobile', 'camino', 
+        'seamonkey', 'firefox', 'opera_mobi', 'opera_mini', ''];
+    
+    ok(expected_results.indexOf(browser) > -1, 'getBrowser() should be expected value: ' + browser);
 });
 
 test("mwf.userAgent.getBrowserEngine()", function()
