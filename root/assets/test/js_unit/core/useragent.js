@@ -50,6 +50,21 @@ test("mwf.userAgent.getBrowserEngine()", function()
     var browserEngine = mwf.userAgent.getBrowserEngine();
     
     ok(typeof browserEngine === 'string','getBrowserEngine() should return a string');
+    
+    var expected_results = ['webkit', 'trident', 'gecko', 'presto', 'khtml', ''];
+    
+    ok(expected_results.indexOf(browserEngine) > -1, 'getBrowserEngine() should be expected value: ' + browserEngine);
+    
+    var saveNavigator = navigator;
+    navigator = new Object();
+    navigator.__proto__ = saveNavigator;
+    Object.defineProperty(navigator, 'userAgent', { get: function() { return "unknown user agent"; }});
+    console.log(navigator);
+    var newUserAgent = new mwf.userAgent.constructor;
+    var newBrowserEngine = newUserAgent.getBrowserEngine();
+    strictEqual(newBrowserEngine, '', 'Unknown user agent should result in empty browserEngine: ' + newBrowserEngine);
+
+    navigator = saveNavigator;
 });
 
 test("mwf.userAgent.getBrowserEngineVersion()", function()
