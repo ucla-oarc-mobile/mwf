@@ -19,8 +19,15 @@ mwf.touch.geolocation = new function()
     var type = -1;
     var position = null;
     var highAccuracy = true;
+    
+    //The maximum age (in milliseconds) of the reading (this is appropriate as 
+    //the device may cache readings to save power and/or bandwidth).
     var timeout = 3000;
-
+    
+    //The maximum time (in milliseconds) for which you are prepared to allow 
+    //the device to try to obtain a Geo location.
+    var geoTimeout = 5000;
+    
     this.getType = function()
     {
         if(type < 0)
@@ -77,7 +84,7 @@ mwf.touch.geolocation = new function()
                 if(typeof onError != 'undefined')
                     onError('Geolocation failure.');
             },
-            {enableHighAccuracy:highAccuracy, maximumAge:timeout});
+            {enableHighAccuracy:highAccuracy, maximumAge:timeout, timeout: geoTimeout});
 
         return true;
     }
