@@ -29,8 +29,8 @@ require_once(dirname(dirname(__FILE__)).'/root/assets/lib/config.class.php');
 Config::set('global', 'site_url', false);
 Config::set('global', 'site_assets_url', false);
 Config::set('global', 'site_nonmobile_url', false);
-Config::set('global', 'full_site_url', false);
-Config::set('global', 'help_site_url', false);
+Config::set('global', 'footer_link_urls', array());
+Config::set('global', 'footer_link_titles', array());
 
 /**
  * CORE
@@ -76,3 +76,5 @@ Config::set('global', 'title_text',                 'UCLA MWF');
 
 Config::set('global', 'header_image_sub_alt', 'MWF');
 Config::set('global', 'header_image_sub', Config::get('global', 'site_assets_url').'/img/mwf-header.gif');
+Config::set('global', 'full_site_url', false);
+Config::set('global', 'help_site_url', false);
