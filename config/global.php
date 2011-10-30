@@ -55,6 +55,7 @@ Config::set('global', 'cookie_prefix', 'mwf_');
  * - copyright_text         The footer copyright notice written by decorator.
  * - header_home_button     Full image path for the header home button image.
  * - header_home_button_alt Alternate text for the header home button image.
+ * - language               Default language code (e.g., "en" for English)
  * - title_text             Title written by decorator into the head
  */
 
