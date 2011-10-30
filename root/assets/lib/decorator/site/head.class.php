@@ -115,12 +115,17 @@ class Head_Site_Decorator extends Tag_HTML_Decorator
         foreach($this->_handler_js_params as $key=>$val)
             $handler_js .= is_int($key) ? $val.'&' : $key.'='.$val.'&';
         $handler_js = substr($handler_js, 0, strlen($handler_js)-1);
-
+        
         $this->add_inner_tag_front('meta', false, array('name'=>'viewport', 'content'=>'height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no'));
         $this->add_inner_tag_front('script', null, array('type'=>'text/javascript', 'src'=>(HTTPS::is_https() ? HTTPS::convert_path($handler_js) : $handler_js)));
         $this->add_inner_tag_front('link', false, array('rel'=>'stylesheet', 'type'=>'text/css', 'href'=>(HTTPS::is_https() ? HTTPS::convert_path($handler_css) : $handler_css), 'media'=>'screen'));
         $this->add_inner_tag_front('title', $this->_title);
 
+        $charset = Config::get('global', 'charset');
+        if ($charset !== false) {
+            $this->add_inner_tag_front('meta', false, array('charset'=>$charset));
+        }
+        
         return parent::render();
     }
 }
