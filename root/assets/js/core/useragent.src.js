@@ -144,13 +144,14 @@ mwf.userAgent = new function() {
         for(;i<browserEnginesToTest.length;i++)
             if(userAgentSubstringExists(browserEnginesToTest[i])) 
                 return browserEnginesToTest[i];
+        
+        return '';
     }
     
     /**
      * Determines the web browser engine version from string or else returns an 
      * empty string.
      *
-     * @todo
      * @return string
      */
     this.getBrowserEngineVersion = function(){
