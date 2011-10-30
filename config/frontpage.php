@@ -94,7 +94,7 @@ Config::set('frontpage', 'menu',
  * capacity only and should not be relied on by components or modules
  * as they will eventually be removed.
  *
- *  * full_site_url    URL of non-mobile site link on front page for mobile devices.
+ * full_site_url    URL of non-mobile site link on front page for mobile devices.
  * help_site_url    URL of the help site or FALSE if there is none.
  *
  * @link index.php
