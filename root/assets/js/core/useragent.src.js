@@ -150,7 +150,6 @@ mwf.userAgent = new function() {
      * Determines the web browser engine version from string or else returns an 
      * empty string.
      *
-     * @todo
      * @return string
      */
     this.getBrowserEngineVersion = function(){
