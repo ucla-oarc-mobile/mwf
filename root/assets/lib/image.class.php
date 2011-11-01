@@ -18,7 +18,7 @@
  * @todo Refactor
  */
 require_once(dirname(dirname(__FILE__)) . '/config.php');
-require_once(dirname(__FILE__).'/path_validator.class.php');
+require_once(dirname(__FILE__) . '/path_validator.class.php');
 
 abstract class Image {
 
@@ -30,23 +30,29 @@ abstract class Image {
     private $_ext_allowed = array();
     private $_ext_force = null;
     private $_cache_filename = null;
-    
+
     abstract protected function &get_gd_image();
+
     abstract protected function get_gd_extension();
 
     public static function factory($image_path) {
         if (!Path_Validator::is_safe($image_path))
             return NULL;
 
-        if (filter_var($image_path, FILTER_VALIDATE_URL)) {
-            require_once(dirname(__FILE__).'/image/remote_image.class.php');
-            return new Remote_Image($image_path);
+        // FILTER_VALIDATE_URL needs an encoded URL
+        $image_url = preg_replace_callback('#://([^/]+)/([^?]+)#', function ($match) {
+                    return '://' . $match[1] . '/' . join('/', array_map('rawurlencode', explode('/', $match[2])));
+                }, $image_path);
+
+        if (filter_var($image_url, FILTER_VALIDATE_URL)) {
+            require_once(dirname(__FILE__) . '/image/remote_image.class.php');
+            return new Remote_Image($image_url);
         } else {
-            require_once(dirname(__FILE__).'/image/local_image.class.php');
+            require_once(dirname(__FILE__) . '/image/local_image.class.php');
             return new Local_Image($image_path);
         }
     }
-    
+
     private function __construct($imagepath) {
         $this->_image_path = $imagepath;
         $this->_image_file_root = md5($imagepath);
@@ -163,11 +169,11 @@ abstract class Image {
         $savefunction($generated, $savepath, $quality);
         return file_exists($savepath);
     }
-    
+
     protected function get_cache_filename() {
         if ($this->_cache_filename !== null)
             return $this->_cache_filename;
-        
+
         $filename = Config::get('image', 'cache_dir') . $this->_image_file_root;
 
         list($filerawwidth, $filerawheight, $filerawtype, $filerawattr) = getimagesize($this->_image_path);
@@ -186,10 +192,10 @@ abstract class Image {
         if ($this->_ext_force) {
             $filename .= $this->_ext_force;
         }
-        
-        return $filename;   
+
+        return $filename;
     }
-    
+
     protected function get_image_path() {
         return $this->_image_path;
     }
