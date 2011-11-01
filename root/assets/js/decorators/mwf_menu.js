@@ -46,8 +46,13 @@ if(mwf.decorators == undefined)
 
 
 
-mwf.decorators.menu = function(isFull, isLight, isPadded, isDetailed)
+mwf.decorators.menu = function(title)
 {   
+    
+    if(title != undefined)
+    {
+        this.setTitle(title);
+    }
     
     /*********************************************************************
      *                    PRIVATE VARIABLES BELOW                        *
@@ -75,25 +80,30 @@ mwf.decorators.menu = function(isFull, isLight, isPadded, isDetailed)
      * If true, the div containing the menu will have ".menu-full" in its class
      * definition.
      */
-    var _isFull = (isFull == undefined) ? true : isFull;
+    var _isFull = true;
     
     /**
      * If true, the div containing the menu will have ".menu-padded" in its 
      * class definition.
      */
-    var _isPadded = (isPadded == undefined) ? true : isPadded;
+    var _isPadded = true;
     
     /**
      * If true, the div containing the menu will have ".menu-detailed" in its 
      * class definition. This variable will have to be set to true in case there
      * exists at least one menu element with details.
      */
-    var _isDetailed = (isDetailed == undefined) ? true : isDetailed;
+    var _isDetailed = true;
     
     /**
      * If true, menu title will have ".light" in its class definition.
      */
-    var _isLight = (isLight == undefined) ? true : isLight;
+    var _isLight = true;
+    
+    /**
+     * If true, title header will have blue formatting. 
+     */
+    var _isBlue  = false;
     
     
     /*********************************************************************
@@ -278,7 +288,7 @@ mwf.decorators.menu = function(isFull, isLight, isPadded, isDetailed)
         {
             //The title is always the first element. If _isLight is true,
             //then also include .light in the class information.
-            _menuTitle.className = "menu-first" + ((_isLight)? " light" : "");
+            _menuTitle.className = "menu-first " + getTitleClass();
    
             menu.appendChild(_menuTitle);
         }
@@ -335,12 +345,21 @@ mwf.decorators.menu = function(isFull, isLight, isPadded, isDetailed)
     }
     
     /**
-     * Sets _isLight
+     * Sets _isLight.
      * @param isLight The new value of _isLight.
      */
     this.setIsLight = function(isLight)
     {
         _isLight = isLight;
+    }
+    
+    /**
+     * Sets _isBlue.
+     * @param isBlue The new value of _isBlue.
+     */
+    this.setIsBlue = function(isBlue)
+    {
+        _isBlue = isBlue;
     }
     
     /*********************************************************************
@@ -376,6 +395,24 @@ mwf.decorators.menu = function(isFull, isLight, isPadded, isDetailed)
         }
         
         return menuClass;
+    }
+    
+    var getTitleClass = function()
+    {
+        var titleClass = "";
+        
+        if(_isLight)
+        {
+            titleClass += "light ";
+        }
+        
+        if(_isBlue)
+        {
+            titleClass += "blue ";
+        }
+        
+        return titleClass;
+        
     }
     
     /**
