@@ -39,7 +39,7 @@ class Remote_Image extends Image {
         if (! file_exists($path)) {
             $path = tempnam(sys_get_temp_dir(), 'mwf');
             if (ini_get('allow_url_fopen')) {
-                /* TODO: need to urlencode() $image_path but only directory and file names */
+                /* NB: We are trusting that the URL is encoded already. This is true if it came from the image minifier. */
                 file_put_contents($path, file_get_contents($image_path, FALSE, NULL, -1, 9999999));
             } else {
                 $ch = curl_init($image_path);
