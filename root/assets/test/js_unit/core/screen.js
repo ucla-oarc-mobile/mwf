@@ -21,7 +21,7 @@ test("mwf.screen.getWidth()", function()
     var width = mwf.screen.getWidth();
     var os = mwf.userAgent.getOS();
     var osVersion = mwf.userAgent.getOSVersion();
-    if (os=='android' && (osVersion.indexOf('2.2') == 0 || version.indexOf('2.3') == 0)) {
+    if (os=='android' && (osVersion.indexOf('2.2') == 0 || osVersion.indexOf('2.3') == 0)) {
         equal(typeof width,'boolean','Android 2.2/2.3 should return Boolean false')
         equal(width,false,'Android 2.2/2.3 cannot reliably report width')
     } else {
@@ -36,7 +36,7 @@ test("mwf.screen.getHeight()", function()
     var height = mwf.screen.getHeight();
     var os = mwf.userAgent.getOS();
     var osVersion = mwf.userAgent.getOSVersion();
-    if (os=='android' && (osVersion.indexOf('2.2') == 0 || version.indexOf('2.3') == 0)) {
+    if (os=='android' && (osVersion.indexOf('2.2') == 0 || osVersion.indexOf('2.3') == 0)) {
         equal(typeof height,'boolean','Android 2.2/2.3 should return Boolean false')
         equal(height,false,'Android 2.2/2.3 cannot reliably report height')
     } else {
