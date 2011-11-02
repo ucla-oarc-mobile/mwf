@@ -38,11 +38,14 @@ class Remote_Image extends Image {
         $path = $this->get_cache_filename();
         if (! file_exists($path)) {
             $path = tempnam(sys_get_temp_dir(), 'mwf');
+            // Encode the URL
+            $image_url = preg_replace_callback('#://([^/]+)/([^?]+)#', function ($match) {
+                    return '://' . $match[1] . '/' . join('/', array_map('rawurlencode', explode('/', $match[2])));
+                }, $image_path);
             if (ini_get('allow_url_fopen')) {
-                /* TODO: need to urlencode() $image_path but only directory and file names */
-                file_put_contents($path, file_get_contents($image_path, FALSE, NULL, -1, 9999999));
+                file_put_contents($path, file_get_contents($image_url, FALSE, NULL, -1, 9999999));
             } else {
-                $ch = curl_init($image_path);
+                $ch = curl_init($image_url);
                 $fh = fopen($path, 'wb');
                 curl_setopt($ch, CURLOPT_FILE, $fh);
                 curl_setopt($ch, CURLOPT_HEADER,0);
