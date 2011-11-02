@@ -23,12 +23,6 @@
  */
 
 /**
- * Defines the file to be parsed as a CSS file.
- */
-
-header("Content-Type: text/css");
-
-/**
  * Include necessary libraries.
  */
 
@@ -37,6 +31,23 @@ require_once(dirname(__FILE__).'/lib/config.class.php');
 require_once(dirname(__FILE__).'/lib/cssmin.class.php');
 require_once(dirname(__FILE__).'/lib/path.class.php');
 require_once(dirname(__FILE__).'/lib/path_validator.class.php');
+
+/**
+ * Defines the file to be parsed as a CSS file.
+ */
+
+header('Content-Type: text/css');
+
+if(!Classification::init())
+{
+    header("Cache-Control: max-age=0");
+}
+else
+{
+    /**
+     * @todo what do we do with caching here?
+     */
+}
 
 ?>/** Mobile Web Framework | http://mwf.ucla.edu */
 

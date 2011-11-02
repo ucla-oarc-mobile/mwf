@@ -1,8 +1,5 @@
 /**
- * A anonymous encapsulated routine that will set a cookie with classification
- * information, if it is not already defined, using mwf.classification methods,
- * and a cookie with user agent data, if it not already defined, using 
- * mwf.userAgent methods.
+ * 
  *
  * @package core
  * @subpackage js
@@ -10,9 +7,10 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110921
+ * @version 20111102
  *
  * @requires mwf
+ * @requires mwf.site
  * @requires mwf.capability
  * @requires mwf.classification
  * @requires mwf.userAgent
@@ -23,132 +21,147 @@
  * @requires /root/assets/js/core/userAgent.js
  */
 
-(function(){
+mwf.server = new function(){
     
-    if(!mwf.capability.cookie())
-        return;
+    this.cookieNameLocal = mwf.site.cookie.prefix+'server';
+    this.mustRedirect = false;
+    this.mustReload = false;
     
-    var i, cookies = document.cookie.split(';');
-    
-    /**
-     * Anonymous routine for the classification cookie that will return 
-     * true if it needs a page reload to pass the cookie to server.
-     */
-    var reload = (function(){
-
-        var classification = mwf.classification;
-
-        /**
-         * Exit routine early with false if matching classification cookie.
-         */
-        for(i=0; i < cookies.length; i++){
-            x = cookies[i].substr(0,cookies[i].indexOf("="));
-            x = x.replace(/^\s+|\s+$/g,"");
-            if(x == classification.cookieName)
-                return false;
-        }
-
-        /**
-         * If cookie is not set, set the cookie and reload the page.
-         */
-        var cookie = classification.cookieName+'={';
-        cookie += '"mobile":'+classification.isMobile();
-        cookie += ',"basic":'+classification.isBasic();
-        cookie += ',"standard":'+classification.isStandard();
-        cookie += ',"full":'+classification.isFull();
-        if(classification.isOverride()){
-            cookie += ',"actual":{';
-            cookie += '"mobile":'+classification.wasMobile();
-            cookie += ',"basic":'+classification.wasBasic();
-            cookie += ',"standard":'+classification.wasStandard();
-            cookie += ',"full":'+classification.wasFull();
-            cookie += '}';
-        }
-        cookie += '};path=/';
-        document.cookie = cookie;
+    this.init = function(){
         
         /**
-         * Return true for reload request if cookie has been written.
+         * Initialization requires cookies to store data - else simply exit.
          */
-        return document.cookie.indexOf(classification.cookieName) != -1;
-
-    })();
+        
+        if(!mwf.capability.cookie())
+            return;
+        
+        
+        /**
+         * Set classification cookie if it doesn't already exist on server.
+         */
+        
+        if(!mwf.site.cookie.exists(mwf.classification.cookieName))
+            this.setCookie(mwf.classification.cookieName, mwf.classification.generateCookieContent());
+        
+        /**
+         * Set user agent cookie if it doesn't already exist on server.
+         */
+        
+        if(!mwf.site.cookie.exists(mwf.userAgent.cookieName))
+            this.setCookie(mwf.userAgent.cookieName, mwf.userAgent.generateCookieContent());
+        
+        /**
+         * Set screen cookie if it doesn't already exist on server.
+         */
+        
+        if(!mwf.site.cookie.exists(mwf.screen.cookieName))
+            this.setCookie(mwf.screen.cookieName, mwf.screen.generateCookieContent());
+        
+        /**
+         * If the service provider doesn't have cookies, either (1) reload
+         * the page if framework is of same-origin or device browser supports 
+         * third-party cookies, or (2) redirect to the SP redirector. If the
+         * service provider already has cookies, then this isn't necessary.
+         */
+        
+        if(this.mustReload){
             
-    /**
-     * Anonymous routine for the classification cookie that will return 
-     * true if it needs a page reload to pass the cookie to server.
-     */
-    reload = (function(){
-         
-        var userAgent = mwf.userAgent;
-
-        /**
-         * Exit routine early with false if matching classification cookie.
-         */
-        for(i=0; i < cookies.length; i++){
-            x = cookies[i].substr(0,cookies[i].indexOf("="));
-            x = x.replace(/^\s+|\s+$/g,"");
-            if(x == userAgent.cookieName)
-                return false;
-        }
-
-        /**
-         * If cookie is not set, set the cookie and reload the page.
-         */
-        var t;
-        var cookie = userAgent.cookieName+'={';
-        cookie += '"s":"'+navigator.userAgent.replace(/\;/g, '\\x3B').replace(/\,/g, '\\x2C')+'"';
-        if(t = userAgent.getOS())
-            cookie += ',"os":"'+t+'"';
-        if(t = userAgent.getOSVersion())
-            cookie += ',"osv":"'+t+'"';
-        if(t = userAgent.getBrowser())
-            cookie += ',"b":"'+t+'"';
-        if(t = userAgent.getBrowserEngine())
-            cookie += ',"be":"'+t+'"';
-        if(t = userAgent.getBrowserEngineVersion())
-            cookie += ',"bev":"'+t+'"';
-        cookie += '};path=/';
-        document.cookie = cookie;
-        
-        /**
-         * Return true for reload request if cookie has been written.
-         */
-        return document.cookie.indexOf(userAgent.cookieName) != -1;
-
-    })() || reload;
+            document.location.reload();
             
-    /**
-     * Anonymous routine for the screen dimensions cookie that will return 
-     * true if it needs a page reload to pass the cookie to server.
-     */
-    reload = (function(){
-
-        var screen = mwf.screen
-        
-        cookieContents = screen.cookieName+'={"h":"'+screen.getHeight()+'","w":"'+screen.getWidth()+'","r":"'+screen.getPixelRatio()+'"}';
-
-        /**
-         * Exit routine early with false if matching classification cookie.
-         */
-        for(i=0; i < cookies.length; i++){
-            if(cookies[i].replace(/^\s+|\s+$/g,"") == cookieContents)
-                return false;
+        }else if(this.mustRedirect){
+            
+            window.location = mwf.site.asset.root+'/passthru.php?return='+encodeURIComponent(window.location);
+            
+        }else{
+            
+            // do nothing!
+            
         }
         
-        document.cookie = cookieContents+';path=/';
+    }
+    
+    this.setCookie = function(cookieName, cookieContent) {
+    
+        /**
+         * Function to generate a cookie on the service provider, specifying a
+         * domain if this is a cross
+         */
+        
+        var cookieSuffix = ';path=/';
+        
+        var isCrossDomain = (function(){
+
+                /**
+                 * No support for cross-domain framework without SP cookie domain.
+                 */
+                if(!mwf.site.cookie.domain)
+                    return false;
+
+                var serviceProvider = "."+mwf.site.cookie.domain.toLowerCase();
+                var contentProvider = "."+mwf.site.local.domain.toLowerCase();
+
+                return contentProvider.substring(contentProvider.length - serviceProvider.length, serviceProvider.length) != serviceProvider;
+
+            })();
+        
+        var isFirstLoad = !mwf.site.local.cookie.exists(this.cookieNameLocal);
         
         /**
-         * Return true for reload request if cookie has been written.
+         *
+         *
+         * @todo determine other operating systems that prevent third-party
          */
-        return document.cookie.indexOf(screen.cookieName) != -1;
-
-    })() || reload;
         
-    /**
-     * Reload the page if needed.
-     */
-    if(reload)
-        document.location.reload();
-     
-})();
+        var isThirdPartySupported = (function(){
+
+                return mwf.userAgent.getBrowser() != 'safari' && mwf.userAgent.getBrowser() != 'firefox';
+
+            })();
+            
+        /**
+         * If not cross-domain or this is the first load and third party is
+         * supported, then attempt to write the cookie to the SP directly.
+         */
+        
+        if(!isCrossDomain || isFirstLoad && isThirdPartySupported){
+            
+            if(isFirstLoad){
+                document.cookie = mwf.server.cookieNameLocal + '="1";path=/';
+            }
+        
+            /**
+             * Error condition will be encountered where domain isn't set if
+             * we're cross-domain but the mwf.site.cookie.domain config
+             * variable is not set.
+             */
+            if(isCrossDomain && mwf.site.cookie.domain) {
+                cookieSuffix += ';domain='+mwf.site.cookie.domain;
+            }
+            
+            /**
+             * Write the cookie with the proper suffix for service provider.
+             */
+            document.cookie = cookieName + "=" + cookieContent+cookieSuffix;
+            
+            /**
+             * Must reload the page to propagate the cookie to SP.
+             */
+            mwf.server.mustReload = true;
+            
+        /**
+         * If third-party cookies aren't supported and this is cross domain,
+         * then redirect through the SP and then back to CP.
+         */    
+        
+        } else {
+            
+            mwf.server.mustRedirect = true;
+            
+        }
+        
+    }
+    
+}
+
+mwf.server.init();

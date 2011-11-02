@@ -8,7 +8,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111003
+ * @version 20111102
  *
  * @requires mwf
  * @requires mwf.site
@@ -92,5 +92,29 @@ mwf.classification=new function(){
             return 'standard';
         else
             return 'basic';
+    }
+    
+    /**
+     * Generate JSON content passed into the cookie written by mwf.server.
+     * 
+     * @return string
+     */
+    this.generateCookieContent = function(){
+        
+        var cookie = '{';
+        cookie += '"mobile":'+this.isMobile();
+        cookie += ',"basic":'+this.isBasic();
+        cookie += ',"standard":'+this.isStandard();
+        cookie += ',"full":'+this.isFull();
+        if(this.isOverride()){
+            cookie += ',"actual":{';
+            cookie += '"mobile":'+this.wasMobile();
+            cookie += ',"basic":'+this.wasBasic();
+            cookie += ',"standard":'+this.wasStandard();
+            cookie += ',"full":'+this.wasFull();
+            cookie += '}';
+        }
+        cookie += '}';
+        return cookie;
     }
 };
