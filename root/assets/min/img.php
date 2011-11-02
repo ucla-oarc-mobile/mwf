@@ -90,6 +90,11 @@ if (isset($_GET['browser_height_percent']) || isset($_GET['browser_height_force'
  */
 $image = Image::factory($_GET['img']);
 
+if (! $image) {
+    error_log('MWF Notice: Image creation failed in ' . $_SERVER['PHP_SELF'] . '. Bad image path?: ' . $_GET['img'], 0);
+    exit(1);
+}
+
 /** GIF, JPG, and JPEG are within XHTML MP 1.0 specification. */
 $image->set_allowed_extension('gif');
 $image->set_allowed_extension('jpeg');
