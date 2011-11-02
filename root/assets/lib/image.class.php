@@ -39,14 +39,9 @@ abstract class Image {
         if (!Path_Validator::is_safe($image_path))
             return NULL;
 
-        // FILTER_VALIDATE_URL needs an encoded URL
-        $image_url = preg_replace_callback('#://([^/]+)/([^?]+)#', function ($match) {
-                    return '://' . $match[1] . '/' . join('/', array_map('rawurlencode', explode('/', $match[2])));
-                }, $image_path);
-
-        if (filter_var($image_url, FILTER_VALIDATE_URL)) {
+        if (array_key_exists('scheme', parse_url($image_path))) {
             require_once(dirname(__FILE__) . '/image/remote_image.class.php');
-            return new Remote_Image($image_url);
+            return new Remote_Image($image_path);
         } else {
             require_once(dirname(__FILE__) . '/image/local_image.class.php');
             return new Local_Image($image_path);
