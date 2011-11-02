@@ -548,13 +548,13 @@ form.form-full > input[type=reset]:hover {
 /********************************************************
  * FRONT PAGE
  *******************************************************/
-body.front-page h1#header {
+body.front-page #header {
     background: #536895 url(img/header-front-page-bg.png) repeat-x;
     height: 50px;
 }
-body.front-page h1#header img {
+body.front-page #header img {
     float: none;
 }
-body.front-page h1#header span {
+body.front-page #header span {
     display: none;
 }
