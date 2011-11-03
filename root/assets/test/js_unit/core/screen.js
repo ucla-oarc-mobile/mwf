@@ -4,7 +4,7 @@
  * @author trott
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111016
+ * @version 20111102
  *
  * @requires mwf
  * @requires mwf.screen
@@ -52,3 +52,10 @@ test("mwf.screen.getPixelRatio()", function()
     equal(typeof pixelRatio, 'number', 'pixel ratio should be a number');
     ok(pixelRatio > 0, 'pixelRatio should be positive: ' + pixelRatio);
 })
+
+test("mwf.screen.generateCookieContent()", function()
+{   
+    var re = /^\{\"h\":\"([0-9]+|false)\",\"w\":\"([0-9]+|false)\",\"r\":\"[0-9]+(\.[0-9]+)?\"\}$/;
+    var cookie = mwf.screen.generateCookieContent();
+    ok(re.exec(cookie), 'cookie should be in expected format');
+});
