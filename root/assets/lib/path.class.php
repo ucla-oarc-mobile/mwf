@@ -32,7 +32,7 @@ class Path extends Path_Validator
      *
      * @var int
      */
-    private static $_curl_timeout_download = 1000;
+    private static $_curl_timeout_download = 1;
     
     /**
      * The timeout that curl will wait for on HTTP HEAD. If this is causing
@@ -91,7 +91,7 @@ class Path extends Path_Validator
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $path);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT_MS, self::$_curl_timeout_download);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, self::$_curl_timeout_download);
         $result = curl_exec($ch);
         curl_close($ch);
 
