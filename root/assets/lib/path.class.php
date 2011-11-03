@@ -11,7 +11,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20101021
+ * @version 20111102
  *
  * @uses Path_Validator
  */
@@ -37,12 +37,12 @@ class Path extends Path_Validator
     /**
      * The timeout that curl will wait for on HTTP HEAD. If this is causing
      * curl to fail the request, then this should be increased. However, in
-     * most cases, the default of 0.5 seconds should be more than enough for a
+     * most cases, the default of 1 second should be more than enough for a
      * HTTP HEAD request between well-connected resources.
      *
      * @var int
      */
-    private static $_curl_timeout_exists = 500;
+    private static $_curl_timeout_exists = 1;
 
     /**
      * Returns true if the file exists by way of an HTTP HEAD curl request. This
@@ -65,7 +65,7 @@ class Path extends Path_Validator
          curl_setopt($ch, CURLOPT_HEADER, TRUE);
          curl_setopt($ch, CURLOPT_NOBODY, TRUE);
          curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT_MS, self::$_curl_timeout_exists);
+         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, self::$_curl_timeout_exists);
          $result = curl_exec($ch);
          curl_close($ch);
          return substr($result, 0, strlen('HTTP/1.1 200')) == 'HTTP/1.1 200';
