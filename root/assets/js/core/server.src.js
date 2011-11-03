@@ -27,6 +27,11 @@ mwf.server = new function(){
     this.mustRedirect = false;
     this.mustReload = false;
     
+    var site = mwf.site,
+        classification = mwf.classification,
+        userAgent = mwf.userAgent,
+        screen = mwf.screen;
+    
     this.init = function(){
         
         /**
@@ -41,22 +46,22 @@ mwf.server = new function(){
          * Set classification cookie if it doesn't already exist on server.
          */
         
-        if(!mwf.site.cookie.exists(mwf.classification.cookieName))
-            this.setCookie(mwf.classification.cookieName, mwf.classification.generateCookieContent());
+        if(!site.cookie.exists(classification.cookieName))
+            this.setCookie(classification.cookieName, classification.generateCookieContent());
         
         /**
          * Set user agent cookie if it doesn't already exist on server.
          */
         
-        if(!mwf.site.cookie.exists(mwf.userAgent.cookieName))
-            this.setCookie(mwf.userAgent.cookieName, mwf.userAgent.generateCookieContent());
+        if(!site.cookie.exists(userAgent.cookieName))
+            this.setCookie(userAgent.cookieName, userAgent.generateCookieContent());
         
         /**
          * Set screen cookie if it doesn't already exist on server.
          */
         
-        if(!mwf.site.cookie.exists(mwf.screen.cookieName))
-            this.setCookie(mwf.screen.cookieName, mwf.screen.generateCookieContent());
+        if(!site.cookie.exists(screen.cookieName))
+            this.setCookie(screen.cookieName, screen.generateCookieContent());
         
         /**
          * If the service provider doesn't have cookies, either (1) reload
@@ -71,7 +76,7 @@ mwf.server = new function(){
             
         }else if(this.mustRedirect){
             
-            window.location = mwf.site.asset.root+'/passthru.php?return='+encodeURIComponent(window.location);
+            window.location = site.asset.root+'/passthru.php?return='+encodeURIComponent(window.location);
             
         }else{
             
@@ -95,17 +100,17 @@ mwf.server = new function(){
                 /**
                  * No support for cross-domain framework without SP cookie domain.
                  */
-                if(!mwf.site.cookie.domain)
+                if(!site.cookie.domain)
                     return false;
 
-                var serviceProvider = "."+mwf.site.cookie.domain.toLowerCase();
-                var contentProvider = "."+mwf.site.local.domain.toLowerCase();
+                var serviceProvider = "."+site.cookie.domain.toLowerCase();
+                var contentProvider = "."+site.local.domain.toLowerCase();
 
                 return contentProvider.substring(contentProvider.length - serviceProvider.length, serviceProvider.length) != serviceProvider;
 
             })();
         
-        var isFirstLoad = !mwf.site.local.cookie.exists(this.cookieNameLocal);
+        var isFirstLoad = !site.local.cookie.exists(this.cookieNameLocal);
         
         /**
          *
@@ -115,7 +120,7 @@ mwf.server = new function(){
         
         var isThirdPartySupported = (function(){
 
-                return mwf.userAgent.getBrowser() != 'safari' && mwf.userAgent.getBrowser() != 'firefox';
+                return userAgent.getBrowser() != 'safari' && userAgent.getBrowser() != 'firefox';
 
             })();
             
@@ -127,7 +132,7 @@ mwf.server = new function(){
         if(!isCrossDomain || isFirstLoad && isThirdPartySupported){
             
             if(isFirstLoad){
-                document.cookie = mwf.server.cookieNameLocal + '="1";path=/';
+                document.cookie = this.cookieNameLocal + '=1;path=/';
             }
         
             /**
@@ -135,8 +140,8 @@ mwf.server = new function(){
              * we're cross-domain but the mwf.site.cookie.domain config
              * variable is not set.
              */
-            if(isCrossDomain && mwf.site.cookie.domain) {
-                cookieSuffix += ';domain='+mwf.site.cookie.domain;
+            if(isCrossDomain && site.cookie.domain) {
+                cookieSuffix += ';domain='+site.cookie.domain;
             }
             
             /**
@@ -147,7 +152,7 @@ mwf.server = new function(){
             /**
              * Must reload the page to propagate the cookie to SP.
              */
-            mwf.server.mustReload = true;
+            this.mustReload = true;
             
         /**
          * If third-party cookies aren't supported and this is cross domain,
@@ -156,7 +161,7 @@ mwf.server = new function(){
         
         } else {
             
-            mwf.server.mustRedirect = true;
+            this.mustRedirect = true;
             
         }
         
