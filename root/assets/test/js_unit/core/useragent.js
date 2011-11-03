@@ -73,3 +73,10 @@ test("mwf.userAgent.getBrowserEngineVersion()", function()
     
     ok(typeof browserEngineVersion === 'string','getBrowserEngineVersion() should return a string');
 });
+
+test("mwf.userAgent.generateCookieContent()", function()
+{   
+    var re = /^\{\"s\":\".*\",\"os\":\".*\",\"osv\":\".*",\"b\":\".*\",\"be\":\".*\",\"bev\":\".*\"\}$/;
+    var cookie = mwf.userAgent.generateCookieContent();
+    ok(re.exec(cookie), 'cookie should be in expected format');
+});
