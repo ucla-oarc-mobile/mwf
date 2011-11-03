@@ -11,7 +11,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111102
+ * @version 20111103
  *
  * @uses Config
  * @uses HTTPS
@@ -24,7 +24,17 @@ require_once(dirname(dirname(dirname(__FILE__))).'/lib/https.class.php');
 
 $prefix = Config::get('global', 'cookie_prefix');
 
-$cookies = array('classification', 'user_agent', 'screen');
+$cookies = array('classification', 'user_agent', 'screen', 'override');
+
+if(isset($_COOKIE[$prefix.'override']))
+    $override_cookie_var = '"'.$_COOKIE[$prefix.'override'].'"';
+else
+    $override_cookie_var = 'false';
+
+if(isset($_COOKIE[$prefix.'classification']))
+    $classification_cookie_var = '"'.$_COOKIE[$prefix.'classification'].'"';
+else
+    $classification_cookie_var = 'false';
 
 $cookies_arr = array();
 foreach($cookies as $cookie)
@@ -60,7 +70,9 @@ mwf.site=new function(){
             for(var i=0; i<cookies.length; i++)
                 if(cookies[i] == e) return true;
             return false;
-        }
+        };
+        this.override = <?php echo $override_cookie_var; ?>;
+        this.classification = <?php echo $classification_cookie_var; ?>;
         
     };
     
@@ -100,15 +112,38 @@ mwf.site=new function(){
             
         })();
         
+        var _isSameOrigin = null;
+        
+        this.isSameOrigin = function(){
+
+            if(_isSameOrigin === null) {
+
+                if(!this.domain) {
+                
+                    _is_same_origin = true;
+                    
+                } else{
+
+                    var serviceProvider = "."+mwf.site.cookie.domain.toLowerCase();
+                    var contentProvider = "."+this.domain.toLowerCase();
+
+                    _isSameOrigin = contentProvider.substring(contentProvider.length - serviceProvider.length, serviceProvider.length) == serviceProvider;
+
+                }
+            }
+            
+            return _isSameOrigin;
+        };
+        
         this.cookie = new function(){
             
-            var cookies = document.cookie.split(';')
+            var cookies = document.cookie.split(';');
         
             this.exists = function(e){
                 
                 return this.value(e) !== false;
                 
-            }
+            };
             
             this.value = function(e){
             
@@ -118,11 +153,11 @@ mwf.site=new function(){
                         
                 return false;
             
-            }
+            };
         
-        }
+        };
     
-    }
+    };
     
     // Deprecated
     

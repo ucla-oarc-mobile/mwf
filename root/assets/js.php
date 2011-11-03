@@ -40,17 +40,7 @@ $ext = '.js';
  */
 
 header('Content-Type: text/javascript');
-
-if(!Classification::init())
-{
-    header("Cache-Control: max-age=0");
-}
-else
-{
-    /**
-     * @todo what do we do with caching here?
-     */
-}
+header("Cache-Control: max-age=0");
 
 ?>/** Mobile Web Framework | http://mwf.ucla.edu */
 

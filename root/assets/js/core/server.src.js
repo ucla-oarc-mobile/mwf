@@ -1,5 +1,6 @@
 /**
- * 
+ * Responsible for writing classification, user agent and screen cookies back
+ * to the server and refreshing the page to propagate this if done as such.
  *
  * @package core
  * @subpackage js
@@ -47,13 +48,15 @@ mwf.server = new function(){
         if(!mwf.capability.cookie())
             return;
         
+        var classificationCookie = classification.generateCookieContent();
         
         /**
          * Set classification cookie if it doesn't already exist on server.
+         * We ch
          */
         
-        if(!site.cookie.exists(classification.cookieName))
-            this.setCookie(classification.cookieName, classification.generateCookieContent());
+        if(!site.cookie.exists(classification.cookieName) || site.cookie.classification != classificationCookie)
+            this.setCookie(classification.cookieName, classificationCookie);
         
         /**
          * Set user agent cookie if it doesn't already exist on server.
@@ -76,9 +79,9 @@ mwf.server = new function(){
          * service provider already has cookies, then this isn't necessary.
          */
         
-        if(this.mustReload){
+        if(this.mustReload && !mwf.override.isRedirecting){
             document.location.reload();
-        }else if(this.mustRedirect){
+        }else if(this.mustRedirect && !mwf.override.isRedirecting){
             window.location = site.asset.root+'/passthru.php?return='+encodeURIComponent(window.location);
         }
         
@@ -91,21 +94,7 @@ mwf.server = new function(){
          * domain if this is a cross
          */
         
-        var isSameOrigin = (function(){
-
-                /**
-                 * No support for cross-domain framework without SP cookie domain.
-                 */
-                
-                if(!site.cookie.domain)
-                    return true;
-
-                var serviceProvider = "."+site.cookie.domain.toLowerCase();
-                var contentProvider = "."+site.local.domain.toLowerCase();
-
-                return contentProvider.substring(contentProvider.length - serviceProvider.length, serviceProvider.length) == serviceProvider;
-
-            })();
+        var isSameOrigin = mwf.site.local.isSameOrigin();
             
         /**
          * If not cross-domain or this is the first load and third party is
