@@ -7,18 +7,20 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111102
+ * @version 20111103
  *
  * @requires mwf
  * @requires mwf.site
  * @requires mwf.capability
  * @requires mwf.classification
  * @requires mwf.userAgent
+ * @requires mwf.screen
  * 
  * @requires /root/assets/js/core/vars.php
  * @requires /root/assets/js/core/capability.js
  * @requires /root/assets/js/core/classification.js
  * @requires /root/assets/js/core/userAgent.js
+ * @requires /root/assets/js/core/screen.js
  */
 
 mwf.server = new function(){
@@ -26,6 +28,10 @@ mwf.server = new function(){
     this.cookieNameLocal = mwf.site.cookie.prefix+'server';
     this.mustRedirect = false;
     this.mustReload = false;
+    
+    /**
+     * Local variables to minimize payload size in compression.
+     */
     
     var site = mwf.site,
         classification = mwf.classification,
@@ -71,17 +77,9 @@ mwf.server = new function(){
          */
         
         if(this.mustReload){
-            
             document.location.reload();
-            
         }else if(this.mustRedirect){
-            
             window.location = site.asset.root+'/passthru.php?return='+encodeURIComponent(window.location);
-            
-        }else{
-            
-            // do nothing!
-            
         }
         
     }
@@ -93,34 +91,19 @@ mwf.server = new function(){
          * domain if this is a cross
          */
         
-        var cookieSuffix = ';path=/';
-        
-        var isCrossDomain = (function(){
+        var isSameOrigin = (function(){
 
                 /**
                  * No support for cross-domain framework without SP cookie domain.
                  */
+                
                 if(!site.cookie.domain)
-                    return false;
+                    return true;
 
                 var serviceProvider = "."+site.cookie.domain.toLowerCase();
                 var contentProvider = "."+site.local.domain.toLowerCase();
 
-                return contentProvider.substring(contentProvider.length - serviceProvider.length, serviceProvider.length) != serviceProvider;
-
-            })();
-        
-        var isFirstLoad = !site.local.cookie.exists(this.cookieNameLocal);
-        
-        /**
-         *
-         *
-         * @todo determine other operating systems that prevent third-party
-         */
-        
-        var isThirdPartySupported = (function(){
-
-                return userAgent.getBrowser() != 'safari' && userAgent.getBrowser() != 'firefox';
+                return contentProvider.substring(contentProvider.length - serviceProvider.length, serviceProvider.length) == serviceProvider;
 
             })();
             
@@ -129,35 +112,24 @@ mwf.server = new function(){
          * supported, then attempt to write the cookie to the SP directly.
          */
         
-        if(!isCrossDomain || isFirstLoad && isThirdPartySupported){
-            
-            if(isFirstLoad){
-                document.cookie = this.cookieNameLocal + '=1;path=/';
-            }
-        
-            /**
-             * Error condition will be encountered where domain isn't set if
-             * we're cross-domain but the mwf.site.cookie.domain config
-             * variable is not set.
-             */
-            if(isCrossDomain && site.cookie.domain) {
-                cookieSuffix += ';domain='+site.cookie.domain;
-            }
+        if(isSameOrigin){
             
             /**
              * Write the cookie with the proper suffix for service provider.
              */
-            document.cookie = cookieName + "=" + cookieContent+cookieSuffix;
+            
+            document.cookie = cookieName + '=' + cookieContent+';path=/';
             
             /**
              * Must reload the page to propagate the cookie to SP.
              */
+            
             this.mustReload = true;
             
         /**
          * If third-party cookies aren't supported and this is cross domain,
          * then redirect through the SP and then back to CP.
-         */    
+         */  
         
         } else {
             
