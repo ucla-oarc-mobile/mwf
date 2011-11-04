@@ -15,15 +15,13 @@
  *
  * @uses Path_Validator
  */
-
 /**
  * Require necessary parent class definition.
  */
-
 require_once('path_validator.class.php');
 
-class Path extends Path_Validator
-{
+class Path extends Path_Validator {
+
     /**
      * The timeout that curl will wait for on HTTP GET. If this is causing
      * curl to fail the download, then this should be increased. However, in
@@ -33,7 +31,7 @@ class Path extends Path_Validator
      * @var int
      */
     private static $_curl_timeout_download = 1;
-    
+
     /**
      * The timeout that curl will wait for on HTTP HEAD. If this is causing
      * curl to fail the request, then this should be increased. However, in
@@ -52,23 +50,22 @@ class Path extends Path_Validator
      * @uses curl
      * @return bool
      */
-    public static function exists($path, $safe = true)
-    {
-        if($safe && !self::is_safe($path))
+    public static function exists($path, $safe = true) {
+        if ($safe && !self::is_safe($path))
             return false;
-        
-        if(self::is_local($path))
+
+        if (self::is_local($path))
             return file_exists($path);
 
-         $ch = curl_init();
-         curl_setopt($ch, CURLOPT_URL, $path);
-         curl_setopt($ch, CURLOPT_HEADER, TRUE);
-         curl_setopt($ch, CURLOPT_NOBODY, TRUE);
-         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, self::$_curl_timeout_exists);
-         $result = curl_exec($ch);
-         curl_close($ch);
-         return substr($result, 0, strlen('HTTP/1.1 200')) == 'HTTP/1.1 200';
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $path);
+        curl_setopt($ch, CURLOPT_HEADER, TRUE);
+        curl_setopt($ch, CURLOPT_NOBODY, TRUE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, self::$_curl_timeout_exists);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        return substr($result, 0, strlen('HTTP/1.1 200')) == 'HTTP/1.1 200';
     }
 
     /**
@@ -80,13 +77,21 @@ class Path extends Path_Validator
      * @uses curl
      * @return bool
      */
-    public static function get_contents($path, $safe = true)
-    {
-        if($safe && !self::is_safe($path))
+    public static function get_contents($path, $safe = true) {
+        if ($safe && !self::is_safe($path))
             return false;
-        
-        if(self::is_local($path))
-            return file_get_contents($path);
+
+        if (self::is_local($path)) {
+            $docroot = dirname(dirname(dirname(__FILE__)));
+            $result = file_get_contents($docroot . '/' . $path);
+            
+            // @deprecated: if file isn't found under docroot, try from /
+            if ($result === false) {
+                $result = file_get_contents($path);
+            }
+
+            return $result;
+        }
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $path);
@@ -97,4 +102,5 @@ class Path extends Path_Validator
 
         return $result;
     }
+
 }
