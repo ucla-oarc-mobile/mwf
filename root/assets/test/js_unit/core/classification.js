@@ -34,6 +34,13 @@ test("mwf.classification.isFull()", function()
     equal(typeof mwf.classification.isFull(),'boolean','isFull() should return a boolean');
 });
 
+test("mwf.classification.isOverride()", function()
+{
+    var override = mwf.classification.isOverride();
+    equal(typeof override,'boolean','isOverride() should return a boolean');
+    equal(override, false, 'isOverride() should return false on a mobile phone');
+})
+
 test("mwf.classification.isPreview()", function()
 {
     equal(typeof mwf.classification.isPreview(),'boolean','isPreview() should return a boolean');
