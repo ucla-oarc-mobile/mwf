@@ -15,14 +15,18 @@
  * @license http://mwf.ucla.edu/license
  * @version 20101021
  */
+class Config {
 
-class Config
-{
     /**
      * @var array Static container of configuration variables that have been
      *              loaded already through config file inclusion (lazy include).
      */
     private static $_vars = array();
+
+    public static function init() {
+        define('MWF_CONFIG_SITE_URL', self::get('required', 'site_url'));
+        define('MWF_CONFIG_SITE_ASSETS_URL', self::get('required', 'site_assets_url'));
+    }
 
     /**
      * Static method that returns a value as specified in the file defined as
@@ -35,12 +39,10 @@ class Config
      * @param string $key key of the value within the $cat namespace
      * @return mixed|false mixed if $key exists for $cat or false otherwise
      */
-    public static function get($cat, $key)
-    {
-        if(!isset(self::$_vars[$cat]) && file_exists(dirname(dirname(dirname(dirname(__FILE__)))).'/config/'.$cat.'.php'))
-            include_once(dirname(dirname(dirname(dirname(__FILE__)))).'/config/'.$cat.'.php');
-        
-    	return isset(self::$_vars[$cat]) && isset(self::$_vars[$cat][$key]) ? self::$_vars[$cat][$key] : false;
+    public static function get($cat, $key) {
+        if (!isset(self::$_vars[$cat]) && file_exists(dirname(dirname(dirname(dirname(__FILE__)))) . '/config/' . $cat . '.ini'))
+            self::$_vars[$cat] = parse_ini_file(dirname(dirname(dirname(dirname(__FILE__)))) . '/config/' . $cat . '.ini');
+        return isset(self::$_vars[$cat]) && isset(self::$_vars[$cat][$key]) ? self::$_vars[$cat][$key] : false;
     }
 
     /**
@@ -52,13 +54,14 @@ class Config
      * @param string $key key of the value within the $cat namespace
      * @param mixed $value the value that the ($cat, $key) pair encodes
      */
-    public static function set($cat, $key, $value)
-    {
-        if(!isset($cat))
+    public static function set($cat, $key, $value) {
+        if (!isset($cat))
             self::$_vars[$cat] = array();
-        
+
         self::$_vars[$cat][$key] = $value;
     }
+
 }
 
+Config::init();
 ?>
