@@ -128,10 +128,6 @@
      * there were Mozilla has issues with document.body as null.
      */
     
-    //if(document.addEventListener) {
-    //    document.addEventListener('DOMContentLoaded',writer,false);
-    //}
-    
     if(window.addEventListener) {
         window.addEventListener('load',writer,false);
     } else if (window.attachEvent) {

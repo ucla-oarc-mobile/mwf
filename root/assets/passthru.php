@@ -11,12 +11,12 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111101
+ * @version 20111104
  *
  * @uses JS
  */
 
-include_once(dirname(__FILE__).'/lib/js.class.php');
+require_once(dirname(__FILE__).'/lib/js.class.php');
 
 ?><html><head></head><body><script type="text/javascript"><?php
 
