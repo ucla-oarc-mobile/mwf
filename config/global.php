@@ -6,7 +6,7 @@
  * This should NOT be included directly; instead /assets/config.php should be.
  *
  * @author ebollens
- * @version 20110511
+ * @version 20111104
  *
  * @uses Config
  * @link /assets/config.php
@@ -18,6 +18,9 @@ require_once(dirname(dirname(__FILE__)).'/root/assets/lib/config.class.php');
  * PATHS
  * 
  * - site_url           URL of the mobile site home page in mwf.site.webroot().
+ *                          You can use a protocol-less URLs (starting with //
+ *                          as in the examples below) to seemlessly handle HTTP 
+ *                          and HTTPS.
  * - site_assets_url    URL of the assets folder in mwf.site.webassetroot().
  * - site_nonmobile_url URL to redirect non-mobile (or FALSE to not redirect).
  * - full_site_url      URL of non-mobile site link on front page for mobile devices.
@@ -26,11 +29,11 @@ require_once(dirname(dirname(__FILE__)).'/root/assets/lib/config.class.php');
  * DO NOT INCLUDE A TRAILING SLASH
  */
 
-Config::set('global', 'site_url', false);
-Config::set('global', 'site_assets_url', false);
-Config::set('global', 'site_nonmobile_url', false);
-Config::set('global', 'footer_link_urls', array());
-Config::set('global', 'footer_link_titles', array());
+//Config::set('global', 'site_url', '//example.com');
+//Config::set('global', 'site_assets_url', '//example.com/assets');
+//Config::set('global', 'site_nonmobile_url', '//www.example.com/');
+//Config::set('global', 'footer_link_urls', array('/help','/about','/preferences'));
+//Config::set('global', 'footer_link_titles', array('Help','About','Preferences'));
 
 /**
  * CORE
@@ -63,11 +66,11 @@ Config::set('global', 'appicon_img',                Config::get('global', 'site_
 Config::set('global', 'appicon_img_precomposed',    Config::get('global', 'site_assets_url').'/img/mwf-appicon-precomposed.png');
 Config::set('global', 'appicon_allow_disable_flag', true);
 Config::set('global', 'back_to_home_text',          'Go Back to Home');
-Config::set('global', 'charset',                    false);
+//Config::set('global', 'charset',                    'utf-8');
 Config::set('global', 'copyright_text',             'University of California &copy; 2010 UC Regents');
 Config::set('global', 'header_home_button',         Config::get('global', 'site_assets_url').'/img/mwf-header.gif');
 Config::set('global', 'header_home_button_alt',     'MWF');
-Config::set('global', 'language',                   false);
+//Config::set('global', 'language',                   'en');
 Config::set('global', 'title_text',                 'UCLA MWF');
 
 /******************************************************************
