@@ -39,6 +39,8 @@ abstract class Image {
         if (!Path_Validator::is_safe($image_path))
             return NULL;
 
+        //@todo: use Path::get_contents() and get rid of Remote vs. Local image
+
         if (array_key_exists('scheme', parse_url($image_path))) {
             require_once(dirname(__FILE__) . '/image/remote_image.class.php');
             return new Remote_Image($image_path);
@@ -100,7 +102,11 @@ abstract class Image {
     }
 
     public function generate_header() {
-        return "Content-Type: " . image_type_to_mime_type(constant('IMAGETYPE_' . strtoupper($this->get_gd_extension())));
+        if ($this->get_gd_extension()) {
+            return "Content-Type: " . image_type_to_mime_type(constant('IMAGETYPE_' . strtoupper($this->get_gd_extension())));
+        } else {
+            return false;
+        }
     }
 
     public function generate_image($savepath = false) {
@@ -171,18 +177,14 @@ abstract class Image {
 
         $filename = Config::get('image', 'cache_dir') . $this->_image_file_root;
 
-        list($filerawwidth, $filerawheight, $filerawtype, $filerawattr) = getimagesize($this->_image_path);
-
-        if ($filerawwidth > $this->_dim_width || $filerawheight > $this->_dim_height) {
-            if ($this->_dim_width || $this->_dim_height)
-                $filename .= '-';
-            if ($this->_dim_width)
-                $filename .= $this->_dim_width . 'w';
-            if ($this->_dim_width && $this->_dim_height)
-                $filename .= '-';
-            if ($this->_dim_height)
-                $filename .= $this->_dim_height . 'h';
-        }
+        if ($this->_dim_width || $this->_dim_height)
+            $filename .= '-';
+        if ($this->_dim_width)
+            $filename .= $this->_dim_width . 'w';
+        if ($this->_dim_width && $this->_dim_height)
+            $filename .= '-';
+        if ($this->_dim_height)
+            $filename .= $this->_dim_height . 'h';
 
         if ($this->_ext_force) {
             $filename .= $this->_ext_force;
