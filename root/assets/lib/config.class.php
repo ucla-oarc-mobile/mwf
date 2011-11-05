@@ -24,8 +24,17 @@ class Config {
     private static $_vars = array();
 
     public static function init() {
-        define('MWF_CONFIG_SITE_URL', self::get('required', 'site_url'));
-        define('MWF_CONFIG_SITE_ASSETS_URL', self::get('required', 'site_assets_url'));
+        if (self::get('base', 'site_url')) {
+            define('MWF_CONFIG_SITE_URL', self::get('base', 'site_url'));
+        } else {
+            define('MWF_CONFIG_SITE_URL', '//'.$_SERVER['SERVER_NAME']);
+        }
+        
+        if (self::get('base', 'site_assets_url')) {
+            define('MWF_CONFIG_SITE_ASSETS_URL', self::get('base', 'site_assets_url'));
+        } else {
+            define('MWF_CONFIG_SITE_ASSETS_URL', '//'.$_SERVER['SERVER_NAME'].'/assets');
+        }
     }
 
     /**
