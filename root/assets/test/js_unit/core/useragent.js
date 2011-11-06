@@ -4,7 +4,7 @@
  * @author trott
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111015
+ * @version 20111102
  *
  * @requires mwf
  * @requires mwf.userAgent
@@ -72,4 +72,11 @@ test("mwf.userAgent.getBrowserEngineVersion()", function()
     var browserEngineVersion = mwf.userAgent.getBrowserEngineVersion();
     
     ok(typeof browserEngineVersion === 'string','getBrowserEngineVersion() should return a string');
+});
+
+test("mwf.userAgent.generateCookieContent()", function()
+{   
+    var re = /^\{\"s\":\".*\",\"os\":\".*\",\"osv\":\".*",\"b\":\".*\",\"be\":\".*\",\"bev\":\".*\"\}$/;
+    var cookie = mwf.userAgent.generateCookieContent();
+    ok(re.exec(cookie), 'cookie should be in expected format');
 });

@@ -8,7 +8,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111003
+ * @version 20111103
  *
  * @requires mwf
  * @requires mwf.site
@@ -71,13 +71,24 @@ mwf.classification=new function(){
     }
     
     /**
+     * Determine if the device is overridden. This defaults to false in its
+     * classification.js definition, though override.js may redefine it to
+     * return true if an override is in progress as determined by mwf.override.
+     *
+     * @return bool
+     */
+    this.isOverride = function(){ 
+        return false;
+    }
+    
+    /**
      * Determine if the device is under preview mode, where preview mode is 
      * defined as a non-mobile device that is overridden as a mobile device.
      * 
      * @return bool
      */
     this.isPreview = function(){
-        return (typeof this.isOverride() == 'function') && this.isOverride() && !this.isMobile();
+        return this.isOverride() && !this.isMobile();
     }
     
     /**
@@ -92,5 +103,29 @@ mwf.classification=new function(){
             return 'standard';
         else
             return 'basic';
+    }
+    
+    /**
+     * Generate JSON content passed into the cookie written by mwf.server.
+     * 
+     * @return string
+     */
+    this.generateCookieContent = function(){
+        
+        var cookie = '{';
+        cookie += '"mobile":'+this.isMobile();
+        cookie += ',"basic":'+this.isBasic();
+        cookie += ',"standard":'+this.isStandard();
+        cookie += ',"full":'+this.isFull();
+        if(this.isOverride()){
+            cookie += ',"actual":{';
+            cookie += '"mobile":'+this.wasMobile();
+            cookie += ',"basic":'+this.wasBasic();
+            cookie += ',"standard":'+this.wasStandard();
+            cookie += ',"full":'+this.wasFull();
+            cookie += '}';
+        }
+        cookie += '}';
+        return cookie;
     }
 };
