@@ -27,12 +27,12 @@
  * Include necessary libraries. 
  */
 
-@require_once(dirname(__FILE__).'/lib/classification.class.php');
-@require_once(dirname(__FILE__).'/lib/js.class.php');
-@require_once(dirname(__FILE__).'/lib/jsmin.class.php');
-@require_once(dirname(__FILE__).'/lib/path.class.php');
-@require_once(dirname(__FILE__).'/lib/path_validator.class.php');
-@require_once(dirname(__FILE__).'/lib/user_agent.class.php');
+require_once(dirname(__FILE__).'/lib/classification.class.php');
+require_once(dirname(__FILE__).'/lib/js.class.php');
+require_once(dirname(__FILE__).'/lib/jsmin.class.php');
+require_once(dirname(__FILE__).'/lib/path.class.php');
+require_once(dirname(__FILE__).'/lib/path_validator.class.php');
+require_once(dirname(__FILE__).'/lib/user_agent.class.php');
 $ext = '.js';
 
 /**
