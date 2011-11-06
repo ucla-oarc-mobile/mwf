@@ -11,7 +11,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111003
+ * @version 20111103
  *
  * @uses Config
  * @uses HTTPS
@@ -22,13 +22,38 @@
 include_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(dirname(dirname(__FILE__))).'/lib/https.class.php');
 
+$prefix = Config::get('global', 'cookie_prefix');
+
+$cookies = array('classification', 'user_agent', 'screen', 'override');
+
+if(isset($_COOKIE[$prefix.'override']))
+    $override_cookie_var = '"'.$_COOKIE[$prefix.'override'].'"';
+else
+    $override_cookie_var = 'false';
+
+if(isset($_COOKIE[$prefix.'classification']))
+    $classification_cookie_var = '"'.$_COOKIE[$prefix.'classification'].'"';
+else
+    $classification_cookie_var = 'false';
+
+$cookies_arr = array();
+foreach($cookies as $cookie)
+    if(isset($_COOKIE[$prefix.$cookie]))
+        $cookies_arr[] = $prefix.$cookie;
+    
+$existing_cookies_var = '["'.implode('","', $cookies_arr).'"]';
+
+$domain_var = Config::get('global', 'cookie_domain');
+if($domain_var && substr($domain_var, 0, 1) == '.')
+    $domain_var = substr($domain_var, 1);
+
 ?>
 
 var mwf=new function(){};
 
 mwf.site=new function(){
     
-this.root = '<?php echo HTTPS::is_https() ? HTTPS::convert_path(Config::get('global', 'site_url')) : Config::get('global', 'site_url'); ?>';
+    this.root = '<?php echo HTTPS::is_https() ? HTTPS::convert_path(Config::get('global', 'site_url')) : Config::get('global', 'site_url'); ?>';
     
     this.asset = new function(){
         
@@ -39,6 +64,15 @@ this.root = '<?php echo HTTPS::is_https() ? HTTPS::convert_path(Config::get('glo
     this.cookie = new function(){
         
         this.prefix = '<?php echo Config::get('global', 'cookie_prefix'); ?>';
+        this.domain = <?php if($domain_var) echo '\''.$domain_var.'\''; else echo 'false';  ?>;
+        this.exists = function(e){
+            var cookies = <?php echo $existing_cookies_var; ?>;
+            for(var i=0; i<cookies.length; i++)
+                if(cookies[i] == e) return true;
+            return false;
+        };
+        this.override = <?php echo $override_cookie_var; ?>;
+        this.classification = <?php echo $classification_cookie_var; ?>;
         
     };
     
@@ -55,22 +89,83 @@ this.root = '<?php echo HTTPS::is_https() ? HTTPS::convert_path(Config::get('glo
     
     };
     
-    this.domain=function(){
+    this.local = new function(){
     
-        var temppath = document.URL;
+        this.domain = (function(){ 
+            var p = document.URL, i;
         
-        if(temppath.search('http://') == 0)
-            temppath = temppath.substring(7, temppath.length);
-        else if(temppath.search('https://') == 0)
-            temppath = temppath.substring(8, temppath.length);
+            if((i = p.indexOf('://')) !== false)
+                p = p.substring(i+3);
+            else if((i = p.indexOf('//')) === 0)
+                p = p.substring(2);
+
+            if((i = p.indexOf('/')) > -1)
+                p = p.substring(0, i);
+
+            if((i = p.indexOf(':')) > -1)
+                p = p.substring(0, i);
+                
+            if((i = p.indexOf('.')) == 0)
+                p = p.substring(1);
+
+            return p;
             
-        if(temppath.search('/') > -1)
-            temppath = temppath.substring(0, temppath.search('/'));
+        })();
+        
+        var _isSameOrigin = null;
+        
+        this.isSameOrigin = function(){
+
+            if(_isSameOrigin === null) {
+
+                if(!this.domain) {
+                
+                    _is_same_origin = true;
+                    
+                } else{
+
+                    var serviceProvider = "."+mwf.site.cookie.domain.toLowerCase();
+                    var contentProvider = "."+this.domain.toLowerCase();
+
+                    _isSameOrigin = contentProvider.substring(contentProvider.length - serviceProvider.length, serviceProvider.length) == serviceProvider;
+
+                }
+            }
             
-        return temppath;
+            return _isSameOrigin;
+        };
+        
+        this.cookie = new function(){
+            
+            var cookies = document.cookie.split(';');
+        
+            this.exists = function(e){
+                
+                return this.value(e) !== false;
+                
+            };
+            
+            this.value = function(e){
+            
+                for(var i = 0; i < cookies.length; i++)
+                     if(cookies[i].substr(0,cookies[i].indexOf("=")).replace(/^\s+|\s+$/g,"") == e)
+                        return cookies[i].substr(cookies[i].indexOf("=")+1).replace(/^\s+|\s+$/g,"");
+                        
+                return false;
+            
+            };
+        
+        };
+    
     };
     
     // Deprecated
+    
+    this.domain=function(){
+    
+        return this.local.domain;
+        
+    };
     
     this.webroot=function(){
         return this.root;
