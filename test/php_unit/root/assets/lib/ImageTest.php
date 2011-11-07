@@ -55,13 +55,21 @@ class ImageTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function image_setMaxHeightWidthTo10_is10By10Image() {
+    public function image_setMaxWidthTo10_widthIs10() {
         $image = Image::factory('/assets/img/mwf-appicon-precomposed.png');
-        $image->set_max_height(10);
         $image->set_max_width(10);
         $png = imagecreatefromstring($image->get_image_as_string());
         $this->assertEquals(10, imagesx($png));
-        $this->assertEquals(10, imagesy($png));
+    }
+    
+    /**
+     * @test
+     */
+    public function image_setMaxHeightTo12_heightIs12() {
+        $image = Image::factory('/assets/img/mwf-appicon-precomposed.png');
+        $image->set_max_height(12);
+        $png = imagecreatefromstring($image->get_image_as_string());
+        $this->assertEquals(12, imagesy($png));
     }
 
     /**
@@ -82,15 +90,11 @@ class ImageTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @test
-     * @runInSeparateProcess
      */
-    public function getImageAsString_largeImage_gracefulError() {
-        ini_set('memory_limit', '4M');
-        // Load a 4.4 Mb image
-        $image = Image::Factory('http://xpress.sfsu.edu/specials/2010s/MOUSE/thumbnail.jpg');
-        $image->set_max_height(100);
-        $this->assertEquals('',$image->get_image_as_string());
-        
+    public function factory_RemoteImageTooLarge_noImage() {
+        Config::set('image','memory_limit',1024);
+        $image = Image::factory('http://mwf.ucla.edu/img/ucla-logo.jpg');
+        $this->assertEquals('',$image->get_mimetype());
     }
 }
 
