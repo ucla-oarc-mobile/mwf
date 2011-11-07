@@ -2,8 +2,7 @@
 
 /**
  * An object that encapsulates an image via its path, determines if its safe,
- * allows for transformations of extension and dimensions, handles caching
- * and produces image headers and output.
+ * allows for transformations of extension and dimensions, and handles caching.
  *
  * @package core
  * @subpackage path
