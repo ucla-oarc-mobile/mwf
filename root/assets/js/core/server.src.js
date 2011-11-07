@@ -8,7 +8,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111103
+ * @version 20111107
  *
  * @requires mwf
  * @requires mwf.site
@@ -29,6 +29,7 @@ mwf.server = new function(){
     this.cookieNameLocal = mwf.site.cookie.prefix+'server';
     this.mustRedirect = false;
     this.mustReload = false;
+    this.error = false;
     
     /**
      * Local variables to minimize payload size in compression.
@@ -73,6 +74,14 @@ mwf.server = new function(){
             this.setCookie(screen.cookieName, screen.generateCookieContent());
         
         /**
+         * If an error is encountered in setting server variables, give up
+         * without redirecting/reloading to avoid infinite loop.
+         */
+        
+        if(this.error)
+            return;
+        
+        /**
          * If the service provider doesn't have cookies, either (1) reload
          * the page if framework is of same-origin or device browser supports 
          * third-party cookies, or (2) redirect to the SP redirector. If the
@@ -88,6 +97,18 @@ mwf.server = new function(){
     }
     
     this.setCookie = function(cookieName, cookieContent) {
+        
+        /**
+         * Check for a bad configuration of the site asset url and the cookie
+         * domain url.
+         */
+        
+        if(!mwf.site.cookie.isValidDomain()) {
+
+            this.error = true;
+            return;
+
+        }
     
         /**
          * Function to generate a cookie on the service provider, specifying a
