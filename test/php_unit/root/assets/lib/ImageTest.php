@@ -11,6 +11,7 @@ require_once dirname(__FILE__) . '/../../../../../root/assets/lib/image.class.ph
  * @version 20111106
  *
  * @uses PHPUnit_Framework_TestCase
+ * @uses Image
  */
 class ImageTest extends PHPUnit_Framework_TestCase {
 
