@@ -124,11 +124,15 @@ mwf.server = new function(){
         
         if(isSameOrigin){
             
+            var cookieSuffix = ';path=/';
+            if(mwf.site.cookie.domain)
+                cookieSuffix += ";domain="+mwf.site.cookie.domain;
+            
             /**
              * Write the cookie with the proper suffix for service provider.
              */
             
-            document.cookie = cookieName + '=' + cookieContent+';path=/';
+            document.cookie = cookieName + '=' + cookieContent+cookieSuffix;
             
             /**
              * Must reload the page to propagate the cookie to SP.
