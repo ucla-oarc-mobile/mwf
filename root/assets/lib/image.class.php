@@ -10,8 +10,9 @@
  * @author trott
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111106
+ * @version 20111107
  *
+ * @uses Config
  * @uses Path_Validator
  *
  * @todo Comments
@@ -23,14 +24,15 @@ require_once(dirname(__FILE__) . '/path_validator.class.php');
 abstract class Image {
 
     private $_image_path;
+    private $_image_file_root;
+    private $_memory_limit;
     private $_image_ext = null;
-    private $_image_file_root = null;
     private $_dim_height = false;
     private $_dim_width = false;
     private $_cache_filename = null;
-    
+
     /** GIF, JPG, and JPEG are within XHTML MP 1.0 specification. */
-    private $_ext_allowed = array('gif','png', 'jpg', 'jpeg');
+    private $_ext_allowed = array('gif', 'png', 'jpg', 'jpeg');
 
     abstract protected function &get_gd_image();
 
@@ -59,6 +61,8 @@ abstract class Image {
     private function __construct($imagepath) {
         $this->_image_path = $imagepath;
         $this->_image_file_root = md5($imagepath);
+        $this->_memory_limit = Config::get('image', 'memory_limit') ?
+                Config::get('image', 'memory_limit') : 104857600;
     }
 
     public function set_max_height($max) {
@@ -182,6 +186,21 @@ abstract class Image {
     protected function get_image_path() {
         return $this->_image_path;
     }
+
+    protected function check_memory($path) {
+        // GD can consume a lot of memory. Check that the image will not likely
+        //  use more memory than we want.
+        $imageinfo = getimagesize($path);
+
+        if (isset($imageinfo[0]) && isset($imageinfo[1]) && isset($imageinfo['bits'])) {
+            $predicted_mem_usage = $imageinfo[0] * $imageinfo[1] * ($imageinfo['bits'] / 8)
+                    * (isset($imageinfo['channels']) ? $imageinfo['channels'] : 3);
+        }
+
+        return (!empty($predicted_mem_usage) &&
+                $predicted_mem_usage > $this->_memory_limit);
+    }
+
 }
 
 ?>
