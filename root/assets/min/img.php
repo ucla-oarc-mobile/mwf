@@ -95,12 +95,6 @@ if (! $image) {
     exit(1);
 }
 
-/** GIF, JPG, and JPEG are within XHTML MP 1.0 specification. */
-$image->set_allowed_extension('gif');
-$image->set_allowed_extension('jpeg');
-$image->set_allowed_extension('jpg');
-$image->set_allowed_extension('png');
-
 /** Force max width if $set_width is true. */
 if ($set_width)
     $image->set_max_width($max_width);
@@ -110,7 +104,7 @@ if ($set_height)
     $image->set_max_height($max_height);
 
 /** Output the header so that browser treats it as an image rather than PHP file. */
-$image->output_header();
+header("Content-type: " . $image->get_mimetype());
 
 /** Output the binary content of the image in its compressed state. */
-$image->output_image();
+echo $image->get_image_as_string();

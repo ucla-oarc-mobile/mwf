@@ -2,7 +2,7 @@
 
 /**
  * An object that encapsulates an image, allows for transformations of extension
- * and dimensions, handles caching and produces image headers and output.
+ * and dimensions, and handles caching.
  *
  * @package core
  * @subpackage path
@@ -10,7 +10,7 @@
  * @author trott
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110929
+ * @version 20111106
  *
  * @uses Path_Validator
  *
@@ -27,14 +27,20 @@ abstract class Image {
     private $_image_file_root = null;
     private $_dim_height = false;
     private $_dim_width = false;
-    private $_ext_allowed = array();
-    private $_ext_force = null;
     private $_cache_filename = null;
+    
+    /** GIF, JPG, and JPEG are within XHTML MP 1.0 specification. */
+    private $_ext_allowed = array('gif','png', 'jpg', 'jpeg');
 
     abstract protected function &get_gd_image();
 
     abstract protected function get_gd_extension();
 
+    /**
+     *
+     * @param string $image_path
+     * @return Image|null
+     */
     public static function factory($image_path) {
         if (!Path_Validator::is_safe($image_path))
             return NULL;
@@ -63,58 +69,42 @@ abstract class Image {
         $this->_dim_width = round($max);
     }
 
-    public function set_allowed_extension($ext) {
-        $this->_ext_allowed[] = $ext;
-    }
-
-    public function force_extension($ext) {
-        $this->_ext_force = $ext;
-    }
-
-    public function output_header() {
+    public function get_mimetype() {
         if ($this->_image_path === false)
-            return;
+            return '';
 
-        header($this->generate_header());
+        if ($this->get_gd_extension()) {
+            return image_type_to_mime_type(constant('IMAGETYPE_' . strtoupper($this->get_gd_extension())));
+        } else {
+            return '';
+        }
     }
 
-    public function output_image() {
+    public function get_image_as_string() {
         if ($this->_image_path === false)
-            return;
+            return '';
 
         $filename = $this->get_cache_filename();
 
         if (file_exists($filename)) {
-            echo file_get_contents($filename);
-            return;
+            return file_get_contents($filename);
         }
 
         if (!$this->generate_image($filename)) {
-            return false;
+            return '';
         }
 
         if (file_exists($filename)) {
-            echo file_get_contents($filename);
-            return;
+            return file_get_contents($filename);
         }
 
-        return false;
+        return '';
     }
 
-    public function generate_header() {
-        if ($this->get_gd_extension()) {
-            return "Content-Type: " . image_type_to_mime_type(constant('IMAGETYPE_' . strtoupper($this->get_gd_extension())));
-        } else {
-            return false;
-        }
-    }
-
-    public function generate_image($savepath = false) {
+    protected function generate_image($savepath = false) {
         $savefunction = false;
 
-        if ($this->_ext_force)
-            $savefunction = 'image' . $this->_ext_force;
-        elseif (in_array($this->get_gd_extension(), $this->_ext_allowed))
+        if (in_array($this->get_gd_extension(), $this->_ext_allowed))
             $savefunction = 'image' . $this->get_gd_extension();
         else
             $savefunction = 'imagegif';
@@ -186,17 +176,12 @@ abstract class Image {
         if ($this->_dim_height)
             $filename .= $this->_dim_height . 'h';
 
-        if ($this->_ext_force) {
-            $filename .= $this->_ext_force;
-        }
-
         return $filename;
     }
 
     protected function get_image_path() {
         return $this->_image_path;
     }
-
 }
 
 ?>
