@@ -55,7 +55,7 @@ if($pos = strpos($site, '/'))
 if($pos = strpos($site, ':'))
     $site = substr($site, 0, $pos);
 
-$valid_domain_var = substr($site, strlen($site)-strlen($domain_var), strlen($domain_var)) == $domain_var ? 'true' : 'false';
+$valid_domain_var = strlen($domain_var) > 0 && substr($site, strlen($site)-strlen($domain_var), strlen($domain_var)) == $domain_var ? 'true' : 'false';
 
 ?>
 
@@ -131,7 +131,7 @@ mwf.site=new function(){
 
             if(_isSameOrigin === null) {
 
-                if(!this.domain) {
+                if(!this.domain || !mwf.site.cookie.domain) {
                 
                     _is_same_origin = true;
                     
