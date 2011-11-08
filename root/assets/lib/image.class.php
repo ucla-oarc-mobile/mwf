@@ -62,7 +62,7 @@ abstract class Image {
         $this->_image_path = $imagepath;
         $this->_image_file_root = md5($imagepath);
         $this->_memory_limit = Config::get('image', 'memory_limit') ?
-                Config::get('image', 'memory_limit') : 104857600;
+                Config::get('image', 'memory_limit') : 33554432;
     }
 
     public function set_max_height($max) {
