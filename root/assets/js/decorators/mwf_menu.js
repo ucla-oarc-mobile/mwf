@@ -34,19 +34,19 @@
  */
 
 //TEMPORARY: Assure that mwf.decorators namespace exists.
-if(mwf == undefined)
+if(typeof mwf == undefined)
 {
     var mwf = function(){};
 }
 
-if(mwf.decorators == undefined)
+if(mwf.decorator == undefined)
 {
-    mwf.decorators = function(){};
+    mwf.decorator = function(){};
 }
 
 
 
-mwf.decorators.menu = function(title)
+mwf.decorator.Menu = function(title)
 {   
     
     if(title != undefined)
