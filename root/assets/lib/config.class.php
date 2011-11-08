@@ -11,9 +11,10 @@
  * @subpackage config
  *
  * @author ebollens
+ * @author trott
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20101021
+ * @version 20111108
  */
 class Config {
 
