@@ -6,22 +6,13 @@
  * This should NOT be included directly; instead /assets/config.php should be.
  *
  * @author ebollens
- * @version 20110511
+ * @version 20111012
  *
  * @uses Config
  * @link /assets/config.php
  */
 
 require_once(dirname(dirname(__FILE__)).'/root/assets/lib/config.class.php');
-
-/**
- * full_site_url    URL of non-mobile site link on front page for mobile devices.
- * help_site_url    URL of the help site or FALSE if there is none.
- *
- * @link index.php
- */
-Config::set('frontpage', 'full_site_url', Config::get('global', 'full_site_url'));
-Config::set('frontpage', 'help_site_url', Config::get('global', 'help_site_url'));
 
 /**
  * header_image_main
@@ -69,6 +60,9 @@ Config::set('frontpage', 'menu',
         array('name'=>'About',
               'id'=>'about',
               'url'=>'mwf/about.php')
+        ,array('name'=>'Device Telemetry',
+               'id'=>'device',
+               'url'=>'mwf/device.php')
         ,array('name'=>'Collaboration',
               'id'=>'showcase',
               'url'=>'index.php?s=collaboration')
@@ -89,10 +83,24 @@ Config::set('frontpage', 'menu',
               'url'=>'https://github.com/ucla/mwf'),
         array('name'=>'Documentation',
               'url'=>'https://github.com/ucla/mwf/wiki'),
-        array('name'=>'Forums',
-              'url'=>'http://mwf.ucla.edu/forum'),
         array('name'=>'Issue Tracker',
               'url'=>'https://jira.ats.ucla.edu:8443/')
         )
     )
 );
+
+/******************************************************************
+ *
+ * DEPRECATED SETTINGS
+ *
+ * Settings below this point are supported by the MWF in a deprecated
+ * capacity only and should not be relied on by components or modules
+ * as they will eventually be removed.
+ *
+ * full_site_url    URL of non-mobile site link on front page for mobile devices.
+ * help_site_url    URL of the help site or FALSE if there is none.
+ *
+ * @link index.php
+ */
+Config::set('frontpage', 'full_site_url', Config::get('global', 'full_site_url'));
+Config::set('frontpage', 'help_site_url', Config::get('global', 'help_site_url'));

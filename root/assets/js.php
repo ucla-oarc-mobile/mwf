@@ -8,77 +8,102 @@
  * This file should be included on all pages that use the mobile framework.
  *
  * @package core
- * @subpackage handler
+ * @subpackage js
  *
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110512
+ * @version 20111101
  *
- * @uses User_Agent
+ * @uses Classification
  * @uses JS
  * @uses JSMin
+ * @uses Path
  * @uses Path_Validator
+ * @uses User_Agent
  */
+
+/**
+ * Include necessary libraries. 
+ */
+
+require_once(dirname(__FILE__).'/lib/classification.class.php');
+require_once(dirname(__FILE__).'/lib/js.class.php');
+require_once(dirname(__FILE__).'/lib/jsmin.class.php');
+require_once(dirname(__FILE__).'/lib/path.class.php');
+require_once(dirname(__FILE__).'/lib/path_validator.class.php');
+require_once(dirname(__FILE__).'/lib/user_agent.class.php');
+$ext = '.js';
 
 /**
  * Defines the file to be parsed as a Javascript file and sets a max cache life.
  */
 
 header('Content-Type: text/javascript');
-header("Cache-Control: max-age=3600");
+header("Cache-Control: max-age=0");
+
+?>/** Mobile Web Framework | http://mwf.ucla.edu */
+
+<?php
 
 /**
- * Include necessary libraries. 
+ * Core Javascript libraries always included.
  */
 
-include_once(dirname(__FILE__).'/lib/user_agent.class.php');
-include_once(dirname(__FILE__).'/lib/js.class.php');
-require_once(dirname(__FILE__).'/lib/jsmin.class.php');
-require_once(dirname(__FILE__).'/lib/path.class.php');
-$ext = '.js';
+$core_filenames = array('vars.php', 
+              'base.js',
+              'modernizr.js', 
+              'capability.js', 
+              'browser.js',
+              'useragent.js',
+              'screen.js',
+              'classification.js', 
+              'util.js',
+              'override.js',
+              'server.js',
+              'telemetry.js');
 
 /**
- * Always included base Javascript libraries.
- *
- * @uses /assets/js/util/util.php
- * @uses /assets/js/util/browser.php
- * @uses /assets/js/util/ua.php
+ * Include each core Javascript library.
  */
-JS::include_library('util', 'util', 'php');
-JS::include_library('browser', 'util', 'php');
-JS::include_library('ua', 'util', 'php');
+
+foreach($core_filenames as $filename)
+    JS::load('core/'.$filename);
 
 /**
- * Conditionally-disabled base Javascript libraries.
- *
- * @uses /assets/js/util/analytics.php
- * @uses /assets/js/util/favicon.php
+ * End JS definitions early if Device is not initialized, as server.js is going
+ * to cause a redirect to return to this page after passing device info.
+ */
+
+if(!Classification::init())
+    die();
+
+JS::load('core/user_agent.js');
+
+/**
+ * Include utility libraries.
  */
 
 if(!isset($_GET['no_ga']))
-    JS::include_library('analytics', 'util', 'php');
+    JS::load('utility/analytics.js');
+
 if(!isset($_GET['no_favicon']) && !isset($_GET['no_icon']))
-    JS::include_library('favicon', 'util', 'php');
+    JS::load('utility/favicon.js');
 
 /**
  * Writes apple-touch-icon[-precomposed] to the DOM.
- *
- * @uses /assets/js/webkit/appicon.js
  */
-if(User_Agent::is_full() && (!Config::get('global', 'appicon_allow_disable_flag') || (!isset($_GET['no_appicon']) && !isset($_GET['no_icon']))))
-    JS::include_library('appicon', 'full', 'php');
+
+if(Classification::is_full() && (!Config::get('global', 'appicon_allow_disable_flag') || (!isset($_GET['no_appicon']) && !isset($_GET['no_icon']))))
+    JS::load('full/appicon.php');
 
 /**
- * Moves the window below the URL bar.
- *
- * @uses /assets/js/iphone/safariurlbar.js
- * @uses /assets/js/iphone/orientation.js
+ * Moves the window below the URL bar and fixes Safari viewport on orientation change.
  */
-if(User_Agent::is_iphone_os())
+if(User_Agent::get_os() == 'iphone_os')
 {
-    JS::include_library('safariurlbar', 'iphone');
-    JS::include_library('orientation', 'iphone');
+    JS::load('iphone/safariurlbar.js');
+    JS::load('iphone/orientation.js');
 }
 
 /**
@@ -88,17 +113,18 @@ if(User_Agent::is_iphone_os())
  * @uses /assets/js/desktop/preview.js [import]
  */
 
-if(User_Agent::is_preview())
+if(Classification::is_preview())
 {
-    JS::include_library('preview_util', 'desktop', 'php');
-    JS::import_library('preview', 'desktop');
+    JS::load_from_key('jquery');
+    JS::load('desktop/preview_util.php');
+    JS::load('desktop/preview_menu.js');
 }
 
 /**
  * Load all standard (and touch_lib for compat) libraries specified in the URI.
  */
 
-if(User_Agent::is_standard() && (isset($_GET['standard_libs']) || isset($_GET['touch_libs'])) )
+if(Classification::is_standard() && (isset($_GET['standard_libs']) || isset($_GET['touch_libs'])) )
 {
     $loadarr = isset($_GET['standard_libs']) ? explode(' ', $_GET['standard_libs']) : array();
 
@@ -106,14 +132,14 @@ if(User_Agent::is_standard() && (isset($_GET['standard_libs']) || isset($_GET['t
         $loadarr = array_merge(explode(' ', $_GET['touch_libs']), $loadarr);
     
     foreach($loadarr as $load)
-        JS::import_library($load, 'standard');
+        JS::load_from_key($load);
 }
 
 /**
  * Load all full (and webkit_lib for compat) libraries specified in the URI.
  */
 
-if(User_Agent::is_full() && (isset($_GET['full_libs']) || isset($_GET['webkit_libs'])) )
+if(Classification::is_full() && (isset($_GET['full_libs']) || isset($_GET['webkit_libs'])) )
 {
     $loadarr = isset($_GET['full_libs']) ? explode(' ', $_GET['full_libs']) : array();
 
@@ -121,7 +147,7 @@ if(User_Agent::is_full() && (isset($_GET['full_libs']) || isset($_GET['webkit_li
         $loadarr = array_merge(explode(' ', $_GET['webkit_libs']), $loadarr);
     
     foreach($loadarr as $load)
-        JS::import_library($load, 'full');
+        JS::load_from_key($load);
 }
 
 /**
@@ -133,12 +159,12 @@ if(isset($_GET['basic']))
         if(Path_Validator::is_safe($file, 'js') && $contents = Path::get_contents($file))
             echo ' ' . JSMin::minify($contents);
 
-if(User_Agent::is_standard() && isset($_GET['standard']))
+if(Classification::is_standard() && isset($_GET['standard']))
     foreach(explode(' ', $_GET['standard']) as $file)
         if(Path_Validator::is_safe($file, 'js') && $contents = Path::get_contents($file))
             echo ' ' . JSMin::minify($contents);
 
-if(User_Agent::is_full() && isset($_GET['full']))
+if(Classification::is_full() && isset($_GET['full']))
     foreach(explode(' ', $_GET['full']) as $file)
         if(Path_Validator::is_safe($file, 'js') && $contents = Path::get_contents($file))
             echo ' ' . JSMin::minify($contents);

@@ -1,1 +1,0 @@
-document.write('<link rel="apple-touch-icon-precomposed" href="'+mwf.site.webassetroot()+'/img/mwf-appicon-precomposed.png" />');document.write('<link rel="apple-touch-icon" href="'+mwf.site.webassetroot()+'/img/mwf-appicon.png" />');
