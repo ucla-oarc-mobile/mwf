@@ -19,6 +19,22 @@
  * @uses document.URL
  */
 
+if (get_magic_quotes_gpc()) {
+    $process = array(&$_COOKIE);
+    while (list($key, $val) = each($process)) {
+        foreach ($val as $k => $v) {
+            unset($process[$key][$k]);
+            if (is_array($v)) {
+                $process[$key][stripslashes($k)] = $v;
+                $process[] = &$process[$key][stripslashes($k)];
+            } else {
+                $process[$key][stripslashes($k)] = stripslashes($v);
+            }
+        }
+    }
+    unset($process);
+}
+
 include_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 require_once(dirname(dirname(dirname(__FILE__))).'/lib/https.class.php');
 
@@ -27,19 +43,19 @@ $prefix = Config::get('global', 'cookie_prefix');
 $cookies = array('classification', 'user_agent', 'screen', 'override');
 
 if(isset($_COOKIE[$prefix.'override']))
-    $override_cookie_var = '"'.$_COOKIE[$prefix.'override'].'"';
+    $override_cookie_var = '"'.addslashes($_COOKIE[$prefix.'override']).'"';
 else
     $override_cookie_var = 'false';
 
 if(isset($_COOKIE[$prefix.'classification']))
-    $classification_cookie_var = '"'.$_COOKIE[$prefix.'classification'].'"';
+    $classification_cookie_var = '"'.addslashes($_COOKIE[$prefix.'classification']).'"';
 else
     $classification_cookie_var = 'false';
 
 $cookies_arr = array();
 foreach($cookies as $cookie)
     if(isset($_COOKIE[$prefix.$cookie]))
-        $cookies_arr[] = $prefix.$cookie;
+        $cookies_arr[] = addslashes($prefix.$cookie);
     
 $existing_cookies_var = '["'.implode('","', $cookies_arr).'"]';
 
