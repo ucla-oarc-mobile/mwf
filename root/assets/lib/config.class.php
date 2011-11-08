@@ -24,16 +24,17 @@ class Config {
     private static $_vars = array();
 
     public static function init() {
+        $scheme = empty($_SERVER['HTTPS']) ? 'http' : 'https';
         if (self::get('base', 'site_url')) {
             define('MWF_CONFIG_SITE_URL', self::get('base', 'site_url'));
         } else {
-            define('MWF_CONFIG_SITE_URL', '//'.$_SERVER['SERVER_NAME']);
+            define('MWF_CONFIG_SITE_URL', $scheme.'://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']);
         }
         
         if (self::get('base', 'site_assets_url')) {
             define('MWF_CONFIG_SITE_ASSETS_URL', self::get('base', 'site_assets_url'));
         } else {
-            define('MWF_CONFIG_SITE_ASSETS_URL', '//'.$_SERVER['SERVER_NAME'].'/assets');
+            define('MWF_CONFIG_SITE_ASSETS_URL', $scheme.'://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].'/assets');
         }
     }
 
