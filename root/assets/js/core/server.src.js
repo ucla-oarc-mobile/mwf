@@ -8,7 +8,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111107
+ * @version 20111108
  *
  * @requires mwf
  * @requires mwf.site
@@ -97,18 +97,6 @@ mwf.server = new function(){
     }
     
     this.setCookie = function(cookieName, cookieContent) {
-        
-        /**
-         * Check for a bad configuration of the site asset url and the cookie
-         * domain url.
-         */
-        
-        if(!mwf.site.cookie.isValidDomain()) {
-
-            this.error = true;
-            return;
-
-        }
     
         /**
          * Function to generate a cookie on the service provider, specifying a
@@ -124,15 +112,11 @@ mwf.server = new function(){
         
         if(isSameOrigin){
             
-            var cookieSuffix = ';path=/';
-            if(mwf.site.cookie.domain)
-                cookieSuffix += ";domain="+mwf.site.cookie.domain;
-            
             /**
              * Write the cookie with the proper suffix for service provider.
              */
             
-            document.cookie = cookieName + '=' + cookieContent+cookieSuffix;
+            document.cookie = cookieName + '=' + cookieContent+';path=/';
             
             /**
              * Must reload the page to propagate the cookie to SP.
