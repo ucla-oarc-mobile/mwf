@@ -404,6 +404,53 @@ form.form-full > input[type=reset]:hover {
 
 
 /********************************************************
+ * MESSAGES
+ *******************************************************/
+
+.message.full {
+    display: block;
+    padding: .5em 0 .5em 1em;
+    text-align: left;
+}
+
+.message.full.alert {
+    border: 1px solid #fa3;
+    background-color: #ffe;
+}
+
+.message.full.confirm {
+    border: 1px solid #6a3;
+    background-color: #efe;
+}
+
+.message.full.error {
+    border: 1px solid #a30;
+    background-color: #fee;
+}
+
+.message.full.info {
+    border: 1px solid #6ac;
+    background-color: #eff;
+}
+
+.message.alert {
+    color: #630;
+}
+
+.message.confirm {
+    color: #360;
+}
+
+.message.error {
+    color: #a00;
+}
+
+.message.info {
+    color: #039;
+}
+
+
+/********************************************************
  * CONTENT
  *******************************************************/
 

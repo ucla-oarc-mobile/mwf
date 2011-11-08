@@ -66,6 +66,9 @@ Config::set('frontpage', 'menu',
         ,array('name'=>'Collaboration',
               'id'=>'showcase',
               'url'=>'index.php?s=collaboration')
+        ,array('name'=>'Demos',
+              'id'=>'demos',
+              'url'=>'mwf/demos.php')
         ,array('name'=>'License',
               'id'=>'license',
               'url'=>'mwf/license.php')
