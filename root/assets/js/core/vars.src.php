@@ -11,7 +11,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111107
+ * @version 20111108
  *
  * @uses Config
  * @uses HTTPS
@@ -47,15 +47,13 @@ $domain_var = Config::get('global', 'cookie_domain');
 if($domain_var && substr($domain_var, 0, 1) == '.')
     $domain_var = substr($domain_var, 1);
 
-$site = Config::get('global', 'site_assets_url');
-if($pos = strpos($site, '//'))
-    $site = substr($site, $pos+2);
-if($pos = strpos($site, '/'))
-    $site = substr($site, 0, $pos);
-if($pos = strpos($site, ':'))
-    $site = substr($site, 0, $pos);
-
-$valid_domain_var = strlen($domain_var) > 0 && substr($site, strlen($site)-strlen($domain_var), strlen($domain_var)) == $domain_var ? 'true' : 'false';
+$domain_var = Config::get('global', 'site_assets_url');
+if($pos = strpos($domain_var, '//'))
+    $domain_var = substr($domain_var, $pos+2);
+if($pos = strpos($domain_var, '/'))
+    $domain_var = substr($domain_var, 0, $pos);
+if($pos = strpos($domain_var, ':'))
+    $domain_var = substr($domain_var, 0, $pos);
 
 ?>
 
@@ -74,7 +72,7 @@ mwf.site=new function(){
     this.cookie = new function(){
         
         this.prefix = '<?php echo Config::get('global', 'cookie_prefix'); ?>';
-        this.domain = <?php if($domain_var) echo '\''.$domain_var.'\''; else echo 'false';  ?>;
+        this.domain = <?php echo '\''.$domain_var.'\''; ?>;
         this.exists = function(e){
             var cookies = <?php echo $existing_cookies_var; ?>;
             for(var i=0; i<cookies.length; i++)
@@ -83,9 +81,6 @@ mwf.site=new function(){
         };
         this.override = <?php echo $override_cookie_var; ?>;
         this.classification = <?php echo $classification_cookie_var; ?>;
-        this.isValidDomain = function(){
-            return <?php echo $valid_domain_var; ?>;
-        };
         
     };
     

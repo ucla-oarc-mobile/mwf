@@ -36,16 +36,9 @@ Config::set('global', 'footer_link_titles', array());
  * CORE
  *
  * - cookie_prefix :: The prefix attached to all cookies that the framework writes.
- * - cookie_domain :: The domain under which the framework asset URL resides.
- *                      For example, if the framework resides at "m.ex.com/f", 
- *                      then this could be set to "m.ex.com", ".ex.com" or
- *                      "ex.com". This is REQUIRED for any framework service 
- *                      provider that has content leveraging the framework
- *                      on any domain except the framework domain itself.
  */
 
 Config::set('global', 'cookie_prefix', 'mwf_');
-Config::set('global', 'cookie_domain', false);
 
 /**
  * TEXT AND IMAGES
