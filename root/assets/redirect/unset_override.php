@@ -22,7 +22,7 @@ if(!headers_sent())
     $ovrrdr_name = Config::get('global', 'cookie_prefix').'ovrrdr';
     foreach($_COOKIE as $name=>$value)
     {
-        if($name == $ovrrdr_name)
+        if(substr($name, 0, strlen($ovrrdr_name)) == $ovrrdr_name)
              setcookie($name, 0, time(), '/');
     }
 }
