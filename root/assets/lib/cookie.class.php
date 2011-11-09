@@ -54,6 +54,10 @@ class Cookie {
         return get_magic_quotes_gpc() ?
                 self::stripslashes_deep($_COOKIE[$name]) : $_COOKIE[$name];
     }
+    
+    public static function set($name, $value, $expire=0, $path='/') {
+        return setcookie(self::$_prefix.$name, $value, $expire, $path);
+    }
 }
 
 Cookie::init();
