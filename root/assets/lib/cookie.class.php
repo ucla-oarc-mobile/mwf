@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * @package core
+ *
+ * @author trott
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20111108
+ * 
+ * @uses Config
+ */
+
 require_once(dirname(__FILE__) . '/config.class.php');
 
 class Cookie {
