@@ -10,10 +10,12 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110906
+ * @version 20111108
+ * 
+ * @uses Cookie
  */
 
-require_once(dirname(dirname(__FILE__)).'/config.php');
+require_once(dirname(__FILE__).'/cookie.class.php');
 
 class User_Agent
 {   
@@ -26,11 +28,18 @@ class User_Agent
     private static $_init = null;
     
     /**
-     * Name of the capabilities cookie set by assets/js/core/server.js.
+     * Name of the user_agent cookie set by assets/js/core/server.js.
      * 
      * @var string
      */
     private static $_name = '';
+    
+    /**
+     * NContents of the user_agent cookie set by assets/js/core/server.js.
+     * 
+     * @var string
+     */
+    private static $_cookie = '';
     
     /**
      * An array of capabilities if know, or false otherwise. Null until loaded
@@ -68,17 +77,21 @@ class User_Agent
         /**
          * Define name of the cookie set by asets/js/core/server.js.
          */
-        self::$_name = Config::get('global', 'cookie_prefix').'user_agent';
+        self::$_name = 'user_agent';
+        
+        /**
+         * Contents of the cookie set by asets/js/core/server.js.
+         */
+        self::$_cookie = Cookie::get(self::$_name);
         
         /**
          * If cookie is set, extract contents and parse the JSON into a PHP
          * object, then setting initialized value to true. Otherwise, set it
          * false, as initialization has failed since no cookie is defined.
          */
-        if(isset($_COOKIE) && isset($_COOKIE[self::$_name]))
+        if(isset(self::$_cookie))
         {
-            $user_agent = $_COOKIE[self::$_name];
-            self::$_user_agent = self::parse($user_agent);
+            self::$_user_agent = self::parse(self::$_cookie);
             self::$_init = true;
         }
         else

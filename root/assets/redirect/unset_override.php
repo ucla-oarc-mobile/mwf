@@ -19,9 +19,10 @@ include_once(dirname(dirname(__FILE__)).'/config.php');
 
 if(!headers_sent())
 {
+    $ovrrdr_name = Config::get('global', 'cookie_prefix').'ovrrdr';
     foreach($_COOKIE as $name=>$value)
     {
-        if(substr($name, 0, 14) == Config::get('global', 'cookie_prefix').'ovrrdr')
+        if($name == $ovrrdr_name)
              setcookie($name, 0, time(), '/');
     }
 }
