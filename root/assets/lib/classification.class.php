@@ -13,10 +13,9 @@
  * @license http://mwf.ucla.edu/license
  * @version 20111108
  * 
- * @uses Config
+ * @uses Cookie
  */
 
-require_once(dirname(dirname(__FILE__)).'/config.php');
 require_once(dirname(__FILE__).'/cookie.class.php');
 
 class Classification

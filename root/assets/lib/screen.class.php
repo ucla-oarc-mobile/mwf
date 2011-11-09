@@ -10,9 +10,8 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110921
+ * @version 20111108
  *
- * @uses Config
  * @uses Cookie
  * @link /assets/js/core/browser.js
  */
@@ -21,7 +20,7 @@
  * Require necessary libraries.
  */
 
-require_once(dirname(dirname(__FILE__)).'/config.php');
+require_once(dirname(__FILE__).'/cookie.class.php');
 
 class Screen
 {   
