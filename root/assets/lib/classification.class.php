@@ -11,10 +11,12 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110901
+ * @version 20111108
+ * 
+ * @uses Cookie
  */
 
-require_once(dirname(dirname(__FILE__)).'/config.php');
+require_once(dirname(__FILE__).'/cookie.class.php');
 
 class Classification
 {   
@@ -32,6 +34,13 @@ class Classification
      * @var string
      */
     private static $_name = '';
+    
+    /**
+     * Contents of cookie set by assets/js/core/server.js.
+     * 
+     * @var string
+     */
+    private static $_cookie = '';
     
     /**
      * An array of capabilities if know, or false otherwise. Null until loaded
@@ -69,16 +78,17 @@ class Classification
         /**
          * Define name of the cookie set by asets/js/core/server.js.
          */
-        self::$_name = Config::get('global', 'cookie_prefix').'classification';
+        self::$_name = 'classification';
         
         /**
          * If cookie is set, extract contents and parse the JSON into a PHP
          * object, then setting initialized value to true. Otherwise, set it
          * false, as initialization has failed since no cookie is defined.
          */
-        if(isset($_COOKIE) && isset($_COOKIE[self::$_name]))
+        self::$_cookie = Cookie::get(self::$_name);
+        if(isset(self::$_cookie))
         {
-            $capabilities = $_COOKIE[self::$_name];
+            $capabilities = self::$_cookie;
             self::$_capabilities = self::parse($capabilities);
             self::$_init = true;
         }
@@ -197,7 +207,7 @@ class Classification
     public static function is_mobile($consider_override = true)
     {
         $capabilities = self::get($consider_override);
-        return $capabilities && $capabilities->mobile || !isset($_COOKIE) || !isset($_COOKIE[self::$_name]);
+        return $capabilities && $capabilities->mobile || !isset(self::$_cookie);
     }
     
     /**
@@ -207,7 +217,8 @@ class Classification
      */
     public static function is_override()
     {
-        return isset($_COOKIE[Config::get('global', 'cookie_prefix').'override']);
+        $override = Cookie::get('override');
+        return isset($override);
     }
     
     /**
