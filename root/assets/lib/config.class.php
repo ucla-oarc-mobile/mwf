@@ -15,7 +15,11 @@
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
  * @version 20111108
+ * 
+ * @uses HTTPS
  */
+require_once(dirname(__FILE__).'/https.class.php');
+
 class Config {
 
     /**
@@ -25,7 +29,7 @@ class Config {
     private static $_vars = array();
 
     public static function init() {
-        $scheme = empty($_SERVER['HTTPS']) ? 'http' : 'https';
+        $scheme = HTTPS::is_https() ? 'https' : 'http';
         if (self::get('base', 'site_url')) {
             define('MWF_CONFIG_SITE_URL', self::get('base', 'site_url'));
         } else {
