@@ -19,6 +19,7 @@ License:
 
 TABLE OF CONTENTS
 
+Version 1.2.06          November 9, 2011
 Version 1.2.05          October 26, 2011
 Version 1.2.04          October 14, 2011
 Version 1.2.03.rc       October 10, 2011
@@ -33,6 +34,43 @@ Version 1.1.03.alpha    July 20, 2011
 Version 1.1.02.alpha    June 23, 2011
 Version 1.1.01.alpha    June 16, 2011
 Version 1.1.00.alpha    May 20, 2011
+
+==============================================================================
+
+Version 1.2.06
+November 9, 2011
+
+* Modifications to device telemetry stack to support cross-domain CPs [#6/#17]
+
+    * Rewrite of mwf.server and mwf.override with major logic changes
+
+    * Modifications to mwf.classification, mwf.userAgent, and mwf.screen
+
+    * Addition of passthru.php redirection script
+
+    * Addition of Cookie class to handle magic_quotes inconsistencies
+
+* Modifications to image compressor
+
+    * Add safeguard to ensure GD does not consume all system memory [#16]
+
+    * Refactor and encapsulation improvements [#18]
+
+    * Fix to support spaces in image paths [MWF-281]
+
+* Addition of JS unit test framework and limited iOS/Android cases [MWF-260]
+
+* Add support for html[lang] [#3]
+
+* Add support for meta[charset] [#6]
+
+* Fix to mwf.userAgent.getBrowserEngine() [#9]
+
+* Fix to mwf.screen for Android 2.3 OS parsing [#11]
+
+* Portability fix for curl in Path_Validator and Path classes [#13]
+
+* Textual fix to comment in mwf.userAgent [#10]
 
 ==============================================================================
 
