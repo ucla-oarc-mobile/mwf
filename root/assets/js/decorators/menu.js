@@ -25,7 +25,7 @@
  * //Finally, render the menu.
  * document.body.appendChild(menu.render());
  * 
- * @namespace mwf.decorators
+ * @namespace mwf.decorator
  * @author zkhalapyan
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
@@ -76,34 +76,6 @@ mwf.decorator.Menu = function(title)
      */ 
     var _menuItems  = document.createElement('ol');
     
-    /**
-     * If true, the div containing the menu will have ".menu-full" in its class
-     * definition.
-     */
-    var _isFull = true;
-    
-    /**
-     * If true, the div containing the menu will have ".menu-padded" in its 
-     * class definition.
-     */
-    var _isPadded = true;
-    
-    /**
-     * If true, the div containing the menu will have ".menu-detailed" in its 
-     * class definition. This variable will have to be set to true in case there
-     * exists at least one menu element with details.
-     */
-    var _isDetailed = true;
-    
-    /**
-     * If true, menu title will have ".light" in its class definition.
-     */
-    var _isLight = true;
-    
-    /**
-     * If true, title header will have blue formatting. 
-     */
-    var _isBlue  = false;
     
     
     /*********************************************************************
@@ -317,51 +289,6 @@ mwf.decorator.Menu = function(title)
        
     }
     
-    /**
-     * Sets _isDetailed.
-     * @param isDetailed The new value of _isDetailed.
-     */
-    this.setIsDetailed = function(isDetailed)
-    {
-        _isDetailed = isDetailed;
-    }
-    
-    /**
-     * Sets _isPadded.
-     * @param isPadded The new value of _isDetailed.
-     */   
-    this.setIsPadded = function(isPadded)
-    {
-        _isPadded = isPadded;
-    }
-    
-    /**
-     * Sets _isFull.
-     * @param isFull The new value of _isDetailed.
-     */
-    this.setIsFull = function(isFull)
-    {
-        _isFull = isFull;
-    }
-    
-    /**
-     * Sets _isLight.
-     * @param isLight The new value of _isLight.
-     */
-    this.setIsLight = function(isLight)
-    {
-        _isLight = isLight;
-    }
-    
-    /**
-     * Sets _isBlue.
-     * @param isBlue The new value of _isBlue.
-     */
-    this.setIsBlue = function(isBlue)
-    {
-        _isBlue = isBlue;
-    }
-    
     /*********************************************************************
      *                     PRIVATE FUNCTIONS BELOW                       *
      *********************************************************************/
@@ -379,17 +306,17 @@ mwf.decorator.Menu = function(title)
         
         var menuClass = "";
          
-        if(_isFull)
+        if(this.isFull())
         {
             menuClass += "menu-full ";
         }
         
-        if(_isDetailed)
+        if(this.isDetailed())
         {
             menuClass += "menu-detailed ";
         }
         
-        if(_isPadded)
+        if(this.isPadded())
         {
             menuClass += "menu-padded ";
         }
@@ -503,3 +430,4 @@ mwf.decorator.Menu = function(title)
     }
     
 }
+
