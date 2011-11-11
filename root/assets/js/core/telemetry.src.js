@@ -7,7 +7,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111007
+ * @version 20111102
  * 
  * @requires mwf.classification
  * @requires mwf.userAgent
@@ -123,13 +123,10 @@
     };
     
     /**
-     * Attaches the writer to both document onDOMContentLoaded and window onLoad
-     * so as to execute as early as when the DOM content is ready, if the device
-     * supports it, or else when the DOM content has fully loaded.
+     * Attaches the writer to the window onLoad to execute when the DOM content 
+     * has fully loaded. Initially this also supported DOMContentLoaded, but
+     * there were Mozilla has issues with document.body as null.
      */
-    if(document.addEventListener) {
-        document.addEventListener('DOMContentLoaded',writer,false);
-    }
     
     if(window.addEventListener) {
         window.addEventListener('load',writer,false);

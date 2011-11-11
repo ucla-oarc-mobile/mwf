@@ -14,12 +14,6 @@
  */
 
 module("core/override.js"); 
-            
-test("mwf.classification.isOverride()", function()
-{
-    equal(typeof mwf.classification.isOverride(), 'boolean',
-        'isOverride() should return a Boolean');
-});
 
 test("mwf.classification.wasFull()", function()
 {

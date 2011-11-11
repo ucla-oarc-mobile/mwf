@@ -7,7 +7,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111007
+ * @version 20111102
  *
  * @requires mwf
  * @requires mwf.browser
@@ -65,5 +65,16 @@ mwf.screen = new function() {
         return (typeof window.devicePixelRatio != 'undefined' && window.devicePixelRatio)
             ? window.devicePixelRatio
             : 1;
+    }
+    
+    /**
+     * Generate JSON content passed into the cookie written by mwf.server.
+     * 
+     * @return string
+     */
+    this.generateCookieContent = function(){
+        
+        return '{"h":"'+this.getHeight()+'","w":"'+this.getWidth()+'","r":"'+this.getPixelRatio()+'"}';
+        
     }
 }
