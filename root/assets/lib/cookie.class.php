@@ -62,8 +62,6 @@ class Cookie {
         $rv = array_keys($_COOKIE);
         $rv = array_filter($rv, create_function('$key', 'return strpos($key, Config::get("global", "cookie_prefix")) === 0;'));
         $foo = array_walk($rv, create_function('&$value, $key', '$value=substr($value, strlen(Config::get("global", "cookie_prefix")), strlen($value) );'));
-        if (!$foo) error_log("OMG");
-        if ($foo) error_log("Good times!");
         return $rv;
     }
 }
