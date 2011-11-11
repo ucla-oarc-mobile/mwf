@@ -10,7 +10,7 @@
  * @author trott
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111107
+ * @version 20111110
  *
  * @uses Config
  * @uses Path_Validator
@@ -58,7 +58,7 @@ abstract class Image {
         }
     }
 
-    private function __construct($imagepath) {
+    protected function __construct($imagepath) {
         $this->_image_path = $imagepath;
         $this->_image_file_root = md5($imagepath);
         $this->_memory_limit = Config::get('image', 'memory_limit') ?
