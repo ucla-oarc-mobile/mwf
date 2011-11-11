@@ -10,7 +10,6 @@
  * 
  * @uses Config
  */
-
 require_once(dirname(__FILE__) . '/config.class.php');
 
 class Cookie {
@@ -33,7 +32,7 @@ class Cookie {
 
     public static function init() {
         self::$_prefix = Config::get('global', 'cookie_prefix') ?
-            Config::get('global', 'cookie_prefix') : 'mwf_';
+                Config::get('global', 'cookie_prefix') : 'mwf_';
     }
 
     protected static function stripslashes_deep($value) {
@@ -54,9 +53,18 @@ class Cookie {
         return get_magic_quotes_gpc() ?
                 self::stripslashes_deep($_COOKIE[$name]) : $_COOKIE[$name];
     }
-    
+
     public static function set($name, $value, $expire=0, $path='/') {
-        return setcookie(self::$_prefix.$name, $value, $expire, $path);
+        return setcookie(self::$_prefix . $name, $value, $expire, $path);
+    }
+
+    public static function get_all_names() {
+        $rv = array_keys($_COOKIE);
+        $rv = array_filter($rv, create_function('$key', 'return strpos($key, Config::get("global", "cookie_prefix")) === 0;'));
+        $foo = array_walk($rv, create_function('&$value, $key', '$value=substr($value, strlen(Config::get("global", "cookie_prefix")), strlen($value) );'));
+        if (!$foo) error_log("OMG");
+        if ($foo) error_log("Good times!");
+        return $rv;
     }
 }
 
