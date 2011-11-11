@@ -18,7 +18,7 @@
  * 
  * @uses HTTPS
  */
-require_once(dirname(__FILE__).'/https.class.php');
+require_once(dirname(__FILE__) . '/https.class.php');
 
 class Config {
 
@@ -29,17 +29,18 @@ class Config {
     private static $_vars = array();
 
     public static function init() {
-        $scheme = HTTPS::is_https() ? 'https' : 'http';
         if (self::get('base', 'site_url')) {
             define('MWF_CONFIG_SITE_URL', self::get('base', 'site_url'));
         } else {
-            define('MWF_CONFIG_SITE_URL', $scheme.'://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT']);
+            $scheme = HTTPS::is_https() ? 'https' : 'http';
+            $port = $_SERVER['SERVER_PORT'] == getservbyname($scheme, "tcp") ? '' : ':' . $_SERVER['SERVER_PORT'];
+            define('MWF_CONFIG_SITE_URL', $scheme . '://' . $_SERVER['SERVER_NAME'] . $port);
         }
-        
+
         if (self::get('base', 'site_assets_url')) {
             define('MWF_CONFIG_SITE_ASSETS_URL', self::get('base', 'site_assets_url'));
         } else {
-            define('MWF_CONFIG_SITE_ASSETS_URL', $scheme.'://'.$_SERVER['SERVER_NAME'].':'.$_SERVER['SERVER_PORT'].'/assets');
+            define('MWF_CONFIG_SITE_ASSETS_URL', MWF_CONFIG_SITE_URL . '/assets');
         }
     }
 
