@@ -59,9 +59,12 @@ class Cookie {
     }
 
     public static function get_all_names() {
-        $rv = array_keys($_COOKIE);
-        $rv = array_filter($rv, create_function('$key', 'return strpos($key, Config::get("global", "cookie_prefix")) === 0;'));
-        $foo = array_walk($rv, create_function('&$value, $key', '$value=substr($value, strlen(Config::get("global", "cookie_prefix")), strlen($value) );'));
+        $rv = array();
+        foreach (array_keys($_COOKIE) as $name) {
+            if (strpos($name,self::$_prefix)===0) {
+                $rv[] = substr($name, strlen(self::$_prefix), strlen($name));
+            }
+        }
         return $rv;
     }
 }
