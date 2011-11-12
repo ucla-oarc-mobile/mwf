@@ -1,0 +1,1448 @@
+/********************************************************
+ * VISIBILITY
+ *******************************************************/
+
+.not-basic,
+.only-webkit,
+.only-full {
+    display: none;
+}
+
+/********************************************************
+ * GLOBAL
+ *******************************************************/
+
+body, html {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+body { font:100%/1.25 Arial, Helvetica, sans-serif; font-size: .95em; }
+
+html, body, address, blockquote, body, dd, div, dl, dt, fieldset, form, frame, frameset, h1, h2, h3, h4, h5, h6, ol, p, ul, center, dir, hr, menu, pre { display: block; }
+
+h1, h2, h3, h4, h5, h6 { line-height: 1.2em; }
+
+h1 { font-size: 1.2em; font-weight: bold; }
+
+h2 { font-size: 1.2em; font-weight: normal; }
+
+h3 { font-size: 1.2em; font-weight: bold; }
+
+h4 { font-size: 1.1em; font-weight: bold; }
+
+h5 { font-size: 1.1em; font-weight: normal; }
+
+h6 { font-size: 1em; font-weight: bold; }
+
+a { text-decoration: none; }
+
+.center { text-align: center !important; margin-left: auto; margin-right: auto; }
+
+.align-left { text-align: left !important; }
+
+.align-right { text-align: right !important; }
+
+.clear { width: 100%; clear: both; float: none !important; height: 1px; }
+
+p {
+    display: block;
+}
+
+.smallprint {
+    font-weight: normal;
+    font-size: 90%;
+}
+
+body {
+    background-color: #ddd;
+}
+
+a {
+    color: #2685bb;
+}
+
+p a,
+p a:visited {
+    color: #2685bb;
+    border-bottom: 1px solid #cccccc;
+}
+
+p a:hover {
+    border-bottom: none;
+}
+
+ol, form {
+    padding: 0;
+    margin: 0;
+}
+
+input {
+     border: 1px solid #cccccc;
+     padding: 4px;
+}
+
+/********************************************************
+ * HEADER
+ *******************************************************/
+
+#header {
+    background: #536895 url(../img/header-bg.png) repeat-x;
+    height: 35px;
+
+}
+
+#header img {
+    border: none;
+    float: left;
+}
+
+#header span {
+    float: left;
+    color: #ffffff;
+    padding: 7px 0 0 5px;
+    font-weight: normal;
+    font-size: .9em;
+}
+
+#header span a {
+    color: #ffffff;
+}
+
+/********************************************************
+ * HEADINGS
+ *******************************************************/
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+/********************************************************
+ * MENUS
+ *******************************************************/
+
+/*-------------------------------------------------
+  Headings
+  ------------------------------------------------*/
+
+.menu-full {
+    width: 100%;
+ }
+
+.menu-full > h1 {
+    background: #efefef;
+    color: #000;
+    margin: 0;
+    padding: .4em 0 .4em 0;
+    text-align: center;
+}
+
+.menu-full li > p {
+    margin: 0;
+    font-weight: normal;
+}
+
+.menu-full > h1.light {
+    background-color: #f6f6f6;
+    color: #555;
+}
+
+.menu-full > h1.blue {
+    background-color: #809FE2;
+    color: #fff;
+}
+
+.menu-full a h4 {
+    color: #2685bb;
+}
+
+.menu-full a:hover h4,
+.menu-full a:focus h4,
+.menu-full a:active h4 {
+    color: #494D69;
+}
+
+.menu-full > h1,
+.menu-full > h4 {
+    padding: 0;
+    margin: 0;
+}
+
+.menu-full a h4 {
+    color: #1e6a95;
+}
+.menu-full a:hover h4,
+.menu-full a:focus h4,
+.menu-full a:active h4 {
+    color: #494D69;
+}
+
+.menu-full p {
+    color: #000;
+    margin-top: 0;
+}
+.menu-detailed p {
+    color: #555;
+}
+
+/*-------------------------------------------------
+Lists
+------------------------------------------------*/
+.menu-full li {
+    font-size: 1.25em;
+    background-color: #FFF;
+    text-align: center;
+    border: 1px #dddddd;
+    border-style: solid none none none;
+}
+
+.menu-full ol {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-detailed li {
+    font-size: 1em;
+    text-align: left;
+}
+
+.menu-detailed li a, .menu-detailed li p
+{
+    padding: .6em 2em .6em .6em;
+}
+
+.menu-button a {
+    color: #2685BB;
+}
+
+
+/********************************************************
+ * LISTS
+ *******************************************************/
+
+.front-page li, .menu-full li {
+    font-weight: bold;
+}
+
+li .smallprint {
+    color: #666666;
+}
+
+li a, li p {
+    display: block;
+    padding: .6em 2em;
+}
+
+li a {
+    color: #2685bb;
+    border: none;
+}
+
+/********************************************************
+ * BUTTONS
+ *******************************************************/
+
+a.button-full, div.button-full {
+    width: auto;
+    display: block;
+}
+
+a.button-full, div.button-full a{
+    display: block;
+    color: #1e6a95;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: center;
+    padding: .4em;
+}
+
+a.button-full:hover,
+a.button-full:focus,
+a.button-full:active,
+div.button-full a:hover,
+div.button-full a:focus,
+div.button-full a:active{
+    color: #494D69;
+}
+
+/********************************************************
+ * FORMS
+ *******************************************************/
+
+form.form-full {
+    background-color: #fff;
+    padding-bottom: 10px;
+}
+
+form.form-full > h1 {
+    background: #efefef;
+    color: #000;
+    margin: 0 0 10px 0;
+    padding: .4em 0 .4em 0;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+form.form-full > h1.light {
+    background-color: #f6f6f6;
+    border-bottom: 1px solid #ddd;
+}
+
+form.form-full > h1,
+form.form-full > input,
+form.form-full > select,
+form.form-full > textarea,
+form.form-full > label,
+form.form-full > p,
+form.form-full > div {
+    width: 100%;
+    display: block;
+    border: 0;
+}
+
+form.form-full > p {
+    padding: 4px 8px;
+    width: auto;
+    color: #444;
+}
+
+form.form-full > label {
+    font-size: .85em;
+    text-align: center;
+    color: #777;
+}
+
+form.form-full > input,
+form.form-full > select,
+form.form-full > textarea {
+    font-size: .95em;
+    background-color: #f1f1f1;
+    margin: 0 auto 10px auto;
+    width: 80%;
+    border: 1px solid #bbb;
+}
+
+form.form-full > input {
+    text-align: center;
+}
+
+form.form-full > textarea {
+    height: 4em;
+    line-height: 1.6em;
+}
+
+form.form-full > input[type=submit],
+form.form-full > input[type=reset] {
+    background-color: #eee;
+    font-weight: bold;
+    color: #1e6a95;
+}
+
+form.form-full > input[type=submit]:active,
+form.form-full > input[type=reset]:active,
+form.form-full > input[type=submit]:focus,
+form.form-full > input[type=reset]:focus,
+form.form-full > input[type=submit]:hover,
+form.form-full > input[type=reset]:hover {
+    background-color: #f6f6f6;
+    color: #2685bb;
+}
+
+
+/********************************************************
+ * CONTENT
+ *******************************************************/
+
+/*-------------------------------------------------
+  Headings
+  ------------------------------------------------*/
+
+
+.content-full > h1,
+.content-full > h4
+.content-elements > h1,
+.content-elements > h4 {
+    padding: 0;
+    margin: 0;
+}
+
+ .content-elements p, .content-full p {
+    margin: 0;
+}
+
+.content-elements, .content-full {
+    width: 100%;
+    line-height: 1.35em;
+}
+
+.content-elements > *, .content-full > * {
+    background-color: #FFF;
+    border-bottom: 1px solid #dddddd;
+    padding: .6em;
+}
+
+.content-elements > h1, .content-full > h1 {
+    background-color: #efefef;
+    color: #000;
+    padding: .4em 0 .4em 0;
+    margin: 0;
+    text-align: center;
+}
+
+.content-elements > h1.light, .content-full > h1.light {
+    background-color: #f6f6f6;
+    color: #555;
+}
+
+.content-elements > h1.blue, .content-full > h1.blue {
+    background-color: #809FE2;
+    color: #fff;
+}
+
+.content-elements > * h1, .content-full > * h1,
+.content-elements > * h4, .content-full > * h4 {
+    margin-bottom: 0;
+}
+
+.content-elements > h4, .content-full > h4 {
+    padding: .1em;
+}
+
+.content-button a {
+    color: #2685BB;
+    font-weight: bold;
+}
+
+.content-button a .label {
+    color: #777;
+    font-weight: bold;
+}
+
+
+/*-------------------------------------------------
+  Breadcrumbs
+  ------------------------------------------------*/
+
+#breadcrumbs {
+    padding: 5px 0;
+    margin-left: 15px;
+    font-size: .9em;
+    font-weight: bold;
+}
+
+#breadcrumbs a {
+    text-decoration: none;
+    color: #2685bb;
+}
+
+/*-------------------------------------------------
+  General
+  ------------------------------------------------*/
+.content-elements, .content-full {
+    margin: 0;
+}
+
+.content-elements div ol, .content-full div ol {
+    margin: 0 1.5em;
+    position: relative;
+}
+
+.content-elements > * p, .content-full > * p {
+    margin-bottom: .5em;
+}
+
+/********************************************************
+ * FOOTER
+ *******************************************************/
+
+#footer {
+    font-size: 80%;
+    padding: 1em;
+    text-align: center;
+}
+
+#footer,
+#footer a,
+#footer a:visited,
+#footer a:hover {
+    color: #666666;
+}
+
+#footer a,
+#footer a:visited {
+    text-decoration: none;
+    border-bottom: 1px solid #666666;
+}
+
+#footer a:hover {
+    border-bottom: none;
+}
+
+/********************************************************
+ * PREVIEW MODE
+ *******************************************************/
+
+#desktop-preview-menu {
+    padding: 3px 10px;
+    background-color: #fff;
+    border-bottom: 1px solid #000;
+}
+
+#desktop-preview-menu h1 {
+    color: #000000;
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+    padding-top: 1px;
+    float: left;
+}
+
+#desktop-preview-menu div.options {
+    font-size: 12px;
+    float: right;
+}
+
+/********************************************************
+ * FRONT PAGE
+ *******************************************************/
+body.front-page h1#header {
+    background: #536895 url(../img/header-front-page-bg.png) repeat-x;
+    height: 50px;
+}
+body.front-page h1#header img {
+    float: none;
+}
+body.front-page h1#header span {
+    display: none;
+}body.front-page {
+    text-align: center;
+}
+/* Filename: default-touch.css
+ *
+ */
+
+.not-basic,
+.not-webkit,
+.not-full {
+    display: block;
+}
+
+.basic-only,
+.only-basic,
+.only-webkit
+.only-full {
+    display: none;
+}
+
+#header {
+    border-bottom: 3px solid #fff;
+}
+
+/* default-touch-main
+ *
+ * Description:
+ *
+ *   -Global
+ *   -Header
+ *   -Headings
+ *   -Menus
+ *   -Lists
+ *   -Buttons
+ *   -Content
+ *
+ *
+ */
+
+/********************************************************
+ * MENUS
+ *******************************************************/
+
+/*-------------------------------------------------
+  Headings
+  ------------------------------------------------*/
+.menu-full > h1 {
+        padding: .4em;
+}
+
+.menu-full > h1 {
+     border: 1px #dddddd;
+     border-style: solid none none none;
+}
+
+/*-------------------------------------------------
+  Lists
+  ------------------------------------------------*/
+
+.menu-full li a:hover,
+.menu-full li a:focus,
+.menu-full li a:active {
+        background-color: #eaf2fa;
+}
+
+/*-------------------------------------------------
+  General
+  ------------------------------------------------*/
+
+.menu-padded > * {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+}
+
+.menu-padded > *:first-child,
+.menu-padded .menu-first {
+    margin-top: 10px !important;
+}
+
+.menu-padded > *:first-child,
+.menu-padded .menu-first {
+    border-top: none !important;
+}
+
+.menu-padded a:last-child li,
+.menu-padded > *:last-child,
+.menu-padded .menu-last {
+    border-bottom: none !important;
+}
+
+/********************************************************
+ * LISTS
+ *******************************************************/
+
+.menu-full li a {
+     background:url(../img/list-arrow.png) no-repeat 95% center; /* Controls menu items */
+}
+
+/********************************************************
+ * BUTTONS
+ *******************************************************/
+
+a#button-top {
+    overflow: hidden;
+    white-space: nowrap;
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    right: 0;
+    /* box model attributes -- should be a total together of 35 px height */
+    height: 16px !important;
+    line-height: 16px;
+    margin: 4px 10px 7px 0;
+    padding: 4px 8px 4px 8px;
+    max-width: 85px;
+    /* decoration */
+    border: 1px solid #bbb;
+    font-size: 12px !important;
+    -webkit-box-shadow: none;
+    background-color: #788ebe;
+    color: #fff;
+    font-weight: bold;
+}
+
+a#button-top:hover,
+a#button-top:active,
+a#button-top:focus{
+    background-color: #576c9c !important;
+    color: #fff;
+}
+
+a.button-full {
+    padding: .6em;
+    margin: 0;
+}
+
+a.button-full.button-padded,
+div.button-full.button-padded{
+    margin-top: 10px;
+}
+
+a.button-full.button-padded {
+    margin: 10px 10px 0 10px;
+}
+
+div.button-full {
+    display: block;
+    position: relative !important;
+    height: 2.45em;
+    width: 100%;
+    overflow: hidden;
+}
+
+div.button-full a,
+div.button-full a.button-light {
+    position: absolute;
+    width: auto;
+    border-left: 1px solid #aaa !important;
+    overflow: hidden;
+    white-space:  nowrap;
+    padding: .4em 0 .4em 0;
+}
+
+div.button-full a:first-child,
+div.button-full a.button-first {
+    border-left: 0 !important;
+    right: 50%;
+    width: 50%;
+}
+
+div.button-full a:last-child,
+div.button-full a.button-last {
+    left: 50%;
+    width: 50%;
+}
+
+div.button-full a:first-child:last-child,
+div.button-full a.button-first.button-last
+{
+    width: 100%;
+    left: 0;
+    right: 0;
+}
+
+div.button-full.button-padded a:first-child,
+div.button-full.button-padded a.button-first {
+    left: 10px;
+    width: auto;
+}
+
+div.button-full.button-padded a:last-child,
+div.button-full.button-padded a.button-last {
+    right: 10px;
+    width: auto;
+}
+
+a#button-top,
+a.button-full.button-padded,
+div.button-full.button-padded a:first-child,
+div.button-full.button-padded a.button-first {
+    -moz-border-radius-topleft: .5em;
+    -moz-border-radius-bottomleft: .5em;
+}
+
+a#button-top,
+a.button-full.button-padded,
+div.button-full.button-padded a:last-child,
+div.button-full.button-padded a.button-last {
+    -moz-border-radius-topright: .5em;
+    -moz-border-radius-bottomright: .5em;
+}
+
+a.button-full,
+div.button-full a {
+    background-color: #536895;
+    color: #fff;
+    font-size: 1.25em;
+    font-weight: bold;
+    border: none;
+}
+
+a.button-full:hover,
+a.button-full:focus,
+a.button-full:active,
+div.button-full a:hover,
+div.button-full a:focus,
+div.button-full a:active,
+a.button-full.button-light:hover,
+a.button-full.button-light:focus,
+a.button-full.button-light:active,
+div.button-full a.button-light:hover,
+div.button-full a.button-light:focus,
+div.button-full a.button-light:active {
+    background-color: #ffb300 !important;
+    color: #494D69;
+}
+
+a.button-full.button-light,
+div.button-full a.button-light,
+div.button-full.button-light a {
+    background-color: #f6f6f6;
+    color: #555;
+}
+
+.button-next {
+    padding: 10px 0px 10px 65px;
+    background:url(../img/button-next.png) no-repeat center;
+}
+
+.button-previous {
+    padding: 10px 0px 10px 65px;
+    background:url(../img/button-previous.png) no-repeat center;
+}
+
+.button-next span,
+.button-previous span {
+    display: none;
+}
+
+.tour-buttons {
+    padding: 12px 10px 15px 10px;
+}
+
+#search-button {
+        background: url(../img/button-search.png) no-repeat;
+        width: 60px;
+        height: 25px;
+        border: 0;
+        padding: 0;
+        margin: 0;
+        text-indent:-9999px;
+}
+#go-button {
+        background: url(../img/button-go.png) no-repeat;
+        width: 30px;
+        height: 25px;
+        border: 0;
+        padding: 0;
+        margin: 0;
+        text-indent:-9999px;
+}
+/********************************************************
+ * FORM
+ *******************************************************/
+
+form.form-padded {
+    margin: 10px 10px 0 10px;
+    width: auto;
+}
+
+form.form-padded {
+    -moz-border-radius-topleft: .5em;
+    -moz-border-radius-topright: .5em;
+    -moz-border-radius-bottomleft: .5em;
+    -moz-border-radius-bottomright: .5em;
+}
+
+form.form-full > input,
+form.form-full > textarea,
+form.form-full > select {
+    box-shadow:inset 0 0 3px #bbb;
+    -moz-box-shadow:inset 0 0 3px #bbb;
+}
+
+form.form-full > input[type=submit],
+form.form-full > input[type=reset] {
+    box-shadow:none;
+    -moz-box-shadow:none;
+}
+
+/********************************************************
+ * CONTENT
+ *******************************************************/
+
+/*-------------------------------------------------
+  Headings
+  ------------------------------------------------*/
+.content-elements > h1, .content-full > h1,
+.content-elements > h4, .content-full > h4 {
+        padding: .4em;
+        margin: 0;
+        text-align: center;
+}
+
+/*-------------------------------------------------
+  General
+  ------------------------------------------------*/
+
+.content-padded > * {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+}
+
+.content-padded {
+    width: 100%;
+}
+
+.content-padded > *:first-child,
+.content-padded .content-first {
+    margin-top: 10px !important;
+    -moz-border-radius-topleft: .5em;
+    -moz-border-radius-topright: .5em;
+}
+
+.content-padded > *:last-child,
+.content-padded .content-last {
+    -moz-border-radius-bottomleft: .5em;
+    -moz-border-radius-bottomright: .5em;
+}
+
+.content-padded > *:first-child,
+.content-padded .content-first {
+    border-top: none !important;
+}
+
+.content-padded > *:last-child,
+.content-padded .content-last {
+    border-bottom: none !important;
+}
+
+.content-elements h1.light, .content-full h1.light {
+     border: 1px #dddddd;
+     border-style: solid none none none;
+}
+
+/* default-touch-frontpage
+ *
+ * Description: Controls the stylings for m.ucla.edu
+ *
+ *   -Global
+ *   -Header
+ *   -Menus
+ *   -Footer
+ *
+ *
+ */
+
+/********************************************************
+ * MENUS
+ *******************************************************/
+
+.front-page .menu-front li a{
+    padding: 1.2em;
+}
+
+
+#header {
+    border-bottom: 3px solid #ffb300;
+}
+
+.front-page #news {
+    background: #fff url(../img/icon/news.png) 16px 14px no-repeat;
+}
+
+.front-page #happenings {
+    background: #fff url(../img/icon/events.png) 17px 12px no-repeat;
+}
+
+.front-page #directory {
+    background: #fff url(../img/icon/directory.png) 17px 16px no-repeat;
+}
+
+.front-page #campus-map {
+    background: #fff url(../img/icon/campus-map.png) 17px 14px no-repeat;
+}
+
+.front-page #campus-tour {
+    background: #fff url(../img/icon/campus-tour.png) 16px 12px no-repeat;
+}
+
+.front-page #campus-life {
+    background: #fff url(../img/icon/campus-life.png) 16px 12px no-repeat;
+}
+
+.front-page #bus {
+    background: #fff url(../img/icon/bus.png) 16px 12px no-repeat;
+}
+
+.front-page #youtube {
+    background: #fff url(../img/icon/youtube.png) 8px 18px no-repeat;
+}
+
+.front-page #itunes {
+    background: #fff url(../img/icon/itunes.png) 15px 14px no-repeat;
+}
+
+.front-page #library {
+    background: #fff url(../img/icon/library.png) 15px 14px no-repeat;
+}
+
+.front-page #bear {
+    background: #fff url(../img/icon/bear.png) 16px 14px no-repeat;
+}
+
+.front-page #social-media {
+    background: #fff url(../img/icon/social-media.png) 16px 14px no-repeat;
+}
+
+.front-page #news a:hover,
+.front-page #news a:focus {
+    background: #eaf2fa url(../img/icon/news.png) 16px 14px no-repeat;
+}
+
+.front-page #happenings a:hover,
+.front-page #happenings a:focus {
+    background: #eaf2fa url(../img/icon/events.png) 17px 12px no-repeat;
+}
+
+.front-page #directory a:hover,
+.front-page #directory a:focus {
+    background: #eaf2fa url(../img/icon/directory.png) 17px 16px no-repeat;
+}
+
+.front-page #bear a:hover,
+.front-page #bear a:focus {
+    background: #eaf2fa url(../img/icon/bear.png) 17px 14px no-repeat;
+}
+
+.front-page #campus-map a:hover,
+.front-page #campus-map a:focus {
+    background: #eaf2fa url(../img/icon/campus-map.png) 17px 14px no-repeat;
+}
+
+.front-page #campus-tour a:hover,
+.front-page #campus-tour a:focus {
+    background: #eaf2fa url(../img/icon/campus-tour.png) 16px 12px no-repeat;
+}
+
+.front-page #campus-life a:hover,
+.front-page #campus-life a:focus {
+    background: #eaf2fa url(../img/icon/campus-life.png) 16px 12px no-repeat;
+}
+
+.front-page #bus a:hover,
+.front-page #bus a:focus {
+    background: #eaf2fa url(../img/icon/bus.png) 16px 12px no-repeat;
+}
+
+.front-page #youtube a:hover,
+.front-page #youtube a:focus {
+    background: #eaf2fa url(../img/icon/youtube.png) 8px 18px no-repeat;
+}
+
+.front-page #itunes a:hover,
+.front-page #itunes a:focus {
+    background: #eaf2fa url(../img/icon/itunes.png) 15px 14px no-repeat;
+}
+
+.front-page #library a:hover,
+.front-page #library a:focus {
+    background: #eaf2fa url(../img/icon/library.png) 15px 14px no-repeat;
+}
+
+.front-page #bear a:hover,
+.front-page #bear a:focus {
+    background: #eaf2fa url(../img/icon/bear.png) 16px 14px no-repeat;
+}
+
+.front-page #social-media a:hover,
+.front-page #social-media a:focus {
+    background: #eaf2fa url(../img/icon/social-media.png) 16px 14px no-repeat;
+}
+
+.front-page .menu-padded li a {
+    padding: 1em;
+}
+
+.front-page .menu-front li a{
+    padding: 1.2em 1em 1.2em 4em;
+}
+/* default-webkit-main
+ *
+ * Description:
+ *
+ *   -Header
+ *   -Menus
+ *   -Buttons
+ *   -Content
+ *
+ *
+ */
+
+.only-webkit, .only-full { display: block; }
+.not-webkit, .not-full { display: none; }
+
+/********************************************************
+ * MENUS
+ *******************************************************/
+
+/*-------------------------------------------------
+  Headings
+  ------------------------------------------------*/
+
+.menu-full > h1 {
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5), color-stop(1, #fff));
+        -webkit-background-origin: padding-box;
+        -webkit-background-clip: padding-box;
+}
+
+.menu-full > h1.light {
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5), color-stop(1, #fff));
+        -webkit-background-origin: padding-box;
+        -webkit-background-clip: padding-box;
+}
+
+.menu-full > h1.blue {
+    background: -webkit-gradient(linear, left top, left bottom, from(#809FE2), to(#637CB0), color-stop(1, #fff));
+}
+
+.menu-padded > :first-child:last-child li:first-child,
+.menu-padded > :first-child,
+.menu-padded .menu-first {
+    -moz-border-radius-topleft: .5em;
+    -moz-border-radius-topright: .5em;
+    -webkit-border-top-left-radius: .5em;
+    -webkit-border-top-right-radius: .5em;
+}
+
+.menu-padded li:last-child,
+.menu-padded .menu-last {
+    -webkit-border-bottom-left-radius: .5em;
+    -webkit-border-bottom-right-radius: .5em;
+    -moz-border-radius-bottomleft: .5em;
+    -moz-border-radius-bottomright: .5em;
+    z-index: -100;
+    margin-bottom: 6px;
+}
+
+.menu-padded > :first-child:last-child li:first-child a:hover,
+.menu-padded > :first-child:last-child li:first-child a:focus,
+.menu-padded > :first-child:last-child li:first-child a:active,
+.menu-padded > :first-child a:hover,
+.menu-padded > :first-child a:focus,
+.menu-padded > :first-child a:active,
+.menu-padded .menu-first a:hover,
+.menu-padded .menu-first a:focus,
+.menu-padded .menu-first a:active {
+    -moz-border-radius-topleft: .5em;
+    -moz-border-radius-topright: .5em;
+    -webkit-border-top-left-radius: .5em;
+    -webkit-border-top-right-radius: .5em;
+}
+
+.menu-padded li:last-child a:hover,
+.menu-padded li:last-child a:focus,
+.menu-padded li:last-child a:active,
+.menu-padded .menu-last a:hover,
+.menu-padded .menu-last a:focus,
+.menu-padded .menu-last a:active {
+    -webkit-border-bottom-left-radius: .5em;
+    -webkit-border-bottom-right-radius: .5em;
+    -moz-border-radius-bottomleft: .5em;
+    -moz-border-radius-bottomright: .5em;
+    z-index: -100;
+    margin-bottom: 6px;
+}
+
+/********************************************************
+ * BUTTONS
+ *******************************************************/
+
+a.button-full,
+div.button-full a {
+    background: -webkit-gradient(linear, left top, left bottom, from(#6883bc), to(#536895), color-stop(1, #fff));
+    -webkit-background-origin: padding-box;
+    -webkit-background-clip: padding-box;
+}
+
+a#button-top {
+    background: -webkit-gradient(linear, left top, left bottom, from(#95aee8), to(#788ebe), color-stop(1, #fff));
+    -webkit-background-origin: padding-box;
+    -webkit-background-clip: padding-box;
+}
+
+a#button-top:hover,
+a#button-top:active,
+a#button-top:focus{
+    background: -webkit-gradient(linear, left top, left bottom, from(#8296c0), to(#576c9c), color-stop(1, #fff));
+}
+
+a#button-top,
+a.button-full.button-padded,
+div.button-full.button-padded a:first-child {
+    -webkit-border-top-left-radius: .5em;
+    -webkit-border-bottom-left-radius: .5em;
+}
+
+a#button-top,
+a.button-full.button-padded,
+div.button-full.button-padded a:last-child {
+    -webkit-border-top-right-radius: .5em;
+    -webkit-border-bottom-right-radius: .5em;
+}
+
+a.button-full.button-light,
+div.button-full a.button-light,
+div.button-full.button-light a {
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5), color-stop(1, #fff));
+    -webkit-background-origin: padding-box;
+    -webkit-background-clip: padding-box;
+    color: #555 !important;
+}
+
+a.button-full:hover,
+a.button-full:focus,
+a.button-full:active,
+div.button-full a:hover,
+div.button-full a:focus,
+div.button-full a:active,
+a.button-full.button-light:hover,
+a.button-full.button-light:focus,
+a.button-full.button-light:active,
+div.button-full a.button-light:hover,
+div.button-full a.button-light:focus,
+div.button-full a.button-light:active{
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffc847), to(#ffb300), color-stop(1, #fff));
+    -webkit-background-origin: padding-box;
+    -webkit-background-clip: padding-box;
+}
+
+/********************************************************
+ * CONTENT
+ *******************************************************/
+
+.content-padded > *:last-child,
+.content-padded .content-last {
+    margin-bottom: 6px;
+}
+
+.content-elements > h1, .content-full > h1 {
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5), color-stop(1, #fff));
+    -webkit-background-origin: padding-box;
+    -webkit-background-clip: padding-box;
+}
+
+.content-elements > h1.light, .content-full > h1.light {
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5), color-stop(1, #fff));
+        -webkit-background-origin: padding-box;
+        -webkit-background-clip: padding-box;
+}
+.content-elements > h1.blue, .content-full > h1.blue {
+    background: -webkit-gradient(linear, left top, left bottom, from(#809FE2), to(#637CB0), color-stop(1, #fff));
+
+}
+
+.content-padded > *:first-child,
+.content-padded .content-first {
+    -webkit-border-top-left-radius: .5em;
+    -webkit-border-top-right-radius: .5em;
+}
+
+.content-padded > *:last-child,
+.content-padded .content-last {
+    -webkit-border-bottom-left-radius: .5em;
+    -webkit-border-bottom-right-radius: .5em;
+}
+
+/********************************************************
+ * FORM
+ *******************************************************/
+
+form.form-padded > *:last-child,
+form.form-padded > .form-last {
+    margin-bottom: 6px;
+}
+
+form.form-full > h1 {
+    background: -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#ccc), color-stop(1, #fff));
+    -webkit-background-origin: padding-box;
+    -webkit-background-clip: padding-box;
+}
+
+form.form-full > h1.light {
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5), color-stop(1, #fff));
+        -webkit-background-origin: padding-box;
+        -webkit-background-clip: padding-box;
+}
+form.form-full > h1.blue {
+    background: -webkit-gradient(linear, left top, left bottom, from(#809FE2), to(#637CB0), color-stop(1, #fff));
+
+}
+
+form.form-full > input,
+form.form-full > select,
+form.form-full > textarea {
+    -webkit-border-top-left-radius: .5em;
+    -webkit-border-top-right-radius: .5em;
+    -webkit-border-bottom-left-radius: .5em;
+    -webkit-border-bottom-right-radius: .5em;
+    -webkit-box-shadow:inset 0 0 3px #bbb;
+    -webkit-appearance: none;
+}
+
+form.form-full > select {
+    background: #fff url(../img/select-options-bg.png) right no-repeat;
+}
+
+form.form-padded,
+form.form-padded > h1.form-first,
+form.form-padded > p.form-first,
+form.form-padded > div.form-first {
+    -webkit-border-top-left-radius: .5em;
+    -webkit-border-top-right-radius: .5em;
+}
+
+form.form-padded,
+form.form-padded > h1.form-last,
+form.form-padded > p.form-last,
+form.form-padded > div.form-last {
+    -webkit-border-bottom-left-radius: .5em;
+    -webkit-border-bottom-right-radius: .5em;
+}
+
+form.form-full > input[type=submit],
+form.form-full > input[type=reset] {
+    -webkit-box-shadow:none;
+    background: -webkit-gradient(linear, left top, left bottom, from(#e5e5e5), to(#f1f1f1), color-stop(0.8, #f1f1f1));
+}
+
+form.form-full > input[type=submit]:active,
+form.form-full > input[type=reset]:active,
+form.form-full > input[type=submit]:focus,
+form.form-full > input[type=reset]:focus,
+form.form-full > input[type=submit]:hover,
+form.form-full > input[type=reset]:hover {
+    background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#f1f1f1), color-stop(0.8, #f1f1f1));
+}
+
+/* default-webkit-transitions
+ *
+ * Description:
+ *
+ *   -Setup
+ *   -Properties
+ *   -Active
+ *   -Inactive
+ *   -Utilities
+ *
+ *
+ */
+
+
+/** TRANSITION SETUP **/
+
+.webkit-transition-fade .webkit-transition-element,
+.webkit-transition-flipY .webkit-transition-element,
+.webkit-transition-slideX .webkit-transition-element,
+.webkit-transition-slideY .webkit-transition-element,
+.webkit-transition-slideXZ .webkit-transition-element {
+    -webkit-transition-duration: 1000ms;
+    overflow: hidden;
+}
+
+.webkit-transition-fade .webkit-transition-element,
+.webkit-transition-slideX .webkit-transition-element,
+.webkit-transition-slideY .webkit-transition-element,
+.webkit-transition-slideXZ .webkit-transition-element {
+    float: left;
+}
+
+.webkit-transition-fade .webkit-transition-element,
+.webkit-transition-slideX .webkit-transition-element,
+.webkit-transition-slideY .webkit-transition-element,
+.webkit-transition-slideXZ .webkit-transition-element {
+    opacity: 0;
+}
+
+/** TRANSITION PROPERTIES **/
+
+.webkit-transition-flipY .webkit-transition-element,
+.webkit-transition-slideX .webkit-transition-element,
+.webkit-transition-slideY .webkit-transition-element,
+.webkit-transition-slideXZ .webkit-transition-element {
+    -webkit-transition-property: webkit-transform;
+}
+
+.webkit-transition-slideXZ .webkit-transition-element {
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-transform-style: preserve-3d;
+}
+
+.webkit-transition-fade .webkit-transition-element {
+    -webkit-transform-property: opacity;
+}
+
+/** TRANSITION ACTIVE **/
+
+.webkit-transition-fade .active,
+.webkit-transition-flipY .active,
+.webkit-transition-slideX .active,
+.webkit-transition-slideY .active,
+.webkit-transition-slideXZ .active{
+    position: relative;
+    opacity: 1;
+}
+
+.webkit-transition-slideX .active,
+.webkit-transition-slideY .active{
+    -webkit-transform: translate(0,0);
+}
+
+.webkit-transition-flipY .active,
+.webkit-transition-slideXZ .active{
+    -webkit-transform: rotateX(0deg);
+}
+
+/** TRANSITION INACTIVE **/
+
+.webkit-transition-fade .inactive-prev,
+.webkit-transition-fade .inactive-next,
+.webkit-transition-flipY .inactive-prev,
+.webkit-transition-flipY .inactive-next,
+.webkit-transition-slideX .inactive-prev,
+.webkit-transition-slideX .inactive-next,
+.webkit-transition-slideY .inactive-prev,
+.webkit-transition-slideY .inactive-next,
+.webkit-transition-slideXZ .inactive-prev,
+.webkit-transition-slideXZ .inactive-next{
+    position: absolute;
+    opacity: 0 !important;
+}
+
+.webkit-transition-fade .inactive-prev,
+.webkit-transition-fade .inactive-next,
+.webkit-transition-slideX .inactive-prev,
+.webkit-transition-slideX .inactive-next,
+.webkit-transition-slideY .inactive-prev,
+.webkit-transition-slideY .inactive-next,
+.webkit-transition-slideXZ .inactive-prev,
+.webkit-transition-slideXZ .inactive-next{
+    opacity: 0 !important;
+}
+
+.webkit-transition-slideXZ .inactive-prev,
+.webkit-transition-slideXZ .inactive-next{
+    position: absolute !important;
+}
+
+.webkit-transition-fade .inactive-prev {
+    z-index: -400;
+}
+
+.webkit-transition-fade .inactive-next {
+    z-index: -400;
+}
+
+.webkit-transition-flipY .inactive-prev{
+    -webkit-transform: rotateX(-180deg);
+    z-index: -400;
+}
+
+.webkit-transition-flipY .inactive-next{
+    -webkit-transform: rotateX(180deg);
+    z-index: -400;
+}
+
+.webkit-transition-slideX .inactive-prev {
+    -webkit-transform: translateX(-100%);
+}
+
+.webkit-transition-slideX .inactive-next {
+    -webkit-transform: translateX(100%);
+}
+
+.webkit-transition-slideY .inactive-prev {
+    -webkit-transform: translateY(-100%);
+}
+
+.webkit-transition-slideY .inactive-next {
+    -webkit-transform: translateY(100%);
+}
+
+.webkit-transition-slideXZ .inactive-prev{
+    -webkit-transform: rotateX(-90deg) scale3d(.835,.835,.835) translateX(-30%);
+}
+
+.webkit-transition-slideXZ .inactive-next{
+    -webkit-transform: rotateX(90deg) scale3d(.835,.835,.835) translateX(30%);
+}
+
+/** TRANSITION UTILITIES **/
+
+.clear {
+    clear: both;
+    width: 100%;
+    height: 1px;
+}
