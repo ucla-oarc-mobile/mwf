@@ -19,6 +19,7 @@ License:
 
 TABLE OF CONTENTS
 
+Version 1.2.07          November 11, 2011
 Version 1.2.06          November 9, 2011
 Version 1.2.05          October 26, 2011
 Version 1.2.04          October 14, 2011
@@ -34,6 +35,17 @@ Version 1.1.03.alpha    July 20, 2011
 Version 1.1.02.alpha    June 23, 2011
 Version 1.1.01.alpha    June 16, 2011
 Version 1.1.00.alpha    May 20, 2011
+
+==============================================================================
+
+Version 1.2.07
+November 11, 2011
+
+* Resolve infinite loop when protocol-less framework root [MWF-291]
+
+* Resolve PHP 5.1 compatibility issue with image compressor [MWF-289]
+
+* Refactor static cookie object [#22]
 
 ==============================================================================
 
