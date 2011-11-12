@@ -1,0 +1,339 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8424404714315C110098CDCC /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8424404614315C110098CDCC /* Default.png */; };
+		8424404C14329E6C0098CDCC /* icon_low_res.png in Resources */ = {isa = PBXBuildFile; fileRef = 8424404B14329E6C0098CDCC /* icon_low_res.png */; };
+		8424404E14329EAA0098CDCC /* icon_high_res.png in Resources */ = {isa = PBXBuildFile; fileRef = 8424404D14329EAA0098CDCC /* icon_high_res.png */; };
+		8424404F14329EDA0098CDCC /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84244048143292A70098CDCC /* Default@2x.png */; };
+		842440561433A18B0098CDCC /* UCLA logo high res.png in Resources */ = {isa = PBXBuildFile; fileRef = 842440551433A18B0098CDCC /* UCLA logo high res.png */; };
+		842440581433A1950098CDCC /* UCLA logo low res.png in Resources */ = {isa = PBXBuildFile; fileRef = 842440571433A1950098CDCC /* UCLA logo low res.png */; };
+		847961F4145B871B008AA79F /* arrowleft.png in Resources */ = {isa = PBXBuildFile; fileRef = 847961F1145B871A008AA79F /* arrowleft.png */; };
+		847961F5145B871B008AA79F /* arrowright.png in Resources */ = {isa = PBXBuildFile; fileRef = 847961F2145B871A008AA79F /* arrowright.png */; };
+		847961F6145B871B008AA79F /* house.png in Resources */ = {isa = PBXBuildFile; fileRef = 847961F3145B871A008AA79F /* house.png */; };
+		848907A1145B849300B1B02B /* img in Resources */ = {isa = PBXBuildFile; fileRef = 848907A0145B849300B1B02B /* img */; };
+		84A7AECE14217581000ABA24 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A7AECD14217581000ABA24 /* UIKit.framework */; };
+		84A7AED014217581000ABA24 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A7AECF14217581000ABA24 /* Foundation.framework */; };
+		84A7AED214217581000ABA24 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84A7AED114217581000ABA24 /* CoreGraphics.framework */; };
+		84A7AED814217581000ABA24 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84A7AED614217581000ABA24 /* InfoPlist.strings */; };
+		84A7AEDA14217581000ABA24 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A7AED914217581000ABA24 /* main.m */; };
+		84A7AEDE14217581000ABA24 /* UCLAMobileAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A7AEDD14217581000ABA24 /* UCLAMobileAppDelegate.m */; };
+		84A7AEE114217581000ABA24 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A7AEDF14217581000ABA24 /* MainWindow.xib */; };
+		84A7AEEA142175A7000ABA24 /* MWFWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A7AEE8142175A7000ABA24 /* MWFWebView.m */; };
+		84A7AEED14227906000ABA24 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A7AEEC14227906000ABA24 /* icon.png */; };
+		84A7AF0E142297CB000ABA24 /* css in Resources */ = {isa = PBXBuildFile; fileRef = 84A7AF0A142297CA000ABA24 /* css */; };
+		84A7AF10142297CB000ABA24 /* index.html in Resources */ = {isa = PBXBuildFile; fileRef = 84A7AF0C142297CA000ABA24 /* index.html */; };
+		84A7AF11142297CB000ABA24 /* js in Resources */ = {isa = PBXBuildFile; fileRef = 84A7AF0D142297CA000ABA24 /* js */; };
+		84A7AF1E1422E0CB000ABA24 /* MWFWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A7AF1F1422E0CB000ABA24 /* MWFWebView.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8424404614315C110098CDCC /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		84244048143292A70098CDCC /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		8424404B14329E6C0098CDCC /* icon_low_res.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_low_res.png; sourceTree = "<group>"; };
+		8424404D14329EAA0098CDCC /* icon_high_res.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_high_res.png; sourceTree = "<group>"; };
+		842440551433A18B0098CDCC /* UCLA logo high res.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UCLA logo high res.png"; sourceTree = "<group>"; };
+		842440571433A1950098CDCC /* UCLA logo low res.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UCLA logo low res.png"; sourceTree = "<group>"; };
+		847961F1145B871A008AA79F /* arrowleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrowleft.png; path = img/arrowleft.png; sourceTree = "<group>"; };
+		847961F2145B871A008AA79F /* arrowright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = arrowright.png; path = img/arrowright.png; sourceTree = "<group>"; };
+		847961F3145B871A008AA79F /* house.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = house.png; path = img/house.png; sourceTree = "<group>"; };
+		848907A0145B849300B1B02B /* img */ = {isa = PBXFileReference; lastKnownFileType = folder; path = img; sourceTree = "<group>"; };
+		84A7AEC914217581000ABA24 /* UCLAMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UCLAMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		84A7AECD14217581000ABA24 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		84A7AECF14217581000ABA24 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		84A7AED114217581000ABA24 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		84A7AED514217581000ABA24 /* UCLAMobile-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UCLAMobile-Info.plist"; sourceTree = "<group>"; };
+		84A7AED714217581000ABA24 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		84A7AED914217581000ABA24 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		84A7AEDB14217581000ABA24 /* UCLAMobile-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UCLAMobile-Prefix.pch"; sourceTree = "<group>"; };
+		84A7AEDC14217581000ABA24 /* UCLAMobileAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UCLAMobileAppDelegate.h; sourceTree = "<group>"; };
+		84A7AEDD14217581000ABA24 /* UCLAMobileAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UCLAMobileAppDelegate.m; sourceTree = "<group>"; };
+		84A7AEE014217581000ABA24 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		84A7AEE7142175A7000ABA24 /* MWFWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MWFWebView.h; sourceTree = "<group>"; };
+		84A7AEE8142175A7000ABA24 /* MWFWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MWFWebView.m; sourceTree = "<group>"; };
+		84A7AEEC14227906000ABA24 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		84A7AF0A142297CA000ABA24 /* css */ = {isa = PBXFileReference; lastKnownFileType = folder; path = css; sourceTree = "<group>"; };
+		84A7AF0C142297CA000ABA24 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = index.html; sourceTree = "<group>"; };
+		84A7AF0D142297CA000ABA24 /* js */ = {isa = PBXFileReference; lastKnownFileType = folder; path = js; sourceTree = "<group>"; };
+		84A7AF1F1422E0CB000ABA24 /* MWFWebView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MWFWebView.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		84A7AEC614217581000ABA24 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84A7AECE14217581000ABA24 /* UIKit.framework in Frameworks */,
+				84A7AED014217581000ABA24 /* Foundation.framework in Frameworks */,
+				84A7AED214217581000ABA24 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		84A7AEBE14217581000ABA24 = {
+			isa = PBXGroup;
+			children = (
+				847961F1145B871A008AA79F /* arrowleft.png */,
+				847961F2145B871A008AA79F /* arrowright.png */,
+				847961F3145B871A008AA79F /* house.png */,
+				848907A0145B849300B1B02B /* img */,
+				842440571433A1950098CDCC /* UCLA logo low res.png */,
+				842440551433A18B0098CDCC /* UCLA logo high res.png */,
+				8424404D14329EAA0098CDCC /* icon_high_res.png */,
+				8424404B14329E6C0098CDCC /* icon_low_res.png */,
+				84244048143292A70098CDCC /* Default@2x.png */,
+				8424404614315C110098CDCC /* Default.png */,
+				84A7AF0A142297CA000ABA24 /* css */,
+				84A7AF0C142297CA000ABA24 /* index.html */,
+				84A7AF0D142297CA000ABA24 /* js */,
+				84A7AEEC14227906000ABA24 /* icon.png */,
+				84A7AED314217581000ABA24 /* UCLAMobile */,
+				84A7AECC14217581000ABA24 /* Frameworks */,
+				84A7AECA14217581000ABA24 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		84A7AECA14217581000ABA24 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				84A7AEC914217581000ABA24 /* UCLAMobile.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		84A7AECC14217581000ABA24 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				84A7AECD14217581000ABA24 /* UIKit.framework */,
+				84A7AECF14217581000ABA24 /* Foundation.framework */,
+				84A7AED114217581000ABA24 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		84A7AED314217581000ABA24 /* UCLAMobile */ = {
+			isa = PBXGroup;
+			children = (
+				84A7AEDC14217581000ABA24 /* UCLAMobileAppDelegate.h */,
+				84A7AEDD14217581000ABA24 /* UCLAMobileAppDelegate.m */,
+				84A7AEDF14217581000ABA24 /* MainWindow.xib */,
+				84A7AED414217581000ABA24 /* Supporting Files */,
+				84A7AEE7142175A7000ABA24 /* MWFWebView.h */,
+				84A7AEE8142175A7000ABA24 /* MWFWebView.m */,
+				84A7AF1F1422E0CB000ABA24 /* MWFWebView.xib */,
+			);
+			path = UCLAMobile;
+			sourceTree = "<group>";
+		};
+		84A7AED414217581000ABA24 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				84A7AED514217581000ABA24 /* UCLAMobile-Info.plist */,
+				84A7AED614217581000ABA24 /* InfoPlist.strings */,
+				84A7AED914217581000ABA24 /* main.m */,
+				84A7AEDB14217581000ABA24 /* UCLAMobile-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		84A7AEC814217581000ABA24 /* UCLAMobile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84A7AEE414217581000ABA24 /* Build configuration list for PBXNativeTarget "UCLAMobile" */;
+			buildPhases = (
+				84A7AEC514217581000ABA24 /* Sources */,
+				84A7AEC614217581000ABA24 /* Frameworks */,
+				84A7AEC714217581000ABA24 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UCLAMobile;
+			productName = UCLAMobile;
+			productReference = 84A7AEC914217581000ABA24 /* UCLAMobile.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		84A7AEC014217581000ABA24 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 84A7AEC314217581000ABA24 /* Build configuration list for PBXProject "UCLA Mobile" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 84A7AEBE14217581000ABA24;
+			productRefGroup = 84A7AECA14217581000ABA24 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				84A7AEC814217581000ABA24 /* UCLAMobile */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		84A7AEC714217581000ABA24 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84A7AED814217581000ABA24 /* InfoPlist.strings in Resources */,
+				84A7AEE114217581000ABA24 /* MainWindow.xib in Resources */,
+				84A7AF1E1422E0CB000ABA24 /* MWFWebView.xib in Resources */,
+				84A7AEED14227906000ABA24 /* icon.png in Resources */,
+				84A7AF0E142297CB000ABA24 /* css in Resources */,
+				84A7AF10142297CB000ABA24 /* index.html in Resources */,
+				84A7AF11142297CB000ABA24 /* js in Resources */,
+				8424404714315C110098CDCC /* Default.png in Resources */,
+				8424404C14329E6C0098CDCC /* icon_low_res.png in Resources */,
+				8424404E14329EAA0098CDCC /* icon_high_res.png in Resources */,
+				8424404F14329EDA0098CDCC /* Default@2x.png in Resources */,
+				842440561433A18B0098CDCC /* UCLA logo high res.png in Resources */,
+				842440581433A1950098CDCC /* UCLA logo low res.png in Resources */,
+				848907A1145B849300B1B02B /* img in Resources */,
+				847961F4145B871B008AA79F /* arrowleft.png in Resources */,
+				847961F5145B871B008AA79F /* arrowright.png in Resources */,
+				847961F6145B871B008AA79F /* house.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		84A7AEC514217581000ABA24 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84A7AEDA14217581000ABA24 /* main.m in Sources */,
+				84A7AEDE14217581000ABA24 /* UCLAMobileAppDelegate.m in Sources */,
+				84A7AEEA142175A7000ABA24 /* MWFWebView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		84A7AED614217581000ABA24 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84A7AED714217581000ABA24 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		84A7AEDF14217581000ABA24 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84A7AEE014217581000ABA24 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		84A7AEE214217581000ABA24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		84A7AEE314217581000ABA24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		84A7AEE514217581000ABA24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UCLAMobile/UCLAMobile-Prefix.pch";
+				INFOPLIST_FILE = "UCLAMobile/UCLAMobile-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		84A7AEE614217581000ABA24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UCLAMobile/UCLAMobile-Prefix.pch";
+				INFOPLIST_FILE = "UCLAMobile/UCLAMobile-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		84A7AEC314217581000ABA24 /* Build configuration list for PBXProject "UCLA Mobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84A7AEE214217581000ABA24 /* Debug */,
+				84A7AEE314217581000ABA24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		84A7AEE414217581000ABA24 /* Build configuration list for PBXNativeTarget "UCLAMobile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84A7AEE514217581000ABA24 /* Debug */,
+				84A7AEE614217581000ABA24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 84A7AEC014217581000ABA24 /* Project object */;
+}
