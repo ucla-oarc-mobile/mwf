@@ -1,106 +1,64 @@
-/**
- * MWF Decorator class for creating and manipulating menus and menu items.
- * This decorator class aims to simplify the process of adding below items to
- * the MWF menu element:
- * 
- * -link list
- * -detailed link list
- * -text items
- * -checkboxes
- * -radio buttons
- * 
- * The class does not require JQuery or third party Javascript library. 
- * 
- * Example Link Menu: 
- * 
- * var menu = new mwf.decorators.menu();
- * 
- * //Set menu's title.
- * menu.setTitle("Simple Link Menu");
- * 
- * //Add to link menu items.
- * menu.addMenuLinkItem("Mobile Web Framework", "http://mwf.ucla.edu");
- * menu.addMenuLinkItem("UCLA Mobile Page", "http://m.ucla.edu");
- * 
- * //Finally, render the menu.
- * document.body.appendChild(menu.render());
- * 
- * @namespace mwf.decorator
- * @author zkhalapyan
- * @copyright Copyright (c) 2010-11 UC Regents
- * @license http://mwf.ucla.edu/license
- * @version 20111031
- * 
- */
+var mwf = mwf || {};
 
-//TEMPORARY: Assure that mwf.decorators namespace exists.
-if(typeof mwf == undefined)
+mwf.decorator.menu = function(title)
 {
-    var mwf = function(){};
-}
-
-if(mwf.decorator == undefined)
-{
-    mwf.decorator = function(){};
-}
-
-
-
-mwf.decorator.Menu = function(title)
-{   
     
-    if(title != undefined)
+    var firstMarker = "menu-first";
+    var lastMarker  = "menu-last";
+    
+    var menu = document.createElement('div');
+    
+    /**  
+     * Sets the title of this menu. If the specified title is null or 
+     * undefined, then the menu's title, if it exists, will be removed.
+     * 
+     * @param title The title of the menu to set.
+     */
+    menu.setTitle = function(title)
     {
-        this.setTitle(title);
+        //If current element has a title, then unset it. 
+        if(this.mwfTitle)
+        {
+            mwf.decorator.remove(this, this.mwfTitle, firstMarker, lastMarker);
+            this.mwfTitle = null;
+        }
+        
+        //Set title, if specified.
+        if(title)
+        {
+            //Create a new title to add to the element, and save it in a member 
+            //variable mwfTitle.
+            this.mwfTitle = mwf.decorator.Title(title);
+            
+            //Prepend the new title to the content.
+            mwf.decorator.prepend(this, this.mwfTitle, firstMarker, lastMarker);
+            
+        }
+        
+        return this;
+        
     }
     
-    /*********************************************************************
-     *                    PRIVATE VARIABLES BELOW                        *
-     *********************************************************************/
-    
     /**
-     * Javascript closeure variable. Utilized by private scope to 
-     * access public scope.
+     * Returns the current elements title if it's set; null otherwise. 
+     * @return The current elements title if it's set; null otherwise. 
      */
-    var me = this;
-    
-    /**
-     * Title element for this menu. This should be set using this.setTitle(..)
-     * which will either create an H1 or H4 element and set it's text. Class 
-     * definition for this element will be set by render().
-     */
-    var _menuTitle = null; 
-    
-    /**
-     * Stores menu items in an ordered list for this menu.
-     */ 
-    var _menuItems  = document.createElement('ol');
-    
-    
-    
-    /*********************************************************************
-     *                     PUBLIC FUNCTIONS BELOW                        *
-     *********************************************************************/
-    
-    /**
-     * Private method that wrappes the specified menuItem element inside an <li>
-     * element and adds it to the menu list (an <ol> element).
-     * 
-     * @return Return the added item - yes, the same thing that was passed in.
-     */
-    this.addMenuItem = function(item)
+    menu.getTitle = function()
     {
-        //Create new <li> element.
-        var li = document.createElement('li');
+        return (this.mwfTitle)? this.mwfTitle : null;
+    }
+    
+    
+    menu.addMenuItem = function(item)
+    {   
+        this._items = this._items || document.createElement('ol');
         
-        //Add the item to the new <li> element.
-        li.appendChild(item);
+        var listItem = document.createElement('li');
+        listItem.appendChild(item);
         
-        //Add the <li> element to them menu's list.
-        _menuItems.appendChild(li);
+        mwf.decorator.append(this._items, listItem, firstMarker, lastMarker);
         
-        return item;
-        
+        return this;
     }
     
     /**
@@ -108,21 +66,19 @@ mwf.decorator.Menu = function(title)
      * 
      * @param text The text to be enclosed in a <p> tag and added to the menu.
      * @return Created menu item.
-     */
-    this.addMenuTextItem = function(text)
+     */  
+    menu.addMenuTextItem = function(text)
     {
         var textItem = document.createElement('p');
         
         //Set the paragraph's text.
         textItem.innerHTML = text;
         
-        //Add the paragraph item to the menu's ordered list and return the item.
+        //Add the paragraph item to the menu's ordered list.
         return this.addMenuItem(textItem);
-  
-
     }
     
-    /**
+     /**
      * Adds a link item to this menu.
      * 
      * @param text    The text of the link item. 
@@ -132,15 +88,12 @@ mwf.decorator.Menu = function(title)
      * 
      * @return Created menu item.         
      */
-    this.addMenuLinkItem = function(text, url, details)
+    menu.addMenuLinkItem = function(text, url, details)
     {
-        var linkItem = createLinkItem(text, url, details);
-        
-        this.addMenuItem(linkItem);
-        
-        return linkItem;
+        return this.addMenuItem(createLinkItem(text, url, details));   
     }
     
+   
     /**
      * Creates a new radio input element and combines it with a link item to 
      * create a menu item. Clicking the menu item will toggle the radio button.
@@ -152,9 +105,9 @@ mwf.decorator.Menu = function(title)
      * @param label   Text label associated with this option item.
      * @param details Details to display about this option.
      *                
-     * @return The created radio menu item.
+     * @return This menu - allowing chained invocation.
      */
-    this.addMenuRadioItem = function(name, value, label, details)
+    menu.addMenuRadioItem = function(name, value, label, details)
     {
        return this.addMenuItem(createOptionItem(name, value, label, details, true));
     }
@@ -170,178 +123,14 @@ mwf.decorator.Menu = function(title)
      * @param label   Text label associated with this option item.
      * @param details Details to display about this option.
      *                
-     * @return The created checkbox menu item.
+     * @return This menu - allowing chained invocation.
      */   
-    this.addMenuCheckboxItem = function(name, value, label, details)
+    menu.addMenuCheckboxItem = function(name, value, label, details)
     {
        return this.addMenuItem(createOptionItem(name, value, label, details, false));
     }
     
-    /**
-     * Sets the title for this menu. 
-     * 
-     * @param title The title of the current menu.
-     * @param isH1  If true the header is <h1>, otherwise its <h4>.
-     */
-    this.setTitle = function(title, isH1)
-    {
-        //If isH1 is not specified, then set it to true.
-        isH1 = (isH1 == undefined)? true : isH1;
         
-        //Create a title element which is either H1 or H4 tag, decided by isH1.
-        _menuTitle = document.createElement((isH1)? 'h1' : 'h4');
-        
-        //Set the title's text.
-        _menuTitle.innerHTML = title;
-        
-        return this;
-    }
-    
-    /**
-     * Returns the first element of the menu.
-     * @return The first element of the menu.
-     */
-    this.getLastMenuItem = function()
-    {
-        return _menuItems.lastChild;
-    }
-    
-    /**
-     * Returns the last element of the menu.
-     * @return The last element of the menu.
-     */
-    this.getFirstMenuItem = function()
-    {
-        return _menuItems.firstChild;
-    }
-    
-    /**
-     * Returns the menu item at a certain index. If the index is negative or is
-     * out of bounds, then a null value will be returned.
-     * 
-     * @return Menu item at specified index.
-     */
-    this.getMenuItemAt = function(index)
-    {
-        if(0 < index && index < _menuItems.children.length)
-        {
-            return _menuItems.children[index];
-        }
-        
-        return null;
-    }
-    
-    /**
-     * Returns the number of elements in the menu.\
-     * 
-     * @return the number of elements in the menu.
-     */
-    this.size = function()
-    {
-        return _menuItems.children.length;
-    }
-    
-    /**
-     * Creates and returns the finalized menu <div>. This method will correctly
-     * set ".menu-first" and ".menu-last" before returning the menu.
-     *  
-     * @return Finalized MWF menu <div> element.
-     */
-    this.render = function()
-    {
-        var menu = document.createElement('div');
-        
-        //Set menu's class information.
-        menu.className = getMenuClass();
-        
-        //If the title has been set, then set its class information and then
-        //add it to the menu. 
-        if(_menuTitle != null)
-        {
-            //The title is always the first element. If _isLight is true,
-            //then also include .light in the class information.
-            _menuTitle.className = "menu-first " + getTitleClass();
-   
-            menu.appendChild(_menuTitle);
-        }
-        
-        //In case the title was not set, then the first element in the menu
-        //wil be the first item, marked with "menu-first".
-        else
-        {
-            if(_menuItems.firstChild != undefined)
-            {  
-                _menuItems.firstChild.className += " menu-first";
-            }
-        }
-
-        //If the last menu item is not undefined, then 
-        //set it to have ".menu-last" in its class definition.
-        if(_menuItems.lastChild != undefined)
-        {
-            _menuItems.lastChild.className += " menu-last";
-        }
-        
-        //Add the menu items to the menu <div>.
-        menu.appendChild(_menuItems);
- 
-        return menu;
-       
-    }
-    
-    /*********************************************************************
-     *                     PRIVATE FUNCTIONS BELOW                       *
-     *********************************************************************/
-     
-    /**
-     * Concatenates a class definition string using boolean variables _isFull, 
-     * _isDetailed, and _isPadded.
-     * 
-     * For example, if all the three variables are set to to true, then the 
-     * returned string will be, "menu-full menu-detailed menu-padded".
-     * 
-     */
-    var getMenuClass = function()
-    {
-        
-        var menuClass = "";
-         
-        if(this.isFull())
-        {
-            menuClass += "menu-full ";
-        }
-        
-        if(this.isDetailed())
-        {
-            menuClass += "menu-detailed ";
-        }
-        
-        if(this.isPadded())
-        {
-            menuClass += "menu-padded ";
-        }
-        
-        return menuClass;
-    }
-    
-    var getTitleClass = function()
-    {
-        var titleClass = "";
-        
-        if(_isLight)
-        {
-            titleClass += "light ";
-        }
-        
-        if(_isBlue)
-        {
-            titleClass += "blue ";
-        }
-        
-        return titleClass;
-        
-    }
-    
     /**
      * Creates a new input element and combines it with a link item to create a
      * menu item. Two types of input elements are supported radios and 
@@ -398,11 +187,9 @@ mwf.decorator.Menu = function(title)
         linkItem.href = url;
         
         //If details is defined, then add the details text within a span tag.
-        if(details != undefined && details != null)
+        if(details)
         {
-            //_isDetails has to be true since an element was added that includes
-            //details.
-            _isDetailed = true;
+            this.setDetailed(true);
             
             linkItem.appendChild(document.createElement('br'));
             linkItem.appendChild(createDetailsSpan(details));
@@ -429,5 +216,76 @@ mwf.decorator.Menu = function(title)
         
     }
     
-}
+    /**
+     * Returns the first element of the menu, if it exists. Null otherwise.
+     * @return The first element of the menu.
+     */
+    menu.getFirstMenuItem = function()
+    {
+        return (this._items) ? this._items.firstChild : null;
+    }
+    
+    /**
+     * Returns the last element of the menu, if it exists. Null otherwise.
+     * @return The last element of the menu.
+     */
+    menu.getLastMenuItem = function()
+    {
+        return (this._items) ? this._items.lastChild : null;
+    }
+    
 
+    
+    /**
+     * Returns the menu item at a certain index. If the index is negative or is
+     * out of bounds, then a null value will be returned.
+     * 
+     * @return Menu item at specified index.
+     */
+    menu.getMenuItemAt = function(index)
+    {
+        if(this._items && 0 <= index && index < this._items.children.length)
+        {
+            return this._items.children[index];
+        }
+        
+        return null;
+    }
+    
+    /**
+     * Returns the number of elements in the menu.
+     * 
+     * @return the number of elements in the menu.
+     */
+    menu.size = function()
+    {
+        return (this._items) ? this._items.children.length : 0;
+    }
+    
+    menu.setPadded = function(isPadded)
+    {
+        mwf.decorator.toggleClass(isPadded, this, "menu-padded");
+        return this;
+    }
+    
+    menu.setFull = function(isFull)
+    {
+        mwf.decorator.toggleClass(isFull, this, "menu-full");
+        return this;
+    }
+    
+    menu.setDetailed = function(isDetailed)
+    {
+        mwf.decorator.toggleClass(isDetailed, this, "menu-detailed");
+        return this;
+    }
+    
+    //Set defaults.
+    menu.setPadded(true);
+    menu.setFull(true);
+    menu.setDetailed(false);
+    menu.setTitle(title);
+  
+    
+    return menu;
+}

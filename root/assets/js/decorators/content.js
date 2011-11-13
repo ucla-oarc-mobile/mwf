@@ -11,20 +11,6 @@ mwf.decorator.Content = function(title, text)
     
     var content = document.createElement("div");
     
-    
-    //If an initial title was specified, then set this conent's title.
-    if(mwf.decorator.isSet(title))
-    {
-        this.setTitle(title);
-    }
-    
-    
-    //If initial text is specified, then add it to the content as a text block.
-    if(mwf.decorator.isSet(text))
-    {
-        this.addTextBlock(text);
-    }
-    
     /**  
      * Sets the title of this content. If the specified title is null or 
      * undefined, then the content's title, if it exists, will be removed.
@@ -33,40 +19,75 @@ mwf.decorator.Content = function(title, text)
      */
     content.setTitle = function(title)
     {
-        if(!mwf.decorator.isSet(title) && mwf.decorator.isSet(this.contentTitle))
+        //If current element has a title, then unset it. 
+        if(this.mwfTitle)
         {
-            this.removeChild(this.contentTitle);
-            this.contentTitle = null;
+            mwf.decorator.remove(this, this.mwfTitle, firstMarker, lastMarker);
+            this.mwfTitle = null;
         }
-        else
+        
+        //Set title, if specified.
+        if(title)
         {
-            mwf.decorator.prepend(this, mwf.decorator.ContentTitle(title), firstMarker, lastMarker);
+            //Create a new title to add to the element, and save it in a member 
+            //variable mwfTitle.
+            this.mwfTitle = mwf.decorator.Title(title);
+            
+            //Prepend the new title to the content.
+            mwf.decorator.prepend(this, this.mwfTitle, firstMarker, lastMarker);
+            
         }
+        
         
         
     }
     
+    /**
+     * Returns the current elements title if it's set; null otherwise. 
+     * @return The current elements title if it's set; null otherwise. 
+     */
     content.getTitle = function()
     {
-        return (mwf.decorator.isSet(this.contentTitle))? this.contenTitle:null;
+        return (this.mwfTitle)? this.mwfTitle : null;
     }
     
     
-    
+    /**
+     * Prepends an arbitrary DOM element to the current content.
+     * 
+     * @return This content element.
+     */
     content.addItem = function(contentItem)
     {
-        content.appendChild(contentItem);
-        
+        mwf.decorator.append(this, contentItem, firstMarker, lastMarker); 
     }
     
-    content.addButton = function(labe, url, callback)
+    content.addButton = function(label, url, callback)
     {
-        
+        mwf.decorator.append(this, 
+                             mwf.decorator.ContentButton(label, url, callback),
+                             firstMarker,
+                             lastMarker);
     }
     
+    /**
+     * Prepends a new text block element to the current content.
+     * 
+     * @return This content.
+     */
     content.addTextBlock = function(text)
     {
+        if(!text)
+            return this;
         
+        //Create a new <p> tag and set its contents to equal the specified text.
+        var textBlock = document.createElement('p');
+        textBlock.innerHTML = text;
+        
+        //Append the text block to the content.
+        mwf.decorator.append(this, textBlock, firstMarker, lastMarker);
+        
+        return this;
     }
     
     content.setPadded = function(isPadded)
@@ -85,24 +106,15 @@ mwf.decorator.Content = function(title, text)
     content.setFull(true);
     content.setPadded(true);
     
+    content.setTitle(title);
+    content.addTextBlock(text);
+   
     return content;
 }
 
-mwf.decorator.ContentTitle = function(title, isH4)
+
+
+mwf.decorator.ContentButton = function(label, url, callback)
 {
-    var contentTitle = document.createElement((isH4)? 'h4' : 'h1');
-    
-    contentTitle.innerHTML = title;
-    
-    contentTitle.setLight = function(isLight)
-    {
-        mwf.decorator.toggleClass(isLight, this, "light");
-        return this;
-    }
-    
-    //Set defaults.
-    contentTitle.setLight(false);
-    
-    return contentTitle;
-    
+    //Not implemented yet.
 }

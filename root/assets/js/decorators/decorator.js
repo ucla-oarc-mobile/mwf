@@ -1,8 +1,4 @@
-if(typeof mwf == "undefined")
-{
-    var mwf = function(){};
-}
-
+var mwf = mwf || function (){};
 
 mwf.decorator = function(){};
 
@@ -145,5 +141,26 @@ mwf.decorator.remove = function(container, element, firstMarker, lastMarker)
          
     }
     
+    
+}
+
+mwf.decorator.Title = function(label, level)
+{
+    level = (1 <= level && level <= 4)? level : 1;
+    
+    var title = document.createElement("h" + level);
+
+    title.innerHTML = label;
+    
+    title.setLight = function(isLight)
+    {
+        mwf.decorator.toggleClass(isLight, this, "light");
+        return this;
+    }
+    
+    //Set defaults.
+    title.setLight(false);
+    
+    return title;
     
 }

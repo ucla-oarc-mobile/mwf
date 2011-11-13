@@ -16,14 +16,15 @@ mwf.decorator.Button = function(label, url, callback, isFirst)
     button.href = url;
 
     //If button's callback is set, then set the <a>'s onclick property.
-    if(mwf.decorator.isSet(callback))
+    if(callback)
     {
         button.onclick = callback;
     }    
 
     //Depending on the value of isFirst, either mark the button as first or
-    //last (".button-first" vs. ".button-last").
-    if(mwf.decorator.isSet(isFirst))
+    //last (".button-first" vs. ".button-last"). If isFirst is not even defined,
+    //or is null, then the code block will not be executed. 
+    if(isFirst)
     {        
         button.className = (isFirst) ? "button-first" : "button-last";
     }
