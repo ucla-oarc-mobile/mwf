@@ -90,11 +90,10 @@ if (isset($_GET['browser_height_percent']) || isset($_GET['browser_height_force'
  */
 $image = Image::factory($_GET['img']);
 
-/** GIF, JPG, and JPEG are within XHTML MP 1.0 specification. */
-$image->set_allowed_extension('gif');
-$image->set_allowed_extension('jpeg');
-$image->set_allowed_extension('jpg');
-$image->set_allowed_extension('png');
+if (! $image) {
+    error_log('MWF Notice: Image creation failed in ' . $_SERVER['PHP_SELF'] . '. Bad image path?: ' . $_GET['img'], 0);
+    exit(1);
+}
 
 /** Force max width if $set_width is true. */
 if ($set_width)
@@ -105,7 +104,7 @@ if ($set_height)
     $image->set_max_height($max_height);
 
 /** Output the header so that browser treats it as an image rather than PHP file. */
-$image->output_header();
+header("Content-type: " . $image->get_mimetype());
 
 /** Output the binary content of the image in its compressed state. */
-$image->output_image();
+echo $image->get_image_as_string();

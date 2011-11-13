@@ -10,9 +10,9 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110921
+ * @version 20111108
  *
- * @uses Config
+ * @uses Cookie
  * @link /assets/js/core/browser.js
  */
 
@@ -20,13 +20,15 @@
  * Require necessary libraries.
  */
 
-require_once(dirname(dirname(__FILE__)).'/config.php');
+require_once(dirname(__FILE__).'/cookie.class.php');
 
 class Screen
 {   
     private static $_init = null;
     
     private static $_name;
+    
+    private static $_cookie;
     
     private static $_screen = null;
     
@@ -41,17 +43,21 @@ class Screen
         /**
          * Define name of the cookie set by asets/js/core/server.js.
          */
-        self::$_name = Config::get('global', 'cookie_prefix').'screen';
+        self::$_name = 'screen';
+        
+        /**
+         * Contents of cookie set by asets/js/core/server.js.
+         */
+        self::$_cookie = Cookie::get(self::$_name);
         
         /**
          * If cookie is set, extract contents and parse the JSON into a PHP
          * object, then setting initialized value to true. Otherwise, set it
          * false, as initialization has failed since no cookie is defined.
          */
-        if(isset($_COOKIE) && isset($_COOKIE[self::$_name]))
+        if(isset(self::$_cookie))
         {
-            $browser = $_COOKIE[self::$_name];
-            self::$_screen = self::parse($browser);
+            self::$_screen = self::parse(self::$_cookie);
             self::$_init = true;
         }
         else
