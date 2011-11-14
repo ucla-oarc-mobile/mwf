@@ -128,13 +128,12 @@
     //Display an alert message indicating that the user is offline.
     else
     {
-        
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UCLA Mobile" message:@"There was an error loading the page. Are you offline?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Offline Mode", nil];
-        
-        
+
         [alert autorelease];
         [alert show];
-        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+
     }
 }
 
