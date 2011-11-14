@@ -121,7 +121,7 @@
     else
     {
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UCLA Mobile" message:@"There was an error loadng the page. Are you offline?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Offline Mode", nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"UCLA Mobile" message:@"There was an error loading the page. Are you offline?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Offline Mode", nil];
         
         
         [alert autorelease];
