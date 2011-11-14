@@ -1,6 +1,6 @@
 var mwf = mwf || {};
 
-mwf.decorator.menu = function(title)
+mwf.decorator.Menu = function(title)
 {
     
     var firstMarker = "menu-first";
@@ -17,21 +17,40 @@ mwf.decorator.menu = function(title)
     menu.setTitle = function(title)
     {
         //If current element has a title, then unset it. 
-        if(this.mwfTitle)
+        if(this._title)
         {
-            mwf.decorator.remove(this, this.mwfTitle, firstMarker, lastMarker);
-            this.mwfTitle = null;
+            mwf.decorator.unsetClass(this._title, firstMarker); 
+            mwf.decorator.unsetClass(this._title, lastMarker); 
+            
+            if(this._items && this._items.firstChild)
+            {
+                mwf.decorator.setClass(this._items.firstChild, firstMarker); 
+            }
+            
+            this.removeChild(this._title);
+            
+            this._title = null;
         }
         
         //Set title, if specified.
         if(title)
         {
             //Create a new title to add to the element, and save it in a member 
-            //variable mwfTitle.
-            this.mwfTitle = mwf.decorator.Title(title);
+            //variable.
+            this._title = mwf.decorator.Title(title);
             
-            //Prepend the new title to the content.
-            mwf.decorator.prepend(this, this.mwfTitle, firstMarker, lastMarker);
+            mwf.decorator.setClass(this._title, firstMarker); 
+        
+            if(this._items && this._items.firstChild)
+            {
+                mwf.decorator.unsetClass(this._items.firstChild, firstMarker); 
+            }
+            else
+            {
+                mwf.decorator.setClass(this._title, lastMarker); 
+            }
+            
+            this.insertBefore(this._title, this.firstChild);
             
         }
         
@@ -45,18 +64,66 @@ mwf.decorator.menu = function(title)
      */
     menu.getTitle = function()
     {
-        return (this.mwfTitle)? this.mwfTitle : null;
+        return (this._title)? this._title : null;
     }
     
     
     menu.addMenuItem = function(item)
     {   
-        this._items = this._items || document.createElement('ol');
+        if(!this._items)
+        {
+            this._items = document.createElement('ol');    
+            this.appendChild(this._items);
+        }
         
         var listItem = document.createElement('li');
         listItem.appendChild(item);
         
-        mwf.decorator.append(this._items, listItem, firstMarker, lastMarker);
+        if(this._items.children.length == 0)
+        {
+            if(this._title)
+            {
+               mwf.decorator.unsetClass(this._title, lastMarker); 
+            }
+        }
+        else 
+        {
+            mwf.decorator.unsetClass(this._items.lastChild, lastMarker);  
+        }
+    
+        mwf.decorator.setClass(listItem, lastMarker);
+        
+        /*
+        if(this._title)
+        {
+            if(this._items.children.length == 0)
+            {
+                mwf.decorator.unsetClass(this._title, lastMarker);
+                mwf.decorator.setClass(listItem, lastMarker);
+            }
+            else
+            {
+                mwf.decorator.unsetClass(this._items.lastChild, lastMarker);
+                mwf.decorator.setClass(listItem, lastMarker);
+            }
+        }
+        else
+        {
+            if(this._items.children.length == 0)
+            {
+                mwf.decorator.setClass(listItem, firstMarker);
+                mwf.decorator.setClass(listItem, lastMarker);
+            }
+            else
+            {
+                mwf.decorator.unsetClass(this._items.lastChild, lastMarker);
+                mwf.decorator.setClass(listItem, lastMarker);
+            }
+        }
+        */
+ 
+        
+        this._items.appendChild(listItem);
         
         return this;
     }
@@ -189,7 +256,7 @@ mwf.decorator.menu = function(title)
         //If details is defined, then add the details text within a span tag.
         if(details)
         {
-            this.setDetailed(true);
+            menu.setDetailed(true);
             
             linkItem.appendChild(document.createElement('br'));
             linkItem.appendChild(createDetailsSpan(details));
