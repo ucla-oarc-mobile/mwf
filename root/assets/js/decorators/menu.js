@@ -1,10 +1,46 @@
-var mwf = mwf || {};
-
+/**
+ * MWF Decorator class for creating and manipulating menus and menu items.
+ * This decorator class provides the functionality for adding items such as 
+ * detailed links, text blocks, checkbox and radio selection items, as well as
+ * any arbitrary item compliant with MWF specification. 
+ * 
+ * The class does not require JQuery or third party Javascript library, but 
+ * depends on mwf.decorator class definition.
+ * 
+ * Example Use: 
+ * 
+ * var menu = mwf.decorators.Menu();
+ * 
+ * //Set menu's title.
+ * menu.setTitle("Simple Link Menu");
+ * 
+ * //Add to link menu items.
+ * menu.addMenuLinkItem("Mobile Web Framework", "http://mwf.ucla.edu");
+ * menu.addMenuLinkItem("UCLA Mobile Page", "http://m.ucla.edu");
+ * 
+ * //Finally, add the menu to the document.
+ * document.body.appendChild(menu);
+ * 
+ * @namespace mwf.decorator.Menu
+ * @dependency mwf.decorator
+ * @author zkhalapyan
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20111115
+ * 
+ */
 mwf.decorator.Menu = function(title)
 {
     
-    var firstMarker = "menu-first";
-    var lastMarker  = "menu-last";
+    /**
+     * A CSS class name that indicates the first element of this menu.
+     */
+    var FIRST_MARKER = "menu-first";
+    
+    /**
+     * A CSS class name that indicates the last element of this menu.
+     */
+    var LAST_MARKER  = "menu-last";
     
     var menu = document.createElement('div');
     
@@ -19,12 +55,12 @@ mwf.decorator.Menu = function(title)
         //If current element has a title, then unset it. 
         if(this._title)
         {
-            mwf.decorator.unsetClass(this._title, firstMarker); 
-            mwf.decorator.unsetClass(this._title, lastMarker); 
+            mwf.decorator.unsetClass(this._title, FIRST_MARKER); 
+            mwf.decorator.unsetClass(this._title, LAST_MARKER); 
             
             if(this._items && this._items.firstChild)
             {
-                mwf.decorator.setClass(this._items.firstChild, firstMarker); 
+                mwf.decorator.setClass(this._items.firstChild, FIRST_MARKER); 
             }
             
             this.removeChild(this._title);
@@ -39,15 +75,15 @@ mwf.decorator.Menu = function(title)
             //variable.
             this._title = mwf.decorator.Title(title);
             
-            mwf.decorator.setClass(this._title, firstMarker); 
+            mwf.decorator.setClass(this._title, FIRST_MARKER); 
         
             if(this._items && this._items.firstChild)
             {
-                mwf.decorator.unsetClass(this._items.firstChild, firstMarker); 
+                mwf.decorator.unsetClass(this._items.firstChild, FIRST_MARKER); 
             }
             else
             {
-                mwf.decorator.setClass(this._title, lastMarker); 
+                mwf.decorator.setClass(this._title, LAST_MARKER); 
             }
             
             this.insertBefore(this._title, this.firstChild);
@@ -68,6 +104,9 @@ mwf.decorator.Menu = function(title)
     }
     
     
+    /**
+     *
+     */
     menu.addMenuItem = function(item)
     {   
         if(!this._items)
@@ -83,15 +122,15 @@ mwf.decorator.Menu = function(title)
         {
             if(this._title)
             {
-               mwf.decorator.unsetClass(this._title, lastMarker); 
+               mwf.decorator.unsetClass(this._title, LAST_MARKER); 
             }
         }
         else 
         {
-            mwf.decorator.unsetClass(this._items.lastChild, lastMarker);  
+            mwf.decorator.unsetClass(this._items.lastChild, LAST_MARKER);  
         }
     
-        mwf.decorator.setClass(listItem, lastMarker);
+        mwf.decorator.setClass(listItem, LAST_MARKER);
         
         /*
         if(this._title)
@@ -132,7 +171,7 @@ mwf.decorator.Menu = function(title)
      * Adds a paragraph element with the specified text to the current menu.
      * 
      * @param text The text to be enclosed in a <p> tag and added to the menu.
-     * @return Created menu item.
+     * @return This menu
      */  
     menu.addMenuTextItem = function(text)
     {

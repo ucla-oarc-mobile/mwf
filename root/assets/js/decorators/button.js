@@ -1,8 +1,6 @@
 
-if(typeof mwf == "undefined")
-{
-    var mwf = function(){};
-}
+//Define MWF namespace, if it doesn't exist.
+var mwf = mwf || function (){};
 
 mwf.decorator.Button = function(label, url, callback, isFirst)
 {   

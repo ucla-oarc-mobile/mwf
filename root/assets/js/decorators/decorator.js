@@ -1,17 +1,60 @@
+/**
+ * MWF Decorator class that encapsulates common behavior among specific MWF 
+ * decorator classes such as Content, Button, and Menu. This class includes 
+ * functionality for appending, prepending, and removing elements from a list
+ * of elements while keeping track of first and last markers, functionality for 
+ * setting and unsetting class names from an object and also for creating non-
+ * specific, reusable elements such as a Title object.
+ * 
+ * The class does not require JQuery or third party Javascript library, but will
+ * create an empty mwf namespacem, if one doesn't already exist.
+ * 
+ * @namespace mwf.decorator
+ * @author zkhalapyan
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20111115
+ * 
+ */
+
+
+//Define MWF namespace, if it doesn't exist.
 var mwf = mwf || function (){};
 
+//Create a namespace for mwf.decorator.
 mwf.decorator = function(){};
 
-
 /**
- * Returns true if the specified variable is neither undefined nor null.
- * @return true, if the specified variable is neither undefined nor null.
+ * Sets or unsets CSS classes for an object. Here, definition of 'set' is a
+ * logical equivalent of add a class and 'unset' is equivalent to remove a 
+ * class. 
+ * 
+ * Example:
+ * 
+ * //Create a div element.
+ * var divObj = document.createElement('div');
+ * 
+ * //Add 'menu-first' class to the div object.
+ * //Result: <div class="menu-first"> </div>
+ * mwf.decorator.toggleClass(true, divObj, "menu-first");
+ * 
+ * //Add 'cool-div' class to the div object.
+ * //Result: <div class="menu-first cool-div"> </div>
+ * mwf.decorator.toggleClass(true, divObj, "cool-div");
+ * 
+ * //Remove menu-first class from the div object.
+ * //Result: <div class="cool-div"> </div>
+ * mwf.decorator.toggleClass(false, divObj, "menu-first");
+ * 
+ * //Remove 'unexisting-class' class from the div object. 
+ * //Output: No change is made.
+ * mwf.decorator.toggleClass(false, divObj, "unexisting-class");
+ * 
+ * @param set       Depending on this value, the class will either be 
+ *                  set or unset.
+ * @param obj       The object to act upon. 
+ * @param className The name of the class to set/unset.
  */
-mwf.decorator.isSet = function(variable)
-{
-    return variable != undefined && variable != null;
-}
-
 mwf.decorator.toggleClass = function(set, obj, className)
 {
     
@@ -62,16 +105,45 @@ mwf.decorator.toggleClass = function(set, obj, className)
     }
 }
 
+/**
+ * Adds a class name to the sepcified object. If the object already has the
+ * class, no duplicate class will be added.
+ * 
+ * 
+ * @param obj       The object to act upon. 
+ * @param className The name of the class to set.
+ */
 mwf.decorator.setClass = function(obj, className)
 {
     mwf.decorator.toggleClass(true, obj, className);
 }
 
+/**
+ * Removes the class name from the object's className member variable. 
+ * 
+ * @param obj       The object to act upon. 
+ * @param className The name of the class to unset.
+ */
 mwf.decorator.unsetClass = function(obj, className)
 {
     mwf.decorator.toggleClass(false, obj, className);
 }
 
+/**
+ * Prepends an element to the children of the provided container while keeping
+ * track of the first and last markers. Think of firstMarker and lastMarker as
+ * head and tail of a linked list - then preprend adds the element to the front
+ * of the list and updates the head and tail of the list as appropriate.Here,
+ * firstMarker and lastMarker are class names such as "menu-first" and 
+ * "menu-last". After invoking this method, the first child will have the first
+ * marker in its class definition, and the last child will have the last marker
+ * in its class definition.
+ * 
+ * @param container   The container to accept the element.
+ * @param element     The element to prepend to the container. 
+ * @param firstMarker A class name that specifies a first element("menu-first").
+ * @param lastMarker  A class name that specifies a last element("menu-last").
+ */
 mwf.decorator.prepend = function(container, element, firstMarker, lastMarker)
 {
     //Add the last marker to the element to be prepended to the container.
@@ -98,6 +170,22 @@ mwf.decorator.prepend = function(container, element, firstMarker, lastMarker)
     container.insertBefore(element, container.firstChild);
 }
 
+
+/**
+ * Appends an element to the children of the provided container while keeping
+ * track of the first and last markers. Think of firstMarker and lastMarker as
+ * head and tail of a linked list - then append adds the element to the end
+ * of the list and updates the head and tail of the list as appropriate. Here,
+ * firstMarker and lastMarker are class names such as "menu-first" and 
+ * "menu-last". After invoking this method, the first child will have the first
+ * marker in its class definition, and the last child will have the last marker
+ * in its class definition.
+ * 
+ * @param container   The container to accept the element.
+ * @param element     The element to append to the container. 
+ * @param firstMarker A class name that specifies a first element("menu-first").
+ * @param lastMarker  A class name that specifies a last element("menu-last").
+ */
 mwf.decorator.append = function(container, element, firstMarker, lastMarker)
 {
     
@@ -144,6 +232,12 @@ mwf.decorator.remove = function(container, element, firstMarker, lastMarker)
     
 }
 
+/**
+ * Creates a non-specific header to be used within content or menu MWF elements.
+ * 
+ * @param label The visible label of the header/title.
+ * @param level The level of the header/title, ranging from 1-4. Default is 1.
+ */
 mwf.decorator.Title = function(label, level)
 {
     level = (1 <= level && level <= 4)? level : 1;
