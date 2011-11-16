@@ -28,6 +28,8 @@ test("mwf.touch.geolocation.isSupported()", function() {
     equal(mwf.touch.geolocation.isSupported(),true,"Geolocation is supported.");
 })
 
+
+//NB: The tester will need to manually allow the script to access location data.
 test("mwf.touch.geolocation.getPosition(onSuccess,onError)", function() {
     expect(3);
     QUnit.config.testTimeout = 5000;

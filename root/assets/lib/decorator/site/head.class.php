@@ -104,17 +104,22 @@ class Head_Site_Decorator extends Tag_HTML_Decorator
         return $this->add_inner_tag('script', '', array('type'=>'text/javascript', 'src'=>$src));
     }
 
+    private function _generate_url_param_string($params) {
+        $rv = '?';
+        foreach($params as $key=>$val) {
+            $rv .= is_int($key) ? $val.'&' : $key.'='.$val.'&';
+        }
+        $rv = rtrim($rv,'?&');
+        return htmlspecialchars($rv);
+    }
+    
     public function render()
-    {
-        $handler_css = $this->_handler_css ? $this->_handler_css : Config::get('global', 'site_assets_url').'/css.php?';
-        foreach($this->_handler_css_params as $key=>$val)
-            $handler_css .= is_int($key) ? $val.'&' : $key.'='.$val.'&';
-        $handler_css = substr($handler_css, 0, strlen($handler_css)-1);
+    {   
+        $handler_css = $this->_handler_css ? $this->_handler_css : Config::get('global', 'site_assets_url').'/css.php';
+        $handler_css .= $this->_generate_url_param_string($this->_handler_css_params);
 
-        $handler_js = $this->_handler_js ? $this->_handler_js : Config::get('global', 'site_assets_url').'/js.php?';
-        foreach($this->_handler_js_params as $key=>$val)
-            $handler_js .= is_int($key) ? $val.'&' : $key.'='.$val.'&';
-        $handler_js = substr($handler_js, 0, strlen($handler_js)-1);
+        $handler_js = $this->_handler_js ? $this->_handler_js : Config::get('global', 'site_assets_url').'/js.php';
+        $handler_js .= $this->_generate_url_param_string($this->_handler_js_params);
         
         $this->add_inner_tag_front('meta', false, array('name'=>'viewport', 'content'=>'height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no'));
         $this->add_inner_tag_front('script', null, array('type'=>'text/javascript', 'src'=>(HTTPS::is_https() ? HTTPS::convert_path($handler_js) : $handler_js)));
