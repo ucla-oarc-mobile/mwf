@@ -35,7 +35,7 @@ class ClassificationTest extends PHPUnit_Framework_TestCase {
      * @runInSeparateProcess
      */
     public function isFull_isFull_True() {
-        $_COOKIE['mwf_classification']='{"mobile":false,"basic":true,"standard":true,"full":true}';
+        $_COOKIE['mwf_classification']='{"mobile":false,"basic":true,"standard":true,"full":true,"native":false}';
         require_once dirname(__FILE__) . '/../../../../../root/assets/lib/classification.class.php';
         $this->assertTrue(Classification::is_full());
     }
@@ -45,7 +45,7 @@ class ClassificationTest extends PHPUnit_Framework_TestCase {
      * @runInSeparateProcess
      */
     public function isFull_notFull_False() {
-        $_COOKIE['mwf_classification']='{"mobile":false,"basic":true,"standard":true,"full":false}';
+        $_COOKIE['mwf_classification']='{"mobile":false,"basic":true,"standard":true,"full":false,"native":false}';
         require_once dirname(__FILE__) . '/../../../../../root/assets/lib/classification.class.php';
         $this->assertFalse(Classification::is_full());
     }
@@ -55,7 +55,7 @@ class ClassificationTest extends PHPUnit_Framework_TestCase {
      * @runInSeparateProcess
      */
     public function isStandard_isStandard_True() {
-        $_COOKIE['mwf_classification']='{"mobile":false,"basic":true,"standard":true,"full":true}';
+        $_COOKIE['mwf_classification']='{"mobile":false,"basic":true,"standard":true,"full":true,"native":false}';
         require_once dirname(__FILE__) . '/../../../../../root/assets/lib/classification.class.php';
         $this->assertTrue(Classification::is_standard());
     }
@@ -65,7 +65,7 @@ class ClassificationTest extends PHPUnit_Framework_TestCase {
      * @runInSeparateProcess
      */
     public function isStandard_notStandard_False() {
-        $_COOKIE['mwf_classification']='{"mobile":false,"basic":true,"standard":false,"full":false}';
+        $_COOKIE['mwf_classification']='{"mobile":false,"basic":true,"standard":false,"full":false,"native":false}';
         require_once dirname(__FILE__) . '/../../../../../root/assets/lib/classification.class.php';
         $this->assertFalse(Classification::is_standard());
     }
@@ -75,7 +75,7 @@ class ClassificationTest extends PHPUnit_Framework_TestCase {
      * @runInSeparateProcess
      */
     public function isBasic_isBasic_True() {
-        $_COOKIE['mwf_classification']='{"mobile":false,"basic":true,"standard":true,"full":true}';
+        $_COOKIE['mwf_classification']='{"mobile":false,"basic":true,"standard":true,"full":true,"native":false}';
         require_once dirname(__FILE__) . '/../../../../../root/assets/lib/classification.class.php';
         $this->assertTrue(Classification::is_basic());
     }
@@ -85,7 +85,7 @@ class ClassificationTest extends PHPUnit_Framework_TestCase {
      * @runInSeparateProcess
      */
     public function isMobile_isMobile_True() {
-        $_COOKIE['mwf_classification']='{"mobile":true,"basic":true,"standard":true,"full":true}';
+        $_COOKIE['mwf_classification']='{"mobile":true,"basic":true,"standard":true,"full":true,"native":false}';
         require_once dirname(__FILE__) . '/../../../../../root/assets/lib/classification.class.php';
         $this->assertTrue(Classification::is_mobile());
     }
@@ -95,30 +95,10 @@ class ClassificationTest extends PHPUnit_Framework_TestCase {
      * @runInSeparateProcess
      */
     public function isMobile_notMobile_False() {
-        $_COOKIE['mwf_classification']='{"mobile":false,"basic":true,"standard":false,"full":false}';
+        $_COOKIE['mwf_classification']='{"mobile":false,"basic":true,"standard":false,"full":false,"native":false}';
         require_once dirname(__FILE__) . '/../../../../../root/assets/lib/classification.class.php';
         $this->assertFalse(Classification::is_standard());
     }
-    
-//    /**
-//     * @test
-//     */
-//    public function isNative_isNative_True() {
-//        // Remove the following lines when you implement this test.
-//        $this->markTestIncomplete(
-//                'This test has not been implemented yet.'
-//        );
-//    }
-//
-//    /**
-//     * @test
-//     */
-//    public function isNative_notNative_False() {
-//        // Remove the following lines when you implement this test.
-//        $this->markTestIncomplete(
-//                'This test has not been implemented yet.'
-//        );
-//    }
     
 }
 
