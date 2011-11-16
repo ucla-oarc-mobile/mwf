@@ -42,6 +42,7 @@ echo Site_Decorator::menu_full()
 ->set_title('MWF Demos')
 ->set_padded()
 ->add_text('The following is a kitchen sink collection of MWF styles.')
+->add_item('Forms', './demos/forms.php')
 ->add_item('Messages', './demos/messages.php');
 
 echo Site_Decorator::button_full()

@@ -322,86 +322,160 @@ div.button-full a:active{
 /********************************************************
  * FORMS
  *******************************************************/
-
-form.form-full {
+.form {
     background-color: #fff;
     padding-bottom: 10px;
 }
 
-form.form-full > h1 {
+/* form h1 heading */
+.form > h1 {
     background: #efefef;
     color: #000;
     margin: 0 0 10px 0;
-    padding: .4em 0 .4em 0;
+    padding: .4em 0;
     text-align: center;
     border-bottom: 1px solid #ddd;
 }
 
-form.form-full > h1.light {
+.form > h1.light {
     background-color: #f6f6f6;
-    border-bottom: 1px solid #ddd;
+    color: #555;
 }
 
-form.form-full > h1,
-form.form-full > input,
-form.form-full > select,
-form.form-full > textarea,
-form.form-full > label,
-form.form-full > p,
-form.form-full > div {
-    width: 100%;
-    display: block;
+.form > h1.blue {
+    background-color: #809FE2;
+    color: #fff;
+}
+
+/* general form controls */
+.form > fieldset {
     border: 0;
 }
 
-form.form-full > p {
-    padding: 4px 8px;
-    width: auto;
-    color: #444;
+.form > h4,
+.form > div,
+.form > fieldset,
+.form > p,
+.form > input,
+.form > select,
+.form > textarea,
+.form > label {
+    margin-left: 10px;
 }
 
-form.form-full > label {
-    font-size: .85em;
+.form > label,
+.form > fieldset {
+    margin-top: 10px;
+}
+
+.form input,
+.form select,
+.form textarea {
+    border: 1px solid #CCC;
+    font-size: 1em;
+}
+
+.form input,
+.form textarea {
+    padding: 4px 0;
+}
+
+/* form buttons */
+.form input[type="submit"],
+.form input[type="reset"],
+.form button {
+    background-color: #e4e7ee;
+    border: 0;
+    color: #000;
+    cursor: pointer;
+    padding: 4px 10px;
+}
+
+.form input[type="submit"]:hover,
+.form input[type="reset"]:hover,
+.form button:hover,
+.form input[type="submit"]:focus,
+.form input[type="reset"]:focus,
+.form button:focus{
+    background-color: #cfd5e1;
+}
+
+.form input[type="submit"].primary,
+.form input[type="reset"].primary,
+.form button.primary {
+    background-color: #fbaf3f;
+}
+
+.form input[type="submit"].primary:hover,
+.form input[type="reset"].primary:hover,
+.form button.primary:hover,
+.form input[type="submit"].primary:focus,
+.form input[type="reset"].primary:focus,
+.form button.primary:focus {
+    background-color: #faa422;
+}
+
+.form input[type="submit"].secondary,
+.form input[type="reset"].secondary,
+.form button.secondary {
+    background-color: #9caccf;
+}
+
+.form input[type="submit"].secondary:hover,
+.form input[type="reset"].secondary:hover,
+.form button.secondary:hover,
+.form input[type="submit"].secondary:focus,
+.form input[type="reset"].secondary:focus,
+.form button.secondary:focus {
+    background-color: #869ac5;
+}
+
+/* full width form */
+.form.full {
+    padding-right: 20px;
+}
+
+.form.full > * {
+    display: block;
+    width: 100%;
+}
+
+.form.full > h1 {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.form.full input[type="submit"],
+.form.full input[type="reset"],
+.form.full button {
+    margin-top: .8em;
+}
+
+/* form control alignment */
+.text-left > *,
+.text-left {
+    text-align: left;
+}
+
+.text-center > *,
+.text-center {
     text-align: center;
+}
+
+.text-right > *,
+.text-right {
+    text-align: right;
+}
+
+/* individual form control styling */
+.form > label {
+    font-size: .9em;
     color: #777;
 }
 
-form.form-full > input,
-form.form-full > select,
-form.form-full > textarea {
-    font-size: .95em;
-    background-color: #f1f1f1;
-    margin: 0 auto 10px auto;
-    width: 80%;
-    border: 1px solid #bbb;
-}
-
-form.form-full > input {
-    text-align: center;
-}
-
-form.form-full > textarea {
+.form textarea {
     height: 4em;
-    line-height: 1.6em;
 }
-
-form.form-full > input[type=submit],
-form.form-full > input[type=reset] {
-    background-color: #eee;
-    font-weight: bold;
-    color: #1e6a95;
-}
-
-form.form-full > input[type=submit]:active,
-form.form-full > input[type=reset]:active,
-form.form-full > input[type=submit]:focus,
-form.form-full > input[type=reset]:focus,
-form.form-full > input[type=submit]:hover,
-form.form-full > input[type=reset]:hover {
-    background-color: #f6f6f6;
-    color: #2685bb;
-}
-
 
 /********************************************************
  * MESSAGES
