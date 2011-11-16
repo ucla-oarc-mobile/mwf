@@ -9,7 +9,12 @@
  *
  * @uses PHPUnit_Framework_TestCase
  * @uses Classification
+ * @uses Config
  */
+
+require_once dirname(__FILE__) . '/../../../../../root/assets/lib/config.class.php';
+Config::set('global','cookie_prefix','mwftest_');
+
 class ClassificationTest extends PHPUnit_Framework_TestCase {
 
     /**
@@ -35,7 +40,7 @@ class ClassificationTest extends PHPUnit_Framework_TestCase {
      * @runInSeparateProcess
      */
     public function isFull_isFull_True() {
-        $_COOKIE['mwf_classification']='{"mobile":false,"basic":true,"standard":true,"full":true,"native":false}';
+        $_COOKIE['mwftest_classification']='{"mobile":false,"basic":true,"standard":true,"full":true,"native":false}';
         require_once dirname(__FILE__) . '/../../../../../root/assets/lib/classification.class.php';
         $this->assertTrue(Classification::is_full());
     }
@@ -45,7 +50,7 @@ class ClassificationTest extends PHPUnit_Framework_TestCase {
      * @runInSeparateProcess
      */
     public function isFull_notFull_False() {
-        $_COOKIE['mwf_classification']='{"mobile":false,"basic":true,"standard":true,"full":false,"native":false}';
+        $_COOKIE['mwftest_classification']='{"mobile":false,"basic":true,"standard":true,"full":false,"native":false}';
         require_once dirname(__FILE__) . '/../../../../../root/assets/lib/classification.class.php';
         $this->assertFalse(Classification::is_full());
     }
@@ -55,7 +60,7 @@ class ClassificationTest extends PHPUnit_Framework_TestCase {
      * @runInSeparateProcess
      */
     public function isStandard_isStandard_True() {
-        $_COOKIE['mwf_classification']='{"mobile":false,"basic":true,"standard":true,"full":true,"native":false}';
+        $_COOKIE['mwftest_classification']='{"mobile":false,"basic":true,"standard":true,"full":true,"native":false}';
         require_once dirname(__FILE__) . '/../../../../../root/assets/lib/classification.class.php';
         $this->assertTrue(Classification::is_standard());
     }
@@ -65,7 +70,7 @@ class ClassificationTest extends PHPUnit_Framework_TestCase {
      * @runInSeparateProcess
      */
     public function isStandard_notStandard_False() {
-        $_COOKIE['mwf_classification']='{"mobile":false,"basic":true,"standard":false,"full":false,"native":false}';
+        $_COOKIE['mwftest_classification']='{"mobile":false,"basic":true,"standard":false,"full":false,"native":false}';
         require_once dirname(__FILE__) . '/../../../../../root/assets/lib/classification.class.php';
         $this->assertFalse(Classification::is_standard());
     }
@@ -75,7 +80,7 @@ class ClassificationTest extends PHPUnit_Framework_TestCase {
      * @runInSeparateProcess
      */
     public function isBasic_isBasic_True() {
-        $_COOKIE['mwf_classification']='{"mobile":false,"basic":true,"standard":true,"full":true,"native":false}';
+        $_COOKIE['mwftest_classification']='{"mobile":false,"basic":true,"standard":true,"full":true,"native":false}';
         require_once dirname(__FILE__) . '/../../../../../root/assets/lib/classification.class.php';
         $this->assertTrue(Classification::is_basic());
     }
@@ -85,7 +90,7 @@ class ClassificationTest extends PHPUnit_Framework_TestCase {
      * @runInSeparateProcess
      */
     public function isMobile_isMobile_True() {
-        $_COOKIE['mwf_classification']='{"mobile":true,"basic":true,"standard":true,"full":true,"native":false}';
+        $_COOKIE['mwftest_classification']='{"mobile":true,"basic":true,"standard":true,"full":true,"native":false}';
         require_once dirname(__FILE__) . '/../../../../../root/assets/lib/classification.class.php';
         $this->assertTrue(Classification::is_mobile());
     }
@@ -95,7 +100,7 @@ class ClassificationTest extends PHPUnit_Framework_TestCase {
      * @runInSeparateProcess
      */
     public function isMobile_notMobile_False() {
-        $_COOKIE['mwf_classification']='{"mobile":false,"basic":true,"standard":false,"full":false,"native":false}';
+        $_COOKIE['mwftest_classification']='{"mobile":false,"basic":true,"standard":false,"full":false,"native":false}';
         require_once dirname(__FILE__) . '/../../../../../root/assets/lib/classification.class.php';
         $this->assertFalse(Classification::is_standard());
     }
