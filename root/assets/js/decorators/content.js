@@ -1,15 +1,48 @@
-if(typeof mwf == "undefined")
-{
-    var mwf = function(){};
-}
+/**
+ * MWF Decorator class for creating and manipulating content elements.
+ * 
+ * The class does not require JQuery or third party Javascript library, but 
+ * depends on mwf.decorator class definition.
+ * 
+ * Example Use: 
+ * 
+ *  var content = mwf.decorator.Content("Hello World", "Some Text.");
+ *  
+ *  content.setTitle("New Title");
+ *  content.addTextBlock("Some other text.");
+ *  
+ *  document.body.appendChild(content);
+ *  
+ * @namespace mwf.decorator.Menu
+ * @dependency mwf.decorator
+ * @author zkhalapyan
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20111115
+ * 
+ */
 
 mwf.decorator.Content = function(title, text)
 {
     
-    var firstMarker = "content-first";
-    var lastMarker  = "content-last";
+    /**
+     * A CSS class name that indicates the first element in a list of elements.
+     */
+    var FIRST_MARKER = "menu-first";
+    
+    /**
+     * A CSS class name that indicates the last element in a list of elements.
+     */
+    var LAST_MARKER  = "menu-last";
     
     var content = document.createElement("div");
+    
+    var attributes = [
+                        new mwf.decorator.Attribute("Padded",   true, "content-padded"),
+                        new mwf.decorator.Attribute("Full",     true, "content-full")
+                     ];
+    
+    mwf.decorator.addAttributes(content, attributes);
     
     /**  
      * Sets the title of this content. If the specified title is null or 
@@ -20,26 +53,24 @@ mwf.decorator.Content = function(title, text)
     content.setTitle = function(title)
     {
         //If current element has a title, then unset it. 
-        if(this.mwfTitle)
+        if(this._title)
         {
-            mwf.decorator.remove(this, this.mwfTitle, firstMarker, lastMarker);
-            this.mwfTitle = null;
+            mwf.decorator.remove(this, this._title, FIRST_MARKER, LAST_MARKER);
+            this._title = null;
         }
         
         //Set title, if specified.
         if(title)
         {
             //Create a new title to add to the element, and save it in a member 
-            //variable mwfTitle.
-            this.mwfTitle = mwf.decorator.Title(title);
+            //variable.
+            this._title = mwf.decorator.Title(title);
             
             //Prepend the new title to the content.
-            mwf.decorator.prepend(this, this.mwfTitle, firstMarker, lastMarker);
+            mwf.decorator.prepend(this, this._title, FIRST_MARKER, LAST_MARKER);
+            
             
         }
-        
-        
-        
     }
     
     /**
@@ -48,7 +79,7 @@ mwf.decorator.Content = function(title, text)
      */
     content.getTitle = function()
     {
-        return (this.mwfTitle)? this.mwfTitle : null;
+        return (this._title)? this._title : null;
     }
     
     
@@ -59,15 +90,15 @@ mwf.decorator.Content = function(title, text)
      */
     content.addItem = function(contentItem)
     {
-        mwf.decorator.append(this, contentItem, firstMarker, lastMarker); 
+        mwf.decorator.append(this, contentItem, FIRST_MARKER, LAST_MARKER); 
     }
     
     content.addButton = function(label, url, callback)
     {
         mwf.decorator.append(this, 
                              mwf.decorator.ContentButton(label, url, callback),
-                             firstMarker,
-                             lastMarker);
+                             FIRST_MARKER,
+                             LAST_MARKER);
     }
     
     /**
@@ -85,26 +116,12 @@ mwf.decorator.Content = function(title, text)
         textBlock.innerHTML = text;
         
         //Append the text block to the content.
-        mwf.decorator.append(this, textBlock, firstMarker, lastMarker);
+        mwf.decorator.append(this, textBlock, FIRST_MARKER, LAST_MARKER);
         
         return this;
     }
     
-    content.setPadded = function(isPadded)
-    {
-        mwf.decorator.toggleClass(isPadded, this, "content-padded");
-        return this;
-    }
-    
-    content.setFull = function(isFull)
-    {
-        mwf.decorator.toggleClass(isFull, this, "content-full");
-        return this;
-    }
-    
-    //Set defaults.
-    content.setFull(true);
-    content.setPadded(true);
+
     
     content.setTitle(title);
     content.addTextBlock(text);

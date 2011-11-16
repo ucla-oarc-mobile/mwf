@@ -33,22 +33,38 @@ mwf.decorator.Menu = function(title)
 {
     
     /**
-     * A CSS class name that indicates the first element of this menu.
+     * A CSS class name that indicates the first element in a list of elements.
      */
     var FIRST_MARKER = "menu-first";
     
     /**
-     * A CSS class name that indicates the last element of this menu.
+     * A CSS class name that indicates the last element in a list of elements.
      */
     var LAST_MARKER  = "menu-last";
     
+    /**
+     * Create the menu as a parent prototype. This will be the object that will
+     * be decorated with menu related functions and returned as the final result.
+     */
     var menu = document.createElement('div');
+    
+    var attr = mwf.decorator.Attribute;
+    
+    var attributes = [
+                            new attr("Padded",   true, "menu-padded"),
+                            new attr("Full",     true, "menu-full"),
+                            new attr("Detailed", true, "menu-detailed")
+                         ];
+    
+    mwf.decorator.addAttributes(menu, attributes);
+    
     
     /**  
      * Sets the title of this menu. If the specified title is null or 
      * undefined, then the menu's title, if it exists, will be removed.
      * 
      * @param title The title of the menu to set.
+     * @return This menu - allows chained invocations.
      */
     menu.setTitle = function(title)
     {
@@ -105,7 +121,15 @@ mwf.decorator.Menu = function(title)
     
     
     /**
-     *
+     * Adds a generic item to the menu. The item will initially be placed inside
+     * an li tag and then pushed into the top of the current menu's ordered
+     * list. The method returns the current menu, allowing chained invocations.
+     * 
+     * The method also adjusts first and last markers of this menu after 
+     * appending a new element. 
+     * 
+     * @param item The item to add to this menu.
+     * @return This menu - allows chained invocations.
      */
     menu.addMenuItem = function(item)
     {   
@@ -132,36 +156,6 @@ mwf.decorator.Menu = function(title)
     
         mwf.decorator.setClass(listItem, LAST_MARKER);
         
-        /*
-        if(this._title)
-        {
-            if(this._items.children.length == 0)
-            {
-                mwf.decorator.unsetClass(this._title, lastMarker);
-                mwf.decorator.setClass(listItem, lastMarker);
-            }
-            else
-            {
-                mwf.decorator.unsetClass(this._items.lastChild, lastMarker);
-                mwf.decorator.setClass(listItem, lastMarker);
-            }
-        }
-        else
-        {
-            if(this._items.children.length == 0)
-            {
-                mwf.decorator.setClass(listItem, firstMarker);
-                mwf.decorator.setClass(listItem, lastMarker);
-            }
-            else
-            {
-                mwf.decorator.unsetClass(this._items.lastChild, lastMarker);
-                mwf.decorator.setClass(listItem, lastMarker);
-            }
-        }
-        */
- 
-        
         this._items.appendChild(listItem);
         
         return this;
@@ -171,7 +165,7 @@ mwf.decorator.Menu = function(title)
      * Adds a paragraph element with the specified text to the current menu.
      * 
      * @param text The text to be enclosed in a <p> tag and added to the menu.
-     * @return This menu
+     * @return This menu - allows chained invocations.
      */  
     menu.addMenuTextItem = function(text)
     {
@@ -192,7 +186,7 @@ mwf.decorator.Menu = function(title)
      * @param url     The URL of the link item.
      * @param details An optional element that adds details section to the item.    
      * 
-     * @return Created menu item.         
+     * @return This menu - allows chained invocations.
      */
     menu.addMenuLinkItem = function(text, url, details)
     {
@@ -367,31 +361,6 @@ mwf.decorator.Menu = function(title)
     {
         return (this._items) ? this._items.children.length : 0;
     }
-    
-    menu.setPadded = function(isPadded)
-    {
-        mwf.decorator.toggleClass(isPadded, this, "menu-padded");
-        return this;
-    }
-    
-    menu.setFull = function(isFull)
-    {
-        mwf.decorator.toggleClass(isFull, this, "menu-full");
-        return this;
-    }
-    
-    menu.setDetailed = function(isDetailed)
-    {
-        mwf.decorator.toggleClass(isDetailed, this, "menu-detailed");
-        return this;
-    }
-    
-    //Set defaults.
-    menu.setPadded(true);
-    menu.setFull(true);
-    menu.setDetailed(false);
-    menu.setTitle(title);
-  
     
     return menu;
 }

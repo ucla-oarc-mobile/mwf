@@ -78,7 +78,7 @@ mwf.decorator.toggleClass = function(set, obj, className)
         //className property.
         if (obj.className.indexOf(className) == -1)
         { 
-            obj.className += ((obj.className.length > 0)?" ":"") + className;
+            obj.className += ((obj.className.length > 0)? " " : "") + className;
         }     
         
     }
@@ -101,7 +101,11 @@ mwf.decorator.toggleClass = function(set, obj, className)
     //left side or the right side.
     else
     {
+        //Remove any trailing or heading extra spaces.
         obj.className = obj.className.replace(/^\s+|\s+$/g,"");
+        
+        //Remove any double spaces inside the class definition.
+        obj.className = obj.className.replace(/\s+/g," ");
     }
 }
 
@@ -211,8 +215,22 @@ mwf.decorator.append = function(container, element, firstMarker, lastMarker)
     
 }
 
+/**
+ *
+ * @param container   The container from which the element will be removed.
+ * @param element     The element to remove from the container.
+ * @param firstMarker A class name that specifies a first element("menu-first").
+ * @param lastMarker  A class name that specifies a last element("menu-last").
+ */
 mwf.decorator.remove = function(container, element, firstMarker, lastMarker)
 {
+    //If the element is not a child of the container, 
+    //then return from the function.
+    if(element.parentNode != container)
+    {
+        return;
+    }
+    
     //Unset both types of markers from the element to be removed.
     mwf.decorator.unsetClass(element, firstMarker);
     mwf.decorator.unsetClass(element, lastMarker);
@@ -246,15 +264,90 @@ mwf.decorator.Title = function(label, level)
 
     title.innerHTML = label;
     
-    title.setLight = function(isLight)
-    {
-        mwf.decorator.toggleClass(isLight, this, "light");
-        return this;
-    }
-    
-    //Set defaults.
-    title.setLight(false);
-    
+    mwf.decorator.addAttribute(title, new mwf.decorator.Attribute("Light", true, "light"));
+   
     return title;
     
 }
+
+/**
+ * Represents an attribute for an object.
+ * 
+ * @param name      The name of the attribute such as Full, Padded, or Light.
+ * @param isSet     The default state of the attribute. If true, will be set.
+ * @param className The class name representing this attribute i.e. button-full.
+ */
+mwf.decorator.Attribute = function(name, isSet, className)
+{
+    this.name      = name;
+    this.className = className;
+    this.isSet     = isSet;
+
+}
+
+/**
+ * Allows adding class attributes to an object. This allows adding an array
+ * of different types of class names that an object might have and produces 
+ * setter and getter functions for that class. 
+ * 
+ * @param obj        The object to add the attribute on.
+ * @param attributes An array of Attribute objects to be added to the object.
+ * 
+ */
+mwf.decorator.addAttributes = function(obj, attributes)
+{
+    
+    //Iterate through each attribute and generate getter and setter functions.
+    for(var i = 0; i < attributes.length; i++)
+    {
+        mwf.decorator.addAttribute(obj, attributes[i]);        
+    }
+}
+
+
+/**
+ * 
+ * For example, the below code using the attributes function:
+ * 
+ *  var attributes = [new mwf.decorator.Attribute("Light", true, "light")];
+ *  mwf.decorator.addAttributes(obj, attributes);
+ *  
+ * Will produce the same code as:
+ *  
+ *  obj.setLight = function(isLight)
+ *  {
+ *      mwf.decorator.toggleClass(isLight, this, "light");
+ *      return this;
+ *  }
+ *  
+ *  obj.isLight = function()
+ *  {
+ *      return obj.className.indexOf(attr.className) != -1;
+ *  }
+ *   
+ *  //Set defaults.
+ *  obj.setLight(true);
+ *  
+ *  
+ * @param obj  The object to add the attribute on.
+ * @param attr The Attribute object to be added to the object.
+ */
+mwf.decorator.addAttribute = function(obj, attr)
+{
+    //Generate the setter function.
+    obj["set" + attr.name] = function(isAttributeSet)
+    {
+        mwf.decorator.toggleClass(isAttributeSet, obj, attr.className);
+        return obj;
+    }
+
+    //Generate the getter function.
+    obj["is" + attr.name] = function()
+    {
+        return obj.className.indexOf(attr.className) != -1;
+    }
+
+    //Set the default value.
+    obj["set" + attr.name](attr.isSet);
+}
+

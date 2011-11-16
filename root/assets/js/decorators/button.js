@@ -1,8 +1,47 @@
+/**
+ * MWF Decorator class for creating and manipulating Buttons.
+ * 
+ * Example Use: 
+ * 
+ *
+ *  //Create a single button and append it to the document.
+ *  var button = mwf.decorator.SingleButton("Hello World", "http://m.ucla.edu");
+ *  document.body.appendChild(button.setLight(true));
+ *  
+ *  
+ *  //Create a double button.
+ *  var buttons = mwf.decorator.DoubleButton("Hello World 1", "http://m.ucla.edu", null,
+ *                                           "Hello World 2", "http://m.ucla.edu", null);
+ *
+ *  //Set the buttons to not be light.
+ *  buttons.setLight(false);
+ *  
+ *  //Set the first button to be light.
+ *  buttons.getFirstButton().setLight(true);
+ *  
+ *  //Append the buttons to the document.
+ *  document.body.appendChild(buttons);
+ *
+ *
+ * @namespace mwf.decorator
+ * @dependency mwf.decorator
+ * @author zkhalapyan
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20111115
+ * 
+ */
 
-//Define MWF namespace, if it doesn't exist.
-var mwf = mwf || function (){};
 
-mwf.decorator.Button = function(label, url, callback, isFirst)
+/**
+ * Creates a simple button provided the label, the url, and the callback 
+ * function. Acts as a building block for SingleButton and DoubleButton.
+ * 
+ * @param label    The visible label for the button.
+ * @param url      The URL for the anchor within the button.
+ * @param callback The onclick handler callback for this button.
+ */
+mwf.decorator.Button = function(label, url, callback)
 {   
     //Create a new anchor element to represent the button.
     var button = document.createElement('a');
@@ -19,47 +58,42 @@ mwf.decorator.Button = function(label, url, callback, isFirst)
         button.onclick = callback;
     }    
 
-    //Depending on the value of isFirst, either mark the button as first or
-    //last (".button-first" vs. ".button-last"). If isFirst is not even defined,
-    //or is null, then the code block will not be executed. 
-    if(isFirst)
-    {        
-        button.className = (isFirst) ? "button-first" : "button-last";
-    }
-    
-    button.setLight = function(isLight)
-    {
-        mwf.decorator.toggleClass(isLight, this, "button-light");
-        return this;
-    }
-
+    mwf.decorator.addAttribute(button, new mwf.decorator.Attribute("Light",  true, "button-light"));
+   
     return button;
     
 }
 
+/**
+ * Creats a single button wrapped inside a <div> tag. Specifying a URL or a 
+ * callback function is optional.
+ * 
+ * Example Use:
+ * 
+ *  var button = mwf.decorator.SingleButton("Hello World", "http://google.com");
+ *  button.setLight(false);
+ *  document.body.appendChild(button);
+ * 
+ * 
+ * @param label    The visible label for the button.
+ * @param url      The URL for the anchor within the button.
+ * @param callback The onclick handler callback for this button.
+ */
 mwf.decorator.SingleButton = function(label, url, callback)
 {
    
    var container = document.createElement('div');
    
-   container.setFull = function(isFull)
-   {
-        mwf.decorator.toggleClass(isFull, this, "button-full");
-        return this;
-   }
-   
-   container.setPadded = function(isPadded)
-   {
-       mwf.decorator.toggleClass(isPadded, this, "button-padded");
-       return this;
-   }
-    
-   container.setLight = function(isLight)
-   {
-       mwf.decorator.toggleClass(isLight, this, "button-light");
-       return this;
-   }
-  
+   var attr = mwf.decorator.Attribute;
+
+   var attributes = [
+                        new attr("Padded", true, "button-padded"),
+                        new attr("Full",   true, "button-full"),
+                        new attr("Light",  true, "button-light")
+                     ];
+
+   mwf.decorator.addAttributes(container, attributes);
+
    /**
     * Returns the button within the container.
     */
@@ -74,40 +108,50 @@ mwf.decorator.SingleButton = function(label, url, callback)
     */
    var button = mwf.decorator.Button(label, url, callback);
    
-   //Set the default values.
-   container.setFull(true);
-   container.setPadded(true);
-   container.setLight(true);
-   
    //Append the created button to the div container.
    container.appendChild(button);
    
    return container;
 }
 
+
+/**
+ * Creates a double button with the provided labels, urls, and callbacks.
+ * Specifying callback or URL values for either button is optional. 
+ * 
+ * @param firstLabel     The visible label for the first button.
+ * @param firstUrl       The URL for the anchor within the first button.
+ * @param firstCallback  The onclick handler callback for first button.
+ * @param secondLabel    The visible label for the second button.
+ * @param secondUrl      The URL for the anchor within the second button.
+ * @param secondCallback The onclick handler callback for second button.
+ */
 mwf.decorator.DoubleButton = function(firstLabel, firstUrl, firstCallback,
                                       secondLabel, secondUrl, secondCallback)
 {
    
+   /**
+    * A CSS class name that indicates a first element in a list of elements.
+    */
+    var FIRST_MARKER = "button-first";
+
+   /**
+    * A CSS class name that indicates the last element in a list of elements.
+    */
+   var LAST_MARKER  = "button-last";
+
    var container = document.createElement('div');
    
-   container.setFull = function(isFull)
-   {
-        mwf.decorator.toggleClass(isFull, this, "button-full");
-        return this;
-   }
+   var attr = mwf.decorator.Attribute;
+
+   var attributes = [
+                        new attr("Padded", true, "button-padded"),
+                        new attr("Full",   true, "button-full"),
+                        new attr("Light",  true, "button-light")
+                     ];
+
+   mwf.decorator.addAttributes(container, attributes);
    
-   container.setPadded = function(isPadded)
-   {
-       mwf.decorator.toggleClass(isPadded, this, "button-padded");
-       return this;
-   }
-    
-   container.setLight = function(isLight)
-   {
-       mwf.decorator.toggleClass(isLight, this, "button-light");
-       return this;
-   }
    
    container.getFirstButton = function()
    {
@@ -119,20 +163,23 @@ mwf.decorator.DoubleButton = function(firstLabel, firstUrl, firstCallback,
        return secondButton;
    }
    
-   var firstButton  = mwf.decorator.Button(firstLabel, firstUrl, firstCallback, true);
-   var secondButton = mwf.decorator.Button(secondLabel, secondUrl, secondCallback, false);
-   
-   container.setFull(true);
-   container.setPadded(true);
-   container.setLight(true);
-   
-   container.appendChild(firstButton);
-   container.appendChild(secondButton);
+   var firstButton  = mwf.decorator.Button(firstLabel, firstUrl, firstCallback);
+   var secondButton = mwf.decorator.Button(secondLabel, secondUrl, secondCallback);
+
+   mwf.decorator.append(container, firstButton, FIRST_MARKER, LAST_MARKER);
+   mwf.decorator.append(container, secondButton, FIRST_MARKER, LAST_MARKER);
    
    return container;
    
 }
 
+/**
+ * Creates a top button provided the label, url, and callback values.
+ * 
+ * @param label    The visible label for the button.
+ * @param url      The URL for the anchor within the button.
+ * @param callback The onclick handler callback for this button.
+ */
 mwf.decorator.TopButton = function(label, url, callback)
 {
     var topButton = mwf.decorator.SingleButton(label, url, callback);
@@ -141,6 +188,7 @@ mwf.decorator.TopButton = function(label, url, callback)
     
     button.id = "button-top";
     
+    //This part cannot really be done by attributes, as it's a negation. 
     topButton.setBasic = function(isBasic)
     {
        mwf.decorator.toggleClass(!isBasic, button, "not-basic");
