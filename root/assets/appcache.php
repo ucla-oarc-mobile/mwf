@@ -31,7 +31,9 @@ if(!Classification::init())
  * Sets output to be parsed as an appcache manifest and to not itself be cached.
  */
 
-header('Content-Type: text/cache-manifest');
-header("Cache-Control: max-age=0");
+header("Cache-Control: max-age=0, no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: Wed, 11 Jan 1984 05:00:00 GMT");
+header('Content-type: text/cache-manifest'); 
 
 require_once(dirname(__FILE__).'/appcache/manifest.appcache');
