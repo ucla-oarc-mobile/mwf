@@ -64,7 +64,7 @@ Config::set('global', 'appicon_img_precomposed',    Config::get('global', 'site_
 Config::set('global', 'appicon_allow_disable_flag', true);
 Config::set('global', 'back_to_home_text',          'Go Back to Home');
 Config::set('global', 'charset',                    false);
-Config::set('global', 'copyright_text',             'University of California &copy; 2010 UC Regents');
+Config::set('global', 'copyright_text',             'University of California &copy; 2010-11 UC Regents');
 Config::set('global', 'header_home_button',         Config::get('global', 'site_assets_url').'/img/mwf-header.gif');
 Config::set('global', 'header_home_button_alt',     'MWF');
 Config::set('global', 'language',                   false);

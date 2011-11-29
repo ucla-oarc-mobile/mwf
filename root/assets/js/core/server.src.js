@@ -29,7 +29,6 @@ mwf.server = new function(){
     this.cookieNameLocal = mwf.site.cookie.prefix+'server';
     this.mustRedirect = false;
     this.mustReload = false;
-    this.error = false;
     
     /**
      * Local variables to minimize payload size in compression.
@@ -72,15 +71,7 @@ mwf.server = new function(){
         
         if(!site.cookie.exists(screen.cookieName))
             this.setCookie(screen.cookieName, screen.generateCookieContent());
-        
-        /**
-         * If an error is encountered in setting server variables, give up
-         * without redirecting/reloading to avoid infinite loop.
-         */
-        
-        if(this.error)
-            return;
-        
+
         /**
          * If the service provider doesn't have cookies, either (1) reload
          * the page if framework is of same-origin or device browser supports 
