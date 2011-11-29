@@ -36,7 +36,9 @@ class Head_Site_Decorator extends Tag_HTML_Decorator
 
     public function &set_title($title)
     {
-        $this->_title = $title;
+        if($title)
+            $this->_title = $title;
+        
         return $this;
     }
 
