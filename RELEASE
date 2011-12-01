@@ -19,6 +19,7 @@ License:
 
 TABLE OF CONTENTS
 
+Version 1.2.08          November 30, 2011
 Version 1.2.07          November 11, 2011
 Version 1.2.06          November 9, 2011
 Version 1.2.05          October 26, 2011
@@ -35,6 +36,21 @@ Version 1.1.03.alpha    July 20, 2011
 Version 1.1.02.alpha    June 23, 2011
 Version 1.1.01.alpha    June 16, 2011
 Version 1.1.00.alpha    May 20, 2011
+
+==============================================================================
+
+Version 1.2.08
+November 30, 2011
+
+* Fix for when title_text is not set [#32]
+
+* Fix for Head_Site_Decorator when multiple JS/CSS libs included [#21]
+
+* Remove dead cookie domain code in mwf.site [#30]
+
+* Remove extraneous stripslashes in screen, user_agent and classification [#29]
+
+* Remove dead error code in mwf.server [#31]
 
 ==============================================================================
 
