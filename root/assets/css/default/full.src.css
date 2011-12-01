@@ -236,39 +236,52 @@ div.button-full a.button-light:active{
 /********************************************************
  * FORM
  *******************************************************/
-.form,
-.form .first,
-.form > *:first-child {
+form {
+    border-radius: .5em;
+}
+
+form,
+form .first,
+form > *:first-child {
     border-top-left-radius: .5em;
     border-top-right-radius: .5em;
 }
 
-.form,
-.form.full .last,
-.form.full > *:last-child {
+form,
+form.full .last {
     border-bottom-left-radius: .5em;
     border-bottom-right-radius: .5em;
 }
 
-.form input,
-.form textarea,
-.form select {
+form input,
+form textarea,
+form select {
     box-shadow: inset 0 0 3px #bbb;
     padding: 4px;
 }
 
 /* making control equal width */
-.form.full input,
-.form.full textarea,
-.form.full select {
+form.full input,
+form.full textarea,
+form.full select {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
 
-.form input[type="submit"],
-.form input[type="reset"],
-.form button {
+/* button */
+form input[type="submit"],
+form input[type="reset"],
+form button,
+form a.button,
+form input[type="submit"]:hover:disabled,
+form input[type="reset"]:hover:disabled,
+form button:hover:disabled,
+form a.button:hover.disabled,
+form input[type="submit"]:focus:disabled,
+form input[type="reset"]:focus:disabled,
+form button:focus:disabled,
+form a.button:focus.disabled {
     background: -moz-linear-gradient(#e4e7ee, #cfd5e1);
     background: -o-linear-gradient(top, #e4e7ee, #cfd5e1);
     background: -webkit-gradient(linear, left top, left bottom, from(#e4e7ee), to(#cfd5e1), color-stop(0.8, #cfd5e1));
@@ -278,54 +291,78 @@ div.button-full a.button-light:active{
     text-shadow: 0 1px 1px #fff;
 }
 
-.form input[type="submit"]:hover,
-.form input[type="reset"]:hover,
-.form button:hover,
-.form input[type="submit"]:focus,
-.form input[type="reset"]:focus,
-.form button:focus{
+form input[type="submit"]:hover,
+form input[type="reset"]:hover,
+form button:hover,
+form a.button:hover,
+form input[type="submit"]:focus,
+form input[type="reset"]:focus,
+form button:focus,
+form a.button:focus {
     background: -moz-linear-gradient(#cfd5e1, #bcc5d5);
     background: -o-linear-gradient(top, #cfd5e1, #bcc5d5);
     background: -webkit-gradient(linear, left top, left bottom, from(#cfd5e1), to(#bcc5d5), color-stop(0.8, #bcc5d5));
     background: linear-gradient(#cfd5e1, #bcc5d5);
 }
 
-.form input[type="submit"].primary,
-.form input[type="reset"].primary,
-.form button.primary {
+form input[type="submit"].primary,
+form input[type="reset"].primary,
+form button.primary,
+form a.button.primary,
+form input[type="submit"].primary:hover:disabled,
+form input[type="reset"].primary:hover:disabled,
+form button.primary:hover:disabled,
+form a.button.primary:hover.disabled,
+form input[type="submit"].primary:focus:disabled,
+form input[type="reset"].primary:focus:disabled,
+form button.primary:focus:disabled,
+form a.button.primary:focus.disabled {
     background: -moz-linear-gradient(#fcbe60, #faa422);
     background: -o-linear-gradient(top, #fcbe60, #faa422);
     background: -webkit-gradient(linear, left top, left bottom, from(#fcbe60), to(#faa422), color-stop(0.8, #faa422));
     background: linear-gradient(#fcbe60, #faa422);
 }
 
-.form input[type="submit"].primary:hover,
-.form input[type="reset"].primary:hover,
-.form button.primary:hover,
-.form input[type="submit"].primary:focus,
-.form input[type="reset"].primary:focus,
-.form button.primary:focus {
+form input[type="submit"].primary:hover,
+form input[type="reset"].primary:hover,
+form button.primary:hover,
+form a.button.primary:hover,
+form input[type="submit"].primary:focus,
+form input[type="reset"].primary:focus,
+form button.primary:focus,
+form a.button.primary:focus {
     background: -moz-linear-gradient(#faa422, #db8504);
     background: -o-linear-gradient(top, #faa422, #db8504);
     background: -webkit-gradient(linear, left top, left bottom, from(#faa422), to(#db8504), color-stop(0.8, #db8504));
     background: linear-gradient(#faa422, #db8504);
 }
 
-.form input[type="submit"].secondary,
-.form input[type="reset"].secondary,
-.form button.secondary {
+form input[type="submit"].secondary,
+form input[type="reset"].secondary,
+form button.secondary,
+form a.button.secondary,
+form input[type="submit"].secondary:hover:disabled,
+form input[type="reset"].secondary:hover:disabled,
+form button.secondary:hover:disabled,
+form a.button.secondary:hover.disabled,
+form input[type="submit"].secondary:focus:disabled,
+form input[type="reset"].secondary:focus:disabled,
+form button.secondary:focus:disabled,
+form a.button.secondary:focus.disabled {
     background: -moz-linear-gradient(#9caccf, #869ac5);
     background: -o-linear-gradient(top, #9caccf, #869ac5);
     background: -webkit-gradient(linear, left top, left bottom, from(#9caccf), to(#869ac5), color-stop(0.8, #869ac5));
     background: linear-gradient(#9caccf, #869ac5);
 }
 
-.form input[type="submit"].secondary:hover,
-.form input[type="reset"].secondary:hover,
-.form button.secondary:hover,
-.form input[type="submit"].secondary:focus,
-.form input[type="reset"].secondary:focus,
-.form button.secondary:focus {
+form input[type="submit"].secondary:hover,
+form input[type="reset"].secondary:hover,
+form button.secondary:hover,
+form a.button.secondary:hover,
+form input[type="submit"].secondary:focus,
+form input[type="reset"].secondary:focus,
+form button.secondary:focus,
+form a.button.secondary:focus {
     background: -moz-linear-gradient(#869ac5, #7188bb);
     background: -o-linear-gradient(top, #869ac5, #7188bb);
     background: -webkit-gradient(linear, left top, left bottom, from(#869ac5), to(#7188bb), color-stop(0.8, #7188bb));

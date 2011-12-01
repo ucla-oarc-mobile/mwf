@@ -5,7 +5,7 @@
 .not-basic,
 .only-webkit,
 .only-full {
-	display: none;
+    display: none;
 }
 
 /********************************************************
@@ -20,7 +20,7 @@ body, html {
 
 body { 
     background-color: #ddd;
-    font:100%/1.25 Arial, Helvetica, sans-serif; 
+    font: 100%/1.25 Arial, Helvetica, sans-serif;
     font-size: .93em; 
     line-height: 1.5;
 }
@@ -127,8 +127,8 @@ p a {
 }
 
 input {
-     border: 1px solid #cccccc;
-     padding: 4px;
+    border: 1px solid #cccccc;
+    padding: 4px;
 }
 
 /********************************************************
@@ -168,7 +168,7 @@ input {
 .menu-full {
     width: 100%;
     font-size: 1.1em;
- }
+}
 
 .menu-full > h1 {
     background: #efefef;
@@ -228,7 +228,7 @@ Lists
 ------------------------------------------------*/
 
 .menu-full li a {
-     background:url(img/list-arrow.png) no-repeat 95% center; /* Controls menu items */
+    background:url(img/list-arrow.png) no-repeat 95% center; /* Controls menu items */
 }
 
 .menu-full li {
@@ -322,160 +322,385 @@ div.button-full a:active{
 /********************************************************
  * FORMS
  *******************************************************/
-.form {
+form {
     background-color: #fff;
-    padding-bottom: 10px;
+    padding-bottom: 1em;
 }
 
-/* form h1 heading */
-.form > h1 {
-    background: #efefef;
-    color: #000;
-    margin: 0 0 10px 0;
-    padding: .4em 0;
+/* ------------------------------------------------------
+ * form heading
+*/
+form > h1,
+form > h4 {
     text-align: center;
     border-bottom: 1px solid #ddd;
 }
 
-.form > h1.light {
+form > h1 {
+    background: #efefef;
+    color: #000;
+    padding: 0.5em 0 0.4em;
+}
+
+form > h1.light {
     background-color: #f6f6f6;
     color: #555;
 }
 
-.form > h1.blue {
+form > h1.blue {
     background-color: #809FE2;
     color: #fff;
 }
 
+form > h4 {
+    padding: 10px;
+    width: 100%;
+}
+
 /* general form controls */
-.form > fieldset {
+form > fieldset {
     border: 0;
 }
 
-.form > h4,
-.form > div,
-.form > fieldset,
-.form > p,
-.form > input,
-.form > select,
-.form > textarea,
-.form > label {
+form a.button {
+    text-align: center;
+}
+
+form > a.button,
+form > button,
+form > input,
+form > label,
+form > select,
+form > textarea {
     margin-left: 10px;
 }
 
-.form > label,
-.form > fieldset {
-    margin-top: 10px;
+/* ------------------------------------------------------
+ * form basic elements
+*/
+form label {
+    display: inline-block;
+    margin-top: 1em;
 }
 
-.form input,
-.form select,
-.form textarea {
+form input,
+form select,
+form textarea {
     border: 1px solid #CCC;
     font-size: 1em;
 }
 
-.form input,
-.form textarea {
+form input,
+form textarea {
     padding: 4px 0;
 }
 
-/* form buttons */
-.form input[type="submit"],
-.form input[type="reset"],
-.form button {
+form textarea {
+    font: 100%/1.25 Arial, Helvetica, sans-serif;
+    height: 4em;
+}
+
+form p {
+    margin-bottom: .5em;
+}
+
+/* ------------------------------------------------------
+ * form buttons
+*/
+form input[type="submit"],
+form input[type="reset"],
+form button,
+form a.button {
     background-color: #e4e7ee;
     border: 0;
     color: #000;
     cursor: pointer;
+    font: 100%/1.25 Arial, Helvetica, sans-serif;
     padding: 4px 10px;
 }
 
-.form input[type="submit"]:hover,
-.form input[type="reset"]:hover,
-.form button:hover,
-.form input[type="submit"]:focus,
-.form input[type="reset"]:focus,
-.form button:focus{
+form a.button {
+    display: inline-block;
+    padding: 4px 14px;
+}
+
+form input[type="submit"]:disabled,
+form input[type="reset"]:disabled,
+form button:disabled,
+form a.button.disabled {
+    color: #888;
+    cursor: default;
+}
+
+form input[type="submit"]:hover:disabled,
+form input[type="reset"]:hover:disabled,
+form button:hover:disabled,
+form a.button:hover.disabled,
+form input[type="submit"]:focus:disabled,
+form input[type="reset"]:focus:disabled,
+form button:focus:disabled,
+form a.button:focus.disabled {
+    background-color: #e4e7ee;
+}
+
+form input[type="submit"]:hover,
+form input[type="reset"]:hover,
+form button:hover,
+form a.button:hover,
+form input[type="submit"]:focus,
+form input[type="reset"]:focus,
+form button:focus,
+form a.button:focus {
     background-color: #cfd5e1;
 }
 
-.form input[type="submit"].primary,
-.form input[type="reset"].primary,
-.form button.primary {
+form input[type="submit"].primary,
+form input[type="reset"].primary,
+form button.primary,
+form a.button.primary,
+form input[type="submit"].primary:hover:disabled,
+form input[type="reset"].primary:hover:disabled,
+form button.primary:hover:disabled,
+form a.button.primary:hover.disabled,
+form input[type="submit"].primary:focus:disabled,
+form input[type="reset"].primary:focus:disabled,
+form button.primary:focus:disabled,
+form a.button.primary:focus.disabled {
     background-color: #fbaf3f;
 }
 
-.form input[type="submit"].primary:hover,
-.form input[type="reset"].primary:hover,
-.form button.primary:hover,
-.form input[type="submit"].primary:focus,
-.form input[type="reset"].primary:focus,
-.form button.primary:focus {
-    background-color: #faa422;
+form input[type="submit"].primary:hover,
+form input[type="reset"].primary:hover,
+form button.primary:hover,
+form a.button.primary:hover,
+form input[type="submit"].primary:focus,
+form input[type="reset"].primary:focus,
+form button.primary:focus,
+form a.button.primary:focus {
+    background-color: #ffb300;
 }
 
-.form input[type="submit"].secondary,
-.form input[type="reset"].secondary,
-.form button.secondary {
+form input[type="submit"].secondary,
+form input[type="reset"].secondary,
+form button.secondary,
+form a.button.secondary,
+form input[type="submit"].secondary:hover:disabled,
+form input[type="reset"].secondary:hover:disabled,
+form button.secondary:hover:disabled,
+form a.button.secondary:hover.disabled,
+form input[type="submit"].secondary:focus:disabled,
+form input[type="reset"].secondary:focus:disabled,
+form button.secondary:focus:disabled,
+form a.button.secondary:focus.disabled {
     background-color: #9caccf;
 }
 
-.form input[type="submit"].secondary:hover,
-.form input[type="reset"].secondary:hover,
-.form button.secondary:hover,
-.form input[type="submit"].secondary:focus,
-.form input[type="reset"].secondary:focus,
-.form button.secondary:focus {
+form input[type="submit"].secondary:hover,
+form input[type="reset"].secondary:hover,
+form button.secondary:hover,
+form a.button.secondary:hover,
+form input[type="submit"].secondary:focus,
+form input[type="reset"].secondary:focus,
+form button.secondary:focus,
+form a.button.secondary:focus {
     background-color: #869ac5;
 }
 
-/* full width form */
-.form.full {
+/* ------------------------------------------------------
+ * full width form
+*/
+form.full {
     padding-right: 20px;
 }
 
-.form.full > * {
-    display: block;
-    width: 100%;
-}
-
-.form.full > h1 {
+form.full > h1 {
     padding-left: 10px;
     padding-right: 10px;
 }
 
-.form.full input[type="submit"],
-.form.full input[type="reset"],
-.form.full button {
-    margin-top: .8em;
+form.full div,
+form.full h1,
+form.full p,
+form.full a.button,
+form.full fieldset,
+form.full input[type="password"],
+form.full input[type="reset"],
+form.full input[type="submit"],
+form.full input[type="text"],
+form.full select,
+form.full textarea {
+    display: block;
+    width: 100%;
 }
 
-/* form control alignment */
-.text-left > *,
-.text-left {
-    text-align: left;
+form.full .last {
+    border-bottom: none;
 }
 
-.text-center > *,
-.text-center {
-    text-align: center;
+form.full input[type="checkbox"],
+form.full input[type="radio"] {
+    margin-top: .5em;
 }
 
-.text-right > *,
-.text-right {
+form.full input[type="checkbox"],
+form.full input[type="radio"],
+form.full .option > label, 
+form.full label.option {
+    display: inline;
+    width: auto;
+}
+
+form.full > div,
+form.full > fieldset,
+form.full > p {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+/* ------------------------------------------------------
+ * full form text and label alignment
+*/
+form.full.text-center label,
+form.full.text-left label,
+form.full.text-right label,
+form.full fieldset.text-center label,
+form.full fieldset.text-left label,
+form.full fieldset.text-right label,
+form.full label.text-center,
+form.full label.text-left,
+form.full label.text-right {
+    display: block;
+    width: 100%;
+}
+
+/* ------------------------------------------------------
+ * full form option alignment
+*/
+form.full .option {
+    padding: 0 0 0 10px;
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+form.full .option.right {
     text-align: right;
 }
 
-/* individual form control styling */
-.form > label {
-    font-size: .9em;
-    color: #777;
+form.full .option.justify input[type="checkbox"],
+form.full .option.justify input[type="radio"]{
+    float: right;
 }
 
-.form textarea {
-    height: 4em;
+/* ------------------------------------------------------
+ * full form button
+*/
+form.full a.button {
+    padding: 4px 0;
 }
+
+form.full input[type="reset"],
+form.full input[type="submit"],
+form.full a.button {
+    margin-top: 10px;
+}
+
+/* ------------------------------------------------------
+ * required label
+*/
+form label.required {
+    background: transparent url('img/astrisk.png') no-repeat top right;
+    padding-right: 10px;
+}
+
+/* ------------------------------------------------------
+ * invalid
+*/
+form .invalid {
+    color: #a00;
+}
+
+form p.invalid {
+    background: transparent url('img/invalid.png') no-repeat 12px 4px;
+    border-bottom: none;
+    padding: 0 0 0 30px;
+    margin-bottom: 0;
+    width: auto;
+}
+
+form input[type="password"].invalid,
+form input[type="text"].invalid,
+form select.invalid,
+form textarea.invalid {
+    border: 1px solid #a00;
+}
+
+/* ------------------------------------------------------
+ * date selection
+*/
+form.full .date-field,
+form.full .month-field,
+form.full .week-field {
+    border-bottom: none;
+    padding: 0 0 0 10px;
+    margin-bottom: 0;
+}
+
+form.full .date-field select,
+form.full .month-field select,
+form.full .week-field select {
+    display: inline;
+    width: auto;
+}
+
+/* ------------------------------------------------------
+ * multi level form
+*/
+.content-full form,
+.full form {
+    padding-left: 0;
+}
+
+.content-full > form,
+.full form {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.content-full > div > form > div,
+.content-full > div > form > fieldset,
+.content-full > div > form > p,
+.full > div > form > div,
+.full > div > form > fieldset,
+.full > div > form > p {
+    border-bottom: none;
+    padding: 0;
+}
+
+.content-full > div > form > fieldset,
+.full > div > form > fieldset{
+    padding-bottom: .5em;
+}
+
+.content-full > div > form.full,
+.full > div > form.full{
+    padding-right: 0;
+}
+
+.content-full > div > form > a.button,
+.content-full > div > form > button,
+.content-full > div > form > input,
+.content-full > div > form > label,
+.content-full > div > form > select,
+.content-full > div > form > textarea,
+.full > div > form > a.button,
+.full > div > form > button,
+.full > div > form > input,
+.full > div > form > label,
+.full > div > form > select,
+.full > div > form > textarea{
+    margin-left: 0;
+}
+
 
 /********************************************************
  * MESSAGES
@@ -538,7 +763,7 @@ div.button-full a:active{
     height: auto;
 }
 
- .content-elements p, .content-full p {
+.content-elements p, .content-full p {
     margin: 0;
 }
 
@@ -620,26 +845,26 @@ div.button-full a:active{
  *******************************************************/
 
 #footer {
-	font-size: 80%;
-	padding: 1em;
-	text-align: center;
+    font-size: 80%;
+    padding: 1em;
+    text-align: center;
 }
 
 #footer,
 #footer a,
 #footer a:visited,
 #footer a:hover {
-	color: #666666;
+    color: #666666;
 }
 
 #footer a,
 #footer a:visited {
-	text-decoration: none;
-	border-bottom: 1px solid #666666;
+    text-decoration: none;
+    border-bottom: 1px solid #666666;
 }
 
 #footer a:hover {
-	border-bottom: none;
+    border-bottom: none;
 }
 
 /********************************************************

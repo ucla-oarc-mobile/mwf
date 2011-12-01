@@ -250,14 +250,18 @@ div.button-full.button-light a {
 /********************************************************
  * FORM
  *******************************************************/
-.form {
+form {
     margin: 10px 10px 0 10px;
 }
 
-.form.not-padded {
+form.not-padded {
     margin: 0;
 }
 
+.content-padded form,
+.content form {
+    margin: 0;
+}
 
 /********************************************************
  * MESSAGES
