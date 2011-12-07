@@ -13,7 +13,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110901
+ * @version 20111207
  *
  * @uses Classification
  * @uses CSS
@@ -72,19 +72,19 @@ $load_compat = !isset($_GET['lean']);
  * Load all basic.css stylesheets under the default and custom directories.
  */
 
-require_once(dirname(__FILE__).'/css/default/basic.css');
-
 if($load_compat)
     require_once(dirname(__FILE__).'/css/default/basic-compat.css');
 
-foreach($custom as $dir)
-    if(file_exists(dirname(__FILE__).'/css/'.$dir.'/basic.css'))
-        include_once(dirname(__FILE__).'/css/'.$dir.'/basic.css');
+require_once(dirname(__FILE__).'/css/default/basic.css');
 
 if($load_compat)
     foreach($custom as $dir)
         if(file_exists(dirname(__FILE__).'/css/'.$dir.'/basic-compat.css'))
             include_once(dirname(__FILE__).'/css/'.$dir.'/basic-compat.css');
+
+foreach($custom as $dir)
+    if(file_exists(dirname(__FILE__).'/css/'.$dir.'/basic.css'))
+        include_once(dirname(__FILE__).'/css/'.$dir.'/basic.css');
 
 /**
  * Load all standard.css stylesheets under the default and custom directories.
@@ -92,19 +92,19 @@ if($load_compat)
 
 if(Classification::is_standard())
 {
-    require_once(dirname(__FILE__).'/css/default/standard.css');
-    
     if($load_compat)
         require_once(dirname(__FILE__).'/css/default/standard-compat.css');
     
-    foreach($custom as $dir)
-        if(file_exists(dirname(__FILE__).'/css/'.$dir.'/standard.css'))
-            include_once(dirname(__FILE__).'/css/'.$dir.'/standard.css');
+    require_once(dirname(__FILE__).'/css/default/standard.css');
     
     if($load_compat)
         foreach($custom as $dir)
             if(file_exists(dirname(__FILE__).'/css/'.$dir.'/standard-compat.css'))
                 include_once(dirname(__FILE__).'/css/'.$dir.'/standard-compat.css');
+    
+    foreach($custom as $dir)
+        if(file_exists(dirname(__FILE__).'/css/'.$dir.'/standard.css'))
+            include_once(dirname(__FILE__).'/css/'.$dir.'/standard.css');
 }
 
 /**
@@ -113,19 +113,19 @@ if(Classification::is_standard())
 
 if(Classification::is_full())
 {
-    require_once(dirname(__FILE__).'/css/default/full.css');
-    
     if($load_compat)
         require_once(dirname(__FILE__).'/css/default/full-compat.css');
     
-    foreach($custom as $dir)
-        if(file_exists(dirname(__FILE__).'/css/'.$dir.'/full.css'))
-            include_once(dirname(__FILE__).'/css/'.$dir.'/full.css');
+    require_once(dirname(__FILE__).'/css/default/full.css');
     
     if($load_compat)
         foreach($custom as $dir)
             if(file_exists(dirname(__FILE__).'/css/'.$dir.'/full-compat.css'))
                 include_once(dirname(__FILE__).'/css/'.$dir.'/full-compat.css');
+    
+    foreach($custom as $dir)
+        if(file_exists(dirname(__FILE__).'/css/'.$dir.'/full.css'))
+            include_once(dirname(__FILE__).'/css/'.$dir.'/full.css');
 }
 
 /**
