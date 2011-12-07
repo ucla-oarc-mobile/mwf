@@ -9,7 +9,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110619
+ * @version 20111207
  *
  * @uses Decorator
  */
@@ -37,10 +37,35 @@ class Site_Decorator extends Decorator
      */
     public static function factory($name, $args = array())
     {
+        $name = strtolower($name);
+        // Deprecated support for old decorators
+        switch($name)
+        {
+            case 'button_full':
+                self::_throw_deprecated_object_error('button_full', 'button');
+                $name = 'button';
+                break;
+            
+            case 'content_full':
+                self::_throw_deprecated_object_error('content_full', 'content');
+                $name = 'content';
+                break;
+            
+            case 'menu_full':
+                self::_throw_deprecated_object_error('menu_full', 'menu');
+                $name = 'menu';
+                break;
+        }
+        
         require_once(dirname(__FILE__).'/site/'.$name.'.class.php');
         $class = $name.'_Site_Decorator';
         $refl = new ReflectionClass($class);
         return $refl->hasMethod('__construct') ? $refl->newInstanceArgs($args) : new $class();
+    }
+    
+    private static function _throw_deprecated_object_error($old, $new)
+    {
+        trigger_error('Site decorator object "'.$old.'" is deprecated and "'.$new.'" should be used instead', E_USER_NOTICE);
     }
 
     /**
