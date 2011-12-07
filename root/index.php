@@ -78,7 +78,7 @@ echo HTML_Decorator::html_start()->render();
 
 echo Site_Decorator::head()->set_title(Config::get('global', 'title_text'))->render();
 
-echo HTML_Decorator::body_start($main_menu ? array('class'=>'front-page') : array())->render();
+echo HTML_Decorator::body_start($main_menu ? array('class'=>'front') : array())->render();
 
 /*
  * Header
@@ -93,10 +93,10 @@ else
  * Menu
  */
 
-$menu = Site_Decorator::menu_full()->set_padded()->set_detailed();
+$menu = Site_Decorator::menu()->set_padded()->set_detailed();
 
 if($main_menu)
-    $menu->add_class('menu-front');
+    $menu->add_class('front');
 
 for($i = 0; $i < count($menu_items); $i++)
 {
@@ -119,7 +119,7 @@ echo $menu->render();
  */
 
 if(!$main_menu)
-    echo Site_Decorator::button_full()
+    echo Site_Decorator::button()
                 ->set_padded()
                 ->add_option(Config::get('global', 'back_to_home_text'), 'index.php')
                 ->render();
