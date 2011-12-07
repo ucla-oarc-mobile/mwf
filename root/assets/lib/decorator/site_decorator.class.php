@@ -63,6 +63,11 @@ class Site_Decorator extends Decorator
         return $refl->hasMethod('__construct') ? $refl->newInstanceArgs($args) : new $class();
     }
     
+    /**
+     *
+     * @param string $old
+     * @param string $new 
+     */
     private static function _throw_deprecated_object_error($old, $new)
     {
         trigger_error('Site decorator object "'.$old.'" is deprecated and "'.$new.'" should be used instead', E_USER_NOTICE);
@@ -71,7 +76,20 @@ class Site_Decorator extends Decorator
     /**
      *
      * @compat < PHP 5.3
-     * @return Button_Full_Site_Decorator
+     * @deprecated
+     * @return Button_Site_Decorator
+     */
+    public static function button()
+    {
+        $args = func_get_args();
+        return self::factory(__FUNCTION__, $args);
+    }
+
+    /**
+     *
+     * @compat < PHP 5.3
+     * @deprecated
+     * @return Button_Site_Decorator
      */
     public static function button_full()
     {
@@ -126,7 +144,19 @@ class Site_Decorator extends Decorator
     /**
      *
      * @compat < PHP 5.3
-     * @return Content_Full_Site_Decorator
+     * @return Content_Site_Decorator
+     */
+    public static function content()
+    {
+        $args = func_get_args();
+        return self::factory(__FUNCTION__, $args);
+    }
+
+    /**
+     *
+     * @compat < PHP 5.3
+     * @deprecated
+     * @return Content_Site_Decorator
      */
     public static function content_full()
     {
@@ -137,7 +167,19 @@ class Site_Decorator extends Decorator
     /**
      *
      * @compat < PHP 5.3
-     * @return Menu_Full_Site_Decorator
+     * @return Menu_Site_Decorator
+     */
+    public static function menu()
+    {
+        $args = func_get_args();
+        return self::factory(__FUNCTION__, $args);
+    }
+
+    /**
+     *
+     * @compat < PHP 5.3
+     * @deprecated
+     * @return Menu_Site_Decorator
      */
     public static function menu_full()
     {
