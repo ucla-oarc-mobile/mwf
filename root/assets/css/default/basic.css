@@ -271,6 +271,7 @@ input, textarea, select {
 .menu {
     width: 100%;
     font-size: 1.1em;
+    font-weight: bold;
 }
  
 .menu > h1 {
@@ -281,7 +282,7 @@ input, textarea, select {
     border-bottom: 1px solid #ddd;
 }
 
-.menu li > p {
+.menu li p {
     font-weight: normal;
 }
 
