@@ -24,6 +24,7 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator
     private $_detailed = null;
     private $_title = false;
     private $_list = array();
+    private $_align = false;
 
     public function __construct($title = false, $params = array())
     {
@@ -42,6 +43,24 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator
     public function &set_detailed($val = true)
     {
         $this->_detailed = $val ? true : false;
+        return $this;
+    }
+    
+    public function set_center_aligned()
+    {
+        $this->_align = 'center';
+        return $this;
+    }
+    
+    public function set_left_aligned()
+    {
+        $this->_align = 'left';
+        return $this;
+    }
+    
+    public function set_right_aligned()
+    {
+        $this->_align = 'right';
         return $this;
     }
 
@@ -104,6 +123,9 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator
             $this->add_class('padded');
         elseif($this->_padded === false)
             $this->remove_class('padded');
+        
+        if($this->_align)
+            $this->add_class($this->_align);
 
         $list = '';
         if($count > 0)

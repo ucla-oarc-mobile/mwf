@@ -197,7 +197,7 @@ input, textarea, select {
  */
  
 /**
- * General
+ * Shared [TODO: Merge styles where possible]
  */
 
  .content img, .menu img, .button img {
@@ -208,7 +208,6 @@ input, textarea, select {
 /**
  * Content
  */
-
 
 .content {
     width: 100%;
@@ -337,13 +336,34 @@ input, textarea, select {
     color: #555;
 }
 
+.menu.left li,
 .menu.detailed li {
-    font-size: 1em;
     text-align: left;
 }
 
-.menu.detailed li a, 
-.menu.detailed li p
+.menu.left li a {
+    padding-left: .9em;
+}
+
+.menu.center li {
+    text-align: center;
+}
+
+.menu.right li {
+    text-align: right;
+}
+
+.menu.right li a,
+.menu.right.detailed li a {
+    padding-right: 3.5em;
+}
+
+.menu.detailed li {
+    font-size: 1em;
+}
+
+.menu.detailed li > a, 
+.menu.detailed li > p
 {
     padding: .9em 2em .8em .9em;
 }
@@ -381,21 +401,6 @@ div.button a:active{
     background-color: #ffb300;
     color: #494D69;
 }
-
-/****************************************************************************
- * Page Descriptors
- */
-
-/**
- * Padded
- */
-
-
-
-/**
- * Light
- */
-
 
 /****************************************************************************
  * Special Styles
