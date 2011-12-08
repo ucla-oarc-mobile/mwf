@@ -57,6 +57,11 @@ echo Site_Decorator::content()
             ->add_section('Text')
             ->render();
 
+echo Site_Decorator::content()
+            ->add_paragraph('Text')
+            ->add_section('Text')
+            ->render();
+
 echo Site_Decorator::menu()
             ->set_title('Menu')
             ->render();
@@ -246,6 +251,12 @@ echo Site_Decorator::content()
 echo Site_Decorator::content()
             ->set_padded()
             ->add_header_light('Content Padded Light')
+            ->add_paragraph('Text')
+            ->add_section('Text')
+            ->render();
+
+echo Site_Decorator::content()
+            ->set_padded()
             ->add_paragraph('Text')
             ->add_section('Text')
             ->render();

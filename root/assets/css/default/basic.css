@@ -231,6 +231,7 @@ input, textarea, select {
 
 .content > h1.light {
     background-color: #f9f9f9;
+    color: #555;
 }
 
 .content > h1.blue {
