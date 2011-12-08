@@ -71,7 +71,7 @@ echo Site_Decorator::header()
         ->set_title('MWF Device')
         ->render();
 
-echo Site_Decorator::content_full()
+echo Site_Decorator::content()
             ->set_padded()
             ->add_header('The Framework')
             ->add_subheader('Server Info')
@@ -113,7 +113,7 @@ echo Site_Decorator::content_full()
             ->add_section(label('Screen::get_pixel_ratio()').text2text(Screen::get_pixel_ratio()))
             ->render();
 
-echo Site_Decorator::button_full()
+echo Site_Decorator::button()
                 ->set_padded()
                 ->add_option(Config::get('global', 'back_to_home_text'), Config::get('global', 'site_url'))
                 ->render();

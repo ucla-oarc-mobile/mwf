@@ -9,7 +9,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110620
+ * @version 20111207
  *
  * @uses Decorator
  * @uses Tag_HTML_Decorator
@@ -18,7 +18,7 @@
 require_once(dirname(dirname(dirname(__FILE__))).'/decorator.class.php');
 require_once(dirname(dirname(__FILE__)).'/html/tag.class.php');
 
-class Button_Full_Site_Decorator extends Tag_HTML_Decorator
+class Button_Site_Decorator extends Tag_HTML_Decorator
 {
     private $_options = array();
     private $_options_count = 0;
@@ -27,16 +27,16 @@ class Button_Full_Site_Decorator extends Tag_HTML_Decorator
     public function __construct($params = array())
     {
         parent::__construct('div', false, $params);
-        $this->add_class('button-full');
+        $this->add_class('button');
         $this->set_maximum(2);
     }
     
     public function &set_padded($val = true)
     {
         if($val)
-            $this->add_class('button-padded');
+            $this->add_class('padded');
         else
-            $this->remove_class('button-padded');
+            $this->remove_class('padded');
         
         return $this;
     }
@@ -59,7 +59,7 @@ class Button_Full_Site_Decorator extends Tag_HTML_Decorator
     public function &set_option_light($num, $name = false, $url = false, $params = array())
     {
         $this->set_option($num, $name, $url, $params);
-        $this->_options[$this->_options_count-1]->add_class('button-light');
+        $this->_options[$this->_options_count-1]->add_class('light');
         return $this;
     }
 
@@ -87,9 +87,6 @@ class Button_Full_Site_Decorator extends Tag_HTML_Decorator
         
         if(count($this->_options) == 0)
             return '';
-
-        $this->_options[0]->add_class('button-first');
-        $this->_options[$this->_options_count-1]->add_class('button-last');
 
         $options = '';
         foreach($this->_options as $option)

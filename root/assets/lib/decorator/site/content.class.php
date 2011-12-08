@@ -9,7 +9,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110518
+ * @version 20111207
  *
  * @uses Decorator
  * @uses Tag_HTML_Decorator
@@ -18,14 +18,14 @@
 require_once(dirname(dirname(dirname(__FILE__))).'/decorator.class.php');
 require_once(dirname(dirname(__FILE__)).'/html/tag.class.php');
 
-class Content_Full_Site_Decorator extends Tag_HTML_Decorator
+class Content_Site_Decorator extends Tag_HTML_Decorator
 {
     private $_padded = false;
 
     public function __construct($inner = array(), $params = array())
     {
         parent::__construct('div', $inner, $params);
-        $this->add_class('content-full');
+        $this->add_class('content');
     }
 
     public function &set_padded($val = true)
@@ -67,7 +67,7 @@ class Content_Full_Site_Decorator extends Tag_HTML_Decorator
     public function render()
     {
         if($this->_padded)
-            $this->add_class('content-padded');
+            $this->add_class('padded');
 
         return parent::render();
     }
