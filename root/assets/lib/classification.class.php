@@ -113,7 +113,7 @@ class Classification
     public static function parse($capabilities)
     {
         include_once(dirname(__FILE__).'/json.php');
-        return json_decode(stripslashes($capabilities));
+        return json_decode($capabilities);
     }
     
     /**

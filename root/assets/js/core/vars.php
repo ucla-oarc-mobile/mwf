@@ -45,10 +45,6 @@ if (isset($cookies['classification']))
 else
     $classification_cookie_var = 'false';
 
-$domain_var = Config::get('global', 'cookie_domain');
-if ($domain_var && substr($domain_var, 0, 1) == '.')
-    $domain_var = substr($domain_var, 1);
-
 $domain_var = Config::get('global', 'site_assets_url');
 if (($pos = strpos($domain_var, '//')) !== false)
     $domain_var = substr($domain_var, $pos + 2);
