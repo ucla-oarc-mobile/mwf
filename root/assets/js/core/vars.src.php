@@ -133,7 +133,7 @@ mwf.site=new function(){
 
                 if(!this.domain || !mwf.site.cookie.domain) {
 
-                    _is_same_origin = true;
+                    _isSameOrigin = true;
 
                 } else{
 
