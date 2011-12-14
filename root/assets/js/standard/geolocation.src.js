@@ -51,7 +51,6 @@ mwf.touch.geolocation = new function()
     
     this.getApi = function()
     {
-        var geo;
         switch(this.getType())
         {
             case 1:
