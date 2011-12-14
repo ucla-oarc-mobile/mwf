@@ -33,7 +33,7 @@ test("mwf.touch.geolocation.isSupported()", function() {
 test("mwf.touch.geolocation.getPosition(onSuccess,onError)", function() {
     expect(3);
     QUnit.config.testTimeout = 5000;
-    stop();
+    QUnit.stop();
     mwf.touch.geolocation.getPosition(function(pos) {
         equal(typeof pos['latitude'], 'number', 'latitude should be a number');
         equal(typeof pos['longitude'], 'number', 'longitude should be a number');
@@ -48,7 +48,7 @@ test("mwf.touch.geolocation.getPosition(onSuccess,onError)", function() {
 test("mwf.touch.geolocation.getPosition(onSuccess)", function() {
     expect(3);
     QUnit.config.testTimeout = 5000;
-    stop();
+    QUnit.stop();
     mwf.touch.geolocation.getPosition(function(pos) {
         equal(typeof pos['latitude'], 'number', 'latitude should be a number');
         equal(typeof pos['longitude'], 'number', 'longitude should be a number');
@@ -64,4 +64,26 @@ test("mwf.touch.geolocation.setTimeout()", function() {
 
 test("mwf.touch.geolocation.setHighAccuracy()", function() {
     equal(typeof mwf.touch.geolocation.setHighAccuracy(true), 'undefined', 'setter should not return a value');
+})
+
+test("mwf.touch.geolocation.getApi()", function() {
+    equal(Object.prototype.toString.call(mwf.touch.geolocation.getApi()), "[object Geolocation]", 'modern phones support navigator.geolocation');
+})
+
+test("mwf.touch.geolocation.watchPosition()", function() {
+    expect(4);
+    QUnit.config.testTimeout = 5000;
+    QUnit.stop();
+    var watchId = mwf.touch.geolocation.watchPosition(function(pos) {
+        equal(typeof pos['latitude'], 'number', 'latitude should be a number');
+        equal(typeof pos['longitude'], 'number', 'longitude should be a number');
+        equal(typeof pos['accuracy'], 'number', 'accuracy should be a number');
+        start();
+    });
+    equal(typeof watchId, 'number', 'watchId should be a number');  
+    mwf.touch.geolocation.clearWatch(watchId);
+})
+
+test("mwf.touch.geolocation.clearWatch()", function() {
+    equal(typeof mwf.touch.geolocation.clearWatch(1),'undefined', 'clearWatch() should not return a value');
 })
