@@ -49,8 +49,12 @@ mwf.decorator.Button = function(label, url, callback)
     //Set the button's visible text.
     button.innerHTML = label;
     
-    //Set the button url.
-    button.href = url;
+    //Prevent href='undefined' scenario.
+    if(url)
+    {
+        //Set the button url.
+        button.href = url;
+    }
 
     //If button's callback is set, then set the <a>'s onclick property.
     if(callback)
