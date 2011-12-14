@@ -103,16 +103,10 @@
 			interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-	[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-	if ((toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft) || 
-        (toInterfaceOrientation == UIInterfaceOrientationLandscapeRight))
-    {
-		[_webView stringByEvaluatingJavaScriptFromString:@"document.body.setAttribute('style','width:'+mwf.screen.getHeight()+'px');"]; 
-    }else{
-		[_webView stringByEvaluatingJavaScriptFromString:@"document.body.setAttribute('style','width:'+mwf.screen.getWidth()+'px');"]; 
-    }
+	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+	[_webView stringByEvaluatingJavaScriptFromString:@"var e = document.createEvent('Events'); e.initEvent('orientationchange', true, false); document.dispatchEvent(e);"];
 }
 
 /*
