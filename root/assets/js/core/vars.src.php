@@ -45,10 +45,6 @@ if (isset($cookies['classification']))
 else
     $classification_cookie_var = 'false';
 
-$domain_var = Config::get('global', 'cookie_domain');
-if ($domain_var && substr($domain_var, 0, 1) == '.')
-    $domain_var = substr($domain_var, 1);
-
 $domain_var = Config::get('global', 'site_assets_url');
 if (($pos = strpos($domain_var, '//')) !== false)
     $domain_var = substr($domain_var, $pos + 2);
@@ -62,129 +58,136 @@ var mwf=new function(){};
 
 mwf.site=new function(){
 
-this.root = '<?php echo HTTPS::is_https() ? HTTPS::convert_path(Config::get('global', 'site_url')) : Config::get('global', 'site_url'); ?>';
+    this.root = '<?php echo HTTPS::is_https() ? HTTPS::convert_path(Config::get('global', 'site_url')) : Config::get('global', 'site_url'); ?>';
 
-this.asset = new function(){
+    this.asset = new function(){
 
-this.root = '<?php echo HTTPS::is_https() ? HTTPS::convert_path(Config::get('global', 'site_assets_url')) : Config::get('global', 'site_assets_url'); ?>';
+        this.root = '<?php echo HTTPS::is_https() ? HTTPS::convert_path(Config::get('global', 'site_assets_url')) : Config::get('global', 'site_assets_url'); ?>';
 
-};
-
-this.cookie = new function(){
-
-this.prefix = '<?php echo Config::get('global', 'cookie_prefix'); ?>';
-this.domain = <?php echo '\'' . $domain_var . '\''; ?>;
-this.exists = function(e){
-var cookies = <?php echo $existing_cookies_var; ?>;
-for(var i=0; i<cookies.length; i++)
-    if(cookies[i] == e) return true;
-    return false;
     };
-    this.override = <?php echo $override_cookie_var; ?>;
-    this.classification = <?php echo $classification_cookie_var; ?>;
+
+    this.cookie = new function(){
+
+        this.prefix = '<?php echo Config::get('global', 'cookie_prefix'); ?>';
+
+        this.domain = <?php echo '\'' . $domain_var . '\''; ?>;
+
+        this.exists = function(e){
+
+            var cookies = <?php echo $existing_cookies_var; ?>;
+
+            for(var i=0; i<cookies.length; i++)
+                if(cookies[i] == e) return true;
+
+            return false;
+        };
+
+        this.override = <?php echo $override_cookie_var; ?>;
+
+        this.classification = <?php echo $classification_cookie_var; ?>;
 
     };
 
     this.analytics = new function(){
 
-    this.key = <?php echo (Config::get('analytics', 'account') ? ('\'' . Config::get('analytics', 'account') . '\'') : 'null') ?>;
+        this.key = <?php echo (Config::get('analytics', 'account') ? ('\'' . Config::get('analytics', 'account') . '\'') : 'null') ?>;
 
     };
 
     this.mobile = new function(){
 
-    this.maxWidth = <?php echo (Config::get('mobile', 'max_width') ? Config::get('mobile', 'max_width') : 799) ?>;
-    this.maxHeight = <?php echo (Config::get('mobile', 'max_height') ? Config::get('mobile', 'max_height') : 599) ?>;
+        this.maxWidth = <?php echo (Config::get('mobile', 'max_width') ? Config::get('mobile', 'max_width') : 799) ?>;
+        this.maxHeight = <?php echo (Config::get('mobile', 'max_height') ? Config::get('mobile', 'max_height') : 599) ?>;
 
     };
 
     this.local = new function(){
 
-    this.domain = (function(){ 
-    var p = document.URL, i;
+        this.domain = (function(){
 
-    if((i = p.indexOf('://')) !== false)
-    p = p.substring(i+3);
-    else if((i = p.indexOf('//')) === 0)
-    p = p.substring(2);
+            var p = document.URL, i;
 
-    if((i = p.indexOf('/')) > -1)
-    p = p.substring(0, i);
+            if((i = p.indexOf('://')) !== false)
+                p = p.substring(i+3);
+            else if((i = p.indexOf('//')) === 0)
+                p = p.substring(2);
 
-    if((i = p.indexOf(':')) > -1)
-    p = p.substring(0, i);
+            if((i = p.indexOf('/')) > -1)
+                p = p.substring(0, i);
 
-    if((i = p.indexOf('.')) == 0)
-    p = p.substring(1);
+            if((i = p.indexOf(':')) > -1)
+                p = p.substring(0, i);
 
-    return p;
+            if((i = p.indexOf('.')) == 0)
+                p = p.substring(1);
 
-    })();
+            return p;
 
-    var _isSameOrigin = null;
+        })();
 
-    this.isSameOrigin = function(){
+        var _isSameOrigin = null;
 
-    if(_isSameOrigin === null) {
+        this.isSameOrigin = function(){
 
-    if(!this.domain || !mwf.site.cookie.domain) {
+            if(_isSameOrigin === null) {
 
-    _is_same_origin = true;
+                if(!this.domain || !mwf.site.cookie.domain) {
 
-    } else{
+                    _is_same_origin = true;
 
-    var serviceProvider = "."+mwf.site.cookie.domain.toLowerCase();
-    var contentProvider = "."+this.domain.toLowerCase();
+                } else{
 
-    _isSameOrigin = contentProvider.substring(contentProvider.length - serviceProvider.length, serviceProvider.length) == serviceProvider;
+                    var serviceProvider = "."+mwf.site.cookie.domain.toLowerCase();
+                    var contentProvider = "."+this.domain.toLowerCase();
 
-    }
-    }
+                    _isSameOrigin = contentProvider.substring(contentProvider.length - serviceProvider.length, serviceProvider.length) == serviceProvider;
 
-    return _isSameOrigin;
-    };
+                }
+            }
 
-    this.cookie = new function(){
+            return _isSameOrigin;
 
-    var cookies = document.cookie.split(';');
+        };
 
-    this.exists = function(e){
+        this.cookie = new function(){
 
-    return this.value(e) !== false;
+            var cookies = document.cookie.split(';');
 
-    };
+            this.exists = function(e){
 
-    this.value = function(e){
+                return this.value(e) !== false;
 
-    for(var i = 0; i < cookies.length; i++)
-    if(cookies[i].substr(0,cookies[i].indexOf("=")).replace(/^\s+|\s+$/g,"") == e)
-    return cookies[i].substr(cookies[i].indexOf("=")+1).replace(/^\s+|\s+$/g,"");
+            };
 
-    return false;
+            this.value = function(e){
 
-    };
+                for(var i = 0; i < cookies.length; i++)
+                    if(cookies[i].substr(0,cookies[i].indexOf("=")).replace(/^\s+|\s+$/g,"") == e)
+                        return cookies[i].substr(cookies[i].indexOf("=")+1).replace(/^\s+|\s+$/g,"");
 
-    };
+                return false;
+
+            };
+
+        };
 
     };
 
     // Deprecated
 
     this.domain=function(){
-
-    return this.local.domain;
-
+        return this.local.domain;
     };
 
     this.webroot=function(){
-    return this.root;
+        return this.root;
     };
 
     this.frontpage=function(){
-    return this.root+'/index.php';
+        return this.root+'/index.php';
     };
 
     this.webassetroot=function(){
-    return this.asset.root;
+        return this.asset.root;
     };
 };
