@@ -27,6 +27,10 @@ class HTML_Start_HTML_Decorator extends Tag_Open_HTML_Decorator {
         }
         parent::__construct('html', $params);
     }
+    
+    public function &add_appcache() {
+        return parent::set_param('manifest',Config::get('global','site_assets_url').'/appcache.php');
+    }
 
     public function render() {
         return '<!DOCTYPE html>
