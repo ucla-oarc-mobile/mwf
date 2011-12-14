@@ -184,7 +184,7 @@ mwf.userAgent = new function() {
     this.generateCookieContent = function(){
         
         var cookie = '{';
-        cookie += '"s":"'+navigator.userAgent.replace(/\;/g, '\\x3B').replace(/\,/g, '\\x2C')+'"';
+        cookie += '"s":"'+navigator.userAgent+'"';
         if(t = this.getOS())
             cookie += ',"os":"'+t+'"';
         if(t = this.getOSVersion())

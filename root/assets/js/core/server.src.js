@@ -107,7 +107,7 @@ mwf.server = new function(){
              * Write the cookie with the proper suffix for service provider.
              */
             
-            document.cookie = cookieName + '=' + cookieContent+';path=/';
+            document.cookie = cookieName + '=' + encodeURIComponent(cookieContent)+';path=/';
             
             /**
              * Must reload the page to propagate the cookie to SP.
