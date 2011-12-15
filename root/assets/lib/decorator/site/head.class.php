@@ -109,9 +109,10 @@ class Head_Site_Decorator extends Tag_HTML_Decorator
     private function _generate_url_param_string($params) {
         $rv = '?';
         foreach($params as $key=>$val) {
-            $rv .= is_int($key) ? htmlspecialchars($val).'&' : htmlspecialchars($key).'='.htmlspecialchars($val).'&';
+            $rv .= is_int($key) ? $val.'&' : $key.'='.$val.'&';
         }
-        return rtrim($rv,'?&');
+        $rv = rtrim($rv,'?&');
+        return htmlspecialchars($rv);
     }
     
     public function render()
