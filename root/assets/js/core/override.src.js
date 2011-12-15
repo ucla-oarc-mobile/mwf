@@ -10,7 +10,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111103
+ * @version 20111213
  *
  * @requires mwf
  * @requires mwf.site
@@ -116,7 +116,7 @@ mwf.override = new function(){
              */
             } else {
                 
-                window.location = mwf.site.asset.root+'/passthru.php?override='+requestedOverride+'&return='+encodeURIComponent(returnLocation);
+                window.location = mwf.site.asset.root+'/passthru.php?override='+requestedOverride+'&return='+encodeURIComponent(returnLocation)+'&mode='+mwf.browser.getMode();
                 
             }
             
