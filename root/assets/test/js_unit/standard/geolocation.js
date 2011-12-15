@@ -71,16 +71,8 @@ test("mwf.touch.geolocation.getApi()", function() {
 })
 
 test("mwf.touch.geolocation.watchPosition()", function() {
-    expect(4);
-    QUnit.config.testTimeout = 5000;
-    QUnit.stop();
-    var watchId = mwf.touch.geolocation.watchPosition(function(pos) {
-        equal(typeof pos['latitude'], 'number', 'latitude should be a number');
-        equal(typeof pos['longitude'], 'number', 'longitude should be a number');
-        equal(typeof pos['accuracy'], 'number', 'accuracy should be a number');
-        start();
-    });
-    equal(typeof watchId, 'number', 'watchId should be a number');  
+    watchId = mwf.touch.geolocation.watchPosition(function(pos) {});
+    equal(typeof watchId, 'number', 'watchPosition() should return a number');
     mwf.touch.geolocation.clearWatch(watchId);
 })
 
