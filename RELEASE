@@ -19,6 +19,7 @@ License:
 
 TABLE OF CONTENTS
 
+Version 1.2.09          December 14, 2011
 Version 1.2.08          November 30, 2011
 Version 1.2.07          November 11, 2011
 Version 1.2.06          November 9, 2011
@@ -36,6 +37,23 @@ Version 1.1.03.alpha    July 20, 2011
 Version 1.1.02.alpha    June 23, 2011
 Version 1.1.01.alpha    June 16, 2011
 Version 1.1.00.alpha    May 20, 2011
+
+==============================================================================
+
+Version 1.2.09
+December 14, 2011
+
+* Fix critical typo in mwf.site.local causing DTS infinite loop [#40]
+
+* Fix critical escaping in mwf.server/userAgent causing DTS infinite loop [#41]
+
+* Add quirks mode logic to passthru.php to avoid capabilities flip-flop [#40]
+
+* Fix bug in Head_Site_Decorator query string escaping logic [#42] 
+
+* Add appcache handler and extend Head_Site_Decorator to include it [#37/#39]
+
+* Add of watchPosition and clearWatch to geolocation API [#34/#35]
 
 ==============================================================================
 
