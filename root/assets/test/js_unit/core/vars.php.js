@@ -79,7 +79,8 @@ test("mwf.site.local.domain()", function()
 
 test("mwf.site.local.isSameOrigin()", function()
 {
-    //@todo: minimal test for isSameOrigin()
+    var isSameOrigin = mwf.site.local.isSameOrigin();
+    equal(typeof isSameOrigin, 'boolean', 'isSameOrigin() should return a boolean');
 })
 
 test("mwf.site.local.cookie.exists()", function()
