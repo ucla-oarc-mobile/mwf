@@ -46,21 +46,45 @@ mwf.decorator.Button = function(label, url, callback)
     //Create a new anchor element to represent the button.
     var button = document.createElement('a');
 
-    //Set the button's visible text.
-    button.innerHTML = label;
-    
-    //Prevent href='undefined' scenario.
-    if(url)
+    /**
+     * Sets a new label for this button. The label is what's visible to the
+     * front user and is encapsulated inside an anchor tag.
+     */
+    button.setLabel = function(label)
     {
-        //Set the button url.
-        button.href = url;
+        if(label)
+        {
+            this.innerHTML = label;
+        }
     }
-
-    //If button's callback is set, then set the <a>'s onclick property.
-    if(callback)
+    
+    /**
+     * Sets the URL for this button. The URL will be actually be the value of
+     * the href attribute of the underlying anchor tag. 
+     */
+    button.setURL = function(url)
     {
-        button.onclick = callback;
-    }    
+        if(url)
+        {
+            this.href = url;
+        }
+    }
+    
+    /**
+     * Sets the on click listener for this button. 
+     */
+    button.click = function(callback)
+    {
+        //If button's callback is set, then set the <a>'s onclick property.
+        if(callback)
+        {
+            button.onclick = callback;
+        }   
+    }
+    
+    button.setLabel(label);
+    button.setURL(url);
+    button.click(callback);
 
     mwf.decorator.addAttribute(button, new mwf.decorator.Attribute("Light",  true, "button-light"));
    
@@ -99,6 +123,12 @@ mwf.decorator.SingleButton = function(label, url, callback)
    mwf.decorator.addAttributes(container, attributes);
 
    /**
+    * Create a button to be contained inside the div tag. To access this button
+    * use getButton() method.
+    */
+   var button = mwf.decorator.Button(label, url, callback);
+   
+   /**
     * Returns the button within the container.
     */
    container.getButton = function()
@@ -106,11 +136,9 @@ mwf.decorator.SingleButton = function(label, url, callback)
        return button;
    }
    
-   /**
-    * Create a button to be contained inside the div tag. To access this button
-    * use getButton() method.
-    */
-   var button = mwf.decorator.Button(label, url, callback);
+   container.click    = button.click;
+   container.setLabel = button.setLabel;
+   container.setURL   = button.setURL;
    
    //Append the created button to the div container.
    container.appendChild(button);
@@ -118,6 +146,19 @@ mwf.decorator.SingleButton = function(label, url, callback)
    return container;
 }
 
+/**
+ * Convinience method designed to bypass the hassle with creating a DoubleButton
+ * with no callbacks, or URLs. The method takes only two parameters - the first
+ * button label, and the second button label. 
+ * 
+ * @param firstLabel     The visible label for the first button.
+ * @param secondLabel    The visible label for the second button.
+ */
+mwf.decorator.SimpleDoubleButton = function(firstLabel, secondLabel)
+{
+    return mwf.decorator.DoubleButton(firstLabel, null, null, 
+                                      secondLabel, null, null);
+}
 
 /**
  * Creates a double button with the provided labels, urls, and callbacks.
