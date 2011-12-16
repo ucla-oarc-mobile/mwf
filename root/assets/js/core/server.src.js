@@ -8,7 +8,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111108
+ * @version 20111213
  *
  * @requires mwf
  * @requires mwf.site
@@ -82,7 +82,7 @@ mwf.server = new function(){
         if(this.mustReload && !mwf.override.isRedirecting){
             document.location.reload();
         }else if(this.mustRedirect && !mwf.override.isRedirecting){
-            window.location = site.asset.root+'/passthru.php?return='+encodeURIComponent(window.location);
+            window.location = site.asset.root+'/passthru.php?return='+encodeURIComponent(window.location)+'&mode='+mwf.browser.getMode();
         }
         
     }
@@ -107,7 +107,7 @@ mwf.server = new function(){
              * Write the cookie with the proper suffix for service provider.
              */
             
-            document.cookie = cookieName + '=' + cookieContent+';path=/';
+            document.cookie = cookieName + '=' + encodeURIComponent(cookieContent)+';path=/';
             
             /**
              * Must reload the page to propagate the cookie to SP.

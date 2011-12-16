@@ -36,11 +36,13 @@ require_once(dirname(__FILE__).'/lib/user_agent.class.php');
 $ext = '.js';
 
 /**
- * Defines the file to be parsed as a Javascript file and sets a max cache life.
+ * Defines the file to be parsed as a Javascript file and restricts online caching.
  */
 
+header("Cache-Control: max-age=0, no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: Wed, 11 Jan 1984 05:00:00 GMT");
 header('Content-Type: text/javascript');
-header("Cache-Control: max-age=0");
 
 ?>/** Mobile Web Framework | http://mwf.ucla.edu */
 

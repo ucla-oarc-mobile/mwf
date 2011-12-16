@@ -2,20 +2,20 @@
  * Interface:
  *   mwf.touch.geolocation.getType() -> 0|1|2
  *   mwf.touch.geolocation.getTypeName() -> "HTML5 Geolocation"|"Google Gears"|"Unsupported"
+ *   mwf.touch.geolocation.getApi() -> Geolocation API (HTML5 or Google Gears)
  *   mwf.touch.geolocation.isSupported() -> boolean
- *   mwf.touch.geolocation.getPosition(onSuccessCallback, onFailureCallback) -> [['lat']=>decimal, ['lon']=>decimal]
- *   mwf.touch.geolocation.getLatitude() -> decimal
- *   mwf.touch.geolocation.getLongitude() -> decimal
- *   mwf.touch.geolocation.validPosition() -> boolean
- *   mwf.touch.geolocation.getError() -> string|false
- *   mwf.touch.geolocation.hasError() -> boolean
- *   mwf.touch.geolocation.setPosition(lat, lon)
- *   mwf.touch.geolocation.setError(err)
- *   mwf.touch.geolocation.flush()
+ *   mwf.touch.geolocation.getPosition(onSuccessCallback, onFailureCallback) -> [['latitude']=>decimal, ['longitude']=>decimal, ['accuracy']=>decimal]
+ *   mwf.touch.geolocation.watchPosition(onSuccessCallback, onFailureCallback) -> [['latitude']=>decimal, ['longitude']=>decimal, ['accuracy']=>decimal]
+ *   mwf.touch.geolocation.clearWatch(watchID)
  */
 
 mwf.touch.geolocation = new function()
 {
+    var ERROR = {
+        GENERAL: 'Geolocation failure.',
+        NO_SUPPORT: 'No geolocation support available.'
+    };
+
     var type = -1;
     var position = null;
     var highAccuracy = true;
@@ -48,6 +48,19 @@ mwf.touch.geolocation = new function()
             default: return 'Unsupported';
         }
     }
+    
+    this.getApi = function()
+    {
+        switch(this.getType())
+        {
+            case 1:
+                return navigator.geolocation;
+            case 2:
+                return google.gears.factory.create('beta.geolocation');
+            default:
+                return null;
+        }
+    }
 
     this.isSupported = function()
     {
@@ -56,19 +69,12 @@ mwf.touch.geolocation = new function()
 
     this.getPosition = function(onSuccess, onError)
     {
-        var geo;
-        switch(this.getType())
+        var geo = this.getApi();
+        
+        if(!geo)
         {
-            case 1:
-                geo = navigator.geolocation;
-                break;
-            case 2:
-                geo = google.gears.factory.create('beta.geolocation');
-                break;
-            default:
-                mwf.touch.geolication.setError('No geolocation support available.');
-                onError('No geolocation support available.');
-                return;
+            onError(ERROR.NO_SUPPORT);
+            return;
         }
 
         geo.getCurrentPosition(
@@ -82,11 +88,63 @@ mwf.touch.geolocation = new function()
 
             }, function() {
                 if(typeof onError != 'undefined')
-                    onError('Geolocation failure.');
+                    onError(ERROR.GENERAL);
             },
             {enableHighAccuracy:highAccuracy, maximumAge:timeout, timeout: geoTimeout});
 
         return true;
+    }
+    
+    this.watchPosition = function(onSuccess, onError)
+    {
+        var geo = this.getApi();
+        
+        if(!geo)
+        {
+            onError(ERROR.NO_SUPPORT);
+            return;
+        }
+
+        var watchID = geo.watchPosition(
+        
+            // Position was successfully retrieved
+            function(position) {
+                
+                onSuccess && onSuccess({
+                    'latitude': position.coords.latitude,
+                    'longitude': position.coords.latitude,
+                    'accuracy': position.coords.accuracy
+                });
+                
+            },
+            
+            // An error occurred
+            function(err) {
+                onError && onError(ERROR.GENERAL);
+            },
+            
+            // Options
+            {
+                enableHighAccuracy: highAccuracy,
+                maximumAge: timeout,
+                timeout: geoTimeout
+            }
+        );
+        
+        return watchID;
+    }
+    
+    this.clearWatch = function(watchID)
+    {
+        var geo = this.getApi();
+        
+        if(!geo)
+        {
+            onError(ERROR.NO_SUPPORT);
+            return;
+        }
+        
+        geo.clearWatch(watchID);
     }
 
     this.setTimeout = function(ms)
