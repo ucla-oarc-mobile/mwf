@@ -14,10 +14,19 @@
 
 module("standard/preferences.js", {
     setup: function() {
+        var len = localStorage.length;
+        this.oldItems = {};
+        var tempKey;
+        for (var i=0; i<len; i++) {
+            tempKey = localStorage.key(i);
+            this.oldItems[tempKey] = localStorage.getItem(tempKey);
+        }
         localStorage.clear();
     },
     teardown: function() {
         localStorage.clear();
+        for (var key in this.oldItems)
+            localStorage.setItem(key,this.oldItems[key]);
     }
 }); 
 
