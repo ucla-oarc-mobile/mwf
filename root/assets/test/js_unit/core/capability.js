@@ -130,7 +130,7 @@ test("mwf.capability.css.transitions()", function()
 test("mwf.capability.css.prop()", function()
 {
     expect(4);
-    var prop = mwf.capability.css.prop('pointerEvents');
+    var prop = mwf.capability.css.prop('background');
     equal(typeof prop, 'boolean', 'mwf.capability.css.prop() should return a boolean true');
     equal(prop, true, 'browser supports pointerEvents property');
     prop = mwf.capability.css.prop('nonexistentProperty');
@@ -165,7 +165,7 @@ test("mwf.capability.events()", function()
 test("mwf.capability.css.event()", function()
 {
     expect(4);
-    var event = mwf.capability.event('touchstart');
+    var event = mwf.capability.event('load');
     equal(typeof event, 'boolean', 'mwf.capability.event() should return a boolean');
     equal(event, true, 'browser supports touchstart event');
     event = mwf.capability.event('nonexistent');

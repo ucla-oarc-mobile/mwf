@@ -8,7 +8,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111003
+ * @version 20111213
  * 
  * @requires mwf.site
  * 
@@ -144,20 +144,21 @@ mwf.userAgent = new function() {
         for(;i<browserEnginesToTest.length;i++)
             if(userAgentSubstringExists(browserEnginesToTest[i])) 
                 return browserEnginesToTest[i];
+        
+        return '';
     }
     
     /**
      * Determines the web browser engine version from string or else returns an 
      * empty string.
      *
-     * @todo
      * @return string
      */
     this.getBrowserEngineVersion = function(){
         var ua = userAgent, s;
         var userAgentAfterPatternToSpace = function(p){
             var s = ua.indexOf(p)+p.length;
-            return ua.substring(s, ua.indexOf(' ',s));
+            return ua.substring(s, Math.min(ua.indexOf(' ',s),ua.indexOf(';',s)));
         }
         switch(this.getBrowserEngine())
         {
@@ -173,5 +174,30 @@ mwf.userAgent = new function() {
         }
         
         return '';
+    }
+    
+    /**
+     * Generate JSON content passed into the cookie written by mwf.server.
+     * 
+     * @return string
+     */
+    this.generateCookieContent = function(){
+        
+        var cookie = '{';
+        cookie += '"s":"'+navigator.userAgent+'"';
+        if(t = this.getOS())
+            cookie += ',"os":"'+t+'"';
+        if(t = this.getOSVersion())
+            cookie += ',"osv":"'+t+'"';
+        if(t = this.getBrowser())
+            cookie += ',"b":"'+t+'"';
+        if(t = this.getBrowserEngine())
+            cookie += ',"be":"'+t+'"';
+        if(t = this.getBrowserEngineVersion())
+            cookie += ',"bev":"'+t+'"';
+        cookie += '}';
+        
+        return cookie;
+        
     }
 };

@@ -83,3 +83,19 @@ test("mwf.browser.pageHeight() DEPRECATED", function()
     expect(1);
     equal(mwf.browser.pageHeight(), mwf.browser.getHeight(), "pageHeight() should equal getHeight()");
 })
+
+test("mwf.browser.isQuirksMode()", function()
+{
+    equal(typeof mwf.browser.isQuirksMode(), "boolean", "isQuirks() should return boolean");
+})
+
+test("mwf.browser.isStandardsMode()", function()
+{
+    equal(typeof mwf.browser.isStandardsMode(), "boolean", "isStandards() should return boolean");
+})
+
+test("mwf.browser.getMode()", function()
+{
+    var mode = mwf.browser.getMode();
+    ok((mode=="quirks" || mode=="standards"), "getMode() should return 'quirks' or 'standards'");
+})

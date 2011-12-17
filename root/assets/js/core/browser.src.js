@@ -9,7 +9,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111003
+ * @version 20111213
  *
  * @requires document
  * @requires mwf
@@ -119,4 +119,32 @@ mwf.browser = new function() {
      * @return int|null
      */
     this.pageHeight = this.getHeight;
+    
+    /**
+     * Return true if browser is running in quirks mode: IE, Moz, Saf, Chrome
+     * use "BackCompat" to define quirks mode, while Op uses "QuirksMode".
+     * 
+     * @return bool
+     */
+    this.isQuirksMode = function(){
+        return document.compatMode == 'BackCompat' || document.compatMode == 'QuirksMode';
+    }
+    
+    /**
+     * Return true if browser is running in standards mode.
+     * 
+     * @return bool
+     */
+    this.isStandardsMode = function(){
+        return !this.isQuirksMode();
+    }
+    
+    /**
+     * Return string "standards" or "quirks" from mwf.browser.isQuirksMode().
+     * 
+     * @return "standards"|"quirks"
+     */
+    this.getMode = function(){
+        return this.isQuirksMode() ? "quirks" : "standards";
+    }
 };
