@@ -12,7 +12,14 @@
  * 
  */
 
-module("standard/preferences.js"); 
+module("standard/preferences.js", {
+    setup: function() {
+        localStorage.clear();
+    },
+    teardown: function() {
+        localStorage.clear();
+    }
+}); 
 
 test("mwf.standard.preferences.isSupported()", function()
 {
@@ -31,16 +38,25 @@ test("mwf.standard.preferences.set()", function()
     equal(mwf.standard.preferences.get('test'), 'a test value', 'set() can change the setting');
 });
 
-test("mwf.standard,preferences.clearAll()", function()
+test("mwf.standard.preferences.clearAll() delete a single item", function()
 {
     mwf.standard.preferences.set("test", "a temporary value");
     mwf.standard.preferences.clearAll();
-    equal(mwf.standard.preferences.get("test"), null, "clearAll() erases previous values");
-})
+    equal(mwf.standard.preferences.get("test"), null, "clearAll() erased previous value");
+});
+
+test("mwf.standard.preferences.clearAll() deletes multiple items", function ()
+{
+    mwf.standard.preferences.set("test", "a temporary value");
+    mwf.standard.preferences.set("another_test", "another temporary value");
+    mwf.standard.preferences.clearAll();
+    equal(mwf.standard.preferences.get("test"), null, "clearAll() erased first of previous values");
+    equal(mwf.standard.preferences.get("another_test"), null, "clearAll() erased second of previous values");
+});
 
 test("mwf.standard.preferences.clear()", function()
-{
+{   
     mwf.standard.preferences.set("test", "just another temporary value from LA");
     mwf.standard.preferences.clear("test");
     equal(mwf.standard.preferences.get("test"), null, "clear() erases previous value");
-})
+});
