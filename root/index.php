@@ -68,7 +68,7 @@ if (isset($_GET['s']) && isset($menu[$_GET['s']])) {
 
 echo HTML_Decorator::html_start()->render();
 
-echo Site_Decorator::head()->set_title(Config::get('global', 'title_text'))->add_js_handler_library('standard_libs','preferences')->render();
+echo Site_Decorator::head()->set_title(Config::get('global', 'title_text'))->render();
 
 echo HTML_Decorator::body_start($main_menu ? array('class' => 'front-page') : array())->render();
 
