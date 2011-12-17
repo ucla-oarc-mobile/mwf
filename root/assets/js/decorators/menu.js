@@ -283,8 +283,8 @@ mwf.decorator.Menu = function(title)
     {
         var linkItem = document.createElement('a');
         
-        linkItem.innerHTML = text;
-        linkItem.href = url;
+        linkItem.innerHTML = text | "";
+        linkItem.href = url || null;
         
         //If details is defined, then add the details text within a span tag.
         if(details)
@@ -361,6 +361,13 @@ mwf.decorator.Menu = function(title)
     {
         return (this._items) ? this._items.children.length : 0;
     }
+    
+    //If a default title has been set, then set the menu's title.
+    if(title)
+    {
+        menu.setTitle(title);
+    }
+    
     
     return menu;
 }
