@@ -257,7 +257,7 @@ mwf.decorator.Menu = function(title)
         inputItem.value = value;
 
         //Create a standard menu link item and prepend the option button.
-        var linkItem = createLinkItem(label, "#", details);
+        var linkItem = createLinkItem(label, null, details);
         linkItem.insertBefore(inputItem, linkItem.firstChild);
 
         //Add an event handler that would toggle the option button's
@@ -283,7 +283,7 @@ mwf.decorator.Menu = function(title)
     {
         var linkItem = document.createElement('a');
         
-        linkItem.innerHTML = text | "";
+        linkItem.innerHTML = text || "";
         linkItem.href = url || null;
         
         //If details is defined, then add the details text within a span tag.
