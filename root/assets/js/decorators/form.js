@@ -1,19 +1,11 @@
 /**
- * MWF Decorator class for creating and manipulating content elements.
+ * MWF Decorator class for creating and manipulating form elements.
  * 
  * The class does not require JQuery or third party Javascript library, but 
  * depends on mwf.decorator class definition.
- * 
- * Example Use: 
- * 
- *  var content = mwf.decorator.Content("Hello World", "Some Text.");
+
  *  
- *  content.setTitle("New Title");
- *  content.addTextBlock("Some other text.");
- *  
- *  document.body.appendChild(content);
- *  
- * @namespace mwf.decorator.Content
+ * @namespace mwf.decorator.Form
  * @dependency mwf.decorator
  * @author zkhalapyan
  * @copyright Copyright (c) 2010-11 UC Regents
@@ -22,35 +14,35 @@
  * 
  */
 
-mwf.decorator.Content = function(title, text)
+mwf.decorator.Form = function(title)
 {
     
     /**
      * A CSS class name that indicates the first element in a list of elements.
      */
-    var FIRST_MARKER = "menu-first";
+    var FIRST_MARKER = "form-first";
     
     /**
      * A CSS class name that indicates the last element in a list of elements.
      */
-    var LAST_MARKER  = "menu-last";
+    var LAST_MARKER  = "form-last";
     
-    var content = document.createElement("div");
+    var form = document.createElement("form");
     
     var attributes = [
-                        new mwf.decorator.Attribute("Padded",   true, "content-padded"),
-                        new mwf.decorator.Attribute("Full",     true, "content-full")
+                        new mwf.decorator.Attribute("Padded",   true, "form-padded"),
+                        new mwf.decorator.Attribute("Full",     true, "form-full")
                      ];
     
-    mwf.decorator.addAttributes(content, attributes);
+    mwf.decorator.addAttributes(form, attributes);
     
     /**  
-     * Sets the title of this content. If the specified title is null or 
-     * undefined, then the content's title, if it exists, will be removed.
+     * Sets the title of this form. If the specified title is null or 
+     * undefined, then the form's title, if it exists, will be removed.
      * 
-     * @param title The title of the content to set.
+     * @param title The title to set.
      */
-    content.setTitle = function(title)
+    form.setTitle = function(title)
     {
         //If current element has a title, then unset it. 
         if(this._title)
@@ -71,48 +63,37 @@ mwf.decorator.Content = function(title, text)
             
             
         }
-        
-        return this;
     }
     
     /**
      * Returns the current elements title if it's set; null otherwise. 
      * @return The current elements title if it's set; null otherwise. 
      */
-    content.getTitle = function()
+    form.getTitle = function()
     {
         return (this._title)? this._title : null;
     }
     
     
     /**
-     * Prepends an arbitrary DOM element to the current content.
+     * Prepends an arbitrary DOM element to the current form.
      * 
-     * @return This content element.
+     * @return This form element.
      */
-    content.addItem = function(contentItem)
+    form.addItem = function(item)
     {
-        mwf.decorator.append(this, contentItem, FIRST_MARKER, LAST_MARKER); 
+        mwf.decorator.append(this, item, FIRST_MARKER, LAST_MARKER); 
         
         return this;
     }
-    
-    content.addButton = function(label, url, callback)
-    {
-        mwf.decorator.append(this, 
-                             mwf.decorator.ContentButton(label, url, callback),
-                             FIRST_MARKER,
-                             LAST_MARKER);
-                             
-        return this;
-    }
+
     
     /**
      * Prepends a new text block element to the current content.
      * 
      * @return This content.
      */
-    content.addTextBlock = function(text)
+    form.addTextBlock = function(text)
     {
         if(!text)
             return this;
@@ -129,15 +110,9 @@ mwf.decorator.Content = function(title, text)
     
 
     
-    content.setTitle(title);
-    content.addTextBlock(text);
+    form.setTitle(title);
+
    
-    return content;
+    return form;
 }
 
-
-
-mwf.decorator.ContentButton = function(label, url, callback)
-{
-    //Not implemented yet.
-}

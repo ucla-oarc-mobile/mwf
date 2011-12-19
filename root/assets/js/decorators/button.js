@@ -23,7 +23,7 @@
  *  document.body.appendChild(buttons);
  *
  *
- * @namespace mwf.decorator
+ * @namespace mwf.decorator.Button
  * @dependency mwf.decorator
  * @author zkhalapyan
  * @copyright Copyright (c) 2010-11 UC Regents
