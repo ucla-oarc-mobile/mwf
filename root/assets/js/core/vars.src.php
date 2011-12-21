@@ -88,6 +88,10 @@ mwf.site=new function(){
 
     };
 
+    this.localStorage = new function(){
+        this.prefix = '<?php echo Config::get('global', 'local_storage_prefix'); ?>';
+    };
+
     this.analytics = new function(){
 
         this.key = <?php echo (Config::get('analytics', 'account') ? ('\'' . Config::get('analytics', 'account') . '\'') : 'null') ?>;

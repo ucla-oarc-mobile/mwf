@@ -29,16 +29,18 @@ require_once(dirname(dirname(__FILE__)).'/root/assets/lib/config.class.php');
 Config::set('global', 'site_url', false);
 Config::set('global', 'site_assets_url', false);
 Config::set('global', 'site_nonmobile_url', false);
-Config::set('global', 'full_site_url', false);
-Config::set('global', 'help_site_url', false);
+Config::set('global', 'footer_link_urls', array());
+Config::set('global', 'footer_link_titles', array());
 
 /**
  * CORE
  *
- * - cookie_prefix :: The prefix attached to all cookies that the framework writes.
+ * - cookie_prefix :: Prefix attached to all cookies that the framework writes
+ * - local_storage_prefix :: Prefix attached to all HTML5 LocalStorage that the framework writes
  */
 
 Config::set('global', 'cookie_prefix', 'mwf_');
+Config::set('global', 'local_storage_prefix', 'mwf_');
 
 /**
  * TEXT AND IMAGES
@@ -82,3 +84,5 @@ Config::set('global', 'title_text',                 'UCLA MWF');
 
 Config::set('global', 'header_image_sub_alt', 'MWF');
 Config::set('global', 'header_image_sub', Config::get('global', 'site_assets_url').'/img/mwf-header.gif');
+Config::set('global', 'full_site_url', false);
+Config::set('global', 'help_site_url', false);

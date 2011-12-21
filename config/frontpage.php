@@ -15,15 +15,6 @@
 require_once(dirname(dirname(__FILE__)).'/root/assets/lib/config.class.php');
 
 /**
- * full_site_url    URL of non-mobile site link on front page for mobile devices.
- * help_site_url    URL of the help site or FALSE if there is none.
- *
- * @link index.php
- */
-Config::set('frontpage', 'full_site_url', Config::get('global', 'full_site_url'));
-Config::set('frontpage', 'help_site_url', Config::get('global', 'help_site_url'));
-
-/**
  * header_image_main
  * header_image_main_alt
  * header_image_sub
@@ -75,6 +66,9 @@ Config::set('frontpage', 'menu',
         ,array('name'=>'Collaboration',
               'id'=>'showcase',
               'url'=>'index.php?s=collaboration')
+        ,array('name'=>'Demos',
+              'id'=>'demos',
+              'url'=>'mwf/demos.php')
         ,array('name'=>'License',
               'id'=>'license',
               'url'=>'mwf/license.php')
@@ -94,3 +88,19 @@ Config::set('frontpage', 'menu',
         )
     )
 );
+
+/******************************************************************
+ *
+ * DEPRECATED SETTINGS
+ *
+ * Settings below this point are supported by the MWF in a deprecated
+ * capacity only and should not be relied on by components or modules
+ * as they will eventually be removed.
+ *
+ * full_site_url    URL of non-mobile site link on front page for mobile devices.
+ * help_site_url    URL of the help site or FALSE if there is none.
+ *
+ * @link index.php
+ */
+Config::set('frontpage', 'full_site_url', Config::get('global', 'full_site_url'));
+Config::set('frontpage', 'help_site_url', Config::get('global', 'help_site_url'));
