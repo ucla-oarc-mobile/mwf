@@ -8,7 +8,7 @@
  *   -Content
  *
  *
-*/
+ */
 
 .only-webkit, .only-full { display: block; }
 .not-webkit, .not-full { display: none; }
@@ -266,10 +266,10 @@ form.form-full > h1.blue {
 form.form-full > input,
 form.form-full > select,
 form.form-full > textarea {
-    -webkit-border-top-left-radius: .5em;
-    -webkit-border-top-right-radius: .5em;
-    -webkit-border-bottom-left-radius: .5em;
-    -webkit-border-bottom-right-radius: .5em;
+	-webkit-border-top-left-radius: .5em;
+	-webkit-border-top-right-radius: .5em;
+	-webkit-border-bottom-left-radius: .5em;
+	-webkit-border-bottom-right-radius: .5em;
     -webkit-box-shadow:inset 0 0 3px #bbb;
     -webkit-appearance: none;
 }
@@ -282,16 +282,16 @@ form.form-padded,
 form.form-padded > h1.form-first,
 form.form-padded > p.form-first,
 form.form-padded > div.form-first {
-    -webkit-border-top-left-radius: .5em;
-    -webkit-border-top-right-radius: .5em;
+	-webkit-border-top-left-radius: .5em;
+	-webkit-border-top-right-radius: .5em;
 }
 
 form.form-padded,
 form.form-padded > h1.form-last,
 form.form-padded > p.form-last,
 form.form-padded > div.form-last {
-    -webkit-border-bottom-left-radius: .5em;
-    -webkit-border-bottom-right-radius: .5em;
+	-webkit-border-bottom-left-radius: .5em;
+	-webkit-border-bottom-right-radius: .5em;
 }
 
 form.form-full > input[type=submit],
@@ -315,51 +315,6 @@ form.form-full > input[type=reset]:hover {
     background: linear-gradient(#f9f9f9, #f1f1f1);
 }
 
-
-/********************************************************
- * MESSAGES
- *******************************************************/
-.message-wrapper {
-    position: absolute;
-    top: 25%;
-    left: 10px;
-    right: 10px;
-    z-index: 1002;
-    background-color: #fff;
-    border: 1px solid #666;
-    border-radius: .5em;
-}
-
-.message-modal.message {
-    margin-top: .6em;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.message-modal.message.not-padded {
-    margin: 0;
-}
-
-a.message-button {
-    margin: 10px;
-}
-
-a.message-button.not-padded {
-    margin: 0;
-}
-
-.message-mask {
-    position:fixed;
-    top:0;
-    left:0;
-    height:100%;
-    width:100%;
-    background:#666;
-    opacity:.75;
-    filter:alpha(opacity=75);
-    z-index:1001
-}
-
 /* default-webkit-transitions
  *
  * Description:
@@ -371,7 +326,7 @@ a.message-button.not-padded {
  *   -Utilities
  *
  *
-*/
+ */
 
 
 /** TRANSITION SETUP **/

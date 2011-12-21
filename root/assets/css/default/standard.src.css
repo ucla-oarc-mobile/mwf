@@ -276,49 +276,6 @@ form.form-full > input[type=reset] {
     -moz-box-shadow:none;
 }
 
-
-/********************************************************
- * MESSAGES
- *******************************************************/
-
-.message.full {
-    background-position: 99% 50%;
-    background-repeat: no-repeat;
-    margin-top: .6em;
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.message.full.alert {
-    background-image: url("img/message-alert.png");
-}
-
-.message.full.confirm {
-    background-image: url("img/message-confirm.png");
-}
-
-.message.full.error {
-    background-image: url("img/message-error.png");
-}
-
-.message.full.info {
-    background-image: url("img/message-info.png");
-}
-
-.message.full.not-padded {
-    margin: 0;
-}
-
-.content-full .message,
-.menu-full .message,
-.form-full .message,
-.full .message {
-    margin-top: .6em;
-    margin-left: 0;
-    margin-right: 0;
-}
-
-
 /********************************************************
  * CONTENT
  *******************************************************/
@@ -368,3 +325,5 @@ form.form-full > input[type=reset] {
 .front-page .menu-front li a{
     padding: 1.2em;
 }
+
+

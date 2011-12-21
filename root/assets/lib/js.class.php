@@ -84,7 +84,6 @@ class JS
         self::$_dependencies['jquery_ui'] = array('jquery');
         self::$_dependencies['transitions'] = array('jquery');
         self::$_dependencies['touch_transitions'] = array('transitions', 'jquery.swipe');
-        self::$_dependencies['messages'] = array('jquery');
     }
     
     /**
