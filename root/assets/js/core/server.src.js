@@ -52,7 +52,8 @@ mwf.server = new function(){
         
         /**
          * Set classification cookie if it doesn't already exist on server.
-         * We ch
+         * Set it if classification has changed (e.g., user turns on or off
+         *    something in their settings).
          */
         
         if(!site.cookie.exists(classification.cookieName) || site.cookie.classification != classificationCookie)
