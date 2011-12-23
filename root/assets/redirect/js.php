@@ -14,16 +14,15 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110902
+ * @version 20111108
  *
- * @uses Classification
- * @uses Config
+ * @uses Cookie
  */
 
 header('Content-Type: text/javascript');
 header('Cache-Control: max-age=0');
 
-include_once(dirname(dirname(__FILE__)).'/config.php');
+require_once(dirname(dirname(__FILE__)).'/lib/cookie.class.php');
 
 /**
  * If GET 'm' isn't set, then this page has no content
@@ -45,7 +44,8 @@ $domain_key = isset($_GET['d']) ? '_' . substr(md5($_GET['d']), 0, 8) : '';
 /** 
  * Check to see if an override cookie exists. 
  */
-$cookie_override = isset($_COOKIE[Config::get('global', 'cookie_prefix').'ovrrdr'.$domain_key]) && $_COOKIE[Config::get('global', 'cookie_prefix').'ovrrdr'.$domain_key] == 1 ? 1 : 0;
+$cookie = Cookie::get('ovrrdr'.$domain_key);
+$cookie_override = isset($cookie) && $cookie == 1 ? 1 : 0;
 
 /**
  * Determine if an override request has been made of the referrer
@@ -69,9 +69,9 @@ if(strlen($domain_key) > 0 && isset($_GET['e']) && is_numeric($_GET['e']))
  * Set cookie if a URI GET 'ovrrdr' exists or else refresh cookie if it is set.
  */
 if($uri_override !== false)
-    setcookie(Config::get('global', 'cookie_prefix').'ovrrdr'.$domain_key, $uri_override, ($expiry_time != 0 ? time()+$expiry_time*$uri_override : 0), '/');
+    Cookie::set('ovrrdr'.$domain_key, $uri_override, ($expiry_time != 0 ? time()+$expiry_time*$uri_override : 0), '/');
 elseif($cookie_override == 1)
-    setcookie(Config::get('global', 'cookie_prefix').'ovrrdr'.$domain_key, $cookie_override, ($expiry_time != 0 ? time()+$expiry_time : 0), '/');
+    Cookie::set('ovrrdr'.$domain_key, $cookie_override, ($expiry_time != 0 ? time()+$expiry_time : 0), '/');
 
 /** 
  * Determine if an override has occurred based on $uri_override. 

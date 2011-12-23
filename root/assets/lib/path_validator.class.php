@@ -36,9 +36,17 @@ class Path_Validator
         if(self::is_remote($path))
             return true;
 
-        $local = dirname(dirname(dirname(__FILE__)));
-
-        if(substr(realpath($path), 0, strlen($local)) == $local)
+        $docroot = dirname(dirname(dirname(__FILE__)));
+       
+        $full_path = $docroot . '/' . $path;
+        
+        // Check to see if file path appended to docroot is still under
+        //  docroot. This prevents ..-style shenanigans.
+        if(substr(realpath($full_path), 0, strlen($docroot)) == $docroot)
+                return true;
+        
+        // @deprecated Check to see if true full path is specified
+        if(substr(realpath($path), 0, strlen($docroot)) == $docroot)
             return true;
 
         return false;

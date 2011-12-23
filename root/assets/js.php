@@ -13,33 +13,36 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110901
+ * @version 20111101
  *
  * @uses Classification
  * @uses JS
  * @uses JSMin
  * @uses Path
  * @uses Path_Validator
+ * @uses User_Agent
  */
-
-/**
- * Defines the file to be parsed as a Javascript file and sets a max cache life.
- */
-
-header('Content-Type: text/javascript');
-header("Cache-Control: max-age=3600");
 
 /**
  * Include necessary libraries. 
  */
 
-include_once(dirname(__FILE__).'/lib/classification.class.php');
-include_once(dirname(__FILE__).'/lib/js.class.php');
+require_once(dirname(__FILE__).'/lib/classification.class.php');
+require_once(dirname(__FILE__).'/lib/js.class.php');
 require_once(dirname(__FILE__).'/lib/jsmin.class.php');
 require_once(dirname(__FILE__).'/lib/path.class.php');
 require_once(dirname(__FILE__).'/lib/path_validator.class.php');
-include_once(dirname(__FILE__).'/lib/user_agent.class.php');
+require_once(dirname(__FILE__).'/lib/user_agent.class.php');
 $ext = '.js';
+
+/**
+ * Defines the file to be parsed as a Javascript file and restricts online caching.
+ */
+
+header("Cache-Control: max-age=0, no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: Wed, 11 Jan 1984 05:00:00 GMT");
+header('Content-Type: text/javascript');
 
 ?>/** Mobile Web Framework | http://mwf.ucla.edu */
 
