@@ -21,7 +21,7 @@ require_once(dirname(__FILE__).'/lib/js.class.php');
 if($_GET['mode'] == 'standards')
     echo '<!DOCTYPE html>';
 
-?><html><head></head><body><script type="text/javascript"><?php
+?><html><head><title></title></head><body><script type="text/javascript"><?php
 
         /**
          * Core Javascript libraries always included.
