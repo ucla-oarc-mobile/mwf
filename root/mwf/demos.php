@@ -38,13 +38,14 @@ echo Site_Decorator::header()
         ->set_title('MWF Demo')
         ->render();
 
-echo Site_Decorator::menu_full()
+echo Site_Decorator::menu()
 ->set_title('MWF Demos')
 ->set_padded()
 ->add_text('The following is a kitchen sink collection of MWF styles.')
-->add_item('Messages', './demos/messages.php');
+->add_item('Entities', 'demos/entities.php')
+->add_item('Messages', 'demos/messages.php');
 
-echo Site_Decorator::button_full()
+echo Site_Decorator::button()
         ->set_padded()
         ->add_option(Config::get('global', 'back_to_home_text'), Config::get('global', 'site_url'))
         ->render();

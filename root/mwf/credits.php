@@ -54,7 +54,7 @@ echo Site_Decorator::header()
         ->set_title('MWF Credits')
         ->render();
 
-echo Site_Decorator::content_full()
+echo Site_Decorator::content()
             ->set_padded()
             ->add_header('Project')
             ->add_paragraph('<strong>Project Lead</strong><br>
@@ -74,7 +74,7 @@ echo Site_Decorator::content_full()
                             array('style'=>'text-align:center;'))
             ->render();
 
-$contributions = Site_Decorator::content_full()
+$contributions = Site_Decorator::content()
                     ->set_padded()
                     ->add_header('Contributors')
                     ->add_paragraph('In addition to their own mobile applications, a number of participants have contributed code directly to the UCLA Mobile Web Framework.', array('style'=>'font-style:italic;'));
@@ -92,7 +92,7 @@ $contributions->add_paragraph('Beyond direct contributions, the input and sugges
 
 echo $contributions->render();
 
-echo Site_Decorator::button_full()
+echo Site_Decorator::button()
                 ->set_padded()
                 ->add_option(Config::get('global', 'back_to_home_text'), Config::get('global', 'site_url'))
                 ->render();

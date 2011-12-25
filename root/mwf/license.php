@@ -83,7 +83,7 @@ $ol = HTML_Decorator::tag('ol');
 foreach($terms as $term)
     $ol->add_inner(HTML_Decorator::tag('li')->add_inner($term));
 
-echo Site_Decorator::content_full()
+echo Site_Decorator::content()
             ->set_padded()
             ->add_header('License')
             ->add_paragraph('
@@ -126,7 +126,7 @@ any terms, or sublicense this software to others.')
             ->add_section(HTML_Decorator::tag('p', 'You agree:')->render() . $ol->render())
             ->render();
 
-echo Site_Decorator::content_full()
+echo Site_Decorator::content()
         ->set_padded()
         ->add_header('Disclaimer')
         ->add_paragraph('UCLA reserves the right to modify this license at any
@@ -135,7 +135,7 @@ Web Framework license, the latest version exists on the MWF site.')
         ->add_paragraph(HTML_Decorator::tag('a', 'http://mwf.ucla.edu/license', array('href'=>'http://mwf.ucla.edu/license')), array('style'=>'text-align:center;'))
         ->render();
 
-echo Site_Decorator::button_full()
+echo Site_Decorator::button()
                 ->set_padded()
                 ->add_option(Config::get('global', 'back_to_home_text'), Config::get('global', 'site_url'))
                 ->render();

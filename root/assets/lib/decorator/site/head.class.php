@@ -32,6 +32,7 @@ class Head_Site_Decorator extends Tag_HTML_Decorator
     public function __construct()
     {
         parent::__construct('head');
+        $this->set_css_handler_params(array('lean'));
     }
 
     public function &set_title($title)
