@@ -15,5 +15,17 @@
 
 require_once(dirname(dirname(dirname(__FILE__))).'/config.php');
 
-echo 'document.write(\'<link rel="apple-touch-icon" href="'.Config::get('global', 'appicon_img').'">\');';
-echo 'document.write(\'<link rel="apple-touch-icon-precomposed" href="'.Config::get('global', 'appicon_img_precomposed').'">\');';
+$appicon_img = Config::get('global', 'appicon_img');
+if(strpos($appicon_img, '://') === false && substr($appicon_img, 0, 2) != '//')
+{
+    if(isset($_SERVER['HTTP_X_FORWARDED_SERVER']))
+        $appicon_img = '//'.$_SERVER['HTTP_X_FORWARDED_SERVER'].'/'.$appicon_img;
+    elseif(isset($_SERVER['HTTP_HOST']))
+        $appicon_img = '//'.$_SERVER['HTTP_HOST'].'/'.$appicon_img;
+    elseif(substr($appicon_img, 0, 1) != '/')
+        $appicon_img = '/'.$appicon_img;
+}
+
+echo 'document.write(\'<link rel="apple-touch-icon" href="'.$appicon_img.'">\');';
+echo 'document.write(\'<link rel="apple-touch-icon-precomposed" href="'.$appicon_img.'">\');';
+
