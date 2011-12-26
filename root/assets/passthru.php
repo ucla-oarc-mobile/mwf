@@ -18,10 +18,13 @@
 
 require_once(dirname(__FILE__).'/lib/js.class.php');
 
-if($_GET['mode'] == 'standards')
+if(isset($_GET['mode']) && $_GET['mode'] == 'standards')
     echo '<!DOCTYPE html>';
 
 ?><html><head><title></title></head><body><script type="text/javascript"><?php
+
+    if(isset($_GET['return']) && strlen($_GET['return']) > 0)
+    {
 
         /**
          * Core Javascript libraries always included.
@@ -45,4 +48,8 @@ if($_GET['mode'] == 'standards')
 
         foreach($core_filenames as $filename)
             JS::load('core/'.$filename);
-        ?> window.location = '<?php echo $_GET['return'] ?>';</script></body></html>
+        echo 'window.location = "'.$_GET['return'].'"';
+        
+    }
+        
+        ?></script></body></html>
