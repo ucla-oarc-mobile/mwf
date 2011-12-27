@@ -33,8 +33,7 @@ class Config {
             define('MWF_CONFIG_SITE_URL', self::get('base', 'site_url'));
         } else {
             $scheme = HTTPS::is_https() ? 'https' : 'http';
-            $port = $_SERVER['SERVER_PORT'] == getservbyname($scheme, "tcp") ? '' : ':' . $_SERVER['SERVER_PORT'];
-            define('MWF_CONFIG_SITE_URL', $scheme . '://' . $_SERVER['SERVER_NAME'] . $port);
+            define('MWF_CONFIG_SITE_URL', $scheme . '://' . $_SERVER['HTTP_HOST']);
         }
 
         if (self::get('base', 'site_assets_url')) {
