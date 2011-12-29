@@ -46,22 +46,27 @@ if (!Config::get('global', 'site_url') || !Config::get('global', 'site_assets_ur
     die('<h1>Fatal Error</h1><p>The configuration settings {global::site_url} and {global::site_asset_url} must be defined in ' . dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'global.php</p>');
 
 /**
- * Get the menu from {'frontpage':'menu'} defined in config/frontpage.php.
- */
-$menu = Config::get('frontpage', 'menu');
-
-/**
  * Handle differences between a subsection and the top-level menu, using key
  * 'default' if on the front page or otherwise the $_GET['s'] parameter.
  */
-if (isset($_GET['s']) && isset($menu[$_GET['s']])) {
-    $menu_items = $menu[$_GET['s']];
-    $main_menu = false;
-} else {
-    $menu_items = $menu['default'];
-    $main_menu = true;
+
+$menu_section = 'default';
+if (isset($_GET['s'])) {
+    $menu_section = $_GET['s'];
+} 
+
+$menu_names = Config::get('frontpage', 'menu.name.'.$menu_section);
+
+if (! isset($menu_names)) {
+    $menu_section = 'default';
+    $menu_names = Config::get('frontpage', 'menu.name.'.$menu_section);
 }
 
+$menu_ids = Config::get('frontpage', 'menu.id.'.$menu_section);
+$menu_urls = Config::get('frontpage', 'menu.url.'.$menu_section);
+$menu_restrictions = Config::get('frontpage', 'menu.restriction.'.$menu_section);
+
+$main_menu = ($menu_section == 'default');
 /**
  * Start page
  */
@@ -90,17 +95,15 @@ $menu = Site_Decorator::menu()->set_padded()->set_detailed();
 if($main_menu)
     $menu->add_class('front');
 
-for($i = 0; $i < count($menu_items); $i++)
+for($i = 0; $i < count($menu_names); $i++)
 {
-    $menu_item = $menu_items[$i];
-
-    if (isset($menu_item['restriction'])) {
-        $function = $menu_item['restriction'];
+    if (isset($menu_restrictions[$i])) {
+        $function = $menu_restrictions[$i];
         if (!User_Agent::$function())
             continue;
     }
 
-    $menu->add_item($menu_item['name'], $menu_item['url'], isset($menu_item['id']) ? array('id' => $menu_item['id']) : array());
+    $menu->add_item($menu_names[$i], $menu_urls[$i], isset($menu_ids[$i]) ? array('id' => $menu_ids[$i]) : array());
 }
 
 echo $menu->render();
