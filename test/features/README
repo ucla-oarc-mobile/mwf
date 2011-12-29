@@ -1,0 +1,43 @@
+These are the messy notes I took while putting together the Cucumber tests.
+
+I'll clean them up after I figure out what is actually needed and what isn't.
+
+PREREQUISITES
+
+* Add Cucumber to your Ruby environment:
+
+    gem install cucumber
+
+* Add RSpec to your Ruby environment:
+
+    gem install rspec
+
+* Add Capybara and mechanize:
+
+    gem install capybara
+    gem install mechanize  (not needed?)
+    gem install capybara-mechanize (not needed?)
+
+If that doesn't do it, try doing these too:
+
+* Add Selenium Webdriver to your Ruby environment:
+
+    gem install selenium-webdriver
+
+  If you get an error indicating that you need to update RubyGems, do this:
+
+    gem update --system
+
+* To get rid of irksome JSON warning message when running RSpec:
+
+    gem install json
+
+****
+
+* To test in iPhone simulator:
+
+  You must have XCode 4.2 or later
+  svn checkout http://selenium.googlecode.com/svn/trunk/ selenium-read-only
+  open selenium-read-only/iphone/iWebDriver.xcodeproj/
+  Using dropdown menu in top left, select "iWebDriver" and "iPhone 5.0 Simulator"
+  Build and Run
