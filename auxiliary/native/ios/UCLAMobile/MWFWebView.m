@@ -50,6 +50,7 @@
     [self.view insertSubview:self.splashView atIndex:4];
     self.splashView.hidden = NO;
  
+    self.webView.scrollView.bounces = NO; 
     
     //Initially try to load the online version - if there is an error, 
     //and the isOnline flag is set to NO, then the app will go into offline mode. 
