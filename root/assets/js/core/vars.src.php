@@ -45,11 +45,8 @@ if (isset($cookies['classification']))
 else
     $classification_cookie_var = 'false';
 
-if(isset($_SERVER['HTTP_X_FORWARDED_SERVER'])) // proxy server actual host
-{
-    $domain_var = $_SERVER['HTTP_X_FORWARDED_SERVER'];
-}
-elseif(isset($_SERVER['HTTP_HOST'])) // actual host for multi-host requests
+/** @todo determine if we should first check HTTP_X_FORWARDED_SERVER */
+if(isset($_SERVER['HTTP_HOST'])) // actual host for multi-host requests
 {
     $domain_var = $_SERVER['HTTP_HOST'];
 }
