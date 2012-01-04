@@ -1,43 +1,45 @@
-These are the messy notes I took while putting together the Cucumber tests.
+AUTOMATED TESTS IN IPHONE SIMULATOR -- INSTALLATION:
 
-I'll clean them up after I figure out what is actually needed and what isn't.
-
-PREREQUISITES
+You must be using Mac OS X and XCode 4.2 or later.
 
 * Add Cucumber to your Ruby environment:
 
-    gem install cucumber
+    sudo gem install cucumber
 
 * Add RSpec to your Ruby environment:
 
-    gem install rspec
+    sudo gem install rspec
 
-* Add Capybara and mechanize:
+* Add Capybara to your Ruby environment:
 
-    gem install capybara
-    gem install mechanize  (not needed?)
-    gem install capybara-mechanize (not needed?)
+    sudo gem install capybara
 
-If that doesn't do it, try doing these too:
+* Get iWebDriver code:
 
-* Add Selenium Webdriver to your Ruby environment:
+    svn checkout http://selenium.googlecode.com/svn/trunk/ selenium-read-only
 
-    gem install selenium-webdriver
+* Open iWebDriver code in XCode:
 
-  If you get an error indicating that you need to update RubyGems, do this:
+    open selenium-read-only/iphone/iWebDriver.xcodeproj/
 
-    gem update --system
+* Set target for iPhone Simulator:
 
-* To get rid of irksome JSON warning message when running RSpec:
+  In XCode, use dropdown menu in top left, select "iWebDriver" and "iPhone 5.0 Simulator"
 
-    gem install json
+* Install iWebDriver on the iPhone Simulator:
 
-****
+  In XCode, select "Run"
 
-* To test in iPhone simulator:
 
-  You must have XCode 4.2 or later
-  svn checkout http://selenium.googlecode.com/svn/trunk/ selenium-read-only
-  open selenium-read-only/iphone/iWebDriver.xcodeproj/
-  Using dropdown menu in top left, select "iWebDriver" and "iPhone 5.0 Simulator"
-  Build and Run
+RUNNING THE TESTS:
+
+* In mwf/test directory:
+
+  cucumber
+
+
+NOTE:
+
+Unfortunately, there appears to be no easy way to instruct Cucumber/Capybara/Selenium/iWebDriver
+that the Simulator should accept the Geolocation popup, so that portion of the interaction
+must be handled manually.
