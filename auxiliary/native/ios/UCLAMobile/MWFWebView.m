@@ -25,8 +25,6 @@
         
         //Initial page has not been loaded.
         self.initPageLoaded = NO;
-        
-        
     }
     return self;
 }
@@ -165,6 +163,13 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    if (navigationType == UIWebViewNavigationTypeLinkClicked) 
+        webView.scalesPageToFit=YES;
+    return YES;
 }
 
 - (void)dealloc {
