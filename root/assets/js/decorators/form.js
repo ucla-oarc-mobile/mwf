@@ -89,29 +89,60 @@ mwf.decorator.Form = function(title)
 
     
     /**
-     * Prepends a new text block element to the current content.
+     * Appends a new text block element to the current content.
      * 
-     * @return This content.
+     * @return This form.
      */
     form.addTextBlock = function(text)
-    {
-        if(!text)
-            return this;
-        
+    {   
         //Create a new <p> tag and set its contents to equal the specified text.
         var textBlock = document.createElement('p');
-        textBlock.innerHTML = text;
+        textBlock.innerHTML = text | "";
         
-        //Append the text block to the content.
-        mwf.decorator.append(this, textBlock, FIRST_MARKER, LAST_MARKER);
-        
-        return this;
+        return this.addItem(textBlock);
+
     }
     
-
+    /**
+     * Appends a text box with a specified name and ID attributes to the 
+     * current form.
+     * 
+     * @param name The name of the text box input item.
+     * @param id The ID of the new text box input item.
+     * 
+     * @return This form.
+     */
+    form.addTextBox = function(name, id)
+    {
+        var textBox = document.createElement('input');
+        
+        textBox.name = name || null;
+        textBox.id   = id || null;
+        
+        return this.addItem(textBox);
+    }
+    
+    /**
+     * Appends a submit button to the current form.
+     * 
+     * @param text The visible text for the submit button.
+     * @param callback The callback function for the submit button's onclick
+     *        event listener.
+     *        
+     * @return This form.
+     */
+    form.addSubmitButton = function(text, callback)
+    {
+        var submitButton = document.createElement('input');
+        
+        submitButton.type = 'submit';
+        submitButton.value = text;
+        submitButton.onclick = callback || null;
+        
+        return this.addItem(submitButton);
+    }
     
     form.setTitle(title);
-
    
     return form;
 }
