@@ -193,6 +193,36 @@ mwf.decorator.Menu = function(title)
         return this.addMenuItem(createLinkItem(text, url, details));   
     }
     
+    /**
+     * Adds a link item to this menu with a 16x16 icon on the left side.
+     * 
+     * @param text    The text of the link item. 
+     *                This will be enclosed within an <a> tag.
+     * @param url     The URL of the link item.
+     * @param img_url The URL of the 16x16 icon for this menu item.
+     * @param details An optional element that adds details section to the item.    
+     * 
+     * @return This menu - allows chained invocations.
+     */
+    menu.addMenuIconItem = function(text, url, img_url, details)
+    {
+        var linkItem = createLinkItem(text, url, details);
+
+        var icon = document.createElement('img');
+
+        //Future developments should extract this out into a CSS class. 
+        icon.src = img_url;
+        icon.width  = 16;
+        icon.height = 16;
+        icon.style.verticalAlign='text-top';
+        icon.style.paddingRight = "5px";
+        
+        linkItem.insertBefore(icon, linkItem.firstChild);
+        
+        return this.addMenuItem(linkItem);
+   
+    }
+    
    
     /**
      * Creates a new radio input element and combines it with a link item to 
