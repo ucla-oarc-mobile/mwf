@@ -50,8 +50,10 @@
     [self.view insertSubview:self.splashView atIndex:4];
     self.splashView.hidden = NO;
  
-    self.webView.scrollView.bounces = NO; 
-    
+    for (id subview in self.webView.subviews)
+        if ([[subview class] isSubclassOfClass: [UIScrollView class]])
+            ((UIScrollView *)subview).bounces = NO;
+   
     //Initially try to load the online version - if there is an error, 
     //and the isOnline flag is set to NO, then the app will go into offline mode. 
     [self goHome];
@@ -164,8 +166,6 @@
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
-
-
 
 - (void)dealloc {
     
