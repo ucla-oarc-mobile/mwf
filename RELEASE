@@ -9,7 +9,7 @@ THE UCLA MOBILE WEB FRAMEWORK
 
 Copyright:
 
-    Copyright (c) 2010-11 UC Regents
+    Copyright (c) 2010-12 UC Regents
 
 License:
 
@@ -19,6 +19,7 @@ License:
 
 TABLE OF CONTENTS
 
+Version 1.2.10          January 10, 2012
 Version 1.2.09          December 14, 2011
 Version 1.2.08          November 30, 2011
 Version 1.2.07          November 11, 2011
@@ -37,6 +38,33 @@ Version 1.1.03.alpha    July 20, 2011
 Version 1.1.02.alpha    June 23, 2011
 Version 1.1.01.alpha    June 16, 2011
 Version 1.1.00.alpha    May 20, 2011
+
+==============================================================================
+
+Version 1.2.10
+January 10, 2012
+
+* Device telemetry stack to support multiple-host configuration [#45]
+
+    * Add mwf.site.local.[root|asset.root] as relative without hostname
+
+    * Update to force mwf.site.[root|asset.root] always fully-qualified
+
+    * Redirect to passthru.php on host of js.php using mwf.site.local
+
+* Update passthru.php to return empty page if no return parameter [#47]
+
+* Remove bad header from appcache.php and js.php [#46]
+
+* New version of the Mobile Web Framework license [#53]
+
+    * Update /LICENSE to reflect new license
+
+    * Update Footer_Site_Decorator for new attribution phrase
+
+    * Update MWF module to include new license
+
+* Update passthru.php to define empty <title> element [#44]
 
 ==============================================================================
 

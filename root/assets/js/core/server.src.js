@@ -52,7 +52,8 @@ mwf.server = new function(){
         
         /**
          * Set classification cookie if it doesn't already exist on server.
-         * We ch
+         * Set it if classification has changed (e.g., user turns on or off
+         *    something in their settings).
          */
         
         if(!site.cookie.exists(classification.cookieName) || site.cookie.classification != classificationCookie)
@@ -82,7 +83,7 @@ mwf.server = new function(){
         if(this.mustReload && !mwf.override.isRedirecting){
             document.location.reload();
         }else if(this.mustRedirect && !mwf.override.isRedirecting){
-            window.location = site.asset.root+'/passthru.php?return='+encodeURIComponent(window.location)+'&mode='+mwf.browser.getMode();
+            window.location = '//'+site.cookie.domain+'/'+site.local.asset.root+'/passthru.php?return='+encodeURIComponent(window.location)+'&mode='+mwf.browser.getMode();
         }
         
     }
