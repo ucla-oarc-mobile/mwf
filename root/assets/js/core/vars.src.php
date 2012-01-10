@@ -45,24 +45,71 @@ if (isset($cookies['classification']))
 else
     $classification_cookie_var = 'false';
 
-$domain_var = Config::get('global', 'site_assets_url');
-if (($pos = strpos($domain_var, '//')) !== false)
-    $domain_var = substr($domain_var, $pos + 2);
-if (($pos = strpos($domain_var, '/')) !== false)
-    $domain_var = substr($domain_var, 0, $pos);
-if (($pos = strpos($domain_var, ':')) !== false)
-    $domain_var = substr($domain_var, 0, $pos);
+/** @todo determine if we should first check HTTP_X_FORWARDED_SERVER */
+if(isset($_SERVER['HTTP_HOST'])) // actual host for multi-host requests
+{
+    $domain_var = $_SERVER['HTTP_HOST'];
+}
+else // fallthru that will not support successful multi-host requests
+{
+    $domain_var = Config::get('global', 'site_assets_url');
+    if (($pos = strpos($domain_var, '//')) !== false)
+        $domain_var = substr($domain_var, $pos + 2);
+    if (($pos = strpos($domain_var, '/')) !== false)
+        $domain_var = substr($domain_var, 0, $pos);
+    if (($pos = strpos($domain_var, ':')) !== false)
+        $domain_var = substr($domain_var, 0, $pos);
+}
+
+$site_url = $local_site_url = Config::get('global', 'site_url');
+if(strpos($local_site_url, '://') !== false || substr($local_site_url, 0, 2) == '//')
+{
+    if(($scheme_pos = strpos($local_site_url, '//')) !== false)
+    {
+        if(($pos = strpos($local_site_url, '/', $scheme_pos+2)) !== false && strlen($local_site_url) > ++$pos)
+            $local_site_url = substr($local_site_url, $pos);
+        else
+            $local_site_url = '';
+    }
+    
+    if(HTTPS::is_https())
+    {
+        $site_url = HTTPS::convert_path($site_url);
+    }
+}
+else
+    $site_url = '//'.$domain_var.'/'.$site_url;
+
+$site_asset_url = $local_site_asset_url = Config::get('global', 'site_assets_url');
+if(strpos($local_site_asset_url, '://') !== false || substr($local_site_asset_url, 0, 2) == '//')
+{
+    if(($scheme_pos = strpos($local_site_asset_url, '//')) !== false)
+    {
+        if(($pos = strpos($local_site_asset_url, '/', $scheme_pos+2)) !== false && strlen($local_site_asset_url) > ++$pos)
+            $local_site_asset_url = substr($local_site_asset_url, $pos);
+        else
+            $local_site_asset_url = '';
+    }
+    
+    if(HTTPS::is_https())
+    {
+        $site_asset_url = HTTPS::convert_path($site_asset_url);
+    }
+}
+else
+    $site_asset_url = '//'.$domain_var.'/'.$site_asset_url;
+
 ?>
 
 var mwf=new function(){};
 
 mwf.site=new function(){
 
-    this.root = '<?php echo HTTPS::is_https() ? HTTPS::convert_path(Config::get('global', 'site_url')) : Config::get('global', 'site_url'); ?>';
+    this.root = '<?php echo $site_url; ?>';
 
     this.asset = new function(){
 
-        this.root = '<?php echo HTTPS::is_https() ? HTTPS::convert_path(Config::get('global', 'site_assets_url')) : Config::get('global', 'site_assets_url'); ?>';
+        this.root = '<?php echo $site_asset_url; ?>';
 
     };
 
@@ -102,6 +149,14 @@ mwf.site=new function(){
     };
 
     this.local = new function(){
+    
+        this.root = "<?php echo $local_site_url; ?>";
+    
+        this.asset = new function(){ 
+        
+            this.root = "<?php echo $local_site_asset_url; ?>";
+            
+        };
 
         this.domain = (function(){
 

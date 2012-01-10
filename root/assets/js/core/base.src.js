@@ -26,7 +26,7 @@
  * 
  * @see /root/assets/redirect/js.php
  */
-document.write('<script type="text/javascript" src="'+mwf.site.asset.root+'/redirect/js_unset_override.php"></scr'+'ipt>');
+document.write('<script type="text/javascript" src="//'+mwf.site.cookie.domain+'/'+mwf.site.local.asset.root+'/redirect/js_unset_override.php"></scr'+'ipt>');
 
 /**
  * Classification-based namespaces.
