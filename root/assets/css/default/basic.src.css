@@ -408,6 +408,10 @@ form p {
     margin-bottom: .5em;
 }
 
+form .placeholder {
+    display: none;
+}
+
 /* ------------------------------------------------------
  * form buttons
 */
@@ -643,8 +647,22 @@ form p.invalid {
     width: auto;
 }
 
-form input[type="password"].invalid,
-form input[type="text"].invalid,
+form.full input[type="color"].invalid,
+form.full input[type="date"].invalid,
+form.full input[type="datetime"].invalid,
+form.full input[type="email"].invalid,
+form.full input[type="month"].invalid,
+form.full input[type="number"].invalid,
+form.full input[type="password"].invalid,
+form.full input[type="range"].invalid,
+form.full input[type="reset"].invalid,
+form.full input[type="search"].invalid,
+form.full input[type="submit"].invalid,
+form.full input[type="tel"].invalid,
+form.full input[type="text"].invalid,
+form.full input[type="time"].invalid,
+form.full input[type="url"].invalid,
+form.full input[type="week"].invalid,
 form select.invalid,
 form textarea.invalid {
     border: 1px solid #a00;

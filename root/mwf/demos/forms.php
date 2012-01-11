@@ -163,10 +163,10 @@ echo Site_Decorator::content_full()
 <!-- invalid -->
 <form action="#" method="post" class="full">
     <h1>Invalid Form</h1>
-    <label for="input-11" class="required invalid">Name</label>
+    <label for="input-11" class="invalid required">Name</label>
     <input type="text" id="input-11" name="input-11" class="invalid" />
     <p class="invalid">This field is required</p>
-    <label class="required invalid">Choice</label>
+    <label class="invalid required">Choice</label>
     <div class="option">
         <input type="checkbox" id="checkbox-13" name="checkbox-13" class="invalid" />
         <label for="checkbox-13" class="invalid">One</label><br />
@@ -176,14 +176,14 @@ echo Site_Decorator::content_full()
         <label for="checkbox-15"class="invalid">Three</label>
     </div>
     <p class="invalid">This field is required</p>
-    <label for="select-11" class="required invalid">Status</label>
+    <label for="select-11" class="invalid required">Status</label>
     <select id="select-11" name="select-11" class="invalid">
         <option value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>
     </select>
     <p class="invalid">This field is required</p>
-    <label for="textarea-11" class="required invalid">Comment</label>
+    <label for="textarea-11" class="invalid required">Comment</label>
     <textarea id="textarea-11" name="textarea-11" class="invalid"></textarea>
     <p class="invalid">This field is required</p>
 </form>
@@ -215,8 +215,21 @@ echo Site_Decorator::content_full()
     <a class="button disabled">Disabled</a>
 </form>
 
-<form action="#" method="post" class="full">
+<form action="#" method="post" class="full" id="html5form">
     <h1>HTML5 Input Form</h1>
+    <label>Placeholder</label>
+    <input type="text" name="placeholder" /><span class="placeholder">Please enter text here</span>
+    <label class="required">Required</label>
+    <input type="text" name="required" />
+    <label class="required">Required Div</label>
+    <div class="option">
+        <input type="checkbox" id="checkbox-80" name="checkbox-80" />
+        <label for="checkbox-80">One</label><br />
+        <input type="checkbox" id="checkbox-81" name="checkbox-81" />
+        <label for="checkbox-81">Two</label><br />
+        <input type="checkbox" id="checkbox-82" name="checkbox-82" />
+        <label for="checkbox-82">Three</label>
+    </div>
     <label>Color</label>
     <input type="text" class="color-field" name="color" />
     <label>Search</label>
@@ -239,7 +252,7 @@ echo Site_Decorator::content_full()
         <option value="8">8</option>
         <option value="10">10</option>
     </select>
-    <label>Tel</label>
+    <label class="required">Tel</label>
     <input type="text" class="tel-field" name="tel" />
     <label>Url</label>
     <input type="text" class="url-field" name="url" />
@@ -630,7 +643,7 @@ echo Site_Decorator::content_full()
             <option value="59" selected>59</option>
         </select>
     </div>
-    <input type="submit" class="primary" value="Go!" />
+    <input type="submit" class="primary" value="Test Me!" />
 </form>
 
 <!-- not-padded -->
