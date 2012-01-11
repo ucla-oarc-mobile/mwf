@@ -131,6 +131,10 @@ input {
     padding: 4px;
 }
 
+.hide {
+    display: none !important;
+}
+
 /********************************************************
  * HEADER
  *******************************************************/
@@ -387,7 +391,7 @@ form input,
 form select,
 form textarea {
     border: 1px solid #CCC;
-    font-size: 1em;
+    font-size: .9em;
 }
 
 form input,
@@ -523,10 +527,22 @@ form.full h1,
 form.full p,
 form.full a.button,
 form.full fieldset,
+form.full input[type="color"],
+form.full input[type="date"],
+form.full input[type="datetime"],
+form.full input[type="email"],
+form.full input[type="month"],
+form.full input[type="number"],
 form.full input[type="password"],
+form.full input[type="range"],
 form.full input[type="reset"],
+form.full input[type="search"],
 form.full input[type="submit"],
+form.full input[type="tel"],
 form.full input[type="text"],
+form.full input[type="time"],
+form.full input[type="url"],
+form.full input[type="week"],
 form.full select,
 form.full textarea {
     display: block;
@@ -639,7 +655,9 @@ form textarea.invalid {
 */
 form.full .date-field,
 form.full .month-field,
-form.full .week-field {
+form.full .week-field,
+form.full .datetime-field,
+form.full .time-field {
     border-bottom: none;
     padding: 0 0 0 10px;
     margin-bottom: 0;
@@ -647,7 +665,9 @@ form.full .week-field {
 
 form.full .date-field select,
 form.full .month-field select,
-form.full .week-field select {
+form.full .week-field select,
+form.full .datetime-field select,
+form.full .time-field select {
     display: inline;
     width: auto;
 }

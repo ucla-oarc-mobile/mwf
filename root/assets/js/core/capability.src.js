@@ -276,6 +276,120 @@ mwf.capability=new function(){
     }
     
     /**
+     * Methods that determine input types
+     */
+    this.inputtypes = new function() {
+        
+        /**
+         * Determine if the device supports color input type
+         * 
+         * @return bool
+         */
+        this.color = function() {
+            return _m.inputtypes.color;
+        }
+        
+        /**
+         * Determine if the device supports date input type
+         * 
+         * @return bool
+         */
+        this.date = function() {
+            return _m.inputtypes.date;
+        }
+        
+        /**
+         * Determine if the device supports datetime input type
+         * 
+         * @return bool
+         */
+        this.datetime = function() {
+            return _m.inputtypes.datetime;
+        }
+        
+        /**
+         * Determine if the device supports email input type
+         * 
+         * @return bool
+         */
+        this.email = function() {
+            return _m.inputtypes.email;
+        }
+        
+        /**
+         * Determine if the device supports month input type
+         * 
+         * @return bool
+         */
+        this.month = function() {
+            return _m.inputtypes.month;
+        }
+        
+        /**
+         * Determine if the device supports number input type
+         * 
+         * @return bool
+         */
+        this.number = function() {
+            return _m.inputtypes.number;
+        }
+        
+        /**
+         * Determine if the device supports range input type
+         * 
+         * @return bool
+         */
+        this.range = function() {
+            return _m.inputtypes.range;
+        }
+        
+        /**
+         * Determine if the device supports search input type
+         * 
+         * @return bool
+         */
+        this.search = function() {
+            return _m.inputtypes.search;
+        }
+        
+        /**
+         * Determine if the device supports tel input type
+         * 
+         * @return bool
+         */
+        this.tel = function() {
+            return _m.inputtypes.tel;
+        }
+        
+        /**
+         * Determine if the device supports time input type
+         * 
+         * @return bool
+         */
+        this.time = function() {
+            return _m.inputtypes.time;
+        }
+        
+        /**
+         * Determine if the device supports url input type
+         * 
+         * @return bool
+         */
+        this.url = function() {
+            return _m.inputtypes.url;
+        }
+        
+        /**
+         * Determine if the device supports week input type
+         * 
+         * @return bool
+         */
+        this.week = function() {
+            return _m.inputtypes.week;
+        }
+    }
+    
+    /**
      * Determine if the device browser supports the DOM localStorage object and
      * associated local storage API.
      * 
