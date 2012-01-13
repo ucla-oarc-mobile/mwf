@@ -1,0 +1,1 @@
+mwf.tooltip=function(a){(function(c){var b=c.extend({selector:""},a);c(b.selector+" .tiptext").addClass("tooltip").before('<a href="#" class="tip">tip</a>');c(b.selector+" .tip").tooltip({effect:"slide",position:"top right",offset:[40,-40],events:{def:"mouseover focus, mouseout blur"}}).dynamic({bottom:{direction:"down",bounce:true}})})(jQuery)};

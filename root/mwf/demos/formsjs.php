@@ -30,6 +30,7 @@ echo HTML_Decorator::html_start()->render();
 echo Site_Decorator::head()
         ->set_title('MWF Demos')
         ->add_js_handler_library('full_libs', 'forms')
+        ->add_js_handler_library('standard_libs', 'tooltip')
         ->render();
 ?>
 
@@ -48,7 +49,7 @@ echo Site_Decorator::content_full()
 ?>
 
 <!-- required -->
-<form action="#" method="post" class="full">
+<form action="#" method="post" class="full" id="form1">
     <h1>Required Form</h1>
     <p>This form demonstrates client-side required validation.  Note that required validation does not work with checkbox or radio.</p>
     <label for="input-10" class="required">Name</label>
@@ -57,9 +58,9 @@ echo Site_Decorator::content_full()
     <div class="option">
         <input type="checkbox" id="checkbox-10" name="checkbox-10" />
         <label for="checkbox-10">One</label><br />
-        <input type="checkbox" id="checkbox-11" name="checkbox-11" />
+        <input type="checkbox" id="checkbox-11" name="checkbox-10" />
         <label for="checkbox-11">Two</label><br />
-        <input type="checkbox" id="checkbox-12" name="checkbox-12" />
+        <input type="checkbox" id="checkbox-12" name="checkbox-10" />
         <label for="checkbox-12">Three</label>
     </div>
     <label for="select-10" class="required">Status</label>
@@ -70,9 +71,9 @@ echo Site_Decorator::content_full()
     </select>
     <label for="textarea-10" class="required">Comment</label>
     <textarea id="textarea-10" name="textarea-10"></textarea>
-    <label for="input-11" class="required">Tooltip</label><a href="#" class="tip">tip</a><span class="tiptext">Tip text goes here</span>
+    <label for="input-11" class="required">Tooltip</label><span class="tiptext">Tip text goes here</span>
     <input type="text" id="input-11" name="input-11" />
-    <label for="input-12" class="required">Tooltip with a really long label</label><a href="#" class="tip">tip</a><span class="tiptext">A very very very very very very very very very very very long text goes here</span>
+    <label for="input-12" class="required">Tooltip with a really long label</label><span class="tiptext">A very very very very very very very very very very very long text goes here</span>
     <input type="text" id="input-12" name="input-12" />
     <input type="submit" class="primary" value="Test Me!" />
 </form>
@@ -519,6 +520,7 @@ echo Site_Decorator::default_footer()->render();
 ?>
 
 <script type="text/javascript">
+    mwf.tooltip();
     mwf.forms.init();
 </script>
 
