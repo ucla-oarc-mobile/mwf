@@ -260,6 +260,29 @@ form select {
     padding: 4px;
 }
 
+/* tooltip */
+form .tip {
+    background: transparent url(img/forms-tip.png) center right no-repeat;
+    margin-top: 1em;
+    padding-right: 1.5em;
+}
+
+form .tooltip {
+    display: none;	
+    background: transparent url(img/forms-tip-bg.png) 0 0 no-repeat;
+    height: 161px;
+    padding: 20px 30px;
+    width: 250px;
+    color: #fff;
+    font-style: normal;
+    text-align: left;
+}
+
+form .tooltip.bottom {
+    background-image: url(img/forms-tip-bg-down.png);
+    padding: 40px 30px;
+}
+
 /* making control equal width */
 form.full input,
 form.full textarea,

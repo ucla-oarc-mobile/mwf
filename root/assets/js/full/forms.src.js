@@ -18,9 +18,30 @@ mwf.forms = new function() {
     /**
      * Initializes the form by transforming input types into HTML5 input types 
      * if the device supports it.  Any changes to the transformed input type 
-     * values will also be changed in the non HTML5 input types.
+     * values will also be changed in the non HTML5 input types.  Also displays
+     * tool tips.
      */
     this.init = function() {
+        
+        /////////////////////////////////////////
+        // Tool Tips
+        /////////////////////////////////////////
+        $(".tiptext").addClass("tooltip");
+        
+        $(".tip").tooltip(
+            {
+                effect: 'slide',
+                position: 'top right',
+                offset: [40, -40],
+                events: {
+                    def: "mouseover focus, mouseout blur"
+                }
+            }
+        ).dynamic(
+            {
+                bottom: {direction: 'down', bounce: true}
+            }
+        );
         
         /////////////////////////////////////////
         // Transform

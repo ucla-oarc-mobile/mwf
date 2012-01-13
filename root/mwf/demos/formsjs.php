@@ -70,6 +70,10 @@ echo Site_Decorator::content_full()
     </select>
     <label for="textarea-10" class="required">Comment</label>
     <textarea id="textarea-10" name="textarea-10"></textarea>
+    <label for="input-11" class="required">Tooltip</label><a href="#" class="tip">tip</a><span class="tiptext">Tip text goes here</span>
+    <input type="text" id="input-11" name="input-11" />
+    <label for="input-12" class="required">Tooltip with a really long label</label><a href="#" class="tip">tip</a><span class="tiptext">A very very very very very very very very very very very long text goes here</span>
+    <input type="text" id="input-12" name="input-12" />
     <input type="submit" class="primary" value="Test Me!" />
 </form>
 
@@ -77,8 +81,8 @@ echo Site_Decorator::content_full()
     <h1>HTML5 Input Form</h1>
     <p>This form demonstrates HTML5 input types, placeholder, and various validation.</p>
     <label>Placeholder</label>
-    <input type="text" name="placeholder" /><span class="placeholder">Please enter text here</span>
-    <label class="required">Required</label>
+    <input type="text" name="placeholder" />
+    <label class="required">Required</label><span class="placeholder">Please enter text here</span>
     <input type="text" name="required" />
     <label class="required">Required Div</label>
     <div class="option">

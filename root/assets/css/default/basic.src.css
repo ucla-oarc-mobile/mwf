@@ -412,6 +412,21 @@ form .placeholder {
     display: none;
 }
 
+/* tooltip */
+form .tip {
+    display: block;
+    float: right;
+    overflow: hidden;
+    text-indent: -999em;
+}
+
+form .tiptext {
+    display: block;
+    margin: 0 10px;
+    color: #999;
+    font-style: italic;
+}
+
 /* ------------------------------------------------------
  * form buttons
 */
