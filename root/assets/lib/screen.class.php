@@ -81,7 +81,7 @@ class Screen
     public static function parse($dimensions)
     {
         include_once(dirname(__FILE__).'/json.php');
-        return json_decode(str_replace(array('\\x3B', '\\x2C'), array(';', ','), stripslashes($dimensions)));
+        return json_decode(str_replace(array('\\x3B', '\\x2C'), array(';', ','), $dimensions));
     }
     
     public static function get($name)

@@ -9,7 +9,7 @@ THE UCLA MOBILE WEB FRAMEWORK
 
 Copyright:
 
-    Copyright (c) 2010-11 UC Regents
+    Copyright (c) 2010-12 UC Regents
 
 License:
 
@@ -19,6 +19,9 @@ License:
 
 TABLE OF CONTENTS
 
+Version 1.2.10          January 10, 2012
+Version 1.2.09          December 14, 2011
+Version 1.2.08          November 30, 2011
 Version 1.2.07          November 11, 2011
 Version 1.2.06          November 9, 2011
 Version 1.2.05          October 26, 2011
@@ -35,6 +38,65 @@ Version 1.1.03.alpha    July 20, 2011
 Version 1.1.02.alpha    June 23, 2011
 Version 1.1.01.alpha    June 16, 2011
 Version 1.1.00.alpha    May 20, 2011
+
+==============================================================================
+
+Version 1.2.10
+January 10, 2012
+
+* Device telemetry stack to support multiple-host configuration [#45]
+
+    * Add mwf.site.local.[root|asset.root] as relative without hostname
+
+    * Update to force mwf.site.[root|asset.root] always fully-qualified
+
+    * Redirect to passthru.php on host of js.php using mwf.site.local
+
+* Update passthru.php to return empty page if no return parameter [#47]
+
+* Remove bad header from appcache.php and js.php [#46]
+
+* New version of the Mobile Web Framework license [#53]
+
+    * Update /LICENSE to reflect new license
+
+    * Update Footer_Site_Decorator for new attribution phrase
+
+    * Update MWF module to include new license
+
+* Update passthru.php to define empty <title> element [#44]
+
+==============================================================================
+
+Version 1.2.09
+December 14, 2011
+
+* Fix critical typo in mwf.site.local causing DTS infinite loop [#40]
+
+* Fix critical escaping in mwf.server/userAgent causing DTS infinite loop [#41]
+
+* Add quirks mode logic to passthru.php to avoid capabilities flip-flop [#40]
+
+* Fix bug in Head_Site_Decorator query string escaping logic [#42] 
+
+* Add appcache handler and extend Head_Site_Decorator to include it [#37/#39]
+
+* Add of watchPosition and clearWatch to geolocation API [#34/#35]
+
+==============================================================================
+
+Version 1.2.08
+November 30, 2011
+
+* Fix for when title_text is not set [#32]
+
+* Fix for Head_Site_Decorator when multiple JS/CSS libs included [#21]
+
+* Remove dead cookie domain code in mwf.site [#30]
+
+* Remove extraneous stripslashes in screen, user_agent and classification [#29]
+
+* Remove dead error code in mwf.server [#31]
 
 ==============================================================================
 

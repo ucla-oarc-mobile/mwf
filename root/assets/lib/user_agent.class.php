@@ -115,7 +115,7 @@ class User_Agent
     public static function parse($useragent)
     {
         include_once(dirname(__FILE__).'/json.php');
-        return json_decode(str_replace(array('\\x3B', '\\x2C'), array(';', ','), stripslashes($useragent)));
+        return json_decode(str_replace(array('\\x3B', '\\x2C'), array(';', ','), $useragent));
     }
     
     /**

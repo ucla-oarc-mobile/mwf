@@ -1,0 +1,560 @@
+/********************************************************
+ * VISIBILITY
+ *******************************************************/
+
+.not-basic,
+.only-webkit,
+.only-full {
+	display: none;
+}
+
+/********************************************************
+ * GLOBAL
+ *******************************************************/
+
+body, html {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+body { 
+    background-color: #ddd;
+    font:100%/1.25 Arial, Helvetica, sans-serif; 
+    font-size: .93em; 
+    line-height: 1.5;
+}
+
+html, 
+body, 
+address, 
+blockquote, 
+body, 
+dd, 
+div, 
+dl, 
+dt, 
+fieldset, 
+form, 
+frame, 
+frameset, 
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6, 
+ol, 
+p, 
+ul, 
+center, 
+dir, 
+hr, 
+menu, 
+pre { 
+    display: block; 
+    padding: 0;
+    margin: 0;
+}
+
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6 { 
+    line-height: 1.2em; 
+}
+
+h1, 
+h2 { 
+    font-size: 1.2em; 
+    font-weight: bold; 
+}
+
+h3, 
+h4 { 
+    font-size: 1.1em; 
+    font-weight: bold; }
+
+h5 { 
+    font-size: 1.1em; 
+    font-weight: normal; 
+}
+
+h6 { 
+    font-size: 1em; 
+    font-weight: bold; 
+}
+
+a { 
+    text-decoration: none; 
+}
+
+.center { 
+    text-align: center !important; 
+    margin-left: auto; 
+    margin-right: auto; 
+}
+
+.align-left { 
+    text-align: left !important; 
+}
+
+.align-right { 
+    text-align: right !important; 
+}
+
+.clear { 
+    width: 100%; 
+    clear: both; 
+    float: none !important; 
+    height: 1px; 
+}
+
+.smallprint {
+    font-weight: normal;
+    font-size: 90%;
+}
+
+a, 
+a:visited {
+    color: #2685bb;
+}
+
+p a {
+    border-bottom: none;
+}
+
+input {
+     border: 1px solid #cccccc;
+     padding: 4px;
+}
+
+/********************************************************
+ * HEADER
+ *******************************************************/
+
+#header {
+    background: #536895 url(img/header-bg.png) repeat-x;
+    height: 35px;
+    border-bottom: 3px solid #869ac5;
+}
+
+#header img {
+    border: none;
+    float: left;
+}
+
+#header span {
+    float: left;
+    padding: 8px 0 0 5px;
+    font-weight: normal;
+    font-size: 16px;
+}
+
+#header span, #header span a {
+    color: #fff;
+}
+
+/********************************************************
+ * MENUS
+ *******************************************************/
+
+/*-------------------------------------------------
+  Headings
+  ------------------------------------------------*/
+
+.menu-full {
+    width: 100%;
+    font-size: 1.1em;
+ }
+
+.menu-full > h1 {
+    background: #efefef;
+    color: #000;
+    padding: .5em 0 .4em 0;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.menu-full li > p {
+    font-weight: normal;
+}
+
+.menu-full > h1.light {
+    background-color: #f6f6f6;
+    color: #555;
+}
+
+.menu-full > h1.blue {
+    background-color: #809FE2;
+    color: #fff;
+}
+
+.menu-full a h4 {
+    color: #2685bb;
+}
+
+.menu-full a:hover h4,
+.menu-full a:focus h4,
+.menu-full a:active h4 {
+    color: #494D69;
+}
+
+.menu-full a h4 {
+    color: #1e6a95;
+}
+.menu-full a:hover h4,
+.menu-full a:focus h4,
+.menu-full a:active h4 {
+    color: #494D69;
+}
+
+.menu-full p {
+    color: #000;
+}
+.menu-detailed p {
+    color: #555;
+}
+
+.menu-full img {
+    max-width: 100%;
+    height: auto;
+}
+
+/*-------------------------------------------------
+Lists
+------------------------------------------------*/
+
+.menu-full li a {
+     background:url(img/list-arrow.png) no-repeat 95% center; /* Controls menu items */
+}
+
+.menu-full li {
+    background-color: #FFF;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.menu-full li a:hover,
+.menu-full li a:focus,
+.menu-full li a:active {
+    background-color: #eaf2fa;
+}
+
+.menu-full li a {
+    padding: .9em 2em .8em 2em;
+}
+
+.menu-full ol {
+    list-style-type: none;
+}
+
+.menu-detailed li {
+    font-size: 1em;
+    text-align: left;
+}
+
+.menu-detailed li a, 
+.menu-detailed li p
+{
+    padding: .9em 2em .8em .9em;
+}
+
+.menu-button a {
+    color: #2685BB;
+}
+
+
+/********************************************************
+ * LISTS
+ *******************************************************/
+
+.front-page li, .menu-full li {
+    font-weight: bold;
+}
+
+li .smallprint {
+    color: #666666;
+}
+
+li a, li p {
+    display: block;
+    padding: .6em 2em;
+}
+
+li a {
+    color: #2685bb;
+    border: none;
+}
+
+/********************************************************
+ * BUTTONS
+ *******************************************************/
+
+a.button-full, div.button-full {
+    width: auto;
+    margin: 0;
+}
+
+a.button-full, div.button-full a{
+    border-bottom: 1px solid #aaa;
+    padding: .5em 0 .4em 0;
+    background-color: #536895;
+    color: #fff;
+    display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+a.button-full:hover,
+a.button-full:focus,
+a.button-full:active,
+div.button-full a:hover,
+div.button-full a:focus,
+div.button-full a:active{
+    background-color: #ffb300;
+    color: #494D69;
+}
+
+/********************************************************
+ * FORMS
+ *******************************************************/
+
+form.form-full {
+    background-color: #fff;
+    padding-bottom: 10px;
+}
+
+form.form-full > h1 {
+    background: #efefef;
+    color: #000;
+    margin: 0 0 10px 0;
+    padding: .4em 0 .4em 0;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+form.form-full > h1.light {
+    background-color: #f6f6f6;
+    border-bottom: 1px solid #ddd;
+}
+
+form.form-full > h1,
+form.form-full > input,
+form.form-full > select,
+form.form-full > textarea,
+form.form-full > label,
+form.form-full > p,
+form.form-full > div {
+    width: 100%;
+    display: block;
+    border: 0;
+}
+
+form.form-full > p {
+    padding: 4px 8px;
+    width: auto;
+    color: #444;
+}
+
+form.form-full > label {
+    font-size: .85em;
+    text-align: center;
+    color: #777;
+}
+
+form.form-full > input,
+form.form-full > select,
+form.form-full > textarea {
+    font-size: .95em;
+    background-color: #f1f1f1;
+    margin: 0 auto 10px auto;
+    width: 80%;
+    border: 1px solid #bbb;
+}
+
+form.form-full > input {
+    text-align: center;
+}
+
+form.form-full > textarea {
+    height: 4em;
+    line-height: 1.6em;
+}
+
+form.form-full > input[type=submit],
+form.form-full > input[type=reset] {
+    background-color: #eee;
+    font-weight: bold;
+    color: #1e6a95;
+}
+
+form.form-full > input[type=submit]:active,
+form.form-full > input[type=reset]:active,
+form.form-full > input[type=submit]:focus,
+form.form-full > input[type=reset]:focus,
+form.form-full > input[type=submit]:hover,
+form.form-full > input[type=reset]:hover {
+    background-color: #f6f6f6;
+    color: #2685bb;
+}
+
+
+/********************************************************
+ * CONTENT
+ *******************************************************/
+
+/*-------------------------------------------------
+  Headings
+  ------------------------------------------------*/
+
+.content-full img,
+.content-elements img {
+    max-width: 100%;
+    height: auto;
+}
+
+ .content-elements p, .content-full p {
+    margin: 0;
+}
+
+.content-elements, .content-full {
+    width: 100%;
+}
+
+.content-elements > *, .content-full > * {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    padding: .8em;
+}
+
+.content-elements > h1, .content-full > h1 {
+    background-color: #e9e9e9;
+    color: #000;
+}
+
+.content-elements > h1, .content-full > h1,
+.content-elements > h4, .content-full > h4 {
+    padding: .5em 0 .4em;
+    text-align: center;
+}
+
+.content-elements > h1.light, .content-full > h1.light {
+    background-color: #f9f9f9;
+}
+
+.content-elements > h1.blue, .content-full > h1.blue {
+    background-color: #809FE2;
+    color: #fff;
+}
+
+.content-button a {
+    color: #2685BB;
+    font-weight: bold;
+}
+
+.content-button a .label {
+    color: #777;
+    font-weight: bold;
+}
+
+
+/*-------------------------------------------------
+  Breadcrumbs
+  ------------------------------------------------*/
+
+#breadcrumbs {
+    padding: 5px 0;
+    margin-left: 15px;
+    font-size: .9em;
+    font-weight: bold;
+}
+
+#breadcrumbs a {
+    text-decoration: none;
+    color: #2685bb;
+}
+
+/*-------------------------------------------------
+  General
+  ------------------------------------------------*/
+.content-elements, .content-full {
+    margin: 0;
+}
+
+.content-elements div ol, .content-full div ol {
+    margin: 0 1.5em;
+    position: relative;
+}
+
+.content-elements > * p, .content-full > * p {
+    margin-bottom: .5em;
+}
+
+/********************************************************
+ * FOOTER
+ *******************************************************/
+
+#footer {
+	font-size: 80%;
+	padding: 1em;
+	text-align: center;
+}
+
+#footer,
+#footer a,
+#footer a:visited,
+#footer a:hover {
+	color: #666666;
+}
+
+#footer a,
+#footer a:visited {
+	text-decoration: none;
+	border-bottom: 1px solid #666666;
+}
+
+#footer a:hover {
+	border-bottom: none;
+}
+
+/********************************************************
+ * PREVIEW MODE
+ *******************************************************/
+
+#desktop-preview-menu {
+    padding: 3px 10px;
+    background-color: #fff;
+    border-bottom: 1px solid #000;
+}
+
+#desktop-preview-menu h1 {
+    color: #000000;
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
+    padding-top: 1px;
+    float: left;
+}
+
+#desktop-preview-menu div.options {
+    font-size: 12px;
+    float: right;
+}
+
+/********************************************************
+ * FRONT PAGE
+ *******************************************************/
+body.front-page h1#header {
+    background: #536895 url(img/header-front-page-bg.png) repeat-x;
+    height: 50px;
+}
+body.front-page h1#header img {
+    float: none;
+}
+body.front-page h1#header span {
+    display: none;
+}

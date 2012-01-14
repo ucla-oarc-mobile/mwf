@@ -39,30 +39,22 @@ echo Site_Decorator::header()
         ->set_title('MWF Demo')
         ->render();
 
-echo Site_Decorator::content_full()
+echo Site_Decorator::content()
         ->set_padded()
         ->add_header('MWF Forms Demo')
         ->add_paragraph('The following is a demo of MWF Forms UI.')
         ->render();
 ?>
 
-<!-- short form -->
-<form action="#" method="post">
-    <h1>Short Form</h1>
-    <label for="input-0">Name</label>
-    <input type="text" id="input-0" name="input-0" />
-    <input type="submit" class="primary" value="Search">
-</form>
-
 <!-- left aligned full form -->
-<form action="#" method="post" class="full">
-    <h1>Full Form</h1>
+<form action="#" method="post" class="padded">
+    <h1>Simple Form</h1>
     <label for="input-1">Name</label>
     <input type="text" id="input-1" name="input-1" />
 </form>
 
 <!-- options -->
-<form action="#" method="post" class="full">
+<form action="#" method="post" class="padded">
     <h1>Option Form</h1>
     <label>Checkbox</label>
     <div class="option">
@@ -94,20 +86,7 @@ echo Site_Decorator::content_full()
 </form>
 
 <!-- button -->
-<form action="#" method="post">
-    <h1>Short Button Form</h1>
-    <br />
-    <input type="submit" value="Primary Button" class="primary" >
-    <input type="submit" value="Secondary Button" class="secondary">
-    <input type="reset" value="Neutral Button" class="neutral">
-    <br />
-    <br />
-    <a href="#" class="button primary">Primary Link</a>
-    <a href="#" class="button secondary">Secondary Link</a>
-    <a href="#" class="button neutral">Neutral Link</a>
-</form>
-
-<form class="full" action="#" method="post">
+<form class="padded" action="#" method="post">
     <h1>Full Button Form</h1>
     <input type="submit" value="Primary Button" class="primary" >
     <input type="submit" value="Secondary Button" class="secondary">
@@ -118,14 +97,14 @@ echo Site_Decorator::content_full()
 </form>
 
 <!-- textarea -->
-<form action="#" method="post" class="full">
+<form action="#" method="post" class="padded">
     <h1>Textarea Form</h1>
     <label for="textarea-1">Label for Text Area 1</label>
     <textarea id="textarea-1" name="textarea-1"></textarea>
 </form>
 
 <!-- select -->
-<form action="#" method="post" class="full">
+<form action="#" method="post" class="padded">
     <h1>Select Form</h1>
     <label for="select-1">Label for Select 1</label>
     <select id="select-1" name="select-1">
@@ -136,7 +115,7 @@ echo Site_Decorator::content_full()
 </form>
 
 <!-- required -->
-<form action="#" method="post" class="full">
+<form action="#" method="post" class="padded">
     <h1>Required Form</h1>
     <label for="input-10" class="required">Name</label>
     <input type="text" id="input-10" name="input-10" />
@@ -160,7 +139,7 @@ echo Site_Decorator::content_full()
 </form>
 
 <!-- invalid -->
-<form action="#" method="post" class="full">
+<form action="#" method="post" class="padded">
     <h1>Invalid Form</h1>
     <label for="input-11" class="invalid required">Name</label>
     <input type="text" id="input-11" name="input-11" class="invalid" />
@@ -188,7 +167,7 @@ echo Site_Decorator::content_full()
 </form>
 
 <!-- disabled -->
-<form action="#" method="post" class="full">
+<form action="#" method="post" class="padded">
     <h1>Disabled Form</h1>
     <label for="input-12" class="required">Name</label>
     <input type="text" id="input-12" name="input-12" disabled="disabled"/>
@@ -215,7 +194,7 @@ echo Site_Decorator::content_full()
 </form>
 
 <!-- not-padded -->
-<form class="not-padded" action="#" method="post">
+<form action="#" method="post">
     <h1 class="first">Not Padded Form</h1>
     <label for="input-99">Label 99</label>
     <input type="text" id="input-99" name="input-99">
@@ -223,7 +202,7 @@ echo Site_Decorator::content_full()
 </form>
 
 <!-- prototype 1 -->
-<form class="full" action="#" method="post">
+<form class="padded" action="#" method="post">
     <h1 class="first">Prototype 1</h1>
     <h4>Subtitle</h4>
     <p>A content box with paragraph content.</p>
@@ -260,7 +239,7 @@ echo Site_Decorator::content_full()
 </form>
 
 <!-- prototype 2 -->
-<div class="content-full content-padded">
+<div class="content padded">
     <h1 class="light">Prototype 2</h1>
     <h4>Subtitle</h4>
     <p>A content box with paragraph content.</p>
@@ -268,8 +247,8 @@ echo Site_Decorator::content_full()
         <p>One of multiple paragraphs defined within one content box (div).</p>
         <p>Another of multiple paragraphs defined within one content box (div).</p>
     </div>
-    <form class="full" action="#" method="post">
-        <h4 class="first">Subtitle</h4>
+    <form action="#" method="post">
+        <h4>Subtitle</h4>
         <p>A content box with paragraph content.</p>
         <div>
             <p>One of multiple paragraphs defined within one content box (div).</p>
@@ -312,7 +291,7 @@ echo Site_Decorator::content_full()
 </div>
 
 <!-- prototype 3 -->
-<div class="content-full content-padded">
+<div class="content padded">
     <h1 class="blue">Prototype 3</h1>
     <h4>Subtitle</h4>
     <p>A content box with paragraph content.</p>
@@ -321,7 +300,7 @@ echo Site_Decorator::content_full()
         <p>Another of multiple paragraphs defined within one content box (div).</p>
     </div>
     <div>
-        <form class="full" action="#" method="post">
+        <form action="#" method="post">
             <p class="first">This and all the below form elements should be within one content box.</p>
             <fieldset>
                 <label for="input-102">Label for Input 102</label>
@@ -354,7 +333,7 @@ echo Site_Decorator::content_full()
 </div>
 
 <?php
-echo Site_Decorator::button_full()
+echo Site_Decorator::button()
         ->set_padded()
         ->add_option('Back to Demos', Config::get('global', 'site_url') . '/mwf/demos.php')
         ->render();

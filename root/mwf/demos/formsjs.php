@@ -41,7 +41,7 @@ echo Site_Decorator::header()
         ->set_title('MWF Demo')
         ->render();
 
-echo Site_Decorator::content_full()
+echo Site_Decorator::content()
         ->set_padded()
         ->add_header('MWF Forms Demo')
         ->add_paragraph('The following is a demo of MWF Forms JS.')
@@ -49,7 +49,7 @@ echo Site_Decorator::content_full()
 ?>
 
 <!-- required -->
-<form action="#" method="post" class="full" id="form1">
+<form action="#" method="post" class="padded" id="form1">
     <h1>Required Form</h1>
     <p>This form demonstrates client-side required validation.  Note that required validation does not work with checkbox or radio.</p>
     <label for="input-10" class="required">Name</label>
@@ -78,7 +78,7 @@ echo Site_Decorator::content_full()
     <input type="submit" class="primary" value="Test Me!" />
 </form>
 
-<form action="#" method="post" class="full" id="html5form">
+<form action="#" method="post" class="padded" id="html5form">
     <h1>HTML5 Input Form</h1>
     <p>This form demonstrates HTML5 input types, placeholder, and various validation.</p>
     <label>Placeholder</label>
@@ -511,7 +511,7 @@ echo Site_Decorator::content_full()
 </form>
 
 <?php
-echo Site_Decorator::button_full()
+echo Site_Decorator::button()
         ->set_padded()
         ->add_option('Back to Demos', Config::get('global', 'site_url') . '/mwf/demos.php')
         ->render();
@@ -520,8 +520,12 @@ echo Site_Decorator::default_footer()->render();
 ?>
 
 <script type="text/javascript">
-    mwf.tooltip();
-    mwf.forms.init();
+    if (mwf.classification.isStandard()) {
+        mwf.tooltip();
+    }
+    if (mwf.classification.isFull()) {
+        mwf.forms.init();
+    }
 </script>
 
 <?php

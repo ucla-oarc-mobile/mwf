@@ -103,12 +103,12 @@ mwf.messages.modal = function(options) {
                 throw "Text parameter must be specified";
             }
         
-            element += '<div class="message full ';
+            element += '<div class="message ';
             
             element += settings.type;
             
-            if (!settings.padded) {
-                element += ' not-padded'
+            if (settings.padded) {
+                element += ' padded'
             }
             
             element += '">';
@@ -126,18 +126,18 @@ mwf.messages.modal = function(options) {
             return;
         }
         
-        if (message.hasClass("not-padded")) {
-            settings.padded = false;
+        if (message.hasClass("padded")) {
+            settings.padded = true;
         }
             
         var mask = $('<div class="message-mask" />');
-        var buttonClass = "message-button button-full";
+        var buttonClass = "message-button button";
             
-        if (!settings.padded) {
-            buttonClass += " not-padded";
+        if (settings.padded) {
+            buttonClass += " padded";
         }
             
-        var button = $('<a href="#" class="' + buttonClass + '">OK</a>');
+        var button = $('<div class="' + buttonClass + '"><a href="#">OK</a></div>');
             
         // remove from DOM and added it back to the beginning of page
         message.detach();
@@ -166,5 +166,3 @@ mwf.messages.modal = function(options) {
     
     })(jQuery);
 }
-
-
