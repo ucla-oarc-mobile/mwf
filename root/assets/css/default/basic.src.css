@@ -510,12 +510,8 @@ form a.button {
     color: #000;
     cursor: pointer;
     font: 100%/1.25 Arial, Helvetica, sans-serif;
-    padding: 4px 10px;
-}
-
-form a.button {
-    display: inline-block;
-    padding: 4px 14px;
+    margin-top: 10px;
+    padding: .5em 0;
 }
 
 form input[type="submit"]:disabled,
@@ -628,9 +624,9 @@ form .last {
     border-bottom: none;
 }
 
-form input[type="checkbox"],
-form input[type="radio"] {
-    margin-top: .5em;
+form .option br {
+    display: block;
+    margin: .25em 0;
 }
 
 form input[type="checkbox"],
@@ -680,20 +676,6 @@ form .option.right {
 form .option.justify input[type="checkbox"],
 form .option.justify input[type="radio"]{
     float: right;
-}
-
-/* ------------------------------------------------------
- * full form button
- */
-form a.button {
-    height: auto;
-    padding: 4px 0;
-}
-
-form input[type="reset"],
-form input[type="submit"],
-form a.button {
-    margin-top: 10px;
 }
 
 /* ------------------------------------------------------
