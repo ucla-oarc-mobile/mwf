@@ -46,7 +46,7 @@ $terms = array(
         application or website  The aforementioned logo or text (which can be 
         found at this webpage:  http://mwf.ucla.edu/attribution) should be an 
         image or textual active hyperlink to this web address:  
-        http://mwf.ucla.edu and maybe placed on an \'about\' page or other 
+        http://mwf.ucla.edu and may be placed on an \'about\' page or other 
         central, descriptive page.',
 '        Not remove any copyright or other notices from the Software.',
 '        That you will not distribute this software or any Derivative Works of 
