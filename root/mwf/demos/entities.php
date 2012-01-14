@@ -438,6 +438,11 @@ echo Site_Decorator::menu()
             ->add_item('Item 2<p>Description</p>', '#')
             ->render();
 
+echo Site_Decorator::button_full()
+        ->set_padded()
+        ->add_option('Back to Demos', Config::get('global', 'site_url') . '/mwf/demos.php')
+        ->render();
+
 echo Site_Decorator::default_footer()->render();
 
 echo HTML_Decorator::body_end()->render();
