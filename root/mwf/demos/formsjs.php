@@ -82,8 +82,8 @@ echo Site_Decorator::content()
     <h1>HTML5 Input Form</h1>
     <p>This form demonstrates HTML5 input types, placeholder, and various validation.</p>
     <label>Placeholder</label>
-    <input type="text" name="placeholder" />
-    <label class="required">Required</label><span class="placeholder">Please enter text here</span>
+    <input type="text" name="placeholder" /><span class="placeholder">Please enter text here</span>
+    <label class="required">Required</label>
     <input type="text" name="required" />
     <label class="required">Required Div</label>
     <div class="option">

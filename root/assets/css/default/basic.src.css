@@ -512,6 +512,7 @@ form a.button {
     font: 100%/1.25 Arial, Helvetica, sans-serif;
     margin-top: 10px;
     padding: .5em 0;
+    height: auto;
 }
 
 form input[type="submit"]:disabled,
