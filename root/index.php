@@ -65,6 +65,7 @@ if (! isset($menu_names)) {
 $menu_ids = Config::get('frontpage', 'menu.id.'.$menu_section);
 $menu_urls = Config::get('frontpage', 'menu.url.'.$menu_section);
 $menu_restrictions = Config::get('frontpage', 'menu.restriction.'.$menu_section);
+$menu_externals = Config::get('frontpage', 'menu.external.'.$menu_section);
 
 $main_menu = ($menu_section == 'default');
 /**
@@ -102,8 +103,16 @@ for($i = 0; $i < count($menu_names); $i++)
         if (!User_Agent::$function())
             continue;
     }
+    $link_attributes=array();
+    if (isset($menu_externals[$i])) {
+        if ($menu_externals[$i]) 
+            $link_attributes['rel']='external';
+    }
+    $list_item_attributes=array();
+    if (isset($menu_ids[$i]))
+        $list_item_attributes['id']=$menu_ids[$i];
 
-    $menu->add_item($menu_names[$i], $menu_urls[$i], isset($menu_ids[$i]) ? array('id' => $menu_ids[$i]) : array());
+    $menu->add_item($menu_names[$i], $menu_urls[$i], $list_item_attributes,$link_attributes);
 }
 
 echo $menu->render();

@@ -133,7 +133,7 @@ echo Site_Decorator::content()
         ->add_paragraph('UCLA reserves the right to modify this license at any
 time. Therefore, although this represents a working copy of the UCLA Mobile
 Web Framework license, the latest version exists on the MWF site.')
-        ->add_paragraph(HTML_Decorator::tag('a', 'http://mwf.ucla.edu/license', array('href'=>'http://mwf.ucla.edu/license')), array('style'=>'text-align:center;'))
+        ->add_paragraph(HTML_Decorator::tag('a', 'http://mwf.ucla.edu/license', array('href'=>'http://mwf.ucla.edu/license', 'rel'=>'external')), array('style'=>'text-align:center;'))
         ->render();
 
 echo Site_Decorator::button()

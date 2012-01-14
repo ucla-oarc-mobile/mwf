@@ -78,7 +78,7 @@ class Footer_Site_Decorator extends Tag_HTML_Decorator {
 
         if($this->_powered_by)
         {
-            $this->add_inner_tag('p', 'Powered by the <br><a href="http://mwf.ucla.edu" target="_blank">Mobile Web Framework</a>', array('style'=>'font-weight:bold;font-style:italic'));
+            $this->add_inner_tag('p', 'Powered by the <br><span class="external"><a rel="external" class="no-ext-ind" href="http://mwf.ucla.edu" target="_blank">Mobile Web Framework</a></span>', array('style'=>'font-weight:bold;font-style:italic'));
         }
 
         return parent::render();
