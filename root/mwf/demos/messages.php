@@ -69,7 +69,7 @@ echo Site_Decorator::content_full()
 <?php
 echo Site_Decorator::button_full()
         ->set_padded()
-        ->add_option('Back to Demos', Config::get('global', 'site_url') . '/mwf/demos.php')
+        ->add_option('Back To Demos', Config::get('global', 'site_url') . '/mwf/demos.php')
         ->render();
 
 echo Site_Decorator::default_footer()->render();
