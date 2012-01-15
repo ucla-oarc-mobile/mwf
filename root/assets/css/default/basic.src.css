@@ -549,7 +549,6 @@ form input[type="reset"]:focus,
 form button:focus,
 form a.button:focus {
     background-color: #cfd5e1;
-    color: #000;
 }
 
 form input[type="submit"].primary,
@@ -591,7 +590,6 @@ form input[type="reset"].secondary:focus:disabled,
 form button.secondary:focus:disabled,
 form a.button.secondary:focus.disabled {
     background-color: #9caccf;
-    color: #888;
 }
 
 form input[type="submit"].secondary:hover,
@@ -693,7 +691,7 @@ form textarea.invalid {
 form .date-field,
 form .month-field,
 form .week-field,
-form .datetime-field,
+form .datetime-local-field,
 form .time-field {
     border-bottom: none;
     padding: 0 0 0 10px;
@@ -703,7 +701,7 @@ form .time-field {
 form .date-field select,
 form .month-field select,
 form .week-field select,
-form .datetime-field select,
+form .datetime-local-field select,
 form .time-field select {
     display: inline;
     width: auto;
