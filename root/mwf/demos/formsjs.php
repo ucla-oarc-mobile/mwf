@@ -50,7 +50,7 @@ echo Site_Decorator::content()
 
 <!-- required -->
 <form action="#" method="post" class="padded" id="form1">
-    <h1>Required Form</h1>
+    <h1>Required & Tooltip Form</h1>
     <p>This form demonstrates client-side required validation.  Note that required validation does not work with checkbox or radio.</p>
     <label for="input-10" class="required">Name</label>
     <input type="text" id="input-10" name="input-10" />
@@ -203,7 +203,7 @@ echo Site_Decorator::content()
             <option value="2015">2015</option>
         </select>
     </div>
-    <label for="month-1">Week</label>
+    <label for="week-1">Week</label>
     <div class="week-field">
         <select class="week" name="week-week">
             <option value="01">1</option>
@@ -267,7 +267,7 @@ echo Site_Decorator::content()
             <option value="2015" selected>2015</option>
         </select>
     </div>
-    <label>Datetime (MMM/dd/yyyy hh:mm)</label>
+    <label>Datetime</label>
     <div class="datetime-field">
         <select class="month" name="datetime-month">
             <option value="01">Jan</option>
@@ -414,7 +414,7 @@ echo Site_Decorator::content()
             <option value="59">59</option>
         </select>
     </div>
-    <label>Time (hh:mm)</label>
+    <label>Time</label>
     <div class="time-field">
         <select class="hour" name="time-hour">
             <option value="00">0</option>
