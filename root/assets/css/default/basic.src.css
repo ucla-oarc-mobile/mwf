@@ -419,6 +419,7 @@ div.button a:active{
 form {
     background-color: #fff;
     padding-bottom: 1em;
+    padding-right: 20px;
 }
 
 /*
@@ -433,7 +434,7 @@ form > h4 {
 form > h1 {
     background: #efefef;
     color: #000;
-    padding: 0.5em 0 0.4em;
+    padding: 0.5em 10px;
 }
 
 form > h1.light {
@@ -451,13 +452,8 @@ form > h4 {
     width: 100%;
 }
 
-/* general form controls */
 form > fieldset {
     border: 0;
-}
-
-form a.button {
-    text-align: center;
 }
 
 form > a.button,
@@ -501,6 +497,10 @@ form p {
 /*
  * Forms Buttons
  */
+form a.button {
+    text-align: center;
+}
+
 form input[type="submit"],
 form input[type="reset"],
 form button,
@@ -598,18 +598,7 @@ form a.button.secondary:focus {
     background-color: #869ac5;
 }
 
-/*
- * full width form
- */
-form {
-    padding-right: 20px;
-}
-
-form > h1 {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
+/* full width form - default */
 form div,
 form h1,
 form p,
@@ -620,6 +609,12 @@ form select,
 form textarea {
     display: block;
     width: 100%;
+}
+
+/* short width form */
+form.short input {
+    display: inline;
+    width: auto;
 }
 
 form .last {
@@ -646,25 +641,7 @@ form > p {
     padding: 10px;
 }
 
-/*
- * full form text and label alignment
- */
-form.text-center label,
-form.text-left label,
-form.text-right label,
-form fieldset.text-center label,
-form fieldset.text-left label,
-form fieldset.text-right label,
-form label.text-center,
-form label.text-left,
-form label.text-right {
-    display: block;
-    width: 100%;
-}
-
-/* ------------------------------------------------------
- * full form option alignment
- */
+/* form option alignment */
 form .option {
     padding: 0 0 0 10px;
     margin-bottom: 0;
@@ -680,17 +657,13 @@ form .option.justify input[type="radio"]{
     float: right;
 }
 
-/* ------------------------------------------------------
- * required label
-*/
+/* required label */
 form label.required {
     background: transparent url('img/astrisk.png') no-repeat top right;
     padding-right: 10px;
 }
 
-/* ------------------------------------------------------
- * invalid
-*/
+/* invalid */
 form .invalid {
     color: #a00;
 }
@@ -709,9 +682,7 @@ form textarea.invalid {
     border: 1px solid #a00;
 }
 
-/*
- * date selection
- */
+/* form date selection */
 form .date-field,
 form .month-field,
 form .week-field,
