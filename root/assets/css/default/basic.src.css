@@ -543,6 +543,7 @@ form input[type="reset"]:focus,
 form button:focus,
 form a.button:focus {
     background-color: #cfd5e1;
+    color: #000;
 }
 
 form input[type="submit"].primary,
