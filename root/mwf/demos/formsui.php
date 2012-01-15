@@ -46,11 +46,12 @@ echo Site_Decorator::content()
         ->render();
 ?>
 
-<!-- left aligned full form -->
-<form action="#" method="post" class="padded">
-    <h1>Simple Form</h1>
+<!-- short form -->
+<form action="#" method="post" class="short padded">
+    <h1>Short Form</h1>
     <label for="input-1">Name</label>
     <input type="text" id="input-1" name="input-1" />
+    <input type="submit" class="primary" value="Submit"/>
 </form>
 
 <!-- options -->
