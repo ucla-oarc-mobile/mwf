@@ -28,7 +28,7 @@ require_once(dirname(dirname(dirname(__FILE__))) . '/assets/config.php');
 echo HTML_Decorator::html_start()->render();
 
 echo Site_Decorator::head()
-        ->set_title('MWF Demos')
+        ->set_title('Forms UI Demo')
         ->render();
 ?>
 
@@ -36,12 +36,12 @@ echo Site_Decorator::head()
 echo HTML_Decorator::body_start()->render();
 
 echo Site_Decorator::header()
-        ->set_title('MWF Demo')
+        ->set_title('Forms UI Demo')
         ->render();
 
 echo Site_Decorator::content()
         ->set_padded()
-        ->add_header('MWF Forms Demo')
+        ->add_header('Forms UI Demo')
         ->add_paragraph('The following is a demo of MWF Forms UI.')
         ->render();
 ?>

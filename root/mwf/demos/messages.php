@@ -28,7 +28,7 @@ require_once(dirname(dirname(dirname(__FILE__))) . '/assets/config.php');
 echo HTML_Decorator::html_start()->render();
 
 echo Site_Decorator::head()
-        ->set_title('MWF Demos')
+        ->set_title('Messages Demo')
         ->add_js_handler_library('standard_libs', 'messages')
         ->render();
 ?>
@@ -37,12 +37,12 @@ echo Site_Decorator::head()
 echo HTML_Decorator::body_start()->render();
 
 echo Site_Decorator::header()
-        ->set_title('MWF Demo')
+        ->set_title('Messages Demo')
         ->render();
 
 echo Site_Decorator::content()
         ->set_padded()
-        ->add_header('MWF Message Demo')
+        ->add_header('Messages Demo')
         ->add_paragraph('The following is a demo of MWF Messages.')
         ->render();
 ?>
