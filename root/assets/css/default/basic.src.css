@@ -515,6 +515,12 @@ form a.button {
     height: auto;
 }
 
+form input[type="submit"],
+form input[type="reset"],
+form button {
+    padding: .5em 1em;
+}
+
 form input[type="submit"]:disabled,
 form input[type="reset"]:disabled,
 form button:disabled,
@@ -585,6 +591,7 @@ form input[type="reset"].secondary:focus:disabled,
 form button.secondary:focus:disabled,
 form a.button.secondary:focus.disabled {
     background-color: #9caccf;
+    color: #888;
 }
 
 form input[type="submit"].secondary:hover,
