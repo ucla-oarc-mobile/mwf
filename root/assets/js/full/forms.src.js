@@ -322,7 +322,7 @@ mwf.forms.init = function(options) {
                 else
                     clone.addClass("datetime-transform-field");
                 clone.insertAfter(element);
-            //element.addClass("hide");
+                element.addClass("hide");
             });
                         
             /*
