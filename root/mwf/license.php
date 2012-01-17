@@ -38,15 +38,15 @@ echo Site_Decorator::header()
 
 $terms = array(
 '        To share all Derivative Works you create of the Software (the Mobile Web
-        Framework itself) with the Licensor at UCLA’s Office of Information 
-        Technology’s Education and Collaboration Technology Group so that others
+        Framework itself) with the Licensor at UCLA\'s Office of Information 
+        Technology\'s Education and Collaboration Technology Group so that others
         who are using the Software can benefit from improvements.',
-'        That you will include the phrase “Powered by: “ + the MOBILE WEB 
-        FRAMEWORK logo or the text “The Mobile Web Framework” somewhere on your 
+'        That you will include the phrase "Powered by: " + the MOBILE WEB 
+        FRAMEWORK logo or the text "The Mobile Web Framework" somewhere on your 
         application or website  The aforementioned logo or text (which can be 
         found at this webpage:  http://mwf.ucla.edu/attribution) should be an 
         image or textual active hyperlink to this web address:  
-        http://mwf.ucla.edu and maybe placed on an ‘about’ page or other 
+        http://mwf.ucla.edu and may be placed on an \'about\' page or other 
         central, descriptive page.',
 '        Not remove any copyright or other notices from the Software.',
 '        That you will not distribute this software or any Derivative Works of 
@@ -86,7 +86,7 @@ This License governs use of the accompanying Mobile Web Framework and all
 accompanying utilities, forms, libraries, etc. (&quot;Software&quot;), and your use of the
 Software, Platform, and all Utilities constitutes acceptance of this license.')
             ->add_paragraph('
-The Software was originally created by UCLA\'s Office of Information Technology’s
+The Software was originally created by UCLA\'s Office of Information Technology\'s
 Education and Collaboration Technology Group (&quot;Licensor&quot;) to enable Faculty, 
 Departments and Researchers to deliver their content to mobile devices easily 
 and efficiently using the Mobile Web Framework.')
@@ -112,7 +112,7 @@ Software into a commercial product.')
             ->add_paragraph('
 You may create Derivative Works of the software for your own use. You may modify
 this Software and contribute it back to UCLA and the MWF Community, but you may 
-not distribute the modified Software; all distribution must happen via UCLA’s 
+not distribute the modified Software; all distribution must happen via UCLA\'s 
 Office of Information Technology Education and Collaboration Technology Group.  
 You may not grant rights to the Software or Derivative Works to this software 
 under this License. For example, you may not distribute modifications of the 
