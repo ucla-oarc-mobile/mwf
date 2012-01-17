@@ -691,6 +691,7 @@ form textarea.invalid {
 form .date-field,
 form .month-field,
 form .week-field,
+form .datetime-field,
 form .datetime-local-field,
 form .time-field {
     border-bottom: none;
@@ -701,6 +702,7 @@ form .time-field {
 form .date-field select,
 form .month-field select,
 form .week-field select,
+form .datetime-field select,
 form .datetime-local-field select,
 form .time-field select {
     display: inline;

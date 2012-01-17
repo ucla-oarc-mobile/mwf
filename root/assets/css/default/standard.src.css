@@ -226,9 +226,9 @@ form .tip {
 form .tooltip {
     display: none;	
     background: transparent url(img/forms-tip-bg.png) 0 0 no-repeat;
-    height: 161px;
-    padding: 20px 30px;
-    width: 250px;
+    padding: 10px 15px;
+    height: 120px;
+    width:180px;
     color: #fff;
     font-style: normal;
     text-align: left;
@@ -236,7 +236,7 @@ form .tooltip {
 
 form .tooltip.bottom {
     background-image: url(img/forms-tip-bg-down.png);
-    padding: 40px 30px;
+    padding: 30px 15px;
 }
 
 /**

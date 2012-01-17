@@ -61,9 +61,15 @@ mwf.capability=new function(){
     this.ajax = function(){
         if(_ajax === false){
             _ajax = null;
-            try { _ajax = new XMLHttpRequest(); } catch (e) {}
-            try { _ajax = new ActiveXObject("Microsoft.XMLHTTP"); } catch (e) {}
-            try { _ajax = new ActiveXObject("Msxml2.XMLHTTP"); } catch (e) {}
+            try {
+                _ajax = new XMLHttpRequest();
+            } catch (e) {}
+            try {
+                _ajax = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (e) {}
+            try {
+                _ajax = new ActiveXObject("Msxml2.XMLHTTP");
+            } catch (e) {}
         }
         return _ajax != null;
     }
@@ -276,6 +282,29 @@ mwf.capability=new function(){
     }
     
     /**
+     * Methods that determine input
+     */
+    this.input = new function() {
+        /**
+         * Determine if the device supports placeholder
+         *
+         * @return bool
+         */
+        this.placeholder = function() {
+            return _m.input.placeholder;
+        }
+        
+        /**
+         * Detemine if the device supports required
+         * 
+         * @return bool
+         */
+        this.required = function() {
+            return _m.input.required;
+        }
+    }
+    
+    /**
      * Methods that determine input types
      */
     this.inputtypes = new function() {
@@ -308,6 +337,15 @@ mwf.capability=new function(){
         }
         
         /**
+         * Determine if the device supports datetime-local input type
+         * 
+         * @return bool
+         */
+        this.datetimelocal = function() {
+            return _m.inputtypes.datetimelocal;
+        }
+        
+        /**
          * Determine if the device supports email input type
          * 
          * @return bool
@@ -332,15 +370,6 @@ mwf.capability=new function(){
          */
         this.number = function() {
             return _m.inputtypes.number;
-        }
-        
-        /**
-         * Determine if the device supports range input type
-         * 
-         * @return bool
-         */
-        this.range = function() {
-            return _m.inputtypes.range;
         }
         
         /**

@@ -70,11 +70,6 @@ mwf.forms.init = function(options) {
             rangeTransform("number");
         }
 
-        // if support range
-        if (mwf.capability.inputtypes.range()) {
-            rangeTransform("range");
-        }
-
         // if support tel
         if (mwf.capability.inputtypes.tel()) {
             simpleTransform("tel");
@@ -110,18 +105,27 @@ mwf.forms.init = function(options) {
             datetimeTransform("datetime");
         }
         
+        // if support datetime
+        if (mwf.capability.inputtypes.datetimelocal()) {
+            datetimeTransform("datetime-local");
+        }
+        
         // if support time
         if (mwf.capability.inputtypes.time()) {
             datetimeTransform("time");
         }
         
         /*
-         * Transforms required class into required attributes and add required 
-         * class to its label
+         * Transforms required class into required attributes for the immediate 
+         * input type.  ignore div.option (select or checkboxe group for now).
          */
         function requiredTransform() {
+            var fields = $(settings.selector).find("label,:input,div");
             $(settings.selector + " .required").each(function() {
-                $(this).next(":input").attr("required", "required");
+                var next = $(fields.eq(fields.index(this) + 1));
+                if (!next.is("div")) {
+                    next.attr("required", "required");
+                }
             })
         }
         
@@ -141,11 +145,13 @@ mwf.forms.init = function(options) {
             $(settings.selector + " ." + inputtype + "-field").each(function() {
                 var element = $(this);
                 var clone = element.clone();
+                clone.attr("name", element.attr("name") + "-transform");
                 clone.attr("type", inputtype);
                 clone.removeClass(inputtype + "-field");
                 clone.addClass("simple-transform-field");
                 clone.insertAfter(element);
                 element.addClass("hide");
+                element.removeAttr("required");
             });
         }
         
@@ -153,7 +159,7 @@ mwf.forms.init = function(options) {
          * Transforms into a range input type such as number or range.
          */
         function rangeTransform(inputtype) {
-            $("." + inputtype + "-field").each(function() {
+            $(settings.selector + " ." + inputtype + "-field").each(function() {
                 var element = $(this);
                 
                 // find the min
@@ -170,6 +176,7 @@ mwf.forms.init = function(options) {
                 var current = element.find("option:selected").attr("value");
                 
                 var clone = $('<input type="' + inputtype + '" />');
+                clone.attr("name", element.attr("name") + "-transform");
                 clone.attr("min", min);
                 clone.attr("max", max);
                 clone.attr("value", current);
@@ -185,10 +192,22 @@ mwf.forms.init = function(options) {
          * datetime, time.
          */
         function datetimeTransform(inputtype) {
-            $("." + inputtype + "-field").each(function() {
+            $(settings.selector + " ." + inputtype + "-field").each(function() {
                 var element = $(this);
             
                 // determine what type of input type (date, month, week)
+                var hasOffsetMinute = false;
+                if (element.find(".offset-minute").size() > 0)
+                    hasOffsetMinute = true;
+                var hasOffsetHour = false;
+                if (element.find(".offset-hour").size() > 0)
+                    hasOffsetHour = true;
+                var hasOffset = false;
+                if (element.find(".offset").size() > 0)
+                    hasOffset = true;
+                var hasSecond = false;
+                if (element.find(".second").size() > 0)
+                    hasSecond = true;
                 var hasMinute = false;
                 if (element.find(".minute").size() > 0)
                     hasMinute = true;
@@ -209,114 +228,93 @@ mwf.forms.init = function(options) {
                     hasYear = true;               
                 
                 // get each field's value
-                var minMinute = "00";
-                var maxMinute = "00";
+                var currentOffsetMinute = "00";
+                if (hasOffsetMinute) {
+                    currentOffsetMinute = getCurrentDateField(element, "offset-minute");
+                }
+                
+                var currentOffsetHour = "00";
+                if (hasOffsetHour) {
+                    currentOffsetHour = getCurrentDateField(element, "offset-hour");
+                }
+                
+                var currentOffset = "+";
+                if (hasOffset) {
+                    currentOffset = getCurrentDateField(element, "offset");
+                }
+                
+                var currentSecond = "00";
+                if (hasSecond) {
+                    currentSecond = getCurrentDateField(element, "second");
+                }
+                
                 var currentMinute = "00";
                 if (hasMinute) {
-                    minMinute = getMinDateField(element, "minute");
-                    maxMinute = getMaxDateField(element, "minute");
                     currentMinute = getCurrentDateField(element, "minute");
                 }
                 
-                var minHour = "00";
-                var maxHour = "00";
                 var currentHour = "00";
                 if (hasHour) {
-                    minHour = getMinDateField(element, "hour");
-                    maxHour = getMaxDateField(element, "hour");
                     currentHour = getCurrentDateField(element, "hour");
                 }
                 
-                var minDay = "01";
-                var maxDay = "01";
                 var currentDay = "01";
                 if (hasDay) {
-                    minDay = getMinDateField(element, "day");
-                    maxDay = getMaxDateField(element, "day");
                     currentDay = getCurrentDateField(element, "day");
                 }
                 
-                var minWeek = "01";
-                var maxWeek = "01";
                 var currentWeek = "01";
                 if (hasWeek) {
-                    minWeek = getMinDateField(element, "week");
-                    maxWeek = getMaxDateField(element, "week");
                     currentWeek = getCurrentDateField(element, "week");
                 }
                 
-                var minMonth = "01";
-                var maxMonth = "01";
                 var currentMonth = "01";
                 if (hasMonth) {
-                    minMonth = getMinDateField(element, "month");
-                    maxMonth = getMaxDateField(element, "month");
                     currentMonth = getCurrentDateField(element, "month");
                 }
                 
-                var minYear = "1900";
-                var maxYear = "1900";
                 var currentYear = "1900";
                 if (hasYear) {
-                    minYear = getMinDateField(element, "year");
-                    maxYear = getMaxDateField(element, "year");
                     currentYear = getCurrentDateField(element, "year");
                 }
                 
                 // build transformed element
                 var clone = $('<input type="' + inputtype + '" />');
                 
-                var min = "";
-                var max = "";
                 var current = "";
                 
                 if (hasYear) {
-                    min += minYear;
-                    max += maxYear;
                     current += currentYear;
                 }
                 
                 if (hasMonth) {
-                    min += "-";
-                    min += minMonth;
-                    max += "-";
-                    max += maxMonth;
                     current += "-";
                     current += currentMonth;
                 }
                 
                 if (hasWeek) {
-                    min += "-W";
-                    min += minWeek;
-                    max += "-W";
-                    max += maxWeek;
                     current += "-W";
                     current += currentWeek;
                 }
                 
                 if (hasDay) {
-                    min += "-";
-                    min += minDay;
-                    max += "-";
-                    max += maxDay;
                     current += "-";
                     current += currentDay;
                 }
                 
-                if (inputtype === "datetime" && (hasHour || hasMinute)) {
-                    min += "T";
-                    max += "T";
+                if (inputtype === "datetime-local" || inputtype === "datetime") {
                     current += "T";
                 }
                 
-                if (hasHour || hasMinute) {
-                    min += minHour + ":" + minMinute + ":00";
-                    max += maxHour + ":" + maxMinute + ":00";
-                    current += currentHour + ":" + currentMinute + ":00";
+                if (hasHour || hasMinute || hasSecond) {
+                    current += currentHour + ":" + currentMinute + ":" + currentSecond;
                 }
                 
-                clone.attr("min", min);
-                clone.attr("max", max);
+                if (inputtype === "datetime") {
+                    current += currentOffset + currentOffsetHour + ":" + currentOffsetMinute;
+                }
+                
+                clone.attr("name", element.attr("name") + "-transform");
                 clone.attr("value", current);
                 clone.removeClass(inputtype + "-field");
                 if (inputtype === "time")
@@ -324,9 +322,8 @@ mwf.forms.init = function(options) {
                 else
                     clone.addClass("datetime-transform-field");
                 clone.insertAfter(element);
-                element.addClass("hide");
+            //element.addClass("hide");
             });
-            
                         
             /*
              * helper method for dateTransform to get minimum date
@@ -358,7 +355,7 @@ mwf.forms.init = function(options) {
          * Listens for changes on simple transform input field and updates the 
          * original input type.
          */
-        $(".simple-transform-field").change(function() {
+        $(settings.selector + " .simple-transform-field").blur(function() {
             var element = $(this);
             element.prev().val(element.val());
         });
@@ -367,7 +364,7 @@ mwf.forms.init = function(options) {
          * Listens for changes on range transform input field and updates the 
          * original input type.
          */
-        $(".range-transform-field").change(function() {
+        $(settings.selector + " .range-transform-field").blur(function() {
             var element = $(this);
             element.prev().val(element.val());
         });
@@ -376,14 +373,20 @@ mwf.forms.init = function(options) {
          * Listens for changes on date transform input field and updates the 
          * original input type.
          */
-        $(".datetime-transform-field").change(function() {
+        $(settings.selector + " .datetime-transform-field").blur(function() {
             var element = $(this);
             var prevElement = element.prev();
+            
+            // clear all currently selected
+            prevElement.find("option:selected").removeAttr("selected");
                 
-            // split by "T" into date and time
-            var tokens = element.val().split("T");
+            // split by "T" or " " into date and time
+            var tokens = element.val().split("T"); 
+            if (tokens.length == 0) {
+                tokens = element.val().split(" ");     
+            }
 
-            // process date.  split into year, month/week, day
+            // process date.  split into year, month/week, day, time, timezone
             var t = tokens[0].split("-");
                         
             // set year
@@ -393,8 +396,8 @@ mwf.forms.init = function(options) {
             if (t.length > 1) {
                 // starts with "W" if week
                 if (t[1].lastIndexOf("W", 0) === 0) {
-                    var length = t[1].length;
-                    prevElement.find(".week").val(t[1].substring(1, length));
+                    //var length = t[1].length;  // get rid of 'W'
+                    prevElement.find(".week").val(t[1].substring(1, 3));
                 } else {
                     prevElement.find(".month").val(t[1]);
                 }
@@ -404,38 +407,104 @@ mwf.forms.init = function(options) {
                 prevElement.find(".day").val(t[2]);
             }
                 
-            // process time
-            t = tokens[1].split(":");
-            prevElement.find(".hour").val(t[0]);
-            prevElement.find(".minute").val(t[1]);
+            // process time and timezone (hh:mm:ss+HH:MM or hh:mm:ssZ)
+            var hasTime = false;
+            var hasTimeZone = false;
+            var isUtc = false;
+            var isPositiveOffset = false;
+            var tz;
+            
+            // has time component?
+            if (tokens.length > 1) {
+                hasTime = true;
+                
+                // is utc format?
+                tz = tokens[1].split("Z");
+                if (tz.length > 1) {
+                    isUtc = true;
+                } else {
+                    // is offset + or -?
+                    tz = tokens[1].split("+");
+                    if (tz.length > 1) {
+                        isPositiveOffset = true;
+                    } else {
+                        tz = tokens[1].split("-");
+                    }
+                }
+            }
+            
+            if (tz.length > 1) {
+                hasTimeZone = true;
+            }
+            
+            if (hasTime) {                        
+                t = tz[0].split(":");
+                prevElement.find(".hour").val(t[0]);
+                if (t.length > 1) {
+                    prevElement.find(".minute").val(t[1]);
+                    // default to 0 sec in case seconds is not avaiable in ui
+                    prevElement.find(".second").val("00");
+                }
+                if (t.length > 2) {
+                    prevElement.find(".second").val(t[2].substring(0, 2));
+                }
+                    
+                if (hasTimeZone) {
+                    prevElement.find(".offset").val("+");
+                    prevElement.find(".offset-hour").val("00");
+                    prevElement.find(".offset-minute").val("00");
+                    if (!isUtc) {
+                        if (!isPositiveOffset) {
+                            prevElement.find(".offset").val("-");
+                        }
+                        t = tz[1].split(":");
+                        prevElement.find(".offset-hour").val(t[0]);
+                        prevElement.find(".offset-minute").val(t[1]);
+                    }
+                }
+            }
+            
         });
         
         /*
          * Listens for changes on time transform input field and updates the 
-         * original input type.
-         */
-        $(".time-transform-field").change(function() {
+        * original input type.
+        */
+        $(settings.selector + " .time-transform-field").blur(function() {
             var element = $(this);
             var prevElement = element.prev();
+            
+            // clear all currently selected
+            prevElement.find("option:selected").removeAttr("selected");
                 
-            // split by ":" into hour, minute, second
+            // split by ":" into hour, minute
             var tokens = element.val().split(":");
 
-            for (var i = 0; i < tokens.length; i++) {
+            if (tokens.length > 0) {
                 prevElement.find(".hour").val(tokens[0]);
+            }
+            
+            if (tokens.length > 1) {
                 prevElement.find(".minute").val(tokens[1]);
+            }
+            
+            if (tokens.length > 2) {
+                prevElement.find(".second").val(tokens[2]);
             }
         });
         
         /////////////////////////////////////////
         // Validate
         /////////////////////////////////////////
-        $("form").each(function() {
+        $(settings.selector).each(function() {
             $(this).validate({
                 errorClass: "invalid",
-                errorElement: "p"
+                errorElement: "p",
+                autoCreateRanges: true
             });
+            
+            $.validator.autoCreateRanges = true;
         });
         
     })(jQuery);
-};   
+};
