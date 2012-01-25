@@ -45,9 +45,8 @@ class Config {
     }
 
     /**
-     * Static method that returns a value as specified in the file defined as
-     *      /assets/config/{$cat}.php, where it should have been set via
-     *      Config::set($cat, $key, $value) in that config file.
+     * Static method that returns a value as specified in .ini files or where 
+     * set via Config::set($cat, $key, $value).
      * 
      * @link /assets/config/
      *
