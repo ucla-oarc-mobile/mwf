@@ -48,7 +48,7 @@ echo Site_Decorator::content_full()
 ?>
 
 <!-- Messages -->
-<div class="content-full content-padded">
+<div class="content padded">
     <h1 class="content-first">Content Messages</h1>
     <p>Inline message <span class="message alert">alert</span>, <span class="message confirm">confirm</span>, <span class="message error">error</span>, <span class="message info">info</span>.</p>
     <div>
