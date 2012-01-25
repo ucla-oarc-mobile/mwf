@@ -1,5 +1,6 @@
 <?php
 
+$_SERVER['HTTP_HOST']='m.example.edu';
 require_once dirname(__FILE__) . '/../../../../../root/assets/lib/config.class.php';
 Config::set('global','cookie_prefix','mwftest_');
 require_once dirname(__FILE__) . '/../../../../../root/assets/lib/cookie.class.php';
