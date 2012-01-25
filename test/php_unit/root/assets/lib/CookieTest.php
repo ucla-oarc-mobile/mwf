@@ -19,10 +19,6 @@ require_once dirname(__FILE__) . '/../../../../../root/assets/lib/cookie.class.p
  */
 class CookieTest extends PHPUnit_Framework_TestCase {
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
     protected function setUp() {
         $_COOKIE=array();
     }
