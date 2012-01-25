@@ -1,5 +1,7 @@
 <?php
 
+$_SERVER['HTTP_HOST']='www.example.edu';
+require_once dirname(__FILE__) . '/../../../../../root/assets/lib/config.class.php';
 require_once dirname(__FILE__) . '/../../../../../root/assets/lib/image.class.php';
 
 /**
@@ -12,6 +14,7 @@ require_once dirname(__FILE__) . '/../../../../../root/assets/lib/image.class.ph
  *
  * @uses PHPUnit_Framework_TestCase
  * @uses Image
+ * @uses Config
  */
 class ImageTest extends PHPUnit_Framework_TestCase {
 
