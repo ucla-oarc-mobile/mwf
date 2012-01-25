@@ -19,8 +19,7 @@ class ClassificationTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $_SERVER['SERVER_PORT']="80";
-        $_SERVER['SERVER_NAME']='localhost';
+        $_SERVER['HTTP_HOST']="localhost:80";
         require_once dirname(__FILE__) . '/../../../../../root/assets/lib/config.class.php';
         Config::set('global','cookie_prefix','mwftest_');
         $_COOKIE=array();
