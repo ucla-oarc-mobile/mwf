@@ -342,7 +342,7 @@ mwf.capability=new function(){
          * @return bool
          */
         this.datetimelocal = function() {
-            return _m.inputtypes.datetimelocal;
+            return _m.inputtypes["datetime-local"];
         }
         
         /**
