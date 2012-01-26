@@ -116,7 +116,7 @@ mwf.override = new function(){
              */
             } else {
                 
-                window.location = mwf.site.asset.root+'/passthru.php?override='+requestedOverride+'&return='+encodeURIComponent(returnLocation)+'&mode='+mwf.browser.getMode();
+                window.location = '//'+mwf.site.cookie.domain+'/'+mwf.site.local.asset.root+'/passthru.php?override='+requestedOverride+'&return='+encodeURIComponent(returnLocation)+'&mode='+mwf.browser.getMode();
                 
             }
             

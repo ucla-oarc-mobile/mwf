@@ -48,7 +48,7 @@ echo Site_Decorator::content_full()
 ?>
 
 <!-- Messages -->
-<div class="content-full content-padded">
+<div class="content padded">
     <h1 class="content-first">Content Messages</h1>
     <p>Inline message <span class="message alert">alert</span>, <span class="message confirm">confirm</span>, <span class="message error">error</span>, <span class="message info">info</span>.</p>
     <div>
@@ -69,7 +69,7 @@ echo Site_Decorator::content_full()
 <?php
 echo Site_Decorator::button_full()
         ->set_padded()
-        ->add_option('Back to Demos', Config::get('global', 'site_url') . '/mwf/demos.php')
+        ->add_option('Back To Demos', Config::get('global', 'site_url') . '/mwf/demos.php')
         ->render();
 
 echo Site_Decorator::default_footer()->render();

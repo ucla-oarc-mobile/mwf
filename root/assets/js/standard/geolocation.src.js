@@ -13,7 +13,8 @@ mwf.touch.geolocation = new function()
 {
     var ERROR = {
         GENERAL: 'Geolocation failure.',
-        NO_SUPPORT: 'No geolocation support available.'
+        NO_SUPPORT: 'No geolocation support available.',
+        PERMISSION_DENIED: 'Geolocation permission not granted.'
     };
 
     var type = -1;
@@ -85,14 +86,16 @@ mwf.touch.geolocation = new function()
                         'longitude':position.coords.longitude,
                         'accuracy':position.coords.accuracy
                     });
-
-            }, function() {
-                if(typeof onError != 'undefined')
-                    onError(ERROR.GENERAL);
+            }, function(error) {
+                if(typeof onError != 'undefined') {
+                    var errorMsg = error.code == error.PERMISSION_DENIED ?
+                        ERROR.PERMISSION_DENIED : ERROR.GENERAL;
+                    onError(errorMsg);
+                }         
             },
             {enableHighAccuracy:highAccuracy, maximumAge:timeout, timeout: geoTimeout});
 
-        return true;
+        return;
     }
     
     this.watchPosition = function(onSuccess, onError)
