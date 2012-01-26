@@ -5,6 +5,7 @@
  *   mwf.touch.geolocation.getApi() -> Geolocation API (HTML5 or Google Gears)
  *   mwf.touch.geolocation.isSupported() -> boolean
  *   mwf.touch.geolocation.getPosition(onSuccessCallback, onFailureCallback) -> [['latitude']=>decimal, ['longitude']=>decimal, ['accuracy']=>decimal]
+ *   mwf.touch.geolocation.getCurrentPosition(onSuccessCallback, onFailureCallback) -> [['latitude']=>decimal, ['longitude']=>decimal, ['accuracy']=>decimal]
  *   mwf.touch.geolocation.watchPosition(onSuccessCallback, onFailureCallback) -> [['latitude']=>decimal, ['longitude']=>decimal, ['accuracy']=>decimal]
  *   mwf.touch.geolocation.clearWatch(watchID)
  */
@@ -91,6 +92,37 @@ mwf.touch.geolocation = new function()
                     var errorMsg = error.code == error.PERMISSION_DENIED ?
                         ERROR.PERMISSION_DENIED : ERROR.GENERAL;
                     onError(errorMsg);
+                }         
+            },
+            {enableHighAccuracy:highAccuracy, maximumAge:timeout, timeout: geoTimeout});
+
+        return;
+    }
+	
+    this.getCurrentPosition = function(onSuccess, onError)
+    {
+        var geo = this.getApi();
+        
+        if(!geo)
+        {
+            onError({
+					code: 0,
+					message: ERROR.NO_SUPPORT
+				});
+            return;
+        }
+
+        geo.getCurrentPosition(
+            function(position) {
+                if(typeof onSuccess != 'undefined')
+                    onSuccess({
+                        'latitude':position.coords.latitude,
+                        'longitude':position.coords.longitude,
+                        'accuracy':position.coords.accuracy
+                    });
+            }, function(error) {
+                if(typeof onError != 'undefined') {
+                    onError(error);
                 }         
             },
             {enableHighAccuracy:highAccuracy, maximumAge:timeout, timeout: geoTimeout});

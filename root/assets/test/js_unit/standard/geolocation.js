@@ -57,6 +57,38 @@ test("mwf.touch.geolocation.getPosition(onSuccess)", function() {
     
 })
 
+test("mwf.touch.geolocation.getCurrentPosition(onSuccess,onError)", function() {
+    expect(1);
+    QUnit.config.testTimeout = 5000;
+    QUnit.stop();
+    mwf.touch.geolocation.getCurrentPosition(function(pos) {
+        var receivedExpectedResultTypes = 
+            typeof pos['latitude']=='number'
+            && typeof pos['longitude']=='number'
+            && typeof pos['accuracy']=='number';
+        ok(receivedExpectedResultTypes, 'lat, long, and accuracy should be numbers');
+        start();
+    }, function(error) {
+		var matchesPositionErrorInterface =
+			typeof error.code === 'number'
+			&& typeof error.message === 'string';
+        ok(matchesPositionErrorInterface, 'error should implement PositionError interface');
+        start();
+    });
+})
+
+test("mwf.touch.geolocation.getCurrentPosition(onSuccess)", function() {
+    QUnit.config.testTimeout = 5000;
+    QUnit.stop();
+    mwf.touch.geolocation.getCurrentPosition(function(pos) {
+        equal(typeof pos['latitude'], 'number', 'latitude should be a number');
+        equal(typeof pos['longitude'], 'number', 'longitude should be a number');
+        equal(typeof pos['accuracy'], 'number', 'accuracy should be a number');
+        start();
+    });
+    
+})
+
 test("mwf.touch.geolocation.setTimeout()", function() {
     equal(typeof mwf.touch.geolocation.setTimeout(3000), 'undefined', 'setter should not return a value');
 })
