@@ -34,7 +34,9 @@
  * Shared [TODO: Merge styles where possible]
  */
 
-
+ select {
+     -webkit-appearance: none;
+ }
  
 /**
  * Content
