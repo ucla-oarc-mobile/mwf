@@ -135,6 +135,10 @@ input {
     padding: 4px;
 }
 
+select {
+    background: url(img/select-options-bg.png) center right no-repeat;
+}
+
 .hide {
     display: none !important;
 }
@@ -626,11 +630,6 @@ form .last {
     border-bottom: none;
 }
 
-form .option br {
-    display: block;
-    margin: .25em 0;
-}
-
 form input[type="checkbox"],
 form input[type="radio"],
 form .option > label, 
@@ -660,6 +659,7 @@ form .option.right {
 form .option.justify input[type="checkbox"],
 form .option.justify input[type="radio"]{
     float: right;
+    margin-bottom: 0;
 }
 
 /* required label */
