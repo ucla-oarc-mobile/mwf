@@ -56,22 +56,21 @@ test("mwf.touch.geolocation.getPosition(onSuccess)", function() {
     }); 
 })
 
-test("mwf.touch.geolocation.getPosition(onSuccess)", function() {
+test("mwf.touch.geolocation.getPosition(onSuccess) Geolocation unsupported", function() {
 
     var getApi = mwf.touch.geolocation.getApi;
     mwf.touch.geolocation.getApi = function() { return null; };
 
-    try
-    {
+    try {
         mwf.touch.geolocation.getPosition(function() {});
     }
-    catch(ex)
-    {
-        mwf.touch.geolocation.getApi = getApi;
-        throw ex;
+    catch(ex) {
+        ok(false, 'getPosition should not throw an exception if an onError handler is not provided '
+                    + 'and geolocation is unsupported');
     }
-    
-    mwf.touch.geolocation.getApi = getApi;
+    finally {
+        mwf.touch.geolocation.getApi = getApi;
+    }
 })
 
 test("mwf.touch.geolocation.getCurrentPosition(onSuccess,onError)", function() {
@@ -108,22 +107,21 @@ test("mwf.touch.geolocation.getCurrentPosition(onSuccess)", function() {
     });
 })
 
-test("mwf.touch.geolocation.getCurrentPosition(onSuccess)", function() {
+test("mwf.touch.geolocation.getCurrentPosition(onSuccess) Geolocation unsupported", function() {
 
     var getApi = mwf.touch.geolocation.getApi;
     mwf.touch.geolocation.getApi = function() { return null; };
 
-    try
-    {
+    try {
         mwf.touch.geolocation.getCurrentPosition(function() {});
     }
-    catch(ex)
-    {
-        mwf.touch.geolocation.getApi = getApi;
-        throw ex;
+    catch(ex) {
+        ok(false, 'getCurrentPosition should not throw an exception if an onError handler is not '
+                    + 'provided and geolocation is unsupported');
     }
-    
-    mwf.touch.geolocation.getApi = getApi;
+    finally {
+        mwf.touch.geolocation.getApi = getApi;
+    }
 })
 
 test("mwf.touch.geolocation.setTimeout()", function() {
@@ -144,22 +142,21 @@ test("mwf.touch.geolocation.watchPosition()", function() {
     mwf.touch.geolocation.clearWatch(watchId);
 })
 
-test("mwf.touch.geolocation.watchPosition(onSuccess)", function() {
+test("mwf.touch.geolocation.watchPosition(onSuccess) Geolocation unsupported", function() {
 
     var getApi = mwf.touch.geolocation.getApi;
     mwf.touch.geolocation.getApi = function() { return null; };
 
-    try
-    {
+    try {
         mwf.touch.geolocation.watchPosition(function() {});
     }
-    catch(ex)
-    {
-        mwf.touch.geolocation.getApi = getApi;
-        throw ex;
+    catch(ex) {
+        ok(false, 'watchPosition should not throw an exception if an onError handler is not '
+                    + 'provided and geolocation is unsupported');
     }
-    
-    mwf.touch.geolocation.getApi = getApi;
+    finally {
+        mwf.touch.geolocation.getApi = getApi;
+    }
 })
 
 test("mwf.touch.geolocation.clearWatch()", function() {
