@@ -62,6 +62,27 @@
     border-bottom: none !important;
 }
 
+/* The rel=external stuff is not solely for menus, but primarily. 
+   Use span.external:after around a link with class no-ext-ind to keep indicator
+      from being styled like the link.  This is useful if links are underlined,
+      for example, and also in .menu.detailed (see comment for no-ext-ind).
+*/
+a[rel~=external]:after, span.external:after {	
+    content: "\a0 " url(img/external-link.png);
+}
+
+/* Allow suppression of external link indicator via class "no-ext-ind". 
+   This is useful for .menu.detailed where a span.external inside an 
+   a[rel=external] can show where the indicator should end up.  This keeps the
+   indicator from floating off to the right away from the relevant text. This is
+   desirable, rather than just not using rel=external, because rel=external 
+   will determine how the link is handled in the native client and possibly in
+   screen readers.
+*/
+a[rel=external].no-ext-ind:after {	
+    content: "";
+}
+
 /**
  * Button
  */
