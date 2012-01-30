@@ -22,11 +22,11 @@ Software License
 MOBILE WEB FRAMEWORK
 
 This License governs use of the accompanying Mobile Web Framework and all 
-accompanying utilities, forms, libraries, etc. (“Software”), and your use of the
+accompanying utilities, forms, libraries, etc. ("Software"), and your use of the
 Software, Platform, and all Utilities constitutes acceptance of this license.
 
-The Software was originally created by UCLA’s Office of Information Technology’s
-Education and Collaboration Technology Group (“Licensor”) to enable Faculty, 
+The Software was originally created by UCLA's Office of Information Technology's
+Education and Collaboration Technology Group ("Licensor") to enable Faculty, 
 Departments and Researchers to deliver their content to mobile devices easily 
 and efficiently using the Mobile Web Framework.
 
@@ -38,8 +38,8 @@ and personal experimentation.
 
 You may use the software if you are a commercial entity. There are two things 
 you cannot do with this Software: The first is you cannot incorporate it into a 
-commercial product (“Commercial Use”), the second is you cannot distribute this 
-software or any modifications (“Derivative Work) of this software and beyond 
+commercial product ("Commercial Use"), the second is you cannot distribute this 
+software or any modifications ("Derivative Work") of this software and beyond 
 that, you must share your changes to the Mobile Web Framework with UCLA and the 
 MWF Community. We want everyone to benefit from the use of this product, we want
 it to stay free, and we want to avoid it forking (or splintering) into 
@@ -51,7 +51,7 @@ Software into a commercial product.
 
 You may create Derivative Works of the software for your own use. You may modify
 this Software and contribute it back to UCLA and the MWF Community, but you may 
-not distribute the modified Software; all distribution must happen via UCLA’s 
+not distribute the modified Software; all distribution must happen via UCLA's 
 Office of Information Technology Education and Collaboration Technology Group.  
 You may not grant rights to the Software or Derivative Works to this software 
 under this License. For example, you may not distribute modifications of the 
@@ -67,17 +67,17 @@ subsidiaries and directly affiliated companies or entities would be covered.
 You agree: 
 
 1.      To share all Derivative Works you create of the Software (the Mobile Web
-        Framework itself) with the Licensor at UCLA’s Office of Information 
-        Technology’s Education and Collaboration Technology Group so that others
+        Framework itself) with the Licensor at UCLA's Office of Information 
+        Technology's Education and Collaboration Technology Group so that others
         who are using the Software can benefit from improvements.
 
-2.      That you will include the phrase “Powered by: “ + the MOBILE WEB 
-        FRAMEWORK logo or the text “The Mobile Web Framework” somewhere on your 
-        application or website  The aforementioned logo or text (which can be 
-        found at this webpage:  http://mwf.ucla.edu/attribution) should be an 
-        image or textual active hyperlink to this web address:  
-        http://mwf.ucla.edu and maybe placed on an ‘about’ page or other 
-        central, descriptive page. 
+2.      That you will include the phrase "Powered by " + the MOBILE WEB 
+        FRAMEWORK logo or the text "the Mobile Web Framework" somewhere on your 
+        application or website. The logo and example attributions may be found 
+        at the webpage:  http://mwf.ucla.edu/attribution. The aforementioned 
+        logo or text should be an image or textual hyperlink to the web address 
+        http://mwf.ucla.edu, and it maybe placed on an About webpage or other 
+        central, descriptive webpage. 
 
 3.      Not remove any copyright or other notices from the Software.
 
