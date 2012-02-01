@@ -30,9 +30,9 @@ $cookies = array('classification' => Cookie::get('classification'),
 );
 
 $cookies_arr = array();
-foreach ($cookies as $key => $value)
+foreach ($cookies as $key=>$value)
     if (isset($value))
-        $cookies_arr[] = $prefix . $key;
+        $cookies_arr[] = $prefix.$key;
 $existing_cookies_var = '["' . implode('","', $cookies_arr) . '"]';
 
 if (isset($cookies['override']))
@@ -57,8 +57,6 @@ else // fallthru that will not support successful multi-host requests
         $domain_var = substr($domain_var, $pos + 2);
     if (($pos = strpos($domain_var, '/')) !== false)
         $domain_var = substr($domain_var, 0, $pos);
-    if (($pos = strpos($domain_var, ':')) !== false)
-        $domain_var = substr($domain_var, 0, $pos);
 }
 
 $site_url = $local_site_url = Config::get('global', 'site_url');
@@ -78,7 +76,9 @@ if(strpos($local_site_url, '://') !== false || substr($local_site_url, 0, 2) == 
     }
 }
 else
-    $site_url = '//'.$domain_var.'/'.$site_url;
+{
+    $site_url = '//'.$domain_var.(substr($site_url,0,1) != '/' ? '/':'').$site_url;
+}
 
 $site_asset_url = $local_site_asset_url = Config::get('global', 'site_assets_url');
 if(strpos($local_site_asset_url, '://') !== false || substr($local_site_asset_url, 0, 2) == '//')
@@ -97,7 +97,10 @@ if(strpos($local_site_asset_url, '://') !== false || substr($local_site_asset_ur
     }
 }
 else
-    $site_asset_url = '//'.$domain_var.'/'.$site_asset_url;
+    $site_asset_url = '//'.$domain_var.(substr($site_asset_url,0,1) != '/' ? '/':'').$site_asset_url;
+
+if (($pos = strpos($domain_var, ':')) !== false)
+    $domain_var = substr($domain_var, 0, $pos);
 
 ?>
 

@@ -19,6 +19,7 @@ License:
 
 TABLE OF CONTENTS
 
+Version 1.2.11          February 1, 2012
 Version 1.2.10          January 10, 2012
 Version 1.2.09          December 14, 2011
 Version 1.2.08          November 30, 2011
@@ -38,6 +39,17 @@ Version 1.1.03.alpha    July 20, 2011
 Version 1.1.02.alpha    June 23, 2011
 Version 1.1.01.alpha    June 16, 2011
 Version 1.1.00.alpha    May 20, 2011
+
+==============================================================================
+
+Version 1.2.11
+February 1, 2012
+
+* Fix device telemetry stack but with port in FQDN asset path [#77]
+
+* Geolocation update to handle undefined errback [#65]
+
+* Minor license text changes [#73]
 
 ==============================================================================
 
