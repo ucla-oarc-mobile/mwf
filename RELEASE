@@ -47,6 +47,8 @@ February 1, 2012
 
 * Fix device telemetry stack but with port in FQDN asset path [#77]
 
+* Geolocation update to handle undefined errback [#65]
+
 * Minor license text changes [#73]
 
 ==============================================================================
