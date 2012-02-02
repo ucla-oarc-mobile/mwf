@@ -173,15 +173,6 @@ test("mwf.capability.css.event()", function()
     equal(event, false, 'browser does not support nonexistent event')
 });
 
-test("mwf.capability.flexbox()", function()
-{
-    expect(2);
-    var flexbox = mwf.capability.flexbox();
-    equal(typeof flexbox, 'boolean', 'mwf.capability.flexbox() should return a boolean');
-    equal(flexbox, true, 'browser supports flexible box model');
-});
-
-
 test("mwf.capability.inlinesvg()", function()
 {
     expect(2);

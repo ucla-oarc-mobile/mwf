@@ -264,15 +264,6 @@ mwf.capability=new function(){
     }
     
     /**
-     * Determine if the device browser supports HTML 5 flexible box model.
-     * 
-     * @return bool
-     */
-    this.flexbox = function(){
-        return _m.flexbox;
-    }
-    
-    /**
      * Determine if the device browser supports inline SVG.
      * 
      * @return bool

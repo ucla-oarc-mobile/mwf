@@ -313,14 +313,14 @@ select {
 }
 
 .menu li {
-    background-color: #FFF;
+    background:url(img/list-arrow.png) no-repeat 95% center;
+    background-color: #fff;
     text-align: center;
     border-bottom: 1px solid #ddd;
 }
 
 .menu li a {
     display: block;
-    background:url(img/list-arrow.png) no-repeat 95% center;
 }
 
 .menu li a:hover,

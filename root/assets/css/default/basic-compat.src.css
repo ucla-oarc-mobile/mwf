@@ -227,12 +227,9 @@ input {
 Lists
 ------------------------------------------------*/
 
-.menu-full li a {
-     background:url(img/list-arrow.png) no-repeat 95% center; /* Controls menu items */
-}
-
 .menu-full li {
-    background-color: #FFF;
+    background:url(img/list-arrow.png) no-repeat 95% center; /* Controls menu items */
+    background-color: #fff;
     text-align: center;
     border-bottom: 1px solid #ddd;
 }

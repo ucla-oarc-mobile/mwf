@@ -28,33 +28,58 @@ test("mwf.touch.geolocation.isSupported()", function() {
     equal(mwf.touch.geolocation.isSupported(),true,"Geolocation is supported.");
 })
 
-test("mwf.touch.geolocation.getPosition(onSuccess,onError)", function() {
+test("mwf.touch.geolocation.getCurrentPosition(onSuccess,onError)", function() {
     expect(1);
     QUnit.config.testTimeout = 5000;
     QUnit.stop();
-    mwf.touch.geolocation.getPosition(function(pos) {
+    mwf.touch.geolocation.getCurrentPosition(function(pos) {
         var receivedExpectedResultTypes = 
             typeof pos['latitude']=='number'
             && typeof pos['longitude']=='number'
             && typeof pos['accuracy']=='number';
         ok(receivedExpectedResultTypes, 'lat, long, and accuracy should be numbers');
         start();
-    }, function(errorMsg) {
-        equal(errorMsg,'Geolocation permission not granted.', 'errorMsg should be permission denied: ' + errorMsg);
+    }, function(error) {
+        var matchesPositionErrorInterface =
+            typeof error.code === 'number'
+            && typeof error.message === 'string'
+            && typeof error.PERMISSION_DENIED === 'number'
+            && typeof error.POSITION_UNAVAILABLE === 'number'
+            && typeof error.TIMEOUT === 'number'
+        ok(matchesPositionErrorInterface, 'error should implement PositionError interface');
         start();
     });
 })
 
-test("mwf.touch.geolocation.getPosition(onSuccess)", function() {
+test("mwf.touch.geolocation.getCurrentPosition(onSuccess)", function() {
     QUnit.config.testTimeout = 5000;
     QUnit.stop();
-    mwf.touch.geolocation.getPosition(function(pos) {
+    mwf.touch.geolocation.getCurrentPosition(function(pos) {
         equal(typeof pos['latitude'], 'number', 'latitude should be a number');
         equal(typeof pos['longitude'], 'number', 'longitude should be a number');
         equal(typeof pos['accuracy'], 'number', 'accuracy should be a number');
         start();
     });
-    
+})
+
+test("mwf.touch.geolocation.getCurrentPosition(onSuccess) Geolocation unsupported", function() {
+
+    var getApi = mwf.touch.geolocation.getApi;
+    mwf.touch.geolocation.getApi = function() { return null; };
+
+    try {
+        var rv = mwf.touch.geolocation.getCurrentPosition(function() {
+           ok(false, 'success callback should not trigger if geolocation is unsupported');
+        });
+        equal(typeof rv, 'undefined', 'getCurrentPosition() function should not return a value'); 
+    }
+    catch(ex) {
+        ok(false, 'getCurrentPosition() should not throw an exception if an onError handler is not '
+                    + 'provided and geolocation is unsupported');
+    }
+    finally {
+        mwf.touch.geolocation.getApi = getApi;
+    }
 })
 
 test("mwf.touch.geolocation.setTimeout()", function() {
@@ -73,6 +98,26 @@ test("mwf.touch.geolocation.watchPosition()", function() {
     watchId = mwf.touch.geolocation.watchPosition(function(pos) {});
     equal(typeof watchId, 'number', 'watchPosition() should return a number');
     mwf.touch.geolocation.clearWatch(watchId);
+})
+
+test("mwf.touch.geolocation.watchPosition(onSuccess) Geolocation unsupported", function() {
+
+    var getApi = mwf.touch.geolocation.getApi;
+    mwf.touch.geolocation.getApi = function() { return null; };
+
+    try {
+        var rv = mwf.touch.geolocation.watchPosition(function() {
+            ok(false, 'success callback should not trigger if geolocation is unsupported');
+        });
+        equal(typeof rv, 'undefined', 'watchPosition() function should not return a value');
+    }
+    catch(ex) {
+        ok(false, 'watchPosition() should not throw an exception if an onError handler is not '
+                    + 'provided and geolocation is unsupported');
+    }
+    finally {
+        mwf.touch.geolocation.getApi = getApi;
+    }
 })
 
 test("mwf.touch.geolocation.clearWatch()", function() {
