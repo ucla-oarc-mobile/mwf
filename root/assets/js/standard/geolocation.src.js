@@ -123,22 +123,21 @@ mwf.touch.geolocation = new function()
         
         if(geo === null)
         {
-            if(typeof onError != 'undefined') {
+            if(typeof onError == 'function')
                 onError(ERROR.NO_SUPPORT);
-            }
             return;
         }
 
         geo.getCurrentPosition(
             function(position) {
-                if(typeof onSuccess != 'undefined')
+                if(typeof onSuccess == 'function')
                     onSuccess({
                         'latitude':position.coords.latitude,
                         'longitude':position.coords.longitude,
                         'accuracy':position.coords.accuracy
                     });
             }, function(error) {
-                if(typeof onError != 'undefined') {
+                if(typeof onError == 'function') {
                     onError(error);
                 }         
             },
@@ -153,8 +152,8 @@ mwf.touch.geolocation = new function()
         
         if(!geo)
         {
-            if(typeof onError != 'undefined') {
-                onError(ERROR_MESSAGE.NO_SUPPORT);
+            if(typeof onError == 'function') {
+                onError(ERROR.NO_SUPPORT);
             }
             return;
         }
@@ -172,9 +171,9 @@ mwf.touch.geolocation = new function()
                 
             },
             
-            // An error occurred
             function(err) {
-                onError && onError(ERROR_MESSAGE.GENERAL);
+                if (typeof onError == 'function')
+                    onError(err);
             },
             
             // Options
