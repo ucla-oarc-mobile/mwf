@@ -79,6 +79,12 @@ mwf.touch.geolocation = new function()
         return this.getType() > 0;
     }
 
+    /**
+     * getPosition() is deprecated. Use getCurrentPosition() instead.
+     *
+     * @deprecated
+     * @return void
+     */
     this.getPosition = function(onSuccess, onError)
     {
         var geo = this.getApi();
