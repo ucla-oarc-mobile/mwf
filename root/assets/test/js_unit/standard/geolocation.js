@@ -62,10 +62,13 @@ test("mwf.touch.geolocation.getPosition(onSuccess) Geolocation unsupported", fun
     mwf.touch.geolocation.getApi = function() { return null; };
 
     try {
-        mwf.touch.geolocation.getPosition(function() {});
+        var rv = mwf.touch.geolocation.getPosition(function() {
+            ok(false, 'success callback should not trigger if geolocation is unsupported');
+        });
+        equal(typeof rv, 'undefined', 'getPosition() function should not return a value');
     }
     catch(ex) {
-        ok(false, 'getPosition should not throw an exception if an onError handler is not provided '
+        ok(false, 'getPosition() should not throw an exception if an onError handler is not provided '
                     + 'and geolocation is unsupported');
     }
     finally {
@@ -113,10 +116,13 @@ test("mwf.touch.geolocation.getCurrentPosition(onSuccess) Geolocation unsupporte
     mwf.touch.geolocation.getApi = function() { return null; };
 
     try {
-        mwf.touch.geolocation.getCurrentPosition(function() {});
+        var rv = mwf.touch.geolocation.getCurrentPosition(function() {
+           ok(false, 'success callback should not trigger if geolocation is unsupported');
+        });
+        equal(typeof rv, 'undefined', 'getCurrentPosition() function should not return a value'); 
     }
     catch(ex) {
-        ok(false, 'getCurrentPosition should not throw an exception if an onError handler is not '
+        ok(false, 'getCurrentPosition() should not throw an exception if an onError handler is not '
                     + 'provided and geolocation is unsupported');
     }
     finally {
@@ -148,10 +154,13 @@ test("mwf.touch.geolocation.watchPosition(onSuccess) Geolocation unsupported", f
     mwf.touch.geolocation.getApi = function() { return null; };
 
     try {
-        mwf.touch.geolocation.watchPosition(function() {});
+        var rv = mwf.touch.geolocation.watchPosition(function() {
+            ok(false, 'success callback should not trigger if geolocation is unsupported');
+        });
+        equal(typeof rv, 'undefined', 'watchPosition() function should not return a value');
     }
     catch(ex) {
-        ok(false, 'watchPosition should not throw an exception if an onError handler is not '
+        ok(false, 'watchPosition() should not throw an exception if an onError handler is not '
                     + 'provided and geolocation is unsupported');
     }
     finally {
