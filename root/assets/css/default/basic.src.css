@@ -664,7 +664,7 @@ form .option.justify input[type="radio"]{
 
 /* required label */
 form label.required {
-    background: transparent url('img/astrisk.png') no-repeat top right;
+    background: transparent url('img/asterisk.png') no-repeat top right;
     padding-right: 10px;
 }
 
