@@ -7,9 +7,9 @@
  * @subpackage js
  *
  * @author ebollens
- * @copyright Copyright (c) 2010-11 UC Regents
+ * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111003
+ * @version 20120203
  *
  * @requires mwf
  * @requires mwf.site
@@ -26,7 +26,7 @@
  * 
  * @see /root/assets/redirect/js.php
  */
-document.write('<script type="text/javascript" src="//'+mwf.site.cookie.domain+'/'+mwf.site.local.asset.root+'/redirect/js_unset_override.php"></scr'+'ipt>');
+document.write('<script type="text/javascript" src="'+mwf.site.asset.root+'/redirect/js_unset_override.php"></scr'+'ipt>');
 
 /**
  * Classification-based namespaces.
