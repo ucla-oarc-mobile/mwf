@@ -15,3 +15,11 @@ end
 Then /I should not be in an infinite redirect loop/ do
   should have_selector("#success")
 end
+
+Given /I visit a page hosted on a non-standard port/ do
+  visit "http://localhost/assets/test/selenium/cross_domain_cookie_non_standard_port.php"
+end
+
+Then /the framework should extract the correct cookie domain/ do
+  should have_selector("#success")
+end
