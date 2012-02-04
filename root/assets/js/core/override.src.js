@@ -109,20 +109,19 @@ mwf.override = new function(){
                  */
                 mwf.site.cookie.exists = function(){ return false; }
                 currentOverride = requestedOverride;
-                window.location = returnLocation;
+                mwf.site.redirect(returnLocation);
             
             /**
              * Redirect to the service provider.
              */
             } else {
                 
-                window.location = '//'+mwf.site.cookie.domain+'/'+mwf.site.local.asset.root+'/passthru.php?override='+requestedOverride+'&return='+encodeURIComponent(returnLocation)+'&mode='+mwf.browser.getMode();
+                mwf.site.redirect('//'+mwf.site.cookie.domain+'/'+mwf.site.local.asset.root+'/passthru.php?override='+requestedOverride+'&return='+encodeURIComponent(returnLocation)+'&mode='+mwf.browser.getMode());
                 
             }
             
             /**
-             * Mark this as redirecting so that mwf.server does not rewrite 
-             * window.location as well.
+             * Mark this as redirecting so that mwf.server does not redirect too.
              */
             this.isRedirecting = true;
             

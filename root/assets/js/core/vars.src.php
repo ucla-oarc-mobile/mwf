@@ -234,6 +234,10 @@ mwf.site=new function(){
         };
 
     };
+    
+    this.redirect=function(target){
+        window.location=target;
+    };
 
     // Deprecated
 
