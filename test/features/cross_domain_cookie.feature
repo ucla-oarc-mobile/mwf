@@ -13,3 +13,7 @@ Scenario: Non-Standard Port
   Given I visit a page hosted on a non-standard port
   Then the framework should extract the correct cookie domain
   
+Scenario: Non-Standard Port With Redirect
+  Given I have no framework cookies
+  And I visit a page wherein the framework is hosted on a non-standard port
+  Then the redirect will include the non-standard port

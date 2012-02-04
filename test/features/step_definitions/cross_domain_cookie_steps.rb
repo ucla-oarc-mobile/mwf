@@ -23,3 +23,11 @@ end
 Then /the framework should extract the correct cookie domain/ do
   should have_selector("#success")
 end
+
+Given /I visit a page wherein the framework is hosted on a non-standard port/ do
+  visit "http://localhost/assets/test/selenium/cross_domain_cookie_non_standard_port_redirect.php"
+end
+
+Then /the redirect will include the non-standard port/ do
+  should have_selector("#success")
+end
