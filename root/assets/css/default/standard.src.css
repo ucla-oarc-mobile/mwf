@@ -222,45 +222,92 @@ a.button.light,
 }
 
 /**
+ * Forms
+ */
+
+form {
+    margin: 0;
+}
+
+form.padded {
+    margin: 10px 10px 0 10px;
+}
+
+.content form {
+    margin: 0;
+}
+
+/* tooltip */
+form .tip {
+    background: transparent url(img/forms-tip.png) center right no-repeat;
+    margin-top: 1em;
+    padding-right: 1.5em;
+}
+
+form .tooltip {
+    display: none;	
+    background: transparent url(img/forms-tip-bg.png) 0 0 no-repeat;
+    padding: 10px 15px;
+    height: 120px;
+    width:180px;
+    color: #fff;
+    font-style: normal;
+    text-align: left;
+}
+
+form .tooltip.bottom {
+    background-image: url(img/forms-tip-bg-down.png);
+    padding: 30px 15px;
+}
+
+/**
  * Messages
  */
 
-.message.full {
+div.message {
     background-position: 99% 50%;
     background-repeat: no-repeat;
+    margin: 0;
+    padding-right: 32px;
+}
+
+div.message.padded {
     margin-top: .6em;
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.message.full.alert {
+div.message.alert {
     background-image: url("img/message-alert.png");
 }
 
-.message.full.confirm {
+div.message.confirm {
     background-image: url("img/message-confirm.png");
 }
 
-.message.full.error {
+div.message.error {
     background-image: url("img/message-error.png");
 }
 
-.message.full.info {
+div.message.info {
     background-image: url("img/message-info.png");
 }
 
-.message.full.not-padded {
-    margin: 0;
-}
-
-.content-full .message,
-.menu-full .message,
-.form-full .message,
-.full .message {
-    margin-top: .6em;
+.content div.message,
+.menu div.message,
+.form div.message {
+    margin-top: 0;
     margin-left: 0;
     margin-right: 0;
+    margin-bottom: 10px;
 }
+
+.content div.message:last-child,
+.menu div.message:last-child,
+.form div.message:last-child {
+    margin-bottom: 0;
+}
+
 
 /****************************************************************************
  * Page Descriptors

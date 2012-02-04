@@ -9,7 +9,7 @@
 .not-basic,
 .only-webkit,
 .only-full {
-	display: none;
+    display: none;
 }
 
 /**
@@ -24,7 +24,7 @@ body, html {
 
 body { 
     background-color: #ddd;
-    font:100%/1.25 Arial, Helvetica, sans-serif; 
+    font: 100%/1.25 Arial, Helvetica, sans-serif;
     font-size: .93em; 
     line-height: 1.5;
 }
@@ -130,14 +130,22 @@ p a {
     border-bottom: none;
 }
 
-input, textarea, select {
-     border: 1px solid #cccccc;
-     padding: 4px;
+input {
+    border: 1px solid #cccccc;
+    padding: 4px;
 }
 
-/****************************************************************************
- * Global Elements
- */
+select {
+    background: url(img/select-options-bg.png) center right no-repeat;
+}
+
+.hide {
+    display: none !important;
+}
+
+/********************************************************
+ * HEADER
+ *******************************************************/
 
 /**
  * Header
@@ -410,31 +418,381 @@ div.button a:active{
 }
 
 /**
+ * Forms
+ */
+form {
+    background-color: #fff;
+    padding-bottom: 1em;
+    padding-right: 20px;
+}
+
+/*
+ * Forms Heading
+ */
+form > h1,
+form > h4 {
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+form > h1 {
+    background: #efefef;
+    color: #000;
+    padding: 0.5em 10px;
+}
+
+form > h1.light {
+    background-color: #f6f6f6;
+    color: #555;
+}
+
+form > h1.blue {
+    background-color: #809FE2;
+    color: #fff;
+}
+
+form > h4 {
+    padding: 10px;
+    width: 100%;
+}
+
+form > fieldset {
+    border: 0;
+}
+
+form > a.button,
+form > button,
+form > input,
+form > label,
+form > select,
+form > textarea {
+    margin-left: 10px;
+}
+
+/*
+ * Forms Basic Elements
+ */
+form label {
+    display: inline-block;
+    margin-top: 1em;
+}
+
+form input,
+form select,
+form textarea {
+    border: 1px solid #CCC;
+    font-size: .9em;
+}
+
+form input,
+form textarea {
+    padding: 4px 0;
+}
+
+form textarea {
+    font: 100%/1.25 Arial, Helvetica, sans-serif;
+    height: 4em;
+}
+
+form p {
+    margin-bottom: .5em;
+}
+
+/*
+ * Forms Buttons
+ */
+form a.button {
+    text-align: center;
+}
+
+form input[type="submit"],
+form input[type="reset"],
+form button,
+form a.button {
+    background-color: #e4e7ee;
+    border: 0;
+    color: #000;
+    cursor: pointer;
+    font: 100%/1.25 Arial, Helvetica, sans-serif;
+    margin-top: 10px;
+    padding: .5em 0;
+    height: auto;
+}
+
+form input[type="submit"],
+form input[type="reset"],
+form button {
+    padding: .5em 1em;
+}
+
+form input[type="submit"]:disabled,
+form input[type="reset"]:disabled,
+form button:disabled,
+form a.button.disabled {
+    color: #888;
+    cursor: default;
+}
+
+form input[type="submit"]:hover:disabled,
+form input[type="reset"]:hover:disabled,
+form button:hover:disabled,
+form a.button:hover.disabled,
+form input[type="submit"]:focus:disabled,
+form input[type="reset"]:focus:disabled,
+form button:focus:disabled,
+form a.button:focus.disabled {
+    background-color: #e4e7ee;
+}
+
+form input[type="submit"]:hover,
+form input[type="reset"]:hover,
+form button:hover,
+form a.button:hover,
+form input[type="submit"]:focus,
+form input[type="reset"]:focus,
+form button:focus,
+form a.button:focus {
+    background-color: #cfd5e1;
+}
+
+form input[type="submit"].primary,
+form input[type="reset"].primary,
+form button.primary,
+form a.button.primary,
+form input[type="submit"].primary:hover:disabled,
+form input[type="reset"].primary:hover:disabled,
+form button.primary:hover:disabled,
+form a.button.primary:hover.disabled,
+form input[type="submit"].primary:focus:disabled,
+form input[type="reset"].primary:focus:disabled,
+form button.primary:focus:disabled,
+form a.button.primary:focus.disabled {
+    background-color: #fbaf3f;
+}
+
+form input[type="submit"].primary:hover,
+form input[type="reset"].primary:hover,
+form button.primary:hover,
+form a.button.primary:hover,
+form input[type="submit"].primary:focus,
+form input[type="reset"].primary:focus,
+form button.primary:focus,
+form a.button.primary:focus {
+    background-color: #ffb300;
+}
+
+form input[type="submit"].secondary,
+form input[type="reset"].secondary,
+form button.secondary,
+form a.button.secondary,
+form input[type="submit"].secondary:hover:disabled,
+form input[type="reset"].secondary:hover:disabled,
+form button.secondary:hover:disabled,
+form a.button.secondary:hover.disabled,
+form input[type="submit"].secondary:focus:disabled,
+form input[type="reset"].secondary:focus:disabled,
+form button.secondary:focus:disabled,
+form a.button.secondary:focus.disabled {
+    background-color: #9caccf;
+}
+
+form input[type="submit"].secondary:hover,
+form input[type="reset"].secondary:hover,
+form button.secondary:hover,
+form a.button.secondary:hover,
+form input[type="submit"].secondary:focus,
+form input[type="reset"].secondary:focus,
+form button.secondary:focus,
+form a.button.secondary:focus {
+    background-color: #869ac5;
+}
+
+/* full width form - default */
+form div,
+form h1,
+form p,
+form a.button,
+form fieldset,
+form input,
+form select,
+form textarea {
+    display: block;
+    width: 100%;
+}
+
+/* short width form */
+form.short input {
+    display: inline;
+    width: auto;
+}
+
+form .last {
+    border-bottom: none;
+}
+
+form input[type="checkbox"],
+form input[type="radio"],
+form .option > label, 
+form label.option {
+    display: inline;
+    width: auto;
+}
+
+form > div,
+form > fieldset,
+form > p {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+/* form option alignment */
+form .option {
+    padding: 0 0 0 10px;
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+form .option.right {
+    text-align: right;
+}
+
+form .option.justify input[type="checkbox"],
+form .option.justify input[type="radio"]{
+    float: right;
+    margin-bottom: 0;
+}
+
+/* required label */
+form label.required {
+    background: transparent url('img/asterisk.png') no-repeat top right;
+    padding-right: 10px;
+}
+
+/* invalid */
+form .invalid {
+    color: #a00;
+}
+
+form p.invalid {
+    background: transparent url('img/invalid.png') no-repeat 12px 4px;
+    border-bottom: none;
+    padding: 0 0 0 30px;
+    margin-bottom: 0;
+    width: auto;
+}
+
+form input.invalid,
+form select.invalid,
+form textarea.invalid {
+    border: 1px solid #a00;
+}
+
+/* form date selection */
+form .date-field,
+form .month-field,
+form .week-field,
+form .datetime-field,
+form .datetime-local-field,
+form .time-field {
+    border-bottom: none;
+    padding: 0 0 0 10px;
+    margin-bottom: 0;
+}
+
+form .date-field select,
+form .month-field select,
+form .week-field select,
+form .datetime-field select,
+form .datetime-local-field select,
+form .time-field select {
+    display: inline;
+    width: auto;
+}
+
+/* placeholder */
+form .placeholder {
+    display: none;
+}
+
+/* tooltip */
+form .tip {
+    display: block;
+    float: right;
+    overflow: hidden;
+    text-indent: -999em;
+}
+
+form .tiptext {
+    display: block;
+    margin: 0 10px;
+    color: #999;
+    font-style: italic;
+}
+
+/* ------------------------------------------------------
+ * multi level form
+*/
+.content form {
+    padding-left: 0;
+}
+
+.content form {
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 20px;
+}
+
+.content > div > form > div,
+.content > div > form > fieldset,
+.content > div > form > p {
+    border-bottom: none;
+    padding: 0;
+}
+
+.content > div > form > fieldset{
+    padding-bottom: .5em;
+}
+
+.content > div > form{
+    padding-right: 0;
+}
+
+.content > div > form > a.button,
+.content > div > form > button,
+.content > div > form > input,
+.content > div > form > label,
+.content > div > form > select,
+.content > div > form > textarea{
+    margin-left: 0;
+}
+
+
+/**
  * Messages
  */
 
-.message.full {
+div.message {
     display: block;
     padding: .5em 0 .5em 1em;
     text-align: left;
 }
 
-.message.full.alert {
+div.message.alert {
     border: 1px solid #fa3;
     background-color: #ffe;
 }
 
-.message.full.confirm {
+div.message.confirm {
     border: 1px solid #6a3;
     background-color: #efe;
 }
 
-.message.full.error {
+div.message.error {
     border: 1px solid #a30;
     background-color: #fee;
 }
 
-.message.full.info {
+div.message.info {
     border: 1px solid #6ac;
     background-color: #eff;
 }

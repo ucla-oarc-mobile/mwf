@@ -185,6 +185,109 @@ test("mwf.capability.inlinesvg()", function()
     equal(inlinesvg, supports, 'iOS 5 and Android 3 support inline SVG. otherwise, not so much...');
 });
 
+test("mwf.capability.input.placeholder()", function()
+{
+    expect(2);
+    var placeholder = mwf.capability.input.placeholder();
+    equal(typeof placeholder, 'boolean', 'mwf.capability.input.placeholder() should return a boolean');
+    equal(placeholder, true, 'browser supports placeholder');
+});
+
+test("mwf.capability.input.required()", function()
+{
+    expect(2);
+    var required = mwf.capability.input.required();
+    equal(typeof required, 'boolean', 'mwf.capability.input.required() should return a boolean');
+    equal(required, true, 'browser supports required');
+});
+
+test("mwf.capability.inputtypes.color()", function()
+{
+    expect(1);
+    var color = mwf.capability.inputtypes.color();
+    equal(typeof color, 'boolean', 'mwf.capability.inputtypes.color() should return a boolean');
+});
+
+test("mwf.capability.inputtypes.date()", function()
+{
+    expect(1);
+    var date = mwf.capability.inputtypes.date();
+    equal(typeof date, 'boolean', 'mwf.capability.inputtypes.date() should return a boolean');
+});
+
+test("mwf.capability.inputtypes.datetime()", function()
+{
+    expect(1);
+    var datetime = mwf.capability.inputtypes.datetime();
+    equal(typeof datetime, 'boolean', 'mwf.capability.inputtypes.datetime() should return a boolean');
+});
+
+test("mwf.capability.inputtypes.datetimelocal()", function()
+{
+    expect(1);
+    var datetimelocal = mwf.capability.inputtypes.datetimelocal();
+    equal(typeof datetimelocal, 'boolean', 'mwf.capability.inputtypes.datetimelocal() should return a boolean');
+});
+
+test("mwf.capability.inputtypes.email()", function()
+{
+    expect(2);
+    var email = mwf.capability.inputtypes.email();
+    equal(typeof email, 'boolean', 'mwf.capability.inputtypes.email() should return a boolean');
+    equal(email, true, 'browser supports email');
+});
+
+test("mwf.capability.inputtypes.month()", function()
+{
+    expect(1);
+    var month = mwf.capability.inputtypes.month();
+    equal(typeof month, 'boolean', 'mwf.capability.inputtypes.month() should return a boolean');
+});
+
+test("mwf.capability.inputtypes.number()", function()
+{
+    expect(1);
+    var number = mwf.capability.inputtypes.number();
+    equal(typeof number, 'boolean', 'mwf.capability.inputtypes.number() should return a boolean');
+});
+
+test("mwf.capability.inputtypes.search()", function()
+{
+    expect(2);
+    var search = mwf.capability.inputtypes.search();
+    equal(typeof search, 'boolean', 'mwf.capability.inputtypes.search() should return a boolean');
+    equal(search, true, 'browser supports search');
+});
+
+test("mwf.capability.inputtypes.tel()", function()
+{
+    expect(2);
+    var tel = mwf.capability.inputtypes.tel();
+    equal(typeof tel, 'boolean', 'mwf.capability.inputtypes.tel() should return a boolean');
+    equal(tel, true, 'browser supports tel');
+});
+
+test("mwf.capability.inputtypes.time()", function()
+{
+    expect(1);
+    var time = mwf.capability.inputtypes.time();
+    equal(typeof time, 'boolean', 'mwf.capability.inputtypes.time() should return a boolean');
+});
+
+test("mwf.capability.inputtypes.url()", function()
+{
+    expect(2);
+    var url = mwf.capability.inputtypes.url();
+    equal(typeof url, 'boolean', 'mwf.capability.inputtypes.url() should return a boolean');
+    equal(url, true, 'browser supports url');
+});
+
+test("mwf.capability.inputtypes.week()", function()
+{
+    expect(1);
+    var week = mwf.capability.inputtypes.week();
+    equal(typeof week, 'boolean', 'mwf.capability.inputtypes.week() should return a boolean');
+});
 
 test("mwf.capability.localstorage()", function()
 {

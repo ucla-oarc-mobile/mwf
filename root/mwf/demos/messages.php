@@ -28,8 +28,8 @@ require_once(dirname(dirname(dirname(__FILE__))) . '/assets/config.php');
 echo HTML_Decorator::html_start()->render();
 
 echo Site_Decorator::head()
-        ->set_title('MWF Demos')
-        ->add_js_handler_library('full_libs', 'messages')
+        ->set_title('Messages Demo')
+        ->add_js_handler_library('standard_libs', 'messages')
         ->render();
 ?>
 
@@ -37,12 +37,12 @@ echo Site_Decorator::head()
 echo HTML_Decorator::body_start()->render();
 
 echo Site_Decorator::header()
-        ->set_title('MWF Demo')
+        ->set_title('Messages Demo')
         ->render();
 
-echo Site_Decorator::content_full()
+echo Site_Decorator::content()
         ->set_padded()
-        ->add_header('MWF Message Demo')
+        ->add_header('Messages Demo')
         ->add_paragraph('The following is a demo of MWF Messages.')
         ->render();
 ?>
@@ -52,22 +52,22 @@ echo Site_Decorator::content_full()
     <h1 class="content-first">Content Messages</h1>
     <p>Inline message <span class="message alert">alert</span>, <span class="message confirm">confirm</span>, <span class="message error">error</span>, <span class="message info">info</span>.</p>
     <div>
-        <div class="message full alert">This is an alert message</div>
-        <div class="message full confirm">This is a confirm message</div>
-        <div class="message full not-padded error">This is a not-padded error message</div>
-        <div class="message full not-padded info">This is a not-padded info message</div>
+        <div class="message alert">This is an alert message inside a content</div>
+        <div class="message confirm">This is a confirm message inside a content</div>
+        <div class="message error">This is an error message inside a content</div>
+        <div class="message info">This is an info message inside a content</div>
     </div>
 </div>
 
-<div class="message full alert">This is an alert message</div>
-<div class="message full confirm">This is a confirm message</div>
-<div class="message full not-padded error">This is a not-padded error message</div>
-<div class="message full not-padded info">This is a not-padded info message</div>
+<div class="message alert padded">This is a padded alert message</div>
+<div class="message confirm padded">This is a padded confirm message</div>
+<div class="message error">This is a not padded error message</div>
+<div class="message info">This is a not padded info message</div>
 
-<div id="alert-msg" class="message full alert">This is an alert message from existing markup</div>
+<div id="alert-msg" class="message alert padded">This is an alert message from existing markup</div>
 
 <?php
-echo Site_Decorator::button_full()
+echo Site_Decorator::button()
         ->set_padded()
         ->add_option('Back To Demos', Config::get('global', 'site_url') . '/mwf/demos.php')
         ->render();
@@ -76,28 +76,30 @@ echo Site_Decorator::default_footer()->render();
 ?>
 
 <script type="text/javascript">
-    // an alert message from existing markup
-    mwf.messages.modal({
-        id: "alert-msg"
-    });
+    if (mwf.classification.isFull()) {
+        // an alert message from existing markup
+        mwf.messages.modal({
+            id: "alert-msg"
+        });
     
-    // a dynamic info message from dynamic markup
-    mwf.messages.modal({
-        text: "An dynamic info message",
-        type: "info"
-    });
+        // a dynamic info message from dynamic markup
+        mwf.messages.modal({
+            text: "An dynamic info message",
+            type: "info"
+        });
     
-    // a dynamic confirm message with callback
-    cb = function() {
-        alert("This is a call back function for confirm message.");
+        // a dynamic confirm message with callback
+        cb = function() {
+            alert("This is a call back function for confirm message.");
+        }
+    
+        mwf.messages.modal({
+            text: "A not-padded confirm message with call back",
+            type: "confirm",
+            padded: false,
+            callback: cb
+        });
     }
-    
-    mwf.messages.modal({
-        text: "A not-padded confirm message with call back",
-        type: "confirm",
-        padded: false,
-        callback: cb
-    });
 </script>
 
 <?php
