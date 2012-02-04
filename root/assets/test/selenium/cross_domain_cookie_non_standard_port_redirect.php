@@ -13,7 +13,7 @@ $_SERVER['HTTP_HOST'] = 'www.example.com:8080';
 ?><!DOCTYPE html>
 <html>
     <head>
-        <title>Cross-Domain-Cookie Non-Standard-Port Test</title>
+        <title>Cross-Domain-Cookie Non-Standard-Port Redirect Test</title>
         <script type="text/javascript">
             <?php require_once(dirname(dirname(dirname(dirname(__FILE__)))).'/assets/js/core/vars.php'); ?>
                 mwf.capability = new function() { this.cookie = function() {return true} }

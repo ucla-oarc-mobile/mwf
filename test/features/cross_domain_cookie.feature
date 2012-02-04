@@ -17,3 +17,8 @@ Scenario: Non-Standard Port With Redirect
   Given I have no framework cookies
   And I visit a page wherein the framework is hosted on a non-standard port
   Then the redirect will include the non-standard port
+
+Scenario: Non-Standard Port With Unset Override
+  Given I have no framework cookies
+  And I visit a page that loads the framework JavaScript from a non-standard port
+  Then the tag that loads js_unset_override.php will specify the non-standard port
