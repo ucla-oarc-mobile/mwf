@@ -39,7 +39,7 @@ echo Site_Decorator::header()
 echo Site_Decorator::content()
             ->set_padded()
             ->add_header('The Framework')
-            ->add_paragraph('The UCLA Mobile Web Framework is a cross-platform web framework that focuses on mobile web standards, semantic markup, device agnosticism and graceful degradation, providing a robust presentation layer that allows applications to define a single set of markup optimized for HTML 5 capable devices that degrades gracefully to any HTML 4.01 or XHTML MP 2.0 compliant device including Blackberry, Windows Mobile and even T9 phones.')
+            ->add_paragraph('The Mobile Web Framework is a cross-platform web framework that focuses on mobile web standards, semantic markup, device agnosticism and graceful degradation, providing a robust presentation layer that allows applications to define a single set of markup optimized for HTML 5 capable devices that degrades gracefully to any HTML 4.01 or XHTML MP 2.0 compliant device including Blackberry, Windows Mobile and even T9 phones.')
             ->render();
 
 echo Site_Decorator::content()
