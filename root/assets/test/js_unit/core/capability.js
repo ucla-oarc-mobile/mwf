@@ -234,7 +234,7 @@ test("mwf.capability.inputtypes.email()", function()
     expect(2);
     var email = mwf.capability.inputtypes.email();
     equal(typeof email, 'boolean', 'mwf.capability.inputtypes.email() should return a boolean');
-    equal(email, true, 'browser supports email');
+    equal(email, mwf.userAgent.getOS()!='android', 'browser supports email in iOS, not in Android');
 });
 
 test("mwf.capability.inputtypes.month()", function()
@@ -279,7 +279,7 @@ test("mwf.capability.inputtypes.url()", function()
     expect(2);
     var url = mwf.capability.inputtypes.url();
     equal(typeof url, 'boolean', 'mwf.capability.inputtypes.url() should return a boolean');
-    equal(url, true, 'browser supports url');
+    equal(url, mwf.userAgent.getOS()!='android', 'browser supports url in iOS, not in Android');
 });
 
 test("mwf.capability.inputtypes.week()", function()
