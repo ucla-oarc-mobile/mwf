@@ -138,14 +138,14 @@ echo Site_Decorator::menu()
 
 echo Site_Decorator::menu()
             ->set_right_aligned()
-            ->set_title('Menu Left')
+            ->set_title('Menu Right')
             ->add_item('Item 1', '#')
             ->add_item('Item 2', '#')
             ->render();
 
 echo Site_Decorator::menu()
             ->set_right_aligned()
-            ->set_title_light('Menu Light Left')
+            ->set_title_light('Menu Light Right')
             ->add_item('Item 1', '#')
             ->add_item('Item 2', '#')
             ->render();
