@@ -323,9 +323,7 @@ select {
     display: block;
 }
 
-.menu li a:hover,
-.menu li a:focus,
-.menu li a:active {
+.menu li:hover {
     background-color: #eaf2fa;
 }
 
