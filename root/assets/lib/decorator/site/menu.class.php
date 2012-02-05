@@ -81,7 +81,7 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator
     }
 
     public function &add_item($name, $url, $li_params = array(), $a_params = array())
-    {
+    {        
         if(!is_array($this->_list))
             $this->_list = array();
         if(!is_array($li_params))
@@ -89,7 +89,7 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator
         if(!is_array($a_params))
             $a_params = array();
 
-        $link = HTML_Decorator::tag('a', $name?$name:'', array_merge($a_params, array('href'=>$url?$url:'#')));
+        $link = HTML_Decorator::tag('a', $name?$name:'', array_merge($a_params, array('href'=>$url?htmlspecialchars($url):'#')));
         $this->_list[] = HTML_Decorator::tag('li', $link, $li_params);
 
         return $this;
