@@ -362,15 +362,6 @@ select {
     text-align: center;
 }
 
-.menu.right li {
-    text-align: right;
-}
-
-.menu.right li a,
-.menu.right.detailed li a {
-    padding-right: 4em;
-}
-
 .menu.detailed li {
     font-size: 1em;
 }
