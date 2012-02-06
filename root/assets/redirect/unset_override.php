@@ -12,18 +12,22 @@
  * @license http://mwf.ucla.edu/license
  * @version 20101021
  *
+ * @uses Config
+ * @uses Cookie
+ * 
  * @link /assets/redirect/js.php
  */
 
-include_once(dirname(dirname(__FILE__)).'/config.php');
+require_once(dirname(dirname(__FILE__)).'/config.php');
+require_once(dirname(dirname(__FILE__)).'/lib/cookie.class.php');
 
 if(!headers_sent())
 {
-    $ovrrdr_name = Config::get('global', 'cookie_prefix').'ovrrdr';
-    foreach($_COOKIE as $name=>$value)
+    $ovrrdr_name = 'ovrrdr';
+    foreach(Cookie::get_all_names() as $name)
     {
         if(substr($name, 0, strlen($ovrrdr_name)) == $ovrrdr_name)
-             setcookie($name, 0, time(), '/');
+                Cookie::set($name,0,time(),'/');
     }
 }
 

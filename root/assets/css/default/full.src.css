@@ -1,154 +1,193 @@
-/* default-webkit-main
- *
- * Description:
- *
- *   -Header
- *   -Menus
- *	 -Buttons
- *   -Content
- *
- *
+/****************************************************************************
+ * Global Definitions
  */
 
-.only-webkit, .only-full { display: block; }
-.not-webkit, .not-full { display: none; }
+/**
+ * Visibility Controls
+ */
 
-/********************************************************
- * MENUS
- *******************************************************/
+.only-webkit, 
+.only-full { 
+    display: block; 
+}
 
-/*-------------------------------------------------
-  Headings
-  ------------------------------------------------*/
+.not-webkit, 
+.not-full { 
+    display: none; 
+}
 
-.menu-full > h1 {
+/**
+ * General Styles
+ */
+
+.clear {
+    clear: both;
+    width: 100%;
+    height: 1px;
+}
+
+/****************************************************************************
+ * Page Elements
+ */
+ 
+/**
+ * Shared [TODO: Merge styles where possible]
+ */
+
+ select {
+     -webkit-appearance: none;
+ }
+ 
+/**
+ * Content
+ */
+
+.content.padded {
+    border-radius: .5em;
+    -webkit-border-radius: .5em;
+    -moz-border-radius: .5em;
+}
+
+.content > h1 {
     background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
     background: -moz-linear-gradient(#fff, #e5e5e5);
     background: -o-linear-gradient(top, #fff, #e5e5e5);
     background: linear-gradient(#fff, #e5e5e5);
 }
 
-.menu-full > h1.light {
+.content > h1.light {
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
+    background: -moz-linear-gradient(#fff, #e5e5e5);
+    background: -o-linear-gradient(top, #fff, #e5e5e5);
+    background: linear-gradient(#fff, #e5e5e5);
+}
+.content > h1.blue {
+    background: -webkit-gradient(linear, left top, left bottom, from(#809FE2), to(#637CB0));
+    background: -moz-linear-gradient(#809FE2, #637CB0);
+    background: -o-linear-gradient(top, #809FE2, #637CB0);
+    background: linear-gradient(#809FE2, #637CB0);
+
+}
+
+.content.padded > *:first-child {
+    -webkit-border-top-left-radius: .5em;
+    -webkit-border-top-right-radius: .5em;
+    -moz-border-radius-topleft: .5em;
+    -moz-border-radius-topright: .5em;
+}
+
+.content.padded > *:last-child {
+    -webkit-border-bottom-left-radius: .5em;
+    -webkit-border-bottom-right-radius: .5em;
+    -moz-border-radius-bottomleft: .5em;
+    -moz-border-radius-bottomright: .5em;
+}
+
+/**
+ * Menu
+ */
+
+.menu > h1 {
     background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
     background: -moz-linear-gradient(#fff, #e5e5e5);
     background: -o-linear-gradient(top, #fff, #e5e5e5);
     background: linear-gradient(#fff, #e5e5e5);
 }
 
-.menu-full > h1.blue {
+.menu > h1.light {
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
+    background: -moz-linear-gradient(#fff, #e5e5e5);
+    background: -o-linear-gradient(top, #fff, #e5e5e5);
+    background: linear-gradient(#fff, #e5e5e5);
+}
+
+.menu > h1.blue {
     background: -webkit-gradient(linear, left top, left bottom, from(#809FE2), to(#637CB0));
     background: -moz-linear-gradient(#809FE2, #637CB0);
     background: -o-linear-gradient(top, #809FE2, #637CB0);
     background: linear-gradient(#809FE2, #637CB0);
 }
 
-.menu-padded {
+.menu.padded {
     border-radius: .5em;
     -webkit-border-radius: .5em;
     -moz-border-radius: .5em;
 }
 
-.menu-padded > :first-child:last-child li:first-child,
-.menu-padded > :first-child,
-.menu-padded .menu-first {
+.menu.padded > :first-child:last-child li:first-child,
+.menu.padded > :first-child {
     -moz-border-radius-topleft: .5em;
     -moz-border-radius-topright: .5em;
     -webkit-border-top-left-radius: .5em;
     -webkit-border-top-right-radius: .5em;
 }
 
-.menu-padded li:last-child,
-.menu-padded .menu-last {
+.menu.padded > :first-child:last-child,
+.menu.padded li:last-child {
     -webkit-border-bottom-left-radius: .5em;
     -webkit-border-bottom-right-radius: .5em;
     -moz-border-radius-bottomleft: .5em;
     -moz-border-radius-bottomright: .5em;
 }
 
-.menu-padded > :first-child:last-child li:first-child a:hover,
-.menu-padded > :first-child:last-child li:first-child a:focus,
-.menu-padded > :first-child:last-child li:first-child a:active,
-.menu-padded > :first-child li:first-child a:hover,
-.menu-padded > :first-child li:first-child a:focus,
-.menu-padded > :first-child li:first-child a:active,
-.menu-padded .menu-first a:hover,
-.menu-padded .menu-first a:focus,
-.menu-padded .menu-first a:active {
+.menu.padded > :first-child:last-child li:first-child a:hover,
+.menu.padded > :first-child:last-child li:first-child a:focus,
+.menu.padded > :first-child:last-child li:first-child a:active,
+.menu.padded > :first-child li:first-child a:hover,
+.menu.padded > :first-child li:first-child a:focus,
+.menu.padded > :first-child li:first-child a:active {
     -moz-border-radius-topleft: .5em;
     -moz-border-radius-topright: .5em;
     -webkit-border-top-left-radius: .5em;
     -webkit-border-top-right-radius: .5em;
 }
 
-.menu-padded li:last-child a:hover,
-.menu-padded li:last-child a:focus,
-.menu-padded li:last-child a:active,
-.menu-padded .menu-last a:hover,
-.menu-padded .menu-last a:focus,
-.menu-padded .menu-last a:active {
+.menu.padded li:last-child a:hover,
+.menu.padded li:last-child a:focus,
+.menu.padded li:last-child a:active {
     -webkit-border-bottom-left-radius: .5em;
     -webkit-border-bottom-right-radius: .5em;
     -moz-border-radius-bottomleft: .5em;
     -moz-border-radius-bottomright: .5em;
 }
 
-/********************************************************
- * BUTTONS
- *******************************************************/
+/**
+ * Button
+ */
 
-.button-padded {
+.button.padded {
     border-radius: .5em;
     -webkit-border-radius: .5em;
     -moz-border-radius: .5em;
 }
 
-a.button-full,
-div.button-full a {
+a.button,
+.button a {
     background: -webkit-gradient(linear, left top, left bottom, from(#6883bc), to(#536895));
     background: -moz-linear-gradient(#6883bc, #536895);
     background: -o-linear-gradient(top, #6883bc, #536895);
     background: linear-gradient(#6883bc, #536895);
 }
 
-a#button-top {
-    background: -webkit-gradient(linear, left top, left bottom, from(#95aee8), to(#788ebe));
-    background: -moz-linear-gradient(#95aee8, #788ebe);
-    background: -o-linear-gradient(top, #95aee8, #788ebe);
-    background: linear-gradient(#95aee8, #788ebe);
-}
-
-a#button-top:hover,
-a#button-top:active,
-a#button-top:focus{
-    background: -webkit-gradient(linear, left top, left bottom, from(#8296c0), to(#576c9c));
-    background: -moz-linear-gradient(#8296c0, #576c9c);
-    background: -o-linear-gradient(top, #8296c0, #576c9c);
-    background: linear-gradient(#8296c0, #576c9c);
-}
-
-a#button-top,
-a.button-full.button-padded,
-div.button-full.button-padded a.button-first,
-div.button-full.button-padded a:first-child {
+a.button.padded,
+.button.padded a:first-child {
     -webkit-border-top-left-radius: .5em;
     -webkit-border-bottom-left-radius: .5em;
     -moz-border-radius-topleft: .5em;
     -moz-border-radius-bottomleft: .5em;
 }
 
-a#button-top,
-a.button-full.button-padded,
-div.button-full.button-padded a.button-last,
-div.button-full.button-padded a:last-child {
+a.button.padded,
+div.button.padded a:last-child {
     -webkit-border-top-right-radius: .5em;
     -webkit-border-bottom-right-radius: .5em;
     -moz-border-radius-topright: .5em;
     -moz-border-radius-bottomright: .5em;
 }
 
-a.button-full.button-light,
-div.button-full a.button-light,
-div.button-full.button-light a {
+a.button.light,
+div.button a.light,
+div.button.light a {
     background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
     background: -moz-linear-gradient(#fff, #e5e5e5);
     background: -o-linear-gradient(top, #fff, #e5e5e5);
@@ -156,180 +195,236 @@ div.button-full.button-light a {
     color: #555 !important;
 }
 
-a.button-full:hover,
-a.button-full:focus,
-a.button-full:active,
-div.button-full a:hover,
-div.button-full a:focus,
-div.button-full a:active,
-a.button-full.button-light:hover,
-a.button-full.button-light:focus,
-a.button-full.button-light:active,
-div.button-full a.button-light:hover,
-div.button-full a.button-light:focus,
-div.button-full a.button-light:active{
+a.button:hover,
+a.button:focus,
+a.button:active,
+div.button a:hover,
+div.button a:focus,
+div.button a:active,
+a.button.light:hover,
+a.button.light:focus,
+a.button.light:active,
+div.button a.light:hover,
+div.button a.light:focus,
+div.button a.light:active{
     background: -webkit-gradient(linear, left top, left bottom, from(#ffc847), to(#ffb300));
     background: -moz-linear-gradient(#ffc847, #ffb300);
     background: -o-linear-gradient(top, #ffc847, #ffb300);
     background: linear-gradient(#ffc847, #ffb300);
 }
 
-/********************************************************
- * CONTENT
- *******************************************************/
-
-.content-padded {
-    border-radius: .5em;
-    -webkit-border-radius: .5em;
-    -moz-border-radius: .5em;
-}
-
-.content-elements > h1, .content-full > h1 {
-    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
-    background: -moz-linear-gradient(#fff, #e5e5e5);
-    background: -o-linear-gradient(top, #fff, #e5e5e5);
-    background: linear-gradient(#fff, #e5e5e5);
-}
-
-.content-elements > h1.light, .content-full > h1.light {
-    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
-    background: -moz-linear-gradient(#fff, #e5e5e5);
-    background: -o-linear-gradient(top, #fff, #e5e5e5);
-    background: linear-gradient(#fff, #e5e5e5);
-}
-.content-elements > h1.blue, .content-full > h1.blue {
-    background: -webkit-gradient(linear, left top, left bottom, from(#809FE2), to(#637CB0));
-    background: -moz-linear-gradient(#809FE2, #637CB0);
-    background: -o-linear-gradient(top, #809FE2, #637CB0);
-    background: linear-gradient(#809FE2, #637CB0);
-
-}
-
-.content-padded > *:first-child {
-    -webkit-border-top-left-radius: .5em;
-    -webkit-border-top-right-radius: .5em;
-    -moz-border-radius-topleft: .5em;
-    -moz-border-radius-topright: .5em;
-}
-
-.content-padded .content-first {
-    -webkit-border-top-left-radius: .5em;
-    -webkit-border-top-right-radius: .5em;
-    -moz-border-radius-topleft: .5em;
-    -moz-border-radius-topright: .5em;
-}
-
-.content-padded > *:last-child {
-    -webkit-border-bottom-left-radius: .5em;
-    -webkit-border-bottom-right-radius: .5em;
-    -moz-border-radius-bottomleft: .5em;
-    -moz-border-radius-bottomright: .5em;
-}
-
-.content-padded .content-last {
-    -webkit-border-bottom-left-radius: .5em;
-    -webkit-border-bottom-right-radius: .5em;
-    -moz-border-radius-bottomleft: .5em;
-    -moz-border-radius-bottomright: .5em;
-}
-
-/********************************************************
- * FORM
- *******************************************************/
-
-form.form-padded > *:last-child,
-form.form-padded > .form-last {
-    margin-bottom: 6px;
-}
-
-form.form-full > h1 {
-	background: -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#ccc));
-    background: -moz-linear-gradient(#efefef, #ccc);
-    background: -o-linear-gradient(top, #efefef, #ccc);
-    background: linear-gradient(#fff, #e5e5e5);
-}
-
-form.form-full > h1.light {
-    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
-    background: -moz-linear-gradient(#fff, #e5e5e5);
-    background: -o-linear-gradient(top, #fff, #e5e5e5);
-    background: linear-gradient(#fff, #e5e5e5);
-}
-form.form-full > h1.blue {
-	background: -webkit-gradient(linear, left top, left bottom, from(#809FE2), to(#637CB0));
-    background: -moz-linear-gradient(#809FE2, #637CB0);
-    background: -o-linear-gradient(top, #809FE2, #637CB0);
-    background: linear-gradient(#809FE2, #637CB0);
-
-}
-
-form.form-full > input,
-form.form-full > select,
-form.form-full > textarea {
-	-webkit-border-top-left-radius: .5em;
-	-webkit-border-top-right-radius: .5em;
-	-webkit-border-bottom-left-radius: .5em;
-	-webkit-border-bottom-right-radius: .5em;
-    -webkit-box-shadow:inset 0 0 3px #bbb;
-    -webkit-appearance: none;
-}
-
-form.form-full > select {
-    background: #fff url(img/select-options-bg.png) right no-repeat;
-}
-
-form.form-padded,
-form.form-padded > h1.form-first,
-form.form-padded > p.form-first,
-form.form-padded > div.form-first {
-	-webkit-border-top-left-radius: .5em;
-	-webkit-border-top-right-radius: .5em;
-}
-
-form.form-padded,
-form.form-padded > h1.form-last,
-form.form-padded > p.form-last,
-form.form-padded > div.form-last {
-	-webkit-border-bottom-left-radius: .5em;
-	-webkit-border-bottom-right-radius: .5em;
-}
-
-form.form-full > input[type=submit],
-form.form-full > input[type=reset] {
-    -webkit-box-shadow:none;
-    background: -webkit-gradient(linear, left top, left bottom, from(#e5e5e5), to(#f1f1f1), color-stop(0.8, #f1f1f1));
-    background: -moz-linear-gradient(#e5e5e5, #f1f1f1);
-    background: -o-linear-gradient(top, #e5e5e5, #f1f1f1);
-    background: linear-gradient(#e5e5e5, #f1f1f1);
-}
-
-form.form-full > input[type=submit]:active,
-form.form-full > input[type=reset]:active,
-form.form-full > input[type=submit]:focus,
-form.form-full > input[type=reset]:focus,
-form.form-full > input[type=submit]:hover,
-form.form-full > input[type=reset]:hover {
-    background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#f1f1f1), color-stop(0.8, #f1f1f1));
-    background: -moz-linear-gradient(#f9f9f9, #f1f1f1);
-    background: -o-linear-gradient(top, #f9f9f9, #f1f1f1);
-    background: linear-gradient(#f9f9f9, #f1f1f1);
-}
-
-/* default-webkit-transitions
- *
- * Description:
- *
- *   -Setup
- *   -Properties
- *	 -Active
- *   -Inactive
- *   -Utilities
- *
- *
+/**
+ * Button (Top)
  */
 
+#button-top {
+    background: -webkit-gradient(linear, left top, left bottom, from(#95aee8), to(#788ebe));
+    background: -moz-linear-gradient(#95aee8, #788ebe);
+    background: -o-linear-gradient(top, #95aee8, #788ebe);
+    background: linear-gradient(#95aee8, #788ebe);
+    -moz-border-radius: .5em;
+    -webkit-border-radius: .5em;
+}
 
-/** TRANSITION SETUP **/
+#button-top:hover,
+#button-top:active,
+#button-top:focus{
+    background: -webkit-gradient(linear, left top, left bottom, from(#8296c0), to(#576c9c));
+    background: -moz-linear-gradient(#8296c0, #576c9c);
+    background: -o-linear-gradient(top, #8296c0, #576c9c);
+    background: linear-gradient(#8296c0, #576c9c);
+}
+
+/**
+ * Forms
+ */
+ 
+form {
+    border-radius: .5em;
+}
+
+form,
+form .first,
+form > *:first-child {
+    border-top-left-radius: .5em;
+    border-top-right-radius: .5em;
+}
+
+form,
+form .last {
+    border-bottom-left-radius: .5em;
+    border-bottom-right-radius: .5em;
+}
+
+form input,
+form textarea,
+form select {
+    box-shadow: inset 0 0 3px #bbb;
+    padding: 4px;
+}
+
+/* making control equal width */
+form input,
+form textarea,
+form select {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* button */
+form input[type="submit"],
+form input[type="reset"],
+form button,
+form a.button,
+form input[type="submit"]:hover:disabled,
+form input[type="reset"]:hover:disabled,
+form button:hover:disabled,
+form a.button:hover.disabled,
+form input[type="submit"]:focus:disabled,
+form input[type="reset"]:focus:disabled,
+form button:focus:disabled,
+form a.button:focus.disabled {
+    background: -moz-linear-gradient(#e4e7ee, #cfd5e1);
+    background: -o-linear-gradient(top, #e4e7ee, #cfd5e1);
+    background: -webkit-gradient(linear, left top, left bottom, from(#e4e7ee), to(#cfd5e1), color-stop(0.8, #cfd5e1));
+    background: linear-gradient(#e4e7ee, #cfd5e1);
+    border-radius: .5em;
+    box-shadow: 0 2px 2px #999;
+    text-shadow: 0 1px 1px #fff;
+}
+
+form input[type="submit"]:hover,
+form input[type="reset"]:hover,
+form button:hover,
+form a.button:hover,
+form input[type="submit"]:focus,
+form input[type="reset"]:focus,
+form button:focus,
+form a.button:focus {
+    background: -moz-linear-gradient(#cfd5e1, #bcc5d5);
+    background: -o-linear-gradient(top, #cfd5e1, #bcc5d5);
+    background: -webkit-gradient(linear, left top, left bottom, from(#cfd5e1), to(#bcc5d5), color-stop(0.8, #bcc5d5));
+    background: linear-gradient(#cfd5e1, #bcc5d5);
+}
+
+form input[type="submit"].primary,
+form input[type="reset"].primary,
+form button.primary,
+form a.button.primary,
+form input[type="submit"].primary:hover:disabled,
+form input[type="reset"].primary:hover:disabled,
+form button.primary:hover:disabled,
+form a.button.primary:hover.disabled,
+form input[type="submit"].primary:focus:disabled,
+form input[type="reset"].primary:focus:disabled,
+form button.primary:focus:disabled,
+form a.button.primary:focus.disabled {
+    background: -moz-linear-gradient(#fcbe60, #faa422);
+    background: -o-linear-gradient(top, #fcbe60, #faa422);
+    background: -webkit-gradient(linear, left top, left bottom, from(#fcbe60), to(#faa422), color-stop(0.8, #faa422));
+    background: linear-gradient(#fcbe60, #faa422);
+}
+
+form input[type="submit"].primary:hover,
+form input[type="reset"].primary:hover,
+form button.primary:hover,
+form a.button.primary:hover,
+form input[type="submit"].primary:focus,
+form input[type="reset"].primary:focus,
+form button.primary:focus,
+form a.button.primary:focus {
+    background: -moz-linear-gradient(#faa422, #db8504);
+    background: -o-linear-gradient(top, #faa422, #db8504);
+    background: -webkit-gradient(linear, left top, left bottom, from(#faa422), to(#db8504), color-stop(0.8, #db8504));
+    background: linear-gradient(#faa422, #db8504);
+}
+
+form input[type="submit"].secondary,
+form input[type="reset"].secondary,
+form button.secondary,
+form a.button.secondary,
+form input[type="submit"].secondary:hover:disabled,
+form input[type="reset"].secondary:hover:disabled,
+form button.secondary:hover:disabled,
+form a.button.secondary:hover.disabled,
+form input[type="submit"].secondary:focus:disabled,
+form input[type="reset"].secondary:focus:disabled,
+form button.secondary:focus:disabled,
+form a.button.secondary:focus.disabled {
+    background: -moz-linear-gradient(#9caccf, #869ac5);
+    background: -o-linear-gradient(top, #9caccf, #869ac5);
+    background: -webkit-gradient(linear, left top, left bottom, from(#9caccf), to(#869ac5), color-stop(0.8, #869ac5));
+    background: linear-gradient(#9caccf, #869ac5);
+}
+
+form input[type="submit"].secondary:hover,
+form input[type="reset"].secondary:hover,
+form button.secondary:hover,
+form a.button.secondary:hover,
+form input[type="submit"].secondary:focus,
+form input[type="reset"].secondary:focus,
+form button.secondary:focus,
+form a.button.secondary:focus {
+    background: -moz-linear-gradient(#869ac5, #7188bb);
+    background: -o-linear-gradient(top, #869ac5, #7188bb);
+    background: -webkit-gradient(linear, left top, left bottom, from(#869ac5), to(#7188bb), color-stop(0.8, #7188bb));
+    background: linear-gradient(#869ac5, #7188bb);
+}
+
+
+/**
+ * Messages
+ */
+ 
+.message-wrapper {
+    position: absolute;
+    top: 25%;
+    left: 10px;
+    right: 10px;
+    z-index: 1002;
+    background-color: #fff;
+    border: 1px solid #666;
+    border-radius: .5em;
+}
+
+.message-modal.message {
+    margin: 0;
+}
+
+.message-modal.message.padded {
+    margin-top: .6em;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+div.message-button {
+    margin: 0;
+}
+
+div.message-button.padded {
+    margin: 10px;
+}
+
+.message-mask {
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background:#666;
+    opacity:.75;
+    filter:alpha(opacity=75);
+    z-index:1001
+}
+
+/****************************************************************************
+ * Special Styles
+ */
+
+/**
+ * Webkit Transitions [DEPRECATED]
+ */
 
 .webkit-transition-fade .webkit-transition-element,
 .webkit-transition-flipY .webkit-transition-element,
@@ -466,12 +561,4 @@ form.form-full > input[type=reset]:hover {
 
 .webkit-transition-slideXZ .inactive-next{
     -webkit-transform: rotateX(90deg) scale3d(.835,.835,.835) translateX(30%);
-}
-
-/** TRANSITION UTILITIES **/
-
-.clear {
-    clear: both;
-    width: 100%;
-    height: 1px;
 }

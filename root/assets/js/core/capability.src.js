@@ -61,9 +61,15 @@ mwf.capability=new function(){
     this.ajax = function(){
         if(_ajax === false){
             _ajax = null;
-            try { _ajax = new XMLHttpRequest(); } catch (e) {}
-            try { _ajax = new ActiveXObject("Microsoft.XMLHTTP"); } catch (e) {}
-            try { _ajax = new ActiveXObject("Msxml2.XMLHTTP"); } catch (e) {}
+            try {
+                _ajax = new XMLHttpRequest();
+            } catch (e) {}
+            try {
+                _ajax = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (e) {}
+            try {
+                _ajax = new ActiveXObject("Msxml2.XMLHTTP");
+            } catch (e) {}
         }
         return _ajax != null;
     }
@@ -258,21 +264,149 @@ mwf.capability=new function(){
     }
     
     /**
-     * Determine if the device browser supports HTML 5 flexible box model.
-     * 
-     * @return bool
-     */
-    this.flexbox = function(){
-        return _m.flexbox;
-    }
-    
-    /**
      * Determine if the device browser supports inline SVG.
      * 
      * @return bool
      */
     this.inlinesvg = function(){
         return _m.inlinesvg
+    }
+    
+    /**
+     * Methods that determine input
+     */
+    this.input = new function() {
+        /**
+         * Determine if the device supports placeholder
+         *
+         * @return bool
+         */
+        this.placeholder = function() {
+            return _m.input.placeholder;
+        }
+        
+        /**
+         * Detemine if the device supports required
+         * 
+         * @return bool
+         */
+        this.required = function() {
+            return _m.input.required;
+        }
+    }
+    
+    /**
+     * Methods that determine input types
+     */
+    this.inputtypes = new function() {
+        
+        /**
+         * Determine if the device supports color input type
+         * 
+         * @return bool
+         */
+        this.color = function() {
+            return _m.inputtypes.color;
+        }
+        
+        /**
+         * Determine if the device supports date input type
+         * 
+         * @return bool
+         */
+        this.date = function() {
+            return _m.inputtypes.date;
+        }
+        
+        /**
+         * Determine if the device supports datetime input type
+         * 
+         * @return bool
+         */
+        this.datetime = function() {
+            return _m.inputtypes.datetime;
+        }
+        
+        /**
+         * Determine if the device supports datetime-local input type
+         * 
+         * @return bool
+         */
+        this.datetimelocal = function() {
+            return _m.inputtypes["datetime-local"];
+        }
+        
+        /**
+         * Determine if the device supports email input type
+         * 
+         * @return bool
+         */
+        this.email = function() {
+            return _m.inputtypes.email;
+        }
+        
+        /**
+         * Determine if the device supports month input type
+         * 
+         * @return bool
+         */
+        this.month = function() {
+            return _m.inputtypes.month;
+        }
+        
+        /**
+         * Determine if the device supports number input type
+         * 
+         * @return bool
+         */
+        this.number = function() {
+            return _m.inputtypes.number;
+        }
+        
+        /**
+         * Determine if the device supports search input type
+         * 
+         * @return bool
+         */
+        this.search = function() {
+            return _m.inputtypes.search;
+        }
+        
+        /**
+         * Determine if the device supports tel input type
+         * 
+         * @return bool
+         */
+        this.tel = function() {
+            return _m.inputtypes.tel;
+        }
+        
+        /**
+         * Determine if the device supports time input type
+         * 
+         * @return bool
+         */
+        this.time = function() {
+            return _m.inputtypes.time;
+        }
+        
+        /**
+         * Determine if the device supports url input type
+         * 
+         * @return bool
+         */
+        this.url = function() {
+            return _m.inputtypes.url;
+        }
+        
+        /**
+         * Determine if the device supports week input type
+         * 
+         * @return bool
+         */
+        this.week = function() {
+            return _m.inputtypes.week;
+        }
     }
     
     /**

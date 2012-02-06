@@ -8,7 +8,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111102
+ * @version 20111213
  * 
  * @requires mwf.site
  * 
@@ -158,7 +158,7 @@ mwf.userAgent = new function() {
         var ua = userAgent, s;
         var userAgentAfterPatternToSpace = function(p){
             var s = ua.indexOf(p)+p.length;
-            return ua.substring(s, ua.indexOf(' ',s));
+            return ua.substring(s, Math.min(ua.indexOf(' ',s),ua.indexOf(';',s)));
         }
         switch(this.getBrowserEngine())
         {
@@ -184,7 +184,7 @@ mwf.userAgent = new function() {
     this.generateCookieContent = function(){
         
         var cookie = '{';
-        cookie += '"s":"'+navigator.userAgent.replace(/\;/g, '\\x3B').replace(/\,/g, '\\x2C')+'"';
+        cookie += '"s":"'+navigator.userAgent+'"';
         if(t = this.getOS())
             cookie += ',"os":"'+t+'"';
         if(t = this.getOSVersion())

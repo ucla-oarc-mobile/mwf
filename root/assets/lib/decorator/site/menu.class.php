@@ -9,7 +9,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110518
+ * @version 20111207
  *
  * @uses Decorator
  * @uses Tag_HTML_Decorator
@@ -18,17 +18,18 @@
 require_once(dirname(dirname(dirname(__FILE__))).'/decorator.class.php');
 require_once(dirname(dirname(__FILE__)).'/html/tag.class.php');
 
-class Menu_Full_Site_Decorator extends Tag_HTML_Decorator
+class Menu_Site_Decorator extends Tag_HTML_Decorator
 {
     private $_padded = null;
     private $_detailed = null;
     private $_title = false;
     private $_list = array();
+    private $_align = false;
 
     public function __construct($title = false, $params = array())
     {
         parent::__construct('div', false, $params);
-        $this->add_class('menu-full');
+        $this->add_class('menu');
         if($title)
             $this->set_title($title);
     }
@@ -42,6 +43,18 @@ class Menu_Full_Site_Decorator extends Tag_HTML_Decorator
     public function &set_detailed($val = true)
     {
         $this->_detailed = $val ? true : false;
+        return $this;
+    }
+    
+    public function set_center_aligned()
+    {
+        $this->_align = 'center';
+        return $this;
+    }
+    
+    public function set_left_aligned()
+    {
+        $this->_align = 'left';
         return $this;
     }
 
@@ -62,7 +75,7 @@ class Menu_Full_Site_Decorator extends Tag_HTML_Decorator
     }
 
     public function &add_item($name, $url, $li_params = array(), $a_params = array())
-    {
+    {        
         if(!is_array($this->_list))
             $this->_list = array();
         if(!is_array($li_params))
@@ -70,7 +83,7 @@ class Menu_Full_Site_Decorator extends Tag_HTML_Decorator
         if(!is_array($a_params))
             $a_params = array();
 
-        $link = HTML_Decorator::tag('a', $name?$name:'', array_merge($a_params, array('href'=>$url?$url:'#')));
+        $link = HTML_Decorator::tag('a', $name?$name:'', array_merge($a_params, array('href'=>$url?htmlspecialchars($url):'#')));
         $this->_list[] = HTML_Decorator::tag('li', $link, $li_params);
 
         return $this;
@@ -94,26 +107,19 @@ class Menu_Full_Site_Decorator extends Tag_HTML_Decorator
     public function render()
     {
         $count = count($this->_list);
-        
-        if($this->_title)
-            $this->_title->add_class('menu-first');
-        elseif($count > 0)
-            $this->_list[0]->add_class('menu-first');
-
-        if($count > 0)
-            $this->_list[$count-1]->add_class('menu-last');
-        else if($this->_title)
-            $this->_title->add_class('menu-last');
 
         if($this->_detailed)
-            $this->add_class('menu-detailed');
+            $this->add_class('detailed');
         elseif($this->_detailed === false)
-            $this->remove_class('menu-detailed');
+            $this->remove_class('detailed');
 
         if($this->_padded)
-            $this->add_class('menu-padded');
+            $this->add_class('padded');
         elseif($this->_padded === false)
-            $this->remove_class('menu-padded');
+            $this->remove_class('padded');
+        
+        if($this->_align)
+            $this->add_class($this->_align);
 
         $list = '';
         if($count > 0)
