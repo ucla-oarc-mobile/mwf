@@ -57,12 +57,6 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator
         $this->_align = 'left';
         return $this;
     }
-    
-    public function set_right_aligned()
-    {
-        $this->_align = 'right';
-        return $this;
-    }
 
     public function &set_title($inner, $params = array())
     {
