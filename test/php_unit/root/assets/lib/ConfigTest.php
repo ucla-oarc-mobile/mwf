@@ -13,10 +13,14 @@
  */
 class ConfigTest extends PHPUnit_Framework_TestCase {
 
+    public function run(PHPUnit_Framework_TestResult $result = NULL) {
+        $this->setPreserveGlobalState(false);
+        return parent::run($result);
+    }
+    
     protected function setUp() {
-        if (! isset($_SERVER['HTTP_HOST'])) 
-            $_SERVER['HTTP_HOST'] = 'www.example.com:8080';
-        require_once dirname(__FILE__) . '/../../../../../root/assets/lib/config.class.php';
+        $_SERVER['HTTP_HOST'] = 'www.example.com:8080';
+        require dirname(__FILE__) . '/../../../../../root/assets/lib/config.class.php';
     }
 
     
