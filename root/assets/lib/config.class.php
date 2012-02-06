@@ -49,21 +49,6 @@ class Config {
         }
     }
 
-    public static function init() {
-        if (self::get('base', 'site_url')) {
-            define('MWF_CONFIG_SITE_URL', self::get('base', 'site_url'));
-        } else {
-            $scheme = HTTPS::is_https() ? 'https' : 'http';
-            define('MWF_CONFIG_SITE_URL', $scheme . '://' . $_SERVER['HTTP_HOST']);
-        }
-
-        if (self::get('base', 'site_assets_url')) {
-            define('MWF_CONFIG_SITE_ASSETS_URL', self::get('base', 'site_assets_url'));
-        } else {
-            define('MWF_CONFIG_SITE_ASSETS_URL', MWF_CONFIG_SITE_URL . '/assets');
-        }
-    }
-
     /**
      * Static method that returns a value as specified in the file defined as
      *      /assets/config/{$cat}.php, where it should have been set via
