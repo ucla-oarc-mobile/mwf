@@ -11,7 +11,7 @@ echo Site_Decorator::head()->set_title('MWF About')->render();
 echo HTML_Decorator::body_start()->render();
 
 echo Site_Decorator::header()
-        ->set_title('MWF Test')
+        ->set_title('Entities Demo')
         ->render();
 
 echo Site_Decorator::button()
