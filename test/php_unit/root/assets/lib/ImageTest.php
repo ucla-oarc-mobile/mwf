@@ -1,6 +1,6 @@
 <?php
 
-$_SERVER['HTTP_HOST']='www.example.edu';
+$_SERVER['HTTP_HOST'] = 'www.example.edu';
 require_once dirname(__FILE__) . '/../../../../../root/assets/lib/config.class.php';
 require_once dirname(__FILE__) . '/../../../../../root/assets/lib/image.class.php';
 
@@ -23,7 +23,11 @@ class ImageTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        
+        $cache_files = glob(Config::get('image','cache_dir').'/*');
+        foreach ($cache_files as $cache_file) { 
+            if (is_file($file))
+                unlink($file);
+        }
     }
 
     /**
@@ -64,7 +68,7 @@ class ImageTest extends PHPUnit_Framework_TestCase {
         $png = imagecreatefromstring($image->get_image_as_string());
         $this->assertEquals(10, imagesx($png));
     }
-    
+
     /**
      * @test
      */
@@ -74,7 +78,7 @@ class ImageTest extends PHPUnit_Framework_TestCase {
         $png = imagecreatefromstring($image->get_image_as_string());
         $this->assertEquals(12, imagesy($png));
     }
-    
+
     /**
      * @test
      */
@@ -87,7 +91,7 @@ class ImageTest extends PHPUnit_Framework_TestCase {
         ob_end_flush();
         $finfo = finfo_open();
         $mime_type = finfo_buffer($finfo, $png_string, FILEINFO_MIME_TYPE);
-        $this->assertEquals('image/png',$mime_type);
+        $this->assertEquals('image/png', $mime_type);
     }
 
     /**
@@ -110,10 +114,11 @@ class ImageTest extends PHPUnit_Framework_TestCase {
      * @test
      */
     public function factory_RemoteImageTooLarge_noImage() {
-        Config::set('image','memory_limit',1024);
+        Config::set('image', 'memory_limit', 1024);
         $image = Image::factory('http://mwf.ucla.edu/img/ucla-logo.jpg');
-        $this->assertEquals('',$image->get_mimetype());
+        $this->assertEquals('', $image->get_mimetype());
     }
+
 }
 
 ?>
