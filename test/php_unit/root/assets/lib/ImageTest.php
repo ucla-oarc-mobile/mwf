@@ -58,7 +58,7 @@ class ImageTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function image_setMaxWidthTo10_widthIs10() {
+    public function getImageAsString_setMaxWidthTo10_widthIs10() {
         $image = Image::factory('/assets/img/mwf-appicon-precomposed.png');
         $image->set_max_width(10);
         $png = imagecreatefromstring($image->get_image_as_string());
@@ -68,11 +68,26 @@ class ImageTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function image_setMaxHeightTo12_heightIs12() {
+    public function getImageAsString_setMaxHeightTo12_heightIs12() {
         $image = Image::factory('/assets/img/mwf-appicon-precomposed.png');
         $image->set_max_height(12);
         $png = imagecreatefromstring($image->get_image_as_string());
         $this->assertEquals(12, imagesy($png));
+    }
+    
+    /**
+     * @test
+     */
+    public function getImageAsString_LocalPNG_isPNG() {
+        $image = Image::factory('/assets/img/mwf-appicon-precomposed.png');
+        $png = imagecreatefromstring($image->get_image_as_string());
+        ob_start();
+        imagepng($png);
+        $png_string = ob_get_contents();
+        ob_end_flush();
+        $finfo = finfo_open();
+        $mime_type = finfo_buffer($finfo, $png_string, FILEINFO_MIME_TYPE);
+        $this->assertEquals('image/png',$mime_type);
     }
 
     /**
