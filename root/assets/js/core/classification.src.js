@@ -14,6 +14,7 @@
  * @requires mwf.site
  * @requires mwf.screen
  * @requires mwf.capability
+ * @requires mwf.userAgent
  * 
  * @see /root/assets/js/core/override.js
  * @see /root/assets/js/core/server.js
@@ -36,6 +37,16 @@ mwf.classification=new function(){
     this.isMobile = function(){
         return mwf.site.mobile.maxHeight > mwf.screen.getHeight()
             && mwf.site.mobile.maxWidth  > mwf.screen.getWidth();
+    }
+    
+    /**
+     * Determine if the client is classified as a native container based on the 
+     * user agent string.
+     * 
+     * @return bool
+     */
+    this.isNative = function(){
+        return mwf.userAgent.isNative();
     }
     
     /**
@@ -117,12 +128,14 @@ mwf.classification=new function(){
         cookie += ',"basic":'+this.isBasic();
         cookie += ',"standard":'+this.isStandard();
         cookie += ',"full":'+this.isFull();
+        cookie += ',"native":'+this.isNative();
         if(this.isOverride()){
             cookie += ',"actual":{';
             cookie += '"mobile":'+this.wasMobile();
             cookie += ',"basic":'+this.wasBasic();
             cookie += ',"standard":'+this.wasStandard();
             cookie += ',"full":'+this.wasFull();
+            cookie += ',"native":'+this.wasNative();
             cookie += '}';
         }
         cookie += '}';
