@@ -25,8 +25,8 @@ class ImageTest extends PHPUnit_Framework_TestCase {
     protected function setUp() {
         $cache_files = glob(Config::get('image','cache_dir').'/*');
         foreach ($cache_files as $cache_file) { 
-            if (is_file($file))
-                unlink($file);
+            if (is_file($cache_file))
+                unlink($cache_file);
         }
     }
 
