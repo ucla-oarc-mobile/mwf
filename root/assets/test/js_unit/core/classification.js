@@ -59,3 +59,8 @@ test("mwf.classification.generateCookieContent()", function()
     var cookie = mwf.classification.generateCookieContent();
     ok(re.exec(cookie), 'cookie should be in expected format');
 });
+
+test("mwf.classification.isNative()", function()
+{
+    equal(mwf.classification.isNative(), false, 'Native should be false, unit tests not accessible from native container');
+});
