@@ -55,7 +55,7 @@ test("mwf.classification.get()", function()
 
 test("mwf.classification.generateCookieContent()", function()
 {   
-    var re = /^\{\"mobile\":(true|false),\"basic\":(true|false),\"standard\":(true|false),\"full\":(true|false)\}$/;
+    var re = /^\{\"mobile\":(true|false),\"basic\":(true|false),\"standard\":(true|false),\"full\":(true|false),\"native\":(true|false)\}$/;
     var cookie = mwf.classification.generateCookieContent();
     ok(re.exec(cookie), 'cookie should be in expected format');
 });
