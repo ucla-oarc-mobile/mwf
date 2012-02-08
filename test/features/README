@@ -2,6 +2,9 @@ AUTOMATED TESTS IN IPHONE SIMULATOR -- INSTALLATION:
 
 You must be using Mac OS X and XCode 4.2 or later.
 
+The tests currently assume that you have your MWF site running on your machine and
+accessible at http://localhost/.
+
 * Add Cucumber to your Ruby environment:
 
     sudo gem install cucumber
