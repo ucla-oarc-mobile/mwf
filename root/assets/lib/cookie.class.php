@@ -67,6 +67,10 @@ class Cookie {
         }
         return $rv;
     }
+    
+    public static function get_prefix() {
+        return self::$_prefix;
+    }
 }
 
 Cookie::init();
