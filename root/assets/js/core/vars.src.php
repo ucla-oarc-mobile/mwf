@@ -17,9 +17,8 @@
  */
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/lib/js_vars_helper.class.php'); 
-?>
 
-var mwf=new function(){};
+?>var mwf=new function(){};
 
 mwf.site=new function(){
 
