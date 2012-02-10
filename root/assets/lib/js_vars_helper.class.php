@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Helper methods for vars.php.  Mostly it makes Config stuff from PHP accessible
  *     via JavaScript.
@@ -22,20 +23,19 @@ require_once(dirname(__FILE__) . '/cookie.class.php');
  * Class that generates JS data from PHP data.
  */
 class JS_Vars_Helper {
-    
+
     private static $_cookie_domain;
     private static $_cookies;
 
     private static function init_cookies() {
-        $all_cookie_names = array('classification','user_agent','screen','override');
+        $all_cookie_names = array('classification', 'user_agent', 'screen', 'override');
         if (!isset(self::$_cookies)) {
-            self::$_cookies=array();
+            self::$_cookies = array();
             foreach ($all_cookie_names as $cookie_name)
                 self::$_cookies[$cookie_name] = Cookie::get($cookie_name);
         }
     }
-    
-    
+
     /**
      *
      * @return string
@@ -51,7 +51,7 @@ class JS_Vars_Helper {
                 $cookies_arr[] = $prefix . $key;
         return(json_encode($cookies_arr));
     }
-   
+
     /**
      *
      * @param string $cookie_name
@@ -60,25 +60,23 @@ class JS_Vars_Helper {
     public static function get_cookie($cookie_name) {
         if (!isset(self::$_cookies))
             self::init_cookies();
-        
-        if (! isset(self::$_cookies[$cookie_name]))
+
+        if (!isset(self::$_cookies[$cookie_name]))
             return json_encode(false);
-            
+
         return json_encode(self::$_cookies[$cookie_name]);
     }
-    
-    
+
     /**
      *
      * @return string 
      */
     private static function get_raw_cookie_domain() {
         /** @todo determine if we should first check HTTP_X_FORWARDED_SERVER */
-        
         if (isset(self::$_cookie_domain)) {
             return self::$_cookie_domain;
         }
-        
+
         if (isset($_SERVER['HTTP_HOST'])) { // actual host for multi-host requests
             self::$_cookie_domain = $_SERVER['HTTP_HOST'];
         } else { // fallthru that will not support successful multi-host requests
@@ -91,11 +89,10 @@ class JS_Vars_Helper {
 
         if (($pos = strpos(self::$_cookie_domain, ':')) !== false)
             self::$_cookie_domain = substr(self::$_cookie_domain, 0, $pos);
-        
+
         return self::$_cookie_domain;
     }
-    
-    
+
     /**
      *
      * @return string 
@@ -103,7 +100,7 @@ class JS_Vars_Helper {
     public static function get_cookie_domain() {
         return json_encode(self::get_raw_cookie_domain());
     }
-    
+
     /**
      *
      * @return string 
@@ -111,8 +108,7 @@ class JS_Vars_Helper {
     public static function get_cookie_prefix() {
         return json_encode(Cookie::get_prefix());
     }
-    
-    
+
     /**
      *
      * @return string 
@@ -128,7 +124,7 @@ class JS_Vars_Helper {
         }
         return json_encode($site_url);
     }
-    
+
     /**
      *
      * @return string 
@@ -144,7 +140,7 @@ class JS_Vars_Helper {
             $site_asset_url = '//' . self::get_raw_cookie_domain() . (substr($site_asset_url, 0, 1) != '/' ? '/' : '') . $site_asset_url;
         return json_encode($site_asset_url);
     }
-    
+
     /**
      *
      * @return string 
@@ -161,7 +157,7 @@ class JS_Vars_Helper {
         }
         return json_encode($local_site_url);
     }
-    
+
     /**
      *
      * @return string 
@@ -178,8 +174,7 @@ class JS_Vars_Helper {
         }
         return json_encode($local_site_asset_url);
     }
-    
-    
+
     /**
      *
      * @return string 
@@ -187,7 +182,20 @@ class JS_Vars_Helper {
     public static function get_localstorage_prefix() {
         return json_encode(Config::get('global', 'local_storage_prefix'));
     }
+
     
+    /**
+     *
+     * @return string
+     */
+    public static function get_analytics_key() {
+        if (Config::get('analytics', 'account')) {
+            return json_encode(Config::get('analytics', 'account'));
+        } else {
+            return 'null';
+        }
+    }
+
     /**
      * Return JSON object representing analytics.pathKeys from config file.
      * 
@@ -203,9 +211,26 @@ class JS_Vars_Helper {
         $pathKeys = array();
         foreach ($indexes as $index) {
             // a = account, s = start path
-            $pathKeys[] = array('a'=>$pathAccounts[$index],'s'=>$pathStarts[$index]);
+            $pathKeys[] = array('a' => $pathAccounts[$index], 's' => $pathStarts[$index]);
         }
         return json_encode($pathKeys);
     }
-
+    
+    
+    /**
+     * 
+     * @return string
+     */
+    public static function get_mobile_max_width() {
+        return Config::get('mobile', 'max_width') ? Config::get('mobile', 'max_width') : '799';
+    }
+    
+    
+    /**
+     * 
+     * @return string
+     */
+    public static function get_mobile_max_height() {
+        return Config::get('mobile', 'max_height') ? Config::get('mobile', 'max_height') : '599';
+    }
 }
