@@ -52,8 +52,7 @@ while (list(, $token) = each($tokens)) {
                 }
             }
             $hash = md5($php_code_chunk);
-            // Exclamation point tells YUI Compressor to preserve comment, although
-            //    it will still strip the exclamation point itself.
+            // Exclamation point tells YUI Compressor to preserve comment.
             $cipher = '/*!' . $hash . '*/function(){}';
             $code_chunk_array[] = $php_code_chunk;
             $hash_array[] = $cipher;
