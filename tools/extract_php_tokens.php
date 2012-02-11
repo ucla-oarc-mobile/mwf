@@ -74,12 +74,7 @@ exec($minify_command, $yui_compressor_output);
 unlink($minifiable_file);
 
 $minified = implode("", $yui_compressor_output);
-
-// Now that the code is minified, put the PHP back where the tokens were.
-//   Again, this is not generalized.  It will work for vars.src.php, though.
-//if (substr($minified, 0, strlen($hash_array[0])+1 ) == $hash_array[0].';') {
-//    $minified = str_replace($hash_array[0].';', $code_chunk_array[0], $minified );
-//} 
+ 
 $minified = str_replace($hash_array, $code_chunk_array, $minified);
 
 // Now put the minified code where it belongs
