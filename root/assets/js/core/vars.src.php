@@ -17,9 +17,8 @@
  */
 
 require_once(dirname(dirname(dirname(__FILE__))) . '/lib/js_vars_helper.class.php'); 
-?>
 
-var mwf=new function(){};
+?>var mwf=new function(){};
 
 mwf.site=new function(){
 
@@ -58,15 +57,13 @@ mwf.site=new function(){
     };
 
     this.analytics = new function(){
-        this.key = <?php echo (Config::get('analytics', 'account') ? ("'" . Config::get('analytics', 'account') . "'") : 'null') ?>;
+    this.key = <?php echo JS_Vars_Helper::get_analytics_key(); ?>;
         this.pathKeys =  <?php echo JS_Vars_Helper::get_path_keys(); ?>;
     };
 
     this.mobile = new function(){
-
-        this.maxWidth = <?php echo (Config::get('mobile', 'max_width') ? Config::get('mobile', 'max_width') : 799) ?>;
-        this.maxHeight = <?php echo (Config::get('mobile', 'max_height') ? Config::get('mobile', 'max_height') : 599) ?>;
-
+        this.maxWidth = <?php echo JS_Vars_Helper::get_mobile_max_width(); ?>;
+        this.maxHeight = <?php echo JS_Vars_Helper::get_mobile_max_height(); ?>;
     };
 
     this.local = new function(){
