@@ -6,8 +6,9 @@
  *
  * @package core
  * 
+ * @author ebollens
  * @author trott
- * @copyright Copyright (c) 2012 UC Regents
+ * @copyright Copyright (c) 2010-2012 UC Regents
  * @license http://mwf.ucla.edu/license
  * @version 20120208
  *
