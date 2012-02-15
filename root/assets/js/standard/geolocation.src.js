@@ -78,6 +78,44 @@ mwf.touch.geolocation = new function()
     {
         return this.getType() > 0;
     }
+
+    /**
+     * getPosition() is deprecated. Use getCurrentPosition() instead.
+     *
+     * @deprecated
+     * @return void
+     */
+    this.getPosition = function(onSuccess, onError)
+    {
+        var geo = this.getApi();
+        
+        if(geo === null)
+        {
+            if(typeof onError != 'undefined') {
+                onError(ERROR_MESSAGE.NO_SUPPORT);
+            }
+            return;
+        }
+
+        geo.getCurrentPosition(
+            function(position) {
+                if(typeof onSuccess != 'undefined')
+                    onSuccess({
+                        'latitude':position.coords.latitude,
+                        'longitude':position.coords.longitude,
+                        'accuracy':position.coords.accuracy
+                    });
+            }, function(error) {
+                if(typeof onError != 'undefined') {
+                    var errorMsg = error.code == error.PERMISSION_DENIED ?
+                        ERROR_MESSAGE.PERMISSION_DENIED : ERROR_MESSAGE.GENERAL;
+                    onError(errorMsg);
+                }         
+            },
+            {enableHighAccuracy:highAccuracy, maximumAge:timeout, timeout: geoTimeout});
+
+        return;
+    }
     
     this.getCurrentPosition = function(onSuccess, onError)
     {
