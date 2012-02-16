@@ -211,6 +211,18 @@ class Classification
     }
     
     /**
+     * A client is regarded as native if it is accessing the site via the MWF 
+     * native container.
+     * 
+     * @return bool 
+     */
+    public static function is_native()
+    {
+        $capabilities = self::get();
+        return $capabilities && isset($capabilities->native) && $capabilities->native;
+    }
+    
+    /**
      * Determin if the device is overridden based on the override cookie.
      * 
      * @return bool
