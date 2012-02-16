@@ -9,6 +9,7 @@
  */
 
 mwf.site.analytics.trackPageview = function(url) {
+    url = url || window.location.pathname + window.location.search + window.location.hash; 
     if (mwf.site.analytics.key) {
         _gaq.push(["_trackPageview",url]);
     }
@@ -24,7 +25,6 @@ var _gaq = _gaq || [];
     
 if(mwf.site.analytics.key) {
     _gaq.push(["_setAccount", mwf.site.analytics.key]);
-    _gaq.push(["_trackPageview"]);
 }
     
 for (var i = 0; i < mwf.site.analytics.pathKeys.length; i++) {
@@ -38,9 +38,10 @@ if (mwf.userAgent.isNative()) {
     // @todo: Possible to integration test this with PHP code?
     _gaq.push(['_setCustomVar', 1, 'mwf_native_client', mwf.userAgent.getOS()]);       
 }
-    
 
-if (_gaq.length==0) {
+mwf.site.analytics.trackPageview();
+
+if (_gaq.length!=0) {
     (function() {
         var ga = document.createElement('script');
         ga.type = 'text/javascript';
@@ -50,4 +51,3 @@ if (_gaq.length==0) {
         s.parentNode.insertBefore(ga, s);
     })();
 }
-
