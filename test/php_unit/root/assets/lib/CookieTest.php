@@ -49,7 +49,7 @@ class CookieTest extends PHPUnit_Framework_TestCase {
     
     /**
      * @test
-     * @runAsSeparateProcess
+     * @runInSeparateProcess
      */
     public function getAllNames_cookiesExist_names() {
         $_COOKIE['mwftest_foo'] = 'some arbitrary value';
