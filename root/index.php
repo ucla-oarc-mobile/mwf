@@ -5,9 +5,6 @@
  * If the user is on a non-mobile device and {'global':'site_nonmobile_url'} is
  * set in config/global.php, then they will be redirected.
  *
- * This page throws a fatal error if either {'global':'site_url'} or
- * {'global':'site_assets_url'} are not set in /config/global.php.
- *
  * @package frontpage
  *
  * @author ebollens
