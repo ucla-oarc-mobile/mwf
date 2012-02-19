@@ -31,7 +31,7 @@ mwf.full.configurableMenu=new function(){
         if (target === null)
             return;
         
-        var result = '<ol>';
+        var result = '';
         var keys = null;
         
         if (mwf.standard.preferences.isSupported()) {
@@ -58,7 +58,6 @@ mwf.full.configurableMenu=new function(){
             }
         }
         
-        result += '</ol>';
         target.innerHTML = result;
     }
 }

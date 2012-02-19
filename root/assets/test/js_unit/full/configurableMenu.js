@@ -42,7 +42,7 @@ test("mwf.full.configurableMenu.render() no settings, object passed, returns eve
         );
 
     equal(document.getElementById('fake_main_menu').innerHTML, 
-        '<ol><li><a href="foo">Foo</a></li><li><a href="foo">Foo</a></li></ol>',
+        '<li><a href="foo">Foo</a></li><li><a href="foo">Foo</a></li>',
         'No prefs set, should print all menu items');
 
     if (oldValue != null) {
@@ -63,7 +63,7 @@ test("mwf.full.configurableMenu.render() no settings, array passed, returns ever
         );
 
     equal(document.getElementById('fake_main_menu').innerHTML, 
-        '<ol><li><a href="foo">Foo</a></li><li><a href="foo">Foo</a></li></ol>',
+        '<li><a href="foo">Foo</a></li><li><a href="foo">Foo</a></li>',
         'No prefs set, should print all menu items');
 
     if (oldValue != null) {
@@ -87,7 +87,7 @@ test("mwf.full.configurableMenu.render() has settings, object passed", function(
         );
 
     equal(document.getElementById('fake_main_menu').innerHTML, 
-        '<ol><li><a href="bar">Bar</a></li></ol>',
+        '<li><a href="bar">Bar</a></li>',
         'No prefs set, should print all menu items');
 
     if (oldValue != null) {
@@ -108,7 +108,7 @@ test("mwf.full.configurableMenu.render() has settings, array passed", function()
         );
 
     equal(document.getElementById('fake_main_menu').innerHTML, 
-        '<ol><li><a href="foo">Foo</a></li><li><a href="whoa">Whoa</a></li></ol>',
+        '<li><a href="foo">Foo</a></li><li><a href="whoa">Whoa</a></li>',
         'No prefs set, should print all menu items');
 
     if (oldValue != null) {

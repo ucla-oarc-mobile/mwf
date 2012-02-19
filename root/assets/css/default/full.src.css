@@ -114,7 +114,7 @@
     -moz-border-radius: .5em;
 }
 
-.menu.padded > :first-child:last-child li:first-child,
+.menu.padded > ol li:first-child,
 .menu.padded > :first-child {
     -moz-border-radius-topleft: .5em;
     -moz-border-radius-topright: .5em;

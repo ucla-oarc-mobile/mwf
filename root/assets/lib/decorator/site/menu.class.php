@@ -124,7 +124,7 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
 
         if ($this->_align)
             $this->add_class($this->_align);
-
+        
         if ($this->_homescreen && Classification::is_full() && Config::get('frontpage','configurable_homescreen')) {
 
             // Can't use closures until PHP 5.3. Declare callback here...
@@ -133,10 +133,11 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
             }
 
             // ...and use the callback here.
-            $js = 'mwf.full.configurableMenu.render("main_menu","homescreen_layout",' . 
+            $js = 'mwf.full.configurableMenu.render("main_menu_list","homescreen_layout",' . 
                     json_encode(array_map('call_render', $this->_list)) . ');';
 
-            $menu_markup = HTML_Decorator::tag('script', $js)->render();
+            $menu_markup = HTML_Decorator::tag('ol')->set_param('id','main_menu_list')->render();
+            $menu_markup .= HTML_Decorator::tag('script', $js)->render();
 
         } else {
             $menu_markup = '';
@@ -144,7 +145,7 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
                 $inner = '';
                 foreach ($this->_list as $list_item)
                     $inner .= $list_item->render();
-                $menu_markup = HTML_Decorator::tag('ol', $inner)->render();
+                $menu_markup = HTML_Decorator::tag('ol', $inner)->set_param('id','main_menu_list')->render();
             }
         }
 
