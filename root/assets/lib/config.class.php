@@ -39,6 +39,7 @@ class Config {
             define('MWF_CONFIG_SITE_URL', self::get('base', 'site_url'));
         } else {
             $scheme = HTTPS::is_https() ? 'https' : 'http';
+            //TODO: HTTP_HOST is not necessarily defined. Write unit test and fix.
             define('MWF_CONFIG_SITE_URL', $scheme . '://' . $_SERVER['HTTP_HOST']);
         }
 

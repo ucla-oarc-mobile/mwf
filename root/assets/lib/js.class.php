@@ -87,6 +87,7 @@ class JS
         self::$_dependencies['messages'] = array('jquery');
         self::$_dependencies['forms'] = array('jquery', 'jquery.validation');
         self::$_dependencies['tooltip'] = array('jquery', 'jquery.tooltip');
+        self::$_dependencies['configurableMenu'] = array('preferences');
     }
     
     /**
@@ -180,7 +181,7 @@ class JS
             foreach(self::$_exts as $ext)
                 if(self::import_file('full/'.$key.$ext))
                     return true;
-                
+ 
         /**
          * If standard device, or if full device and not already returned, check
          * each $_exts as assets/js/full/{$key}{$ext}. If found, then use
