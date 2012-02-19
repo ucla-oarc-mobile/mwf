@@ -14,17 +14,17 @@
  */
 
 module("full/configurableMenu.js", {
-setup: function() {
-    var target = document.createElement('div');
-    target.setAttribute('id',"fake_main_menu");
-    target.setAttribute('style',"display:none");
-    document.body.appendChild(target);
-},
-teardown: function() {
-    var target = document.getElementById('fake_main_menu');
-    if (target) 
-        target.parentNode.removeChild(target);
-}
+    setup: function() {
+        var target = document.createElement('div');
+        target.setAttribute('id',"fake_main_menu");
+        target.setAttribute('style',"display:none");
+        document.body.appendChild(target);
+    },
+    teardown: function() {
+        var target = document.getElementById('fake_main_menu');
+        if (target) 
+            target.parentNode.removeChild(target);
+    }
 });
 
 test("mwf.full.configurableMenu.render() no settings, object passed, returns everything", function()
@@ -118,17 +118,26 @@ test("mwf.full.configurableMenu.render() has settings, array passed", function()
 
 test("mwf.full.configurable.render() mangled settings, graceful handling", function()
 {
+    var result = true;
     expect(1);
     
     var oldValue = mwf.standard.preferences.get('homescreen_layout');
     mwf.standard.preferences.set('homescreen_layout','["a]');
     
-    mwf.full.configurableMenu.render(
-        "fake_main_menu",
-        "homescreen_layout",
-        ["a","b","c"]
-    );
+    try {
+        mwf.full.configurableMenu.render(
+            "fake_main_menu",
+            "homescreen_layout",
+            ["a","b","c"]
+            );
+    } catch (e) {
+        result = false;
+    } finally {
+        if (oldValue != null) {
+            mwf.standard.preferences.set('homescreen_layout',oldValue);
+        }
+    }
         
-    ok(true,"No error thrown");
-    
+    ok(result,"Exception should handled");
+
 });
