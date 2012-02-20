@@ -16,22 +16,8 @@
  */
 
 mwf.full.configurableMenu=new function(){
-    /**
-     * Renders the items from object or array menuItems whose keys are specified
-     * in the preferences key prefsKey into the DOM object with id targetId.
-     * 
-     * @param targetId string
-     * @param prefsKey string
-     * @param menuItems object|array
-     * 
-     * @return null
-     */
-    this.render = function(targetId, prefsKey, menuItems, disabledMenuItems){
-        var target = document.getElementById(targetId);
-        if (target === null)
-            return;
-        
-        var result = '';
+    
+    var _getPrefsLists = function(prefsKey) {
         var keys = null;
         
         if (mwf.standard.preferences.isSupported()) {
@@ -45,6 +31,27 @@ mwf.full.configurableMenu=new function(){
                     keys = null;
                 }
         }
+        return keys;
+    }
+        
+    /**
+     * Renders the items from object or array menuItems whose keys are specified
+     * in the preferences key prefsKey into the DOM object with id targetId.
+     * 
+     * @param targetId string
+     * @param prefsKey string
+     * @param menuItems object|array
+     * 
+     * @return null
+     */
+    
+    this.render = function(targetId, prefsKey, menuItems, disabledMenuItems){
+        var target = document.getElementById(targetId);
+        if (target === null)
+            return;
+        
+        var result = '';
+        var keys = _getPrefsLists(prefsKey);
         
         if (keys === null) {            
             for (var key in menuItems) {
@@ -87,5 +94,35 @@ mwf.full.configurableMenu=new function(){
         }
         
         target.innerHTML = result;
+    }
+    
+    /**
+     * Enables or disables an item in the menu.
+     * 
+     * @param itemId string|int Corresponds to array key in ini file for menu.
+     * @param enable boolean If true, enable item. Otherwise, disable.
+     */
+    this.set = function(prefsKey, itemId, enable) {
+        var prop = enable ? "on" : "off";
+        var keys = _getPrefsLists(prefsKey);
+
+        if (keys==null) {
+            keys={};
+        }
+
+        if (! keys.hasOwnProperty(prop)) {
+            keys[prop] = [itemId];
+        } else {
+            if (keys[prop].indexOf(itemId)==-1)
+                keys[prop].push(itemId)
+        }
+        
+        otherProp = prop=="on" ? "off" : "on";
+        
+        if (keys.hasOwnProperty(otherProp)) {
+            while (keys[otherProp].indexOf(itemId)!=-1)
+                keys[otherProp].splice(keys[otherProp].indexOf(itemId),1);
+        }
+        mwf.standard.preferences.set(prefsKey,JSON.stringify(keys));
     }
 }

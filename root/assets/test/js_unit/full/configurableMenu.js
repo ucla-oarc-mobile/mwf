@@ -150,9 +150,11 @@ test("mwf.full.configurableMenu.render() has settings, array passed", function()
     mwf.full.configurableMenu.render(
         "fake_main_menu",
         "homescreen_layout",
-        {"0":"<li><a href=\"foo\">Foo<\/a><\/li>",
-         "2":"<li><a href=\"whoa\">Whoa<\/a><\/li>",
-         "3":"<li><a href=\"baz\">Baz<\/a><\/li>"}
+        {
+            "0":"<li><a href=\"foo\">Foo<\/a><\/li>",
+            "2":"<li><a href=\"whoa\">Whoa<\/a><\/li>",
+            "3":"<li><a href=\"baz\">Baz<\/a><\/li>"
+        }
         );
 
     equal(document.getElementById('fake_main_menu').innerHTML, 
@@ -172,10 +174,15 @@ test("mwf.full.configurableMenu.render() has settings, array passed", function()
     mwf.full.configurableMenu.render(
         "fake_main_menu",
         "homescreen_layout",
-        {"0":"<li><a href=\"foo\">Foo<\/a><\/li>",
-         "2":"<li><a href=\"whoa\">Whoa<\/a><\/li>",
-         "3":"<li><a href=\"baz\">Baz<\/a><\/li>"},
-        {"2":"<li>No dice!</li>"}
+        {
+            "0":"<li><a href=\"foo\">Foo<\/a><\/li>",
+            "2":"<li><a href=\"whoa\">Whoa<\/a><\/li>",
+            "3":"<li><a href=\"baz\">Baz<\/a><\/li>"
+        },
+
+        {
+            "2":"<li>No dice!</li>"
+        }
         );
 
     equal(document.getElementById('fake_main_menu').innerHTML, 
@@ -185,4 +192,112 @@ test("mwf.full.configurableMenu.render() has settings, array passed", function()
     if (oldValue != null) {
         mwf.standard.preferences.set('homescreen_layout',oldValue);
     }
+});
+
+test("mwf.full.configurableMenu.set() enable new item", function()
+{
+    var oldValue = mwf.standard.preferences.get('homescreen_layout');
+    mwf.standard.preferences.set('homescreen_layout','{"on":[1,2,3],"off":[4,5,6]}')
+
+    mwf.full.configurableMenu.set('homescreen_layout',7,true);
+    
+    var newPrefsString = mwf.standard.preferences.get('homescreen_layout');
+    var newPrefs = JSON.parse(newPrefsString);
+    var expectedPrefs = {"on":[1,2,3,7],"off":[4,5,6]};
+    deepEqual(newPrefs, expectedPrefs, "should add new item to enabled list");
+
+    if (oldValue != null) {
+        mwf.standard.preferences.set('homescreen_layout',oldValue);
+    }
+    
+});
+
+test("mwf.full.configurableMenu.set() disable new item", function()
+{
+    var oldValue = mwf.standard.preferences.get('homescreen_layout');
+    mwf.standard.preferences.set('homescreen_layout','{"on":[1,2,3],"off":[4,5,6]}')
+
+    mwf.full.configurableMenu.set('homescreen_layout',7,false);
+    
+    var newPrefsString = mwf.standard.preferences.get('homescreen_layout');
+    var newPrefs = JSON.parse(newPrefsString);
+    var expectedPrefs = {"on":[1,2,3],"off":[4,5,6,7]};
+    deepEqual(newPrefs, expectedPrefs, "should add new item to disabled list");
+
+    if (oldValue != null) {
+        mwf.standard.preferences.set('homescreen_layout',oldValue);
+    }
+    
+});
+
+test("mwf.full.configurableMenu.set() enable disabled item", function()
+{
+    var oldValue = mwf.standard.preferences.get('homescreen_layout');
+    mwf.standard.preferences.set('homescreen_layout','{"on":[1,2,3],"off":[4,5,6]}')
+
+    mwf.full.configurableMenu.set('homescreen_layout',4,true);
+    
+    var newPrefsString = mwf.standard.preferences.get('homescreen_layout');
+    var newPrefs = JSON.parse(newPrefsString);
+    var expectedPrefs = {"on":[1,2,3,4],"off":[5,6]};
+    deepEqual(newPrefs, expectedPrefs, "should move disabled item to enabled list");
+
+    if (oldValue != null) {
+        mwf.standard.preferences.set('homescreen_layout',oldValue);
+    }
+    
+});
+
+test("mwf.full.configurableMenu.set() disable enabled item", function()
+{
+    var oldValue = mwf.standard.preferences.get('homescreen_layout');
+    mwf.standard.preferences.set('homescreen_layout','{"on":[1,2,3],"off":[4,5,6]}')
+
+    mwf.full.configurableMenu.set('homescreen_layout',3,false);
+    
+    var newPrefsString = mwf.standard.preferences.get('homescreen_layout');
+    var newPrefs = JSON.parse(newPrefsString);
+    var expectedPrefs = {"on":[1,2],"off":[4,5,6,3]};
+    deepEqual(newPrefs, expectedPrefs, "should move enabled item to disabled list");
+
+    if (oldValue != null) {
+        mwf.standard.preferences.set('homescreen_layout',oldValue);
+    }
+    
+});
+
+test("mwf.full.configurableMenu.set() enable enabled item", function()
+{
+    var oldValue = mwf.standard.preferences.get('homescreen_layout');
+    mwf.standard.preferences.set('homescreen_layout','{"on":[1,2,3],"off":[4,5,6]}')
+
+    mwf.full.configurableMenu.set('homescreen_layout',3,true);
+    
+    var newPrefsString = mwf.standard.preferences.get('homescreen_layout');
+    var newPrefs = JSON.parse(newPrefsString);
+    var expectedPrefs = {"on":[1,2,3],"off":[4,5,6]};
+    deepEqual(newPrefs, expectedPrefs, "should do nothing with enabled item");
+
+    if (oldValue != null) {
+        mwf.standard.preferences.set('homescreen_layout',oldValue);
+    }
+    
+});
+
+test("mwf.full.configurableMenu.set() disable disabled item", function()
+{
+    var oldValue = mwf.standard.preferences.get('homescreen_layout');
+    mwf.standard.preferences.set('homescreen_layout','{"on":[1,2,3],"off":[4,5,6]}')
+
+    mwf.full.configurableMenu.set('homescreen_layout',4,false);
+    
+    var newPrefsString = mwf.standard.preferences.get('homescreen_layout');
+    var newPrefs = JSON.parse(newPrefsString);
+    var expectedPrefs = {"on":[1,2,3],"off":[4,5,6]};
+    deepEqual(newPrefs, expectedPrefs, "should do nothing with disabled item");
+
+    if (oldValue != null) {
+        mwf.standard.preferences.set('homescreen_layout',oldValue);
+    }
+    
 });
