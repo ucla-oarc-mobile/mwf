@@ -13,6 +13,8 @@
  * @requires mwf
  * @requires mwf.standard.preferences
  * 
+ * @todo Shouldn't be a static class. Refactor as non-static class and get rid
+ *    of all those unfortunate prefsKey params.
  */
 
 mwf.full.configurableMenu=new function(){
@@ -85,10 +87,6 @@ mwf.full.configurableMenu=new function(){
             
             for (i in menuItems) {
                 if (menuItems.hasOwnProperty(i)) {
-                    // In addition to 'i', use '+i' so that it gets cast to an 
-                    // integer if it's a string in integer form.
-                    // This allows objects and arrays to play nicely together as object keys will 
-                    // always be strings. 
                     if (! (_contains(i,off) || _contains(i,on)))
                         result += menuItems[i];
                 }
@@ -137,4 +135,48 @@ mwf.full.configurableMenu=new function(){
         }
         mwf.standard.preferences.set(prefsKey,JSON.stringify(keys));
     }
+    
+    /**
+     * Moves the specified item up one space in the enabled items list.
+     * 
+     * @param prefsKey string
+     * @param itemId string|int
+     * 
+     * @todo This requires that 'on' is an array and not an object. Either 
+     *    refactor elsewhere to insure this or else modify to handle objects.
+     */
+    this.moveUp = function(prefsKey,itemId) {
+        keys = _getPrefsLists(prefsKey);
+        if (keys.hasOwnProperty('on')) {
+            var index = keys.on.indexOf(itemId);
+            if (index > 0) {
+                var temp = keys.on[index];
+                keys.on[index] = keys.on[index-1];
+                keys.on[index-1] = temp;
+                mwf.standard.preferences.set(prefsKey,JSON.stringify(keys))
+            }   
+        }
+    }
+    
+    /**
+     * Moves the specified item down one space in the enabled items list.
+     * 
+     * @param prefsKey string
+     * @param itemId string|int
+     * 
+     * @todo This requires that 'on' is an array and not an object. Either 
+     *    refactor elsewhere to insure this or else modify to handle objects.
+     */
+    this.moveDown = function(prefsKey,itemId) {
+        keys = _getPrefsLists(prefsKey);
+        if (keys.hasOwnProperty('on')) {
+            var index = keys.on.indexOf(itemId);
+            if (index > -1 && index < keys.on.length-1) {
+                var temp = keys.on[index];
+                keys.on[index] = keys.on[index+1];
+                keys.on[index+1] = temp;
+                mwf.standard.preferences.set(prefsKey,JSON.stringify(keys))
+            }   
+        }
+    }   
 }

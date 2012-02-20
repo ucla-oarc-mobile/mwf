@@ -323,3 +323,31 @@ test("mwf.full.configurableMenu.render() should not have side effects on passed 
         mwf.standard.preferences.set('homescreen_layout',oldValue);
     }
 })
+
+test("mwf.full.configurableMenu.moveUp() moves item up", function()
+{
+    var oldValue = mwf.standard.preferences.get('homescreen_layout');
+    mwf.standard.preferences.set('homescreen_layout','{"on":[90,12,14,10]}');
+    
+    mwf.full.configurableMenu.moveUp('homescreen_layout',14);
+    
+    equal(mwf.standard.preferences.get('homescreen_layout'),'{"on":[90,14,12,10]}');
+        
+    if (oldValue != null) {
+        mwf.standard.preferences.set('homescreen_layout',oldValue);
+    }
+});
+
+test("mwf.full.configurableMenu.moveDown() moves item down", function()
+{
+    var oldValue = mwf.standard.preferences.get('homescreen_layout');
+    mwf.standard.preferences.set('homescreen_layout','{"on":[90,12,14,10]}');
+    
+    mwf.full.configurableMenu.moveDown('homescreen_layout',14);
+    
+    equal(mwf.standard.preferences.get('homescreen_layout'),'{"on":[90,12,10,14]}');
+        
+    if (oldValue != null) {
+        mwf.standard.preferences.set('homescreen_layout',oldValue);
+    }
+});
