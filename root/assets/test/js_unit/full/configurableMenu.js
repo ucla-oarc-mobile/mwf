@@ -163,3 +163,26 @@ test("mwf.full.configurableMenu.render() has settings, array passed", function()
         mwf.standard.preferences.set('homescreen_layout',oldValue);
     }
 });
+
+test("mwf.full.configurableMenu.render() has settings, array passed", function()
+{    
+    var oldValue = mwf.standard.preferences.get('homescreen_layout');
+    mwf.standard.preferences.set('homescreen_layout','{"on":[0,1],"off":[2]}');
+    
+    mwf.full.configurableMenu.render(
+        "fake_main_menu",
+        "homescreen_layout",
+        {"0":"<li><a href=\"foo\">Foo<\/a><\/li>",
+         "2":"<li><a href=\"whoa\">Whoa<\/a><\/li>",
+         "3":"<li><a href=\"baz\">Baz<\/a><\/li>"},
+        {"2":"<li>No dice!</li>"}
+        );
+
+    equal(document.getElementById('fake_main_menu').innerHTML, 
+        '<li><a href="foo">Foo</a></li><li><a href="baz">Baz</a></li><li>No dice!</li>',
+        'Prefs set, disabled options sent, should print items from "on" followed by unlisted items and finally disabled items from "off"');
+
+    if (oldValue != null) {
+        mwf.standard.preferences.set('homescreen_layout',oldValue);
+    }
+});

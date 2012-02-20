@@ -26,7 +26,7 @@ mwf.full.configurableMenu=new function(){
      * 
      * @return null
      */
-    this.render = function(targetId, prefsKey, menuItems){
+    this.render = function(targetId, prefsKey, menuItems, disabledMenuItems){
         var target = document.getElementById(targetId);
         if (target === null)
             return;
@@ -52,6 +52,7 @@ mwf.full.configurableMenu=new function(){
                     result += menuItems[key];
             }
         } else {
+            // Render items in 'on' in the correct order
             var i;
             if (keys.hasOwnProperty('on')) {
                 for (i=0; i<keys.on.length; i++) {
@@ -61,6 +62,8 @@ mwf.full.configurableMenu=new function(){
                     }
                 }
             }
+            
+            // Render items not in 'off'
             var off = keys.hasOwnProperty('off') ? keys.off : [];
             
             for (i in menuItems) {
@@ -70,6 +73,15 @@ mwf.full.configurableMenu=new function(){
                     // always be strings. 
                     if (!(off.indexOf(i)>=0 || off.indexOf(+i)>=0))
                         result += menuItems[i];
+                }
+            }
+            
+            // If 'disabledMenuItems' was sent, then render items from 'off'
+            if (disabledMenuItems) {
+                for (i=0; i<off.length; i++) {
+                    if (disabledMenuItems.hasOwnProperty(off[i])) {
+                        result += disabledMenuItems[off[i]];
+                    }
                 }
             }
         }
