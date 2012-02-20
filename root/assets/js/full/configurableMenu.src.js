@@ -33,6 +33,14 @@ mwf.full.configurableMenu=new function(){
         }
         return keys;
     }
+    
+    var _contains = function(needle,haystack) {
+        // In addition to 'needle', use '+needle' so that it gets cast to an 
+        // integer if it's a string in integer form.
+        // This allows objects and arrays to play nicely together as object keys 
+        // will always be strings. 
+        return (haystack.indexOf(needle)>=0 || haystack.indexOf(+needle)>=0); 
+    }
         
     /**
      * Renders the items from object or array menuItems whose keys are specified
@@ -41,6 +49,7 @@ mwf.full.configurableMenu=new function(){
      * @param targetId string
      * @param prefsKey string
      * @param menuItems object|array
+     * @param disabledMenuItems object|array
      * 
      * @return null
      */
@@ -61,24 +70,26 @@ mwf.full.configurableMenu=new function(){
         } else {
             // Render items in 'on' in the correct order
             var i;
-            if (keys.hasOwnProperty('on')) {
-                for (i=0; i<keys.on.length; i++) {
-                    if (menuItems.hasOwnProperty(keys.on[i])) {
-                        result += menuItems[keys.on[i]];      
-                        delete menuItems[keys.on[i]];
-                    }
+            
+            var on = keys.hasOwnProperty('on') ? keys.on : [];
+
+            for (i=0; i<on.length; i++) {
+                if (menuItems.hasOwnProperty(on[i])) {
+                    result += menuItems[on[i]];      
                 }
             }
+
             
-            // Render items not in 'off'
+            // Render items that are neither in 'on' nor in 'off'
             var off = keys.hasOwnProperty('off') ? keys.off : [];
             
             for (i in menuItems) {
                 if (menuItems.hasOwnProperty(i)) {
-                    // Use +i so that it gets cast to an integer if it's a string in integer form.
+                    // In addition to 'i', use '+i' so that it gets cast to an 
+                    // integer if it's a string in integer form.
                     // This allows objects and arrays to play nicely together as object keys will 
                     // always be strings. 
-                    if (!(off.indexOf(i)>=0 || off.indexOf(+i)>=0))
+                    if (! (_contains(i,off) || _contains(i,on)))
                         result += menuItems[i];
                 }
             }
@@ -99,6 +110,7 @@ mwf.full.configurableMenu=new function(){
     /**
      * Enables or disables an item in the menu.
      * 
+     * @param prefsKey string
      * @param itemId string|int Corresponds to array key in ini file for menu.
      * @param enable boolean If true, enable item. Otherwise, disable.
      */

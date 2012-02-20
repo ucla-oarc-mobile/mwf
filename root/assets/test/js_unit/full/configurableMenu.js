@@ -301,3 +301,25 @@ test("mwf.full.configurableMenu.set() disable disabled item", function()
     }
     
 });
+
+test("mwf.full.configurableMenu.render() should not have side effects on passed array", function()
+{
+    var oldValue = mwf.standard.preferences.get('homescreen_layout');
+    mwf.standard.preferences.set('homescreen_layout','{"off":[],"on":[0]}');
+    
+    var menuItems = ["foo", "bar", "baz"];
+    var disabledItems = ["oof", "rab", "zab"];
+    mwf.full.configurableMenu.render(
+        "fake_main_menu",
+        "homescreen_layout",
+        menuItems,
+        disabledItems
+    );
+    
+    deepEqual(menuItems, ["foo","bar","baz"], "render() should not have side effects on menuItems array");
+    deepEqual(disabledItems, ["oof","rab","zab"], "render() should not have side effects on disabledItems array");
+    
+    if (oldValue != null) {
+        mwf.standard.preferences.set('homescreen_layout',oldValue);
+    }
+})
