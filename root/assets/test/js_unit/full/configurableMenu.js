@@ -74,7 +74,7 @@ test("mwf.full.configurableMenu.render() no settings, array passed, returns ever
 test("mwf.full.configurableMenu.render() has settings, object passed", function()
 {    
     var oldValue = mwf.standard.preferences.get('homescreen_layout');
-    mwf.standard.preferences.set('homescreen_layout','["b"]');
+    mwf.standard.preferences.set('homescreen_layout','{"on":["b"],"off":["a","c"]}');
     
     mwf.full.configurableMenu.render(
         "fake_main_menu",
@@ -88,7 +88,7 @@ test("mwf.full.configurableMenu.render() has settings, object passed", function(
 
     equal(document.getElementById('fake_main_menu').innerHTML, 
         '<li><a href="bar">Bar</a></li>',
-        'No prefs set, should print all menu items');
+        'Prefs set to print just the middle item');
 
     if (oldValue != null) {
         mwf.standard.preferences.set('homescreen_layout',oldValue);
@@ -99,7 +99,7 @@ test("mwf.full.configurableMenu.render() has settings, object passed", function(
 test("mwf.full.configurableMenu.render() has settings, array passed", function()
 {    
     var oldValue = mwf.standard.preferences.get('homescreen_layout');
-    mwf.standard.preferences.set('homescreen_layout','[0,2]');
+    mwf.standard.preferences.set('homescreen_layout','{"on":[0,2],"off":[1]}');
     
     mwf.full.configurableMenu.render(
         "fake_main_menu",
@@ -109,7 +109,7 @@ test("mwf.full.configurableMenu.render() has settings, array passed", function()
 
     equal(document.getElementById('fake_main_menu').innerHTML, 
         '<li><a href="foo">Foo</a></li><li><a href="whoa">Whoa</a></li>',
-        'No prefs set, should print all menu items');
+        'Prefs set to print first and last menu items');
 
     if (oldValue != null) {
         mwf.standard.preferences.set('homescreen_layout',oldValue);
@@ -140,4 +140,26 @@ test("mwf.full.configurable.render() mangled settings, graceful handling", funct
         
     ok(result,"Exception should handled");
 
+});
+
+test("mwf.full.configurableMenu.render() has settings, array passed", function()
+{    
+    var oldValue = mwf.standard.preferences.get('homescreen_layout');
+    mwf.standard.preferences.set('homescreen_layout','{"on":[0,1],"off":[2]}');
+    
+    mwf.full.configurableMenu.render(
+        "fake_main_menu",
+        "homescreen_layout",
+        {"0":"<li><a href=\"foo\">Foo<\/a><\/li>",
+         "2":"<li><a href=\"whoa\">Whoa<\/a><\/li>",
+         "3":"<li><a href=\"baz\">Baz<\/a><\/li>"}
+        );
+
+    equal(document.getElementById('fake_main_menu').innerHTML, 
+        '<li><a href="foo">Foo</a></li><li><a href="baz">Baz</a></li>',
+        'Prefs set, should print items from "on" followed by unlisted items and not items from "off"');
+
+    if (oldValue != null) {
+        mwf.standard.preferences.set('homescreen_layout',oldValue);
+    }
 });

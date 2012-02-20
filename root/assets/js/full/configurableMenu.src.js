@@ -52,9 +52,25 @@ mwf.full.configurableMenu=new function(){
                     result += menuItems[key];
             }
         } else {
-            for (var i=0; i<keys.length; i++) {
-                if (menuItems.hasOwnProperty(keys[i]))
-                    result += menuItems[keys[i]];
+            var i;
+            if (keys.hasOwnProperty('on')) {
+                for (i=0; i<keys.on.length; i++) {
+                    if (menuItems.hasOwnProperty(keys.on[i])) {
+                        result += menuItems[keys.on[i]];      
+                        delete menuItems[keys.on[i]];
+                    }
+                }
+            }
+            var off = keys.hasOwnProperty('off') ? keys.off : [];
+            
+            for (i in menuItems) {
+                if (menuItems.hasOwnProperty(i)) {
+                    // Use +i so that it gets cast to an integer if it's a string in integer form.
+                    // This allows objects and arrays to play nicely together as object keys will 
+                    // always be strings. 
+                    if (!(off.indexOf(i)>=0 || off.indexOf(+i)>=0))
+                        result += menuItems[i];
+                }
             }
         }
         
