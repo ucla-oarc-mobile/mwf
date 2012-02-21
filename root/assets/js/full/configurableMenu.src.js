@@ -35,14 +35,6 @@ mwf.full.configurableMenu=new function(){
         }
         return keys;
     }
-    
-    var _contains = function(needle,haystack) {
-        // In addition to 'needle', use '+needle' so that it gets cast to an 
-        // integer if it's a string in integer form.
-        // This allows objects and arrays to play nicely together as object keys 
-        // will always be strings. 
-        return (haystack.indexOf(needle)>=0 || haystack.indexOf(+needle)>=0); 
-    }
         
     /**
      * Renders the items from object or array menuItems whose keys are specified
@@ -94,7 +86,7 @@ mwf.full.configurableMenu=new function(){
             
             for (i in menuItems) {
                 if (menuItems.hasOwnProperty(i)) {
-                    if (! (_contains(i,off) || _contains(i,on))) {
+                    if (off.indexOf(+i)==-1 && on.indexOf(+i)==-1) {
                         keys.on.push(+i);
                         result += menuItems[i];
                     }
@@ -153,8 +145,6 @@ mwf.full.configurableMenu=new function(){
      * @param prefsKey string
      * @param itemId string|int
      * 
-     * @todo This requires that 'on' is an array and not an object. Either 
-     *    refactor elsewhere to insure this or else modify to handle objects.
      */
     this.moveUp = function(prefsKey,itemId) {
         keys = _getPrefsLists(prefsKey);
@@ -175,8 +165,6 @@ mwf.full.configurableMenu=new function(){
      * @param prefsKey string
      * @param itemId string|int
      * 
-     * @todo This requires that 'on' is an array and not an object. Either 
-     *    refactor elsewhere to insure this or else modify to handle objects.
      */
     this.moveDown = function(prefsKey,itemId) {
         keys = _getPrefsLists(prefsKey);

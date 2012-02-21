@@ -74,15 +74,15 @@ test("mwf.full.configurableMenu.render() no settings, array passed, returns ever
 test("mwf.full.configurableMenu.render() has settings, object passed", function()
 {    
     var oldValue = mwf.standard.preferences.get('homescreen_layout');
-    mwf.standard.preferences.set('homescreen_layout','{"on":["b"],"off":["a","c"]}');
+    mwf.standard.preferences.set('homescreen_layout','{"on":[2],"off":[1,3]}');
     
     mwf.full.configurableMenu.render(
         "fake_main_menu",
         "homescreen_layout",
         {
-            "a":"<li><a href=\"foo\">Foo<\/a><\/li>",
-            "b":"<li><a href=\"bar\">Bar<\/a><\/li>",
-            "c":"<li><a href=\"baz\">Baz<\/a><\/li>"
+            "1":"<li><a href=\"foo\">Foo<\/a><\/li>",
+            "2":"<li><a href=\"bar\">Bar<\/a><\/li>",
+            "3":"<li><a href=\"baz\">Baz<\/a><\/li>"
         }
         );
 
