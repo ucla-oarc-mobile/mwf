@@ -28,12 +28,15 @@
  * @uses Body_End_HTML_Decorator
  * @uses HTML_End_HTML_Decorator
  * @uses User_Agent
+ * @uses Classification
  * 
  * @link assets/redirect/unset_override.php
  */
 require_once(dirname(__FILE__) . '/assets/config.php');
 require_once(dirname(__FILE__) . '/assets/lib/decorator.class.php');
 require_once(dirname(__FILE__) . '/assets/redirect/unset_override.php');
+require_once(dirname(__FILE__) . '/assets/lib/user_agent.class.php');
+require_once(dirname(__FILE__) . '/assets/lib/classification.class.php');
 
 /**
  * Handle differences between a subsection and the top-level menu, using key
@@ -118,7 +121,10 @@ if (!$main_menu)
 /**
  * Footer
  */
-echo Site_Decorator::default_footer()->render();
+$footer = Site_Decorator::default_footer();
+if ($main_menu && Classification::is_full())
+    $footer->add_footer_link('Customize Home Screen',"/customize_home_screen.php");
+echo $footer->render();
 
 /**
  * End page
