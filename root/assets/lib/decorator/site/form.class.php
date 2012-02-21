@@ -19,10 +19,10 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
 
     private $_padded = null;
     private $_title = false;
+    private $_form_elements = array();
 
     public function __construct($title = false, $params = array()) {
-        parent::__construct('form', false, 
-                array_merge(array('method'=>'get', 'action'=>'#'), $params));
+        parent::__construct('form', false, array_merge(array('method' => 'get', 'action' => '#'), $params));
         if ($title)
             $this->set_title($title);
     }
@@ -33,8 +33,27 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     }
 
     public function set_title($inner, $params = array()) {
-        $this->_title = $inner === false ? 
+        $this->_title = $inner === false ?
                 false : HTML_Decorator::tag('h1', $inner, $params);
+        return $this;
+    }
+
+    public function add_checkbox($id, $label='', $params = array()) {
+        $id = htmlspecialchars($id);
+        $label = htmlspecialchars($label);
+        if (!is_array($params))
+            $params = array();
+
+        $this->_form_elements[] = HTML_Decorator::tag('input', false, 
+                array_merge($params, 
+                        array('type' => 'checkbox',
+                            'id' => $id,
+                            'name' => $id)));
+        if ($label) {
+            $this->_form_elements[] = HTML_Decorator::tag('label', $label, 
+                    array('for'=>$id));
+        }
+
         return $this;
     }
 
@@ -44,11 +63,18 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
         elseif ($this->_padded === false)
             $this->remove_class('padded');
 
-        $title = is_a($this->_title, 'Decorator') ? 
+        $inner = '';
+        if (count($this->_form_elements) > 0) {
+            foreach ($this->_form_elements as $element)
+                $inner .= $element->render();
+        }
+
+        $title = is_a($this->_title, 'Decorator') ?
                 $this->_title->render() : ($this->_title ? $this->_title : '');
 
-        $this->add_inner_front($title);
+        $this->add_inner_front($title . $inner);
         return parent::render();
     }
 
 }
+
