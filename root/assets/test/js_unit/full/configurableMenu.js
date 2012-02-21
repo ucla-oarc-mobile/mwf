@@ -351,3 +351,111 @@ test("mwf.full.configurableMenu.moveDown() moves item down", function()
         mwf.standard.preferences.set('homescreen_layout',oldValue);
     }
 });
+
+test("mwf.full.configurableMenu.render() no settings, object passed, sets settings", function()
+{    
+    var oldValue = mwf.standard.preferences.get('homescreen_layout',oldValue);
+    mwf.standard.preferences.clear('homescreen_layout');
+        
+    mwf.full.configurableMenu.render(
+        "fake_main_menu",
+        "homescreen_layout",
+        ["foo","bar"]
+        );
+            
+    var prefResults = JSON.parse(mwf.standard.preferences.get('homescreen_layout'));
+
+    equal(prefResults.on[0],0,
+        'render() should set prefs if they are not already set');
+        
+    equal(prefResults.on[1],1,
+        'render() should set prefs if they are not already set');
+    
+    equal(prefResults.on.length,2,
+        'render() should result in one pref setting per menu item');
+
+    if (oldValue != null) {
+        mwf.standard.preferences.set('homescreen_layout',oldValue);
+    }
+});
+
+test("mwf.full.configurableMenu.render() some settings, missing items set", function()
+{    
+    var oldValue = mwf.standard.preferences.get('homescreen_layout',oldValue);
+    mwf.standard.preferences.set('homescreen_layout',JSON.stringify({"on":[1]}));
+        
+    mwf.full.configurableMenu.render(
+        "fake_main_menu",
+        "homescreen_layout",
+        ["foo","bar"]
+        );
+            
+    var prefResults = JSON.parse(mwf.standard.preferences.get('homescreen_layout'));
+
+    equal(prefResults.on[0],1,
+        'render() should leave set prefs');
+        
+    equal(prefResults.on[1],0,
+        'render() should set prefs if they are not already set');
+    
+    equal(prefResults.on.length,2,
+        'render() should result in one pref setting per menu item');
+
+    if (oldValue != null) {
+        mwf.standard.preferences.set('homescreen_layout',oldValue);
+    }
+});
+
+test("mwf.full.configurableMenu.render() no settings, object passed, sets settings casting strings to ints", function()
+{    
+    var oldValue = mwf.standard.preferences.get('homescreen_layout',oldValue);
+    mwf.standard.preferences.clear('homescreen_layout');
+        
+    mwf.full.configurableMenu.render(
+        "fake_main_menu",
+        "homescreen_layout",
+        {"0":"foo","1":"bar"}
+        );
+            
+    var prefResults = JSON.parse(mwf.standard.preferences.get('homescreen_layout'));
+
+    equal(prefResults.on[0],0,
+        'render() should set prefs if they are not already set casting string to int');
+        
+    strictEqual(prefResults.on[1],1,
+        'render() should set prefs if they are not already set casting string to int');
+    
+    strictEqual(prefResults.on.length,2,
+        'render() should result in one pref setting per menu item');
+
+    if (oldValue != null) {
+        mwf.standard.preferences.set('homescreen_layout',oldValue);
+    }
+});
+
+test("mwf.full.configurableMenu.render() some settings, missing items set casting string to int", function()
+{    
+    var oldValue = mwf.standard.preferences.get('homescreen_layout',oldValue);
+    mwf.standard.preferences.set('homescreen_layout',JSON.stringify({"on":[1]}));
+        
+    mwf.full.configurableMenu.render(
+        "fake_main_menu",
+        "homescreen_layout",
+        {"0":"foo","1":"bar"}
+        );
+            
+    var prefResults = JSON.parse(mwf.standard.preferences.get('homescreen_layout'));
+
+    strictEqual(prefResults.on[0],1,
+        'render() should leave set prefs');
+        
+    strictEqual(prefResults.on[1],0,
+        'render() should set prefs if they are not already set');
+    
+    equal(prefResults.on.length,2,
+        'render() should result in one pref setting per menu item');
+
+    if (oldValue != null) {
+        mwf.standard.preferences.set('homescreen_layout',oldValue);
+    }
+});

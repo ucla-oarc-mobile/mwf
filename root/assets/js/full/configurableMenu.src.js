@@ -64,16 +64,23 @@ mwf.full.configurableMenu=new function(){
         var result = '';
         var keys = _getPrefsLists(prefsKey);
         
-        if (keys === null) {            
-            for (var key in menuItems) {
-                if (menuItems.hasOwnProperty(key))
+        if (keys===null) {
+            keys={};
+            keys.on = [];
+            for (var key in menuItems)
+                if (menuItems.hasOwnProperty(key)) {
+                    keys.on.push(+key);
                     result += menuItems[key];
-            }
+                }
+            if (mwf.standard.preferences.isSupported())
+                mwf.standard.preferences.set(prefsKey,JSON.stringify(keys));
         } else {
             // Render items in 'on' in the correct order
             var i;
             
-            var on = keys.hasOwnProperty('on') ? keys.on : [];
+            if (! keys.hasOwnProperty('on')) 
+                keys.on = [];
+            var on = keys.on;
 
             for (i=0; i<on.length; i++) {
                 if (menuItems.hasOwnProperty(on[i])) {
@@ -87,10 +94,14 @@ mwf.full.configurableMenu=new function(){
             
             for (i in menuItems) {
                 if (menuItems.hasOwnProperty(i)) {
-                    if (! (_contains(i,off) || _contains(i,on)))
+                    if (! (_contains(i,off) || _contains(i,on))) {
+                        keys.on.push(+i);
                         result += menuItems[i];
+                    }
                 }
             }
+            if (mwf.standard.preferences.isSupported())
+                mwf.standard.preferences.set(prefsKey,JSON.stringify(keys));
             
             // If 'disabledMenuItems' was sent, then render items from 'off'
             if (disabledMenuItems) {
@@ -100,8 +111,8 @@ mwf.full.configurableMenu=new function(){
                     }
                 }
             }
-        }
         
+        }
         target.innerHTML = result;
     }
     
@@ -124,7 +135,7 @@ mwf.full.configurableMenu=new function(){
             keys[prop] = [itemId];
         } else {
             if (keys[prop].indexOf(itemId)==-1)
-                keys[prop].push(itemId)
+                keys[prop].push(+itemId)
         }
         
         otherProp = prop=="on" ? "off" : "on";
