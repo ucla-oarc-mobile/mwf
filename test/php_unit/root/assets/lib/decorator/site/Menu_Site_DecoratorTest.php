@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Test class for Head_Site_Decorator.
+ * Test class for Menu_Site_Decorator.
  * 
  * @author trott
  * @copyright Copyright (c) 2010-12 UC Regents
