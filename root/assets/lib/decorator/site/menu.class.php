@@ -145,7 +145,7 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
                 $inner = '';
                 foreach ($this->_list as $list_item)
                     $inner .= $list_item->render();
-                $menu_markup = HTML_Decorator::tag('ol', $inner)->set_param('id','main_menu_list')->render();
+                $menu_markup = HTML_Decorator::tag('ol', $inner)->render();
             }
         }
 
