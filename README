@@ -4,7 +4,7 @@
  //  //  //  //  //  //  //////
 //  //  //  //////////  //
 
-THE UCLA MOBILE WEB FRAMEWORK
+THE MOBILE WEB FRAMEWORK
 
 ==============================================================================
 
@@ -30,7 +30,7 @@ TABLE OF CONTENTS
 
 1. FRAMEWORK
 
-The UCLA Mobile Web Framework is a cross-platform web framework that focuses
+The Mobile Web Framework is a cross-platform web framework that focuses
 on mobile web standards, semantic markup, device agnosticism and graceful
 degradation, providing a robust presentation layer that allows applications
 to define a single set of markup optimized for HTML 5 capable devices that
@@ -60,7 +60,7 @@ More information is online at the collaboration site: http://mwf.ucla.edu
 
 3. COLLABORATION
 
-To get involved with the UCLA Mobile Web Framework project, please see the
+To get involved with the Mobile Web Framework project, please see the
 following links:
 
     Home                http://mwf.ucla.edu
@@ -77,7 +77,7 @@ following links:
 
 4. LICENSE
 
-The UCLA Mobile Web Framework is licensed under a source-available license
+The Mobile Web Framework is licensed under a source-available license
 that supports both commercial and non-commercial development.
 
 For the full text of the license, please see the online version:
@@ -104,7 +104,7 @@ A copy of this license is also available in the LICENSE file.
 5.2 CONTRIBUTORS
 
 In addition to their own mobile applications, a number of participants have
-contributed code directly to the UCLA Mobile Web Framework.
+contributed code directly to the Mobile Web Framework.
 
     UC Los Angeles      Eric Bollens
                         Ed Sakabu
@@ -125,4 +125,4 @@ contributed code directly to the UCLA Mobile Web Framework.
     UC Riverside        Chris Webber
 
 Beyond direct contributions, the input and suggestions of numerous others
-have made the UCLA Mobile Web Framework possible.
+have made the Mobile Web Framework possible.
