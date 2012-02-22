@@ -2,18 +2,19 @@ Given /I have no previous preferences/ do
   visit "http://localhost/assets/test/selenium/nuke_prefs.html"
 end
 
-And /^I should see the "([^"]*)" menu item$/ do |menu_item|
-  should have_link(menu_item)
+And /^I note the name of menu item number (\d*), let's call it "([^"]*)"$/ do |n, name|
+  if ! defined?(@note)
+    @note = Hash.new;
+  end
+   @note[name] = find(:xpath, '//ol[@id="main_menu_list"]/li[' + n + ']/a').text;
 end
 
-And /^I should not see the "([^"]*)" menu item$/ do |menu_item|
-  should have_no_link(menu_item)
+And /^I should see that menu item number (\d*) is so-called "([^"]*)"$/ do |n, item|
+  assert find(:xpath, '//ol[@id="main_menu_list"]/li[' + n + ']/a').text == @note[item];
 end
 
-And /^I should see the menu items "([^"]*)", "([^"]*)", and "([^"]*)"$/ do |first, second, third|
-  assert find(:xpath, '//ol[@id="main_menu_list"]/li[1]/a').text == first;
-  assert find(:xpath, '//ol[@id="main_menu_list"]/li[2]/a').text == second;
-  assert find(:xpath, '//ol[@id="main_menu_list"]/li[3]/a').text == third;
+And /^I should not see the so-called "([^"]*)" menu item$/ do |item|
+  should have_no_link(@note[item])
 end
 
 Then /I click the "([^"]*)" link/ do |link_text|
@@ -28,10 +29,10 @@ And /the "([^"]*)" page loads/ do |header_text|
   should have_content(header_text)
 end
 
-Then /I uncheck "([^"]*)"/ do |label|
-  uncheck(label)
+Then /I uncheck so-called "([^"]*)"/ do |item|
+  uncheck(@note[item])
 end
 
-Then /^I click "([^"]*)" for "([^"]*)"$/ do |button_value, label_text|
-  find('label', {:text => label_text, :visible => true}).find(:xpath, './/../input[@type="submit" and @value="'+button_value+'"]').click
+Then /^I click "([^"]*)" for so-called "([^"]*)"$/ do |button_value, label_text|
+  find('label', {:text => @note[label_text], :visible => true}).find(:xpath, './/../input[@type="submit" and @value="'+button_value+'"]').click
 end
