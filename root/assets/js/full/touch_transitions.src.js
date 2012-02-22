@@ -15,4 +15,4 @@ mwf.webkit.touch_transitions = new function() {
     }
 }
 
-document.addEventListener('load', mwf.webkit.touch_transitions.init, false);
+window.addEventListener('load', mwf.webkit.touch_transitions.init, false);
