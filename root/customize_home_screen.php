@@ -84,7 +84,7 @@ if (Classification::is_full()) {
             ->add_inner($js .
                     "var cm = new mwf.full.ConfigurableMenu('homescreen_layout');".
                     "function renderMenu()".
-                    "{cm.render('app_order',apps,disabledApps);}".
+                    "{cm.render('app_order',apps,disabledApps)}".
                     "renderMenu();")
             ->render();
 } else {
