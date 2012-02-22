@@ -49,27 +49,21 @@ if (Classification::is_full()) {
 
         $this_id = htmlspecialchars($ids[$key]);
         $encoded_key = json_encode($key);
-        $apps_rendered[$key] = '<input type="submit" onclick="cm.moveUp(' .
+        $apps_rendered[$key] = '<div><input type="submit" onclick="cm.moveUp(' .
                 $encoded_key . '); renderMenu(); return false" value="Up">' .
                 '&nbsp;<input type="submit" onclick="cm.moveDown(' .
                 $encoded_key . '); renderMenu(); return false" value="Down">' .
-                '&nbsp;<input type="checkbox" id="' . 
-                $this_id .
-                '" onclick="cm.set(' .
-                $encoded_key . ',this.checked); renderMenu()" name="' .
-                $this_id .
-                '"  checked>&nbsp;<label for="' .
+                '&nbsp;<input type="checkbox" onclick="cm.set(' .
+                $encoded_key . ',this.checked); renderMenu()" id="'.$this_id.'" checked>&nbsp;<label for="' .
                 $this_id .
                 '">' .
                 htmlspecialchars($apps[$key]) .
-                '</label><br/>';
-        $disabled_apps_rendered[$key] = '<input type="submit" value="Up" disabled>' .
+                '</label></div>';
+        $disabled_apps_rendered[$key] = '<div><input type="submit" value="Up" disabled>' .
                 '<input type="submit" value="Down" disabled>' .
-                '<input type="checkbox" id="' . $this_id .
-                '" onclick="cm.set(' .
-                $encoded_key . ',this.checked); renderMenu()" name="' .
-                $this_id . '"/><label for="' . $this_id . '">' .
-                htmlspecialchars($apps[$key]) . '</label><br/>';
+                '<input type="checkbox" onclick="cm.set(' .
+                $encoded_key . ',this.checked); renderMenu()" id="'.$this_id.'"><label for="' . $this_id . '">' .
+                htmlspecialchars($apps[$key]) . '</label></div>';
     }
 
     $js = 'var apps=' . json_encode($apps_rendered) . ';var disabledApps=' . json_encode($disabled_apps_rendered) . ';';
