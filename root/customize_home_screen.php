@@ -49,20 +49,23 @@ if (Classification::is_full()) {
 
         $this_id = htmlspecialchars($ids[$key]);
         $encoded_key = json_encode($key);
-        $apps_rendered[$key] = '<input type="checkbox" id="' . 
+        $apps_rendered[$key] = '<input type="submit" onclick="cm.moveUp(' .
+                $encoded_key . '); renderMenu(); return false" value="Up">' .
+                '&nbsp;<input type="submit" onclick="cm.moveDown(' .
+                $encoded_key . '); renderMenu(); return false" value="Down">' .
+                '&nbsp;<input type="checkbox" id="' . 
                 $this_id .
                 '" onclick="cm.set(' .
                 $encoded_key . ',this.checked); renderMenu()" name="' .
                 $this_id .
-                '"  checked/><label for="' .
+                '"  checked>&nbsp;<label for="' .
                 $this_id .
                 '">' .
                 htmlspecialchars($apps[$key]) .
-                '</label> <input type="submit" onclick="cm.moveUp(' .
-                $encoded_key . '); renderMenu(); return false" value="Up">' .
-                '<input type="submit" onclick="cm.moveDown(' .
-                $encoded_key . '); renderMenu(); return false" value="Down"><br/>';
-        $disabled_apps_rendered[$key] = '<input type="checkbox" id="' . $this_id .
+                '</label><br/>';
+        $disabled_apps_rendered[$key] = '<input type="submit" value="Up" disabled>' .
+                '<input type="submit" value="Down" disabled>' .
+                '<input type="checkbox" id="' . $this_id .
                 '" onclick="cm.set(' .
                 $encoded_key . ',this.checked); renderMenu()" name="' .
                 $this_id . '"/><label for="' . $this_id . '">' .
