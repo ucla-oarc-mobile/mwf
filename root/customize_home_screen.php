@@ -58,10 +58,10 @@ if (Classification::is_full()) {
                 $this_id .
                 '">' .
                 htmlspecialchars($apps[$key]) .
-                '</label> <a href="#" onclick="cm.moveUp(' .
-                $encoded_key . '); renderMenu(); return false;">[Up]</a> ' .
-                '<a href="#" onclick="cm.moveDown(' .
-                $encoded_key . '); renderMenu(); return false;">[Down]</a><br/>';
+                '</label> <input type="submit" onclick="cm.moveUp(' .
+                $encoded_key . '); renderMenu(); return false" value="Up">' .
+                '<input type="submit" onclick="cm.moveDown(' .
+                $encoded_key . '); renderMenu(); return false" value="Down"><br/>';
         $disabled_apps_rendered[$key] = '<input type="checkbox" id="' . $this_id .
                 '" onclick="cm.set(' .
                 $encoded_key . ',this.checked); renderMenu()" name="' .
@@ -71,7 +71,7 @@ if (Classification::is_full()) {
 
     $js = 'var apps=' . json_encode($apps_rendered) . ';var disabledApps=' . json_encode($disabled_apps_rendered) . ';';
 
-    echo Site_Decorator::form()
+    echo Site_Decorator::form(false, array('class'=>'short'))
             ->set_padded()
             ->set_title('Home Screen Customization')
             ->add_inner_tag('div', '', array('class' => 'option', 'id' => 'app_order'))
