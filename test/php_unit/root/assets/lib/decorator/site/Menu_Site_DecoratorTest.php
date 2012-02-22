@@ -77,6 +77,6 @@ class Menu_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
         $this->object->set_homescreen();
         $this->object->add_item('Foo', 'http://example.com/', array(), array(), 'foo_index');
         $this->object->add_item('Bar', 'http://musicroutes.com/', array(), array(), 'bar_index');
-        $this->assertRegExp('/<script>mwf\.full\.configurableMenu\.render\(\"main_menu_list\",\"homescreen_layout\",.*\);/', $this->object->render());
+        $this->assertRegExp('/new\s*mwf\.full\.ConfigurableMenu\(\"homescreen_layout"\)\.render\(/', $this->object->render());
     }
 }

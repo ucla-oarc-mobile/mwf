@@ -30,7 +30,7 @@ require_once(dirname(__FILE__) . '/assets/lib/classification.class.php');
 echo HTML_Decorator::html_start()->render();
 
 echo Site_Decorator::head()->set_title('Customize Home Screen')
-        ->add_js_handler_library('full_libs', 'configurableMenu')
+        ->add_js_handler_library('full_libs', 'ConfigurableMenu')
         ->render();
 
 echo HTML_Decorator::body_start()->render();
@@ -49,21 +49,21 @@ if (Classification::is_full()) {
 
         $this_id = htmlspecialchars($ids[$key]);
         $encoded_key = json_encode($key);
-        $apps_rendered[$key] = '<input type="checkbox" id="' .
+        $apps_rendered[$key] = '<input type="checkbox" id="' . 
                 $this_id .
-                '" onclick="mwf.full.configurableMenu.set(\'homescreen_layout\',' .
+                '" onclick="cm.set(' .
                 $encoded_key . ',this.checked); renderMenu()" name="' .
                 $this_id .
                 '"  checked/><label for="' .
                 $this_id .
                 '">' .
                 htmlspecialchars($apps[$key]) .
-                '</label> <a href="#" onclick="mwf.full.configurableMenu.moveUp(\'homescreen_layout\',' .
+                '</label> <a href="#" onclick="cm.moveUp(' .
                 $encoded_key . '); renderMenu(); return false;">[Up]</a> ' .
-                '<a href="#" onclick="mwf.full.configurableMenu.moveDown(\'homescreen_layout\',' .
+                '<a href="#" onclick="cm.moveDown(' .
                 $encoded_key . '); renderMenu(); return false;">[Down]</a><br/>';
         $disabled_apps_rendered[$key] = '<input type="checkbox" id="' . $this_id .
-                '" onclick="mwf.full.configurableMenu.set(\'homescreen_layout\',' .
+                '" onclick="cm.set(' .
                 $encoded_key . ',this.checked); renderMenu()" name="' .
                 $this_id . '"/><label for="' . $this_id . '">' .
                 htmlspecialchars($apps[$key]) . '</label><br/>';
@@ -79,7 +79,10 @@ if (Classification::is_full()) {
 
     echo HTML_Decorator::tag('script')
             ->add_inner($js .
-                    "function renderMenu() {mwf.full.configurableMenu.render('app_order', 'homescreen_layout',  apps, disabledApps);}renderMenu();")
+                    "var cm = new mwf.full.ConfigurableMenu('homescreen_layout');".
+                    "function renderMenu()".
+                    "{cm.render('app_order',apps,disabledApps);}".
+                    "renderMenu();")
             ->render();
 } else {
     echo Site_Decorator::Content()

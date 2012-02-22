@@ -2,14 +2,14 @@
 
 /**
  *
- *
  * @package decorator
  * @subpackage site_decorator
  *
  * @author ebollens
+ * @author trott
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111207
+ * @version 20120221
  *
  * @uses Decorator
  * @uses Tag_HTML_Decorator
@@ -133,7 +133,7 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
             }
 
             // ...and use the callback here.
-            $js = 'mwf.full.configurableMenu.render("main_menu_list","homescreen_layout",' . 
+            $js = 'new mwf.full.ConfigurableMenu("homescreen_layout").render("main_menu_list",' . 
                     json_encode(array_map('call_render', $this->_list)) . ');';
 
             $menu_markup = HTML_Decorator::tag('ol')->set_param('id','main_menu_list')->render();

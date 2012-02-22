@@ -1,6 +1,6 @@
 /**
- * Defines methods under mwf.standard.configurableMenu that allow menu items to
- * be determined by the user.
+ * mwf.full.ConfigurableMenu object that allows menu items to be determined by 
+ * the user.
  *
  * @package full
  * @subpackage js
@@ -13,17 +13,17 @@
  * @requires mwf
  * @requires mwf.standard.preferences
  * 
- * @todo Shouldn't be a static class. Refactor as non-static class and get rid
- *    of all those unfortunate prefsKey params.
  */
 
-mwf.full.configurableMenu=new function(){
+mwf.full.ConfigurableMenu=function(prefsKey){
     
-    var _getPrefsLists = function(prefsKey) {
+    var _prefsKey = prefsKey;
+ 
+    var _getPrefsLists = function() {
         var keys = null;
         
         if (mwf.standard.preferences.isSupported()) {
-            var prefsValue = mwf.standard.preferences.get(prefsKey);
+            var prefsValue = mwf.standard.preferences.get(_prefsKey);
             if (prefsValue!==null)
                 try {
                     keys = JSON.parse(prefsValue);    
@@ -37,24 +37,23 @@ mwf.full.configurableMenu=new function(){
     }
         
     /**
-     * Renders the items from object or array menuItems whose keys are specified
-     * in the preferences key prefsKey into the DOM object with id targetId.
+     * Renders the items from object or array menuItems (whose keys are 
+     * specified in the preferences) into the DOM object with id targetId.
      * 
      * @param targetId string
-     * @param prefsKey string
      * @param menuItems object|array
      * @param disabledMenuItems object|array
      * 
      * @return null
      */
     
-    this.render = function(targetId, prefsKey, menuItems, disabledMenuItems){
+    this.render = function(targetId, menuItems, disabledMenuItems){
         var target = document.getElementById(targetId);
         if (target === null)
             return;
         
         var result = '';
-        var keys = _getPrefsLists(prefsKey);
+        var keys = _getPrefsLists();
         
         if (keys===null) {
             keys={};
@@ -65,7 +64,7 @@ mwf.full.configurableMenu=new function(){
                     result += menuItems[key];
                 }
             if (mwf.standard.preferences.isSupported())
-                mwf.standard.preferences.set(prefsKey,JSON.stringify(keys));
+                mwf.standard.preferences.set(_prefsKey,JSON.stringify(keys));
         } else {
             // Render items in 'on' in the correct order
             var i;
@@ -93,7 +92,7 @@ mwf.full.configurableMenu=new function(){
                 }
             }
             if (mwf.standard.preferences.isSupported())
-                mwf.standard.preferences.set(prefsKey,JSON.stringify(keys));
+                mwf.standard.preferences.set(_prefsKey,JSON.stringify(keys));
             
             // If 'disabledMenuItems' was sent, then render items from 'off'
             if (disabledMenuItems) {
@@ -111,13 +110,12 @@ mwf.full.configurableMenu=new function(){
     /**
      * Enables or disables an item in the menu.
      * 
-     * @param prefsKey string
      * @param itemId string|int Corresponds to array key in ini file for menu.
      * @param enable boolean If true, enable item. Otherwise, disable.
      */
-    this.set = function(prefsKey, itemId, enable) {
+    this.set = function(itemId, enable) {
         var prop = enable ? "on" : "off";
-        var keys = _getPrefsLists(prefsKey);
+        var keys = _getPrefsLists();
 
         if (keys==null) {
             keys={};
@@ -136,25 +134,24 @@ mwf.full.configurableMenu=new function(){
             while (keys[otherProp].indexOf(itemId)!=-1)
                 keys[otherProp].splice(keys[otherProp].indexOf(itemId),1);
         }
-        mwf.standard.preferences.set(prefsKey,JSON.stringify(keys));
+        mwf.standard.preferences.set(_prefsKey,JSON.stringify(keys));
     }
     
     /**
      * Moves the specified item up one space in the enabled items list.
      * 
-     * @param prefsKey string
      * @param itemId string|int
      * 
      */
-    this.moveUp = function(prefsKey,itemId) {
-        keys = _getPrefsLists(prefsKey);
+    this.moveUp = function(itemId) {
+        keys = _getPrefsLists();
         if (keys.hasOwnProperty('on')) {
             var index = keys.on.indexOf(itemId);
             if (index > 0) {
                 var temp = keys.on[index];
                 keys.on[index] = keys.on[index-1];
                 keys.on[index-1] = temp;
-                mwf.standard.preferences.set(prefsKey,JSON.stringify(keys))
+                mwf.standard.preferences.set(_prefsKey,JSON.stringify(keys))
             }   
         }
     }
@@ -162,19 +159,18 @@ mwf.full.configurableMenu=new function(){
     /**
      * Moves the specified item down one space in the enabled items list.
      * 
-     * @param prefsKey string
      * @param itemId string|int
      * 
      */
-    this.moveDown = function(prefsKey,itemId) {
-        keys = _getPrefsLists(prefsKey);
+    this.moveDown = function(itemId) {
+        keys = _getPrefsLists();
         if (keys.hasOwnProperty('on')) {
             var index = keys.on.indexOf(itemId);
             if (index > -1 && index < keys.on.length-1) {
                 var temp = keys.on[index];
                 keys.on[index] = keys.on[index+1];
                 keys.on[index+1] = temp;
-                mwf.standard.preferences.set(prefsKey,JSON.stringify(keys))
+                mwf.standard.preferences.set(_prefsKey,JSON.stringify(keys))
             }   
         }
     }   
