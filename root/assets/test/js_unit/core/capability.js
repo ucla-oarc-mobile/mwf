@@ -42,7 +42,7 @@ test("mwf.capability.audio()", function()
 test("mwf.capability.canvas()", function()
 {
     expect(2);
-    var canvas = mwf.capability.applicationcache();
+    var canvas = mwf.capability.canvas();
     equal(typeof canvas, 'boolean', 'mwf.capability.canvas() should return a boolean');
     equal(canvas, true, 'browser is canvas-capable');
 });
