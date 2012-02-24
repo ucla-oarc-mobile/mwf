@@ -66,7 +66,7 @@ mwf.userAgent = new function() {
                 break;
             case 'blackberry':
                 x = ua.match(/^mozilla\/5\.0 \(blackberry;.* version\/([\d\.]+)/);
-                if (x[1]) {
+                if (x!=null) {
                     r = x[1];
                     break;
                 }else if(ua.substring(0, 10) == 'blackberry'){
