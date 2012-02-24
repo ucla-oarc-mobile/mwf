@@ -31,7 +31,16 @@ test("mwf.userAgent.getOS() is iphone", function()
    var oldNav = navigator;
    navigator = {'userAgent':'Mozilla/5.0 (iPod; U; CPU iPhone OS 4_3_3 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5'};
    var ua = new mwf.userAgent.constructor();
-   equal(ua.getOS(),'iphone_os','should detect iPhone useragent string');
+   equal(ua.getOS(),'iphone_os','should detect iPhone userAgent string');
+   navigator = oldNav;
+});
+
+test("mwf.userAgent.getOS() unknwon", function()
+{
+   var oldNav = navigator;
+   navigator = {'userAgent':'totally crazy user agent!'};
+   var ua = new mwf.userAgent.constructor();
+   equal(ua.getOS(), '', 'should return empty string for unknown userAgent string');
    navigator = oldNav;
 });
 
