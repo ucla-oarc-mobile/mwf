@@ -26,6 +26,15 @@ test("mwf.userAgent.getOS()", function()
     ok(expected_results.indexOf(os) > -1, 'getOS() should be expected value: ' + os);
 });
 
+test("mwf.userAgent.getOS() is iphone", function()
+{
+   var oldNav = navigator;
+   navigator = {'userAgent':'Mozilla/5.0 (iPod; U; CPU iPhone OS 4_3_3 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5'};
+   var ua = new mwf.userAgent.constructor();
+   equal(ua.getOS(),'iphone_os','should detect iPhone useragent string');
+   navigator = oldNav;
+});
+
 test("mwf.userAgent.getOSVersion()", function()
 {
     var osVersion = mwf.userAgent.getOSVersion();
