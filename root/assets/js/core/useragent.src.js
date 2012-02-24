@@ -57,14 +57,19 @@ mwf.userAgent = new function() {
      * @return string
      */
     this.getOSVersion = function(){ 
-        var ua = userAgent, s, r='';
+        var ua = userAgent, s, r='', x;
         switch(this.getOS())
         {
             case 'iphone_os':
                 s = ua.indexOf('iphone os')+10;
                 r = ua.substring(s, ua.indexOf(' ', s));
+                break;
             case 'blackberry':
-                if(ua.substring(0, 10) == 'blackberry'){
+                x = ua.match(/^mozilla\/5\.0 \(blackberry;.* version\/([\d\.]+)/);
+                if (x[1]) {
+                    r = x[1];
+                    break;
+                }else if(ua.substring(0, 10) == 'blackberry'){
                     s = ua.indexOf('/')+1;
                     r = ua.substring(s, ua.indexOf(' ', s));
                 }
