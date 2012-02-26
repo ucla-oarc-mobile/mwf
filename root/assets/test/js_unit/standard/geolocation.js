@@ -157,6 +157,14 @@ test("mwf.standard.geolocation.isSupported()", function() {
 })
 
 test("mwf.touch.geolocation.getPosition(onSuccess,onError)", function() {
+    var saveNavigator = navigator;
+    navigator = new Object();
+    navigator.__proto__ = saveNavigator;
+    navigator.geolocation = new Object();
+    navigator.geolocation.getCurrentPosition=function(onSuccess,onError) {
+        onSuccess({coords:{latitude:1.11,longitude:2.22,accuracy:3}});
+    }
+    
     expect(1);
     QUnit.config.testTimeout = 5000;
     QUnit.stop();
@@ -167,10 +175,9 @@ test("mwf.touch.geolocation.getPosition(onSuccess,onError)", function() {
         && typeof pos['accuracy']=='number';
         ok(receivedExpectedResultTypes, 'lat, long, and accuracy should be numbers');
         start();
-    }, function(errorMsg) {
-        equal(errorMsg,'Geolocation permission not granted.', 'errorMsg should be permission denied: ' + errorMsg);
-        start();
     });
+    
+    navigator = saveNavigator;
 })
 
 test("mwf.touch.geolocation.getPosition(onSuccess) Geolocation unsupported", function() {
@@ -402,12 +409,6 @@ test("mwf.standard.geolocation.getApi() Unsupported", function() {
     navigator = saveNavigator;
     
     strictEqual(api, null, 'getApi() should return null if Geolocation is unsupported');
-})
-
-test("mwf.standard.geolocation.watchPosition()", function() {
-    watchId = mwf.standard.geolocation.watchPosition(function(pos) {});
-    equal(typeof watchId, 'number', 'watchPosition() should return a number');
-    mwf.standard.geolocation.clearWatch(watchId);
 })
 
 test("mwf.standard.geolocation.watchPosition(onSuccess) Geolocation unsupported", function() {
