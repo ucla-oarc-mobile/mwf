@@ -99,27 +99,27 @@ test("mwf.userAgent.getOSVersion() for Android", function()
     navigator = oldNav;
 });
 
-//test("mwf.userAgent.getOSVersion() for Windows Phone OS", function()
-//{
-//    var oldNav = navigator;
-//    navigator = {
-//        'userAgent':'Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0; DELL; Venue Pro)'
-//    };
-//    var ua = new mwf.userAgent.constructor();
-//    equal(ua.getOSVersion(),"7.0","getOSVersion() should parse Windows Phone OS 7.0 userAgent string");
-//    navigator = oldNav;
-//});
-//
-//test("mwf.userAgent.getOSVersion() for Symbian OS", function()
-//{
-//    var oldNav = navigator;
-//    navigator = {
-//        'userAgent':'Nokia3650/1.0 SymbianOS/6.1 Series60/1.2 Profile/MIDP-1.0 Configuration/CLDC-1.0'
-//    };
-//    var ua = new mwf.userAgent.constructor();
-//    equal(ua.getOSVersion(),"6.1","getOSVersion() should parse Symbian OS 6.1 userAgent string");
-//    navigator = oldNav;
-//});
+test("mwf.userAgent.getOSVersion() for Windows Phone OS", function()
+{
+    var oldNav = navigator;
+    navigator = {
+        'userAgent':'Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0; DELL; Venue Pro)'
+    };
+    var ua = new mwf.userAgent.constructor();
+    equal(ua.getOSVersion(),"7.0","getOSVersion() should parse Windows Phone OS 7.0 userAgent string");
+    navigator = oldNav;
+});
+
+test("mwf.userAgent.getOSVersion() for Symbian OS", function()
+{
+    var oldNav = navigator;
+    navigator = {
+        'userAgent':'Nokia3650/1.0 SymbianOS/6.1 Series60/1.2 Profile/MIDP-1.0 Configuration/CLDC-1.0'
+    };
+    var ua = new mwf.userAgent.constructor();
+    equal(ua.getOSVersion(),"6.1","getOSVersion() should parse Symbian OS 6.1 userAgent string");
+    navigator = oldNav;
+});
 
 test("mwf.userAgent.getOSVersion() for WebOS", function()
 {
