@@ -173,17 +173,6 @@ test("mwf.touch.geolocation.getPosition(onSuccess,onError)", function() {
     });
 })
 
-test("mwf.touch.geolocation.getPosition(onSuccess)", function() {
-    QUnit.config.testTimeout = 5000;
-    QUnit.stop();
-    mwf.touch.geolocation.getPosition(function(pos) {
-        equal(typeof pos['latitude'], 'number', 'latitude should be a number');
-        equal(typeof pos['longitude'], 'number', 'longitude should be a number');
-        equal(typeof pos['accuracy'], 'number', 'accuracy should be a number');
-        start();
-    }); 
-})
-
 test("mwf.touch.geolocation.getPosition(onSuccess) Geolocation unsupported", function() {
 
     var getApi = mwf.touch.geolocation.getApi;
@@ -294,30 +283,15 @@ test("mwf.standard.geolocation.getCurrentPosition() unsupported with error callb
     navigator = saveNavigator;    
 });
 
-test("mwf.touch.geolocation.getCurrentPosition(onSuccess,onError)", function() {
-    expect(1);
-    QUnit.config.testTimeout = 5000;
-    QUnit.stop();
-    mwf.standard.geolocation.getCurrentPosition(function(pos) {
-        var receivedExpectedResultTypes = 
-        typeof pos['latitude']=='number'
-        && typeof pos['longitude']=='number'
-        && typeof pos['accuracy']=='number';
-        ok(receivedExpectedResultTypes, 'lat, long, and accuracy should be numbers');
-        start();
-    }, function(error) {
-        var matchesPositionErrorInterface =
-        typeof error.code === 'number'
-        && typeof error.message === 'string'
-        && typeof error.PERMISSION_DENIED === 'number'
-        && typeof error.POSITION_UNAVAILABLE === 'number'
-        && typeof error.TIMEOUT === 'number'
-        ok(matchesPositionErrorInterface, 'error should implement PositionError interface');
-        start();
-    });
-})
-
 test("mwf.standard.geolocation.getCurrentPosition(onSuccess)", function() {
+    var saveNavigator = navigator;
+    navigator = new Object();
+    navigator.__proto__ = saveNavigator;
+    navigator.geolocation = new Object();
+    navigator.geolocation.getCurrentPosition=function(onSuccess,onError) {
+        onSuccess({'coords':{'latitude':1.11,'longitude':2.22, 'accuracy':3}});
+    }
+   
     QUnit.config.testTimeout = 5000;
     QUnit.stop();
     mwf.standard.geolocation.getCurrentPosition(function(pos) {
@@ -326,6 +300,7 @@ test("mwf.standard.geolocation.getCurrentPosition(onSuccess)", function() {
         equal(typeof pos['accuracy'], 'number', 'accuracy should be a number');
         start();
     });
+    navigator=saveNavigator;
 })
 
 test("mwf.standard.geolocation.getCurrentPosition(onSuccess) Geolocation unsupported", function() {
