@@ -14,7 +14,7 @@ And /^I should see that menu item number (\d*) is so-called "([^"]*)"$/ do |n, i
 end
 
 And /^I should not see the so-called "([^"]*)" menu item$/ do |item|
-  should have_no_link(@note[item])
+  should have_no_selector(:xpath, '//ol[@id="main_menu_list"]/li[a="' + item + '"]');
 end
 
 Then /I click the "([^"]*)" link/ do |link_text|
@@ -35,4 +35,8 @@ end
 
 Then /^I click "([^"]*)" for so-called "([^"]*)"$/ do |button_value, label_text|
   find('label', {:text => @note[label_text], :visible => true}).find(:xpath, './/../input[@type="submit" and @value="'+button_value+'"]').click
+end
+
+And /^I go back$/ do
+  evaluate_script('window.history.back()')
 end

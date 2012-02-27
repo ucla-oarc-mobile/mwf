@@ -11,7 +11,7 @@ Scenario: Remove an item
   Then I click the "Customize Home Screen" link
   And the "Home Screen Customization" page loads
   Then I uncheck so-called "third_item"
-  And I click the "Go Back To Home" link
+  And I go back
   Then I should see the home page
   And I should not see the so-called "third_item" menu item
 
@@ -26,7 +26,7 @@ Scenario: Move items
   And the "Home Screen Customization" page loads
   Then I click "Down" for so-called "first_item"
   And I click "Up" for so-called "third_item"
-  And I click the "Go Back To Home" link
+  And I go back
   Then I should see the home page
   And I should see that menu item number 1 is so-called "second_item"
   And I should see that menu item number 2 is so-called "third_item"
