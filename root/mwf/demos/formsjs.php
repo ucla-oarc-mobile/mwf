@@ -54,14 +54,14 @@ echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Required & Tooltip Form')
         ->add_paragraph('This form demonstrates client-side required validation. Note that required validation does not work with checkbox or radio.')
-        ->add_text('input-1', 'Text', true)
+        ->add_text('input-1', 'Text', array('required' => true))
         ->add_checkboxes('checkbox-group-1', 'Checkbox',
                 array(
                         array('id' => 'checkbox-1', 'label' => 'One', 'value' => 1),
                         array('id' => 'checkbox-2', 'label' => 'Two', 'value' => 2),
                         array('id' => 'checkbox-3', 'label' => 'Three', 'value' => 3)
                 ),
-                true
+                array('required' => true)
           )
         ->add_select('select-group-1', 'Select',
                 array(
@@ -69,12 +69,11 @@ echo Site_Decorator::form()
                         array('label' => 'Two', 'value' => 2),
                         array('label' => 'Three', 'value' => 3)
                 ),
-                false,
-                true
+                array('required' => true)
           )
-        ->add_textarea('textarea-1', 'Textarea', true)
-        ->add_text('input-2', 'Tooltip', true, array('tooltip' => 'tooltip text'))
-        ->add_textarea('textarea-2', 'Tooltip with long label', true, array('tooltip' => 'A very very very very very very long tooltip text'))
+        ->add_textarea('textarea-1', 'Textarea', array('required' => true))
+        ->add_text('input-2', 'Tooltip', array('required' => true, 'tooltip' => 'tooltip text'))
+        ->add_textarea('textarea-2', 'Tooltip with long label', array('required' => true, 'tooltip' => 'A very very very very very very long tooltip text'))
         ->add_submit('Test Me')
         ->render();
 
@@ -83,28 +82,28 @@ echo Site_Decorator::form()
         ->set_padded()
         ->set_title('HTML5 Input Form')
         ->add_paragraph('This form demonstrates HTML5 input types, placeholder and various client side validation.')
-        ->add_text('input-10', 'Placeholder', true, array('placeholder' => 'Please enter text here'))
-        ->add_text('input-11', 'Required', true)
+        ->add_text('input-10', 'Placeholder', array('required' => true, 'placeholder' => 'Please enter text here'))
+        ->add_text('input-11', 'Required', array('required' => true))
         ->add_checkboxes('checkbox-group-10', 'Required Div',
                 array(
                         array('id' => 'checkbox-11', 'label' => 'One', 'value' => 1),
                         array('id' => 'checkbox-12', 'label' => 'Two', 'value' => 2),
                         array('id' => 'checkbox-13', 'label' => 'Three', 'value' => 3)
                 ),
-                true
+                array('required' => true)
           )
-        ->add_color('color-10', 'Color', true)
-        ->add_search('search-10', 'Search', true)
-        ->add_number('number-10', 'Number', 0, 10, 2, 4, true)
-        ->add_range('range-10', 'Range', 0, 100, 10, 40, true)
-        ->add_tel('tel-10', 'Telephone', true)
-        ->add_url('url-10', 'URL', true)
-        ->add_email('email-10', 'Email', true)
-        ->add_date('date-10', 'Date', '2010-01-01', '2015-12-31', 'now', true)
-        ->add_month('month-10', 'Month', '2010-01', '2015-12', '2012-02', true)
-        ->add_week('week-10', 'Week', '2010-W01', '2012-W01', '2011-W05', true)
-        ->add_datetime_local('datetime-10', 'Datetime Local', '2010-01-01 00:00:00', '2012-12-31 23:59:00', '2011-07-10 12:30:30', true)
-        ->add_time('time-10', 'Time', '05:05:05', '10:10:10', '07:07:07', true)
+        ->add_color('color-10', 'Color', array('required' => true))
+        ->add_search('search-10', 'Search', array('required' => true))
+        ->add_number('number-10', 'Number', 0, 10, array('step' => 2, 'selected' => 4, 'required' => true))
+        ->add_range('range-10', 'Range', 0, 100, array('step' => 10, 'selected' => 40, 'required' => true))
+        ->add_tel('tel-10', 'Telephone', array('required' => true))
+        ->add_url('url-10', 'URL', array('required' => true))
+        ->add_email('email-10', 'Email', array('required' => true))
+        ->add_date('date-10', 'Date', '2010-01-01', '2015-12-31', array('selected' => 'now', 'required' => true))
+        ->add_month('month-10', 'Month', '2010-01', '2015-12', array('selected' => '2012-02', 'required' => true))
+        ->add_week('week-10', 'Week', '2010-W01', '2012-W01', array('selected' => '2011-W05', 'required' => true))
+        ->add_datetime_local('datetime-10', 'Datetime Local', '2010-01-01 00:00:00', '2012-12-31 23:59:00', array('selected' => '2011-07-10 12:30:30', 'required' => true))
+        ->add_time('time-10', 'Time', '05:05:05', '10:10:10', array('selected' => '07:07:07', 'required' => true))
         ->add_submit('Test Me')
         ->render();
 

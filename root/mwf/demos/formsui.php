@@ -75,8 +75,7 @@ echo Site_Decorator::form()
                         array('id' => 'radio-2', 'label' => 'Two', 'value' => 2),
                         array('id' => 'radio-3', 'label' => 'Three', 'value' => 3)
                 ),
-                false,
-                'right'
+                array('align' => 'right')
           )
         ->add_radios('radio-group-2', 'Label for Justify Aligned Radio',
                 array(
@@ -84,8 +83,7 @@ echo Site_Decorator::form()
                         array('id' => 'radio-5', 'label' => 'Two', 'value' => 2),
                         array('id' => 'radio-6', 'label' => 'Three', 'value' => 3)
                 ),
-                false,
-                'justify'
+                array('align' => 'justify')
           )
         ->render();
 
@@ -125,14 +123,14 @@ echo Site_Decorator::form()
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Required Form')
-        ->add_text('text-10', 'Name', true)
+        ->add_text('text-10', 'Name', array('required' => true))
         ->add_checkboxes('checkbox-group-10', 'Checkbox',
                 array(
                         array('id' => 'checkbox-11', 'label' => 'One', 'value' => 1),
                         array('id' => 'checkbox-12', 'label' => 'Two', 'value' => 2),
                         array('id' => 'checkbox-13', 'label' => 'Three', 'value' => 3)
                 ),
-                true
+                array('required' => true)
           )
         ->add_select('select-group-10', 'Select',
                 array(
@@ -140,26 +138,23 @@ echo Site_Decorator::form()
                         array('label' => 'Two', 'value' => 2),
                         array('label' => 'Three', 'value' => 3)
                 ),
-                false,
-                true
+                array('required' => true)
           )
-        ->add_textarea('textarea-10', 'Textarea', true)
+        ->add_textarea('textarea-10', 'Textarea', array('required' => true))
         ->render();
 
 /* invalid form */
 echo Site_Decorator::form()
         ->set_padded()
-        ->set_title('Required Form')
-        ->add_text('text-20', 'Name', true, array('invalid' => 'Error messager goes here'))
+        ->set_title('Invalid Form')
+        ->add_text('text-20', 'Name', array('required' => true, 'invalid' => 'Error messager goes here'))
         ->add_checkboxes('checkbox-group-20', 'Checkbox',
                 array(
                         array('id' => 'checkbox-21', 'label' => 'One', 'value' => 1),
                         array('id' => 'checkbox-22', 'label' => 'Two', 'value' => 2),
                         array('id' => 'checkbox-23', 'label' => 'Three', 'value' => 3)
                 ),
-                true,
-                'left',
-                array('invalid' => 'Error messager goes here')
+                array('required' => true, 'invalid' => 'Error messager goes here')
           )
         ->add_select('select-group-20', 'Select',
                 array(
@@ -167,26 +162,22 @@ echo Site_Decorator::form()
                         array('label' => 'Two', 'value' => 2),
                         array('label' => 'Three', 'value' => 3)
                 ),
-                false,
-                true,
-                array('invalid' => 'Error messager goes here')
+                array('required' => true, 'invalid' => 'Error messager goes here')
           )
-        ->add_textarea('textarea-20', 'Textarea', true,  array('invalid' => 'Error messager goes here'))
+        ->add_textarea('textarea-20', 'Textarea', array('required' => true, 'invalid' => 'Error messager goes here'))
         ->render();
 
 /* disabled form */
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Disabled Form')
-        ->add_text('text-30', 'Name', true, array('disabled' => true))
+        ->add_text('text-30', 'Name', array('disabled' => true))
         ->add_checkboxes('checkbox-group-30', 'Checkbox',
                 array(
                         array('id' => 'checkbox-31', 'label' => 'One', 'value' => 1),
                         array('id' => 'checkbox-32', 'label' => 'Two', 'value' => 2),
                         array('id' => 'checkbox-33', 'label' => 'Three', 'value' => 3)
                 ),
-                true,
-                'left',
                 array('disabled' => true)
           )
         ->add_select('select-group-30', 'Select',
@@ -195,11 +186,9 @@ echo Site_Decorator::form()
                         array('label' => 'Two', 'value' => 2),
                         array('label' => 'Three', 'value' => 3)
                 ),
-                false,
-                true,
                 array('disabled' => true)
           )
-        ->add_textarea('textarea-30', 'Textarea', true,  array('disabled' => true))
+        ->add_textarea('textarea-30', 'Textarea', array('disabled' => true))
         ->render();
 
 /* not padded form */
