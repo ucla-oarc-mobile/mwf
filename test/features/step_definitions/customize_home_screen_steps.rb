@@ -40,3 +40,7 @@ end
 And /^I go back$/ do
   evaluate_script('window.history.back()')
 end
+
+And /^I reload$/ do
+  evaluate_script('window.location.reload()')
+end
