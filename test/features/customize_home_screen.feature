@@ -9,7 +9,7 @@ Scenario: Remove an item
   Then I should see the home page
   And I note the name of menu item number 3, let's call it "third_item"
   Then I click the "Customize Home Screen" link
-  And the "Home Screen Customization" page loads
+  And the "Customize Home Screen" page loads
   Then I uncheck so-called "third_item"
   And I go back
   And I reload
@@ -24,7 +24,7 @@ Scenario: Move items
   And I note the name of menu item number 2, let's call it "second_item"
   And I note the name of menu item number 3, let's call it "third_item"
   Then I click the "Customize Home Screen" link
-  And the "Home Screen Customization" page loads
+  And the "Customize Home Screen" page loads
   Then I click "Down" for so-called "first_item"
   And I click "Up" for so-called "third_item"
   And I go back

@@ -26,7 +26,7 @@ Then /I click the "([^"]*)" button/ do |button_text|
 end
 
 And /the "([^"]*)" page loads/ do |header_text|
-  should have_content(header_text)
+  find('h1').should have_content(header_text)
 end
 
 Then /I uncheck so-called "([^"]*)"/ do |item|

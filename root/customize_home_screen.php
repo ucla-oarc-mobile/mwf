@@ -68,9 +68,10 @@ if (Classification::is_full()) {
 
     $js = 'var apps=' . json_encode($apps_rendered) . ';var disabledApps=' . json_encode($disabled_apps_rendered) . ';';
 
-    echo Site_Decorator::form(false, array('class'=>'short'))
+    echo Site_Decorator::form('Customize Home Screen')
+            ->set_short()
             ->set_padded()
-            ->set_title('Home Screen Customization')
+            ->add_paragraph('Changes are saved automatically.')
             ->add_inner_tag('div', '', array('class' => 'option', 'id' => 'app_order'))
             ->render();
 
