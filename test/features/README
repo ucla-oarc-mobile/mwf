@@ -39,10 +39,3 @@ RUNNING THE TESTS:
 * In mwf/test directory:
 
   cucumber
-
-
-NOTE:
-
-Unfortunately, there appears to be no easy way to instruct Cucumber/Capybara/Selenium/iWebDriver
-that the Simulator should accept the Geolocation popup, so that portion of the interaction
-must be handled manually.

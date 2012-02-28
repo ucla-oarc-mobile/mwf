@@ -4,11 +4,6 @@ Given /I am on the JS Unit Tests page/ do
   @results = find_by_id('qunit-testresult')
 end
 
-When /I accept the popup/ do
-  # Alas, no way to automate this in iPhone Driver at the current time
-  true
-end
-
 Then /I should see that all tests have passed/ do
   total = @results.find('.total').text
   passed = @results.find('.passed').text
