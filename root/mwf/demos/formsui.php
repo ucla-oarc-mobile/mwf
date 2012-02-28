@@ -47,160 +47,170 @@ echo Site_Decorator::content()
 ?>
 
 <!-- short form -->
-<form action="#" method="post" class="short padded">
-    <h1>Short Form</h1>
-    <label for="input-1">Name</label>
-    <input type="text" id="input-1" name="input-1" />
-    <input type="submit" class="primary" value="Submit"/>
-</form>
 
-<!-- options -->
-<form action="#" method="post" class="padded">
-    <h1>Option Form</h1>
-    <label>Checkbox</label>
-    <div class="option">
-        <input type="checkbox" id="checkbox-1" name="checkbox-1" />
-        <label for="checkbox-1">One</label><br />
-        <input type="checkbox" id="checkbox-2" name="checkbox-2" />
-        <label for="checkbox-2">Two</label><br />
-        <input type="checkbox" id="checkbox-3" name="checkbox-3" />
-        <label for="checkbox-3">Three</label>
-    </div>
-    <label>Right Aligned Radio</label>
-    <div class="option right">
-        <label for="radio-1">One</label>
-        <input type="radio" id="radio-1" name="radio-1" /><br />
-        <label for="radio-2">Two</label>
-        <input type="radio" id="radio-2" name="radio-2" /><br />
-        <label for="radio-3">Three</label>
-        <input type="radio" id="radio-3" name="radio-3" />
-    </div>
-    <label>Justify Aligned Radio</label>
-    <div class="option justify">
-        <label for="radio-4">One</label>
-        <input type="radio" id="radio-4" name="radio-4" /><br />
-        <label for="radio-5">Two</label>
-        <input type="radio" id="radio-5" name="radio-5" /><br />
-        <label for="radio-6">Three</label>
-        <input type="radio" id="radio-6" name="radio-6" />
-    </div>
-</form>
+<?php
+/* short form */
+echo Site_Decorator::form()
+        ->set_padded()
+        ->set_short()
+        ->set_title('Short Form')
+        ->add_text('text-1', 'Name')
+        ->add_submit()
+        ->render();
 
-<!-- button -->
-<form class="padded" action="#" method="post">
-    <h1>Full Button Form</h1>
-    <input type="submit" value="Primary Button" class="primary" >
-    <input type="submit" value="Secondary Button" class="secondary">
-    <input type="reset" value="Neutral Button" class="neutral">
-    <a href="#" class="button primary">Primary Link</a>
-    <a href="#" class="button secondary">Secondary Link</a>
-    <a href="#" class="button neutral">Neutral Link</a>
-</form>
+/* option form */
+echo Site_Decorator::form()
+        ->set_padded()
+        ->set_title('Option Form')
+        ->add_checkboxes('checkbox-group-1', 'Label for Checkbox',
+                array(
+                        array('id' => 'checkbox-1', 'label' => 'One', 'value' => 1),
+                        array('id' => 'checkbox-2', 'label' => 'Two', 'value' => 2),
+                        array('id' => 'checkbox-3', 'label' => 'Three', 'value' => 3)
+                )
+          )
+        ->add_radios('radio-group-1', 'Label for Right Aligned Radio',
+                array(
+                        array('id' => 'radio-1', 'label' => 'One', 'value' => 1),
+                        array('id' => 'radio-2', 'label' => 'Two', 'value' => 2),
+                        array('id' => 'radio-3', 'label' => 'Three', 'value' => 3)
+                ),
+                array('align' => 'right')
+          )
+        ->add_radios('radio-group-2', 'Label for Justify Aligned Radio',
+                array(
+                        array('id' => 'radio-4', 'label' => 'One', 'value' => 1),
+                        array('id' => 'radio-5', 'label' => 'Two', 'value' => 2),
+                        array('id' => 'radio-6', 'label' => 'Three', 'value' => 3)
+                ),
+                array('align' => 'justify')
+          )
+        ->render();
 
-<!-- textarea -->
-<form action="#" method="post" class="padded">
-    <h1>Textarea Form</h1>
-    <label for="textarea-1">Label for Text Area 1</label>
-    <textarea id="textarea-1" name="textarea-1"></textarea>
-</form>
+/* full button form */
+echo Site_Decorator::form()
+        ->set_padded()
+        ->set_title('Full Button Form')
+        ->add_primary_button('Primary Button')
+        ->add_secondary_button('Secondary Button', 'secondary')
+        ->add_button('Neutral Button', 'neutral')
+        ->add_primary_link_button('Primary Link', 'primary')
+        ->add_secondary_link_button('Secondary Link', 'secondary')
+        ->add_link_button('Neutral Link', 'neutral')
+        ->render();
 
-<!-- select -->
-<form action="#" method="post" class="padded">
-    <h1>Select Form</h1>
-    <label for="select-1">Label for Select 1</label>
-    <select id="select-1" name="select-1">
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-    </select>
-</form>
+/* textarea form */
+echo Site_Decorator::form()
+        ->set_padded()
+        ->set_title('Textarea Form')
+        ->add_textarea('textarea-1', 'Label for Textarea 1')
+        ->render();
 
-<!-- required -->
-<form action="#" method="post" class="padded">
-    <h1>Required Form</h1>
-    <label for="input-10" class="required">Name</label>
-    <input type="text" id="input-10" name="input-10" />
-    <label class="required">Choice</label>
-    <div class="option">
-        <input type="checkbox" id="checkbox-10" name="checkbox-10" />
-        <label for="checkbox-10">One</label><br />
-        <input type="checkbox" id="checkbox-11" name="checkbox-11" />
-        <label for="checkbox-11">Two</label><br />
-        <input type="checkbox" id="checkbox-12" name="checkbox-12" />
-        <label for="checkbox-12">Three</label>
-    </div>
-    <label for="select-10" class="required">Status</label>
-    <select id="select-10" name="select-10">
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-    </select>
-    <label for="textarea-10" class="required">Comment</label>
-    <textarea id="textarea-10" name="textarea-10"></textarea>
-</form>
+/* select form */
+echo Site_Decorator::form()
+        ->set_padded()
+        ->set_title('Select Form')
+        ->add_select('select-group-1', 'Label for Select',
+                array(
+                        array('label' => 'One', 'value' => 1),
+                        array('label' => 'Two', 'value' => 2),
+                        array('label' => 'Three', 'value' => 3)
+                )
+          )
+        ->render();
 
-<!-- invalid -->
-<form action="#" method="post" class="padded">
-    <h1>Invalid Form</h1>
-    <label for="input-11" class="invalid required">Name</label>
-    <input type="text" id="input-11" name="input-11" class="invalid" />
-    <p class="invalid">This field is required</p>
-    <label class="invalid required">Choice</label>
-    <div class="option">
-        <input type="checkbox" id="checkbox-13" name="checkbox-13" class="invalid" />
-        <label for="checkbox-13" class="invalid">One</label><br />
-        <input type="checkbox" id="checkbox-14" name="checkbox-14" class="invalid"/>
-        <label for="checkbox-14"class="invalid">Two</label><br />
-        <input type="checkbox" id="checkbox-15" name="checkbox-15" class="invalid"/>
-        <label for="checkbox-15"class="invalid">Three</label>
-    </div>
-    <p class="invalid">This field is required</p>
-    <label for="select-11" class="invalid required">Status</label>
-    <select id="select-11" name="select-11" class="invalid">
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-    </select>
-    <p class="invalid">This field is required</p>
-    <label for="textarea-11" class="invalid required">Comment</label>
-    <textarea id="textarea-11" name="textarea-11" class="invalid"></textarea>
-    <p class="invalid">This field is required</p>
-</form>
+/* required form */
+echo Site_Decorator::form()
+        ->set_padded()
+        ->set_title('Required Form')
+        ->add_text('text-10', 'Name', array('required' => true))
+        ->add_checkboxes('checkbox-group-10', 'Checkbox',
+                array(
+                        array('id' => 'checkbox-11', 'label' => 'One', 'value' => 1),
+                        array('id' => 'checkbox-12', 'label' => 'Two', 'value' => 2),
+                        array('id' => 'checkbox-13', 'label' => 'Three', 'value' => 3)
+                ),
+                array('required' => true)
+          )
+        ->add_select('select-group-10', 'Select',
+                array(
+                        array('label' => 'One', 'value' => 1),
+                        array('label' => 'Two', 'value' => 2),
+                        array('label' => 'Three', 'value' => 3)
+                ),
+                array('required' => true)
+          )
+        ->add_textarea('textarea-10', 'Textarea', array('required' => true))
+        ->render();
 
-<!-- disabled -->
-<form action="#" method="post" class="padded">
-    <h1>Disabled Form</h1>
-    <label for="input-12" class="required">Name</label>
-    <input type="text" id="input-12" name="input-12" disabled="disabled"/>
-    <label class="required">Choice</label>
-    <div class="option">
-        <input type="checkbox" id="checkbox-10" name="checkbox-10" disabled="disabled"/>
-        <label for="checkbox-16">One</label><br />
-        <input type="checkbox" id="checkbox-11" name="checkbox-11" disabled="disabled"/>
-        <label for="checkbox-17">Two</label><br />
-        <input type="checkbox" id="checkbox-12" name="checkbox-12" disabled="disabled"/>
-        <label for="checkbox-18">Three</label>
-    </div>
-    <label for="select-12" class="required">Status</label>
-    <select id="select-10" name="select-10" disabled="disabled">
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-    </select>
-    <label for="textarea-12" class="required">Comment</label>
-    <textarea id="textarea-12" name="textarea-10" disabled="disabled"></textarea>
-    <input type="submit" class="primary" value="Disabled" disabled="disabled">
-    <input type="reset" class="secondary" value="Disabled" disabled="disabled">
-    <a class="button disabled">Disabled</a>
-</form>
+/* invalid form */
+echo Site_Decorator::form()
+        ->set_padded()
+        ->set_title('Invalid Form')
+        ->add_text('text-20', 'Name', array('required' => true, 'invalid' => 'Error messager goes here'))
+        ->add_checkboxes('checkbox-group-20', 'Checkbox',
+                array(
+                        array('id' => 'checkbox-21', 'label' => 'One', 'value' => 1),
+                        array('id' => 'checkbox-22', 'label' => 'Two', 'value' => 2),
+                        array('id' => 'checkbox-23', 'label' => 'Three', 'value' => 3)
+                ),
+                array('required' => true, 'invalid' => 'Error messager goes here')
+          )
+        ->add_select('select-group-20', 'Select',
+                array(
+                        array('label' => 'One', 'value' => 1),
+                        array('label' => 'Two', 'value' => 2),
+                        array('label' => 'Three', 'value' => 3)
+                ),
+                array('required' => true, 'invalid' => 'Error messager goes here')
+          )
+        ->add_textarea('textarea-20', 'Textarea', array('required' => true, 'invalid' => 'Error messager goes here'))
+        ->render();
 
-<!-- not-padded -->
-<form action="#" method="post">
-    <h1 class="first">Not Padded Form</h1>
-    <label for="input-99">Label 99</label>
-    <input type="text" id="input-99" name="input-99">
-    <input type="submit" value="Search" class="primary">
-</form>
+/* disabled form */
+echo Site_Decorator::form()
+        ->set_padded()
+        ->set_title('Disabled Form')
+        ->add_text('text-30', 'Name', array('disabled' => true))
+        ->add_checkboxes('checkbox-group-30', 'Checkbox',
+                array(
+                        array('id' => 'checkbox-31', 'label' => 'One', 'value' => 1),
+                        array('id' => 'checkbox-32', 'label' => 'Two', 'value' => 2),
+                        array('id' => 'checkbox-33', 'label' => 'Three', 'value' => 3)
+                ),
+                array('disabled' => true)
+          )
+        ->add_select('select-group-30', 'Select',
+                array(
+                        array('label' => 'One', 'value' => 1),
+                        array('label' => 'Two', 'value' => 2),
+                        array('label' => 'Three', 'value' => 3)
+                ),
+                array('disabled' => true)
+          )
+        ->add_textarea('textarea-30', 'Textarea', array('disabled' => true))
+        ->render();
+
+/* not padded form */
+echo Site_Decorator::form()
+        ->set_title('Not Padded Form')
+        ->add_text('text-100', 'Label')
+        ->add_submit('Search')
+        ->render();
+
+
+/* prototype 0 */
+echo Site_Decorator::form()
+        ->set_padded()
+        ->set_title('Prototype 0')
+        ->add_subtitle('Subtitle')
+        ->add_paragraph('A content bo with paragraph content')
+        ->add_section('<p>One of multiple paragraphs defined within one content box(div).</p><p>Another of multiple paragraphs defined within one content box(div).</p>')
+        ->add_fieldset('<p>One of multiple paragraphs defined within one content box(fieldset).</p><p>Another of multiple paragraphs defined within one content box(fieldset).</p>')
+        ->add_submit('Submit')
+        ->render();
+
+?>
 
 <!-- prototype 1 -->
 <form class="padded" action="#" method="post">
