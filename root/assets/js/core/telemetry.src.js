@@ -21,7 +21,7 @@
     var written = false;
     
     /**
-     * Telemetry-writing function attached onDOMContentLoaded and onLoad. The
+     * Telemetry-writing function attached onDOMContentLoaded and onLoad.
      */
     var writer = function(){
         
@@ -125,7 +125,7 @@
     /**
      * Attaches the writer to the window onLoad to execute when the DOM content 
      * has fully loaded. Initially this also supported DOMContentLoaded, but
-     * there were Mozilla has issues with document.body as null.
+     * Mozilla has issues with document.body as null.
      */
     
     if(window.addEventListener) {

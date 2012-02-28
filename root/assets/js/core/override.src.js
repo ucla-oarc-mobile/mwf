@@ -8,9 +8,9 @@
  * @subpackage js
  *
  * @author ebollens
- * @copyright Copyright (c) 2010-11 UC Regents
+ * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111213
+ * @version 20120224
  *
  * @requires mwf
  * @requires mwf.site
@@ -51,12 +51,11 @@ mwf.override = new function(){
         
         
         /**
-         * If no support for cookies, then set isOverride false, since override
-         * requires a cookie, and then return early from this initialization.
+         * If no support for cookies, then return early since override requires
+         * a cookie.
          */
         if(!mwf.capability.cookie()) {
             
-            classification.isOverride = function(){ return false; }
             return false;
             
         }
@@ -135,12 +134,11 @@ mwf.override = new function(){
     }
     
     /**
-     * If no current override, then set mwf.classification.isOverride() to a 
-     * false response and exit early - no need to define the wasX methods.
+     * If no current override, then exit early - no need to define the wasX 
+     * methods.
      */
     if(!currentOverride) {
     
-        classification.isOverride = function(){return false;};
         return;
         
     }

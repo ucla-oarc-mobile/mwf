@@ -11,7 +11,7 @@
  * @author trott
  * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120208
+ * @version 20120226
  *
  * @uses JS_Vars_Helper
  */
@@ -148,6 +148,10 @@ mwf.site=new function(){
     
     this.redirect=function(target){
         window.location=target;
+    };
+    
+    this.reload=function(){
+        document.location.reload();
     };
 
     // Deprecated

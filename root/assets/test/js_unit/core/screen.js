@@ -30,6 +30,22 @@ test("mwf.screen.getWidth()", function()
     }
 });
 
+test("mwf.screen.getWidth() on android 2.2 is false", function()
+{
+    var oldGetOS = mwf.userAgent.getOS;
+    var oldGetOSVersion = mwf.userAgent.getOSVersion;
+    mwf.userAgent.getOS = function() {
+        return 'android';
+    };
+    mwf.userAgent.getOSVersion = function() {
+        return '2.2.';
+    };
+    var androidScreen = new mwf.screen.constructor();
+    equal(androidScreen.getWidth(),false,"screen width cannot be determine reliably in Android 2.2");
+    mwf.userAgent.getOS = oldGetOS;
+    mwf.userAgent.getOSVersion = oldGetOSVersion;
+})
+
 test("mwf.screen.getHeight()", function()
 {
     expect(2); 

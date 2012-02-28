@@ -117,14 +117,7 @@ mwf.capability=new function(){
      * @return bool
      */
     this.cookie = function(){
-        if(_cookie === null){
-            _cookie = (navigator.cookieEnabled && typeof document.cookie != 'undefined') ? true : false
-            if (!_cookie){ 
-                document.cookie= mwf.site.cookie.prefix+'test';
-                _cookie = (document.cookie.indexOf(+mwf.site.cookie.prefix+'test') != -1) ? true : false;
-            }
-        }
-        return _cookie;
+        return _m.cookies;
     }
     
     /**

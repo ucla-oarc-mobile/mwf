@@ -53,11 +53,44 @@ test("mwf.classification.get()", function()
     ok(acceptableValues.indexOf(get) > -1, 'get() sould return "full", "standard" or "basic": ' + get);
 });
 
+test('mwf.classification.get() and isFull() should return "full"', function()
+{
+    mwf.classification.isFull = function() { return true; };
+    equal(mwf.classification.get(), 'full', 'get() should return "full" if isFull() is true');
+});
+
+test('mwf.classification.get(), ! isFull(), and isStandard(); should return "standard"', function()
+{
+    mwf.classification.isFull = function() { return false; };
+    mwf.classification.isStandard = function() { return true; };
+    equal(mwf.classification.get(), 'standard', 'get() should return "standard" if isFull() is false and isStandard() is true');
+});
+
+test('mwf.classificationget(), ! isFull(), and ! isStandard(); should return "basic"', function()
+{
+    mwf.classification.isFull = function() { return false; };
+    mwf.classification.isStandard = function() { return false; };
+    equal(mwf.classification.get(), 'basic', 'get() should return "basic" if isFull(0 is false and isStandard() is false');
+});
+
 test("mwf.classification.generateCookieContent()", function()
 {   
     var re = /^\{\"mobile\":(true|false),\"basic\":(true|false),\"standard\":(true|false),\"full\":(true|false),\"native\":(true|false)\}$/;
     var cookie = mwf.classification.generateCookieContent();
     ok(re.exec(cookie), 'cookie should be in expected format');
+});
+
+test("mwf.classification.generateCookieContent() with override", function()
+{
+   mwf.classification.isOverride = function() { return true; }
+   mwf.classification.wasMobile = function() { return false; }
+   mwf.classification.wasBasic = function() { return false; }
+   mwf.classification.wasStandard = function() { return false; }
+   mwf.classification.wasFull = function() { return false; }
+   mwf.classification.wasNative = function() { return true; }
+   var re = /^\{\"mobile\":(true|false),\"basic\":(true|false),\"standard\":(true|false),\"full\":(true|false),\"native\":(true|false),\"actual\":{\"mobile\":false,\"basic\":false,\"standard\":false,\"full\":false,\"native\":true\}\}$/;
+   var cookie = mwf.classification.generateCookieContent();
+   ok(re.exec(cookie), 'cookie should be in expected format: ' + cookie);
 });
 
 test("mwf.classification.isNative()", function()

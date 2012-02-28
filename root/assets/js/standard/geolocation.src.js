@@ -8,6 +8,8 @@
  *   mwf.touch.geolocation.getCurrentPosition(onSuccessCallback, onFailureCallback) -> [['latitude']=>decimal, ['longitude']=>decimal, ['accuracy']=>decimal]
  *   mwf.touch.geolocation.watchPosition(onSuccessCallback, onFailureCallback) -> [['latitude']=>decimal, ['longitude']=>decimal, ['accuracy']=>decimal]
  *   mwf.touch.geolocation.clearWatch(watchID)
+ *   
+ *   @todo: For 2.0, do not return lat,long,accuracy.  Return the position object in its entirety instead.
  */
 
 mwf.touch.geolocation = new function()
@@ -40,14 +42,17 @@ mwf.touch.geolocation = new function()
     //the device to try to obtain a Geo location.
     var geoTimeout = 5000;
     
+    /**
+     * @deprecated (should be a private or protected method)
+     */
     this.getType = function()
     {
         if(type < 0)
             type = navigator.geolocation
-                   ? 1
-                   : google.gears
-                     ? 2
-                     : 0;
+            ? 1
+            : typeof google != 'undefined' && google.gears
+            ? 2
+            : 0;
         return type;
     }
 
@@ -55,12 +60,18 @@ mwf.touch.geolocation = new function()
     {
         switch(this.getType())
         {
-            case 1: return 'HTML5 Geolocation';
-            case 2: return 'Google Gears';
-            default: return 'Unsupported';
+            case 1:
+                return 'HTML5 Geolocation';
+            case 2:
+                return 'Google Gears';
+            default:
+                return 'Unsupported';
         }
     }
     
+    /**
+     * @deprecated (should be a private or protected method)
+     */
     this.getApi = function()
     {
         switch(this.getType())
@@ -108,11 +119,15 @@ mwf.touch.geolocation = new function()
             }, function(error) {
                 if(typeof onError != 'undefined') {
                     var errorMsg = error.code == error.PERMISSION_DENIED ?
-                        ERROR_MESSAGE.PERMISSION_DENIED : ERROR_MESSAGE.GENERAL;
+                    ERROR_MESSAGE.PERMISSION_DENIED : ERROR_MESSAGE.GENERAL;
                     onError(errorMsg);
                 }         
             },
-            {enableHighAccuracy:highAccuracy, maximumAge:timeout, timeout: geoTimeout});
+            {
+                enableHighAccuracy:highAccuracy, 
+                maximumAge:timeout, 
+                timeout: geoTimeout
+            });
 
         return;
     }
@@ -141,7 +156,11 @@ mwf.touch.geolocation = new function()
                     onError(error);
                 }         
             },
-            {enableHighAccuracy:highAccuracy, maximumAge:timeout, timeout: geoTimeout});
+            {
+                enableHighAccuracy:highAccuracy, 
+                maximumAge:timeout, 
+                timeout: geoTimeout
+            });
 
         return;
     }
@@ -182,7 +201,7 @@ mwf.touch.geolocation = new function()
                 maximumAge: timeout,
                 timeout: geoTimeout
             }
-        );
+            );
         
         return watchID;
     }
@@ -191,13 +210,8 @@ mwf.touch.geolocation = new function()
     {
         var geo = this.getApi();
         
-        if(geo === null)
-        {
-            // If geolocation is not supported, silently fail
-            return;
-        }
-        
-        geo.clearWatch(watchID);
+        if(geo !== null)
+            geo.clearWatch(watchID);
     }
 
     this.setTimeout = function(ms)

@@ -5,6 +5,5 @@ Feature: JS Unit Tests
 
 Scenario: JS Unit Tests
   Given I am on the JS Unit Tests page
-  And I accept the popup
   Then I should see that all tests have passed
   And I should see that no tests have failed
