@@ -35,7 +35,7 @@ Config::set('frontpage', 'header_image_main', Config::get('global', 'site_assets
 Config::set('frontpage', 'header_image_main_alt', 'MWF');
 Config::set('frontpage', 'header_image_sub_alt', 'MWF');
 Config::set('frontpage', 'header_image_sub', Config::get('global', 'site_assets_url').'/img/mwf-header.gif');
-Config::set('frontpage', 'header_main_text', 'UCLA Mobile Web Framework');
+Config::set('frontpage', 'header_main_text', 'Mobile Web Framework');
 
 
 /**

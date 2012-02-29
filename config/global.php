@@ -68,7 +68,7 @@ Config::set('global', 'copyright_text',             'University of California &c
 Config::set('global', 'header_home_button',         Config::get('global', 'site_assets_url').'/img/mwf-header.gif');
 Config::set('global', 'header_home_button_alt',     'MWF');
 Config::set('global', 'language',                   false);
-Config::set('global', 'title_text',                 'UCLA MWF');
+Config::set('global', 'title_text',                 'MWF');
 
 /******************************************************************
  *
