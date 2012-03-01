@@ -47,9 +47,9 @@ class Menu_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function render_quotesInUrlParam_quotesNotReplacedWithEntities() {
+    public function render_quotesInUrlParam_quotesReplacedWithEntities() {
         $this->object->add_item('test', 'http://www.example.com/test?"foo"\'bar\'');
-        $this->assertContains('http://www.example.com/test?"foo"\'bar\'', $this->object->render());
+        $this->assertContains('http://www.example.com/test?&quot;foo&quot;\'bar\'', $this->object->render());
     }
 }
 ?>
