@@ -44,7 +44,7 @@ mwf.full.ConfigurableMenu=function(prefsKey){
      * @param menuItems object|array
      * @param disabledMenuItems object|array
      * 
-     * @return null
+     * @return undefined
      */
     
     this.render = function(targetId, menuItems, disabledMenuItems){
