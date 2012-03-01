@@ -45,31 +45,4 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
         $this->object->set_title('Totally Legit Title');
         $this->assertContains('<h1>Totally Legit Title</h1>', $this->object->render());
     }
-
-    /**
-     * @test
-     * @runInSeparateProcess
-     */
-    public function render_checkbox_checkbox() {
-        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))))) . '/root/assets/lib/decorator/site/form.class.php';
-        
-        $this->object = new Form_Site_Decorator;
-        
-        $this->object->add_checkbox('foo','');
-        $this->assertContains('<input type="checkbox" id="foo" name="foo"', $this->object->render());
-    }
-    
-    /**
-     * @test
-     * @runInSeparateProcess
-     */
-    public function render_checkboxWithLabel_checkboxWithLabel() {
-        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))))) . '/root/assets/lib/decorator/site/form.class.php';
-        
-        $this->object = new Form_Site_Decorator;
-        
-        $this->object->add_checkbox('foo','Foo & Bar!');
-        $this->assertContains('<label for="foo">Foo &amp; Bar!</label>', $this->object->render());
-    }
-
 }

@@ -4,10 +4,11 @@
  * @package decorator
  * @subpackage site_decorator
  *
- * @author trott ilin
+ * @author ilin
+ * @author trott
  * @copyright Copyright (c) 2012 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120221
+ * @version 20120301
  *
  * @uses Decorator
  * @uses Tag_HTML_Decorator
@@ -63,7 +64,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $val Defaults to true.
      * @return \Form_Site_Decorator 
      */
-    public function &set_padded($val = true) {
+    public function set_padded($val = true) {
         $this->_padded = $val ? true : false;
         return $this;
     }
@@ -74,7 +75,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $val Defaults to true.
      * @return \Form_Site_Decorator 
      */
-    public function &set_short($val = true) {
+    public function set_short($val = true) {
         $this->_short = $val ? true : fasle;
         return $this;
     }
@@ -86,7 +87,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optional params array.  Possible values include 'class' => 'blue'.
      * @return \Form_Site_Decorator 
      */
-    public function &set_title($inner, $params = array()) {
+    public function set_title($inner, $params = array()) {
         $this->_title = $inner === false ? false : HTML_Decorator::tag('h1', $inner, $params);
         return $this;
     }
@@ -98,7 +99,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params
      * @return \Form_Site_Decorator 
      */
-    public function &add_subtitle($inner, $params = array()) {
+    public function add_subtitle($inner, $params = array()) {
         $this->_form_elements[] = HTML_Decorator::tag('h4', $inner, $params);
         return $this;
     }
@@ -110,7 +111,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params
      * @return \Form_Site_Decorator 
      */
-    public function &add_paragraph($inner, $params = array()) {
+    public function add_paragraph($inner, $params = array()) {
         $this->_form_elements[] = HTML_Decorator::tag('p', $inner, $params);
         return $this;
     }
@@ -122,7 +123,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params
      * @return \Form_Site_Decorator 
      */
-    public function &add_section($inner, $params = array()) {
+    public function add_section($inner, $params = array()) {
         $this->_form_elements[] = HTML_Decorator::tag('div', $inner, $params);
         return $this;
     }
@@ -134,7 +135,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params
      * @return \Form_Site_Decorator 
      */
-    public function &add_fieldset($inner, $params = array()) {
+    public function add_fieldset($inner, $params = array()) {
         $this->_form_elements[] = HTML_Decorator::tag('fieldset', $inner, $params);
         return $this;
     }
@@ -147,7 +148,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
      * @return type 
      */
-    public function &add_text($id = false, $label = false, $params = array()) {
+    public function add_text($id = false, $label = false, $params = array()) {
         return $this->add_input_helper($id, $label, 'text', $params);
     }
 
@@ -159,7 +160,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
      * @return type 
      */
-    public function &add_color($id = false, $label = false, $params = array()) {
+    public function add_color($id = false, $label = false, $params = array()) {
         return $this->add_input_helper($id, $label, 'color-field', $params);
     }
 
@@ -171,7 +172,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
      * @return type 
      */
-    public function &add_search($id = false, $label = false, $params = array()) {
+    public function add_search($id = false, $label = false, $params = array()) {
         return $this->add_input_helper($id, $label, 'search-field', $params);
     }
 
@@ -183,7 +184,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
      * @return type 
      */
-    public function &add_tel($id = false, $label = false, $params = array()) {
+    public function add_tel($id = false, $label = false, $params = array()) {
         return $this->add_input_helper($id, $label, 'tel-field', $params);
     }
 
@@ -195,7 +196,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
      * @return type 
      */
-    public function &add_url($id = false, $label = false, $params = array()) {
+    public function add_url($id = false, $label = false, $params = array()) {
         return $this->add_input_helper($id, $label, 'url-field', $params);
     }
 
@@ -207,7 +208,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
      * @return type 
      */
-    public function &add_email($id = false, $label = false, $params = array()) {
+    public function add_email($id = false, $label = false, $params = array()) {
         return $this->add_input_helper($id, $label, 'email-field', $params);
     }
 
@@ -220,7 +221,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param string $params
      * @return \Form_Site_Decorator 
      */
-    private function &add_input_helper($id, $label, $field, $params) {
+    private function add_input_helper($id, $label, $field, $params) {
         $id = htmlspecialchars($id);
         $label = htmlspecialchars($label);
         $field = htmlspecialchars($field);
@@ -258,7 +259,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optional parameters.  Possible values include 'selected' => '2012-12-31', disabled' => true.
      * @return type 
      */
-    public function &add_date($id = false, $label = false, $min = false, $max = false, $params = array()) {
+    public function add_date($id = false, $label = false, $min = false, $max = false, $params = array()) {
         return $this->add_datetime_helper('date', $id, $label, $min, $max, $params);
     }
 
@@ -272,7 +273,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optional parameters.  Possible values include 'selected' => '2012-12', disabled' => true.
      * @return type 
      */
-    public function &add_month($id = false, $label = false, $min = false, $max = false, $params = array()) {
+    public function add_month($id = false, $label = false, $min = false, $max = false, $params = array()) {
         return $this->add_datetime_helper('month', $id, $label, $min, $max, $params);
     }
 
@@ -286,7 +287,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optional parameters.  Possible values include 'selected' => '2012-W12', disabled' => true.
      * @return type 
      */
-    public function &add_week($id = false, $label = false, $min = false, $max = false, $params = array()) {
+    public function add_week($id = false, $label = false, $min = false, $max = false, $params = array()) {
         return $this->add_datetime_helper('week', $id, $label, $min, $max, $params);
     }
 
@@ -301,7 +302,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optional parameters.  Possible values include 'selected' => '2012-12-31 23:59:59', disabled' => true.
      * @return type 
      */
-    public function &add_datetime_local($id = false, $label = false, $min = false, $max = false, $params = array()) {
+    public function add_datetime_local($id = false, $label = false, $min = false, $max = false, $params = array()) {
         return $this->add_datetime_helper('datetime-local', $id, $label, $min, $max, $params);
     }
 
@@ -315,7 +316,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optional parameters.  Possible values include 'selected' => '23:59:59', disabled' => true.
      * @return type 
      */
-    public function &add_time($id = false, $label = false, $min = false, $max = false, $params = array()) {
+    public function add_time($id = false, $label = false, $min = false, $max = false, $params = array()) {
         return $this->add_datetime_helper('time', $id, $label, $min, $max, $params);
     }
 
@@ -330,7 +331,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params
      * @return \Form_Site_Decorator 
      */
-    private function &add_datetime_helper($field, $id, $label, $min, $max, $params) {
+    private function add_datetime_helper($field, $id, $label, $min, $max, $params) {
         // TODO is this the best way to do away with warnings?
         date_default_timezone_set('America/Los_Angeles');
 
@@ -547,7 +548,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optiaonal parameters.  Possible values include 'disabled' => true.
      * @return type 
      */
-    public function &add_submit($value = 'Submit', $params = array()) {
+    public function add_submit($value = 'Submit', $params = array()) {
         return $this->add_button_helper($value, 'primary', false, $params);
     }
 
@@ -558,7 +559,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optiaonal parameters.  Possible values include 'disabled' => true.
      * @return type 
      */
-    public function &add_primary_button($value = '', $params = array()) {
+    public function add_primary_button($value = '', $params = array()) {
         return $this->add_button_helper($value, 'primary', false, $params);
     }
 
@@ -569,7 +570,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optiaonal parameters.  Possible values include 'disabled' => true.
      * @return type 
      */
-    public function &add_secondary_button($value = '', $params = array()) {
+    public function add_secondary_button($value = '', $params = array()) {
         return $this->add_button_helper($value, 'secondary', false, $params);
     }
 
@@ -580,7 +581,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optiaonal parameters.  Possible values include 'disabled' => true.
      * @return type 
      */
-    public function &add_button($value = '', $params = array()) {
+    public function add_button($value = '', $params = array()) {
         return $this->add_button_helper($value, false, false, $params);
     }
 
@@ -592,7 +593,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param array $params
      * @return \Form_Site_Decorator 
      */
-    private function &add_button_helper($value, $class, $params) {
+    private function add_button_helper($value, $class, $params) {
         $value = htmlspecialchars($value);
         $class = htmlspecialchars($class);
 
@@ -611,7 +612,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optiaonal parameters.  Possible values include 'disabled' => true.
      * @return type 
      */
-    public function &add_primary_link_button($value = '', $params = array()) {
+    public function add_primary_link_button($value = '', $params = array()) {
         return $this->add_link_button_helper($value, 'primary', false, $params);
     }
 
@@ -622,7 +623,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optiaonal parameters.  Possible values include 'disabled' => true.
      * @return type 
      */
-    public function &add_secondary_link_button($value = '', $params = array()) {
+    public function add_secondary_link_button($value = '', $params = array()) {
         return $this->add_link_button_helper($value, 'secondary', false, $params);
     }
 
@@ -633,7 +634,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optiaonal parameters.  Possible values include 'disabled' => true.
      * @return type 
      */
-    public function &add_link_button($value = '', $params = array()) {
+    public function add_link_button($value = '', $params = array()) {
         return $this->add_link_button_helper($value, false, false, $params);
     }
 
@@ -645,7 +646,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param array $params
      * @return \Form_Site_Decorator 
      */
-    private function &add_link_button_helper($value, $class, $params) {
+    private function add_link_button_helper($value, $class, $params) {
         $value = htmlspecialchars($value);
         $class = htmlspecialchars($class);
 
@@ -667,10 +668,10 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      *          array('id' => 'checkbox-2', 'label' => 'Two', 'value' => 2),
      *          array('id' => 'checkbox-3', 'label' => 'Three', 'value' => 3)
      *      )
-     * @param type $params Optiaonal parameters.  Possible values include 'required' => true, 'disabled' => true.
+     * @param type $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
      * @return type 
      */
-    public function &add_checkboxes($id = '', $label = false, $options = array(), $params = array()) {
+    public function add_checkboxes($id = '', $label = false, $options = array(), $params = array()) {
         return $this->add_options_helper('checkbox', $id, $label, $options, $params);
     }
 
@@ -688,7 +689,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optiaonal parameters.  Possible values include 'required' => true, 'disabled' => true.
      * @return type 
      */
-    public function &add_radios($id = '', $label = false, $options = array(), $params = array()) {
+    public function add_radios($id = '', $label = false, $options = array(), $params = array()) {
         return $this->add_options_helper('radio', $id, $label, $options, $params);
     }
 
@@ -702,7 +703,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params
      * @return \Form_Site_Decorator 
      */
-    private function &add_options_helper($type, $id, $label, $options, $params) {
+    private function add_options_helper($type, $id, $label, $options, $params) {
         $id = htmlspecialchars($id);
         $label = htmlspecialchars($label);
         $align = htmlspecialchars($params['align']);
@@ -777,7 +778,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param array $params Optional parameters.  Possible values include 'step' => 2, 'selected' => 4, 'required' => true.
      * @return type 
      */
-    public function &add_number($id = false, $label = false, $min = false, $max = false, $params = array()) {
+    public function add_number($id = false, $label = false, $min = false, $max = false, $params = array()) {
         $min = htmlspecialchars($min);
         $max = htmlspecialchars($max);
         $step = htmlspecialchars($params['step']);
@@ -803,7 +804,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param array $params Optional parameters.  Possible values include 'step' => 2, 'selected' => 4, 'required' => true.
      * @return type 
      */
-    public function &add_range($id = false, $label = false, $min = false, $max = false, $params = array()) {
+    public function add_range($id = false, $label = false, $min = false, $max = false, $params = array()) {
         $min = htmlspecialchars($min);
         $max = htmlspecialchars($max);
         $step = htmlspecialchars($params['step']);
@@ -833,7 +834,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param array $params Optional parameters.  Possible values include 'disabled' => true.
      * @return type 
      */
-    public function &add_select($id = false, $label = false, $options = array(), $params = array()) {
+    public function add_select($id = false, $label = false, $options = array(), $params = array()) {
         $id = htmlspecialchars($id);
         $label = htmlspecialchars($label);
         $selected = htmlspecialchars($params['selected']);
@@ -880,7 +881,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
      * @return \Form_Site_Decorator 
      */
-    public function &add_textarea($id = false, $label = false, $params = array()) {
+    public function add_textarea($id = false, $label = false, $params = array()) {
         $id = htmlspecialchars($id);
         $label = htmlspecialchars($label);
 
@@ -907,7 +908,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * 
      * @param string $params 
      */
-    private function &is_invalid_helper(&$params) {
+    private function is_invalid_helper(&$params) {
         if ($params['invalid']) {
             $params['class'] = $params['class'] . ' invalid';
         }
@@ -918,7 +919,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * 
      * @param string $params 
      */
-    private function &disabled_helper(&$params) {
+    private function disabled_helper(&$params) {
         if ($params['disabled']) {
             $params['disabled'] = 'disabled';
         }
@@ -931,7 +932,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $label
      * @param type $params 
      */
-    private function &add_label_tooltip($id, $label, $params) {
+    private function add_label_tooltip($id, $label, $params) {
         $label_params = array();
         if ($params['required'])
             $label_params['class'] = $params['class'] . ' required';
@@ -949,7 +950,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * 
      * @param type $params 
      */
-    private function &add_placeholder($params) {
+    private function add_placeholder($params) {
         if ($params['placeholder']) {
             $this->_form_elements[] = HTML_Decorator::tag('span', htmlspecialchars($params['placeholder']), array('class' => 'placeholder'));
         }
@@ -960,13 +961,13 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * 
      * @param type $params 
      */
-    private function &add_invalid($params) {
+    private function add_invalid($params) {
         if ($params['invalid']) {
             $this->_form_elements[] = HTML_Decorator::tag('p', htmlspecialchars($params['invalid']), array('class' => 'invalid'));
         }
     }
 
-    public function &render() {
+    public function render() {
         /* padded */
         if ($this->_padded)
             $this->add_class('padded');
