@@ -133,7 +133,7 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
             }
 
             // ...and use the callback here.
-            $js = 'new mwf.full.ConfigurableMenu("homescreen_layout").render("main_menu_list",' . 
+            $js = 'mwf.full.configurableMenu("homescreen_layout").render("main_menu_list",' . 
                     json_encode(array_map('call_render', $this->_list)) . ');';
 
             $menu_markup = HTML_Decorator::tag('ol')->set_param('id','main_menu_list')->render();

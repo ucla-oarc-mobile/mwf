@@ -30,7 +30,7 @@ require_once(dirname(__FILE__) . '/assets/lib/classification.class.php');
 echo HTML_Decorator::html_start()->render();
 
 echo Site_Decorator::head()->set_title('Customize Home Screen')
-        ->add_js_handler_library('full_libs', 'ConfigurableMenu')
+        ->add_js_handler_library('full_libs', 'configurableMenu')
         ->render();
 
 echo HTML_Decorator::body_start()->render();
@@ -77,7 +77,7 @@ if (Classification::is_full()) {
 
     echo HTML_Decorator::tag('script')
             ->add_inner($js .
-                    "var cm = new mwf.full.ConfigurableMenu('homescreen_layout');".
+                    "var cm = mwf.full.configurableMenu('homescreen_layout');".
                     "function renderMenu()".
                     "{cm.render('app_order',apps,disabledApps)}".
                     "renderMenu();")

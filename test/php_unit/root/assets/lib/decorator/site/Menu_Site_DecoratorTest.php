@@ -50,19 +50,6 @@ class Menu_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
      * @test
      * @runInSeparateProcess
      */
-    public function render_quotesInUrlParam_quotesNotReplacedWithEntities() {
-        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))))) . '/root/assets/lib/decorator/site/menu.class.php';
-
-        $this->object = new Menu_Site_Decorator;
-
-        $this->object->add_item('test', 'http://www.example.com/test?"foo"\'bar\'');
-        $this->assertContains('http://www.example.com/test?"foo"\'bar\'', $this->object->render());
-    }
-
-    /**
-     * @test
-     * @runInSeparateProcess
-     */
     public function setHomescreen_noParam_isHomescreen() {
         require dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))))) . '/root/assets/lib/decorator/site/menu.class.php';
 
@@ -90,7 +77,7 @@ class Menu_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
         $this->object->set_homescreen();
         $this->object->add_item('Foo', 'http://example.com/', array(), array(), 'foo_index');
         $this->object->add_item('Bar', 'http://musicroutes.com/', array(), array(), 'bar_index');
-        $this->assertRegExp('/new\s*mwf\.full\.ConfigurableMenu\(\"homescreen_layout"\)\.render\(/', $this->object->render());
+        $this->assertRegExp('/\bmwf\.full\.configurableMenu\(\"homescreen_layout"\)\.render\(/', $this->object->render());
     }
 
 }
