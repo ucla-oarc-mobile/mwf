@@ -82,7 +82,7 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
         if (!is_array($a_params))
             $a_params = array();
 
-        $link = HTML_Decorator::tag('a', $name ? $name : '', array_merge($a_params, array('href' => $url ? htmlspecialchars($url, ENT_NOQUOTES) : '#')));
+        $link = HTML_Decorator::tag('a', $name ? $name : '', array_merge($a_params, array('href' => $url ? htmlspecialchars($url) : '#')));
         if (is_string($key) || is_int($key)) {
             $this->_list[$key] = HTML_Decorator::tag('li', $link, $li_params);
         } else {
