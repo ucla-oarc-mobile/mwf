@@ -11,10 +11,15 @@
  * 
  *   Retrieve the cache directory for the cache labeled "rss". This is useful
  *   for libraries like SimplePie that handle their own caching but need to be
- *   told where the cache directory is. Do not use the Cache object to read or
- *   write to the cache if you do that.
- *     $rss_cache_dir = $rssCache->get_cache_dir();
+ *   told where the cache directory is. 
+ *     $rss_cache_dir = $rss_cache->get_cache_path();
  *
+ *   Retrieve the full path to a file in the cache for $key:
+ *     $cache_file_path_for-key = $rss_cache->get_cache_path($key);
+ * 
+ *   Retrieve the raw contents of a cache file with key:
+ *     $raw_contents = $rss_cache->get_raw($key); 
+ * 
  * @package core
  * @subpackage cache
  *
