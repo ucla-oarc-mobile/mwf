@@ -39,18 +39,18 @@ class Cache {
      * @param string $label 
      */
     public function __construct($label) {
-        if (! preg_match('/^\w+$/', $label)) {
+        if (!preg_match('/^\w+$/', $label)) {
             throw new InvalidArgumentException("Invalid label " . $label);
         }
 
         $base_dir = Config::get('global', 'var_dir');
-        if (! file_exists($base_dir)) {
+        if (!file_exists($base_dir)) {
             throw new RuntimeException("MWF var directory does not exist: " . $base_dir);
         }
-        
+
         $this->_cache_dir = Config::get('global', 'var_dir') . '/cache/' . $label;
 
-        if (! file_exists($this->_cache_dir)) {
+        if (!file_exists($this->_cache_dir)) {
             if (!mkdir($this->_cache_dir, 0700, true)) {
                 throw new RuntimeException("Could not create directory (check directory permission): " . $this->_cache_dir);
             }
@@ -58,11 +58,33 @@ class Cache {
     }
 
     /**
-     *
+     * Returns the cache directory path or the path to a file in the 
+     * cache if $key is specified.
+     * 
+     * @param string $key 
+     * 
      * @return string
      */
-    public function get_cache_dir() {
-        return $this->_cache_dir;
-    } 
+    public function get_cache_path($key=null) {
+        if ($key === null) {
+            return $this->_cache_dir;
+        }
+        return $this->_cache_dir . '/' . md5($key);
+    }
+
+    /**
+     * Returns the raw contents of a cache file specified by $key.
+     * 
+     * @param string $key
+     * @return string 
+     */
+    public function get_raw($key) {
+        $file = $this->get_cache_path($key);
+        if (file_exists($file)) {
+            return file_get_contents($file);
+        }
+        return false;
+    }
 }
+
 ?>

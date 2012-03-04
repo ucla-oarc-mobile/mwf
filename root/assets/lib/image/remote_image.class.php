@@ -34,7 +34,7 @@ class Remote_Image extends Image {
         }
 
         $unlink_path = FALSE;
-        $path = $this->get_cache_filename();
+        $path = $this->_cache->get_cache_path($this->get_cache_key());
         if (!file_exists($path)) {
             /**
              * @compat 5.1
@@ -70,7 +70,7 @@ class Remote_Image extends Image {
         }
 
         if ($this->check_memory($path)) {
-            error_log('MWF Notice: Image too large to process: ' . $image_path);
+            trigger_error('Image too large to process: ' . $image_path, E_USER_NOTICE);
             $this->_image_gd = false;
             $this->_image_ext = false;
         } else {
@@ -129,5 +129,3 @@ class Remote_Image extends Image {
     }
 
 }
-
-?>

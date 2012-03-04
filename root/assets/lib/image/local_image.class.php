@@ -25,7 +25,7 @@ class Local_Image extends Image {
 
     private $_image_gd = null;
 
-    protected function &get_gd_image() {
+    protected function get_gd_image() {
         if ($this->_image_gd !== null)
             return $this->_image_gd;
 
@@ -41,7 +41,6 @@ class Local_Image extends Image {
         if (!$this->_image_gd) {
             $this->_image_ext = false;
         } else {
-
             $pathinfo = pathinfo($path);
             $ext = array_key_exists('extension',$pathinfo) ? $pathinfo['extension'] : '';
 

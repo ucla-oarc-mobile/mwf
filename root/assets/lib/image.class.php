@@ -10,13 +10,13 @@
  * @author trott
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111110
+ * @version 20120303
  *
  * @uses Config
+ * @uses Cache
  * @uses Path_Validator
  *
- * @todo Comments
- * @todo Refactor
+ * @todo phpdoc
  */
 require_once(dirname(dirname(__FILE__)) . '/config.php');
 require_once(dirname(__FILE__) . '/path_validator.class.php');
@@ -26,15 +26,15 @@ abstract class Image {
     private $_image_path;
     private $_image_file_root;
     private $_memory_limit;
-    private $_image_ext = null;
+    protected $_image_ext = null;
     private $_dim_height = false;
     private $_dim_width = false;
-    private $_cache_filename = null;
+    protected $_cache;
 
     /** GIF, JPG, and JPEG are within XHTML MP 1.0 specification. */
     private $_ext_allowed = array('gif', 'png', 'jpg', 'jpeg');
 
-    abstract protected function &get_gd_image();
+    abstract protected function get_gd_image();
 
     abstract protected function get_gd_extension();
 
@@ -45,7 +45,7 @@ abstract class Image {
      */
     public static function factory($image_path) {
         if (!Path_Validator::is_safe($image_path))
-            return NULL;
+            return null;
 
         //@todo: use Path::get_contents() and get rid of Remote vs. Local image
 
@@ -60,7 +60,8 @@ abstract class Image {
 
     protected function __construct($imagepath) {
         $this->_image_path = $imagepath;
-        $this->_image_file_root = md5($imagepath);
+
+        $this->_cache = new Cache(Config::get('image', 'cache_name'));
         $this->_memory_limit = Config::get('image', 'memory_limit') ?
                 Config::get('image', 'memory_limit') : 33554432;
     }
@@ -84,30 +85,37 @@ abstract class Image {
         }
     }
 
-    public function get_image_as_string() {
+    /**
+     *
+     * @return type string Returns image as a string. Returns an empty string on failure.
+     */
+    public function find_or_create_image_as_string() {
         if ($this->_image_path === false)
             return '';
 
-        $filename = $this->get_cache_filename();
+        $key = $this->get_cache_key();
 
-        if (file_exists($filename)) {
-            return file_get_contents($filename);
+        $image = $this->_cache->get_raw($key);
+        if ($image) {
+            return $image;
         }
 
-        if (!$this->generate_image($filename)) {
-            return '';
-        }
-
-        if (file_exists($filename)) {
-            return file_get_contents($filename);
+        if ($this->generate_image()) {
+            $return = file_get_contents($this->_cache->get_cache_path($key));
+            return $return ? $return : '';
         }
 
         return '';
     }
 
-    protected function generate_image($savepath = false) {
-        $savefunction = false;
+    protected function get_cache_key() {
+        $key = $this->_image_path;
+        $key .= $this->_dim_width ? $this->_dim_width . 'w' : '0w';
+        $key .= $this->_dim_height ? $this->_dim_height . 'h' : '0h';
+        return $key;
+    }
 
+    protected function generate_image() {
         if (in_array($this->get_gd_extension(), $this->_ext_allowed))
             $savefunction = 'image' . $this->get_gd_extension();
         else
@@ -125,7 +133,7 @@ abstract class Image {
                 break;
         }
 
-        $source = & $this->get_gd_image();
+        $source = $this->get_gd_image();
 
         if ($source === false) {
             return false;
@@ -153,34 +161,11 @@ abstract class Image {
         $new_width = round($width * $scale_factor);
 
         $generated = imagecreatetruecolor($new_width, $new_height);
-        imagecopyresampled($generated, $source, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-
-        if (!is_writable(dirname($savepath)))
-            $savepath = false;
-
-        if (!$savepath)
-            return $savefunction($generated, null, $quality);
-
-        $savefunction($generated, $savepath, $quality);
-        return file_exists($savepath);
-    }
-
-    protected function get_cache_filename() {
-        if ($this->_cache_filename !== null)
-            return $this->_cache_filename;
-
-        $filename = Config::get('image', 'cache_dir') . $this->_image_file_root;
-
-        if ($this->_dim_width || $this->_dim_height)
-            $filename .= '-';
-        if ($this->_dim_width)
-            $filename .= $this->_dim_width . 'w';
-        if ($this->_dim_width && $this->_dim_height)
-            $filename .= '-';
-        if ($this->_dim_height)
-            $filename .= $this->_dim_height . 'h';
-
-        return $filename;
+        if (imagecopyresampled($generated, $source, 0, 0, 0, 0, $new_width, $new_height, $width, $height)) {
+            return $savefunction($generated, $this->_cache->get_cache_path($this->get_cache_key()), $quality);
+        }
+        
+        return false;
     }
 
     protected function get_image_path() {
@@ -202,5 +187,3 @@ abstract class Image {
     }
 
 }
-
-?>

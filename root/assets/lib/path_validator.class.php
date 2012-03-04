@@ -36,7 +36,7 @@ class Path_Validator
         if(self::is_remote($path))
             return true;
 
-        $docroot = dirname(dirname(dirname(__FILE__)));
+        $docroot = dirname(dirname(__DIR__));
        
         $full_path = $docroot . '/' . $path;
         

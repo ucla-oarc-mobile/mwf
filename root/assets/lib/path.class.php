@@ -82,13 +82,8 @@ class Path extends Path_Validator {
             return false;
 
         if (self::is_local($path)) {
-            $docroot = dirname(dirname(dirname(__FILE__)));
+            $docroot = dirname(dirname(__DIR__));
             $result = file_get_contents($docroot . '/' . $path);
-            
-            // @deprecated: if file isn't found under docroot, try from /
-            if ($result === false) {
-                $result = file_get_contents($path);
-            }
 
             return $result;
         }

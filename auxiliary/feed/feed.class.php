@@ -122,7 +122,7 @@ class Feed {
             $simplepie->enable_order_by_date(false);
             $simplepie->set_feed_url($this->get_path());
             if (isset($this->_cache)) {
-                $simplepie->set_cache_location($this->_cache->get_cache_dir());
+                $simplepie->set_cache_location($this->_cache->get_cache_path());
             } else {
                 $simplepie->enable_cache(false);
             }
