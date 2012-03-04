@@ -11,12 +11,25 @@
  * @uses PHPUnit_Framework_TestCase
  * @uses Feed
  */
-require_once dirname(__FILE__) . '/../../../../auxiliary/feed/feed.class.php';
 
+/**
+ * @backupGlobals disabled
+ * @backupStaticAttributes disabled
+ */
 class FeedTest extends PHPUnit_Framework_TestCase {
 
+    public function run(PHPUnit_Framework_TestResult $result = NULL) {
+        $this->setPreserveGlobalState(false);
+        return parent::run($result);
+    }
+    
+    public function setUp() {
+        require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/auxiliary/feed/feed.class.php';
+    }
+    
     /**
      * @test
+     * @runInSeparateProcess
      */
     public function getName_name_name() {
         $feed = new Feed('Harold', 'http://example.com/harold.rss');
@@ -25,6 +38,7 @@ class FeedTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @test
+     * @runInSeparateProcess
      */
     public function getPath_url_url() {
         $feed = new Feed('Harold', 'http://example.com/harold.rss');
@@ -33,22 +47,24 @@ class FeedTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @test
+     * @runInSeparateProcess
      */
-    public function testGet_items() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+    public function getItems_missingRSS_false() {
+        $feed = new Feed('Harold', 'missing.rss');
+        $this->assertEquals($feed->get_items(), false);
     }
 
     /**
      * @test
+     * @runInSeparateProcess
      */
-    public function testFetch_items() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+    public function getItems_testRSS_arrayOfFeedItems() {
+        $feed = new Feed('Test RSS', __DIR__ . '/test.rss');
+        $items = $feed->get_items();
+        $this->assertEquals('Feed_Item', get_class($items[0]));
+        $this->assertEquals('Feed_Item', get_class($items[1]));
+        $this->assertEquals('Feed_Item', get_class($items[2]));
+        $this->assertEquals(count($items), 3);
     }
 
     /**

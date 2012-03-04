@@ -1,8 +1,7 @@
 <?php
 
-$_SERVER['HTTP_HOST'] = 'www.example.edu';
-require_once dirname(__FILE__) . '/../../../../../root/assets/lib/config.class.php';
-require_once dirname(__FILE__) . '/../../../../../root/assets/lib/image.class.php';
+require_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/root/assets/lib/config.class.php';
+require_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/root/assets/lib/image.class.php';
 
 /**
  * Test class for Image.
@@ -120,5 +119,3 @@ class ImageTest extends PHPUnit_Framework_TestCase {
     }
 
 }
-
-?>

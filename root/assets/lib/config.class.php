@@ -18,7 +18,7 @@
  * 
  * @uses HTTPS
  */
-require_once(dirname(__FILE__) . '/https.class.php');
+require_once(__DIR__ . '/https.class.php');
 
 class Config {
 
@@ -27,25 +27,44 @@ class Config {
      *              loaded already through config file inclusion (lazy include).
      */
     private static $_vars = array();
-    
+
     // @todo: If we are supporting only PHP 5.3.0 and above, use a namespace for
     //    the constants.
 
 
     public static function init() {
-        if (defined('MWF_CONFIG_SITE_URL') && defined('MWF_CONFIG_SITE_ASSETS_URL'))
+        if (defined('MWF_CONFIG_SITE_URL') && defined('MWF_CONFIG_SITE_ASSETS_URL') && defined('MWF_CONFIG_VAR_DIR'))
             return;
+
         if (self::get('base', 'site_url')) {
             define('MWF_CONFIG_SITE_URL', self::get('base', 'site_url'));
         } else {
             $scheme = HTTPS::is_https() ? 'https' : 'http';
-            define('MWF_CONFIG_SITE_URL', $scheme . '://' . $_SERVER['HTTP_HOST']);
+            if (isset($_SERVER['HTTP_HOST'])) {
+                define('MWF_CONFIG_SITE_URL', $scheme . '://' . $_SERVER['HTTP_HOST']);
+            } else {
+                if (isset($_SERVER['SERVER_NAME'])) {
+                    if (isset($_SERVER['SERVER_PORT'])) {
+                        $port = $_SERVER['SERVER_PORT'] == getservbyname($scheme, "tcp") ? '' : ':' . $_SERVER['SERVER_PORT'];
+                    }
+                    define('MWF_CONFIG_SITE_URL', $scheme . '://' . $_SERVER['SERVER_NAME'] . $port);
+                } else {
+                    // no SERVER_NAME, must be command-line testing
+                    define('MWF_CONFIG_SITE_URL', 'http://localhost');
+                }
+            }
         }
 
         if (self::get('base', 'site_assets_url')) {
             define('MWF_CONFIG_SITE_ASSETS_URL', self::get('base', 'site_assets_url'));
         } else {
             define('MWF_CONFIG_SITE_ASSETS_URL', MWF_CONFIG_SITE_URL . '/assets');
+        }
+
+        if (self::get('base', 'var_dir')) {
+            define('MWF_CONFIG_VAR_DIR', realpath(self::get('base', 'var_dir')));
+        } else {
+            define('MWF_CONFIG_VAR_DIR', realpath(dirname(dirname(dirname(__DIR__))) . '/var'));
         }
     }
 
@@ -85,4 +104,3 @@ class Config {
 }
 
 Config::init();
-?>
