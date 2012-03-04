@@ -20,7 +20,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase {
     
     protected function setUp() {
         $_SERVER['HTTP_HOST'] = 'www.example.com:8080';
-        require dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/root/assets/lib/config.class.php';
+        require_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/root/assets/lib/config.class.php';
     }
 
     
