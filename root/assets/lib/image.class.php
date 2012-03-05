@@ -18,8 +18,9 @@
  *
  * @todo phpdoc
  */
-require_once(dirname(dirname(__FILE__)) . '/config.php');
-require_once(dirname(__FILE__) . '/path_validator.class.php');
+require_once(dirname(__DIR__) . '/config.php');
+require_once(__DIR__ . '/cache.class.php');
+require_once(__DIR__ . '/path_validator.class.php');
 
 abstract class Image {
 
