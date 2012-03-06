@@ -66,7 +66,7 @@ class User_Agent
      * 
      * @return bool
      */
-    public static function init()
+    private static function init()
     {
         /**
          * If initialized, return initialized value without reprocessing.
@@ -112,7 +112,7 @@ class User_Agent
      * @param string $useragent
      * @return object 
      */
-    public static function parse($useragent)
+    private static function parse($useragent)
     {
         include_once(dirname(__FILE__).'/json.php');
         return json_decode(str_replace(array('\\x3B', '\\x2C'), array(';', ','), $useragent));
@@ -123,10 +123,11 @@ class User_Agent
      * mwf.userAgent in js/useragent.js and passed via JSON in a cookie by name 
      * self::$_name.
      * 
-     * @param bool $val
-     * @return object|false 
+     * @param string $val
+     * @return string|false
+     *  
      */
-    public static function get($val)
+    private static function get($val)
     {
         /**
          * Initialize if not already initialized.
@@ -152,7 +153,7 @@ class User_Agent
     /**
      * Returns the user agent string as determined by mwf.userAgent.
      * 
-     * @return string 
+     * @return string|false 
      */
     public static function get_user_agent()
     {
@@ -162,7 +163,7 @@ class User_Agent
     /**
      * Returns the operating system as determined by mwf.userAgent.
      * 
-     * @return string 
+     * @return string|false 
      */
     public static function get_os()
     {
@@ -172,7 +173,7 @@ class User_Agent
     /**
      * Returns the operating system version as determined by mwf.userAgent.
      * 
-     * @return string 
+     * @return string|false 
      */
     public static function get_os_version()
     {
@@ -182,7 +183,7 @@ class User_Agent
     /**
      * Returns the browser as determined by mwf.userAgent.
      * 
-     * @return string 
+     * @return string|false 
      */
     public static function get_browser()
     {
@@ -192,7 +193,7 @@ class User_Agent
     /**
      * Returns the browser engine as determined by mwf.userAgent.
      * 
-     * @return string 
+     * @return string|false 
      */
     public static function get_browser_engine()
     {
@@ -202,15 +203,10 @@ class User_Agent
     /**
      * Returns the browser engine version as determined by mwf.userAgent.
      * 
-     * @return string 
+     * @return string|false 
      */
     public static function get_browser_engine_version()
     {
         return self::get('bev');
     }
 }
-
-/**
- * Initialize the User_Agent static object.
- */
-User_Agent::init();
