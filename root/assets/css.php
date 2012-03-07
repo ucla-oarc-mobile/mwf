@@ -62,6 +62,11 @@ $custom = $custom ? (array) $custom : array();
 $load_compat = !isset($_GET['lean']);
 
 /**
+ * Get the string for OS-specific CSS.
+ */
+$os = User_Agent::get_os();
+
+/**
  * Load all basic.css stylesheets under the default and custom directories.
  */
 foreach ($classifications as $classification => $is_classification) {
@@ -84,19 +89,27 @@ foreach ($classifications as $classification => $is_classification) {
             if (file_exists(__DIR__ . '/css/' . $dir . '/' . $classification . '.css')) {
                 include_once(__DIR__ . '/css/' . $dir . '/' . $classification . '.css');
             }
+            if ($os) {
+                $os_specific_css_path = __DIR__ . '/css/' . $dir . '/' . $classification . '-' . $os . '.css';
+
+                if ($os && file_exists($os_specific_css_path)) {
+                    include_once($os_specific_css_path);
+                }
+            }
         }
     }
 }
 
-/**
- * Load URL-specified CSS files (minified) based on user agent.
- */
-foreach ($classifications as $is_classification) {
-    if ($is_classification && isset($_GET[$classification])) {
-        foreach (explode(' ', $_GET[$classification]) as $file) {
-            if (Path_Validator::is_safe($file, 'css') && $contents = Path::get_contents($file)) {
-                echo ' ' . CSSMin::minify($contents);
+    /**
+     * Load URL-specified CSS files (minified) based on user agent.
+     */
+    foreach ($classifications as $is_classification) {
+        if ($is_classification && isset($_GET[$classification])) {
+            foreach (explode(' ', $_GET[$classification]) as $file) {
+                if (Path_Validator::is_safe($file, 'css') && $contents = Path::get_contents($file)) {
+                    echo ' ' . CSSMin::minify($contents);
+                }
             }
         }
     }
-}   
+    
