@@ -87,6 +87,7 @@ class JS
         self::$_dependencies['messages'] = array('jquery');
         self::$_dependencies['forms'] = array('jquery', 'jquery.validation');
         self::$_dependencies['tooltip'] = array('jquery', 'jquery.tooltip');
+        self::$_dependencies['interactivity'] = array('jquery');
     }
     
     /**
