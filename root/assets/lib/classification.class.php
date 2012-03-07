@@ -43,7 +43,7 @@ class Classification
     private static $_cookie = '';
     
     /**
-     * An array of capabilities if know, or false otherwise. Null until loaded
+     * An array of capabilities if known, or false otherwise. Null until loaded
      * by invoking init().
      * 
      * @var array|false
