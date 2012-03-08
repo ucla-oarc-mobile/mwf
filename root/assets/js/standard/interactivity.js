@@ -6,7 +6,6 @@ mwf.standard.interactivity = new function(){
     this.init = function(ele){
         
         var addTriggers = function(ele){
-            // find t- definitions on the element defined as .trigger
             jQuery.each(ele.className.split(/\s+/), function(){
                 if(this.substr(0, 2) == 't-')
                     mwf.standard.interactivity.initTrigger(ele, this.substring(2));
@@ -33,13 +32,15 @@ mwf.standard.interactivity = new function(){
         
         $('.'+targetName).each(function(){
             
-            var target = this,
-                targetContainer = mwf.standard.interactivity.getHandlerElement(target),
-                handlerName = mwf.standard.interactivity.getHandlerName(target),
-                execHandler = mwf.standard.interactivity.getExecHandler(handlerName),
-                initHandler = mwf.standard.interactivity.getInitHandler(handlerName),
-                execContainerHandler = mwf.standard.interactivity.getExecContainerHandler(handlerName),
-                initContainerHandler = mwf.standard.interactivity.getInitContainerHandler(handlerName);
+            var i = mwf.standard.interactivity,
+                target = this,
+                targetContainer = i.getHandlerElement(target),
+                handlerName = i.getHandlerName(target),
+                handlerEvent = i.getHandlerEvent(handlerName),
+                execHandler = i.getExecHandler(handlerName),
+                initHandler = i.getInitHandler(handlerName),
+                execContainerHandler = i.getExecContainerHandler(handlerName),
+                initContainerHandler = i.getInitContainerHandler(handlerName);
             
             if(initContainerHandler)
                 initContainerHandler.call(targetContainer);
@@ -48,10 +49,10 @@ mwf.standard.interactivity = new function(){
                 initHandler.call(target);
             
             if(execContainerHandler)
-                $(trigger).click(function(){execContainerHandler.call(targetContainer)});
+                $(trigger).bind(handlerEvent, function(){execContainerHandler.call(targetContainer)});
             
             if(execHandler)
-                $(trigger).click(function(){execHandler.call(target)});
+                $(trigger).bind(handlerEvent, function(){execHandler.call(target)});
             
         });
         
@@ -98,48 +99,51 @@ mwf.standard.interactivity = new function(){
         
     };
     
-    this.executeTarget = function(name){
-        
-        
-        
-    };
-    
     var handlers = {};
     
-    this.registerHandler = function(name, callbacks){
+    this.registerHandler = function(name, event, callbacks){
         
-        handlers[name] = callbacks;
+        handlers[name] = {
+            'event':event,
+            'callbacks':callbacks
+        };
         
     };
+    
+    this.getHandlerEvent = function(name){
+        
+        return handlers[name].event;
+        
+    }
     
     this.getExecHandler = function(name){
         
-        return getHandler(name, 'exec');
+        return getHandlerCallback(name, 'exec');
         
     };
 
     this.getInitHandler = function(name){
         
-        return getHandler(name, 'init');
+        return getHandlerCallback(name, 'init');
         
     };
     
     this.getExecContainerHandler = function(name){
         
-        return getHandler(name, 'execContainer');
+        return getHandlerCallback(name, 'execContainer');
         
     };
 
     this.getInitContainerHandler = function(name){
         
-        return getHandler(name, 'initContainer');
+        return getHandlerCallback(name, 'initContainer');
         
     };
     
-    var getHandler = function(name, type){
+    var getHandlerCallback = function(name, type){
         
-        return typeof handlers[name] == 'object' && typeof handlers[name][type] == 'function' 
-            ? handlers[name][type] 
+        return typeof handlers[name] == 'object' && typeof handlers[name].callbacks[type] == 'function' 
+            ? handlers[name].callbacks[type] 
             : false;
         
     }
