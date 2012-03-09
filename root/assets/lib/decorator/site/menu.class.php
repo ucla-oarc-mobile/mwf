@@ -2,14 +2,14 @@
 
 /**
  *
- *
  * @package decorator
  * @subpackage site_decorator
  *
  * @author ebollens
+ * @author trott
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111207
+ * @version 20120221
  *
  * @uses Decorator
  * @uses Tag_HTML_Decorator
@@ -82,7 +82,7 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
         if (!is_array($a_params))
             $a_params = array();
 
-        $link = HTML_Decorator::tag('a', $name ? $name : '', array_merge($a_params, array('href' => $url ? htmlspecialchars($url, ENT_NOQUOTES) : '#')));
+        $link = HTML_Decorator::tag('a', $name ? $name : '', array_merge($a_params, array('href' => $url ? htmlspecialchars($url) : '#')));
         if (is_string($key) || is_int($key)) {
             $this->_list[$key] = HTML_Decorator::tag('li', $link, $li_params);
         } else {
@@ -133,7 +133,7 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
             }
 
             // ...and use the callback here.
-            $js = 'mwf.full.configurableMenu.render("main_menu_list","homescreen_layout",' . 
+            $js = 'mwf.full.configurableMenu("homescreen_layout").render("main_menu_list",' . 
                     json_encode(array_map('call_render', $this->_list)) . ');';
 
             $menu_markup = HTML_Decorator::tag('ol')->set_param('id','main_menu_list')->render();
@@ -145,7 +145,7 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
                 $inner = '';
                 foreach ($this->_list as $list_item)
                     $inner .= $list_item->render();
-                $menu_markup = HTML_Decorator::tag('ol', $inner)->set_param('id','main_menu_list')->render();
+                $menu_markup = HTML_Decorator::tag('ol', $inner)->render();
             }
         }
 

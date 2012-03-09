@@ -42,7 +42,7 @@ test("mwf.capability.audio()", function()
 test("mwf.capability.canvas()", function()
 {
     expect(2);
-    var canvas = mwf.capability.applicationcache();
+    var canvas = mwf.capability.canvas();
     equal(typeof canvas, 'boolean', 'mwf.capability.canvas() should return a boolean');
     equal(canvas, true, 'browser is canvas-capable');
 });
@@ -89,14 +89,23 @@ test("mwf.capability.css.gradients()", function()
 
 test("mwf.capability.css.transforms()", function()
 {
-    expect(2);
+    var os = mwf.userAgent.getOS();
+    switch (os) {
+        case 'iphone_os':
+        case 'android':
+            expect(2);
+            break;
+        default:
+            expect(1);
+    }
     var transforms = mwf.capability.css.transforms();
     equal(typeof transforms, 'boolean', 'mwf.capability.css.transforms() should return a boolean');
 
-    var os = mwf.userAgent.getOS();
-    var osVersion = parseInt(mwf.userAgent.getOSVersion());
-    var supports = (os == 'iphone_os') || (os == 'android' && osVersion >= 3);
-    equal(transforms, supports, 'iOS supports transforms, Android only from version 3');
+    if ((os == 'iphone_os') || (os == 'android')) {
+        var osVersion = parseInt(mwf.userAgent.getOSVersion());
+        var supports = (os == 'iphone_os') || (os == 'android' && osVersion >= 3);
+        equal(transforms, supports, 'iOS supports transforms, Android only from version 3');
+    }
 });
 
 test("mwf.capability.css.transforms2d()", function()
@@ -109,14 +118,23 @@ test("mwf.capability.css.transforms2d()", function()
 
 test("mwf.capability.css.transforms3d()", function()
 {
-    expect(2);
+    var os = mwf.userAgent.getOS();
+    switch (os) {
+        case 'iphone_os':
+        case 'android':
+            expect(2);
+            break;
+        default:
+            expect(1);
+    }
     var transforms3d = mwf.capability.css.transforms3d();
     equal(typeof transforms3d, 'boolean', 'mwf.capability.css.transforms3d() should return a boolean');
     
-    var os = mwf.userAgent.getOS();
-    var osVersion = parseInt(mwf.userAgent.getOSVersion());
-    var supports = (os == 'iphone_os') || (os == 'android' && osVersion >= 3);
-    equal(transforms3d, supports, 'iOS supports transforms3d, Android only from version 3');
+    if ((os == 'iphone_os') || (os == 'android')) {
+        var osVersion = parseInt(mwf.userAgent.getOSVersion());
+        var supports = (os == 'iphone_os') || (os == 'android' && osVersion >= 3);
+        equal(transforms3d, supports, 'iOS supports transforms3d, Android only from version 3');
+    }
 });
 
 test("mwf.capability.css.transitions()", function()
@@ -175,14 +193,23 @@ test("mwf.capability.css.event()", function()
 
 test("mwf.capability.inlinesvg()", function()
 {
-    expect(2);
-    var inlinesvg = mwf.capability.inlinesvg();
-    equal(typeof inlinesvg, 'boolean', 'mwf.capability.inlinesvg() should return a boolean');
     var os = mwf.userAgent.getOS();
-    var osVersion = parseInt(mwf.userAgent.getOSVersion());
-    var supports = (os == 'iphone_os' && osVersion >= 5) || (os == 'android' && osVersion >= 3);
-    
-    equal(inlinesvg, supports, 'iOS 5 and Android 3 support inline SVG. otherwise, not so much...');
+    switch (os) {
+        case 'iphone_os':
+        case 'android':
+            expect(2);
+            break;
+        default:
+            expect(1);
+    }
+    var inlinesvg = mwf.capability.inlinesvg();
+
+    equal(typeof inlinesvg, 'boolean', 'mwf.capability.inlinesvg() should return a boolean');
+    if ((os == 'iphone_os') || (os == 'android')) {
+        var osVersion = parseInt(mwf.userAgent.getOSVersion());
+        var supports = (os == 'iphone_os' && osVersion >= 5) || (os == 'android' && osVersion >= 3);
+        equal(inlinesvg, supports, 'iOS 5 and Android 3 support inline SVG. otherwise, not so much...');
+    }    
 });
 
 test("mwf.capability.input.placeholder()", function()
@@ -308,21 +335,41 @@ test("mwf.capability.sessionstorage()", function()
 
 test("mwf.capability.svg()", function()
 {
-    expect(2);
+    var os = mwf.userAgent.getOS();
+    switch (os) {
+        case 'iphone_os':
+        case 'android':
+            expect(2);
+            break;
+        default:
+            expect(1);
+    }
     var svg = mwf.capability.svg();
     equal(typeof svg, 'boolean', 'mwf.capability.svg() should return a boolean');
-    var os = mwf.userAgent.getOS();
-    var osVersion = parseInt(mwf.userAgent.getOSVersion());
-    var supports = (os == 'iphone_os') || (os == 'android' && osVersion >= 3);
-    equal(svg, supports, 'iOS (all versions) and Android 3 and above support SVG');
+
+    if ((os == 'iphone_os') || (os == 'android')) {
+        var osVersion = parseInt(mwf.userAgent.getOSVersion());
+        var supports = (os == 'iphone_os') || (os == 'android' && osVersion >= 3);
+        equal(svg, supports, 'iOS (all versions) and Android 3 and above support SVG');
+    }   
 });
 
 test("mwf.capability.touch()", function()
 {
-    expect(2);
+    var os = mwf.userAgent.getOS();
+    switch (os) {
+        case 'iphone_os':
+        case 'android':
+            expect(2);
+            break;
+        default:
+            expect(1);
+    }
     var touch = mwf.capability.touch();
     equal(typeof touch, 'boolean', 'mwf.capability.touch() should return a boolean');
-    equal(touch, true, 'browser supports touch events');
+    if ((os == 'iphone_os') || (os == 'android')) {
+        equal(touch, true, 'browser supports touch events');
+    }
 });
 
 test("mwf.capability.video()", function()
@@ -335,14 +382,23 @@ test("mwf.capability.video()", function()
 
 test("mwf.capability.websockets()", function()
 {
-    expect(2);
+    var os = mwf.userAgent.getOS();
+    switch (os) {
+        case 'iphone_os':
+        case 'android':
+            expect(2);
+            break;
+        default:
+            expect(1);
+    }
     var websockets = mwf.capability.websockets();
     equal(typeof websockets, 'boolean', 'mwf.capability.websockets() should return a boolean');
-    var os = mwf.userAgent.getOS();
-    var osVersion = mwf.userAgent.getOSVersion();
-    var supports = (os == 'iphone_os' && 
-        (parseInt(osVersion) > 4 || osVersion.indexOf('4.2')==0 || osVersion.indexOf('4.3')==0));
-    equal(websockets, supports, 'browser supports web sockets');
+
+    if ((os == 'iphone_os') || (os == 'android')) {
+        var osVersion = parseInt(mwf.userAgent.getOSVersion());
+        var supports = (os == 'iphone_os' && osVersion > 4 || osVersion.indexOf('4.2')==0 || osVersion.indexOf('4.3')==0);  
+        equal(websockets, supports, 'browser supports web sockets');
+    }
 });
 
 test("mwf.capability.write()", function()

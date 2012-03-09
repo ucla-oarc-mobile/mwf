@@ -30,7 +30,7 @@ mwf.screen = new function() {
      * @compat Android 2.2-3
      */
     var version = mwf.userAgent.getOSVersion();
-    if(typeof mwf.userAgent !== 'undefined' && mwf.userAgent.getOS() == 'android' && (version.indexOf('2.2') == 0 || version.indexOf('2.3') == 0)) {
+    if(mwf.userAgent.getOS() == 'android' && (version.indexOf('2.2') == 0 || version.indexOf('2.3') == 0)) {
         ws = {width:false,height:false}
     }
     

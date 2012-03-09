@@ -8,7 +8,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120203
+ * @version 20120226
  *
  * @requires mwf
  * @requires mwf.site
@@ -25,11 +25,7 @@
  */
 
 mwf.server = new function(){
-    
-    this.cookieNameLocal = mwf.site.cookie.prefix+'server';
-    this.mustRedirect = false;
-    this.mustReload = false;
-    
+
     /**
      * Local variables to minimize payload size in compression.
      */
@@ -38,7 +34,12 @@ mwf.server = new function(){
     classification = mwf.classification,
     userAgent = mwf.userAgent,
     screen = mwf.screen;
-    
+
+    //@todo: These properties are visible outside mwf.server. Should they be?
+    this.cookieNameLocal = site.cookie.prefix+'server';
+    this.mustRedirect = false;
+    this.mustReload = false;
+        
     this.init = function(){
         
         /**
@@ -81,13 +82,15 @@ mwf.server = new function(){
          */
         
         if(this.mustReload && !mwf.override.isRedirecting){
-            document.location.reload();
+            site.reload();
         }else if(this.mustRedirect && !mwf.override.isRedirecting){
-            mwf.site.redirect(site.asset.root+'/passthru.php?return='+encodeURIComponent(window.location)+'&mode='+mwf.browser.getMode());
+            site.redirect(site.asset.root+'/passthru.php?return='+encodeURIComponent(window.location)+'&mode='+mwf.browser.getMode());
         }
         
     }
     
+
+    //@todo: setCookie() is visible from outside the object. Is that what we really want?
     this.setCookie = function(cookieName, cookieContent) {
     
         /**
@@ -95,7 +98,7 @@ mwf.server = new function(){
          * domain if this is a cross
          */
         
-        var isSameOrigin = mwf.site.local.isSameOrigin();
+        var isSameOrigin = site.local.isSameOrigin();
             
         /**
          * If not cross-domain or this is the first load and third party is

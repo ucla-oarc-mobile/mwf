@@ -105,6 +105,7 @@ mwf.classification=new function(){
     /**
      * Returns the string of the top-level classification related to the device.
      * 
+     * @deprecated
      * @return string
      */
     this.get = function(){

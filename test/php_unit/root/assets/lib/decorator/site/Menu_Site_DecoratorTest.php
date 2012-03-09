@@ -37,13 +37,13 @@ class Menu_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
      * @test
      * @runInSeparateProcess
      */
-    public function render_quotesInUrlParam_quotesNotReplacedWithEntities() {
+    public function render_quotesInUrlParam_quotesReplacedWithEntities() {
         require dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))))) . '/root/assets/lib/decorator/site/menu.class.php';
 
         $this->object = new Menu_Site_Decorator;
 
         $this->object->add_item('test', 'http://www.example.com/test?"foo"\'bar\'');
-        $this->assertContains('http://www.example.com/test?"foo"\'bar\'', $this->object->render());
+        $this->assertContains('http://www.example.com/test?&quot;foo&quot;\'bar\'', $this->object->render());
     }
 
     /**
@@ -66,7 +66,7 @@ class Menu_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
      * @runInSeparateProcess
      */
     public function render_homescreenAndFull_jsObject() {
-        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))))) . '/root/assets/lib/config.class.php';
+        require_once dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))))) . '/root/assets/lib/config.class.php';
         Config::set('frontpage', 'configurable_homescreen', true);
         Config::set('global', 'cookie_prefix', 'mwftest_');
         $_COOKIE['mwftest_classification'] = '{"mobile":false,"basic":true,"standard":true,"full":true,"native":false}';
@@ -77,6 +77,7 @@ class Menu_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
         $this->object->set_homescreen();
         $this->object->add_item('Foo', 'http://example.com/', array(), array(), 'foo_index');
         $this->object->add_item('Bar', 'http://musicroutes.com/', array(), array(), 'bar_index');
-        $this->assertRegExp('/<script>mwf\.full\.configurableMenu\.render\(\"main_menu\",\"homescreen_layout\",.*\);/', $this->object->render());
+        $this->assertRegExp('/\bmwf\.full\.configurableMenu\(\"homescreen_layout"\)\.render\(/', $this->object->render());
     }
+
 }
