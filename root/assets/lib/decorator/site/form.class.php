@@ -332,8 +332,6 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @return \Form_Site_Decorator 
      */
     private function add_datetime_helper($field, $id, $label, $min, $max, $params) {
-        // TODO is this the best way to do away with warnings?
-        date_default_timezone_set('America/Los_Angeles');
 
         $id = htmlspecialchars($id);
         $label = htmlspecialchars($label);
@@ -349,11 +347,11 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             $this->add_label_tooltip($id, $label, $params);
         }
 
-        $min = strtotime($min);
-        $max = strtotime($max);
+        $min = new DateTime($min);
+        $max = new DateTime($max);
         if (!$selected)
             $selected = 'now';
-        $selected = strtotime($selected);
+        $selected = new DateTime($selected);
 
         $current = $min;
 
@@ -368,16 +366,16 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
         /* increment from min to max differently depending on field type */
         if ($field === 'date' || $field === 'datetime-local') {
             while ($current <= $max) {
-                $Y = date('Y', $current);
-                $M = date('M', $current);
-                $m = date('m', $current);
-                $d = date('d', $current);
+                $Y = $current->format('Y');
+                $M = $current->format('M');
+                $m = $current->format('m');
+                $d = $current->format('d');
 
                 $years[$Y] = array('label' => $Y, 'value' => $Y);
                 $months[$m] = array('label' => $M, 'value' => $m);
                 $days[$d] = array('label' => ltrim($d, '0'), 'value' => $d);
 
-                $current = strtotime('+1 day', $current);
+                $current->add(DateInterval::createFromDateString('1 day'));
             }
 
             if ($field === 'datetime-local') {
@@ -396,34 +394,34 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             }
         } else if ($field === 'month') {
             while ($current <= $max) {
-                $Y = date('Y', $current);
-                $M = date('M', $current);
-                $m = date('m', $current);
+                $Y = $current->format('Y');
+                $M = $current->format('M');
+                $m = $current->format('m');
 
                 $years[$Y] = array('label' => $Y, 'value' => $Y);
                 $months[$m] = array('label' => $M, 'value' => $m);
 
-                $current = strtotime('+1 month', $current);
+                $current->add(DateInterval::createFromDateString('1 month'));
             }
         } else if ($field === 'week') {
             while ($current <= $max) {
-                $Y = date('Y', $current);
-                $W = date('W', $current);
+                $Y = $current->format('Y');
+                $W = $current->format('W');
 
                 $years[$Y] = array('label' => $Y, 'value' => $Y);
                 $weeks[$W] = array('label' => $W, 'value' => $W);
 
-                $current = strtotime('+1 week', $current);
+                $current->add(DateInterval::createFromDateString('1 week'));
             }
         } else if ($field === 'time') {
             while ($current <= $max) {
-                $H = date('H', $current);
-                $i = date('i', $current);
+                $H = $current->format('H');
+                $i = $current->format('i');
 
                 $hours[$H] = array('label' => ltrim($H, '0'), 'value' => $H);
                 $minutes[$i] = array('label' => ltrim($i, '0'), 'value' => $i);
 
-                $current = strtotime('+1 minute', $current);
+                $current->add(DateInterval::createFromDateString('1 minute'));
             }
 
             for ($i = 0; $i < 60; $i++) {
@@ -441,7 +439,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             foreach ($months as $month) {
                 $month_params = array();
                 $month_params['value'] = $month['value'];
-                if ($month['value'] == date('m', $selected)) {
+                if ($month['value'] == $selected->format('m')) {
                     $month_params['selected'] = 'selected';
                 }
                 $month_options[] = HTML_Decorator::tag('option', $month['label'], $month_params);
@@ -455,7 +453,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             foreach ($weeks as $week) {
                 $week_params = array();
                 $week_params['value'] = $week['value'];
-                if ($week['value'] == date('W', $selected)) {
+                if ($week['value'] == $selected->format('W')) {
                     $week_params['selected'] = 'selected';
                 }
                 $week_options[] = HTML_Decorator::tag('option', $week['label'], $week_params);
@@ -469,7 +467,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             foreach ($days as $day) {
                 $day_params = array();
                 $day_params['value'] = $day['value'];
-                if ($day['value'] == date('d', $selected)) {
+                if ($day['value'] == $selected->format('d')) {
                     $day_params['selected'] = 'selected';
                 }
                 $day_options[] = HTML_Decorator::tag('option', $day['label'], $day_params);
@@ -483,7 +481,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             foreach ($years as $year) {
                 $year_params = array();
                 $year_params['value'] = $year['value'];
-                if ($year['value'] == date('Y', $selected)) {
+                if ($year['value'] == $selected->format('Y')) {
                     $year_params['selected'] = 'selected';
                 }
                 $year_options[] = HTML_Decorator::tag('option', $year['label'], $year_params);
@@ -497,7 +495,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             foreach ($hours as $hour) {
                 $hour_params = array();
                 $hour_params['value'] = $hour['value'];
-                if ($hour['value'] == date('H', $selected)) {
+                if ($hour['value'] == $selected->format('H')) {
                     $hour_params['selected'] = 'selected';
                 }
                 $hour_options[] = HTML_Decorator::tag('option', $hour['label'], $hour_params);
@@ -511,7 +509,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             foreach ($minutes as $minute) {
                 $minute_params = array();
                 $minute_params['value'] = $minute['value'];
-                if ($minute['value'] == date('i', $selected)) {
+                if ($minute['value'] == $selected->format('i')) {
                     $minute_params['selected'] = 'selected';
                 }
                 $minute_options[] = HTML_Decorator::tag('option', $minute['label'], $minute_params);
@@ -526,7 +524,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             foreach ($seconds as $second) {
                 $second_params = array();
                 $second_params['value'] = $second['value'];
-                if ($second['value'] == date('s', $selected)) {
+                if ($second['value'] == $selected->format('s')) {
                     $second_params['selected'] = 'selected';
                 }
                 $second_options[] = HTML_Decorator::tag('option', $second['label'], $second_params);
@@ -724,12 +722,12 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             $option_id = htmlspecialchars($option['id']);
             $option_label = htmlspecialchars($option['label']);
             $option_value = htmlspecialchars($option['value']);
-            $option_params = $option['params'];
+            $option_params = isset($option['params']) ? $options['param'] : array();
 
             if (!is_array($option_params))
                 $option_params = array();
 
-            if ($params['disabled']) {
+            if (! empty($params['disabled'])) {
                 $option_params['disabled'] = 'disabled';
             }
 
@@ -852,7 +850,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
         foreach ($options as $option) {
             $option_label = htmlspecialchars($option['label']);
             $option_value = htmlspecialchars($option['value']);
-            $option_params = $option['params'];
+            $option_params = isset($option['params']) ? $option['params'] : array();
 
             if (!is_array($option_params))
                 $option_params = array();
@@ -909,7 +907,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param string $params 
      */
     private function is_invalid_helper(&$params) {
-        if ($params['invalid']) {
+        if (! empty($params['invalid'])) {
             $params['class'] = $params['class'] . ' invalid';
         }
     }
@@ -920,7 +918,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param string $params 
      */
     private function disabled_helper(&$params) {
-        if ($params['disabled']) {
+        if (! empty($params['disabled'])) {
             $params['disabled'] = 'disabled';
         }
     }
@@ -934,13 +932,13 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      */
     private function add_label_tooltip($id, $label, $params) {
         $label_params = array();
-        if ($params['required'])
+        if (! empty($params['required']))
             $label_params['class'] = $params['class'] . ' required';
 
         $this->_form_elements[] = HTML_Decorator::tag('label', $label, 
                 array_merge($label_params, array('for' => $id)));
 
-        if ($params['tooltip']) {
+        if (! empty($params['tooltip'])) {
             $this->_form_elements[] = HTML_Decorator::tag('span', htmlspecialchars($params['tooltip']), array('class' => 'tiptext'));
         }
     }
@@ -951,7 +949,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params 
      */
     private function add_placeholder($params) {
-        if ($params['placeholder']) {
+        if (! empty($params['placeholder'])) {
             $this->_form_elements[] = HTML_Decorator::tag('span', htmlspecialchars($params['placeholder']), array('class' => 'placeholder'));
         }
     }
@@ -962,7 +960,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params 
      */
     private function add_invalid($params) {
-        if ($params['invalid']) {
+        if (! empty($params['invalid'])) {
             $this->_form_elements[] = HTML_Decorator::tag('p', htmlspecialchars($params['invalid']), array('class' => 'invalid'));
         }
     }
