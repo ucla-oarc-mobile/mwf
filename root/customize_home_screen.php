@@ -7,7 +7,7 @@
  * @author trott
  * @copyright Copyright (c) 2012 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120220
+ * @version 20120308
  *
  * @uses Config
  * @uses Decorator
@@ -79,7 +79,7 @@ if (Classification::is_full()) {
             ->add_inner($js .
                     "var cm = mwf.full.configurableMenu('homescreen_layout');" .
                     "function renderMenu()" .
-                    "{cm.render('app_order',apps,disabledApps)}" .
+                    "{cm.render('app_order',apps, disabledApps)}" .
                     "renderMenu();")
             ->render();
 } else {
