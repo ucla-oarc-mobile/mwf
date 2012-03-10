@@ -595,11 +595,11 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
         if ($class !== false) {
             if (isset($params['class'])) {
                 $params['class'] .= ' ' . $class;
+            } else {
+                $params['class'] = $class;
             }
-        } else {
-            $params['class'] = $class;
         }
-        
+
         $this->_form_elements[] = HTML_Decorator::tag('input', false, array_merge($params, array('type' => 'submit', 'value' => $value)));
 
         return $this;
@@ -729,7 +729,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             if (!is_array($option_params))
                 $option_params = array();
 
-            if (! empty($params['disabled'])) {
+            if (!empty($params['disabled'])) {
                 $option_params['disabled'] = 'disabled';
             }
 
@@ -902,7 +902,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param string $params 
      */
     private function is_invalid_helper(&$params) {
-        if (! empty($params['invalid'])) {
+        if (!empty($params['invalid'])) {
             $params['class'] = $params['class'] . ' invalid';
         }
     }
@@ -913,7 +913,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param string $params 
      */
     private function disabled_helper(&$params) {
-        if (! empty($params['disabled'])) {
+        if (!empty($params['disabled'])) {
             $params['disabled'] = 'disabled';
         }
     }
@@ -927,12 +927,12 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      */
     private function add_label_tooltip($id, $label, $params) {
         $label_params = array();
-        if (! empty($params['required']))
+        if (!empty($params['required']))
             $label_params['class'] = $params['class'] . ' required';
 
         $this->_form_elements[] = HTML_Decorator::tag('label', $label, array_merge($label_params, array('for' => $id)));
 
-        if (! empty($params['tooltip'])) {
+        if (!empty($params['tooltip'])) {
             $this->_form_elements[] = HTML_Decorator::tag('span', htmlspecialchars($params['tooltip']), array('class' => 'tiptext'));
         }
     }
@@ -943,7 +943,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params 
      */
     private function add_placeholder($params) {
-        if (! empty($params['placeholder'])) {
+        if (!empty($params['placeholder'])) {
             $this->_form_elements[] = HTML_Decorator::tag('span', htmlspecialchars($params['placeholder']), array('class' => 'placeholder'));
         }
     }
@@ -954,7 +954,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $params 
      */
     private function add_invalid($params) {
-        if (! empty($params['invalid'])) {
+        if (!empty($params['invalid'])) {
             $this->_form_elements[] = HTML_Decorator::tag('p', htmlspecialchars($params['invalid']), array('class' => 'invalid'));
         }
     }

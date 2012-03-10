@@ -53,8 +53,30 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     public function addButton_withParams_paramsAreIncluded() {
         require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
         $this->object = new Form_Site_Decorator;
-        $this->object->add_button('foo',array('bar'=>'baz'));
+        $this->object->add_button('foo', array('bar' => 'baz'));
         $this->assertContains('bar="baz"', $this->object->render());
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addButton_noClass_noClassRendered() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_button('foo', array('bar' => 'baz'));
+        $this->assertNotContains('class', $this->object->render());
+    }
+    
+        /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addButton_class_classRendered() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_button('foo', array('bar' => 'baz','class' => 'classy'));
+        $this->assertContains('class="classy"', $this->object->render());
     }
 
 }
