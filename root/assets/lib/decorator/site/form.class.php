@@ -13,8 +13,8 @@
  * @uses Decorator
  * @uses Tag_HTML_Decorator
  */
-require_once(dirname(dirname(dirname(__FILE__))) . '/decorator.class.php');
-require_once(dirname(dirname(__FILE__)) . '/html/tag.class.php');
+require_once(dirname(dirname(__DIR__)) . '/decorator.class.php');
+require_once(dirname(__DIR__) . '/html/tag.class.php');
 
 class Form_Site_Decorator extends Tag_HTML_Decorator {
 
@@ -238,8 +238,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             $params['class'] = $params['class'] . ' ' . $field;
         }
 
-        $this->_form_elements[] = HTML_Decorator::tag('input', false,
-                array_merge($params, array('type' => 'text', 'id' => $id, 'name' => $id)));
+        $this->_form_elements[] = HTML_Decorator::tag('input', false, array_merge($params, array('type' => 'text', 'id' => $id, 'name' => $id)));
 
         $this->add_placeholder($params);
 
@@ -332,7 +331,6 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @return \Form_Site_Decorator 
      */
     private function add_datetime_helper($field, $id, $label, $min, $max, $params) {
-
         $id = htmlspecialchars($id);
         $label = htmlspecialchars($label);
         $min = htmlspecialchars($min);
@@ -547,7 +545,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @return type 
      */
     public function add_submit($value = 'Submit', $params = array()) {
-        return $this->add_button_helper($value, 'primary', false, $params);
+        return $this->add_button_helper($value, $params, 'primary');
     }
 
     /**
@@ -558,7 +556,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @return type 
      */
     public function add_primary_button($value = '', $params = array()) {
-        return $this->add_button_helper($value, 'primary', false, $params);
+        return $this->add_button_helper($value, $params, 'primary');
     }
 
     /**
@@ -569,36 +567,40 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @return type 
      */
     public function add_secondary_button($value = '', $params = array()) {
-        return $this->add_button_helper($value, 'secondary', false, $params);
+        return $this->add_button_helper($value, $params, 'secondary');
     }
 
     /**
      * Adds a neutral submit button.
      * 
-     * @param type $value
-     * @param type $params Optiaonal parameters.  Possible values include 'disabled' => true.
+     * @param string $value
+     * @param array $params Optiaonal parameters.  Possible values include 'disabled' => true.
      * @return type 
      */
     public function add_button($value = '', $params = array()) {
-        return $this->add_button_helper($value, false, false, $params);
+        return $this->add_button_helper($value, $params, false);
     }
 
     /**
      * Helper function to generate form buttons.
      * 
-     * @param type $value
-     * @param type $class
+     * @param string $value
      * @param array $params
-     * @return \Form_Site_Decorator 
+     * @param string|false $class
+     * @return Form_Site_Decorator 
      */
-    private function add_button_helper($value, $class, $params) {
+    private function add_button_helper($value, $params, $class=false) {
         $value = htmlspecialchars($value);
-        $class = htmlspecialchars($class);
 
-        $params['class'] = $params['class'] . ' ' . $class;
-
-        $this->_form_elements[] = HTML_Decorator::tag('input', false, 
-                array_merge($params, array('type' => 'submit', 'value' => $value)));
+        if ($class !== false) {
+            if (isset($params['class'])) {
+                $params['class'] .= ' ' . $class;
+            }
+        } else {
+            $params['class'] = $class;
+        }
+        
+        $this->_form_elements[] = HTML_Decorator::tag('input', false, array_merge($params, array('type' => 'submit', 'value' => $value)));
 
         return $this;
     }
@@ -732,20 +734,16 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             }
 
             if ($align !== 'left') {
-                $option_elements[] = HTML_Decorator::tag('label', $option_label, 
-                        array_merge($params, array('for' => $option_id)));
+                $option_elements[] = HTML_Decorator::tag('label', $option_label, array_merge($params, array('for' => $option_id)));
             }
 
-            $option_elements[] = HTML_Decorator::tag('input', false, 
-                    array_merge($option_params, 
-                            array('type' => $type,
+            $option_elements[] = HTML_Decorator::tag('input', false, array_merge($option_params, array('type' => $type,
                                 'id' => $option_id,
                                 'name' => $id,
                                 'value' => $option_value)));
 
             if ($align === 'left') {
-                $option_elements[] = HTML_Decorator::tag('label', $option_label, 
-                        array_merge($params, array('for' => $option_id)));
+                $option_elements[] = HTML_Decorator::tag('label', $option_label, array_merge($params, array('for' => $option_id)));
             }
 
             $option_elements[] = HTML_Decorator::tag('br', false);
@@ -858,12 +856,10 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             if ($selected && $option_value === $selected)
                 $option_params['selected'] = 'selected';
 
-            $option_elements[] = HTML_Decorator::tag('option', $option_label, 
-                    array_merge($option_params, array('value' => $option_value)));
+            $option_elements[] = HTML_Decorator::tag('option', $option_label, array_merge($option_params, array('value' => $option_value)));
         }
 
-        $this->_form_elements[] = HTML_Decorator::tag('select', $option_elements, 
-                array_merge($params, array('id' => $id, 'name' => $id)));
+        $this->_form_elements[] = HTML_Decorator::tag('select', $option_elements, array_merge($params, array('id' => $id, 'name' => $id)));
 
         $this->add_invalid($params);
 
@@ -891,8 +887,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             $this->add_label_tooltip($id, $label, $params);
         }
 
-        $this->_form_elements[] = HTML_Decorator::tag('textarea', '', 
-                array_merge($params, array('id' => $id, 'name' => $id)));
+        $this->_form_elements[] = HTML_Decorator::tag('textarea', '', array_merge($params, array('id' => $id, 'name' => $id)));
 
         $this->add_placeholder($params);
 
@@ -935,8 +930,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
         if (! empty($params['required']))
             $label_params['class'] = $params['class'] . ' required';
 
-        $this->_form_elements[] = HTML_Decorator::tag('label', $label, 
-                array_merge($label_params, array('for' => $id)));
+        $this->_form_elements[] = HTML_Decorator::tag('label', $label, array_merge($label_params, array('for' => $id)));
 
         if (! empty($params['tooltip'])) {
             $this->_form_elements[] = HTML_Decorator::tag('span', htmlspecialchars($params['tooltip']), array('class' => 'tiptext'));

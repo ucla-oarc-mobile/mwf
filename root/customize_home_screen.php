@@ -7,7 +7,7 @@
  * @author trott
  * @copyright Copyright (c) 2012 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120220
+ * @version 20120308
  *
  * @uses Config
  * @uses Decorator
@@ -54,7 +54,7 @@ if (Classification::is_full()) {
                 '&nbsp;<input type="submit" onclick="cm.moveDown(' .
                 $encoded_key . '); renderMenu(); return false" value="Down">' .
                 '&nbsp;<input type="checkbox" onclick="cm.set(' .
-                $encoded_key . ',this.checked); renderMenu()" id="'.$this_id.'" checked>&nbsp;<label for="' .
+                $encoded_key . ',this.checked); renderMenu()" id="' . $this_id . '" checked>&nbsp;<label for="' .
                 $this_id .
                 '">' .
                 htmlspecialchars($apps[$key]) .
@@ -62,7 +62,7 @@ if (Classification::is_full()) {
         $disabled_apps_rendered[$key] = '<div><input type="submit" value="Up" disabled>' .
                 '<input type="submit" value="Down" disabled>' .
                 '<input type="checkbox" onclick="cm.set(' .
-                $encoded_key . ',this.checked); renderMenu()" id="'.$this_id.'"><label for="' . $this_id . '">' .
+                $encoded_key . ',this.checked); renderMenu()" id="' . $this_id . '"><label for="' . $this_id . '">' .
                 htmlspecialchars($apps[$key]) . '</label></div>';
     }
 
@@ -77,9 +77,9 @@ if (Classification::is_full()) {
 
     echo HTML_Decorator::tag('script')
             ->add_inner($js .
-                    "var cm = mwf.full.configurableMenu('homescreen_layout');".
-                    "function renderMenu()".
-                    "{cm.render('app_order',apps,disabledApps)}".
+                    "var cm = mwf.full.configurableMenu('homescreen_layout');" .
+                    "function renderMenu()" .
+                    "{cm.render('app_order',apps, disabledApps)}" .
                     "renderMenu();")
             ->render();
 } else {
@@ -89,6 +89,11 @@ if (Classification::is_full()) {
             ->add_paragraph('Device does not support customization.')
             ->render();
 }
+
+echo Site_Decorator::button()
+        ->set_padded()
+        ->add_option('Reset To Default', '#', array('onclick'=>'cm.reset(); renderMenu(); return false'))
+        ->render();
 
 echo Site_Decorator::button()
         ->set_padded()
