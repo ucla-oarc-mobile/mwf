@@ -514,3 +514,20 @@ test("mwf.full.configurableMenu render() some settings, missing items set castin
         mwf.standard.preferences.set('homescreen_layout',oldValue);
     }
 });
+
+test("mwf.full.configurableMenu reset() removes settings", function()
+{
+    var oldValue = mwf.standard.preferences.get('homescreen_layout', oldValue);
+    mwf.standard.preferences.set('homescreen_layout',JSON.stringify({
+        "on":[1]
+    }));
+    
+    var cm = mwf.full.configurableMenu('homescreen_layout');
+    cm.reset();
+    var prefResults = mwf.standard.preferences.get('homescreen_layout');
+    strictEqual(prefResults,null,'clear() should remove preferences list');
+    
+    if (oldValue != null) {
+        mwf.standard.preferences.set('homescreen_layout',oldValue);
+    }
+})

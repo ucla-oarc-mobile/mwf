@@ -8,7 +8,7 @@
  * @author trott
  * @copyright Copyright (c) 2012 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120301
+ * @version 20120308
  *
  * @requires mwf
  * @requires mwf.standard.preferences
@@ -16,22 +16,20 @@
  */
 
 mwf.full.configurableMenu=function(prefsKey){
-    
-    var _prefsKey = prefsKey;
- 
-    var _getPrefsLists = function() {
+     
+    var getPrefsLists = function() {
         var keys = null;
         
         if (mwf.standard.preferences.isSupported()) {
-            var prefsValue = mwf.standard.preferences.get(_prefsKey);
+            var prefsValue = mwf.standard.preferences.get(prefsKey);
             if (prefsValue!==null)
                 try {
                     keys = JSON.parse(prefsValue);    
                 } catch (e) {
-                // String from user's preferences is not a valid JSON object.
-                // Revert to default.
-                keys = null;
-            }
+                    // String from user's preferences is not a valid JSON object.
+                    // Revert to default.
+                    keys = null;
+                }
         }
         return keys;
     }
@@ -54,7 +52,7 @@ mwf.full.configurableMenu=function(prefsKey){
                 return;
         
             var result = '';
-            var keys = _getPrefsLists();
+            var keys = getPrefsLists();
         
             if (keys===null) {
                 keys={};
@@ -65,7 +63,7 @@ mwf.full.configurableMenu=function(prefsKey){
                         result += menuItems[key];
                     }
                 if (mwf.standard.preferences.isSupported())
-                    mwf.standard.preferences.set(_prefsKey,JSON.stringify(keys));
+                    mwf.standard.preferences.set(prefsKey,JSON.stringify(keys));
             } else {
                 // Render items in 'on' in the correct order
                 var i;
@@ -93,7 +91,7 @@ mwf.full.configurableMenu=function(prefsKey){
                     }
                 }
                 if (mwf.standard.preferences.isSupported())
-                    mwf.standard.preferences.set(_prefsKey,JSON.stringify(keys));
+                    mwf.standard.preferences.set(prefsKey,JSON.stringify(keys));
             
                 // If 'disabledMenuItems' was sent, then render items from 'off'
                 if (disabledMenuItems) {
@@ -116,7 +114,7 @@ mwf.full.configurableMenu=function(prefsKey){
          */
         set: function(itemId, enable) {
             var prop = enable ? "on" : "off";
-            var keys = _getPrefsLists();
+            var keys = getPrefsLists();
 
             if (keys==null) {
                 keys={};
@@ -135,7 +133,7 @@ mwf.full.configurableMenu=function(prefsKey){
                 while (keys[otherProp].indexOf(itemId)!=-1)
                     keys[otherProp].splice(keys[otherProp].indexOf(itemId),1);
             }
-            mwf.standard.preferences.set(_prefsKey,JSON.stringify(keys));
+            mwf.standard.preferences.set(prefsKey,JSON.stringify(keys));
         },
     
         /**
@@ -145,14 +143,14 @@ mwf.full.configurableMenu=function(prefsKey){
          * 
          */
         moveUp: function(itemId) {
-            keys = _getPrefsLists();
+            keys = getPrefsLists();
             if (keys.hasOwnProperty('on')) {
                 var index = keys.on.indexOf(itemId);
                 if (index > 0) {
                     var temp = keys.on[index];
                     keys.on[index] = keys.on[index-1];
                     keys.on[index-1] = temp;
-                    mwf.standard.preferences.set(_prefsKey,JSON.stringify(keys))
+                    mwf.standard.preferences.set(prefsKey,JSON.stringify(keys))
                 }   
             }
         },
@@ -164,16 +162,24 @@ mwf.full.configurableMenu=function(prefsKey){
          * 
          */
         moveDown: function(itemId) {
-            keys = _getPrefsLists();
+            keys = getPrefsLists();
             if (keys.hasOwnProperty('on')) {
                 var index = keys.on.indexOf(itemId);
                 if (index > -1 && index < keys.on.length-1) {
                     var temp = keys.on[index];
                     keys.on[index] = keys.on[index+1];
                     keys.on[index+1] = temp;
-                    mwf.standard.preferences.set(_prefsKey,JSON.stringify(keys))
+                    mwf.standard.preferences.set(prefsKey,JSON.stringify(keys))
                 }   
             }
-        }   
+        },
+        
+        /**
+         * Resets the list order to the default.
+         * 
+         */
+        reset: function() {
+            mwf.standard.preferences.clear(prefsKey);
+        }
     }
 };
