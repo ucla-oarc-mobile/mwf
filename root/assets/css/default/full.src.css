@@ -562,3 +562,11 @@ div.message-button.padded {
 .webkit-transition-slideXZ .inactive-next{
     -webkit-transform: rotateX(90deg) scale3d(.835,.835,.835) translateX(30%);
 }
+
+/**
+ * Sortable Options (used for Customize Home Screen)
+ */
+ div#app_order.option.ui-sortable > div {
+     background-color: #869AC5;
+     margin: 1px;
+ }
