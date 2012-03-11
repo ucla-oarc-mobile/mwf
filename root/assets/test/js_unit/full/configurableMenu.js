@@ -4,7 +4,7 @@
  * @author trott
  * @copyright Copyright (c) 2012 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120308
+ * @version 20120310
  *
  * @requires mwf
  * @requires mwf.full.configurableMenu
@@ -245,7 +245,7 @@ test("mwf.full.configurableMenu render() disabled items sent", function()
     }
 })
 
-test("mwf.full.configurableMenu set() enable new item", function()
+test("mwf.full.configurableMenu enableItem() enable new item", function()
 {
     var oldValue = mwf.standard.preferences.get('homescreen_layout');
     var initialPrefs = {
@@ -308,7 +308,7 @@ test("mwf.full.configurableMenu set() enable new item", function()
 
     var cm = mwf.full.configurableMenu('homescreen_layout');
 
-    cm.set(7,true);
+    cm.enableItem(7,true);
     
     var newPrefsString = mwf.standard.preferences.get('homescreen_layout');
     var newPrefs = JSON.parse(newPrefsString);
@@ -320,7 +320,7 @@ test("mwf.full.configurableMenu set() enable new item", function()
     
 });
 
-test("mwf.full.configurableMenu set() disable new item", function()
+test("mwf.full.configurableMenu enableItem() disable new item", function()
 {
     var oldValue = mwf.standard.preferences.get('homescreen_layout');
     var initialPrefs = {
@@ -383,7 +383,7 @@ test("mwf.full.configurableMenu set() disable new item", function()
 
     var cm = mwf.full.configurableMenu('homescreen_layout');
 
-    cm.set(7,false);
+    cm.enableItem(7,false);
     
     var newPrefsString = mwf.standard.preferences.get('homescreen_layout');
     var newPrefs = JSON.parse(newPrefsString);
@@ -396,7 +396,7 @@ test("mwf.full.configurableMenu set() disable new item", function()
     
 });
 
-test("mwf.full.configurableMenu set() enable disabled item", function()
+test("mwf.full.configurableMenu enableItem() enable disabled item", function()
 {
     var oldValue = mwf.standard.preferences.get('homescreen_layout');
     var initialPrefs = {
@@ -456,7 +456,7 @@ test("mwf.full.configurableMenu set() enable disabled item", function()
 
     var cm = mwf.full.configurableMenu('homescreen_layout');
 
-    cm.set(4,true);
+    cm.enableItem(4,true);
     
     var newPrefsString = mwf.standard.preferences.get('homescreen_layout');
     var newPrefs = JSON.parse(newPrefsString);
@@ -469,7 +469,7 @@ test("mwf.full.configurableMenu set() enable disabled item", function()
     
 });
 
-test("mwf.full.configurableMenu set() disable enabled item", function()
+test("mwf.full.configurableMenu enableItem() disable enabled item", function()
 {
     var oldValue = mwf.standard.preferences.get('homescreen_layout');
     var initialPrefs = {
@@ -528,7 +528,7 @@ test("mwf.full.configurableMenu set() disable enabled item", function()
 
     var cm = mwf.full.configurableMenu('homescreen_layout');
 
-    cm.set(3,false);
+    cm.enableItem(3,false);
     
     var newPrefsString = mwf.standard.preferences.get('homescreen_layout');
     var newPrefs = JSON.parse(newPrefsString);
@@ -541,7 +541,7 @@ test("mwf.full.configurableMenu set() disable enabled item", function()
     
 });
 
-test("mwf.full.configurableMenu set() enable enabled item", function()
+test("mwf.full.configurableMenu enableItem() enable enabled item", function()
 {
     var oldValue = mwf.standard.preferences.get('homescreen_layout');
     
@@ -602,7 +602,7 @@ test("mwf.full.configurableMenu set() enable enabled item", function()
 
     var cm = mwf.full.configurableMenu('homescreen_layout');
 
-    cm.set(3,true);
+    cm.enableItem(3,true);
     
     var newPrefsString = mwf.standard.preferences.get('homescreen_layout');
     var newPrefs = JSON.parse(newPrefsString);
@@ -615,7 +615,7 @@ test("mwf.full.configurableMenu set() enable enabled item", function()
     
 });
 
-test("mwf.full.configurableMenu set() disable disabled item", function()
+test("mwf.full.configurableMenu enableItem() disable disabled item", function()
 {
     var oldValue = mwf.standard.preferences.get('homescreen_layout');
     
@@ -676,7 +676,7 @@ test("mwf.full.configurableMenu set() disable disabled item", function()
 
     var cm = mwf.full.configurableMenu('homescreen_layout');
 
-    cm.set(4,false);
+    cm.enableItem(4,false);
     
     var newPrefsString = mwf.standard.preferences.get('homescreen_layout');
     var newPrefs = JSON.parse(newPrefsString);
@@ -714,7 +714,7 @@ test("mwf.full.configurableMenu render() should not have side effects on passed 
     }
 })
 
-test("mwf.full.configurableMenu moveUp() moves item up", function()
+test("mwf.full.configurableMenu setItemPosition() moves item up", function()
 {
     var oldValue = mwf.standard.preferences.get('homescreen_layout');
     var initialPrefs = {
@@ -769,7 +769,8 @@ test("mwf.full.configurableMenu moveUp() moves item up", function()
     
     var cm = mwf.full.configurableMenu('homescreen_layout');
     
-    cm.moveUp(14);
+    cm.setItemPosition(14,2);
+    cm.setItemPosition(12,3);
     
     var newPrefs = JSON.parse(mwf.standard.preferences.get('homescreen_layout'));
     deepEqual(newPrefs,expectedPrefs);
@@ -834,7 +835,8 @@ test("mwf.full.configurableMenu moveDown() moves item down", function()
     
     var cm = mwf.full.configurableMenu('homescreen_layout');
     
-    cm.moveDown(14);
+    cm.setItemPosition(14,4);
+    cm.setItemPosition(10,3);
     
     deepEqual(JSON.parse(mwf.standard.preferences.get('homescreen_layout')),expectedPrefs);
         

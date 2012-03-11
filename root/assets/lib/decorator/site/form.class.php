@@ -8,7 +8,7 @@
  * @author trott
  * @copyright Copyright (c) 2012 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120301
+ * @version 20120310
  *
  * @uses Decorator
  * @uses Tag_HTML_Decorator
@@ -47,7 +47,6 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     private $_form_elements = array();
 
     /**
-     * Form constructor.
      * 
      * @param type $title Form title text
      * @param type $params 
@@ -57,12 +56,12 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
         if ($title)
             $this->set_title($title);
     }
-
+    
     /**
      * Sets the form's padded attribute.
      * 
      * @param type $val Defaults to true.
-     * @return \Form_Site_Decorator 
+     * @return Form_Site_Decorator 
      */
     public function set_padded($val = true) {
         $this->_padded = $val ? true : false;
@@ -73,7 +72,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * Sets the form's short attribute.
      * 
      * @param type $val Defaults to true.
-     * @return \Form_Site_Decorator 
+     * @return Form_Site_Decorator 
      */
     public function set_short($val = true) {
         $this->_short = $val ? true : fasle;
@@ -85,7 +84,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * 
      * @param type $inner
      * @param type $params Optional params array.  Possible values include 'class' => 'blue'.
-     * @return \Form_Site_Decorator 
+     * @return Form_Site_Decorator 
      */
     public function set_title($inner, $params = array()) {
         $this->_title = $inner === false ? false : HTML_Decorator::tag('h1', $inner, $params);
@@ -97,7 +96,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * 
      * @param type $inner
      * @param type $params
-     * @return \Form_Site_Decorator 
+     * @return Form_Site_Decorator 
      */
     public function add_subtitle($inner, $params = array()) {
         $this->_form_elements[] = HTML_Decorator::tag('h4', $inner, $params);
@@ -109,7 +108,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * 
      * @param type $inner
      * @param type $params
-     * @return \Form_Site_Decorator 
+     * @return Form_Site_Decorator 
      */
     public function add_paragraph($inner, $params = array()) {
         $this->_form_elements[] = HTML_Decorator::tag('p', $inner, $params);
@@ -117,11 +116,11 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     }
 
     /**
-     * Adds a section (a HTML div element).
+     * Adds a section.
      * 
      * @param type $inner
      * @param type $params
-     * @return \Form_Site_Decorator 
+     * @return Form_Site_Decorator 
      */
     public function add_section($inner, $params = array()) {
         $this->_form_elements[] = HTML_Decorator::tag('div', $inner, $params);
@@ -133,7 +132,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * 
      * @param type $inner
      * @param type $params
-     * @return \Form_Site_Decorator 
+     * @return Form_Site_Decorator 
      */
     public function add_fieldset($inner, $params = array()) {
         $this->_form_elements[] = HTML_Decorator::tag('fieldset', $inner, $params);
@@ -219,7 +218,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $label
      * @param type $field
      * @param string $params
-     * @return \Form_Site_Decorator 
+     * @return Form_Site_Decorator 
      */
     private function add_input_helper($id, $label, $field, $params) {
         $id = htmlspecialchars($id);
@@ -328,7 +327,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $min
      * @param type $max
      * @param type $params
-     * @return \Form_Site_Decorator 
+     * @return Form_Site_Decorator 
      */
     private function add_datetime_helper($field, $id, $label, $min, $max, $params) {
         $id = htmlspecialchars($id);
@@ -644,7 +643,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $value
      * @param type $class
      * @param array $params
-     * @return \Form_Site_Decorator 
+     * @return Form_Site_Decorator 
      */
     private function add_link_button_helper($value, $class, $params) {
         $value = htmlspecialchars($value);
@@ -701,7 +700,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $label
      * @param type $options
      * @param type $params
-     * @return \Form_Site_Decorator 
+     * @return Form_Site_Decorator 
      */
     private function add_options_helper($type, $id, $label, $options, $params) {
         $id = htmlspecialchars($id);
@@ -873,7 +872,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param type $label
      * @param type $required
      * @param type $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
-     * @return \Form_Site_Decorator 
+     * @return Form_Site_Decorator 
      */
     public function add_textarea($id = false, $label = false, $params = array()) {
         $id = htmlspecialchars($id);
@@ -960,13 +959,11 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     }
 
     public function render() {
-        /* padded */
         if ($this->_padded)
             $this->add_class('padded');
         elseif ($this->_padded === false)
             $this->remove_class('padded');
 
-        /* short */
         if ($this->_short)
             $this->add_class('short');
         elseif ($this->_short === false)

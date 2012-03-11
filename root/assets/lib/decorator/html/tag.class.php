@@ -29,41 +29,41 @@ class Tag_HTML_Decorator extends Decorator
         $this->add_inner($inner);
     }
 
-    public function &set_param($key, $val)
+    public function set_param($key, $val)
     {
         $this->_tag_open->set_param($key, $val);
         return $this;
     }
 
-    public function &set_params($params)
+    public function set_params($params)
     {
         $this->_tag_open->set_params($params);
         return $this;
     }
 
-    public function &add_class($class)
+    public function add_class($class)
     {
         $this->_tag_open->add_class($class);
         return $this;
     }
 
-    public function &remove_class($class)
+    public function remove_class($class)
     {
         $this->_tag_open->remove_class($class);
         return $this;
     }
 
-    public function &add_inner_tag($tag, $inner = '', $params = array())
+    public function add_inner_tag($tag, $inner = '', $params = array())
     {
         return $this->add_inner(new Tag_HTML_Decorator($tag, $inner, $params));
     }
 
-    public function &add_inner_tag_front($tag, $inner = '', $params = array())
+    public function add_inner_tag_front($tag, $inner = '', $params = array())
     {
         return $this->add_inner_front(new Tag_HTML_Decorator($tag, $inner, $params));
     }
 
-    public function &add_inner($content)
+    public function add_inner($content)
     {
         if(is_array($content))
             foreach($content as $c)
@@ -73,7 +73,7 @@ class Tag_HTML_Decorator extends Decorator
         return $this;
     }
 
-    public function &add_inner_front($content)
+    public function add_inner_front($content)
     {
         if(is_array($content))
             for($i=count($content)-1; $i <= 0; $i--)
@@ -83,7 +83,7 @@ class Tag_HTML_Decorator extends Decorator
         return $this;
     }
 
-    public function &flush_inner()
+    public function flush_inner()
     {
         $this->_inner = array();
         return $this;

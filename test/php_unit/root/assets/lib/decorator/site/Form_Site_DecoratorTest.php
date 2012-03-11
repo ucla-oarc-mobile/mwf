@@ -67,16 +67,28 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
         $this->object->add_button('foo', array('bar' => 'baz'));
         $this->assertNotContains('class', $this->object->render());
     }
-    
-        /**
+
+    /**
      * @test
      * @runInSeparateProcess
      */
     public function addButton_class_classRendered() {
         require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
         $this->object = new Form_Site_Decorator;
-        $this->object->add_button('foo', array('bar' => 'baz','class' => 'classy'));
+        $this->object->add_button('foo', array('bar' => 'baz', 'class' => 'classy'));
         $this->assertContains('class="classy"', $this->object->render());
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addSection_beforeFormElements_renderedBeforeFormElements() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_section('foo');
+        $this->object->add_button('bar');
+        $this->assertRegExp('/<div\b.+bar/', $this->object->render());
     }
 
 }

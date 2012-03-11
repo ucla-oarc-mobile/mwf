@@ -8,7 +8,7 @@
  * @author trott
  * @copyright Copyright (c) 2012 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120308
+ * @version 20120310
  *
  * @requires mwf
  * @requires mwf.standard.preferences
@@ -123,7 +123,7 @@ mwf.full.configurableMenu=function(prefsKey){
          * @param itemId string|int Corresponds to array key in ini file for menu.
          * @param enable boolean If true, enable item. Otherwise, disable.
          */
-        set: function(itemId, enable) {
+        enableItem: function(itemId, enable) {
             var i, add, on, found;
             var keys = getPrefsLists();
             
@@ -158,47 +158,23 @@ mwf.full.configurableMenu=function(prefsKey){
         },
     
         /**
-         * Moves the specified item up one space in the enabled items list.
+         * Sets specified item at the specified position in the items list, 
+         * overwriting anything that was already there..
          * 
-         * @param itemId string|int
-         * 
-         */
-        moveUp: function(itemId) {
-            var keys, i, temp;
-            keys = getPrefsLists();
-            if (keys && keys.hasOwnProperty('items')) {
-                for (i=1; i<keys.items.length; i++) {
-                    if (keys.items[i].key === +itemId) {
-                        temp = keys.items[i];
-                        keys.items[i] = keys.items[i-1];
-                        keys.items[i-1] = temp;
-                        mwf.standard.preferences.set(prefsKey,JSON.stringify(keys));
-                        break;
-                    }
-                }
-            }
-        },
-    
-        /**
-         * Moves the specified item down one space in the enabled items list.
-         * 
-         * @param itemId string|int
+         * @param itemId integer
+         * @param positioin integer
          * 
          */
-        moveDown: function(itemId) {
-            var keys, i, temp;
-            keys = getPrefsLists();
-            if (keys && keys.hasOwnProperty('items')) {
-                for (i=0; i<keys.items.length-1; i++) {
-                    if (keys.items[i].key === +itemId) {
-                        temp = keys.items[i];
-                        keys.items[i] = keys.items[i+1];
-                        keys.items[i+1] = temp;
-                        mwf.standard.preferences.set(prefsKey,JSON.stringify(keys));
-                        break;
-                    }
-                }
+        setItemPosition: function(itemId, position) {
+            var keys = getPrefsLists() || {};
+            if (! keys.hasOwnProperty('items')) {
+                keys.items = [];
             }
+            keys.items[position - 1] = {
+                key:+itemId,
+                on:1
+            };
+            mwf.standard.preferences.set(prefsKey,JSON.stringify(keys));                      
         },
         
         /**

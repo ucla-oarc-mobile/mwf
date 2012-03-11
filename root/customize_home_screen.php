@@ -31,6 +31,7 @@ echo HTML_Decorator::html_start()->render();
 
 echo Site_Decorator::head()->set_title('Customize Home Screen')
         ->add_js_handler_library('full_libs', 'configurableMenu')
+        ->add_js_handler_library('full_libs', 'jquery_ui_touch_punch')
         ->render();
 
 echo HTML_Decorator::body_start()->render();
@@ -49,20 +50,12 @@ if (Classification::is_full()) {
 
         $this_id = htmlspecialchars($ids[$key]);
         $encoded_key = json_encode($key);
-        $apps_rendered[$key] = '<div><input type="submit" onclick="cm.moveUp(' .
-                $encoded_key . '); renderMenu(); return false" value="Up">' .
-                '&nbsp;<input type="submit" onclick="cm.moveDown(' .
-                $encoded_key . '); renderMenu(); return false" value="Down">' .
-                '&nbsp;<input type="checkbox" onclick="cm.set(' .
-                $encoded_key . ',this.checked); renderMenu()" id="' . $this_id . '" checked>&nbsp;<label for="' .
+        $apps_rendered[$key] = '<div data-id="' . $encoded_key . '"><input id="' . $this_id .'" type="checkbox" checked>&nbsp;<label for="' .
                 $this_id .
                 '">' .
                 htmlspecialchars($apps[$key]) .
                 '</label></div>';
-        $disabled_apps_rendered[$key] = '<div><input type="submit" value="Up" disabled>' .
-                '<input type="submit" value="Down" disabled>' .
-                '<input type="checkbox" onclick="cm.set(' .
-                $encoded_key . ',this.checked); renderMenu()" id="' . $this_id . '"><label for="' . $this_id . '">' .
+        $disabled_apps_rendered[$key] = '<div data-id="' . $encoded_key . '"><input id="' . $this_id .'" type="checkbox"><label for="' . $this_id . '">' .
                 htmlspecialchars($apps[$key]) . '</label></div>';
     }
 
@@ -72,15 +65,23 @@ if (Classification::is_full()) {
             ->set_short()
             ->set_padded()
             ->add_paragraph('Changes are saved automatically.')
-            ->add_inner_tag('div', '', array('class' => 'option', 'id' => 'app_order'))
+            ->add_section('', array('class' => 'option', 'id' => 'app_order'))
+            ->add_button('Save', array('onclick'=>'saveMenu(); renderMenu(); return false'))
+            ->add_button('Cancel', array('onclick'=>'renderMenu(); return false'))
+            ->add_button('Reset To Default', array('onclick'=>'cm.reset(); renderMenu(); return false'))
             ->render();
 
     echo HTML_Decorator::tag('script')
             ->add_inner($js .
                     "var cm = mwf.full.configurableMenu('homescreen_layout');" .
+                    "function saveMenu()" .
+                    "{cm.reset();\$('#app_order').children().each(" . 
+                    "  function(index,element) {cm.setItemPosition(element.getAttribute('data-id'),index+1);" .
+                                               "cm.enableItem(element.getAttribute('data-id'),this.querySelector('[type=checkbox]').checked)})}" .
                     "function renderMenu()" .
                     "{cm.render('app_order',apps, disabledApps)}" .
-                    "renderMenu();")
+                    "renderMenu();" .
+                    '$(function() { $( "#app_order" ).sortable(); $( "#app_order" ).disableSelection();});')
             ->render();
 } else {
     echo Site_Decorator::Content()
@@ -89,11 +90,6 @@ if (Classification::is_full()) {
             ->add_paragraph('Device does not support customization.')
             ->render();
 }
-
-echo Site_Decorator::button()
-        ->set_padded()
-        ->add_option('Reset To Default', '#', array('onclick'=>'cm.reset(); renderMenu(); return false'))
-        ->render();
 
 echo Site_Decorator::button()
         ->set_padded()
