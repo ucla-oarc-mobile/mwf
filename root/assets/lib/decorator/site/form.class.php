@@ -593,7 +593,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
 
         if ($class !== false) {
             if (isset($params['class'])) {
-                $params['class'] .= ' ' . $class;
+                $params['class'] = $params['class'] . ' ' . $class;
             } else {
                 $params['class'] = $class;
             }
@@ -705,9 +705,10 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     private function add_options_helper($type, $id, $label, $options, $params) {
         $id = htmlspecialchars($id);
         $label = htmlspecialchars($label);
-        $align = htmlspecialchars($params['align']);
-        if (!$align)
-            $align = 'left';
+        $align = 'left';
+        if (! empty($params['align'])) {
+            $align = htmlspecialchars($params['align']);
+        }
 
         $this->is_invalid_helper($params);
 
