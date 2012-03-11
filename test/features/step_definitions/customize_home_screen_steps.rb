@@ -17,12 +17,8 @@ And /^I should not see the so\-called "([^"]*)" menu item$/ do |item|
   should have_no_selector(:xpath, '//ol[@id="main_menu_list"]/li[a="' + @note[item] + '"]');
 end
 
-Then /I click the "([^"]*)" link/ do |link_text|
+Then /I click "([^"]*)"/ do |link_text|
   click_link(link_text)
-end
-
-Then /I click the "([^"]*)" button/ do |button_text|
-  click_button(button_text)
 end
 
 And /the "([^"]*)" page loads/ do |header_text|
