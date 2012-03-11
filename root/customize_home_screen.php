@@ -50,38 +50,45 @@ if (Classification::is_full()) {
 
         $this_id = htmlspecialchars($ids[$key]);
         $encoded_key = json_encode($key);
-        $apps_rendered[$key] = '<div data-id="' . $encoded_key . '"><input id="' . $this_id .'" type="checkbox" checked>&nbsp;<label for="' .
+        $apps_rendered[$key] = '<div data-id="' . $encoded_key . '"><input id="' . $this_id . '" type="checkbox" checked>&nbsp;<label for="' .
                 $this_id .
                 '">' .
                 htmlspecialchars($apps[$key]) .
-                '</label></div>';
-        $disabled_apps_rendered[$key] = '<div data-id="' . $encoded_key . '"><input id="' . $this_id .'" type="checkbox"><label for="' . $this_id . '">' .
-                htmlspecialchars($apps[$key]) . '</label></div>';
+                '</label><span class="draggable-handle"></span></div>';
+        $disabled_apps_rendered[$key] = '<div data-id="' . $encoded_key . '"><input id="' . $this_id . '" type="checkbox"><label for="' . $this_id . '">' .
+                htmlspecialchars($apps[$key]) . '</label><div class="draggable-handle"></div></div>';
     }
 
     $js = 'var apps=' . json_encode($apps_rendered) . ';var disabledApps=' . json_encode($disabled_apps_rendered) . ';';
 
     echo Site_Decorator::form('Customize Home Screen')
-            ->set_short()
             ->set_padded()
             ->add_paragraph('Drag menu items to desired order. Use checkboxes to remove items.')
             ->add_section('', array('class' => 'option', 'id' => 'app_order'))
-            ->add_button('Save', array('onclick'=>'saveMenu(); renderMenu(); return false'))
-            ->add_button('Cancel', array('onclick'=>'renderMenu(); return false'))
-            ->add_button('Reset To Default', array('onclick'=>'cm.reset(); renderMenu(); return false'))
+            ->render();
+
+    echo Site_Decorator::button()
+            ->set_padded()
+            ->add_option('Save', '#', array('onclick' => 'saveMenu(); renderMenu(); return false'))
+            ->add_option('Cancel', '#', array('onclick' => 'renderMenu(); return false'))
+            ->render();
+
+    echo Site_Decorator::button()
+            ->set_padded()
+            ->add_option('Reset To Default', '#', array('onclick' => 'cm.reset(); renderMenu(); return false'))
             ->render();
 
     echo HTML_Decorator::tag('script')
             ->add_inner($js .
                     "var cm = mwf.full.configurableMenu('homescreen_layout');" .
                     "function saveMenu()" .
-                    "{cm.reset();\$('#app_order').children().each(" . 
+                    "{cm.reset();\$('#app_order').children().each(" .
                     "  function(index,element) {cm.setItemPosition(element.getAttribute('data-id'),index+1);" .
-                                               "cm.enableItem(element.getAttribute('data-id'),this.querySelector('[type=checkbox]').checked)})}" .
+                    "cm.enableItem(element.getAttribute('data-id'),this.querySelector('[type=checkbox]').checked)})}" .
                     "function renderMenu()" .
                     "{cm.render('app_order',apps, disabledApps)}" .
                     "renderMenu();" .
-                    '$(function() { $( "#app_order" ).sortable(); $( "#app_order" ).disableSelection();});')
+                    '$(function() { $( "#app_order" ).sortable({handle:".draggable-handle"}); $( "#app_order" ).disableSelection();});')
             ->render();
 } else {
     echo Site_Decorator::Content()
