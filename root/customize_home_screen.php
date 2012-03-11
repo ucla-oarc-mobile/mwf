@@ -64,7 +64,7 @@ if (Classification::is_full()) {
     echo Site_Decorator::form('Customize Home Screen')
             ->set_short()
             ->set_padded()
-            ->add_paragraph('Changes are saved automatically.')
+            ->add_paragraph('Drag menu items to desired order. Use checkboxes to remove items.')
             ->add_section('', array('class' => 'option', 'id' => 'app_order'))
             ->add_button('Save', array('onclick'=>'saveMenu(); renderMenu(); return false'))
             ->add_button('Cancel', array('onclick'=>'renderMenu(); return false'))
