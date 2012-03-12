@@ -25,7 +25,7 @@ class Local_Image extends Image {
 
     private $_image_gd = null;
 
-    protected function &get_gd_image() {
+    protected function get_gd_image() {
         if ($this->_image_gd !== null)
             return $this->_image_gd;
 

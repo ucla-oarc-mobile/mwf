@@ -1,16 +1,16 @@
 <?php
 
 $_SERVER['HTTP_HOST'] = 'www.example.edu';
-require_once dirname(__FILE__) . '/../../../../../root/assets/lib/config.class.php';
-require_once dirname(__FILE__) . '/../../../../../root/assets/lib/image.class.php';
+require_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/root/assets/lib/config.class.php';
+require_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/root/assets/lib/image.class.php';
 
 /**
  * Test class for Image.
  * 
  * @author trott
- * @copyright Copyright (c) 2010-11 UC Regents
+ * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111106
+ * @version 20120312
  *
  * @uses PHPUnit_Framework_TestCase
  * @uses Image
@@ -23,8 +23,8 @@ class ImageTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
-        $cache_files = glob(Config::get('image','cache_dir').'/*');
-        foreach ($cache_files as $cache_file) { 
+        $cache_files = glob(Config::get('image', 'cache_dir') . '/*');
+        foreach ($cache_files as $cache_file) {
             if (is_file($cache_file))
                 unlink($cache_file);
         }
@@ -114,11 +114,15 @@ class ImageTest extends PHPUnit_Framework_TestCase {
      * @test
      */
     public function factory_RemoteImageTooLarge_noImage() {
+        /* This is expected to log a warning. Suppress it. */
+        $reporting = error_reporting();
+        error_reporting($reporting ^ ( E_USER_WARNING ));
+
+
         Config::set('image', 'memory_limit', 1024);
         $image = Image::factory('http://mwf.ucla.edu/img/ucla-logo.jpg');
         $this->assertEquals('', $image->get_mimetype());
+
+        error_reporting($reporting);
     }
-
 }
-
-?>

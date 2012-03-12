@@ -8,9 +8,9 @@
  * @subpackage path
  *
  * @author trott
- * @copyright Copyright (c) 2010-11 UC Regents
+ * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111110
+ * @version 20120312
  *
  * @uses Config
  * @uses Path_Validator
@@ -18,8 +18,8 @@
  * @todo Comments
  * @todo Refactor
  */
-require_once(dirname(dirname(__FILE__)) . '/config.php');
-require_once(dirname(__FILE__) . '/path_validator.class.php');
+require_once(dirname(__DIR__) . '/config.php');
+require_once(__DIR__ . '/path_validator.class.php');
 
 abstract class Image {
 
@@ -34,7 +34,7 @@ abstract class Image {
     /** GIF, JPG, and JPEG are within XHTML MP 1.0 specification. */
     private $_ext_allowed = array('gif', 'png', 'jpg', 'jpeg');
 
-    abstract protected function &get_gd_image();
+    abstract protected function get_gd_image();
 
     abstract protected function get_gd_extension();
 
@@ -202,5 +202,3 @@ abstract class Image {
     }
 
 }
-
-?>
