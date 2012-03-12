@@ -8,7 +8,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111213
+ * @version 20120306
  * 
  * @requires mwf.site
  * 
@@ -21,7 +21,7 @@ mwf.userAgent = new function() {
      * Name of the user agent cookie that may be written to expose UA-based
      * telemetry to the server.
      */
-    this.cookieName = mwf.site.cookie.prefix+'user_agent';
+    this.cookieName = mwf.site.cookie.prefix + 'user_agent';
     
     var userAgent = navigator.userAgent.toLowerCase();
     
@@ -41,11 +41,11 @@ mwf.userAgent = new function() {
         
         var i = 0,
         osToTest = ['android','blackberry','windows phone os',
-            'symbian','webos','mac os x','windows nt','linux'];
+        'symbian','webos','mac os x','windows nt','linux'];
                     
         for(;i<osToTest.length;i++)
             if(userAgentSubstringExists(osToTest[i]))
-                return osToTest[i];
+                return osToTest[i].replace(/ /g,"_");
         
         return '';
     }
@@ -80,7 +80,7 @@ mwf.userAgent = new function() {
                     r = ua.substring(s, Math.min(ua.indexOf(' ', s), ua.indexOf(';', s), ua.indexOf('-', s)));
                 }
                 break;
-            case 'windows phone os':
+            case 'windows_phone_os':
                 if((s = ua.indexOf('windows phone os ')) != -1){
                     s += 17;
                     r = ua.substring(s, ua.indexOf(';', s));
@@ -111,12 +111,12 @@ mwf.userAgent = new function() {
         if(userAgentSubstringExists('safari'))
             return this.getOS() == 'android' ? 'android_webkit' : 'safari';
 
-        var i = 0,
+        var i,
         browsersToTest = ['chrome','iemobile','camino','seamonkey','firefox','opera mobi','opera mini'];
             
-        for(;i<browsersToTest.length;i++)
+        for(i=0;i<browsersToTest.length;i++)
             if(userAgentSubstringExists(browsersToTest[i]))
-                return browsersToTest[i];
+                return browsersToTest[i].replace(/ /g,"_");
         
         return '';
     }
