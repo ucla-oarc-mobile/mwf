@@ -92,11 +92,11 @@ echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Full Button Form')
         ->add_primary_button('Primary Button')
-        ->add_secondary_button('Secondary Button', 'secondary')
-        ->add_button('Neutral Button', 'neutral')
-        ->add_primary_link_button('Primary Link', 'primary')
-        ->add_secondary_link_button('Secondary Link', 'secondary')
-        ->add_link_button('Neutral Link', 'neutral')
+        ->add_secondary_button('Secondary Button')
+        ->add_button('Neutral Button')
+        ->add_primary_link_button('Primary Link')
+        ->add_secondary_link_button('Secondary Link')
+        ->add_link_button('Neutral Link')
         ->render();
 
 /* textarea form */
