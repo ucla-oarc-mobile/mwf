@@ -195,16 +195,16 @@ div.button.light a {
     color: #555 !important;
 }
 
-a.button:hover,
+.mwf_notmobile a.button:hover,
 a.button:focus,
 a.button:active,
-div.button a:hover,
+.mwf_notmobile div.button a:hover,
 div.button a:focus,
 div.button a:active,
-a.button.light:hover,
+.mwf_notmobile a.button.light:hover,
 a.button.light:focus,
 a.button.light:active,
-div.button a.light:hover,
+.mwf_notmobile div.button a.light:hover,
 div.button a.light:focus,
 div.button a.light:active{
     background: -webkit-gradient(linear, left top, left bottom, from(#ffc847), to(#ffb300));

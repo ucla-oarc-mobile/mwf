@@ -396,10 +396,10 @@ a.button, div.button a{
     text-align: center;
 }
 
-a.button:hover,
+.mwf_notmobile a.button:hover,
 a.button:focus,
 a.button:active,
-div.button a:hover,
+.mwf_notmobile div.button a:hover,
 div.button a:focus,
 div.button a:active{
     background-color: #ffb300;
