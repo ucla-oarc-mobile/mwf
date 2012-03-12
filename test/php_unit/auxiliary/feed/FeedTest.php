@@ -11,101 +11,32 @@
  * @uses PHPUnit_Framework_TestCase
  * @uses Feed
  */
-require_once dirname(__FILE__) . '/../../../../auxiliary/feed/feed.class.php';
 
 class FeedTest extends PHPUnit_Framework_TestCase {
 
+    public function run(PHPUnit_Framework_TestResult $result = NULL) {
+        $this->setPreserveGlobalState(false);
+        return parent::run($result);
+    }
+
     /**
      * @test
+     * @runInSeparateProcess
      */
     public function getName_name_name() {
+        require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/auxiliary/feed/feed.class.php';
         $feed = new Feed('Harold', 'http://example.com/harold.rss');
         $this->assertEquals('Harold', $feed->get_name());
     }
 
     /**
      * @test
+     * @runInSeparateProcess
      */
     public function getPath_url_url() {
+        require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/auxiliary/feed/feed.class.php';
         $feed = new Feed('Harold', 'http://example.com/harold.rss');
         $this->assertEquals('http://example.com/harold.rss', $feed->get_path());
     }
 
-    /**
-     * @test
-     */
-    public function testGet_items() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function testFetch_items() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testGet_item().
-     */
-    public function testGet_item() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testBuild_item_from_request().
-     */
-    public function testBuild_item_from_request() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testGet_page().
-     */
-    public function testGet_page() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testVerify_page().
-     */
-    public function testVerify_page() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers {className}::{origMethodName}
-     * @todo Implement testBuild_page_from_request().
-     */
-    public function testBuild_page_from_request() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
-    }
-
 }
-
-?>
