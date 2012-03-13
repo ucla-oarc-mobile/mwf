@@ -68,7 +68,7 @@ $terms = array(
 '        That if you sue anyone over patents that you think may apply to the 
         Software or anyone\'s use of the Software, your license to the Software 
         ends automatically.',
-'        That your rights under the License end automatically if you breach it in
+'        That your rights under thhe License end automatically if you breach it in
         any way.',
 '        UCLA and the Regents of the University of California reserves all rights
         not expressly granted to you in this license.'
@@ -83,11 +83,11 @@ echo Site_Decorator::content()
             ->add_header('License')
             ->add_paragraph('
 This License governs use of the accompanying Mobile Web Framework and all 
-accompanying utilities, forms, libraries, etc. (&quot;Software&quot;), and your use of the
+accompanying utilities, forms, libraries, etc. ("Software"), and your use of the
 Software, Platform, and all Utilities constitutes acceptance of this license.')
             ->add_paragraph('
 The Software was originally created by UCLA\'s Office of Information Technology\'s
-Education and Collaboration Technology Group (&quot;Licensor&quot;) to enable Faculty, 
+Education and Collaboration Technology Group ("Licensor") to enable Faculty, 
 Departments and Researchers to deliver their content to mobile devices easily 
 and efficiently using the Mobile Web Framework.')
             ->add_paragraph('
@@ -99,8 +99,8 @@ and personal experimentation.')
             ->add_paragraph('
 You may use the software if you are a commercial entity. There are two things 
 you cannot do with this Software: The first is you cannot incorporate it into a 
-commercial product (&quot;Commercial Use&quot;), the second is you cannot distribute this 
-software or any modifications (&quot;Derivative Work&quot;) of this software and beyond 
+commercial product ("Commercial Use"), the second is you cannot distribute this 
+software or any modifications ("Derivative Work") of this software and beyond 
 that, you must share your changes to the Mobile Web Framework with UCLA and the 
 MWF Community. We want everyone to benefit from the use of this product, we want
 it to stay free, and we want to avoid it forking (or splintering) into 

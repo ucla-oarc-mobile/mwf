@@ -61,11 +61,11 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
      * @test
      * @runInSeparateProcess
      */
-    public function addButton_noClass_noClassRendered() {
+    public function addButton_noClass_neutral() {
         require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
         $this->object = new Form_Site_Decorator;
         $this->object->add_button('foo', array('bar' => 'baz'));
-        $this->assertNotContains('class', $this->object->render());
+        $this->assertContains('class="neutral"', $this->object->render());
     }
 
     /**
@@ -76,7 +76,18 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
         require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
         $this->object = new Form_Site_Decorator;
         $this->object->add_button('foo', array('bar' => 'baz', 'class' => 'classy'));
-        $this->assertContains('class="classy"', $this->object->render());
+        $this->assertContains('class="neutral classy"', $this->object->render());
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addButton_ampersand_escapedOnce() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_button('foo&bar');
+        $this->assertContains('foo&amp;bar', $this->object->render());
     }
 
     /**
@@ -89,6 +100,202 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
         $this->object->add_section('foo');
         $this->object->add_button('bar');
         $this->assertRegExp('/<div\b.+bar/', $this->object->render());
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addText_ampersandInId_idIsEncoded() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_text('Bartles&James', 'LogginsAndMessina');
+        $result = $this->object->render();
+        $this->assertContains('Bartles&amp;James', $result);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addText_ampersandInLabel_labelIsEncoded() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_text('BartlesAndJames', 'Loggins&Messina');
+        $result = $this->object->render();
+        $this->assertContains('Loggins&amp;Messina', $result);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addTime_ampersandInId_idIsEncoded() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_time('Bartles&James', 'LogginsAndMessina');
+        $result = $this->object->render();
+        $this->assertContains('Bartles&amp;James', $result);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addTime_ampersandInLabel_labelIsEncoded() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_time('BartlesAndJames', 'Loggins&Messina');
+        $result = $this->object->render();
+        $this->assertContains('Loggins&amp;Messina', $result);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addPrimaryLinkButton_bracketsInLabel_labelIsEncoded() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_primary_link_button('<encode me>');
+        $result = $this->object->render();
+        $this->assertContains('&lt;encode me&gt;', $result);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addCheckboxes_ampersandInId_idIsEncoded() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_checkboxes('Bartles&James', 'LogginsAndMessina');
+        $result = $this->object->render();
+        $this->assertContains('Bartles&amp;James', $result);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addCheckboxes_ampersandInLabel_labelIsEncoded() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_checkboxes('BartlesAndJames', 'Loggins&Messina');
+        $result = $this->object->render();
+        $this->assertContains('Loggins&amp;Messina', $result);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addCheckboxes_bracketsInOptionIdLabelAndValue_bracketsAreEncoded() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_checkboxes('BartlesAndJames', 'LogginsAndMessina', array(array('id' => 'a<wiggle>', 'label' => 'and><or', 'value' => 'a<waggle>')));
+        $result = $this->object->render();
+        $this->assertContains('&lt;wiggle&gt;', $result);
+        $this->assertContains('and&gt;&lt;or', $result);
+        $this->assertContains('&lt;waggle&gt;', $result);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addSelect_ampersandInId_idIsEncoded() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_select('Bartles&James', 'LogginsAndMessina');
+        $result = $this->object->render();
+        $this->assertContains('Bartles&amp;James', $result);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addSelect_ampersandInLabel_labelIsEncoded() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_select('BartlesAndJames', 'Loggins&Messina');
+        $result = $this->object->render();
+        $this->assertContains('Loggins&amp;Messina', $result);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addSelect_bracketsInOptionLabelAndValue_bracketsAreEncoded() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_checkboxes('BartlesAndJames', 'LogginsAndMessina', array(array('label' => 'and><or', 'value' => 'a<waggle>')));
+        $result = $this->object->render();
+        $this->assertContains('and&gt;&lt;or', $result);
+        $this->assertContains('&lt;waggle&gt;', $result);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addTextarea_ampersandInId_idIsEncoded() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_textarea('Bartles&James', 'LogginsAndMessina');
+        $result = $this->object->render();
+        $this->assertContains('Bartles&amp;James', $result);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addTextarea_ampersandInLabel_labelIsEncoded() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_textarea('BartlesAndJames', 'Loggins&Messina');
+        $result = $this->object->render();
+        $this->assertContains('Loggins&amp;Messina', $result);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addSelect_quotationMarksInTooltip_tooltipIsEncoded() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_select(
+                'BartlesAndJames', 'Loggins&Messina', array(array('id' => 'id', 'label' => 'label', 'value' => 'value')), array('tooltip' => '"Palace Family Steak House"'));
+        $result = $this->object->render();
+        $this->assertContains('<span class="tiptext">&quot;Palace Family Steak House&quot;</span>', $result);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addTextarea_ampersandInPlaceholder_placeholderIsEncoded() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_textarea('BartlesAndJames', 'Loggins&Messina', array('placeholder'=>'Hall & Oates'));
+        $result = $this->object->render();
+        $this->assertContains('<span class="placeholder">Hall &amp; Oates</span>', $result);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addTextarea_ampersandInInvalid_invalidIsEncoded() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_textarea('BartlesAndJames', 'Loggins&Messina',array('invalid'=>'Simon & Garfunkel'));
+        $result = $this->object->render();
+        $this->assertContains('<p class="invalid">Simon &amp; Garfunkel</p>', $result);
     }
 
 }

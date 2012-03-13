@@ -88,11 +88,10 @@ class Button_Site_Decorator extends Tag_HTML_Decorator
         if(count($this->_options) == 0)
             return '';
 
-        $options = '';
-        foreach($this->_options as $option)
-            $options .= is_a($option, 'Decorator') ? $option->render() : $option;
+        foreach($this->_options as $option) {
+            $this->add_inner($option);
+        }
 
-        $this->add_inner_front($options);
         return parent::render();
     }
 }

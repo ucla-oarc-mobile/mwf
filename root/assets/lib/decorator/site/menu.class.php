@@ -7,9 +7,9 @@
  *
  * @author ebollens
  * @author trott
- * @copyright Copyright (c) 2010-11 UC Regents
+ * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120221
+ * @version 20120312
  *
  * @uses Decorator
  * @uses Tag_HTML_Decorator
@@ -82,7 +82,7 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
         if (!is_array($a_params))
             $a_params = array();
 
-        $link = HTML_Decorator::tag('a', $name ? $name : '', array_merge($a_params, array('href' => $url ? htmlspecialchars($url) : '#')));
+        $link = HTML_Decorator::tag('a', $name ? $name : '', array_merge($a_params, array('href' => $url ? $url : '#')));
         if (is_string($key) || is_int($key)) {
             $this->_list[$key] = HTML_Decorator::tag('li', $link, $li_params);
         } else {
@@ -118,40 +118,32 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
             $this->remove_class('padded');
 
         if ($this->_homescreen)
-            $this->add_class('front')->set_param('id','main_menu');
+            $this->add_class('front')->set_param('id', 'main_menu');
         elseif ($this->_homescreen === false)
             $this->remove_class('front');
 
         if ($this->_align)
             $this->add_class($this->_align);
-        
-        if ($this->_homescreen && Classification::is_full() && Config::get('frontpage','configurable_homescreen')) {
 
-            // Can't use closures until PHP 5.3. Declare callback here...
-            function call_render($obj) {
-                return $obj->render();
-            }
+        if ($this->_title) {
+            $this->add_inner_front($this->_title);
+        }
 
-            // ...and use the callback here.
-            $js = 'mwf.full.configurableMenu("homescreen_layout").render("main_menu_list",' . 
-                    json_encode(array_map('call_render', $this->_list)) . ');';
+        if ($this->_homescreen && Classification::is_full() && Config::get('frontpage', 'configurable_homescreen')) {
+            $js = 'mwf.full.configurableMenu("homescreen_layout").render("main_menu_list",' .
+                    json_encode(
+                            array_map(function($obj) {
+                                        return $obj->render();
+                                    }, $this->_list)) . ');';
 
-            $menu_markup = HTML_Decorator::tag('ol')->set_param('id','main_menu_list')->render();
-            $menu_markup .= HTML_Decorator::tag('script', $js)->render();
-
+            $this->add_inner(HTML_Decorator::tag('ol')->set_param('id', 'main_menu_list'));
+            $this->add_inner(HTML_Decorator::tag('script', $js));
         } else {
-            $menu_markup = '';
             if (count($this->_list) > 0) {
-                $inner = '';
-                foreach ($this->_list as $list_item)
-                    $inner .= $list_item->render();
-                $menu_markup = HTML_Decorator::tag('ol', $inner)->render();
+                $this->add_inner(HTML_Decorator::tag('ol', $this->_list));
             }
         }
 
-        $title = is_a($this->_title, 'Decorator') ? $this->_title->render() : ($this->_title ? $this->_title : '');
-
-        $this->add_inner_front($title . $menu_markup);
         return parent::render();
     }
 

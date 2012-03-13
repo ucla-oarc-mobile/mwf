@@ -7,19 +7,19 @@
  * @subpackage site_decorator
  *
  * @author ebollens
- * @copyright Copyright (c) 2010-11 UC Regents
+ * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110518
+ * @version 20120312
  *
  * @uses Decorator
  * @uses Tag_HTML_Decorator
  * @uses Config
  */
 
-require_once(dirname(dirname(dirname(__FILE__))).'/decorator.class.php');
-require_once(dirname(dirname(dirname(__FILE__))).'/config.class.php');
-require_once(dirname(dirname(dirname(__FILE__))).'/https.class.php');
-require_once(dirname(dirname(__FILE__)).'/html/tag.class.php');
+require_once(dirname(dirname(__DIR__)).'/decorator.class.php');
+require_once(dirname(dirname(__DIR__)).'/config.class.php');
+require_once(dirname(dirname(__DIR__)).'/https.class.php');
+require_once(dirname(__DIR__).'/html/tag.class.php');
 
 class Head_Site_Decorator extends Tag_HTML_Decorator
 {
@@ -113,7 +113,7 @@ class Head_Site_Decorator extends Tag_HTML_Decorator
             $rv .= is_int($key) ? $val.'&' : $key.'='.$val.'&';
         }
         $rv = rtrim($rv,'?&');
-        return htmlspecialchars($rv);
+        return $rv;
     }
     
     public function render()

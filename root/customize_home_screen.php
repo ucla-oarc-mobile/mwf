@@ -7,7 +7,7 @@
  * @author trott
  * @copyright Copyright (c) 2012 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120308
+ * @version 20120312
  *
  * @uses Config
  * @uses Decorator
@@ -23,9 +23,9 @@
  * @uses HTML_End_HTML_Decorator
  * @uses Classification
  */
-require_once(dirname(__FILE__) . '/assets/config.php');
-require_once(dirname(__FILE__) . '/assets/lib/decorator.class.php');
-require_once(dirname(__FILE__) . '/assets/lib/classification.class.php');
+require_once(__DIR__ . '/assets/config.php');
+require_once(__DIR__ . '/assets/lib/decorator.class.php');
+require_once(__DIR__ . '/assets/lib/classification.class.php');
 
 echo HTML_Decorator::html_start()->render();
 
@@ -59,6 +59,7 @@ if (Classification::is_full()) {
                 htmlspecialchars($apps[$key]) . '</label><div class="draggable-handle"></div></div>';
     }
 
+    //@todo Move JS to external file, include with JS handler (perhaps part of configurableMenu, perhaps not)
     $js = 'var apps=' . json_encode($apps_rendered) . ';var disabledApps=' . json_encode($disabled_apps_rendered) . ';';
 
     echo Site_Decorator::form('Customize Home Screen')

@@ -1,6 +1,7 @@
 <?php
 
-require_once dirname(__FILE__) . '/../../../../../../../root/assets/lib/decorator/site/head.class.php';
+require_once dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . 
+        '/root/assets/lib/decorator/site/head.class.php';
 
 /**
  * Test class for Head_Site_Decorator.
@@ -8,7 +9,7 @@ require_once dirname(__FILE__) . '/../../../../../../../root/assets/lib/decorato
  * @author trott
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111110
+ * @version 20120312
  *
  * @uses PHPUnit_Framework_TestCase
  * @uses Head_Site_Decorator
@@ -43,6 +44,15 @@ class Head_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
         $this->object->add_js_handler_library('standard_libs', 'geolocation');
         $this->object->add_js_handler_library('standard', '/my/awesome/library.js');
         $this->assertContains('&amp;', $this->object->render());
+    }
+    
+    /**
+     * @test
+     */
+    public function render_multipleJSLibs_noDoubleEncoding() {
+               $this->object->add_js_handler_library('standard_libs', 'geolocation');
+        $this->object->add_js_handler_library('standard', '/my/awesome/library.js');
+        $this->assertNotContains('&amp;amp;', $this->object->render());
     }
 }
 

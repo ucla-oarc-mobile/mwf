@@ -8,7 +8,7 @@
  * @author trott
  * @copyright Copyright (c) 2012 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120310
+ * @version 20120312
  *
  * @uses Decorator
  * @uses Tag_HTML_Decorator
@@ -214,17 +214,13 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     /**
      * Helper function to add input form element.
      * 
-     * @param type $id
-     * @param type $label
-     * @param type $field
-     * @param string $params
+     * @param string $id
+     * @param string $label
+     * @param string $field
+     * @param array $params
      * @return Form_Site_Decorator 
      */
     private function _add_input_helper($id, $label, $field, $params) {
-        $id = htmlspecialchars($id);
-        $label = htmlspecialchars($label);
-        $field = htmlspecialchars($field);
-
         $this->_is_invalid_helper($params);
 
         $this->_disabled_helper($params);
@@ -321,21 +317,18 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     /**
      * Helper function to generate date/time related form elements.
      * 
-     * @param type $field
-     * @param type $id
-     * @param type $label
+     * @param string $field
+     * @param string $id
+     * @param string $label
      * @param type $min
      * @param type $max
      * @param type $params
      * @return Form_Site_Decorator 
      */
     private function _add_datetime_helper($field, $id, $label, $min, $max, $params) {
-        $id = htmlspecialchars($id);
-        $label = htmlspecialchars($label);
-        $min = htmlspecialchars($min);
-        $max = htmlspecialchars($max);
-        $selected = htmlspecialchars($params['selected']);
-
+        $selected = isset($params['selected']) ? $params['selected'] : 'now';
+        
+        
         $this->_is_invalid_helper($params);
 
         $this->_disabled_helper($params);
@@ -346,8 +339,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
 
         $min = new DateTime($min);
         $max = new DateTime($max);
-        if (!$selected)
-            $selected = 'now';
+
         $selected = new DateTime($selected);
 
         $current = $min;
@@ -428,7 +420,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
         }
 
         /* sort the array */
-        usort($year, array('Form_Site_Decorator', '_sortTimeByValue'));
+        usort($years, array('Form_Site_Decorator', '_sortTimeByValue'));
         usort($months, array('Form_Site_Decorator', '_sortTimeByValue'));
         usort($weeks, array('Form_Site_Decorator', '_sortTimeByValue'));
         usort($hours, array('Form_Site_Decorator', '_sortTimeByValue'));
@@ -542,10 +534,10 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
 
         return $this;
     }
-    
+
     private function _sortTimeByValue($a, $b) {
-            return $a['value'] > $b['value'];
-        }
+        return $a['value'] > $b['value'];
+    }
 
     /**
      * Adds a submit button (defaults to a primary button).
@@ -600,7 +592,10 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @return Form_Site_Decorator 
      */
     private function _add_button_helper($value, $class, $params) {
-        $value = htmlspecialchars($value);
+        if (isset($params['class'])) {
+            $class = $class . ' ' . $params['class'];
+            unset($params['class']);
+        }
 
         $this->_form_elements[] = HTML_Decorator::tag('input', false, array_merge($params, array('type' => 'submit', 'value' => $value, 'class' => $class)));
 
@@ -649,9 +644,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @return Form_Site_Decorator 
      */
     private function _add_link_button_helper($value, $class, $params) {
-        $value = htmlspecialchars($value);
-
-        $this->_form_elements[] = HTML_Decorator::tag('a', $value, array_merge($params, array('class' => ' button ' . $class)));
+        $this->_form_elements[] = HTML_Decorator::tag('a', $value, array_merge($params, array('class' => 'button ' . $class)));
 
         return $this;
     }
@@ -661,7 +654,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * 
      * @param type $id Id and name of element.
      * @param type $label
-     * @param type $options Two dimentional arrays representing checkboxes.
+     * @param type $options Array of arrays representing checkboxes.
      *      array(
      *          array('id' => 'checkbox-1', 'label' => 'One', 'value' => 1),
      *          array('id' => 'checkbox-2', 'label' => 'Two', 'value' => 2),
@@ -679,7 +672,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * 
      * @param type $id Id and name of element.
      * @param type $label
-     * @param type $options Two dimentional arrays representing checkboxes.
+     * @param type $options Array of arrays representing checkboxes.
      *      array(
      *          array('id' => 'radio-1', 'label' => 'One', 'value' => 1),
      *          array('id' => 'radio-2', 'label' => 'Two', 'value' => 2),
@@ -703,11 +696,11 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @return Form_Site_Decorator 
      */
     private function _add_options_helper($type, $id, $label, $options, $params) {
-        $id = htmlspecialchars($id);
-        $label = htmlspecialchars($label);
         $align = 'left';
+        //@todo $options et al. should be an object, not an array of arrays.
+        //@todo align options et al. should be enum/constants, not string values
         if (!empty($params['align'])) {
-            $align = htmlspecialchars($params['align']);
+            $align = $params['align'];
         }
 
         $this->_is_invalid_helper($params);
@@ -721,9 +714,9 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
         $option_elements = array();
 
         foreach ($options as $option) {
-            $option_id = htmlspecialchars($option['id']);
-            $option_label = htmlspecialchars($option['label']);
-            $option_value = htmlspecialchars($option['value']);
+            $option_id = isset($option['id']) ? $option['id'] : false;
+            $option_label = $option['label'];
+            $option_value = $option['value'];
             $option_params = isset($option['params']) ? $options['param'] : array();
 
             if (!is_array($option_params))
@@ -767,20 +760,23 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     /**
      * Adds a number input field.
      * 
-     * @param type $id Id and name of element.
-     * @param type $label
+     * @param string $id Id and name of element.
+     * @param string $label
      * @param type $min
      * @param type $max
      * @param array $params Optional parameters.  Possible values include 'step' => 2, 'selected' => 4, 'required' => true.
      * @return type 
      */
     public function add_number($id = false, $label = false, $min = false, $max = false, $params = array()) {
-        $min = htmlspecialchars($min);
-        $max = htmlspecialchars($max);
-        $step = htmlspecialchars($params['step']);
-
+        $min = (float) $min;
+        $max = (float) $max;
+        
+        $step = 1;
+        if (isset($params['step']) && is_numeric($params['step'])) {
+            $step = (float) $params['step'];
+        }
+        
         $options = array();
-
         for ($i = $min; $i <= $max; $i += $step) {
             $options[] = array('label' => $i, 'value' => $i);
         }
@@ -801,9 +797,13 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @return type 
      */
     public function add_range($id = false, $label = false, $min = false, $max = false, $params = array()) {
-        $min = htmlspecialchars($min);
-        $max = htmlspecialchars($max);
-        $step = htmlspecialchars($params['step']);
+        $min = (float) $min;
+        $max = (float) $max;
+        
+        $step = 1;
+        if (isset($params['step']) && is_numeric($params['step'])) {
+            $step = (float) $params['step'];
+        }
 
         $options = array();
 
@@ -821,7 +821,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * 
      * @param type $id Id and name of element.
      * @param type $label
-     * @param type $options A two dimentional array of options.
+     * @param type $options An array of arrays representing options.
      *      array(
      *          array('label' => 'One', 'value' => 1),
      *          array('label' => 'Two', 'value' => 2),
@@ -831,9 +831,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @return type 
      */
     public function add_select($id = false, $label = false, $options = array(), $params = array()) {
-        $id = htmlspecialchars($id);
-        $label = htmlspecialchars($label);
-        $selected = htmlspecialchars($params['selected']);
+        $selected = isset($params['selected']) ? $params['selected'] : false;
 
         $this->_is_invalid_helper($params);
 
@@ -846,8 +844,8 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
         $option_elements = array();
 
         foreach ($options as $option) {
-            $option_label = htmlspecialchars($option['label']);
-            $option_value = htmlspecialchars($option['value']);
+            $option_label = $option['label'];
+            $option_value = $option['value'];
             $option_params = isset($option['params']) ? $option['params'] : array();
 
             if (!is_array($option_params))
@@ -876,9 +874,6 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @return Form_Site_Decorator 
      */
     public function add_textarea($id = false, $label = false, $params = array()) {
-        $id = htmlspecialchars($id);
-        $label = htmlspecialchars($label);
-
         $this->_is_invalid_helper($params);
 
         $this->_disabled_helper($params);
@@ -901,8 +896,12 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * 
      * @param string $params 
      */
+    // @todo We don't really want to pass-by-reference, do we?  Maybe set an instance variable instead of modifying the $params array?
     private function _is_invalid_helper(&$params) {
         if (!empty($params['invalid'])) {
+            if (! isset($params['class'])) {
+                $params['class']='';
+            }
             $params['class'] = $params['class'] . ' invalid';
         }
     }
@@ -921,9 +920,9 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     /**
      * Helper function to add label and tooltips.
      * 
-     * @param type $id
-     * @param type $label
-     * @param type $params 
+     * @param string $id
+     * @param string $label
+     * @param array $params 
      */
     private function _add_label_tooltip($id, $label, $params) {
         $label_params = array();
@@ -933,18 +932,18 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
         $this->_form_elements[] = HTML_Decorator::tag('label', $label, array_merge($label_params, array('for' => $id)));
 
         if (!empty($params['tooltip'])) {
-            $this->_form_elements[] = HTML_Decorator::tag('span', htmlspecialchars($params['tooltip']), array('class' => 'tiptext'));
+            $this->_form_elements[] = HTML_Decorator::tag('span', $params['tooltip'], array('class' => 'tiptext'));
         }
     }
 
     /**
      * Helper function to add placeholder.
      * 
-     * @param type $params 
+     * @param array $params 
      */
     private function _add_placeholder($params) {
         if (!empty($params['placeholder'])) {
-            $this->_form_elements[] = HTML_Decorator::tag('span', htmlspecialchars($params['placeholder']), array('class' => 'placeholder'));
+            $this->_form_elements[] = HTML_Decorator::tag('span', $params['placeholder'], array('class' => 'placeholder'));
         }
     }
 
@@ -955,7 +954,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      */
     private function _add_invalid($params) {
         if (!empty($params['invalid'])) {
-            $this->_form_elements[] = HTML_Decorator::tag('p', htmlspecialchars($params['invalid']), array('class' => 'invalid'));
+            $this->_form_elements[] = HTML_Decorator::tag('p', $params['invalid'], array('class' => 'invalid'));
         }
     }
 
@@ -970,16 +969,16 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
         elseif ($this->_short === false)
             $this->remove_class('short');
 
-        $inner = '';
         if (count($this->_form_elements) > 0) {
-            foreach ($this->_form_elements as $element)
-                $inner .= $element->render();
+            foreach ($this->_form_elements as $element) {
+                $this->add_inner($element);
+            }
         }
 
-        $title = is_a($this->_title, 'Decorator') ?
-                $this->_title->render() : ($this->_title ? $this->_title : '');
+        if (is_a($this->_title, 'Decorator')) {
+            $this->add_inner_front($this->_title);
+        }
 
-        $this->add_inner_front($title . $inner);
         return parent::render();
     }
 
