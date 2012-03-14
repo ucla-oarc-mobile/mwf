@@ -7,7 +7,7 @@
  * @author trott
  * @copyright Copyright (c) 2012 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120312
+ * @version 20120314
  *
  * @uses Config
  * @uses Decorator
@@ -65,7 +65,7 @@ if (Classification::is_full()) {
     echo Site_Decorator::form('Customize Home Screen')
             ->set_padded()
             ->add_paragraph('Drag menu items to desired order. Use checkboxes to remove items.')
-            ->add_section('', array('class' => 'option', 'id' => 'app_order'))
+            ->add_inner_tag('div', '', array('class' => 'option', 'id' => 'app_order'))
             ->render();
 
     echo Site_Decorator::button()
