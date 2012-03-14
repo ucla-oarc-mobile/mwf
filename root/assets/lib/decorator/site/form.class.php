@@ -19,26 +19,11 @@ require_once(dirname(__DIR__) . '/html/tag.class.php');
 class Form_Site_Decorator extends Tag_HTML_Decorator {
 
     /**
-     * Is form padded?  Defaults to false.
-     * 
-     * @var bool
-     */
-    private $_padded = false;
-
-    /**
-     * Is form short?  Defaults to false.
-     * 
-     * @var bool
-     */
-    private $_short = false;
-
-    /**
      * The form's title text.
      * 
      * @var null|bool
      */
     private $_title = false;
-
 
     /**
      * 
@@ -58,7 +43,11 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @return Form_Site_Decorator 
      */
     public function set_padded($val = true) {
-        $this->_padded = $val ? true : false;
+        if ($val) {
+            $this->add_class('padded');
+        } else {
+            $this->remove_class('padded');
+        }
         return $this;
     }
 
@@ -69,7 +58,11 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @return Form_Site_Decorator 
      */
     public function set_short($val = true) {
-        $this->_short = $val ? true : fasle;
+        if ($val) {
+            $this->add_class('short');
+        } else {
+            $this->remove_class('short');
+        }
         return $this;
     }
 
@@ -933,16 +926,6 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     }
 
     public function render() {
-        if ($this->_padded)
-            $this->add_class('padded');
-        elseif ($this->_padded === false)
-            $this->remove_class('padded');
-
-        if ($this->_short)
-            $this->add_class('short');
-        elseif ($this->_short === false)
-            $this->remove_class('short');
-
         if (is_a($this->_title, 'Decorator')) {
             $this->add_inner_front($this->_title);
         }
@@ -951,4 +934,3 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     }
 
 }
-
