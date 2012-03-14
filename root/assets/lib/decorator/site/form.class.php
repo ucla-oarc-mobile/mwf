@@ -82,60 +82,36 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     /**
      * Sets the form's title.
      * 
-     * @param type $inner
+     * @param type $text
      * @param type $params Optional params array.  Possible values include 'class' => 'blue'.
      * @return Form_Site_Decorator 
      */
-    public function set_title($inner, $params = array()) {
-        $this->_title = $inner === false ? false : HTML_Decorator::tag('h1', $inner, $params);
+    public function set_title($text, $params = array()) {
+        $this->_title = $text === false ? false : HTML_Decorator::tag('h1', $text, $params);
         return $this;
     }
 
     /**
      * Adds a subtitle.
      * 
-     * @param type $inner
+     * @param type $text
      * @param type $params
      * @return Form_Site_Decorator 
      */
-    public function add_subtitle($inner, $params = array()) {
-        $this->_form_elements[] = HTML_Decorator::tag('h4', $inner, $params);
+    public function add_subtitle($text, $params = array()) {
+        $this->_form_elements[] = HTML_Decorator::tag('h4', $text, $params);
         return $this;
     }
 
     /**
      * Adds a paragraph.
      * 
-     * @param type $inner
+     * @param type $text
      * @param type $params
      * @return Form_Site_Decorator 
      */
-    public function add_paragraph($inner, $params = array()) {
-        $this->_form_elements[] = HTML_Decorator::tag('p', $inner, $params);
-        return $this;
-    }
-
-    /**
-     * Adds a section.
-     * 
-     * @param type $inner
-     * @param type $params
-     * @return Form_Site_Decorator 
-     */
-    public function add_section($inner, $params = array()) {
-        $this->_form_elements[] = HTML_Decorator::tag('div', $inner, $params);
-        return $this;
-    }
-
-    /**
-     * Adds a fieldset.
-     * 
-     * @param type $inner
-     * @param type $params
-     * @return Form_Site_Decorator 
-     */
-    public function add_fieldset($inner, $params = array()) {
-        $this->_form_elements[] = HTML_Decorator::tag('fieldset', $inner, $params);
+    public function add_paragraph($text, $params = array()) {
+        $this->_form_elements[] = HTML_Decorator::tag('p', $text, $params);
         return $this;
     }
 
