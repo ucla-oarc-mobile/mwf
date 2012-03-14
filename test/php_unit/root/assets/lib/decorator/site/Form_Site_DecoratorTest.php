@@ -281,7 +281,7 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     public function addTextarea_ampersandInPlaceholder_placeholderIsEncoded() {
         require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
         $this->object = new Form_Site_Decorator;
-        $this->object->add_textarea('BartlesAndJames', 'Loggins&Messina', array('placeholder'=>'Hall & Oates'));
+        $this->object->add_textarea('BartlesAndJames', 'Loggins&Messina', array('placeholder' => 'Hall & Oates'));
         $result = $this->object->render();
         $this->assertContains('<span class="placeholder">Hall &amp; Oates</span>', $result);
     }
@@ -293,9 +293,26 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     public function addTextarea_ampersandInInvalid_invalidIsEncoded() {
         require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
         $this->object = new Form_Site_Decorator;
-        $this->object->add_textarea('BartlesAndJames', 'Loggins&Messina',array('invalid'=>'Simon & Garfunkel'));
+        $this->object->add_textarea('BartlesAndJames', 'Loggins&Messina', array('invalid' => 'Simon & Garfunkel'));
         $result = $this->object->render();
         $this->assertContains('<p class="invalid">Simon &amp; Garfunkel</p>', $result);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addCheckboxes_required_classIsRequired() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $result = $this->object
+                ->add_checkboxes('checkbox-group', 'Checkbox', array(
+            array('id' => 'checkbox-1', 'label' => 'One', 'value' => 1),
+            array('id' => 'checkbox-2', 'label' => 'Two', 'value' => 2),
+            array('id' => 'checkbox-3', 'label' => 'Three', 'value' => 3)
+                ), array('required' => true)
+        )->render();
+        $this->assertContains('class="required"',$result);
     }
 
 }

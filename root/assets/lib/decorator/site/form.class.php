@@ -8,7 +8,7 @@
  * @author trott
  * @copyright Copyright (c) 2012 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120312
+ * @version 20120313
  *
  * @uses Decorator
  * @uses Tag_HTML_Decorator
@@ -327,8 +327,8 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      */
     private function _add_datetime_helper($field, $id, $label, $min, $max, $params) {
         $selected = isset($params['selected']) ? $params['selected'] : 'now';
-        
-        
+
+
         $this->_is_invalid_helper($params);
 
         $this->_disabled_helper($params);
@@ -770,12 +770,12 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     public function add_number($id = false, $label = false, $min = false, $max = false, $params = array()) {
         $min = (float) $min;
         $max = (float) $max;
-        
+
         $step = 1;
         if (isset($params['step']) && is_numeric($params['step'])) {
             $step = (float) $params['step'];
         }
-        
+
         $options = array();
         for ($i = $min; $i <= $max; $i += $step) {
             $options[] = array('label' => $i, 'value' => $i);
@@ -799,7 +799,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     public function add_range($id = false, $label = false, $min = false, $max = false, $params = array()) {
         $min = (float) $min;
         $max = (float) $max;
-        
+
         $step = 1;
         if (isset($params['step']) && is_numeric($params['step'])) {
             $step = (float) $params['step'];
@@ -899,8 +899,8 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     // @todo We don't really want to pass-by-reference, do we?  Maybe set an instance variable instead of modifying the $params array?
     private function _is_invalid_helper(&$params) {
         if (!empty($params['invalid'])) {
-            if (! isset($params['class'])) {
-                $params['class']='';
+            if (!isset($params['class'])) {
+                $params['class'] = '';
             }
             $params['class'] = $params['class'] . ' invalid';
         }
@@ -926,9 +926,13 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      */
     private function _add_label_tooltip($id, $label, $params) {
         $label_params = array();
-        if (!empty($params['required']))
-            $label_params['class'] = $params['class'] . ' required';
-
+        if (!empty($params['required'])) {
+            if (!empty($label_params['class'])) {
+                $label_params['class'] = $params['class'] . ' required';
+            } else {
+                $label_params['class'] = 'required';
+            }
+        }
         $this->_form_elements[] = HTML_Decorator::tag('label', $label, array_merge($label_params, array('for' => $id)));
 
         if (!empty($params['tooltip'])) {
