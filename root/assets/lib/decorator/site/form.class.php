@@ -39,12 +39,6 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      */
     private $_title = false;
 
-    /**
-     * An array representing all form elements inside this form.
-     * 
-     * @var array
-     */
-    private $_form_elements = array();
 
     /**
      * 
@@ -99,7 +93,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @return Form_Site_Decorator 
      */
     public function add_subtitle($text, $params = array()) {
-        $this->_form_elements[] = HTML_Decorator::tag('h4', $text, $params);
+        $this->add_inner_tag('h4', $text, $params);
         return $this;
     }
 
@@ -111,7 +105,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @return Form_Site_Decorator 
      */
     public function add_paragraph($text, $params = array()) {
-        $this->_form_elements[] = HTML_Decorator::tag('p', $text, $params);
+        $this->add_inner_tag('p', $text, $params);
         return $this;
     }
 
@@ -209,7 +203,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             $params['class'] = $params['class'] . ' ' . $field;
         }
 
-        $this->_form_elements[] = HTML_Decorator::tag('input', false, array_merge($params, array('type' => 'text', 'id' => $id, 'name' => $id)));
+        $this->add_inner_tag('input', false, array_merge($params, array('type' => 'text', 'id' => $id, 'name' => $id)));
 
         $this->_add_placeholder($params);
 
@@ -504,7 +498,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             $date_element[] = HTML_Decorator::tag('select', $second_options, array('class' => 'second'));
         }
 
-        $this->_form_elements[] = HTML_Decorator::tag('div', $date_element, array('class' => $field . '-field'));
+        $this->add_inner_tag('div', $date_element, array('class' => $field . '-field'));
 
         $this->_add_invalid($params);
 
@@ -573,7 +567,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             unset($params['class']);
         }
 
-        $this->_form_elements[] = HTML_Decorator::tag('input', false, array_merge($params, array('type' => 'submit', 'value' => $value, 'class' => $class)));
+        $this->add_inner_tag('input', false, array_merge($params, array('type' => 'submit', 'value' => $value, 'class' => $class)));
 
         return $this;
     }
@@ -620,7 +614,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @return Form_Site_Decorator 
      */
     private function _add_link_button_helper($value, $class, $params) {
-        $this->_form_elements[] = HTML_Decorator::tag('a', $value, array_merge($params, array('class' => 'button ' . $class)));
+        $this->add_inner_tag('a', $value, array_merge($params, array('class' => 'button ' . $class)));
 
         return $this;
     }
@@ -726,7 +720,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             $class = $class . ' justify';
         }
 
-        $this->_form_elements[] = HTML_Decorator::tag('div', $option_elements, array('id' => $id, 'class' => $class));
+        $this->add_inner_tag('div', $option_elements, array('id' => $id, 'class' => $class));
 
         $this->_add_invalid($params);
 
@@ -833,7 +827,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             $option_elements[] = HTML_Decorator::tag('option', $option_label, array_merge($option_params, array('value' => $option_value)));
         }
 
-        $this->_form_elements[] = HTML_Decorator::tag('select', $option_elements, array_merge($params, array('id' => $id, 'name' => $id)));
+        $this->add_inner_tag('select', $option_elements, array_merge($params, array('id' => $id, 'name' => $id)));
 
         $this->_add_invalid($params);
 
@@ -858,7 +852,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             $this->_add_label_tooltip($id, $label, $params);
         }
 
-        $this->_form_elements[] = HTML_Decorator::tag('textarea', '', array_merge($params, array('id' => $id, 'name' => $id)));
+        $this->add_inner_tag('textarea', '', array_merge($params, array('id' => $id, 'name' => $id)));
 
         $this->_add_placeholder($params);
 
@@ -909,10 +903,10 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
                 $label_params['class'] = 'required';
             }
         }
-        $this->_form_elements[] = HTML_Decorator::tag('label', $label, array_merge($label_params, array('for' => $id)));
+        $this->add_inner_tag('label', $label, array_merge($label_params, array('for' => $id)));
 
         if (!empty($params['tooltip'])) {
-            $this->_form_elements[] = HTML_Decorator::tag('span', $params['tooltip'], array('class' => 'tiptext'));
+            $this->add_inner_tag('span', $params['tooltip'], array('class' => 'tiptext'));
         }
     }
 
@@ -923,7 +917,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      */
     private function _add_placeholder($params) {
         if (!empty($params['placeholder'])) {
-            $this->_form_elements[] = HTML_Decorator::tag('span', $params['placeholder'], array('class' => 'placeholder'));
+            $this->add_inner_tag('span', $params['placeholder'], array('class' => 'placeholder'));
         }
     }
 
@@ -934,7 +928,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      */
     private function _add_invalid($params) {
         if (!empty($params['invalid'])) {
-            $this->_form_elements[] = HTML_Decorator::tag('p', $params['invalid'], array('class' => 'invalid'));
+            $this->add_inner_tag('p', $params['invalid'], array('class' => 'invalid'));
         }
     }
 
@@ -948,12 +942,6 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             $this->add_class('short');
         elseif ($this->_short === false)
             $this->remove_class('short');
-
-        if (count($this->_form_elements) > 0) {
-            foreach ($this->_form_elements as $element) {
-                $this->add_inner($element);
-            }
-        }
 
         if (is_a($this->_title, 'Decorator')) {
             $this->add_inner_front($this->_title);

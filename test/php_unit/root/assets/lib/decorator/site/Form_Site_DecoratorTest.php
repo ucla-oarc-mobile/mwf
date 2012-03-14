@@ -94,12 +94,24 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
      * @test
      * @runInSeparateProcess
      */
-    public function addSection_beforeFormElements_renderedBeforeFormElements() {
+    public function addInnerTag_beforeButton_renderedBeforeButton() {
         require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
         $this->object = new Form_Site_Decorator;
-        $this->object->add_section('foo');
+        $this->object->add_inner_tag('div', 'foo');
         $this->object->add_button('bar');
         $this->assertRegExp('/<div\b.+bar/', $this->object->render());
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addInnerTag_afterParagraph_renderedAfterParagrph() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_paragraph('Lorem ipsum grumblecakes');
+        $this->object->add_inner_tag('div', 'totally a div over here');
+        $this->assertRegExp('/<p\b.+Lorem ipsum grumblecakes\b.*<\/p>.*<div\b.+totally a div over here\b.*<\/div>/', $this->object->render());
     }
 
     /**
@@ -306,13 +318,13 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
         require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
         $this->object = new Form_Site_Decorator;
         $result = $this->object
-                ->add_checkboxes('checkbox-group', 'Checkbox', array(
-            array('id' => 'checkbox-1', 'label' => 'One', 'value' => 1),
-            array('id' => 'checkbox-2', 'label' => 'Two', 'value' => 2),
-            array('id' => 'checkbox-3', 'label' => 'Three', 'value' => 3)
-                ), array('required' => true)
-        )->render();
-        $this->assertContains('class="required"',$result);
+                        ->add_checkboxes('checkbox-group', 'Checkbox', array(
+                            array('id' => 'checkbox-1', 'label' => 'One', 'value' => 1),
+                            array('id' => 'checkbox-2', 'label' => 'Two', 'value' => 2),
+                            array('id' => 'checkbox-3', 'label' => 'Three', 'value' => 3)
+                                ), array('required' => true)
+                        )->render();
+        $this->assertContains('class="required"', $result);
     }
 
 }
