@@ -68,7 +68,7 @@ class Tag_HTML_Decorator extends Decorator {
 
     public function add_inner_front($content) {
         if (is_array($content))
-            for ($i = count($content) - 1; $i <= 0; $i--)
+            for ($i = count($content) - 1; $i >= 0; $i--)
                 $this->add_inner_front($content[$i]);
         elseif ($content !== false)
             array_unshift($this->_inner, $content);
