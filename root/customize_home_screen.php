@@ -17,6 +17,7 @@
  * @uses Head_Site_Decorator
  * @uses Body_Start_HTML_Decorator
  * @uses Header_Site_Decorator
+ * @uses Form_Decorator
  * @uses Button_Full_Site_Decorator
  * @uses Default_Footer_Site_Decorator
  * @uses Body_End_HTML_Decorator
