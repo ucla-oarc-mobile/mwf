@@ -39,7 +39,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     /**
      * Sets the form's padded attribute.
      * 
-     * @param type $val Defaults to true.
+     * @param boolean $val Defaults to true.
      * @return Form_Site_Decorator 
      */
     public function set_padded($val = true) {
@@ -54,7 +54,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     /**
      * Sets the form's short attribute.
      * 
-     * @param type $val Defaults to true.
+     * @param boolean $val Defaults to true.
      * @return Form_Site_Decorator 
      */
     public function set_short($val = true) {
@@ -69,8 +69,8 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     /**
      * Sets the form's title.
      * 
-     * @param type $text
-     * @param type $params Optional params array.  Possible values include 'class' => 'blue'.
+     * @param string $text
+     * @param array $params Optional params array.  Possible values include 'class' => 'blue'.
      * @return Form_Site_Decorator 
      */
     public function set_title($text, $params = array()) {
@@ -81,8 +81,8 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     /**
      * Adds a subtitle.
      * 
-     * @param type $text
-     * @param type $params
+     * @param string $text
+     * @param array $params
      * @return Form_Site_Decorator 
      */
     public function add_subtitle($text, $params = array()) {
@@ -93,8 +93,8 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     /**
      * Adds a paragraph.
      * 
-     * @param type $text
-     * @param type $params
+     * @param string $text
+     * @param array $params
      * @return Form_Site_Decorator 
      */
     public function add_paragraph($text, $params = array()) {
@@ -105,72 +105,72 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     /**
      * Adds an input text form element.
      * 
-     * @param type $id Id and name of element.
-     * @param type $label
-     * @param type $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
-     * @return type 
+     * @param string $id Id and name of element.
+     * @param string $label
+     * @param array $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
+     * @return Form_Site_Decorator 
      */
-    public function add_text($id = false, $label = false, $params = array()) {
+    public function add_input_text($id = false, $label = false, $params = array()) {
         return $this->_add_input_helper($id, $label, 'text', $params);
     }
 
     /**
      * Adds an input color form element.
      * 
-     * @param type $id Id and name of element.
-     * @param type $label
-     * @param type $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
-     * @return type 
+     * @param string $id Id and name of element.
+     * @param string $label
+     * @param array $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
+     * @return Form_Site_Decorator 
      */
-    public function add_color($id = false, $label = false, $params = array()) {
+    public function add_input_color($id = false, $label = false, $params = array()) {
         return $this->_add_input_helper($id, $label, 'color-field', $params);
     }
 
     /**
      * Adds an input search form element.
      * 
-     * @param type $id Id and name of element.
-     * @param type $label
-     * @param type $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
-     * @return type 
+     * @param string $id Id and name of element.
+     * @param string $label
+     * @param array $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
+     * @return Form_Site_Decorator 
      */
-    public function add_search($id = false, $label = false, $params = array()) {
+    public function add_input_search($id = false, $label = false, $params = array()) {
         return $this->_add_input_helper($id, $label, 'search-field', $params);
     }
 
     /**
      * Adds an input tel form element.
      * 
-     * @param type $id Id and name of element.
-     * @param type $label
-     * @param type $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
-     * @return type 
+     * @param string $id Id and name of element.
+     * @param string $label
+     * @param array $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
+     * @return Form_Site_Decorator 
      */
-    public function add_tel($id = false, $label = false, $params = array()) {
+    public function add_input_tel($id = false, $label = false, $params = array()) {
         return $this->_add_input_helper($id, $label, 'tel-field', $params);
     }
 
     /**
      * Adds an input url form element.
      * 
-     * @param type $id Id and name of element.
-     * @param type $label
-     * @param type $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
-     * @return type 
+     * @param string $id Id and name of element.
+     * @param string $label
+     * @param array $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
+     * @return Form_Site_Decorator 
      */
-    public function add_url($id = false, $label = false, $params = array()) {
+    public function add_input_url($id = false, $label = false, $params = array()) {
         return $this->_add_input_helper($id, $label, 'url-field', $params);
     }
 
     /**
      * Adds an input email form element.
      * 
-     * @param type $id Id and name of element.
-     * @param type $label
-     * @param type $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
-     * @return type 
+     * @param string $id Id and name of element.
+     * @param string $label
+     * @param array $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
+     * @return Form_Site_Decorator 
      */
-    public function add_email($id = false, $label = false, $params = array()) {
+    public function add_input_email($id = false, $label = false, $params = array()) {
         return $this->_add_input_helper($id, $label, 'email-field', $params);
     }
 
@@ -193,7 +193,9 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
         }
 
         if ($field !== 'text') {
-            $params['class'] = $params['class'] . ' ' . $field;
+            $params['class'] = isset($params['class']) ?
+                    $params['class'] . ' ' . $field :
+                    $field;
         }
 
         $this->add_inner_tag('input', false, array_merge($params, array('type' => 'text', 'id' => $id, 'name' => $id)));
@@ -744,7 +746,9 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             $options[] = array('label' => $i, 'value' => $i);
         }
 
-        $params['class'] = $params['class'] . ' number-field';
+        $params['class'] = isset($params['class']) ?
+                $params['class'] . ' number-field' :
+                'number-field';
 
         return $this->add_select($id, $label, $options, $params);
     }
@@ -774,7 +778,9 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
             $options[] = array('label' => $i, 'value' => $i);
         }
 
-        $params['class'] = $params['class'] . ' range-field';
+        $params['class'] = isset($params['class']) ?
+                $params['class'] . ' range-field' :
+                'range-field';
 
         return $this->add_select($id, $label, $options, $params);
     }
@@ -860,7 +866,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param string $params 
      */
     // @todo We don't really want to pass-by-reference, do we?  Maybe set an instance variable instead of modifying the $params array?
-    private function _is_invalid_helper(&$params) {
+    private function _is_invalid_helper($params) {
         if (!empty($params['invalid'])) {
             if (!isset($params['class'])) {
                 $params['class'] = '';

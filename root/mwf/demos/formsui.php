@@ -54,7 +54,7 @@ echo Site_Decorator::form()
         ->set_padded()
         ->set_short()
         ->set_title('Short Form')
-        ->add_text('text-1', 'Name')
+        ->add_input_text('text-1', 'Name')
         ->add_submit()
         ->render();
 
@@ -123,7 +123,7 @@ echo Site_Decorator::form()
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Required Form')
-        ->add_text('text-10', 'Name', array('required' => true))
+        ->add_input_text('text-10', 'Name', array('required' => true))
         ->add_checkboxes('checkbox-group-10', 'Checkbox',
                 array(
                         array('id' => 'checkbox-11', 'label' => 'One', 'value' => 1),
@@ -147,7 +147,7 @@ echo Site_Decorator::form()
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Invalid Form')
-        ->add_text('text-20', 'Name', array('required' => true, 'invalid' => 'Error messager goes here'))
+        ->add_input_text('text-20', 'Name', array('required' => true, 'invalid' => 'Error messager goes here'))
         ->add_checkboxes('checkbox-group-20', 'Checkbox',
                 array(
                         array('id' => 'checkbox-21', 'label' => 'One', 'value' => 1),
@@ -171,7 +171,7 @@ echo Site_Decorator::form()
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Disabled Form')
-        ->add_text('text-30', 'Name', array('disabled' => true))
+        ->add_input_text('text-30', 'Name', array('disabled' => true))
         ->add_checkboxes('checkbox-group-30', 'Checkbox',
                 array(
                         array('id' => 'checkbox-31', 'label' => 'One', 'value' => 1),
@@ -194,7 +194,7 @@ echo Site_Decorator::form()
 /* not padded form */
 echo Site_Decorator::form()
         ->set_title('Not Padded Form')
-        ->add_text('text-100', 'Label')
+        ->add_input_text('text-100', 'Label')
         ->add_submit('Search')
         ->render();
 
@@ -204,9 +204,7 @@ echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Prototype 0')
         ->add_subtitle('Subtitle')
-        ->add_paragraph('A content bo with paragraph content')
-        ->add_section('<p>One of multiple paragraphs defined within one content box(div).</p><p>Another of multiple paragraphs defined within one content box(div).</p>')
-        ->add_fieldset('<p>One of multiple paragraphs defined within one content box(fieldset).</p><p>Another of multiple paragraphs defined within one content box(fieldset).</p>')
+        ->add_paragraph('A content box with paragraph content')
         ->add_submit('Submit')
         ->render();
 
