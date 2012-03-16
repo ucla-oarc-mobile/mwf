@@ -121,7 +121,7 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     public function addInputText_ampersandInId_idIsEncoded() {
         require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
         $this->object = new Form_Site_Decorator;
-        $this->object->add_input_text('Bartles&James', 'LogginsAndMessina');
+        $this->object->add_input(Site_Decorator::input('Bartles&James', 'LogginsAndMessina'));
         $result = $this->object->render();
         $this->assertContains('Bartles&amp;James', $result);
     }
@@ -133,7 +133,7 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     public function addInputText_ampersandInLabel_labelIsEncoded() {
         require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
         $this->object = new Form_Site_Decorator;
-        $this->object->add_input_text('BartlesAndJames', 'Loggins&Messina');
+        $this->object->add_input(Site_Decorator::input('BartlesAndJames', 'Loggins&Messina'));
         $result = $this->object->render();
         $this->assertContains('Loggins&amp;Messina', $result);
     }

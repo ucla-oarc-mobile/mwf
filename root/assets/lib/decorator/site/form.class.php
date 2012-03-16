@@ -8,7 +8,7 @@
  * @author trott
  * @copyright Copyright (c) 2012 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120313
+ * @version 20120315
  *
  * @uses Decorator
  * @uses Tag_HTML_Decorator
@@ -102,109 +102,29 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
         return $this;
     }
 
-    /**
-     * Adds an input text form element.
-     * 
-     * @param string $id Id and name of element.
-     * @param string $label
-     * @param array $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
-     * @return Form_Site_Decorator 
-     */
-    public function add_input_text($id = false, $label = false, $params = array()) {
-        return $this->_add_input_helper($id, $label, 'text', $params);
-    }
+    public function add_input($input_decorator) {
+        if (!is_a($input_decorator, 'Input_Site_Decorator')) {
+            trigger_error('Wrong type sent to add_input()', E_USER_ERROR);
+        }
 
-    /**
-     * Adds an input color form element.
-     * 
-     * @param string $id Id and name of element.
-     * @param string $label
-     * @param array $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
-     * @return Form_Site_Decorator 
-     */
-    public function add_input_color($id = false, $label = false, $params = array()) {
-        return $this->_add_input_helper($id, $label, 'color-field', $params);
-    }
-
-    /**
-     * Adds an input search form element.
-     * 
-     * @param string $id Id and name of element.
-     * @param string $label
-     * @param array $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
-     * @return Form_Site_Decorator 
-     */
-    public function add_input_search($id = false, $label = false, $params = array()) {
-        return $this->_add_input_helper($id, $label, 'search-field', $params);
-    }
-
-    /**
-     * Adds an input tel form element.
-     * 
-     * @param string $id Id and name of element.
-     * @param string $label
-     * @param array $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
-     * @return Form_Site_Decorator 
-     */
-    public function add_input_tel($id = false, $label = false, $params = array()) {
-        return $this->_add_input_helper($id, $label, 'tel-field', $params);
-    }
-
-    /**
-     * Adds an input url form element.
-     * 
-     * @param string $id Id and name of element.
-     * @param string $label
-     * @param array $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
-     * @return Form_Site_Decorator 
-     */
-    public function add_input_url($id = false, $label = false, $params = array()) {
-        return $this->_add_input_helper($id, $label, 'url-field', $params);
-    }
-
-    /**
-     * Adds an input email form element.
-     * 
-     * @param string $id Id and name of element.
-     * @param string $label
-     * @param array $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
-     * @return Form_Site_Decorator 
-     */
-    public function add_input_email($id = false, $label = false, $params = array()) {
-        return $this->_add_input_helper($id, $label, 'email-field', $params);
-    }
-
-    /**
-     * Helper function to add input form element.
-     * 
-     * @param string $id
-     * @param string $label
-     * @param string $field
-     * @param array $params
-     * @return Form_Site_Decorator 
-     */
-    private function _add_input_helper($id, $label, $field, $params) {
-        $this->_is_invalid_helper($params);
-
-        $this->_disabled_helper($params);
-
+        $label = $input_decorator->get_label();
         if ($label) {
-            $this->_add_label_tooltip($id, $label, $params);
+            $label_decorator = HTML_Decorator::tag('label', $label, array('for' => $input_decorator->get_id()));
+
+            if ($input_decorator->is_mandatory()) {
+                $label_decorator->add_class('required');
+            }
+
+            $this->add_inner($label_decorator);
+
+            $tooltip = $input_decorator->get_tooltip();
+            if (!empty($tooltip)) {
+                $tooltip_decorator = HTML_Decorator::tag('span', $tooltip)
+                        ->add_class('tiptext');
+                $this->add_inner($tooltip_decorator);
+            }
         }
-
-        if ($field !== 'text') {
-            $params['class'] = isset($params['class']) ?
-                    $params['class'] . ' ' . $field :
-                    $field;
-        }
-
-        $this->add_inner_tag('input', false, array_merge($params, array('type' => 'text', 'id' => $id, 'name' => $id)));
-
-        $this->_add_placeholder($params);
-
-        $this->_add_invalid($params);
-
-        return $this;
+        return $this->add_inner($input_decorator);
     }
 
     /**

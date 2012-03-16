@@ -50,11 +50,16 @@ echo Site_Decorator::content()
         ->render();
 
 /* required */
+$text_input_mandatory = Site_Decorator::input('input-1', 'Text')
+        ->mandatory();
+$text_input_tooltip = Site_Decorator::input('input-2', 'Tooltip')
+        ->mandatory()
+        ->set_tooltip('tooltip text');
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Required & Tooltip Form')
         ->add_paragraph('This form demonstrates client-side required validation. Note that required validation does not work with checkbox or radio.')
-        ->add_input_text('input-1', 'Text', array('required' => true))
+        ->add_input($text_input_mandatory)
         ->add_checkboxes('checkbox-group-1', 'Checkbox',
                 array(
                         array('id' => 'checkbox-1', 'label' => 'One', 'value' => 1),
@@ -72,18 +77,38 @@ echo Site_Decorator::form()
                 array('required' => true)
           )
         ->add_textarea('textarea-1', 'Textarea', array('required' => true))
-        ->add_input_text('input-2', 'Tooltip', array('required' => true, 'tooltip' => 'tooltip text'))
+        ->add_input($text_input_tooltip)
         ->add_textarea('textarea-2', 'Tooltip with long label', array('required' => true, 'tooltip' => 'A very very very very very very long tooltip text'))
         ->add_submit('Test Me')
         ->render();
 
 /* html5 */
+$text_input_placeholder = Site_Decorator::input('input-10', 'Placeholder')
+        ->mandatory()
+        ->set_placeholder('Please enter text here');
+$text_input_mandatory = Site_Decorator::input('input-11', 'Required')
+        ->mandatory();
+$color_input = Site_Decorator::input('color-10', 'Color')
+        ->type_color()
+        ->mandatory();
+$search_input = Site_Decorator::input('search-10', 'Search')
+        ->type_search()
+        ->mandatory();
+$telephone_input = Site_Decorator::input('tel-10', 'Telephone')
+        ->type_telephone()
+        ->mandatory();
+$url_input = Site_Decorator::input('url-10', 'URL')
+        ->type_url()
+        ->mandatory();
+$email_input = Site_Decorator::input('email-10', 'Email')
+        ->type_email()
+        ->mandatory();
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('HTML5 Input Form')
         ->add_paragraph('This form demonstrates HTML5 input types, placeholder and various client side validation.')
-        ->add_input_text('input-10', 'Placeholder', array('required' => true, 'placeholder' => 'Please enter text here'))
-        ->add_input_text('input-11', 'Required', array('required' => true))
+        ->add_input($text_input_placeholder)
+        ->add_input($text_input_mandatory)
         ->add_checkboxes('checkbox-group-10', 'Required Div',
                 array(
                         array('id' => 'checkbox-11', 'label' => 'One', 'value' => 1),
@@ -92,13 +117,13 @@ echo Site_Decorator::form()
                 ),
                 array('required' => true)
           )
-        ->add_input_color('color-10', 'Color', array('required' => true))
-        ->add_input_search('search-10', 'Search', array('required' => true))
+        ->add_input($color_input)
+        ->add_input($search_input)
         ->add_number('number-10', 'Number', 0, 10, array('step' => 2, 'selected' => 4, 'required' => true))
         ->add_range('range-10', 'Range', 0, 100, array('step' => 10, 'selected' => 40, 'required' => true))
-        ->add_input_tel('tel-10', 'Telephone', array('required' => true))
-        ->add_input_url('url-10', 'URL', array('required' => true))
-        ->add_input_email('email-10', 'Email', array('required' => true))
+        ->add_input($telephone_input)
+        ->add_input($url_input)
+        ->add_input($email_input)
         ->add_date('date-10', 'Date', '2010-01-01', '2015-12-31', array('selected' => 'now', 'required' => true))
         ->add_month('month-10', 'Month', '2010-01', '2015-12', array('selected' => '2012-02', 'required' => true))
         ->add_week('week-10', 'Week', '2010-W01', '2012-W01', array('selected' => '2011-W05', 'required' => true))
