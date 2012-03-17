@@ -20,8 +20,8 @@ test("mwf.userAgent.getOS()", function()
     
     ok(typeof os === 'string','getOS() should return a string');
     
-    var expected_results = ['iphone_os', 'android','blackberry','windows phone os','windows mobile',
-        'symbian','webos','mac os x','windows nt','linux', ''];
+    var expected_results = ['iphone_os', 'android','blackberry','windows_phone_os','windows_mobile',
+        'symbian','webos','mac_os_x','windows_nt','linux', ''];
     
     ok(expected_results.indexOf(os) > -1, 'getOS() should be expected value: ' + os);
 });

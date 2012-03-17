@@ -1,0 +1,1 @@
+mwf.util.importJS(mwf.site.webassetroot()+"/js/auxiliary/js-webshim/minified/polyfiller.js");mwf.util.importCSS(mwf.site.webassetroot()+"/css/auxiliary/js-webshim/shim.css");$(document).ready(function(){$.webshims.setOptions({waitReady:false});$.webshims.polyfill("forms-ext")});

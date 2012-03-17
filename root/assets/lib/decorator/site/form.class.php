@@ -128,21 +128,6 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     }
 
     /**
-     * Adds a date form element.  Three select inputs with month, day and year.  
-     * The default selected value is 'now'.
-     * 
-     * @param type $id Id and name of element.
-     * @param type $label
-     * @param type $min Valid format is 'YYYY-MM-DD'.  Such as '2012-12-31'.
-     * @param type $max Valid format is 'YYYY-MM-DD'.  Such as '2012-12-31'.
-     * @param type $params Optional parameters.  Possible values include 'selected' => '2012-12-31', disabled' => true.
-     * @return type 
-     */
-    public function add_date($id = false, $label = false, $min = false, $max = false, $params = array()) {
-        return $this->_add_datetime_helper('date', $id, $label, $min, $max, $params);
-    }
-
-    /**
      * Adds a month form element.  Two select inputs with month and year.
      * 
      * @param type $id Id and name of element.

@@ -32,7 +32,7 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
         $this->_id = $id;
         $this->_label = $label;
 
-        $params = array_merge($params, array('id'=>$this->_id, 'name'=>$this->_id));
+        $params = array_merge($params, array('id' => $this->_id, 'name' => $this->_id));
         parent::__construct('input', false, $params);
     }
 
@@ -95,16 +95,18 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
      */
     public function mandatory() {
         $this->_required = true;
-        return $this->set_param('required','required');
+        return $this->set_param('required', 'required');
     }
 
     /**
      *
      * @return Input_Site_Decorator 
      */
-    public function invalid($message) {
+    public function invalid($message='') {
         if (!empty($message)) {
-            $this->add_inner_tag('p', $message, array('class' => 'invalid'));
+            $invalid = HTML_Decorator::tag('p', $message)
+                    ->add_class('invalid');
+            $this->add_inner($invalid);
         }
         return $this->add_class('invalid');
     }
@@ -116,37 +118,45 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
     public function disable() {
         return $this->set_param('disabled', 'disabled');
     }
-    
+
+    /**
+     *
+     * @return Input_Site_Decorator
+     */
+    public function type_text() {
+        return $this->set_param('type', 'text');
+    }
+
     /**
      *
      * @return Input_Site_Decorator
      */
     public function type_color() {
-        return $this->add_class('color-field');
+        return $this->set_param('type', 'color');
     }
-    
+
     /**
      *
      * @return Input_Site_Decorator
      */
     public function type_search() {
-        return $this->add_class('search-field');
+        return $this->set_param('type', 'search');
     }
-    
+
     /**
      *
      * @return Input_Site_Decorator 
      */
     public function type_telephone() {
-        return $this->add_class('tel-field');
+        return $this->set_param('type', 'tel');
     }
-    
+
     /**
      *
      * @return Input_Site_Decorator
      */
     public function type_url() {
-        return $this->add_class('url-field');
+        return $this->set_param('type', 'url');
     }
 
     /**
@@ -154,7 +164,47 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
      * @return Input_Site_Decorator
      */
     public function type_email() {
-        return $this->add_class('email-field');
+        return $this->set_param('type', 'email');
+    }
+
+    /**
+     *
+     * @return Input_Site_Decorator
+     */
+    public function type_date() {
+        return $this->set_param('type', 'date');
+    }
+
+    /**
+     *
+     * @return Input_Site_Decorator
+     */
+    public function type_month() {
+        return $this->set_param('type', 'month');
+    }
+
+    /**
+     *
+     * @return Input_Site_Decorator
+     */
+    public function type_week() {
+        return $this->set_param('type', 'week');
+    }
+
+    /**
+     *
+     * @return Input_Site_Decorator
+     */
+    public function type_datetime_local() {
+        return $this->set_param('type', 'datetime-local');
+    }
+    
+    /**
+     * 
+     * @return Input_Site_Decorator
+     */
+    public function type_time() {
+        return $this->set_param('type', 'time');
     }
 
     /**
