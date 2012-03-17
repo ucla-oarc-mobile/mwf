@@ -145,7 +145,10 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     public function addTime_ampersandInId_idIsEncoded() {
         require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
         $this->object = new Form_Site_Decorator;
-        $this->object->add_time('Bartles&James', 'LogginsAndMessina');
+        $this->object->add_input(
+                Site_Decorator::input('Bartles&James', 'LogginsAndMessina')
+                        ->type_time()
+        );
         $result = $this->object->render();
         $this->assertContains('Bartles&amp;James', $result);
     }
@@ -157,7 +160,10 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     public function addTime_ampersandInLabel_labelIsEncoded() {
         require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
         $this->object = new Form_Site_Decorator;
-        $this->object->add_time('BartlesAndJames', 'Loggins&Messina');
+        $this->object->add_input(
+                Site_Decorator::input('BartlesAndJames', 'Loggins&Messina')
+                        ->type_time()
+        );
         $result = $this->object->render();
         $this->assertContains('Loggins&amp;Messina', $result);
     }
