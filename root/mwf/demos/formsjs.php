@@ -1,5 +1,4 @@
 <?php
-
 /**
  *
  * @package mwf.demos
@@ -31,12 +30,12 @@ echo HTML_Decorator::html_start()->render();
 echo Site_Decorator::head()
         ->set_title('Forms JS Demo')
         ->add_js_handler_library('full_libs', 'forms')
+        ->add_js_handler_library('full_libs', 'formsPolyfills')
         ->add_js_handler_library('standard_libs', 'tooltip')
         ->render();
 ?>
 
 <?php
-
 echo HTML_Decorator::body_start()->render();
 
 echo Site_Decorator::header()
@@ -60,22 +59,18 @@ echo Site_Decorator::form()
         ->set_title('Required & Tooltip Form')
         ->add_paragraph('This form demonstrates client-side required validation. Note that required validation does not work with checkbox or radio.')
         ->add_input($text_input_mandatory)
-        ->add_checkboxes('checkbox-group-1', 'Checkbox',
-                array(
-                        array('id' => 'checkbox-1', 'label' => 'One', 'value' => 1),
-                        array('id' => 'checkbox-2', 'label' => 'Two', 'value' => 2),
-                        array('id' => 'checkbox-3', 'label' => 'Three', 'value' => 3)
-                ),
-                array('required' => true)
-          )
-        ->add_select('select-group-1', 'Select',
-                array(
-                        array('label' => 'One', 'value' => 1),
-                        array('label' => 'Two', 'value' => 2),
-                        array('label' => 'Three', 'value' => 3)
-                ),
-                array('required' => true)
-          )
+        ->add_checkboxes('checkbox-group-1', 'Checkbox', array(
+            array('id' => 'checkbox-1', 'label' => 'One', 'value' => 1),
+            array('id' => 'checkbox-2', 'label' => 'Two', 'value' => 2),
+            array('id' => 'checkbox-3', 'label' => 'Three', 'value' => 3)
+                ), array('required' => true)
+        )
+        ->add_select('select-group-1', 'Select', array(
+            array('label' => 'One', 'value' => 1),
+            array('label' => 'Two', 'value' => 2),
+            array('label' => 'Three', 'value' => 3)
+                ), array('required' => true)
+        )
         ->add_textarea('textarea-1', 'Textarea', array('required' => true))
         ->add_input($text_input_tooltip)
         ->add_textarea('textarea-2', 'Tooltip with long label', array('required' => true, 'tooltip' => 'A very very very very very very long tooltip text'))
@@ -103,20 +98,54 @@ $url_input = Site_Decorator::input('url-10', 'URL')
 $email_input = Site_Decorator::input('email-10', 'Email')
         ->type_email()
         ->mandatory();
+$now = new DateTime('now');
+$five_years_ago = new DateTime("5 years ago");
+$five_years_from_now = new DateTime("5 years");
+$date_input = Site_Decorator::input('date-10', 'Date')
+        ->type_date()
+        ->mandatory()
+        ->set_param('min', $five_years_ago->format('Y-m-d'))
+        ->set_param('max', $five_years_from_now->format('Y-m-d'))
+        ->set_param('value', $now->format('Y-m-d'));
+$month_input = Site_Decorator::input('month-10', 'Month')
+        ->type_month()
+        ->mandatory()
+        ->set_param('min', $five_years_ago->format('Y-m'))
+        ->set_param('max', $five_years_from_now->format('Y-m'))
+        ->set_param('value', $now->format('Y-m'));
+$week_input = Site_Decorator::input('week-10', 'Week')
+        ->type_week()
+        ->mandatory()
+        ->set_param('min', $five_years_ago->format('Y-\WW'))
+        ->set_param('max', $five_years_from_now->format('Y-\WW'))
+        ->set_param('value', $now->format('Y-\WW'));
+
+$datetime_local_input = Site_Decorator::input('datetime-10', 'Datetime Local')
+        ->type_datetime_local()
+        ->mandatory()
+        ->set_param('min', $five_years_ago->format('Y-m-d\TH:i'))
+        ->set_param('max', $five_years_from_now->format('Y-m-d\TH:i'))
+        ->set_param('value', $now->format('Y-m-d\TH:i'));
+
+$time_input = Site_Decorator::input('time-10', 'Time')
+        ->type_time()
+        ->mandatory()
+        ->set_param('min', $five_years_ago->format('H:i'))
+        ->set_param('max', $five_years_from_now->format('H:i'))
+        ->set_param('value', $now->format('H:i'));
+
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('HTML5 Input Form')
         ->add_paragraph('This form demonstrates HTML5 input types, placeholder and various client side validation.')
         ->add_input($text_input_placeholder)
         ->add_input($text_input_mandatory)
-        ->add_checkboxes('checkbox-group-10', 'Required Div',
-                array(
-                        array('id' => 'checkbox-11', 'label' => 'One', 'value' => 1),
-                        array('id' => 'checkbox-12', 'label' => 'Two', 'value' => 2),
-                        array('id' => 'checkbox-13', 'label' => 'Three', 'value' => 3)
-                ),
-                array('required' => true)
-          )
+        ->add_checkboxes('checkbox-group-10', 'Required Div', array(
+            array('id' => 'checkbox-11', 'label' => 'One', 'value' => 1),
+            array('id' => 'checkbox-12', 'label' => 'Two', 'value' => 2),
+            array('id' => 'checkbox-13', 'label' => 'Three', 'value' => 3)
+                ), array('required' => true)
+        )
         ->add_input($color_input)
         ->add_input($search_input)
         ->add_number('number-10', 'Number', 0, 10, array('step' => 2, 'selected' => 4, 'required' => true))
@@ -124,14 +153,13 @@ echo Site_Decorator::form()
         ->add_input($telephone_input)
         ->add_input($url_input)
         ->add_input($email_input)
-        ->add_date('date-10', 'Date', '2010-01-01', '2015-12-31', array('selected' => 'now', 'required' => true))
-        ->add_month('month-10', 'Month', '2010-01', '2015-12', array('selected' => '2012-02', 'required' => true))
-        ->add_week('week-10', 'Week', '2010-W01', '2012-W01', array('selected' => '2011-W05', 'required' => true))
-        ->add_datetime_local('datetime-10', 'Datetime Local', '2010-01-01 00:00:00', '2012-12-31 23:59:00', array('selected' => '2011-07-10 12:30:30', 'required' => true))
-        ->add_time('time-10', 'Time', '05:05:05', '10:10:10', array('selected' => '07:07:07', 'required' => true))
+        ->add_input($date_input)
+        ->add_input($month_input)
+        ->add_input($week_input)
+        ->add_input($datetime_local_input)
+        ->add_input($time_input)
         ->add_submit('Test Me')
         ->render();
-
 ?>
 
 
@@ -446,7 +474,6 @@ echo Site_Decorator::form()
 </form>
 
 <?php
-
 echo Site_Decorator::button()
         ->set_padded()
         ->add_option('Back to Demos', Config::get('global', 'site_url') . '/mwf/demos.php')
@@ -465,7 +492,6 @@ echo Site_Decorator::default_footer()->render();
 </script>
 
 <?php
-
 echo HTML_Decorator::body_end()->render();
 
 echo HTML_Decorator::html_end()->render();

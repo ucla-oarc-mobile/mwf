@@ -89,9 +89,20 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
+    public function typeText_previousType_textRendered() {
+        $this->object->type_color();
+        $this->object->type_text();
+        $rendered = $this->object->render();
+        $this->assertContains('type="text"', $rendered);
+        $this->assertNotContains('type="color"', $rendered);
+    }
+
+    /**
+     * @test
+     */
     public function typeColor_void_colorRendered() {
         $this->object->type_color();
-        $this->assertContains('class="color-field"', $this->object->render());
+        $this->assertContains('type="color"', $this->object->render());
     }
 
     /**
@@ -99,7 +110,7 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
      */
     public function typeSearch_void_searchRendered() {
         $this->object->type_search();
-        $this->assertContains('class="search-field"', $this->object->render());
+        $this->assertContains('type="search"', $this->object->render());
     }
 
     /**
@@ -107,7 +118,7 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
      */
     public function typeTelephone_void_telephoneRendered() {
         $this->object->type_telephone();
-        $this->assertContains('class="tel-field"', $this->object->render());
+        $this->assertContains('type="tel"', $this->object->render());
     }
 
     /**
@@ -115,7 +126,7 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
      */
     public function typeUrl_void_urlRendered() {
         $this->object->type_url();
-        $this->assertContains('class="url-field"', $this->object->render());
+        $this->assertContains('type="url"', $this->object->render());
     }
 
     /**
@@ -123,10 +134,49 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
      */
     public function typeEmail_void_emailRendered() {
         $this->object->type_email();
-        $this->assertContains('class="email-field"', $this->object->render());
+        $this->assertContains('type="email"', $this->object->render());
     }
 
+    /**
+     * @test
+     */
+    public function typeDate_void_dateRendered() {
+        $this->object->type_date();
+        $this->assertContains('type="date"', $this->object->render());
+    }
 
+    /**
+     * @test
+     */
+    public function typeMonth_void_monthRendered() {
+        $this->object->type_month();
+        $this->assertContains('type="month"', $this->object->render());
+    }
+
+    /**
+     * @test
+     */
+    public function typeWeek_void_monthRendered() {
+        $this->object->type_week();
+        $this->assertContains('type="week"', $this->object->render());
+    }
+
+    /**
+     * @test
+     */
+    public function typeDatetimeLocal_void_datetimeLocalRendered() {
+        $this->object->type_datetime_local();
+        $this->assertContains('type="datetime-local"', $this->object->render());
+    }
+
+    /**
+     * @test
+     */
+    public function typeTime_void_timeRendered() {
+        $this->object->type_time();
+        $this->assertContains('type="time"', $this->object->render());  
+    }
+    
     /**
      * @test
      */
@@ -135,4 +185,5 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
         $this->assertRegExp('/<input.*id="input_id".*>/', $rendered);
         $this->assertRegExp('/<input.*name="input_id".*>/', $rendered);
     }
+
 }
