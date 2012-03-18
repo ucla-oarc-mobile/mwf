@@ -50,21 +50,10 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
      * @test
      * @runInSeparateProcess
      */
-    public function addButton_withParams_paramsAreIncluded() {
+    public function addInput_buttonType_classIsNeutral() {
         require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
         $this->object = new Form_Site_Decorator;
-        $this->object->add_button('foo', array('bar' => 'baz'));
-        $this->assertContains('bar="baz"', $this->object->render());
-    }
-
-    /**
-     * @test
-     * @runInSeparateProcess
-     */
-    public function addButton_noClass_neutral() {
-        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
-        $this->object = new Form_Site_Decorator;
-        $this->object->add_button('foo', array('bar' => 'baz'));
+        $this->object->add_input(Site_Decorator::input()->type_button());
         $this->assertContains('class="neutral"', $this->object->render());
     }
 
@@ -72,21 +61,10 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
      * @test
      * @runInSeparateProcess
      */
-    public function addButton_class_classRendered() {
+    public function addInput_buttonWithAmpersandInValue_escapedOnce() {
         require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
         $this->object = new Form_Site_Decorator;
-        $this->object->add_button('foo', array('bar' => 'baz', 'class' => 'classy'));
-        $this->assertContains('class="neutral classy"', $this->object->render());
-    }
-
-    /**
-     * @test
-     * @runInSeparateProcess
-     */
-    public function addButton_ampersand_escapedOnce() {
-        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
-        $this->object = new Form_Site_Decorator;
-        $this->object->add_button('foo&bar');
+        $this->object->add_input(Site_Decorator::input()->type_button()->set_param('value', 'foo&bar'));
         $this->assertContains('foo&amp;bar', $this->object->render());
     }
 
@@ -98,7 +76,7 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
         require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
         $this->object = new Form_Site_Decorator;
         $this->object->add_inner_tag('div', 'foo');
-        $this->object->add_button('bar');
+        $this->object->add_input(Site_Decorator::input()->type_button()->set_param('value', 'bar'));
         $this->assertRegExp('/<div\b.+bar/', $this->object->render());
     }
 
@@ -166,18 +144,6 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
         );
         $result = $this->object->render();
         $this->assertContains('Loggins&amp;Messina', $result);
-    }
-
-    /**
-     * @test
-     * @runInSeparateProcess
-     */
-    public function addPrimaryLinkButton_bracketsInLabel_labelIsEncoded() {
-        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
-        $this->object = new Form_Site_Decorator;
-        $this->object->add_primary_link_button('<encode me>');
-        $result = $this->object->render();
-        $this->assertContains('&lt;encode me&gt;', $result);
     }
 
     /**
@@ -333,4 +299,81 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
         $this->assertContains('class="required"', $result);
     }
 
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addLinkButtonPrimary_text_classPrimary() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $result = $this->object->add_link_button_primary('primary')->render();
+        $this->assertRegExp('/class="[^"]*primary[^"]*"/', $result);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addLinkButtonPrimary_text_classButton() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $result = $this->object->add_link_button_primary('primary')->render();
+        $this->assertRegExp('/class="[^"]*button[^"]*"/', $result);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addButtonPrimaryLink_bracketsInText_textIsEncoded() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $this->object->add_link_button_primary('<encode me>');
+        $result = $this->object->render();
+        $this->assertContains('&lt;encode me&gt;', $result);
+    }
+    
+        /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addLinkButtonSecondary_text_classSecondary() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $result = $this->object->add_link_button_secondary('not a primary button')->render();
+        $this->assertRegExp('/class="[^"]*secondary[^"]*"/', $result);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addLinkButtonSecondary_text_classButton() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $result = $this->object->add_link_button_secondary('not primary')->render();
+        $this->assertRegExp('/class="[^"]*button[^"]*"/', $result);
+    }
+    
+        /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addLinkButtonNeutral_text_classNeutral() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $result = $this->object->add_link_button_neutral('i can do it all on my own')->render();
+        $this->assertRegExp('/class="[^"]*neutral[^"]*"/', $result);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function addLinkButtonNeutral_text_classButton() {
+        require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/form.class.php';
+        $this->object = new Form_Site_Decorator;
+        $result = $this->object->add_link_button_neutral('switzerland')->render();
+        $this->assertRegExp('/class="[^"]*button[^"]*"/', $result);
+    }
 }

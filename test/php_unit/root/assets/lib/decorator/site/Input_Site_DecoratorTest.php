@@ -174,9 +174,68 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
      */
     public function typeTime_void_timeRendered() {
         $this->object->type_time();
-        $this->assertContains('type="time"', $this->object->render());  
+        $this->assertContains('type="time"', $this->object->render());
     }
-    
+
+    /**
+     * @test
+     */
+    public function typeSubmit_void_submitRendered() {
+        $this->object->type_submit();
+        $this->assertContains('type="submit"', $this->object->render());
+    }
+
+    /**
+     * @test
+     */
+    public function typeSubmit_void_classPrimary() {
+        $this->object->type_submit();
+        $this->assertContains('class="primary"', $this->object->render());
+    }
+
+    /**
+     * @test
+     */
+    public function typeButton_void_submitRendered() {
+        $this->object->type_button();
+        $this->assertContains('type="submit"', $this->object->render());
+    }
+
+    /**
+     * @test
+     */
+    public function typeButton_void_classNeutral() {
+        $this->object->type_button();
+        $this->assertContains('class="neutral"', $this->object->render());
+    }
+
+    /**
+     * @test
+     */
+    public function primary_void_classPrimary() {
+        $this->object->type_button();
+        $this->object->primary();
+        $this->assertContains('class="primary"', $this->object->render());
+    }
+
+    /**
+     * @test
+     */
+    public function secondary_void_classSecondary() {
+        $this->object->type_button();
+        $this->object->secondary();
+        $this->assertContains('class="secondary"', $this->object->render());
+    }
+
+    /**
+     * @test
+     */
+    public function neutral_void_classNeutral() {
+        $this->object->type_button();
+        $this->object->neutral();
+        $this->assertContains('class="neutral"', $this->object->render());
+    }
+
     /**
      * @test
      */

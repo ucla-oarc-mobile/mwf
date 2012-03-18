@@ -21,6 +21,7 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
     private $_label;
     private $_required = false;
     private $_tooltip = '';
+    private $_button_type = false;
 
     /**
      *
@@ -28,11 +29,18 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
      * @param string $label
      * @param array $params 
      */
-    public function __construct($id, $label, $params = array()) {
+    public function __construct($id = false, $label = false, $params = array()) {
         $this->_id = $id;
         $this->_label = $label;
 
-        $params = array_merge($params, array('id' => $this->_id, 'name' => $this->_id));
+        if ($this->_id !== false) {
+            $params['id'] = $this->_id;
+        }
+
+        if ($this->_label !== false) {
+            $params['name'] = $this->_id;
+        }
+
         parent::__construct('input', false, $params);
     }
 
@@ -198,7 +206,7 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
     public function type_datetime_local() {
         return $this->set_param('type', 'datetime-local');
     }
-    
+
     /**
      * 
      * @return Input_Site_Decorator
@@ -208,10 +216,62 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
     }
 
     /**
+     * 
+     * @return Input_Site_Decorator
+     */
+    public function type_submit() {
+        if (! $this->_button_type) {
+            $this->primary();
+        }
+        return $this->set_param('type', 'submit');
+    }
+    
+    /**
+     * 
+     * @return Input_Site_Decorator
+     */
+    public function type_button() {
+        if (! $this->_button_type) {
+            $this->neutral();
+        }
+        return $this->set_param('type', 'submit');
+    }
+    
+    /**
+     *
+     * @return Input_Site_Decorator 
+     */
+    public function primary() {
+        $this->_button_type = 'primary';
+        return $this;
+    }
+    
+    /**
+     *
+     * @return Input_Site_Decorator 
+     */
+    public function secondary() {
+        $this->_button_type = 'secondary';
+        return $this;
+    }
+    
+    /**
+     *
+     * @return Input_Site_Decorator 
+     */
+    public function neutral() {
+        $this->_button_type = 'neutral';
+        return $this;
+    }
+
+    /**
      *
      * @return string
      */
     public function render() {
+        if ($this->_button_type) {
+            $this->add_class($this->_button_type);
+        }
         return parent::render();
     }
 

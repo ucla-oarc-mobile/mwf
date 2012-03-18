@@ -59,7 +59,7 @@ echo Site_Decorator::form()
         ->set_short()
         ->set_title('Short Form')
         ->add_input($text_input)
-        ->add_submit()
+        ->add_input(Site_Decorator::input()->type_submit())
         ->render();
 ?>
 
@@ -94,12 +94,12 @@ echo Site_Decorator::form()
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Full Button Form')
-        ->add_primary_button('Primary Button')
-        ->add_secondary_button('Secondary Button')
-        ->add_button('Neutral Button')
-        ->add_primary_link_button('Primary Link')
-        ->add_secondary_link_button('Secondary Link')
-        ->add_link_button('Neutral Link')
+        ->add_input(Site_Decorator::input()->type_button()->primary()->set_param('value', 'Primary Button'))
+        ->add_input(Site_Decorator::input()->type_button()->secondary()->set_param('value', 'Secondary Button'))
+        ->add_input(Site_Decorator::input()->type_button()->set_param('value', 'Neutral Button'))
+        ->add_link_button_primary('Primary Link', '#')
+        ->add_link_button_secondary('Secondary Link', '#')
+        ->add_link_button_neutral('Neutral Link', '#')
         ->render();
 
 /* textarea form */
@@ -193,7 +193,7 @@ echo Site_Decorator::form()
 echo Site_Decorator::form()
         ->set_title('Not Padded Form')
         ->add_input(Site_Decorator::input('text-100', 'Label'))
-        ->add_submit('Search')
+        ->add_input(Site_Decorator::input()->type_submit()->set_param('value','Search'))
         ->render();
 
 
@@ -203,7 +203,7 @@ echo Site_Decorator::form()
         ->set_title('Prototype 0')
         ->add_subtitle('Subtitle')
         ->add_paragraph('A content box with paragraph content')
-        ->add_submit('Submit')
+        ->add_input(Site_Decorator::input()->type_submit()->set_param('value','Submit'))
         ->render();
 ?>
 

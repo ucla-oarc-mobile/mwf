@@ -128,113 +128,44 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     }
 
     /**
-     * Adds a submit button (defaults to a primary button).
-     * 
-     * @param type $value
-     * @param type $params Optiaonal parameters.  Possible values include 'disabled' => true.
-     * @return type 
-     */
-    public function add_submit($value = 'Submit', $params = array()) {
-        return $this->_add_button_helper($value, 'primary', $params);
-    }
-
-    /**
-     * Adds a primary submit button.
-     * 
-     * @param type $value
-     * @param type $params Optiaonal parameters.  Possible values include 'disabled' => true.
-     * @return type 
-     */
-    public function add_primary_button($value = '', $params = array()) {
-        return $this->_add_button_helper($value, 'primary', $params);
-    }
-
-    /**
-     * Adds a secondary submit button.
-     * 
-     * @param type $value
-     * @param type $params Optiaonal parameters.  Possible values include 'disabled' => true.
-     * @return type 
-     */
-    public function add_secondary_button($value = '', $params = array()) {
-        return $this->_add_button_helper($value, 'secondary', $params);
-    }
-
-    /**
-     * Adds a neutral submit button.
-     * 
-     * @param string $value
-     * @param array $params Optiaonal parameters.  Possible values include 'disabled' => true.
-     * @return type 
-     */
-    public function add_button($value = '', $params = array()) {
-        return $this->_add_button_helper($value, 'neutral', $params);
-    }
-
-    /**
-     * Helper function to generate form buttons.
-     * 
-     * @param string $value
-     * @param array $params
-     * @param string|false $class
+     *
+     * @param string $text
+     * @param string $url
+     * @param string $class
      * @return Form_Site_Decorator 
      */
-    private function _add_button_helper($value, $class, $params) {
-        if (isset($params['class'])) {
-            $class = $class . ' ' . $params['class'];
-            unset($params['class']);
-        }
-
-        $this->add_inner_tag('input', false, array_merge($params, array('type' => 'submit', 'value' => $value, 'class' => $class)));
-
-        return $this;
+    private function _add_link_button($text, $url, $class) {
+        return $this->add_inner(HTML_Decorator::tag('a', $text, array('href' => $url))->add_class($class)->add_class('button'));
     }
 
     /**
-     * Adds a primary link button.
-     * 
-     * @param type $value
-     * @param type $params Optiaonal parameters.  Possible values include 'disabled' => true.
-     * @return type 
+     *
+     * @param string $text
+     * @param string $url 
+     * @return Form_Site_Decorator
      */
-    public function add_primary_link_button($value = '', $params = array()) {
-        return $this->_add_link_button_helper($value, 'primary', $params);
+    public function add_link_button_primary($text, $url='#') {
+        return $this->_add_link_button($text, $url, 'primary');
     }
 
     /**
-     * Adds a secondary link button.
-     * 
-     * @param type $value
-     * @param type $params Optiaonal parameters.  Possible values include 'disabled' => true.
-     * @return type 
+     *
+     * @param string $text
+     * @param string $url 
+     * @return Form_Site_Decorator
      */
-    public function add_secondary_link_button($value = '', $params = array()) {
-        return $this->_add_link_button_helper($value, 'secondary', $params);
+    public function add_link_button_secondary($text, $url='#') {
+        return $this->_add_link_button($text, $url, 'secondary');
     }
 
     /**
-     * Adds a neutral link button.
-     * 
-     * @param type $value
-     * @param type $params Optiaonal parameters.  Possible values include 'disabled' => true.
-     * @return type 
+     *
+     * @param string $text
+     * @param string $url 
+     * @return Form_Site_Decorator
      */
-    public function add_link_button($value = '', $params = array()) {
-        return $this->_add_link_button_helper($value, 'neutral', $params);
-    }
-
-    /**
-     * Helper function to generate form link button.
-     * 
-     * @param type $value
-     * @param type $class
-     * @param array $params
-     * @return Form_Site_Decorator 
-     */
-    private function _add_link_button_helper($value, $class, $params) {
-        $this->add_inner_tag('a', $value, array_merge($params, array('class' => 'button ' . $class)));
-
-        return $this;
+    public function add_link_button_neutral($text, $url='#') {
+        return $this->_add_link_button($text, $url, 'neutral');
     }
 
     /**

@@ -24,6 +24,9 @@
 require_once(dirname(dirname(dirname(__FILE__))) . '/assets/lib/decorator.class.php');
 require_once(dirname(dirname(dirname(__FILE__))) . '/assets/config.php');
 
+$submit = Site_Decorator::input()
+        ->type_submit()
+        ->set_param('value','Test Me');
 
 echo HTML_Decorator::html_start()->render();
 
@@ -74,7 +77,7 @@ echo Site_Decorator::form()
         ->add_textarea('textarea-1', 'Textarea', array('required' => true))
         ->add_input($text_input_tooltip)
         ->add_textarea('textarea-2', 'Tooltip with long label', array('required' => true, 'tooltip' => 'A very very very very very very long tooltip text'))
-        ->add_submit('Test Me')
+        ->add_input($submit)
         ->render();
 
 /* html5 */
@@ -158,7 +161,7 @@ echo Site_Decorator::form()
         ->add_input($week_input)
         ->add_input($datetime_local_input)
         ->add_input($time_input)
-        ->add_submit('Test Me')
+        ->add_input($submit)
         ->render();
 ?>
 
