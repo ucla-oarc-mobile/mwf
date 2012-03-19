@@ -57,17 +57,15 @@ $text_input_mandatory = Site_Decorator::input('input-1', 'Text')
 $text_input_tooltip = Site_Decorator::input('input-2', 'Tooltip')
         ->mandatory()
         ->set_tooltip('tooltip text');
+$checkbox_input_mandatory = Site_Decorator::input('checkbox-1', 'Checkbox')
+        ->type_checkbox()
+        ->mandatory();
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Required & Tooltip Form')
-        ->add_paragraph('This form demonstrates client-side required validation. Note that required validation does not work with checkbox or radio.')
+        ->add_paragraph('This form demonstrates client-side required validation.')
         ->add_input($text_input_mandatory)
-        ->add_checkboxes('checkbox-group-1', 'Checkbox', array(
-            array('id' => 'checkbox-1', 'label' => 'One', 'value' => 1),
-            array('id' => 'checkbox-2', 'label' => 'Two', 'value' => 2),
-            array('id' => 'checkbox-3', 'label' => 'Three', 'value' => 3)
-                ), array('required' => true)
-        )
+        ->add_input($checkbox_input_mandatory)
         ->add_select('select-group-1', 'Select', array(
             array('label' => 'One', 'value' => 1),
             array('label' => 'Two', 'value' => 2),
@@ -143,12 +141,7 @@ echo Site_Decorator::form()
         ->add_paragraph('This form demonstrates HTML5 input types, placeholder and various client side validation.')
         ->add_input($text_input_placeholder)
         ->add_input($text_input_mandatory)
-        ->add_checkboxes('checkbox-group-10', 'Required Div', array(
-            array('id' => 'checkbox-11', 'label' => 'One', 'value' => 1),
-            array('id' => 'checkbox-12', 'label' => 'Two', 'value' => 2),
-            array('id' => 'checkbox-13', 'label' => 'Three', 'value' => 3)
-                ), array('required' => true)
-        )
+        ->add_input($checkbox_input_mandatory)
         ->add_input($color_input)
         ->add_input($search_input)
         ->add_number('number-10', 'Number', 0, 10, array('step' => 2, 'selected' => 4, 'required' => true))

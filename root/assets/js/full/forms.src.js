@@ -54,35 +54,10 @@ mwf.forms.init = function(options) {
         if (mwf.capability.input.required()) {
             requiredTransform();
         }
-
-        // if support color
-        if (mwf.capability.inputtypes.color()) {
-            simpleTransform("color");
-        }
-        
-        // if support search
-        if (mwf.capability.inputtypes.search()) {
-            simpleTransform("search");
-        }
         
         // if support number
         if (mwf.capability.inputtypes.number()) {
             rangeTransform("number");
-        }
-
-        // if support tel
-        if (mwf.capability.inputtypes.tel()) {
-            simpleTransform("tel");
-        }
-
-        // if support url
-        if (mwf.capability.inputtypes.url()) {
-            simpleTransform("url");
-        }
-
-        // if support email
-        if (mwf.capability.inputtypes.email()) {
-            simpleTransform("email");
         }
         
         /*
@@ -106,23 +81,6 @@ mwf.forms.init = function(options) {
             $(settings.selector + " .placeholder").each(function() {
                 $(this).prev(":input").attr("placeholder", $(this).html());
             })
-        }
-
-        /*
-         * Transforms into a single input field such as email, url, tel, search.
-         */
-        function simpleTransform(inputtype) {
-            $(settings.selector + " ." + inputtype + "-field").each(function() {
-                var element = $(this);
-                var clone = element.clone();
-                clone.attr("name", element.attr("name") + "-transform");
-                clone.attr("type", inputtype);
-                clone.removeClass(inputtype + "-field");
-                clone.addClass("simple-transform-field");
-                clone.insertAfter(element);
-                element.addClass("hide");
-                element.removeAttr("required");
-            });
         }
         
         /*

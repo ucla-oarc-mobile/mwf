@@ -19,9 +19,12 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
 
     private $_id;
     private $_label;
+    private $_type=false;
     private $_required = false;
     private $_tooltip = '';
     private $_button_type = false;
+    private $_invalid = false;
+    private $_invalid_message = '';
 
     /**
      *
@@ -35,9 +38,6 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
 
         if ($this->_id !== false) {
             $params['id'] = $this->_id;
-        }
-
-        if ($this->_label !== false) {
             $params['name'] = $this->_id;
         }
 
@@ -67,6 +67,14 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
     public function get_tooltip() {
         return $this->_tooltip;
     }
+    
+    /**
+     * 
+     * @return string
+     */
+    public function get_invalid_message() {
+        return $this->_invalid_message;
+    }
 
     /**
      *
@@ -75,7 +83,42 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
     public function is_mandatory() {
         return $this->_required;
     }
+    
+    /**
+     * 
+     * @return boolean
+     */
+    public function is_option() {
+        return ($this->_type==="checkbox" || $this->_type==="radio");
+    }
+    
+    /**
+     *
+     * @return boolean
+     */
+    public function is_invalid() {
+        return $this->_invalid;
+    }
 
+    /**
+     * Sets the parameter name for the input. For example, all radio buttons
+     * in a group should have the same parameter name.
+     * 
+     * @param string $text
+     * @return Input_Site_Decorator
+     */
+    public function set_name($text) {
+        return $this->set_param('name', $text);
+    }
+
+    /**
+     *
+     * @param string $text
+     * @return Input_Site_Decorator 
+     */
+    public function set_value($text) {
+        return $this->set_param('value', $text);
+    }
     /**
      *
      * @param string $text
@@ -111,10 +154,9 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
      * @return Input_Site_Decorator 
      */
     public function invalid($message='') {
-        if (!empty($message)) {
-            $invalid = HTML_Decorator::tag('p', $message)
-                    ->add_class('invalid');
-            $this->add_inner($invalid);
+        $this->_invalid = true;
+        if (! empty($message)) {
+            $this->_invalid_message = $message;
         }
         return $this->add_class('invalid');
     }
@@ -132,7 +174,8 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
      * @return Input_Site_Decorator
      */
     public function type_text() {
-        return $this->set_param('type', 'text');
+        $this->_type = 'text';
+        return $this;
     }
 
     /**
@@ -140,7 +183,8 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
      * @return Input_Site_Decorator
      */
     public function type_color() {
-        return $this->set_param('type', 'color');
+        $this->_type = 'color';
+        return $this;
     }
 
     /**
@@ -148,7 +192,8 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
      * @return Input_Site_Decorator
      */
     public function type_search() {
-        return $this->set_param('type', 'search');
+        $this->_type = 'search';
+        return $this;
     }
 
     /**
@@ -156,7 +201,8 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
      * @return Input_Site_Decorator 
      */
     public function type_telephone() {
-        return $this->set_param('type', 'tel');
+        $this->_type = 'tel';
+        return $this;
     }
 
     /**
@@ -164,7 +210,8 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
      * @return Input_Site_Decorator
      */
     public function type_url() {
-        return $this->set_param('type', 'url');
+        $this->_type = 'url';
+        return $this;
     }
 
     /**
@@ -172,7 +219,8 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
      * @return Input_Site_Decorator
      */
     public function type_email() {
-        return $this->set_param('type', 'email');
+        $this->_type = 'email';
+        return $this;
     }
 
     /**
@@ -180,7 +228,8 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
      * @return Input_Site_Decorator
      */
     public function type_date() {
-        return $this->set_param('type', 'date');
+        $this->_type = 'date';
+        return $this;
     }
 
     /**
@@ -188,7 +237,8 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
      * @return Input_Site_Decorator
      */
     public function type_month() {
-        return $this->set_param('type', 'month');
+        $this->_type = 'month';
+        return $this;
     }
 
     /**
@@ -196,7 +246,8 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
      * @return Input_Site_Decorator
      */
     public function type_week() {
-        return $this->set_param('type', 'week');
+        $this->_type = 'week';
+        return $this;
     }
 
     /**
@@ -204,7 +255,8 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
      * @return Input_Site_Decorator
      */
     public function type_datetime_local() {
-        return $this->set_param('type', 'datetime-local');
+        $this->_type = 'datetime-local';
+        return $this;
     }
 
     /**
@@ -212,7 +264,8 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
      * @return Input_Site_Decorator
      */
     public function type_time() {
-        return $this->set_param('type', 'time');
+        $this->_type = 'time';
+        return $this;
     }
 
     /**
@@ -220,23 +273,43 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
      * @return Input_Site_Decorator
      */
     public function type_submit() {
-        if (! $this->_button_type) {
+        if (!$this->_button_type) {
             $this->primary();
         }
-        return $this->set_param('type', 'submit');
+        $this->_type = 'submit';
+        return $this;
     }
-    
+
     /**
      * 
      * @return Input_Site_Decorator
      */
     public function type_button() {
-        if (! $this->_button_type) {
+        if (!$this->_button_type) {
             $this->neutral();
         }
-        return $this->set_param('type', 'submit');
+        $this->_type = 'submit';
+        return $this;
     }
-    
+
+    /**
+     *
+     * @return Input_Site_Decorator
+     */
+    public function type_checkbox() {
+        $this->_type = 'checkbox';
+        return $this;
+    }
+
+    /**
+     *
+     * @return Input_Site_Decorator
+     */
+    public function type_radio() {
+        $this->_type = 'radio';
+        return $this;
+    }
+
     /**
      *
      * @return Input_Site_Decorator 
@@ -245,7 +318,7 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
         $this->_button_type = 'primary';
         return $this;
     }
-    
+
     /**
      *
      * @return Input_Site_Decorator 
@@ -254,7 +327,7 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
         $this->_button_type = 'secondary';
         return $this;
     }
-    
+
     /**
      *
      * @return Input_Site_Decorator 
@@ -271,6 +344,9 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
     public function render() {
         if ($this->_button_type) {
             $this->add_class($this->_button_type);
+        }
+        if ($this->_type) {
+            $this->set_param('type', $this->_type);
         }
         return parent::render();
     }

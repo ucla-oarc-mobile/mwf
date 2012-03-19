@@ -61,21 +61,35 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function invalid_void_invalidRenderedButNoParagraph() {
+    public function invalid_void_invalidClassApplied() {
         $this->object->invalid();
         $rendered = $this->object->render();
         $this->assertContains('class="invalid"', $rendered);
-        $this->assertNotContains('<p class="invalid">', $rendered);
     }
 
     /**
      * @test
      */
-    public function invalid_message_invalidRenderedWithParagraph() {
-        $this->object->invalid('Input invalid!');
+    public function invalid_message_invalidClassAppliedAndMessageStored() {
+        $this->object->invalid('Error message');
         $rendered = $this->object->render();
-        $this->assertRegExp('/class="invalid">.*<p class="invalid"/', $rendered);
-        $this->assertContains('<p class="invalid">Input invalid!</p>', $rendered);
+        $this->assertContains('class="invalid"', $rendered);
+        $this->assertEquals('Error message', $this->object->get_invalid_message());
+    }
+
+    /**
+     * @test
+     */
+    public function isInvalid_valid_false() {
+        $this->assertFalse($this->object->is_invalid());
+    }
+
+    /**
+     * @test
+     */
+    public function isInvalid_invalid_true() {
+        $this->object->invalid();
+        $this->assertTrue($this->object->is_invalid());
     }
 
     /**
@@ -212,6 +226,22 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
+    public function typeCheckbox_void_checkboxRendered() {
+        $this->object->type_checkbox();
+        $this->assertContains('type="checkbox"', $this->object->render());
+    }
+
+    /**
+     * @test
+     */
+    public function typeRadio_void_selectRendered() {
+        $this->object->type_radio();
+        $this->assertContains('type="radio"', $this->object->render());
+    }
+
+    /**
+     * @test
+     */
     public function primary_void_classPrimary() {
         $this->object->type_button();
         $this->object->primary();
@@ -243,6 +273,57 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
         $rendered = $this->object->render();
         $this->assertRegExp('/<input.*id="input_id".*>/', $rendered);
         $this->assertRegExp('/<input.*name="input_id".*>/', $rendered);
+    }
+
+    /**
+     * @test
+     */
+    public function setName_foo_nameIsDifferentFromId() {
+        $this->object->set_name('foo');
+        $rendered = $this->object->render();
+
+        $this->assertRegExp('/<input.*id="input_id".*>/', $rendered);
+        $this->assertRegExp('/<input.*name="foo".*>/', $rendered);
+    }
+
+    /**
+     * @test
+     */
+    public function setValue_foo_valueIsFoo() {
+        $this->object->set_value('foo');
+        $rendered = $this->object->render();
+        $this->assertRegExp('/<input.*value="foo".*>/', $rendered);
+    }
+
+    /**
+     * @test
+     */
+    public function isOption_checkbox_true() {
+        $this->object->type_checkbox();
+        $this->assertTrue($this->object->is_option());
+    }
+
+    /**
+     * @test
+     */
+    public function isOption_radio_true() {
+        $this->object->type_radio();
+        $this->assertTrue($this->object->is_option());
+    }
+
+    /**
+     * @test
+     */
+    public function isOption_void_false() {
+        $this->assertFalse($this->object->is_option());
+    }
+
+    /**
+     * @test
+     */
+    public function isOption_text_false() {
+        $this->object->type_text();
+        $this->assertFalse($this->object->is_option());
     }
 
 }

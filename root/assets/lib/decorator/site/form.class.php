@@ -109,12 +109,26 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
 
         $label = $input_decorator->get_label();
         if ($label) {
-            $label_decorator = HTML_Decorator::tag('label', $label, array('for' => $input_decorator->get_id()));
+            $span_decorator = HTML_Decorator::tag('span', $label);
 
             if ($input_decorator->is_mandatory()) {
-                $label_decorator->add_class('required');
+                $span_decorator->add_class('required');
             }
 
+            $label_decorator = HTML_Decorator::tag('label', $span_decorator);
+
+            if ($input_decorator->is_option()) {
+                $label_decorator->add_inner_front($input_decorator);
+                $label_decorator->add_class('option');
+            } else {
+                $label_decorator->add_inner($input_decorator);
+            }
+            
+            $invalid_message = $input_decorator->get_invalid_message();
+            if (!empty($invalid_message)) {
+                $label_decorator->add_inner(HTML_Decorator::tag('p', $invalid_message, array('class'=>'invalid')));
+            }
+            
             $this->add_inner($label_decorator);
 
             $tooltip = $input_decorator->get_tooltip();
@@ -123,8 +137,10 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
                         ->add_class('tiptext');
                 $this->add_inner($tooltip_decorator);
             }
+        } else {
+            $this->add_inner($input_decorator);
         }
-        return $this->add_inner($input_decorator);
+        return $this;
     }
 
     /**
@@ -171,109 +187,60 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     /**
      * Adds a group of checkbox input types.
      * 
-     * @param type $id Id and name of element.
-     * @param type $label
-     * @param type $options Array of arrays representing checkboxes.
-     *      array(
-     *          array('id' => 'checkbox-1', 'label' => 'One', 'value' => 1),
-     *          array('id' => 'checkbox-2', 'label' => 'Two', 'value' => 2),
-     *          array('id' => 'checkbox-3', 'label' => 'Three', 'value' => 3)
-     *      )
-     * @param type $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
-     * @return type 
+     * @param string $id Id and name of element.
+     * @param string $label
+     * @param array $checkboxes Array of Input_Site_Decorators for checkboxes
+     * @return Form_Site_Decorator 
      */
-    public function add_checkboxes($id = '', $label = false, $options = array(), $params = array()) {
-        return $this->_add_options_helper('checkbox', $id, $label, $options, $params);
+    public function add_checkbox_group($id = '', $label = false, $checkboxes = array()) {
+        foreach ($checkboxes as $checkbox) {
+            if (!is_a($checkbox, 'Input_Site_Decorator')) {
+                trigger_error('Wrong type sent to add_checkbox_group()', E_USER_ERROR);
+            }
+            $checkbox->type_checkbox();
+        }
+        return $this->_add_options_helper($id, $label, $checkboxes);
     }
 
     /**
      * Adds a group of radio input types..
      * 
-     * @param type $id Id and name of element.
-     * @param type $label
-     * @param type $options Array of arrays representing checkboxes.
-     *      array(
-     *          array('id' => 'radio-1', 'label' => 'One', 'value' => 1),
-     *          array('id' => 'radio-2', 'label' => 'Two', 'value' => 2),
-     *          array('id' => 'radio-3', 'label' => 'Three', 'value' => 3)
-     *      )
-     * @param type $params Optiaonal parameters.  Possible values include 'required' => true, 'disabled' => true.
-     * @return type 
+     * @param string $id Id and name of element.
+     * @param string $label
+     * @param array $options Array of Input_Site_Decorators for checkboxes
+     * @return Form_Site_Decorator 
      */
-    public function add_radios($id = '', $label = false, $options = array(), $params = array()) {
-        return $this->_add_options_helper('radio', $id, $label, $options, $params);
+    public function add_radio_group($id, $label = false, $radios = array()) {
+        foreach ($radios as $radio) {
+            if (!is_a($radio, 'Input_Site_Decorator')) {
+                trigger_error('Wrong type sent to add_radio_group()', E_USER_ERROR);
+            }
+            $radio->type_radio();
+            $radio->set_name($id);
+        }
+        return $this->_add_options_helper($id, $label, $radios);
     }
 
     /**
      * Helper function to add a group of options (checkboxes or radios).
      * 
-     * @param type $type
      * @param type $id
      * @param type $label
      * @param type $options
-     * @param type $params
      * @return Form_Site_Decorator 
      */
-    private function _add_options_helper($type, $id, $label, $options, $params) {
-        $align = 'left';
-        //@todo $options et al. should be an object, not an array of arrays.
-        //@todo align options et al. should be enum/constants, not string values
-        if (!empty($params['align'])) {
-            $align = $params['align'];
-        }
-
-        $this->_is_invalid_helper($params);
-
-        $this->_disabled_helper($params);
-
+    private function _add_options_helper($id, $label, $options) {
         if ($label) {
-            $this->_add_label_tooltip($id, $label, $params);
+            $this->_add_label_tooltip($id, $label, array());
         }
 
         $option_elements = array();
 
         foreach ($options as $option) {
-            $option_id = isset($option['id']) ? $option['id'] : false;
-            $option_label = $option['label'];
-            $option_value = $option['value'];
-            $option_params = isset($option['params']) ? $options['param'] : array();
-
-            if (!is_array($option_params))
-                $option_params = array();
-
-            if (!empty($params['disabled'])) {
-                $option_params['disabled'] = 'disabled';
-            }
-
-            if ($align !== 'left') {
-                $option_elements[] = HTML_Decorator::tag('label', $option_label, array_merge($params, array('for' => $option_id)));
-            }
-
-            $option_elements[] = HTML_Decorator::tag('input', false, array_merge($option_params, array('type' => $type,
-                                'id' => $option_id,
-                                'name' => $id,
-                                'value' => $option_value)));
-
-            if ($align === 'left') {
-                $option_elements[] = HTML_Decorator::tag('label', $option_label, array_merge($params, array('for' => $option_id)));
-            }
-
-            $option_elements[] = HTML_Decorator::tag('br', false);
+            $option_elements[] = HTML_Decorator::tag('label', $option->get_label())->add_inner_front($option);
         }
 
-        $class = 'option';
-
-        if ($align === 'right') {
-            $class = $class . ' right';
-        } else if ($align === 'justify') {
-            $class = $class . ' justify';
-        }
-
-        $this->add_inner_tag('div', $option_elements, array('id' => $id, 'class' => $class));
-
-        $this->_add_invalid($params);
-
-        return $this;
+        return $this->add_inner_tag('div', $option_elements, array('id' => $id, 'class' => 'option'));
     }
 
     /**
@@ -342,9 +309,9 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     /**
      * Adds a select input field.
      * 
-     * @param type $id Id and name of element.
-     * @param type $label
-     * @param type $options An array of arrays representing options.
+     * @param string $id Id and name of element.
+     * @param string $label
+     * @param array $options An array of arrays representing options.
      *      array(
      *          array('label' => 'One', 'value' => 1),
      *          array('label' => 'Two', 'value' => 2),
@@ -420,7 +387,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @param string $params 
      */
     // @todo We don't really want to pass-by-reference, do we?  Maybe set an instance variable instead of modifying the $params array?
-    private function _is_invalid_helper($params) {
+    private function _is_invalid_helper(&$params) {
         if (!empty($params['invalid'])) {
             if (!isset($params['class'])) {
                 $params['class'] = '';

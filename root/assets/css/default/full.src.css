@@ -566,18 +566,17 @@ div.message-button.padded {
 /**
  * Sortable Options (used for Customize Home Screen)
  */
- div#app_order.option.ui-sortable > div {
+ div#app_order.option.ui-sortable {
+     line-height:57px;
+ } 
+
+ div#app_order.option.ui-sortable > label {
      background-color: #869AC5;
      margin: 1px;
  }
- div#app_order.option.ui-sortable > div > label {
-     margin: 1em;
- }
- .draggable-handle {
-     margin: 5px;
-     float:right;
-     background-image: url("img/draggable-handle.png");
-     background-repeat: no-repeat;
-     width:40px;
-     height:40px;
- }
+
+.draggable-handle {
+    padding: 9px;
+    float: right;
+    content: url("img/draggable-handle.png");
+}

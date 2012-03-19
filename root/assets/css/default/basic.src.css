@@ -452,7 +452,7 @@ form > fieldset {
 form > a.button,
 form > button,
 form > input,
-form > label,
+form > label:not(.option),
 form > select,
 form > textarea {
     margin-left: 10px;
@@ -461,10 +461,11 @@ form > textarea {
 /*
  * Forms Basic Elements
  */
-form label {
-    display: inline-block;
+form > label {
     margin-top: 1em;
 }
+
+
 
 form input,
 form select,
@@ -603,28 +604,27 @@ form p,
 form a.button,
 form fieldset,
 form input,
+form label,
 form select,
 form textarea {
     display: block;
     width: 100%;
 }
 
+.option input {
+    display:inline;
+        width:auto;
+}
+
 /* short width form */
-form.short input {
+form.short input,
+form.short > label {
     display: inline;
     width: auto;
 }
 
 form .last {
     border-bottom: none;
-}
-
-form input[type="checkbox"],
-form input[type="radio"],
-form .option > label, 
-form label.option {
-    display: inline;
-    width: auto;
 }
 
 form > div,
@@ -641,20 +641,10 @@ form .option {
     border-bottom: none;
 }
 
-form .option.right {
-    text-align: right;
-}
-
-form .option.justify input[type="checkbox"],
-form .option.justify input[type="radio"]{
-    float: right;
-    margin-bottom: 0;
-}
-
 /* required label */
-form label.required {
-    background: transparent url('img/asterisk.png') no-repeat top right;
-    padding-right: 10px;
+span.required::before {
+    content: "*";
+    color: red;
 }
 
 /* invalid */
@@ -662,13 +652,13 @@ form .invalid {
     color: #a00;
 }
 
-form p.invalid {
-    background: transparent url('img/invalid.png') no-repeat 12px 4px;
-    border-bottom: none;
-    padding: 0 0 0 30px;
-    margin-bottom: 0;
-    width: auto;
+form p.invalid::before {
+    content: url('img/invalid.png') '\0a ';
+    vertical-align: middle;
+        
 }
+
+
 
 form input.invalid,
 form select.invalid,
