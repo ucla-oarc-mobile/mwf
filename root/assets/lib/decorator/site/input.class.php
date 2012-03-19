@@ -309,6 +309,15 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
         $this->_type = 'radio';
         return $this;
     }
+    
+    /**
+     * 
+     * @return Input_Site_Decorator
+     */
+    public function type_number() {
+        $this->_type = 'number';
+        return $this;
+    }
 
     /**
      *

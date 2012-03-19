@@ -135,6 +135,14 @@ $time_input = Site_Decorator::input('time-10', 'Time')
         ->set_param('max', $five_years_from_now->format('H:i'))
         ->set_param('value', $now->format('H:i'));
 
+$number_input = Site_Decorator::input('number-10', 'Number')
+        ->type_number()
+        ->mandatory()
+        ->set_param('min', 0)
+        ->set_param('max', 10)
+        ->set_param('step', 2)
+        ->set_param('value', 4);
+
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('HTML5 Input Form')
@@ -144,7 +152,7 @@ echo Site_Decorator::form()
         ->add_input($checkbox_input_mandatory)
         ->add_input($color_input)
         ->add_input($search_input)
-        ->add_number('number-10', 'Number', 0, 10, array('step' => 2, 'selected' => 4, 'required' => true))
+        ->add_input($number_input)
         ->add_range('range-10', 'Range', 0, 100, array('step' => 10, 'selected' => 40, 'required' => true))
         ->add_input($telephone_input)
         ->add_input($url_input)

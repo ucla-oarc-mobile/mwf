@@ -117,26 +117,26 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
 
             $label_decorator = HTML_Decorator::tag('label', $span_decorator);
 
-            if ($input_decorator->is_option()) {
-                $label_decorator->add_inner_front($input_decorator);
-                $label_decorator->add_class('option');
-            } else {
-                $label_decorator->add_inner($input_decorator);
-            }
-            
-            $invalid_message = $input_decorator->get_invalid_message();
-            if (!empty($invalid_message)) {
-                $label_decorator->add_inner(HTML_Decorator::tag('p', $invalid_message, array('class'=>'invalid')));
-            }
-            
-            $this->add_inner($label_decorator);
-
             $tooltip = $input_decorator->get_tooltip();
             if (!empty($tooltip)) {
                 $tooltip_decorator = HTML_Decorator::tag('span', $tooltip)
                         ->add_class('tiptext');
                 $this->add_inner($tooltip_decorator);
             }
+            
+            if ($input_decorator->is_option()) {
+                $label_decorator->add_inner_front($input_decorator);
+                $label_decorator->add_class('option');
+            } else {
+                $label_decorator->add_inner($input_decorator);
+            }
+
+            $invalid_message = $input_decorator->get_invalid_message();
+            if (!empty($invalid_message)) {
+                $label_decorator->add_inner(HTML_Decorator::tag('p', $invalid_message, array('class' => 'invalid')));
+            }
+
+            $this->add_inner($label_decorator);
         } else {
             $this->add_inner($input_decorator);
         }
@@ -241,37 +241,6 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
         }
 
         return $this->add_inner_tag('div', $option_elements, array('id' => $id, 'class' => 'option'));
-    }
-
-    /**
-     * Adds a number input field.
-     * 
-     * @param string $id Id and name of element.
-     * @param string $label
-     * @param type $min
-     * @param type $max
-     * @param array $params Optional parameters.  Possible values include 'step' => 2, 'selected' => 4, 'required' => true.
-     * @return type 
-     */
-    public function add_number($id = false, $label = false, $min = false, $max = false, $params = array()) {
-        $min = (float) $min;
-        $max = (float) $max;
-
-        $step = 1;
-        if (isset($params['step']) && is_numeric($params['step'])) {
-            $step = (float) $params['step'];
-        }
-
-        $options = array();
-        for ($i = $min; $i <= $max; $i += $step) {
-            $options[] = array('label' => $i, 'value' => $i);
-        }
-
-        $params['class'] = isset($params['class']) ?
-                $params['class'] . ' number-field' :
-                'number-field';
-
-        return $this->add_select($id, $label, $options, $params);
     }
 
     /**

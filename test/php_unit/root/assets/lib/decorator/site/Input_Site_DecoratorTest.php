@@ -238,6 +238,14 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
         $this->object->type_radio();
         $this->assertContains('type="radio"', $this->object->render());
     }
+    
+    /**
+     * @test
+     */
+    public function typeNumber_void_numberRendered() {
+        $this->object->type_number();
+        $this->assertContains('type="number"', $this->object->render());
+    }
 
     /**
      * @test
