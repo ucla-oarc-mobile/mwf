@@ -4,9 +4,9 @@
  * @package mwf.demos
  *
  * @author ilin
- * @copyright Copyright (c) 2010-11 UC Regents
+ * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111114
+ * @version 20120318
  *
  * @uses Decorator
  * @uses Site_Decorator
@@ -15,8 +15,9 @@
  * @uses Head_Site_Decorator
  * @uses Body_Start_HTML_Decorator
  * @uses Header_Site_Decorator
- * @uses Content_Full_Site_Decorator
- * @uses Button_Full_Site_Decorator
+ * @uses Content_Site_Decorator
+ * @uses Button_Site_Decorator
+ * @uses Form_Site_Decorator
  * @uses Default_Footer_Site_Decorator
  * @uses Body_End_HTML_Decorator
  * @uses HTML_End_HTML_Decorator
@@ -26,7 +27,7 @@ require_once(dirname(dirname(dirname(__FILE__))) . '/assets/config.php');
 
 $submit = Site_Decorator::input()
         ->type_submit()
-        ->set_param('value','Test Me');
+        ->set_value('Test Me');
 
 echo HTML_Decorator::html_start()->render();
 
@@ -107,33 +108,33 @@ $date_input = Site_Decorator::input('date-10', 'Date')
         ->mandatory()
         ->set_param('min', $five_years_ago->format('Y-m-d'))
         ->set_param('max', $five_years_from_now->format('Y-m-d'))
-        ->set_param('value', $now->format('Y-m-d'));
+        ->set_value($now->format('Y-m-d'));
 $month_input = Site_Decorator::input('month-10', 'Month')
         ->type_month()
         ->mandatory()
         ->set_param('min', $five_years_ago->format('Y-m'))
         ->set_param('max', $five_years_from_now->format('Y-m'))
-        ->set_param('value', $now->format('Y-m'));
+        ->set_value($now->format('Y-m'));
 $week_input = Site_Decorator::input('week-10', 'Week')
         ->type_week()
         ->mandatory()
         ->set_param('min', $five_years_ago->format('Y-\WW'))
         ->set_param('max', $five_years_from_now->format('Y-\WW'))
-        ->set_param('value', $now->format('Y-\WW'));
+        ->set_value($now->format('Y-\WW'));
 
 $datetime_local_input = Site_Decorator::input('datetime-10', 'Datetime Local')
         ->type_datetime_local()
         ->mandatory()
         ->set_param('min', $five_years_ago->format('Y-m-d\TH:i'))
         ->set_param('max', $five_years_from_now->format('Y-m-d\TH:i'))
-        ->set_param('value', $now->format('Y-m-d\TH:i'));
+        ->set_value($now->format('Y-m-d\TH:i'));
 
 $time_input = Site_Decorator::input('time-10', 'Time')
         ->type_time()
         ->mandatory()
         ->set_param('min', $five_years_ago->format('H:i'))
         ->set_param('max', $five_years_from_now->format('H:i'))
-        ->set_param('value', $now->format('H:i'));
+        ->set_value($now->format('H:i'));
 
 $number_input = Site_Decorator::input('number-10', 'Number')
         ->type_number()
@@ -141,7 +142,14 @@ $number_input = Site_Decorator::input('number-10', 'Number')
         ->set_param('min', 0)
         ->set_param('max', 10)
         ->set_param('step', 2)
-        ->set_param('value', 4);
+        ->set_value(4);
+
+$range_input = Site_Decorator::input('range-10', 'Range')
+        ->type_range()
+        ->set_param('min', 0)
+        ->set_param('max', 100)
+        ->set_param('step', 10)
+        ->set_value(40);
 
 echo Site_Decorator::form()
         ->set_padded()
@@ -153,7 +161,7 @@ echo Site_Decorator::form()
         ->add_input($color_input)
         ->add_input($search_input)
         ->add_input($number_input)
-        ->add_range('range-10', 'Range', 0, 100, array('step' => 10, 'selected' => 40, 'required' => true))
+        ->add_input($range_input)
         ->add_input($telephone_input)
         ->add_input($url_input)
         ->add_input($email_input)

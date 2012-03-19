@@ -6,7 +6,7 @@
  * @author trott
  * @copyright Copyright (c) 2012 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120315
+ * @version 20120318
  *
  * @uses PHPUnit_Framework_TestCase
  * @uses Input_Site_Decorator
@@ -245,6 +245,14 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     public function typeNumber_void_numberRendered() {
         $this->object->type_number();
         $this->assertContains('type="number"', $this->object->render());
+    }
+    
+    /**
+     * @test
+     */
+    public function typeRange_void_rangeRendered() {
+        $this->object->type_range();
+        $this->assertContains('type="range"', $this->object->render());
     }
 
     /**

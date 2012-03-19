@@ -19,7 +19,7 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
 
     private $_id;
     private $_label;
-    private $_type=false;
+    private $_type = false;
     private $_required = false;
     private $_tooltip = '';
     private $_button_type = false;
@@ -67,7 +67,7 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
     public function get_tooltip() {
         return $this->_tooltip;
     }
-    
+
     /**
      * 
      * @return string
@@ -83,15 +83,15 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
     public function is_mandatory() {
         return $this->_required;
     }
-    
+
     /**
      * 
      * @return boolean
      */
     public function is_option() {
-        return ($this->_type==="checkbox" || $this->_type==="radio");
+        return ($this->_type === "checkbox" || $this->_type === "radio");
     }
-    
+
     /**
      *
      * @return boolean
@@ -119,6 +119,7 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
     public function set_value($text) {
         return $this->set_param('value', $text);
     }
+
     /**
      *
      * @param string $text
@@ -155,7 +156,7 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
      */
     public function invalid($message='') {
         $this->_invalid = true;
-        if (! empty($message)) {
+        if (!empty($message)) {
             $this->_invalid_message = $message;
         }
         return $this->add_class('invalid');
@@ -309,13 +310,22 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
         $this->_type = 'radio';
         return $this;
     }
-    
+
     /**
      * 
      * @return Input_Site_Decorator
      */
     public function type_number() {
         $this->_type = 'number';
+        return $this;
+    }
+
+    /**
+     * 
+     * @return Input_Site_Decorator
+     */
+    public function type_range() {
+        $this->_type = 'range';
         return $this;
     }
 

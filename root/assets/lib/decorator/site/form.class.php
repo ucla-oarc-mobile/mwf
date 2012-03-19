@@ -244,38 +244,6 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     }
 
     /**
-     * Adds a range input field.
-     * 
-     * @param type $id Id and name of element.
-     * @param type $label
-     * @param type $min
-     * @param type $max
-     * @param array $params Optional parameters.  Possible values include 'step' => 2, 'selected' => 4, 'required' => true.
-     * @return type 
-     */
-    public function add_range($id = false, $label = false, $min = false, $max = false, $params = array()) {
-        $min = (float) $min;
-        $max = (float) $max;
-
-        $step = 1;
-        if (isset($params['step']) && is_numeric($params['step'])) {
-            $step = (float) $params['step'];
-        }
-
-        $options = array();
-
-        for ($i = $min; $i <= $max; $i += $step) {
-            $options[] = array('label' => $i, 'value' => $i);
-        }
-
-        $params['class'] = isset($params['class']) ?
-                $params['class'] . ' range-field' :
-                'range-field';
-
-        return $this->add_select($id, $label, $options, $params);
-    }
-
-    /**
      * Adds a select input field.
      * 
      * @param string $id Id and name of element.
