@@ -9,7 +9,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110518
+ * @version 20120318
  *
  * @uses Decorator
  */
@@ -69,7 +69,7 @@ class Tag_Open_HTML_Decorator extends Decorator
         $str = '<'.$this->_tag;
         if(count($this->_params) > 0)
             foreach($this->_params as $name=>$val)
-                $str .= ' '.$name.($val ? '="'.$val.'"' : '');
+                $str .= ' '.$name.((string)$val!=='' ? '="'.$val.'"' : '');
         $str .= '>';
         return $str;
     }
