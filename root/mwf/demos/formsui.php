@@ -104,15 +104,15 @@ echo Site_Decorator::form()
         ->render();
 
 /* select form */
+$select_input = Site_Decorator::input('select-group-1', 'Label for Select')
+        ->add_option('','Select...')
+        ->add_option(1,'One')
+        ->add_option(2,'Two')
+        ->add_option(3,'Three');
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Select Form')
-        ->add_select('select-group-1', 'Label for Select', array(
-            array('label' => 'One', 'value' => 1),
-            array('label' => 'Two', 'value' => 2),
-            array('label' => 'Three', 'value' => 3)
-                )
-        )
+        ->add_input($select_input)
         ->render();
 
 /* required form */
@@ -121,18 +121,17 @@ $text_input = Site_Decorator::input('text-10', 'Name')
 $checkbox_input = Site_Decorator::input('checkbox-10', 'Checkbox')
         ->type_checkbox()
         ->mandatory();
-
+$select_input = Site_Decorator::input('select-group-10', 'Select')
+        ->add_option(1,'One')
+        ->add_option(2,'Two')
+        ->add_option(3,'Three')
+        ->mandatory();
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Required Form')
         ->add_input($text_input)
         ->add_input($checkbox_input)
-        ->add_select('select-group-10', 'Select', array(
-            array('label' => 'One', 'value' => 1),
-            array('label' => 'Two', 'value' => 2),
-            array('label' => 'Three', 'value' => 3)
-                ), array('required' => true)
-        )
+        ->add_input($select_input)
         ->add_textarea('textarea-10', 'Textarea', array('required' => true))
         ->render();
 
@@ -144,17 +143,18 @@ $checkbox_input = Site_Decorator::input('checkbox-20', 'Checkbox')
         ->type_checkbox()
         ->mandatory()
         ->invalid('Checkbox error message goes here');
+$select_input = Site_Decorator::input('select-group-20', 'Select')
+        ->add_option(1,'One')
+        ->add_option(2,'Two')
+        ->add_option(3,'Three')
+        ->mandatory()
+        ->invalid('Error message goes here');
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Invalid Form')
         ->add_input($text_input)
         ->add_input($checkbox_input)
-        ->add_select('select-group-20', 'Select', array(
-            array('label' => 'One', 'value' => 1),
-            array('label' => 'Two', 'value' => 2),
-            array('label' => 'Three', 'value' => 3)
-                ), array('required' => true, 'invalid' => 'Error messager goes here')
-        )
+        ->add_input($select_input)
         ->add_textarea('textarea-20', 'Textarea', array('required' => true, 'invalid' => 'Error messager goes here'))
         ->render();
 
@@ -164,17 +164,17 @@ $text_input = Site_Decorator::input('text-30', 'Name')
 $checkbox_input = Site_Decorator::input('checkbox-20', 'Checkbox')
         ->type_checkbox()
         ->disable();
+$select_input = Site_Decorator::input('select-group-30', 'Select')
+        ->add_option(1,'One')
+        ->add_option(2,'Two')
+        ->add_option(3,'Three')
+        ->disable();
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Disabled Form')
         ->add_input($text_input)
         ->add_input($checkbox_input)
-        ->add_select('select-group-30', 'Select', array(
-            array('label' => 'One', 'value' => 1),
-            array('label' => 'Two', 'value' => 2),
-            array('label' => 'Three', 'value' => 3)
-                ), array('disabled' => true)
-        )
+        ->add_input($select_input)
         ->add_textarea('textarea-30', 'Textarea', array('disabled' => true))
         ->render();
 

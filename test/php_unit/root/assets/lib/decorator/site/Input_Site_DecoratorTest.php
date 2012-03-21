@@ -261,6 +261,24 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
         $this->object->type_range();
         $this->assertContains('type="range"', $this->object->render());
     }
+    
+    /**
+     * @test
+     */
+    public function typeSelect_void_optionTagRendered() {
+        $this->object->type_select();
+        $this->assertEquals('<select id="input_id" name="input_id"></select>',
+                $this->object->render());
+    }
+    
+    /**
+     * @test
+     */
+    public function addOption_fooBar_optionRendered() {
+        $this->object->add_option('foo','bar');
+        $this->assertEquals('<select id="input_id" name="input_id"><option value="foo">bar</option></select>',
+                $this->object->render());
+    }
 
     /**
      * @test

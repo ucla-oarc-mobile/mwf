@@ -9,12 +9,11 @@
  * @license http://mwf.ucla.edu/license
  * @version 20120320
  *
- * @uses Decorator
  * @uses Tag_HTML_Decorator
  * 
  * @implements Tag_ParamsInterface
  */
-require_once(dirname(dirname(__DIR__)) . '/decorator.class.php');
+require_once(dirname(__DIR__) . '/html_decorator.class.php');
 require_once(dirname(__DIR__) . '/html/Tag_ParamsInterface.php');
 
 class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
@@ -30,6 +29,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
     private $_button_type = false;
     private $_invalid = false;
     private $_invalid_message = '';
+    private $_options = array();
 
     /**
      *
@@ -215,6 +215,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      */
     public function type_text() {
         $this->_type = 'text';
+        $this->_element = 'input';
         return $this;
     }
 
@@ -224,6 +225,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      */
     public function type_color() {
         $this->_type = 'color';
+        $this->_element = 'input';
         return $this;
     }
 
@@ -233,6 +235,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      */
     public function type_search() {
         $this->_type = 'search';
+        $this->_element = 'input';
         return $this;
     }
 
@@ -242,6 +245,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      */
     public function type_telephone() {
         $this->_type = 'tel';
+        $this->_element = 'input';
         return $this;
     }
 
@@ -251,6 +255,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      */
     public function type_url() {
         $this->_type = 'url';
+        $this->_element = 'input';
         return $this;
     }
 
@@ -260,6 +265,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      */
     public function type_email() {
         $this->_type = 'email';
+        $this->_element = 'input';
         return $this;
     }
 
@@ -269,6 +275,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      */
     public function type_date() {
         $this->_type = 'date';
+        $this->_element = 'input';
         return $this;
     }
 
@@ -278,6 +285,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      */
     public function type_month() {
         $this->_type = 'month';
+        $this->_element = 'input';
         return $this;
     }
 
@@ -287,6 +295,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      */
     public function type_week() {
         $this->_type = 'week';
+        $this->_element = 'input';
         return $this;
     }
 
@@ -296,6 +305,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      */
     public function type_datetime_local() {
         $this->_type = 'datetime-local';
+        $this->_element = 'input';
         return $this;
     }
 
@@ -305,6 +315,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      */
     public function type_time() {
         $this->_type = 'time';
+        $this->_element = 'input';
         return $this;
     }
 
@@ -317,6 +328,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
             $this->primary();
         }
         $this->_type = 'submit';
+        $this->_element = 'input';
         return $this;
     }
 
@@ -329,6 +341,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
             $this->neutral();
         }
         $this->_type = 'submit';
+        $this->_element = 'input';
         return $this;
     }
 
@@ -338,6 +351,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      */
     public function type_checkbox() {
         $this->_type = 'checkbox';
+        $this->_element = 'input';
         return $this;
     }
 
@@ -347,6 +361,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      */
     public function type_radio() {
         $this->_type = 'radio';
+        $this->_element = 'input';
         return $this;
     }
 
@@ -356,6 +371,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      */
     public function type_number() {
         $this->_type = 'number';
+        $this->_element = 'input';
         return $this;
     }
 
@@ -365,6 +381,23 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      */
     public function type_range() {
         $this->_type = 'range';
+        $this->_element = 'input';
+        return $this;
+    }
+    
+    /**
+     * 
+     * @return Input_Site_Decorator
+     */
+    public function type_select() {
+        $this->_element = 'select';
+        $this->_type = false;
+        return $this;
+    }
+    
+    public function add_option($value, $label){
+        $this->type_select();
+        $this->_options[] = HTML_Decorator::tag('option',$label, array('value'=>$value));
         return $this;
     }
 
@@ -400,7 +433,12 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      * @return string
      */
     public function render() {
-        $tag_decorator = HTML_Decorator::tag($this->_element, false, $this->_attributes);
+        $inner = false;
+        if ($this->_element === 'select') {
+            $inner = empty($this->_options) ? '' : $this->_options;
+        }
+        
+        $tag_decorator = HTML_Decorator::tag($this->_element, $inner, $this->_attributes);
 
         foreach ($this->_classes as $class) {
             $tag_decorator->add_class($class);

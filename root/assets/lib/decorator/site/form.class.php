@@ -224,9 +224,9 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     /**
      * Helper function to add a group of options (checkboxes or radios).
      * 
-     * @param type $id
-     * @param type $label
-     * @param type $options
+     * @param string $id
+     * @param string $label
+     * @param array $options
      * @return Form_Site_Decorator 
      */
     private function _add_options_helper($id, $label, $options) {
@@ -241,54 +241,6 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
         }
 
         return $this->add_inner_tag('div', $option_elements, array('id' => $id, 'class' => 'option'));
-    }
-
-    /**
-     * Adds a select input field.
-     * 
-     * @param string $id Id and name of element.
-     * @param string $label
-     * @param array $options An array of arrays representing options.
-     *      array(
-     *          array('label' => 'One', 'value' => 1),
-     *          array('label' => 'Two', 'value' => 2),
-     *          array('label' => 'Three', 'value' => 3)
-     *      )
-     * @param array $params Optional parameters.  Possible values include 'disabled' => true.
-     * @return type 
-     */
-    public function add_select($id = false, $label = false, $options = array(), $params = array()) {
-        $selected = isset($params['selected']) ? $params['selected'] : false;
-
-        $this->_is_invalid_helper($params);
-
-        $this->_disabled_helper($params);
-
-        if ($label) {
-            $this->_add_label_tooltip($id, $label, $params);
-        }
-
-        $option_elements = array();
-
-        foreach ($options as $option) {
-            $option_label = $option['label'];
-            $option_value = $option['value'];
-            $option_params = isset($option['params']) ? $option['params'] : array();
-
-            if (!is_array($option_params))
-                $option_params = array();
-
-            if ($selected && $option_value === $selected)
-                $option_params['selected'] = 'selected';
-
-            $option_elements[] = HTML_Decorator::tag('option', $option_label, array_merge($option_params, array('value' => $option_value)));
-        }
-
-        $this->add_inner_tag('select', $option_elements, array_merge($params, array('id' => $id, 'name' => $id)));
-
-        $this->_add_invalid($params);
-
-        return $this;
     }
 
     /**

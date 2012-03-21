@@ -184,8 +184,10 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function addSelect_ampersandInId_idIsEncoded() {
-        $this->object->add_select('Bartles&James', 'LogginsAndMessina');
+    public function addInput_selectWithAmpersandInId_idIsEncoded() {
+        $select = Site_Decorator::input('Bartles&James', 'LogginsAndMessina')
+                ->type_select();
+        $this->object->add_input($select);
         $result = $this->object->render();
         $this->assertContains('Bartles&amp;James', $result);
     }
@@ -193,8 +195,10 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function addSelect_ampersandInLabel_labelIsEncoded() {
-        $this->object->add_select('BartlesAndJames', 'Loggins&Messina');
+    public function addInput_SelectWithAmpersandInLabel_labelIsEncoded() {
+        $select = Site_Decorator::input('BartlesAndJames', 'Loggins&Messina')
+                ->type_select();
+        $this->object->add_input($select);
         $result = $this->object->render();
         $this->assertContains('Loggins&amp;Messina', $result);
     }
@@ -203,8 +207,9 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
      * @test
      */
     public function addSelect_bracketsInOptionLabelAndValue_bracketsAreEncoded() {
-//        $this->object->add_select('BartlesAndJames', 'LogginsAndMessina', array(Site_Decorator::input(false, 'and><or')->set_value('a<waggle>')));
-        $this->object->add_select('BartlesAndJames', 'LogginsAndMessina', array(array('label' => 'and><or', 'value' => 'a<waggle>')));
+        $select = Site_Decorator::input('BartlesAndJames', 'LogginsAndMessina')
+                ->add_option('a<waggle>','and><or');
+        $this->object->add_input($select);
         $result = $this->object->render();
         $this->assertContains('and&gt;&lt;or', $result);
         $this->assertContains('&lt;waggle&gt;', $result);
@@ -231,9 +236,11 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function addSelect_quotationMarksInTooltip_tooltipIsEncoded() {
-        $this->object->add_select(
-                'BartlesAndJames', 'Loggins&Messina', array(array('id' => 'id', 'label' => 'label', 'value' => 'value')), array('tooltip' => '"Palace Family Steak House"'));
+    public function addInput_selectWithQuotationMarksInTooltip_tooltipIsEncoded() {
+        $select = Site_Decorator::input('BartlesAndJames', 'Loggins&Messina')
+                ->add_option('value','label')
+                ->set_tooltip('"Palace Family Steak House"');      
+        $this->object->add_input($select);
         $result = $this->object->render();
         $this->assertContains('<span class="tiptext">&quot;Palace Family Steak House&quot;</span>', $result);
     }
