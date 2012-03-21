@@ -9,13 +9,14 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120312
+ * @version 20120320
  *
  * @uses Decorator
  */
 require_once(dirname(dirname(__DIR__)) . '/decorator.class.php');
+require_once(__DIR__) . '/Tag_HTML_DecoratorInterface.php';
 
-class Tag_HTML_Decorator extends Decorator {
+class Tag_HTML_Decorator extends Decorator implements Tag_HTML_DecoratorInterface {
 
     private $_tag_open;
     private $_tag_close;
