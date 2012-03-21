@@ -7,18 +7,23 @@
  * @author trott
  * @copyright Copyright (c) 2012 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 201203145
+ * @version 20120320
  *
  * @uses Decorator
  * @uses Tag_HTML_Decorator
+ * 
+ * @implements Tag_ParamsInterface
  */
 require_once(dirname(dirname(__DIR__)) . '/decorator.class.php');
-require_once(dirname(__DIR__) . '/html/tag.class.php');
+require_once(dirname(__DIR__) . '/html/Tag_ParamsInterface.php');
 
-class Input_Site_Decorator extends Tag_HTML_Decorator {
+class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
 
     private $_id;
     private $_label;
+    private $_attributes;
+    private $_element;
+    private $_classes = array();
     private $_type = false;
     private $_required = false;
     private $_tooltip = '';
@@ -41,7 +46,43 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
             $params['name'] = $this->_id;
         }
 
-        parent::__construct('input', false, $params);
+        $this->_element = 'input';
+        $this->_attributes = $params;
+    }
+
+    /**
+     *
+     * @param string $key
+     * @param string $val
+     * @return Input_Site_Decorator 
+     */
+    public function set_param($key, $val) {
+        $this->_attributes[$key] = $val;
+        return $this;
+    }
+
+    /**
+     *
+     * @param array $params
+     * @return Input_Site_Decorator 
+     */
+    public function set_params($params) {
+        $this->_attributes = array_merge($this->_attributes, $params);
+        return $this;
+    }
+
+    public function add_class($class) {
+        $this->_classes[] = $class;
+        return $this;
+    }
+
+    public function remove_class($class) {
+        $index = array_search($class, $this->_classes);
+        if ($index !== false) {
+            unset($this->_classes[$index]);
+            $this->_classes = array_values($this->_classes);
+        }
+        return $this;
     }
 
     /**
@@ -359,13 +400,19 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
      * @return string
      */
     public function render() {
+        $tag_decorator = HTML_Decorator::tag($this->_element, false, $this->_attributes);
+
+        foreach ($this->_classes as $class) {
+            $tag_decorator->add_class($class);
+        }
+        
         if ($this->_button_type) {
-            $this->add_class($this->_button_type);
+            $tag_decorator->add_class($this->_button_type);
         }
         if ($this->_type) {
-            $this->set_param('type', $this->_type);
+            $tag_decorator->set_param('type', $this->_type);
         }
-        return parent::render();
+        return $tag_decorator->render();
     }
 
 }

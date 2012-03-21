@@ -12,7 +12,7 @@
  * @version 20120320
  *
  */
-interface Tag_HTML_DecoratorInterface {
+interface Tag_ParamsInterface {
 
     public function set_param($key, $val);
 
@@ -21,17 +21,4 @@ interface Tag_HTML_DecoratorInterface {
     public function add_class($class);
 
     public function remove_class($class);
-
-    public function add_inner_tag($tag, $inner, $params);
-
-    public function add_inner_tag_front($tag, $inner, $params);
-
-    public function add_inner($content);
-
-    public function add_inner_front($content);
-
-    public function flush_inner();
-    
-    public function render();
-
 }
