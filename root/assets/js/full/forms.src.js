@@ -2,7 +2,7 @@
  * Forms JavaScript Library
  * 
  * Used for transforming HTML form elements into HTML5 form elements if 
- * device supports it.  This includes placeholder, required and various
+ * device supports it.  This required and various
  * input types.
  * 
  * Usage: 
@@ -30,7 +30,7 @@
 mwf.forms = new function() {};
 
 /**
- * Initialize the form for transformation and placeholder.
+ * Initialize the form for transformation.
  */
 mwf.forms.init = function(options) {        
             
@@ -44,11 +44,6 @@ mwf.forms.init = function(options) {
         /////////////////////////////////////////
         // Transform
         /////////////////////////////////////////
-
-        // if support placeholder
-        if (mwf.capability.input.placeholder()) {
-            placeholderTransform();
-        }
 
         // if support required
         if (mwf.capability.input.required()) {
@@ -71,15 +66,6 @@ mwf.forms.init = function(options) {
                 if (!next.is("div")) {
                     next.attr("required", "required");
                 }
-            })
-        }
-        
-        /*
-         * Transforms required class into required attributes
-         */
-        function placeholderTransform() {
-            $(settings.selector + " .placeholder").each(function() {
-                $(this).prev(":input").attr("placeholder", $(this).html());
             })
         }
         

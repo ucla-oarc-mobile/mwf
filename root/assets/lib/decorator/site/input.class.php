@@ -136,9 +136,7 @@ class Input_Site_Decorator extends Tag_HTML_Decorator {
      * @return Input_Site_Decorator
      */
     public function set_placeholder($text) {
-        $placeholder = HTML_Decorator::tag('span', $text)
-                ->add_class('placeholder');
-        return $this->add_inner($placeholder);
+        return $this->set_param('placeholder', $text);
     }
 
     /**

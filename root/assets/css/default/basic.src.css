@@ -686,11 +686,6 @@ form .time-field select {
     width: auto;
 }
 
-/* placeholder */
-form .placeholder {
-    display: none;
-}
-
 /* tooltip */
 form .tip {
     display: block;

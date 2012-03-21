@@ -45,9 +45,16 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function setPlacedholder_placeholderText_placedholderRendered() {
+    public function setPlaceholder_placeholderText_placedholderRendered() {
         $this->object->set_placeholder('Input placeholder text');
-        $this->assertContains('Input placeholder text', $this->object->render());
+        $this->assertContains('placeholder="Input placeholder text"', $this->object->render());
+    }
+    
+    /**
+     * @test
+     */
+    public function setPlaceholder_placeholderText_returnsInputSiteDecorator() {
+        $this->assertTrue(is_a($this->object->set_placeholder('Input placeholder text'), 'Input_Site_Decorator'));
     }
 
     /**
