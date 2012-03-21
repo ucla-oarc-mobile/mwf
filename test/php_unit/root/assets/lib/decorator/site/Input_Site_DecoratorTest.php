@@ -265,12 +265,31 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function typeSelect_void_optionTagRendered() {
+    public function typeSelect_void_selectTagRendered() {
         $this->object->type_select();
         $this->assertEquals('<select id="input_id" name="input_id"></select>',
                 $this->object->render());
     }
     
+    /**
+     * @test
+     */
+    public function typeTextarea_void_textareaTagRendered() {
+        $this->object->type_textarea();
+        $this->assertEquals('<textarea id="input_id" name="input_id"></textarea>',
+                $this->object->render());
+    }
+    
+    /**
+     * @test
+     */
+    public function typeTextarea_setValue_valueIsTagContents() {
+        $this->object->type_textarea();
+        $this->object->set_value('foo');
+        $this->assertRegexp('/^<textarea .*?>foo<\/textarea>/', 
+                $this->object->render());
+    }
+
     /**
      * @test
      */

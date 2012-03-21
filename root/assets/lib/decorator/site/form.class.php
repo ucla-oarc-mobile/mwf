@@ -243,58 +243,6 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
         return $this->add_inner_tag('div', $option_elements, array('id' => $id, 'class' => 'option'));
     }
 
-    /**
-     * Adds a textarea input field.
-     * 
-     * @param type $id
-     * @param type $label
-     * @param type $required
-     * @param type $params Optional parameters.  Possible values include 'required' => true, 'disabled' => true.
-     * @return Form_Site_Decorator 
-     */
-    public function add_textarea($id = false, $label = false, $params = array()) {
-        $this->_is_invalid_helper($params);
-
-        $this->_disabled_helper($params);
-
-        if ($label) {
-            $this->_add_label_tooltip($id, $label, $params);
-        }
-
-        $this->add_inner_tag('textarea', '', array_merge($params, array('id' => $id, 'name' => $id)));
-
-        $this->_add_placeholder($params);
-
-        $this->_add_invalid($params);
-
-        return $this;
-    }
-
-    /**
-     * Helper function to handle decorating invalid fields.
-     * 
-     * @param string $params 
-     */
-    // @todo We don't really want to pass-by-reference, do we?  Maybe set an instance variable instead of modifying the $params array?
-    private function _is_invalid_helper(&$params) {
-        if (!empty($params['invalid'])) {
-            if (!isset($params['class'])) {
-                $params['class'] = '';
-            }
-            $params['class'] = $params['class'] . ' invalid';
-        }
-    }
-
-    /**
-     * Helper function to handle decorating disabled fields.
-     * 
-     * @param string $params 
-     */
-    private function _disabled_helper(&$params) {
-        if (!empty($params['disabled'])) {
-            $params['disabled'] = 'disabled';
-        }
-    }
 
     /**
      * Helper function to add label and tooltips.
@@ -320,27 +268,9 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     }
 
     /**
-     * Helper function to add placeholder.
-     * 
-     * @param array $params 
+     *
+     * @return string
      */
-    private function _add_placeholder($params) {
-        if (!empty($params['placeholder'])) {
-            $this->add_inner_tag('span', $params['placeholder'], array('class' => 'placeholder'));
-        }
-    }
-
-    /**
-     * Helper function to add invalid text.
-     * 
-     * @param type $params 
-     */
-    private function _add_invalid($params) {
-        if (!empty($params['invalid'])) {
-            $this->add_inner_tag('p', $params['invalid'], array('class' => 'invalid'));
-        }
-    }
-
     public function render() {
         if (is_a($this->_title, 'Decorator')) {
             $this->add_inner_front($this->_title);

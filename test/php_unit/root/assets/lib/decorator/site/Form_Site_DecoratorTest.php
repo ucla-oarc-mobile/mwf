@@ -206,9 +206,9 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function addSelect_bracketsInOptionLabelAndValue_bracketsAreEncoded() {
+    public function addInput_bracketsInOptionLabelAndValue_bracketsAreEncoded() {
         $select = Site_Decorator::input('BartlesAndJames', 'LogginsAndMessina')
-                ->add_option('a<waggle>','and><or');
+                ->add_option('a<waggle>', 'and><or');
         $this->object->add_input($select);
         $result = $this->object->render();
         $this->assertContains('and&gt;&lt;or', $result);
@@ -218,8 +218,10 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function addTextarea_ampersandInId_idIsEncoded() {
-        $this->object->add_textarea('Bartles&James', 'LogginsAndMessina');
+    public function addInput_textareaWithAmpersandInId_idIsEncoded() {
+        $textarea = Site_Decorator::input('Bartles&James', 'LogginsAndMessina')
+                ->type_textarea();
+        $this->object->add_input($textarea);
         $result = $this->object->render();
         $this->assertContains('Bartles&amp;James', $result);
     }
@@ -227,8 +229,10 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function addTextarea_ampersandInLabel_labelIsEncoded() {
-        $this->object->add_textarea('BartlesAndJames', 'Loggins&Messina');
+    public function addInput_textareaWithAmpersandInLabel_labelIsEncoded() {
+        $textarea = Site_Decorator::input('BartlesAndJames', 'Loggins&Messina')
+                ->type_textarea();
+        $this->object->add_input($textarea);
         $result = $this->object->render();
         $this->assertContains('Loggins&amp;Messina', $result);
     }
@@ -238,8 +242,8 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
      */
     public function addInput_selectWithQuotationMarksInTooltip_tooltipIsEncoded() {
         $select = Site_Decorator::input('BartlesAndJames', 'Loggins&Messina')
-                ->add_option('value','label')
-                ->set_tooltip('"Palace Family Steak House"');      
+                ->add_option('value', 'label')
+                ->set_tooltip('"Palace Family Steak House"');
         $this->object->add_input($select);
         $result = $this->object->render();
         $this->assertContains('<span class="tiptext">&quot;Palace Family Steak House&quot;</span>', $result);
@@ -248,17 +252,23 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function addTextarea_ampersandInPlaceholder_placeholderIsEncoded() {
-        $this->object->add_textarea('BartlesAndJames', 'Loggins&Messina', array('placeholder' => 'Hall & Oates'));
+    public function addInput_textareaWithAmpersandInPlaceholder_placeholderIsEncoded() {
+        $textarea = Site_Decorator::input('BartlesAndJames', 'Loggins&Messina')
+                ->type_textarea()
+                ->set_placeholder('Hall & Oates');
+        $this->object->add_input($textarea);
         $result = $this->object->render();
-        $this->assertContains('<span class="placeholder">Hall &amp; Oates</span>', $result);
+        $this->assertContains('placeholder="Hall &amp; Oates"', $result);
     }
 
     /**
      * @test
      */
-    public function addTextarea_ampersandInInvalid_invalidIsEncoded() {
-        $this->object->add_textarea('BartlesAndJames', 'Loggins&Messina', array('invalid' => 'Simon & Garfunkel'));
+    public function addInput_textareaWithAmpersandInInvalid_invalidIsEncoded() {
+        $textarea = Site_Decorator::input('BartlesAndJames', 'Loggins&Messina')
+                ->type_textarea()
+                ->invalid('Simon & Garfunkel');
+        $this->object->add_input($textarea);
         $result = $this->object->render();
         $this->assertContains('<p class="invalid">Simon &amp; Garfunkel</p>', $result);
     }

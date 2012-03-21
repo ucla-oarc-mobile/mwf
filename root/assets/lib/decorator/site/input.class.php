@@ -384,7 +384,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
         $this->_element = 'input';
         return $this;
     }
-    
+
     /**
      * 
      * @return Input_Site_Decorator
@@ -394,10 +394,26 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
         $this->_type = false;
         return $this;
     }
-    
-    public function add_option($value, $label){
+
+    /**
+     *
+     * @return Input_Site_Decorator 
+     */
+    public function type_textarea() {
+        $this->_element = 'textarea';
+        $this->_type = false;
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $value
+     * @param string $label
+     * @return Input_Site_Decorator 
+     */
+    public function add_option($value, $label) {
         $this->type_select();
-        $this->_options[] = HTML_Decorator::tag('option',$label, array('value'=>$value));
+        $this->_options[] = HTML_Decorator::tag('option', $label, array('value' => $value));
         return $this;
     }
 
@@ -434,16 +450,27 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      */
     public function render() {
         $inner = false;
-        if ($this->_element === 'select') {
-            $inner = empty($this->_options) ? '' : $this->_options;
+
+        switch ($this->_element) {
+            case 'select':
+                $inner = empty($this->_options) ? '' : $this->_options;
+                break;
+
+            case 'textarea':
+                if (isset($this->_attributes['value'])) {
+                    $inner = $this->_attributes['value'];
+                    unset($this->_attributes['value']);
+                } else {
+                    $inner = '';
+                }
         }
-        
+
         $tag_decorator = HTML_Decorator::tag($this->_element, $inner, $this->_attributes);
 
         foreach ($this->_classes as $class) {
             $tag_decorator->add_class($class);
         }
-        
+
         if ($this->_button_type) {
             $tag_decorator->add_class($this->_button_type);
         }

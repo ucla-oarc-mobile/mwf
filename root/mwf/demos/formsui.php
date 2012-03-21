@@ -100,7 +100,7 @@ echo Site_Decorator::form()
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Textarea Form')
-        ->add_textarea('textarea-1', 'Label for Textarea 1')
+        ->add_input(Site_Decorator::input('textarea-1', 'Label for Textarea 1')->type_textarea())
         ->render();
 
 /* select form */
@@ -126,13 +126,16 @@ $select_input = Site_Decorator::input('select-group-10', 'Select')
         ->add_option(2,'Two')
         ->add_option(3,'Three')
         ->mandatory();
+$textarea_input = Site_Decorator::input('textarea-10', 'Textarea')
+        ->type_textarea()
+        ->mandatory();
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Required Form')
         ->add_input($text_input)
         ->add_input($checkbox_input)
         ->add_input($select_input)
-        ->add_textarea('textarea-10', 'Textarea', array('required' => true))
+        ->add_input($textarea_input)
         ->render();
 
 /* invalid form */
@@ -149,13 +152,17 @@ $select_input = Site_Decorator::input('select-group-20', 'Select')
         ->add_option(3,'Three')
         ->mandatory()
         ->invalid('Error message goes here');
+$textarea_input = Site_Decorator::input('textarea-20', 'Textarea')
+        ->type_textarea()
+        ->mandatory()
+        ->invalid('Textarea error message goes here');
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Invalid Form')
         ->add_input($text_input)
         ->add_input($checkbox_input)
         ->add_input($select_input)
-        ->add_textarea('textarea-20', 'Textarea', array('required' => true, 'invalid' => 'Error messager goes here'))
+        ->add_input($textarea_input)
         ->render();
 
 /* disabled form */
@@ -169,13 +176,16 @@ $select_input = Site_Decorator::input('select-group-30', 'Select')
         ->add_option(2,'Two')
         ->add_option(3,'Three')
         ->disable();
+$textarea_input = Site_Decorator::input('textarea-30', 'Textarea')
+        ->type_textarea()
+        ->disable();
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Disabled Form')
         ->add_input($text_input)
         ->add_input($checkbox_input)
         ->add_input($select_input)
-        ->add_textarea('textarea-30', 'Textarea', array('disabled' => true))
+        ->add_input($textarea_input)
         ->render();
 
 /* not padded form */
