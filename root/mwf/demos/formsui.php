@@ -4,9 +4,10 @@
  * @package mwf.demos
  *
  * @author ilin
- * @copyright Copyright (c) 2010-11 UC Regents
+ * @author trott
+ * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111114
+ * @version 20120322
  *
  * @uses Decorator
  * @uses Site_Decorator
@@ -142,9 +143,10 @@ $checkbox_input = Site_Decorator::input('checkbox-10', 'Checkbox')
         ->type_checkbox()
         ->mandatory();
 $select_input = Site_Decorator::input('select-group-10', 'Select')
-        ->add_option(1,'One')
-        ->add_option(2,'Two')
-        ->add_option(3,'Three')
+        ->add_option(1,'The Beatles')
+        ->add_option(2,'The Rolling Stones')
+        ->add_option(3,'The Who')
+        ->add_option(4,'The Kinks')
         ->mandatory();
 $textarea_input = Site_Decorator::input('textarea-10', 'Textarea')
         ->type_textarea()

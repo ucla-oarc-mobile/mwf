@@ -460,4 +460,33 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
         $this->assertFalse($this->object->is_option());
     }
 
+    /**
+     * @test
+     * 
+     * HTML5 requires tha the first child option element of a select element 
+     * with a required attribute and without a multiple attribute, and whose 
+     * size is 1, must have either an empty value attribute, or must have no 
+     * text content.
+     */
+    public function typeSelect_mandatoryNotMultipleSizeNotSetNoOptions_emptyOptionAdded() {
+        $this->object->type_select()
+                ->mandatory();
+        $this->assertContains('<option value></option>', $this->object->render());
+    }
+
+    /**
+     * @test
+     * 
+     * See comment for typeSelect_mandatoryNotMultipleSizeNotSetNoOptions_emptyOptionAdded()
+     */
+    public function typeSelect_mandatoryNotMultipleSizeNotSetOptions_emptyOptionAddedAsFirstOption() {
+        $this->object->type_select()
+                ->add_option(1, 'The Beatles')
+                ->add_option(2, 'The Rolling Stones')
+                ->add_option(3, 'The Who')
+                ->add_option(4, 'The Kinks')
+                ->mandatory();
+        $this->assertRegexp('/<select [^>]+><option value><\/option>/', $this->object->render());
+    }
+
 }

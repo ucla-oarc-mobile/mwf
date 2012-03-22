@@ -7,7 +7,7 @@
  * @author trott
  * @copyright Copyright (c) 2012 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120320
+ * @version 20120322
  *
  * @uses Tag_HTML_Decorator
  * 
@@ -32,6 +32,8 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
     private $_options = array();
     private $_multiple = false;
     private $_size = false;
+    private $_first_option_value = false;
+    private $_first_option_text = false;
 
     /**
      *
@@ -191,7 +193,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
         $this->_size = true;
         return $this->set_param('size', (int) $size);
     }
-    
+
     /**
      *
      * @return Input_Site_Decorator 
@@ -200,7 +202,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
         $this->_required = true;
         return $this->set_param('required', 'required');
     }
-    
+
     /**
      *
      * @return Input_Site_Decorator
@@ -430,11 +432,27 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      *
      * @param string $value
      * @param string $label
+     * @param boolean $prepend
      * @return Input_Site_Decorator 
      */
-    public function add_option($value, $label) {
+    public function add_option($value, $label, $prepend=false) {
+        $value = (string) $value;
+        $label = (string) $label;
+
         $this->type_select();
-        $this->_options[] = HTML_Decorator::tag('option', $label, array('value' => $value));
+
+        $tag = HTML_Decorator::tag('option', $label, array('value' => $value));
+ 
+        if ($prepend) {
+            array_unshift($this->_options, $tag);
+        } else {
+            $this->_options[] = $tag;
+        }
+        
+        if ((count($this->_options) === 1) || $prepend) {
+            $this->_first_option_value = $value;
+            $this->_first_option_text = $label;
+        }
         return $this;
     }
 
@@ -474,13 +492,38 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
         if (($this->_type === 'color') && isset($this->_attributes['required'])) {
             unset($this->_attributes['required']);
         }
-        
+
         if (($this->_element === 'textarea') && isset($this->_attributes['size'])) {
             unset($this->_attributes['size']);
         }
-        
+
         if (($this->_element !== 'select') && isset($this->_attributes['multiple'])) {
             unset($this->_attributes['multiple']);
+        }
+
+
+        /*
+         * HTML5 requires tha the first child option element of a select element 
+         * with a required attribute and without a multiple attribute, and whose 
+         * size is 1, must have either an empty value attribute, or must have no 
+         * text content.
+         */
+        if (($this->_element === 'select') &&
+                isset($this->_attributes['required']) &&
+                !isset($this->_attributes['multiple'])) {
+
+            if (!isset($this->_attributes['size']) ||
+                    $this->_attributes['size'] === 1) {
+
+                if (count($this->_options) === 0) {
+
+                    $this->add_option('', '');
+                } else if ($this->_first_option_text !== '' &&
+                        $this->_first_option_value !== '') {
+
+                    $this->add_option('', '', true);
+                }
+            }
         }
 
         $inner = false;
