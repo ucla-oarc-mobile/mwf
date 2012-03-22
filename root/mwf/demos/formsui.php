@@ -45,14 +45,12 @@ echo Site_Decorator::header()
 echo Site_Decorator::content()
         ->set_padded()
         ->add_header('Forms UI Demo')
-        ->add_paragraph('The following is a demo of MWF Forms UI.')
         ->render();
 ?>
 
 <!-- short form -->
 
 <?php
-/* short form */
 $text_input = Site_Decorator::input('text-1', 'Name');
 
 echo Site_Decorator::form()
@@ -67,7 +65,6 @@ echo Site_Decorator::form()
 <!-- option form -->
 
 <?php
-/* option form */
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Option Form')
@@ -85,7 +82,11 @@ echo Site_Decorator::form()
         )
         ->render();
 
-/* full button form */
+?>
+
+<!-- full button form -->
+
+<?php
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Full Button Form')
@@ -97,14 +98,22 @@ echo Site_Decorator::form()
         ->add_link_button_neutral('Neutral Link', '#')
         ->render();
 
-/* textarea form */
+?>
+
+<!-- Textarea Form -->
+
+<?php
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Textarea Form')
         ->add_input(Site_Decorator::input('textarea-1', 'Label for Textarea 1')->type_textarea())
         ->render();
 
-/* select form */
+?>
+
+<!-- Select Form -->
+
+<?php
 $select_input = Site_Decorator::input('select-group-1', 'Label for Select')
         ->add_option('','Select...')
         ->add_option(1,'One')
@@ -136,7 +145,11 @@ echo Site_Decorator::form()
         ->add_input($select_input_sized)
         ->render();
 
-/* required form */
+?>
+
+<!-- Form with required elements -->
+
+<?php
 $text_input = Site_Decorator::input('text-10', 'Name')
         ->mandatory();
 $checkbox_input = Site_Decorator::input('checkbox-10', 'Checkbox')
@@ -160,7 +173,11 @@ echo Site_Decorator::form()
         ->add_input($textarea_input)
         ->render();
 
-/* invalid form */
+?>
+
+<!-- Form with invalid submissions marked -->
+
+<?php
 $text_input = Site_Decorator::input('text-20', 'Name')
         ->mandatory()
         ->invalid('Text input error message goes here');
@@ -187,7 +204,11 @@ echo Site_Decorator::form()
         ->add_input($textarea_input)
         ->render();
 
-/* disabled form */
+?>
+
+<!-- Form with disabled elements -->
+
+<?php
 $text_input = Site_Decorator::input('text-30', 'Name')
         ->disable();
 $checkbox_input = Site_Decorator::input('checkbox-30', 'Checkbox')
@@ -210,165 +231,36 @@ echo Site_Decorator::form()
         ->add_input($textarea_input)
         ->render();
 
-/* not padded form */
+?>
+
+<!-- Form without padding -->
+
+<?php
 echo Site_Decorator::form()
-        ->set_title('Not Padded Form')
+        ->set_title('Form That Is Not Padded')
         ->add_input(Site_Decorator::input('text-100', 'Label'))
         ->add_input(Site_Decorator::input()->type_submit()->set_param('value', 'Search'))
         ->render();
-
-
-/* prototype 0 */
-echo Site_Decorator::form()
-        ->set_padded()
-        ->set_title('Prototype 0')
-        ->add_subtitle('Subtitle')
-        ->add_paragraph('A content box with paragraph content')
-        ->add_input(Site_Decorator::input()->type_submit()->set_param('value', 'Submit'))
-        ->render();
 ?>
 
-<!-- prototype 1 -->
-<form class="padded" action="#" method="post">
-    <h1 class="first">Prototype 1</h1>
-    <h4>Subtitle</h4>
-    <p>A content box with paragraph content.</p>
-    <div>
-        <p>One of multiple paragraphs defined within one content box (div).</p>
-        <p>Another of multiple paragraphs defined within one content box (div).</p>
-    </div>
-    <fieldset>
-        <p>One of multiple paragraphs defined within one content box (fieldset).</p>
-        <p>Another of multiple paragraphs defined within one content box (fieldset).</p>
-    </fieldset>
-    <fieldset>
-        <label for="input-100">Label for Input 100</label>
-        <input type="text" id="input-100" name="input-100">
-        <label for="textarea-100">Label for Textarea 100</label>
-        <textarea id="textarea-100" name="textarea-100"></textarea>
-        <label for="radio-100">Label for Radio 100</label>
-        <input type="radio" id="radio-100" name="radio-100"><br />
-        <label for="checkbox-100">Label for Checkbox 100</label>
-        <input type="checkbox" id="checkbox-100" name="checkbox-100"><br />
-        <label for="select-100">Label for Select 100</label>
-        <select id="select-100" name="select-100">
-            <option value="value-1">Value 1</option>
-            <option value="value-2">Value 2</option>
-            <option value="value-3">Value 3</option>
-        </select>
-    </fieldset>
-    <h4>Subtitle</h4>
-    <fieldset class="last">
-        <p>Some text that comes before the submission.</p>
-        <input type="submit" class="primary">
-        <input type="reset">
-    </fieldset>
-</form>
-
-<!-- prototype 2 -->
-<div class="content padded">
-    <h1 class="light">Prototype 2</h1>
-    <h4>Subtitle</h4>
-    <p>A content box with paragraph content.</p>
-    <div>
-        <p>One of multiple paragraphs defined within one content box (div).</p>
-        <p>Another of multiple paragraphs defined within one content box (div).</p>
-    </div>
-    <form action="#" method="post">
-        <h4>Subtitle</h4>
-        <p>A content box with paragraph content.</p>
-        <div>
-            <p>One of multiple paragraphs defined within one content box (div).</p>
-            <p>Another of multiple paragraphs defined within one content box (div).</p>
-        </div>
-        <fieldset>
-            <p>One of multiple paragraphs defined within one content box (fieldset).</p>
-            <p>Another of multiple paragraphs defined within one content box (fieldset).</p>
-        </fieldset>
-        <fieldset>
-            <label for="input-101">Label for Input 101</label>
-            <input type="text" id="input-101" name="input-101">
-            <label for="textarea-101">Label for Textarea 101</label>
-            <textarea id="textarea-101" name="textarea-101"></textarea>
-        </fieldset>
-        <div>
-            <label for="radio-101">Label for Radio 101</label>
-            <input type="radio" id="radio-101" name="radio-101"><br />
-            <label for="checkbox-101">Label for Checkbox 101</label>
-            <input type="checkbox" id="checkbox-101" name="checkbox-101"><br />
-            <label for="select-101">Label for Select 101</label>
-            <select id="select-101" name="select-1">
-                <option value="value-1">Value 1</option>
-                <option value="value-2">Value 2</option>
-                <option value="value-3">Value 3</option>
-            </select>
-        </div>
-        <h4>Subtitle</h4>
-        <fieldset class="last">
-            <p>Some text that comes before the submission.</p>
-            <input type="submit" class="primary">
-            <input type="reset">
-        </fieldset>
-    </form>
-    <p>A content box with paragraph content.</p>
-    <div>
-        <p>One of multiple paragraphs defined within one content box (div).</p>
-        <p>Another of multiple paragraphs defined within one content box (div).</p>
-    </div>
-</div>
-
-<!-- prototype 3 -->
-<div class="content padded">
-    <h1 class="blue">Prototype 3</h1>
-    <h4>Subtitle</h4>
-    <p>A content box with paragraph content.</p>
-    <div>
-        <p>One of multiple paragraphs defined within one content box (div).</p>
-        <p>Another of multiple paragraphs defined within one content box (div).</p>
-    </div>
-    <div>
-        <form action="#" method="post">
-            <p class="first">This and all the below form elements should be within one content box.</p>
-            <fieldset>
-                <label for="input-102">Label for Input 102</label>
-                <input type="text" id="input-102" name="input-102">
-                <label for="textarea-102">Label for Textarea 102</label>
-                <textarea id="textarea-102" name="textarea-102"></textarea>
-            </fieldset>
-            <fieldset>
-                <label for="radio-102">Label for Radio 102</label>
-                <input type="radio" id="radio-102" name="radio-102"><br />
-                <label for="checkbox-102">Label for Checkbox 102</label>
-                <input type="checkbox" id="checkbox-102" name="checkbox-102"><br />
-                <label for="select-102">Label for Select 102</label>
-                <select id="select-102" name="select-102">
-                    <option value="value-1">Value 1</option>
-                    <option value="value-2">Value 2</option>
-                    <option value="value-3">Value 3</option>
-                </select>
-            </fieldset>
-            <p>Some text that comes before the submission.</p>
-            <input type="submit" class="primary">
-            <input type="reset" class="last">
-        </form>
-    </div>
-    <p>A content box with paragraph content.</p>
-    <div>
-        <p>One of multiple paragraphs defined within one content box (div).</p>
-        <p>Another of multiple paragraphs defined within one content box (div).</p>
-    </div>
-</div>
+<!-- Form with text content -->
 
 <?php
+echo Site_Decorator::form()
+        ->set_padded()
+        ->set_title('Text content')
+        ->add_subtitle('Subtitle')
+        ->add_paragraph('Lorem ipsum doodah doodah.')
+        ->add_input(Site_Decorator::input()->type_submit()->set_param('value', 'Submit'))
+        ->render();
+
 echo Site_Decorator::button()
         ->set_padded()
         ->add_option('Back to Demos', Config::get('global', 'site_url') . '/mwf/demos.php')
         ->render();
 
 echo Site_Decorator::default_footer()->render();
-?>
 
-<?php
 echo HTML_Decorator::body_end()->render();
 
 echo HTML_Decorator::html_end()->render();
