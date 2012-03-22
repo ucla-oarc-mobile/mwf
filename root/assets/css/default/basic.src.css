@@ -515,21 +515,21 @@ form button {
     padding: .5em 1em;
 }
 
-form input[type="submit"]:disabled,
-form input[type="reset"]:disabled,
-form button:disabled,
+form input[type="submit"][disabled="disabled"],
+form input[type="reset"][disabled="disabled"],
+form button[disabled="disabled"],
 form a.button.disabled {
     color: #888;
     cursor: default;
 }
 
-form input[type="submit"]:hover:disabled,
-form input[type="reset"]:hover:disabled,
-form button:hover:disabled,
+form input[type="submit"][disabled="disabled"]:hover,
+form input[type="reset"][disabled="disabled"]:hover,
+form button[disabled="disabled"]:hover,
 form a.button:hover.disabled,
-form input[type="submit"]:focus:disabled,
-form input[type="reset"]:focus:disabled,
-form button:focus:disabled,
+form input[type="submit"][disabled="disabled"]:focus,
+form input[type="reset"][disabled="disabled"]:focus,
+form button[disabled="disabled"]:focus,
 form a.button:focus.disabled {
     background-color: #e4e7ee;
 }
@@ -549,13 +549,13 @@ form input[type="submit"].primary,
 form input[type="reset"].primary,
 form button.primary,
 form a.button.primary,
-form input[type="submit"].primary:hover:disabled,
-form input[type="reset"].primary:hover:disabled,
-form button.primary:hover:disabled,
+form input[type="submit"][disabled="disabled"].primary:hover,
+form input[type="reset"][disabled="disabled"].primary:hover,
+form button.primary[disabled="disabled"]:hover,
 form a.button.primary:hover.disabled,
-form input[type="submit"].primary:focus:disabled,
-form input[type="reset"].primary:focus:disabled,
-form button.primary:focus:disabled,
+form input[type="submit"][disabled="disabled"].primary:focus,
+form input[type="reset"][disabled="disabled"].primary:focus,
+form button[disabled="disabled"].primary:focus,
 form a.button.primary:focus.disabled {
     background-color: #fbaf3f;
 }
@@ -575,13 +575,13 @@ form input[type="submit"].secondary,
 form input[type="reset"].secondary,
 form button.secondary,
 form a.button.secondary,
-form input[type="submit"].secondary:hover:disabled,
-form input[type="reset"].secondary:hover:disabled,
-form button.secondary:hover:disabled,
+form input[type="submit"][disabled="disabled"].secondary:hover,
+form input[type="reset"][disabled="disabled"].secondary:hover,
+form button[disabled="disabled"].secondary:hover,
 form a.button.secondary:hover.disabled,
-form input[type="submit"].secondary:focus:disabled,
-form input[type="reset"].secondary:focus:disabled,
-form button.secondary:focus:disabled,
+form input[type="submit"][disabled="disabled"].secondary:focus,
+form input[type="reset"][disabled="disabled"].secondary:focus,
+form button[disabled="disabled"].secondary:focus,
 form a.button.secondary:focus.disabled {
     background-color: #9caccf;
 }
