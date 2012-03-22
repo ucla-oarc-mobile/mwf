@@ -232,10 +232,6 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
     private function _add_options_helper($id, $label, $options) {
         if ($label) {
             $this->add_inner_tag('label', $label);
-
-            if (!empty($options['tooltip'])) {
-                $this->add_inner_tag('span', $params['tooltip'], array('class' => 'tiptext'));
-            }
         }
 
         $option_elements = array();
