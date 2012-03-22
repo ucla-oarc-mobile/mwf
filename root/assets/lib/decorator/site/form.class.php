@@ -123,7 +123,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
                         ->add_class('tiptext');
                 $this->add_inner($tooltip_decorator);
             }
-            
+
             if ($input_decorator->is_option()) {
                 $label_decorator->add_inner_front($input_decorator);
                 $label_decorator->add_class('option');
@@ -231,7 +231,11 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      */
     private function _add_options_helper($id, $label, $options) {
         if ($label) {
-            $this->_add_label_tooltip($id, $label, array());
+            $this->add_inner_tag('label', $label);
+
+            if (!empty($options['tooltip'])) {
+                $this->add_inner_tag('span', $params['tooltip'], array('class' => 'tiptext'));
+            }
         }
 
         $option_elements = array();
@@ -241,30 +245,6 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
         }
 
         return $this->add_inner_tag('div', $option_elements, array('id' => $id, 'class' => 'option'));
-    }
-
-
-    /**
-     * Helper function to add label and tooltips.
-     * 
-     * @param string $id
-     * @param string $label
-     * @param array $params 
-     */
-    private function _add_label_tooltip($id, $label, $params) {
-        $label_params = array();
-        if (!empty($params['required'])) {
-            if (!empty($label_params['class'])) {
-                $label_params['class'] = $params['class'] . ' required';
-            } else {
-                $label_params['class'] = 'required';
-            }
-        }
-        $this->add_inner_tag('label', $label, array_merge($label_params, array('for' => $id)));
-
-        if (!empty($params['tooltip'])) {
-            $this->add_inner_tag('span', $params['tooltip'], array('class' => 'tiptext'));
-        }
     }
 
     /**
