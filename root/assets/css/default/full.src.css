@@ -256,6 +256,10 @@ form .last {
     border-bottom-right-radius: .5em;
 }
 
+.content form {
+    border-radius: 0;
+}
+
 form input,
 form textarea,
 form select {
