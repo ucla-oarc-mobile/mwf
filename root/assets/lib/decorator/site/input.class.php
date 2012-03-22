@@ -30,6 +30,8 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
     private $_invalid = false;
     private $_invalid_message = '';
     private $_options = array();
+    private $_multiple = false;
+    private $_size = false;
 
     /**
      *
@@ -182,11 +184,30 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
 
     /**
      *
+     * @param int $size
+     * @return Input_Site_Decorator 
+     */
+    public function set_size($size) {
+        $this->_size = true;
+        return $this->set_param('size', (int) $size);
+    }
+    
+    /**
+     *
      * @return Input_Site_Decorator 
      */
     public function mandatory() {
         $this->_required = true;
         return $this->set_param('required', 'required');
+    }
+    
+    /**
+     *
+     * @return Input_Site_Decorator
+     */
+    public function multiple() {
+        $this->_multiple = true;
+        return $this->set_param('multiple', false);
     }
 
     /**
@@ -452,6 +473,14 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
         /* HTML5 color input is not permitted to be set to "required" */
         if (($this->_type === 'color') && isset($this->_attributes['required'])) {
             unset($this->_attributes['required']);
+        }
+        
+        if (($this->_element === 'textarea') && isset($this->_attributes['size'])) {
+            unset($this->_attributes['size']);
+        }
+        
+        if (($this->_element !== 'select') && isset($this->_attributes['multiple'])) {
+            unset($this->_attributes['multiple']);
         }
 
         $inner = false;

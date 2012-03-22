@@ -109,10 +109,30 @@ $select_input = Site_Decorator::input('select-group-1', 'Label for Select')
         ->add_option(1,'One')
         ->add_option(2,'Two')
         ->add_option(3,'Three');
+
+$select_input_multiple = Site_Decorator::input('select-group-2', 'Label for Multiple Select')
+        ->multiple()
+        ->add_option('hustle', 'The Hustle')
+        ->add_option('mashedp', 'Mashed Potato')
+        ->add_option('twist', 'The Twist')
+        ->add_option('bunnyhop', 'Bunny Hop');
+
+$select_input_sized = Site_Decorator::input('select-group-3', 'Label for Sized Select')
+        ->set_size(5)
+        ->add_option(1, 'Planet of the Apes')
+        ->add_option(2, 'Beneath the Planet of the Apes')
+        ->add_option(3, 'Escape from the Planet of the Apes')
+        ->add_option(4, 'Conquest of the Planet of the Apes')
+        ->add_option(5, 'Battle for the Planet of the Apes')
+        ->add_option(6, 'Planet of the Apes (Tim Burton Reboot)')
+        ->add_option(7, 'Rise of the Planet of the Apes');
+
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Select Form')
         ->add_input($select_input)
+        ->add_input($select_input_multiple)
+        ->add_input($select_input_sized)
         ->render();
 
 /* required form */
