@@ -122,7 +122,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      * @return boolean
      */
     public function is_mandatory() {
-        return $this->_required;
+        return (($this->_required && $this->_type !== 'color'));
     }
 
     /**
@@ -449,8 +449,12 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      * @return string
      */
     public function render() {
-        $inner = false;
+        /* HTML5 color input is not permitted to be set to "required" */
+        if (($this->_type === 'color') && isset($this->_attributes['required'])) {
+            unset($this->_attributes['required']);
+        }
 
+        $inner = false;
         switch ($this->_element) {
             case 'select':
                 $inner = empty($this->_options) ? '' : $this->_options;

@@ -93,6 +93,9 @@ $text_input_placeholder = Site_Decorator::input('input-10', 'Placeholder')
         ->set_placeholder('Please enter text here');
 $text_input_mandatory = Site_Decorator::input('input-11', 'Required')
         ->mandatory();
+$checkbox_input_mandatory = Site_Decorator::input('checkbox-10', 'Checkbox')
+        ->type_checkbox()
+        ->mandatory();
 $color_input = Site_Decorator::input('color-10', 'Color')
         ->type_color()
         ->mandatory();

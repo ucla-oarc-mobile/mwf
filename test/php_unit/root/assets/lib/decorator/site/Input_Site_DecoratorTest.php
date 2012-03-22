@@ -125,6 +125,30 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
         $this->object->type_color();
         $this->assertContains('type="color"', $this->object->render());
     }
+    
+    /**
+     * @test
+     */
+    public function typeColor_mandatory_mandatoryIgnored() {
+        $this->object->type_color()->mandatory();
+        $this->assertNotContains('required', $this->object->render());
+    }
+    
+    /**
+     * @test
+     */
+    public function isMandatory_colorMandatory_notMandatory() {
+        $this->object->type_color()->mandatory();
+        $this->assertFalse($this->object->is_mandatory());
+    }
+    
+    /**
+     * @test
+     */
+    public function isMandatory_mandatoryColor_notMandatory() {
+        $this->object->mandatory()->type_color();
+        $this->assertFalse($this->object->is_mandatory());
+    }
 
     /**
      * @test

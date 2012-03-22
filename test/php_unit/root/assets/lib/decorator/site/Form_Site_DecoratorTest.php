@@ -236,6 +236,15 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
         $result = $this->object->render();
         $this->assertContains('Loggins&amp;Messina', $result);
     }
+    
+    /**
+     * @test
+     */
+    public function addInput_colorMandatory_mandatoryIgnored() {
+        $color = Site_Decorator::input('foo', 'bar')->type_color()->mandatory();
+        $this->object->add_input($color);
+        $this->assertNotContains('required', $this->object->render());
+    }
 
     /**
      * @test
