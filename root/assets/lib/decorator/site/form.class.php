@@ -133,7 +133,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
 
             $invalid_message = $input_decorator->get_invalid_message();
             if (!empty($invalid_message)) {
-                $label_decorator->add_inner(HTML_Decorator::tag('p', $invalid_message, array('class' => 'invalid')));
+                $label_decorator->add_inner(HTML_Decorator::tag('span', $invalid_message, array('class' => 'invalid')));
             }
 
             $this->add_inner($label_decorator);

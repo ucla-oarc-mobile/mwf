@@ -652,10 +652,14 @@ form .invalid {
     color: #a00;
 }
 
-form p.invalid::before {
-    content: url('img/invalid.png') '\0a ';
+form span.invalid {
+    display: block;
+}
+
+form span.invalid::before {
+    content: '\26a0';
+    font-size: 1.5em;
     vertical-align: middle;
-        
 }
 
 form input.invalid,

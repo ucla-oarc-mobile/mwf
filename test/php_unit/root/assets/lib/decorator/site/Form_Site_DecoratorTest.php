@@ -279,7 +279,7 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
                 ->invalid('Simon & Garfunkel');
         $this->object->add_input($textarea);
         $result = $this->object->render();
-        $this->assertContains('<p class="invalid">Simon &amp; Garfunkel</p>', $result);
+        $this->assertContains('<span class="invalid">Simon &amp; Garfunkel</span>', $result);
     }
 
     /**
@@ -353,8 +353,8 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     public function invalid_message_messageRendered() {
         $this->object->add_input(Site_Decorator::input('Bartles&James', 'LogginsAndMessina')->invalid('Input invalid!'));
         $rendered = $this->object->render();
-        $this->assertRegExp('/class="invalid">.*<p class="invalid"/', $rendered);
-        $this->assertContains('<p class="invalid">Input invalid!</p>', $rendered);
+        $this->assertRegExp('/class="invalid">.*<span class="invalid"/', $rendered);
+        $this->assertContains('<span class="invalid">Input invalid!</span>', $rendered);
     }
 
 }
