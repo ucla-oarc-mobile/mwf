@@ -190,7 +190,7 @@ echo Site_Decorator::form()
 /* disabled form */
 $text_input = Site_Decorator::input('text-30', 'Name')
         ->disable();
-$checkbox_input = Site_Decorator::input('checkbox-20', 'Checkbox')
+$checkbox_input = Site_Decorator::input('checkbox-30', 'Checkbox')
         ->type_checkbox()
         ->disable();
 $select_input = Site_Decorator::input('select-group-30', 'Select')
