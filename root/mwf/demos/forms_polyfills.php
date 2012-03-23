@@ -24,14 +24,13 @@
  * @uses Body_End_HTML_Decorator
  * @uses HTML_End_HTML_Decorator
  */
-require_once(dirname(dirname(dirname(__FILE__))) . '/assets/lib/decorator.class.php');
-require_once(dirname(dirname(dirname(__FILE__))) . '/assets/config.php');
+require_once(dirname(dirname(__DIR__)) . '/assets/config.php');
+require_once(dirname(dirname(__DIR__)) . '/assets/lib/decorator.class.php');
 
 echo HTML_Decorator::html_start()->render();
 
 echo Site_Decorator::head()
         ->set_title('Forms With Polyfills')
-        ->add_js_handler_library('full_libs', 'forms')
         ->add_js_handler_library('full_libs', 'formsPolyfills')
         ->add_js_handler_library('standard_libs', 'tooltip')
         ->render();
@@ -400,9 +399,6 @@ echo Site_Decorator::default_footer()->render();
 <script type="text/javascript">
     if (mwf.classification.isStandard()) {
         mwf.tooltip();
-    }
-    if (mwf.classification.isFull()) {
-        mwf.forms.init();
     }
 </script>
 
