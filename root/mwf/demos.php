@@ -39,12 +39,11 @@ echo Site_Decorator::header()
         ->render();
 
 echo Site_Decorator::menu()
-->set_title('MWF Demos')
+->set_title('MWF Style Demos')
 ->set_padded()
-->add_text('The following is a kitchen sink collection of MWF styles.')
 ->add_item('Entities', 'demos/entities.php')
-->add_item('Forms UI', './demos/formsui.php')
-->add_item('Forms JS', './demos/formsjs.php')
+->add_item('Forms without polyfills', 'demos/forms.php')
+->add_item('Forms with polyfills', 'demos/forms_polyfills.php')
 ->add_item('Messages', 'demos/messages.php');
 
 echo Site_Decorator::button()
