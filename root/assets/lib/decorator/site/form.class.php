@@ -117,13 +117,6 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
 
             $label_decorator = HTML_Decorator::tag('label', $span_decorator);
 
-            $tooltip = $input_decorator->get_tooltip();
-            if (!empty($tooltip)) {
-                $tooltip_decorator = HTML_Decorator::tag('span', $tooltip)
-                        ->add_class('tiptext');
-                $this->add_inner($tooltip_decorator);
-            }
-
             if ($input_decorator->is_option()) {
                 $label_decorator->add_inner_front($input_decorator);
                 $label_decorator->add_class('option');

@@ -690,21 +690,6 @@ form .time-field select {
     width: auto;
 }
 
-/* tooltip */
-form .tip {
-    display: block;
-    float: right;
-    overflow: hidden;
-    text-indent: -999em;
-}
-
-form .tiptext {
-    display: block;
-    margin: 0 10px;
-    color: #999;
-    font-style: italic;
-}
-
 /* Without styling, range does not display by default on Android 4.0 and below. */
 input[type='range']{
     background: grey;

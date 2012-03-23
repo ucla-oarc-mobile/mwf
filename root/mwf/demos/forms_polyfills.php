@@ -32,7 +32,6 @@ echo HTML_Decorator::html_start()->render();
 echo Site_Decorator::head()
         ->set_title('Forms With Polyfills')
         ->add_js_handler_library('full_libs', 'formsPolyfills')
-        ->add_js_handler_library('standard_libs', 'tooltip')
         ->render();
 
 echo HTML_Decorator::body_start()->render();
@@ -251,14 +250,11 @@ echo Site_Decorator::form()
         ->render();
 ?>
 
-<!-- required form elements and some tooltips -->
+<!-- required form elements -->
 
 <?php
 $text_input_mandatory = Site_Decorator::input('input-1', 'Text')
         ->mandatory();
-$text_input_tooltip = Site_Decorator::input('input-2', 'Tooltip')
-        ->mandatory()
-        ->set_tooltip('tooltip text');
 $checkbox_input_mandatory = Site_Decorator::input('checkbox-5', 'Checkbox')
         ->type_checkbox()
         ->mandatory();
@@ -271,20 +267,14 @@ $select_input_mandatory = Site_Decorator::input('select-1', 'Select')
 $textarea_input_mandatory = Site_Decorator::input('textarea-2', 'Textarea')
         ->type_textarea()
         ->mandatory();
-$textarea_input_tooltip = Site_Decorator::input('textarea-3', 'Textarea with long tooltip')
-        ->type_textarea()
-        ->mandatory()
-        ->set_tooltip('A very very very very very very long tooltip text');
 echo Site_Decorator::form()
         ->set_padded()
-        ->set_title('Required & Tooltip Form')
+        ->set_title('Required Elements')
         ->add_paragraph('This form demonstrates client-side required validation.')
         ->add_input($text_input_mandatory)
         ->add_input($checkbox_input_mandatory)
         ->add_input($select_input_mandatory)
         ->add_input($textarea_input_mandatory)
-        ->add_input($text_input_tooltip)
-        ->add_input($textarea_input_tooltip)
         ->add_input($submit)
         ->render();
 ?>
@@ -394,15 +384,7 @@ echo Site_Decorator::button()
         ->render();
 
 echo Site_Decorator::default_footer()->render();
-?>
 
-<script type="text/javascript">
-    if (mwf.classification.isStandard()) {
-        mwf.tooltip();
-    }
-</script>
-
-<?php
 echo HTML_Decorator::body_end()->render();
 
 echo HTML_Decorator::html_end()->render();

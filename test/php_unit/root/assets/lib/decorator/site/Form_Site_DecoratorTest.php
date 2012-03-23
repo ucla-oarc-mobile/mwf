@@ -249,18 +249,6 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function addInput_selectWithQuotationMarksInTooltip_tooltipIsEncoded() {
-        $select = Site_Decorator::input('BartlesAndJames', 'Loggins&Messina')
-                ->add_option('value', 'label')
-                ->set_tooltip('"Palace Family Steak House"');
-        $this->object->add_input($select);
-        $result = $this->object->render();
-        $this->assertContains('<span class="tiptext">&quot;Palace Family Steak House&quot;</span>', $result);
-    }
-
-    /**
-     * @test
-     */
     public function addInput_textareaWithAmpersandInPlaceholder_placeholderIsEncoded() {
         $textarea = Site_Decorator::input('BartlesAndJames', 'Loggins&Messina')
                 ->type_textarea()

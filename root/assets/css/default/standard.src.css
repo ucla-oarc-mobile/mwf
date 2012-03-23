@@ -237,29 +237,6 @@ form.padded {
     margin: 0;
 }
 
-/* tooltip */
-form .tip {
-    background: transparent url(img/forms-tip.png) center right no-repeat;
-    margin-top: 1em;
-    padding-right: 1.5em;
-}
-
-form .tooltip {
-    display: none;	
-    background: transparent url(img/forms-tip-bg.png) 0 0 no-repeat;
-    padding: 10px 15px;
-    height: 120px;
-    width:180px;
-    color: #fff;
-    font-style: normal;
-    text-align: left;
-}
-
-form .tooltip.bottom {
-    background-image: url(img/forms-tip-bg-down.png);
-    padding: 30px 15px;
-}
-
 /**
  * Messages
  */

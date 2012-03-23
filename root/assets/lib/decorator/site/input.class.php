@@ -25,7 +25,6 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
     private $_classes = array();
     private $_type = false;
     private $_required = false;
-    private $_tooltip = '';
     private $_button_type = false;
     private $_invalid = false;
     private $_invalid_message = '';
@@ -106,14 +105,6 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
     }
 
     /**
-     *
-     * @return string
-     */
-    public function get_tooltip() {
-        return $this->_tooltip;
-    }
-
-    /**
      * 
      * @return string
      */
@@ -163,16 +154,6 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      */
     public function set_value($text) {
         return $this->set_param('value', $text);
-    }
-
-    /**
-     *
-     * @param string $text
-     * @return Input_Site_Decorator 
-     */
-    public function set_tooltip($text) {
-        $this->_tooltip = $text;
-        return $this;
     }
 
     /**
