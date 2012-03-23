@@ -83,7 +83,6 @@ echo Site_Decorator::form()
                 )
         )
         ->render();
-
 ?>
 
 <!-- full button form -->
@@ -99,7 +98,6 @@ echo Site_Decorator::form()
         ->add_link_button_secondary('Secondary Link', '#')
         ->add_link_button_neutral('Neutral Link', '#')
         ->render();
-
 ?>
 
 <!-- Textarea Form -->
@@ -110,17 +108,16 @@ echo Site_Decorator::form()
         ->set_title('Textarea Form')
         ->add_input(Site_Decorator::input('textarea-1', 'Label for Textarea 1')->type_textarea())
         ->render();
-
 ?>
 
 <!-- Select Form -->
 
 <?php
 $select_input = Site_Decorator::input('select-group-1', 'Label for Select')
-        ->add_option('','Select...')
-        ->add_option(1,'One')
-        ->add_option(2,'Two')
-        ->add_option(3,'Three');
+        ->add_option('', 'Select...')
+        ->add_option(1, 'One')
+        ->add_option(2, 'Two')
+        ->add_option(3, 'Three');
 
 $select_input_multiple = Site_Decorator::input('select-group-2', 'Label for Multiple Select')
         ->multiple()
@@ -146,7 +143,6 @@ echo Site_Decorator::form()
         ->add_input($select_input_multiple)
         ->add_input($select_input_sized)
         ->render();
-
 ?>
 
 <!-- Form with required elements -->
@@ -158,10 +154,10 @@ $checkbox_input = Site_Decorator::input('checkbox-10', 'Checkbox')
         ->type_checkbox()
         ->mandatory();
 $select_input = Site_Decorator::input('select-group-10', 'Select')
-        ->add_option(1,'The Beatles')
-        ->add_option(2,'The Rolling Stones')
-        ->add_option(3,'The Who')
-        ->add_option(4,'The Kinks')
+        ->add_option(1, 'The Beatles')
+        ->add_option(2, 'The Rolling Stones')
+        ->add_option(3, 'The Who')
+        ->add_option(4, 'The Kinks')
         ->mandatory();
 $textarea_input = Site_Decorator::input('textarea-10', 'Textarea')
         ->type_textarea()
@@ -174,7 +170,6 @@ echo Site_Decorator::form()
         ->add_input($select_input)
         ->add_input($textarea_input)
         ->render();
-
 ?>
 
 <!-- Form with invalid submissions marked -->
@@ -188,9 +183,9 @@ $checkbox_input = Site_Decorator::input('checkbox-20', 'Checkbox')
         ->mandatory()
         ->invalid('Checkbox error message goes here');
 $select_input = Site_Decorator::input('select-group-20', 'Select')
-        ->add_option(1,'One')
-        ->add_option(2,'Two')
-        ->add_option(3,'Three')
+        ->add_option(1, 'One')
+        ->add_option(2, 'Two')
+        ->add_option(3, 'Three')
         ->mandatory()
         ->invalid('Error message goes here');
 $textarea_input = Site_Decorator::input('textarea-20', 'Textarea')
@@ -205,7 +200,6 @@ echo Site_Decorator::form()
         ->add_input($select_input)
         ->add_input($textarea_input)
         ->render();
-
 ?>
 
 <!-- Form with disabled elements -->
@@ -217,9 +211,9 @@ $checkbox_input = Site_Decorator::input('checkbox-30', 'Checkbox')
         ->type_checkbox()
         ->disable();
 $select_input = Site_Decorator::input('select-group-30', 'Select')
-        ->add_option(1,'One')
-        ->add_option(2,'Two')
-        ->add_option(3,'Three')
+        ->add_option(1, 'One')
+        ->add_option(2, 'Two')
+        ->add_option(3, 'Three')
         ->disable();
 $textarea_input = Site_Decorator::input('textarea-30', 'Textarea')
         ->type_textarea()
@@ -232,7 +226,6 @@ echo Site_Decorator::form()
         ->add_input($select_input)
         ->add_input($textarea_input)
         ->render();
-
 ?>
 
 <!-- Form without padding -->
@@ -255,7 +248,6 @@ echo Site_Decorator::form()
         ->add_paragraph('Lorem ipsum doodah doodah.')
         ->add_input(Site_Decorator::input()->type_submit()->set_param('value', 'Submit'))
         ->render();
-
 ?>
 
 <!-- required form elements -->
@@ -268,11 +260,11 @@ $checkbox_input_mandatory = Site_Decorator::input('checkbox-5', 'Checkbox')
         ->mandatory();
 $select_input_mandatory = Site_Decorator::input('select-1', 'Select')
         ->add_option(false, 'Select...')
-        ->add_option(1,'One')
+        ->add_option(1, 'One')
         ->add_option(2, 'Two')
         ->add_option(3, 'Three')
         ->mandatory();
-$textarea_input_mandatory = Site_Decorator::input('textarea-2','Textarea')
+$textarea_input_mandatory = Site_Decorator::input('textarea-2', 'Textarea')
         ->type_textarea()
         ->mandatory();
 echo Site_Decorator::form()
@@ -285,7 +277,6 @@ echo Site_Decorator::form()
         ->add_input($textarea_input_mandatory)
         ->add_input($submit)
         ->render();
-
 ?>
 
 <!-- html5 input types and attributes -->
