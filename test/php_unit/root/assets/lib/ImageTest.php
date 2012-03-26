@@ -4,9 +4,9 @@
  * Test class for Image.
  * 
  * @author trott
- * @copyright Copyright (c) 2010-11 UC Regents
+ * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111106
+ * @version 20120312
  *
  * @uses PHPUnit_Framework_TestCase
  * @uses Cache
@@ -25,11 +25,13 @@ class ImageTest extends PHPUnit_Framework_TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp() {
+
         require_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/root/assets/lib/config.class.php';
         require_once(dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/root/assets/lib/cache.class.php');
         require_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/root/assets/lib/image.class.php';
         $cache = new Cache(Config::get('image', 'cache_name'));
         $cache_files = glob($cache->get_cache_path() . '/*');
+
         foreach ($cache_files as $cache_file) {
             if (is_file($cache_file))
                 unlink($cache_file);
@@ -144,5 +146,4 @@ class ImageTest extends PHPUnit_Framework_TestCase {
         $image = Image::factory('http://mwf.ucla.edu/img/ucla-logo.jpg');
         $this->assertEquals('', @$image->get_mimetype());
     }
-
 }

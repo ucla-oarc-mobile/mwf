@@ -8,22 +8,22 @@
  * @subpackage path
  *
  * @author trott
- * @copyright Copyright (c) 2010-11 UC Regents
+ * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111110
+ * @version 20120312
  *
  * @uses Image
  *
  * @todo Comments
  * @todo Refactor
  */
-require_once(dirname(dirname(__FILE__)) . '/image.class.php');
+require_once(dirname(__DIR__) . '/image.class.php');
 
 class Remote_Image extends Image {
 
     private $_image_gd = null;
 
-    protected function &get_gd_image() {
+    protected function get_gd_image() {
         if ($this->_image_gd !== null)
             return $this->_image_gd;
 

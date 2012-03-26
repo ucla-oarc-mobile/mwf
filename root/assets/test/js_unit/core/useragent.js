@@ -151,7 +151,7 @@ test("mwf.userAgent.getBrowser() Opera Mini", function ()
         'userAgent':'Opera/9.50 (J2ME/MIDP; Opera Mini/4.0.10031/298; U; en)'
     };
     var ua = new mwf.userAgent.constructor();
-    equal(ua.getBrowser(),"opera mini","getBrowser() should detect Opera Mini");
+    equal(ua.getBrowser(),"opera_mini","getBrowser() should detect Opera Mini");
     navigator = oldNav;
 })
 

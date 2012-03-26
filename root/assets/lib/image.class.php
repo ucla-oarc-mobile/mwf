@@ -8,9 +8,13 @@
  * @subpackage path
  *
  * @author trott
- * @copyright Copyright (c) 2010-11 UC Regents
+ * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
+<<<<<<< HEAD
  * @version 20120303
+=======
+ * @version 20120312
+>>>>>>> develop
  *
  * @uses Config
  * @uses Cache
