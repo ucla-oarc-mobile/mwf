@@ -2,14 +2,13 @@
 
 /**
  *
- *
  * @package decorator
  * @subpackage html_decorator
  *
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110620
+ * @version 20120326
  *
  * @uses Decorator
  */
@@ -60,7 +59,7 @@ class Tag_HTML_Decorator extends Decorator {
      * 
      * @param mixed $content
      */
-    private function _check_and_warn_about_raw_html($content) {
+    private static function _check_and_warn_about_raw_html($content) {
         if (is_string($content) && preg_match('/[<>&]/', $content) === 1) {
             $backtrace = '';
             $call_stack = debug_backtrace();
@@ -79,7 +78,7 @@ class Tag_HTML_Decorator extends Decorator {
     }
 
     public function &add_inner($content) {
-        $this->_check_and_warn_about_raw_html($content);
+        self::_check_and_warn_about_raw_html($content);
 
         if (is_array($content))
             foreach ($content as $c)
@@ -90,7 +89,7 @@ class Tag_HTML_Decorator extends Decorator {
     }
 
     public function &add_inner_front($content) {
-        $this->_check_and_warn_about_raw_html($content);
+        self::_check_and_warn_about_raw_html($content);
 
         if (is_array($content))
             for ($i = count($content) - 1; $i >= 0; $i--)
