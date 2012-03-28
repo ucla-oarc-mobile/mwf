@@ -10,13 +10,13 @@
  * @version 20110727
  *
  * @uses SimplePie
- * @uses Cache
+ * @uses Disk_Cache
  * @uses Config
  * @uses Feed_Item
  */
 require_once(__DIR__ . '/simplepie.php');
 require_once(dirname(dirname(__DIR__)) . '/root/assets/lib/config.class.php');
-require_once(dirname(dirname(__DIR__)) . '/root/assets/lib/cache.class.php');
+require_once(dirname(dirname(__DIR__)) . '/root/assets/lib/disk_cache.class.php');
 require_once(__DIR__ . '/feed_item.class.php');
 
 class Feed {
@@ -48,7 +48,7 @@ class Feed {
      * Cache object
      * 
      * @access private
-     * @var Cache
+     * @var Disk_Cache
      */
     private $_cache;
 
@@ -62,7 +62,7 @@ class Feed {
         $this->_name = (string) $name;
         $this->_path = (string) $path;
         try {
-            $this->_cache = new Cache(Config::get('auxiliary/feed', 'cache_name'));
+            $this->_cache = new Disk_Cache(Config::get('auxiliary/feed', 'cache_name'));
         } catch (Exception $e) {
             trigger_error($e->getMessage(), E_USER_WARNING);
             $this->_cache = NULL;

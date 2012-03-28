@@ -10,20 +10,16 @@
  * @author trott
  * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
-<<<<<<< HEAD
- * @version 20120303
-=======
- * @version 20120312
->>>>>>> develop
+ * @version 20120328
  *
  * @uses Config
- * @uses Cache
+ * @uses Disk_Cache
  * @uses Path_Validator
  *
  * @todo phpdoc
  */
 require_once(dirname(__DIR__) . '/config.php');
-require_once(__DIR__ . '/cache.class.php');
+require_once(__DIR__ . '/disk_cache.class.php');
 require_once(__DIR__ . '/path_validator.class.php');
 
 abstract class Image {
@@ -66,7 +62,7 @@ abstract class Image {
     protected function __construct($imagepath) {
         $this->_image_path = $imagepath;
 
-        $this->_cache = new Cache(Config::get('image', 'cache_name'));
+        $this->_cache = new Disk_Cache(Config::get('image', 'cache_name'));
         $this->_memory_limit = Config::get('image', 'memory_limit') ?
                 Config::get('image', 'memory_limit') : 33554432;
     }
