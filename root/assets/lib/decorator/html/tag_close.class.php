@@ -25,7 +25,7 @@ class Tag_Close_HTML_Decorator extends Decorator
         $this->_tag = $tag;
     }
 
-    public function render()
+    public function render($raw = false)
     {
         return '</'.$this->_tag.'>';
     }

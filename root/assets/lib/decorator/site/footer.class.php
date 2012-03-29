@@ -59,7 +59,7 @@ class Footer_Site_Decorator extends Tag_HTML_Decorator {
         return $this;
     }
 
-    public function render() {
+    public function render($raw) {
         $this->set_param('id', 'footer');
 
         if ($this->_copyright || $this->_footer_link_urls) {
@@ -92,7 +92,7 @@ class Footer_Site_Decorator extends Tag_HTML_Decorator {
             $this->add_inner_tag('p', $contents, array('style' => 'font-weight:bold;font-style:italic'));
         }
 
-        return parent::render();
+        return parent::render($raw);
     }
 
 }

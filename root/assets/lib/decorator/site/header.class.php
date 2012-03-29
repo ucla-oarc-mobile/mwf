@@ -47,7 +47,7 @@ class Header_Site_Decorator extends Tag_HTML_Decorator {
         return $this;
     }
 
-    public function render() {
+    public function render($raw = false) {
         if (!$this->_image) {
             $image_path = Config::get('global', 'header_home_button');
             if (HTTPS::is_https()) {
@@ -77,7 +77,7 @@ class Header_Site_Decorator extends Tag_HTML_Decorator {
 
         $this->set_param('id', 'header');
 
-        return parent::render();
+        return parent::render($raw);
     }
 
 }

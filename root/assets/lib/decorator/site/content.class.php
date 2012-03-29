@@ -64,11 +64,11 @@ class Content_Site_Decorator extends Tag_HTML_Decorator
         return $this->add_inner_tag('div', $inner, $params);
     }
 
-    public function render()
+    public function render($raw = false)
     {
         if($this->_padded)
             $this->add_class('padded');
 
-        return parent::render();
+        return parent::render($raw);
     }
 }

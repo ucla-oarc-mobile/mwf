@@ -106,7 +106,7 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
         return $this;
     }
 
-    public function render() {
+    public function render($raw = false) {
         if ($this->_detailed)
             $this->add_class('detailed');
         elseif ($this->_detailed === false)
@@ -133,7 +133,7 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
             $js = 'mwf.full.configurableMenu("homescreen_layout").render("main_menu_list",' .
                     json_encode(
                             array_map(function($obj) {
-                                        return $obj->render();
+                                        return $obj->render($raw);
                                     }, $this->_list)) . ');';
 
             $this->add_inner(HTML_Decorator::tag('ol')->set_param('id', 'main_menu_list'));
@@ -144,7 +144,7 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
             }
         }
 
-        return parent::render();
+        return parent::render($raw);
     }
 
 }

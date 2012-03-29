@@ -240,12 +240,12 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      *
      * @return string
      */
-    public function render() {
+    public function render($raw = false) {
         if (is_a($this->_title, 'Decorator')) {
             $this->add_inner_front($this->_title);
         }
 
-        return parent::render();
+        return parent::render($raw);
     }
 
 }

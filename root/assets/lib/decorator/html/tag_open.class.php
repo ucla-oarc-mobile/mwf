@@ -69,7 +69,7 @@ class Tag_Open_HTML_Decorator extends Decorator {
         return $this->_needs_entities;
     }
 
-    public function render() {
+    public function render($raw = false) {
         $str = '<' . $this->_tag;
         if (count($this->_params) > 0)
             foreach ($this->_params as $name => $val)

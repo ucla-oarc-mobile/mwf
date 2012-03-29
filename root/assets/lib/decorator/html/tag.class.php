@@ -81,14 +81,6 @@ class Tag_HTML_Decorator extends Decorator implements Tag_ParamsInterface {
         return $this;
     }
 
-    /**
-     * Render the tag for output.
-     * 
-     * @return string
-     */
-    public function render() {
-        return $this->_render_helper();
-    }
 
     /**
      * If you really must pass raw HTML to the decorator, well, don't. But if 
@@ -97,18 +89,24 @@ class Tag_HTML_Decorator extends Decorator implements Tag_ParamsInterface {
      * @return string
      */
     public function render_raw() {
-        return $this->_render_helper(true);
+        return $this->render(true);
     }
 
-    private function _render_helper($raw=false) {
-        $str = $this->_tag_open->render();
+    /**
+     * Render the tag for output.
+     * 
+     * @param boolean $raw set to TRUE if the tag's content is raw markup and should remain unescaped
+     * @return string
+     */    
+    public function render ($raw = false) {
+        $str = $this->_tag_open->render($raw);
 
         if (count($this->_inner) === 0)
             return $str;
 
         foreach ($this->_inner as $inner) {
             if (is_a($inner, 'Decorator')) {
-                $str .= $inner->render();
+                $str .= $inner->render($raw);
             } else {
                 if (!$raw && $this->_tag_open->needs_entities()) {
                     $str .= htmlentities($inner, ENT_COMPAT, 'UTF-8');
@@ -118,7 +116,7 @@ class Tag_HTML_Decorator extends Decorator implements Tag_ParamsInterface {
             }
         }
 
-        $str .= $this->_tag_close->render();
+        $str .= $this->_tag_close->render($raw);
         return $str;
     }
 
