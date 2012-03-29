@@ -81,7 +81,26 @@ class Tag_HTML_Decorator extends Decorator implements Tag_ParamsInterface {
         return $this;
     }
 
+    /**
+     * Render the tag for output.
+     * 
+     * @return string
+     */
     public function render() {
+        return $this->_render_helper();
+    }
+
+    /**
+     * If you really must pass raw HTML to the decorator, well, don't. But if 
+     * you have to, this is the method to use.
+     * 
+     * @return string
+     */
+    public function render_raw() {
+        return $this->_render_helper(true);
+    }
+
+    private function _render_helper($raw=false) {
         $str = $this->_tag_open->render();
 
         if (count($this->_inner) === 0)
@@ -91,7 +110,7 @@ class Tag_HTML_Decorator extends Decorator implements Tag_ParamsInterface {
             if (is_a($inner, 'Decorator')) {
                 $str .= $inner->render();
             } else {
-                if ($this->_tag_open->needs_entities()) {
+                if (!$raw && $this->_tag_open->needs_entities()) {
                     $str .= htmlentities($inner, ENT_COMPAT, 'UTF-8');
                 } else {
                     $str .= $inner;
@@ -104,3 +123,4 @@ class Tag_HTML_Decorator extends Decorator implements Tag_ParamsInterface {
     }
 
 }
+

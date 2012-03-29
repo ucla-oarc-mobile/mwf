@@ -36,6 +36,22 @@ class Tag_HTML_DecoratorTest extends PHPUnit_Framework_TestCase {
         $this->assertRegExp('/\bmin\b/', $this->object->render());
     }
 
+    /**
+     * @test
+     */
+    public function render_rawHTML_convertedToEntities() {
+        $this->object = HTML_Decorator::tag('p', '&<br>');
+        $this->assertEquals('<p>&amp;&lt;br&gt;</p>', $this->object->render());
+    }
+
+    /**
+     * @test
+     */
+    public function renderRaw_rawHTML_notConvertedToEntities() {
+        $this->object = HTML_Decorator::tag('p', '&<br>');
+        $this->assertEquals('<p>&<br></p>', $this->object->render_raw());
+    }
+
 }
 
 ?>
