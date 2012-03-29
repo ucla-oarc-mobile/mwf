@@ -61,19 +61,10 @@ class Tag_HTML_Decorator extends Decorator {
      */
     private static function _check_and_warn_about_raw_html($content) {
         if (is_string($content) && preg_match('/[<>&]/', $content) === 1) {
-            $backtrace = '';
-            $call_stack = debug_backtrace();
-            for ($i = 1; $i < count($call_stack); $i++) {
-                $call = $call_stack[$i];
-                if (isset($call['function']) && isset($call['file']) && isset($call['line'])) {
-                    $backtrace = $backtrace . "\n    #${i} ${call['function']}() called at [${call['file']}:${call['line']}]";
-                }
-            }
             trigger_error('Raw HTML or HTML entities are possibly being passed to a Decorator object. ' .
                     'In MWF 1.3, these strings will have special characters replaced with HTML entities. ' .
                     'You should generate HTML using Decorators rather than sending raw HTML. ' .
-                    'The string in question is: "' . $content . '"' .
-                    $backtrace, E_USER_WARNING);
+                    'If you must pass raw HTML, use render_raw().', E_USER_WARNING);
         }
     }
 
@@ -115,6 +106,10 @@ class Tag_HTML_Decorator extends Decorator {
 
         $str .= $this->_tag_close->render();
         return $str;
+    }
+
+    public function render_raw() {
+        return $this->render();
     }
 
 }
