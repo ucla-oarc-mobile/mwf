@@ -1,6 +1,7 @@
 <?php
 
-require_once dirname(__FILE__) . '/../../../../../../../root/assets/lib/decorator/html/tag.class.php';
+require_once dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))))
+    . '/root/assets/lib/decorator/html/tag.class.php';
 
 /**
  * Test class for Tag_HTML_Decorator.
@@ -8,7 +9,7 @@ require_once dirname(__FILE__) . '/../../../../../../../root/assets/lib/decorato
  * @author trott
  * @copyright Copyright (c) 2012 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120318
+ * @version 20120329
  *
  * @uses PHPUnit_Framework_TestCase
  * @uses Tag_HTML_Decorator
