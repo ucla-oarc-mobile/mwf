@@ -59,7 +59,7 @@ class Footer_Site_Decorator extends Tag_HTML_Decorator {
         return $this;
     }
 
-    public function render($raw) {
+    public function render($raw = false) {
         $this->set_param('id', 'footer');
 
         if ($this->_copyright || $this->_footer_link_urls) {
