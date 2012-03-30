@@ -132,9 +132,9 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
         if ($this->_homescreen && Classification::is_full() && Config::get('frontpage', 'configurable_homescreen')) {
             $js = 'mwf.full.configurableMenu("homescreen_layout").render("main_menu_list",' .
                     json_encode(
-                            array_map(function($obj) {
+                            array_map(function($obj, $raw) {
                                         return $obj->render($raw);
-                                    }, $this->_list)) . ');';
+                                    }, $this->_list, array_fill(0, count($this->_list), $raw))) . ');';
 
             $this->add_inner(HTML_Decorator::tag('ol')->set_param('id', 'main_menu_list'));
             $this->add_inner(HTML_Decorator::tag('script', $js));
