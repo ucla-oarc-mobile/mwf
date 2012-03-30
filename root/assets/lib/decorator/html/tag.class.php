@@ -83,16 +83,6 @@ class Tag_HTML_Decorator extends Decorator implements Tag_ParamsInterface {
 
 
     /**
-     * If you really must pass raw HTML to the decorator, well, don't. But if 
-     * you have to, this is the method to use.
-     * 
-     * @return string
-     */
-    public function render_raw() {
-        return $this->render(true);
-    }
-
-    /**
      * Render the tag for output.
      * 
      * @param boolean $raw set to TRUE if the tag's content is raw markup and should remain unescaped

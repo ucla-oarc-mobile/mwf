@@ -48,19 +48,19 @@ class Tag_HTML_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function renderRaw_rawHTML_notConvertedToEntities() {
+    public function render_rawFlagTruerawHTML_notConvertedToEntities() {
         $this->object = HTML_Decorator::tag('p', '&<br>');
-        $this->assertEquals('<p>&<br></p>', $this->object->render_raw());
+        $this->assertEquals('<p>&<br></p>', $this->object->render(true));
     }
 
     /**
      * @test
      */
-    public function renderRaw_HTMLDecorator_notConvertedToEntities() {
+    public function render_rawFlagTrueHTMLDecorator_notConvertedToEntities() {
         $this->object = HTML_Decorator::tag('p')
                 ->add_inner_tag('i', "& don't encode me either, Broseph!");
         $this->assertEquals("<p><i>& don't encode me either, Broseph!</i></p>",
-                $this->object->render_raw());
+                $this->object->render(true));
     }
 }
 
