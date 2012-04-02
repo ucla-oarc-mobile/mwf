@@ -74,7 +74,7 @@ class Button_Site_Decorator extends Tag_HTML_Decorator
         return $this;
     }
 
-    public function render()
+    public function render($raw=false)
     {
         if($this->_options_max !== false && $this->_options_max < $this->_options_count)
         {
@@ -92,6 +92,6 @@ class Button_Site_Decorator extends Tag_HTML_Decorator
             $this->add_inner($option);
         }
 
-        return parent::render();
+        return parent::render($raw);
     }
 }

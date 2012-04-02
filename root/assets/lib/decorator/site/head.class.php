@@ -116,7 +116,7 @@ class Head_Site_Decorator extends Tag_HTML_Decorator
         return $rv;
     }
     
-    public function render()
+    public function render($raw=false)
     {   
         $handler_css = $this->_handler_css ? $this->_handler_css : Config::get('global', 'site_assets_url').'/css.php';
         $handler_css .= $this->_generate_url_param_string($this->_handler_css_params);
@@ -134,6 +134,6 @@ class Head_Site_Decorator extends Tag_HTML_Decorator
             $this->add_inner_tag_front('meta', false, array('charset'=>$charset));
         }
         
-        return parent::render();
+        return parent::render($raw);
     }
 }

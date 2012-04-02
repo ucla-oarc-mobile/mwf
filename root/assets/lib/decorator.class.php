@@ -15,7 +15,7 @@
 
 class Decorator
 {
-    public function render()
+    public function render($raw=false)
     {
         return '';
     }

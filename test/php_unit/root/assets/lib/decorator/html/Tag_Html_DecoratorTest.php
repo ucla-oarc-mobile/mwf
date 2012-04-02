@@ -1,6 +1,7 @@
 <?php
 
-require_once dirname(__FILE__) . '/../../../../../../../root/assets/lib/decorator/html/tag.class.php';
+require_once dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__)))))))
+    . '/root/assets/lib/decorator/html/tag.class.php';
 
 /**
  * Test class for Tag_HTML_Decorator.
@@ -8,7 +9,7 @@ require_once dirname(__FILE__) . '/../../../../../../../root/assets/lib/decorato
  * @author trott
  * @copyright Copyright (c) 2012 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120318
+ * @version 20120329
  *
  * @uses PHPUnit_Framework_TestCase
  * @uses Tag_HTML_Decorator
@@ -47,11 +48,20 @@ class Tag_HTML_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function renderRaw_rawHTML_notConvertedToEntities() {
+    public function render_rawFlagTruerawHTML_notConvertedToEntities() {
         $this->object = HTML_Decorator::tag('p', '&<br>');
-        $this->assertEquals('<p>&<br></p>', $this->object->render_raw());
+        $this->assertEquals('<p>&<br></p>', $this->object->render(true));
     }
 
+    /**
+     * @test
+     */
+    public function render_rawFlagTrueHTMLDecorator_notConvertedToEntities() {
+        $this->object = HTML_Decorator::tag('p')
+                ->add_inner_tag('i', "& don't encode me either, Broseph!");
+        $this->assertEquals("<p><i>& don't encode me either, Broseph!</i></p>",
+                $this->object->render(true));
+    }
 }
 
 ?>

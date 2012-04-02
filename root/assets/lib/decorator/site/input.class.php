@@ -468,7 +468,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      *
      * @return string
      */
-    public function render() {
+    public function render($raw = false) {
         /* HTML5 color input is not permitted to be set to "required" */
         if (($this->_type === 'color') && isset($this->_attributes['required'])) {
             unset($this->_attributes['required']);
@@ -534,7 +534,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
         if ($this->_type) {
             $tag_decorator->set_param('type', $this->_type);
         }
-        return $tag_decorator->render();
+        return $tag_decorator->render($raw);
     }
 
 }

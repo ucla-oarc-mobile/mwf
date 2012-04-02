@@ -32,9 +32,9 @@ class HTML_Start_HTML_Decorator extends Tag_Open_HTML_Decorator {
         return parent::set_param('manifest',Config::get('global','site_assets_url').'/appcache.php');
     }
 
-    public function render() {
+    public function render($raw = false) {
         return '<!DOCTYPE html>
-' . parent::render();
+' . parent::render($raw);
     }
 
 }
