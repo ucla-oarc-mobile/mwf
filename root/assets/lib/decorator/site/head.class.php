@@ -35,7 +35,7 @@ class Head_Site_Decorator extends Tag_HTML_Decorator
         $this->set_css_handler_params(array('lean'));
     }
 
-    public function &set_title($title)
+    public function set_title($title)
     {
         if($title)
             $this->_title = $title;
@@ -43,7 +43,7 @@ class Head_Site_Decorator extends Tag_HTML_Decorator
         return $this;
     }
 
-    public function &set_css_handler($path)
+    public function set_css_handler($path)
     {
         $this->_handler_css = $path;
         if(strpos($path, '?') === false)
@@ -51,13 +51,13 @@ class Head_Site_Decorator extends Tag_HTML_Decorator
         return $this;
     }
 
-    public function &set_css_handler_params($params = array())
+    public function set_css_handler_params($params = array())
     {
         $this->_handler_css_params = array_merge($this->_handler_css_params, $params);
         return $this;
     }
 
-    public function &add_css_handler_library($type, $library)
+    public function add_css_handler_library($type, $library)
     {
         if(is_array($library))
             foreach($library as $l)
@@ -70,7 +70,7 @@ class Head_Site_Decorator extends Tag_HTML_Decorator
         return $this;
     }
 
-    public function &set_js_handler($path)
+    public function set_js_handler($path)
     {
         $this->_handler_js = $path;
         if(strpos($path, '?') === false)
@@ -78,13 +78,13 @@ class Head_Site_Decorator extends Tag_HTML_Decorator
         return $this;
     }
 
-    public function &set_js_handler_params($params = array())
+    public function set_js_handler_params($params = array())
     {
         $this->_handler_js_params = array_merge($this->_handler_js_params, $params);
         return $this;
     }
 
-    public function &add_js_handler_library($type, $library)
+    public function add_js_handler_library($type, $library)
     {
         if(is_array($library))
             foreach($library as $l)
@@ -97,12 +97,12 @@ class Head_Site_Decorator extends Tag_HTML_Decorator
         return $this;
     }
 
-    public function &add_stylesheet($href, $media = 'screen')
+    public function add_stylesheet($href, $media = 'screen')
     {
         return $this->add_inner_tag('link', false, array('rel'=>'stylesheet', 'type'=>'text/css', 'href'=>$href, 'media'=>$media));
     }
 
-    public function &add_javascript($src)
+    public function add_javascript($src)
     {
         return $this->add_inner_tag('script', '', array('type'=>'text/javascript', 'src'=>$src));
     }

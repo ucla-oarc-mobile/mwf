@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . 
+require_once dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) .
         '/root/assets/lib/decorator/site/head.class.php';
 
 /**
@@ -45,15 +45,24 @@ class Head_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
         $this->object->add_js_handler_library('standard', '/my/awesome/library.js');
         $this->assertContains('&amp;', $this->object->render());
     }
-    
+
     /**
      * @test
      */
     public function render_multipleJSLibs_noDoubleEncoding() {
-               $this->object->add_js_handler_library('standard_libs', 'geolocation');
+        $this->object->add_js_handler_library('standard_libs', 'geolocation');
         $this->object->add_js_handler_library('standard', '/my/awesome/library.js');
         $this->assertNotContains('&amp;amp;', $this->object->render());
     }
+
+    /**
+     * @test
+     */
+    public function addStylesheet_href_stylesheetLinkRendered() {
+        $this->object->add_stylesheet('http://example.com/foo.css');
+        $this->assertContains('<link rel="stylesheet" type="text/css" href="http://example.com/foo.css" media="screen">', $this->object->render());
+    }
+
 }
 
 ?>
