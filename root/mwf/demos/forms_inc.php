@@ -1,4 +1,6 @@
 <?php
+require_once(dirname(dirname(__DIR__)) . '/assets/lib/decorator.class.php');
+
 $submit = Site_Decorator::input()
         ->type_submit()
         ->set_value('Test Me');
