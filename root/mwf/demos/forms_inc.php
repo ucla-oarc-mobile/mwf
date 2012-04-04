@@ -106,25 +106,37 @@ echo Site_Decorator::form()
 <?php
 $text_input = Site_Decorator::input('text-10', 'Name')
         ->mandatory();
-$checkbox_input = Site_Decorator::input('checkbox-10', 'Checkbox')
-        ->type_checkbox()
-        ->mandatory();
 $select_input = Site_Decorator::input('select-group-10', 'Select')
+        ->add_option(false, 'Select one...')
         ->add_option(1, 'The Beatles')
         ->add_option(2, 'The Rolling Stones')
         ->add_option(3, 'The Who')
         ->add_option(4, 'The Kinks')
         ->mandatory();
+$select_multiple_input = Site_Decorator::input('select-group-15', 'Select One Or More')
+        ->type_select()
+        ->multiple()
+        ->add_option(1, 'Belle & Sebastian')
+        ->add_option(2, 'Tilly & the Wall')
+        ->add_option(3, 'Angus & Julia Stone')
+        ->add_option(4, 'Planets & Animals')
+        ->mandatory();
 $textarea_input = Site_Decorator::input('textarea-10', 'Textarea')
         ->type_textarea()
         ->mandatory();
+$checkbox_input = Site_Decorator::input('checkbox-10', 'Checkbox')
+        ->type_checkbox()
+        ->mandatory();
+
 echo Site_Decorator::form()
         ->set_padded()
         ->set_title('Required Form')
         ->add_input($text_input)
-        ->add_input($checkbox_input)
         ->add_input($select_input)
+        ->add_input($select_multiple_input)
         ->add_input($textarea_input)
+        ->add_input($checkbox_input)
+        ->add_input($submit)
         ->render();
 ?>
 
@@ -132,21 +144,17 @@ echo Site_Decorator::form()
 
 <?php
 $text_input = Site_Decorator::input('text-20', 'Name')
-        ->mandatory()
         ->invalid('Text input error message goes here');
 $checkbox_input = Site_Decorator::input('checkbox-20', 'Checkbox')
         ->type_checkbox()
-        ->mandatory()
         ->invalid('Checkbox error message goes here');
 $select_input = Site_Decorator::input('select-group-20', 'Select')
         ->add_option(1, 'One')
         ->add_option(2, 'Two')
         ->add_option(3, 'Three')
-        ->mandatory()
-        ->invalid('Error message goes here');
+        ->invalid('Select error message goes here');
 $textarea_input = Site_Decorator::input('textarea-20', 'Textarea')
         ->type_textarea()
-        ->mandatory()
         ->invalid('Textarea error message goes here');
 echo Site_Decorator::form()
         ->set_padded()
@@ -203,35 +211,6 @@ echo Site_Decorator::form()
         ->add_subtitle('Subtitle')
         ->add_paragraph('Lorem ipsum doodah doodah.')
         ->add_input(Site_Decorator::input()->type_submit()->set_param('value', 'Submit'))
-        ->render();
-?>
-
-<!-- required form elements -->
-
-<?php
-$text_input_mandatory = Site_Decorator::input('input-1', 'Text')
-        ->mandatory();
-$checkbox_input_mandatory = Site_Decorator::input('checkbox-5', 'Checkbox')
-        ->type_checkbox()
-        ->mandatory();
-$select_input_mandatory = Site_Decorator::input('select-1', 'Select')
-        ->add_option(false, 'Select...')
-        ->add_option(1, 'One')
-        ->add_option(2, 'Two')
-        ->add_option(3, 'Three')
-        ->mandatory();
-$textarea_input_mandatory = Site_Decorator::input('textarea-2', 'Textarea')
-        ->type_textarea()
-        ->mandatory();
-echo Site_Decorator::form()
-        ->set_padded()
-        ->set_title('Required Elements')
-        ->add_paragraph('This form demonstrates client-side required validation.')
-        ->add_input($text_input_mandatory)
-        ->add_input($checkbox_input_mandatory)
-        ->add_input($select_input_mandatory)
-        ->add_input($textarea_input_mandatory)
-        ->add_input($submit)
         ->render();
 ?>
 
