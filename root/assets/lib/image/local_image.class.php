@@ -41,7 +41,6 @@ class Local_Image extends Image {
         if (!$this->_image_gd) {
             $this->_image_ext = false;
         } else {
-
             $pathinfo = pathinfo($path);
             $ext = array_key_exists('extension',$pathinfo) ? $pathinfo['extension'] : '';
 
