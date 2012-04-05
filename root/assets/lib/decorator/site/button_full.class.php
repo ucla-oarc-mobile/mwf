@@ -91,11 +91,7 @@ class Button_Full_Site_Decorator extends Tag_HTML_Decorator
         $this->_options[0]->add_class('button-first');
         $this->_options[$this->_options_count-1]->add_class('button-last');
 
-        $options = '';
-        foreach($this->_options as $option)
-            $options .= is_a($option, 'Decorator') ? $option->render() : $option;
-
-        $this->add_inner_front($options);
+        $this->add_inner_front($this->_options);
         return parent::render();
     }
 }
