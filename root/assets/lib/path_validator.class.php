@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Static class that validates paths for if they're local or remove and if they
+ * Static class that validates paths for if they're local or remote and if they
  * are "safe" if local (so that one cannot provide a path to an image outside of
  * the mobile root to access data in the rest of the file system).
  *
@@ -36,7 +36,7 @@ class Path_Validator
         if(self::is_remote($path))
             return true;
 
-        $docroot = dirname(dirname(dirname(__FILE__)));
+        $docroot = dirname(dirname(__DIR__));
        
         $full_path = $docroot . '/' . $path;
         

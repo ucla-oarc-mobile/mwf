@@ -20,7 +20,7 @@ class ConfigTest extends PHPUnit_Framework_TestCase {
     
     protected function setUp() {
         $_SERVER['HTTP_HOST'] = 'www.example.com:8080';
-        require dirname(__FILE__) . '/../../../../../root/assets/lib/config.class.php';
+        require_once dirname(dirname(dirname(dirname(dirname(__DIR__))))) . '/root/assets/lib/config.class.php';
     }
 
     
@@ -28,23 +28,31 @@ class ConfigTest extends PHPUnit_Framework_TestCase {
      * @test
      * @runInSeparateProcess
      */
-    public function get_siteUrl_notNull() {
-        $this->assertEquals('http://www.example.com:8080',Config::get('global','site_url'));
+    public function get_siteUrl_notFalse() {
+        $this->assertTrue(!!Config::get('global','site_url'));
     }
     
     /**
      * @test
      * @runInSeparateProcess
      */
-    public function get_siteAssetsUrl_notNull() {
-        $this->assertEquals('http://www.example.com:8080/assets',Config::get('global','site_assets_url'));
+    public function get_siteAssetsUrl_notFalse() {
+        $this->assertTrue(!!Config::get('global','site_assets_url'));
     }
     
     /**
      * @test
      * @runInSeparateProcess
      */
-    public function get_gobbledygook_null() {
+    public function get_varDir_notFalse() {
+        $this->assertTrue(!!Config::get('global','var_dir'));
+    }
+    
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function get_gobbledygook_false() {
         $this->assertEquals(false, Config::get('global','gobbledygook'));
     }
     

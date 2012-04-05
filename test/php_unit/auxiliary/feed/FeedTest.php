@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 /**
  * Test class for Feed
@@ -12,19 +12,26 @@
  * @uses Feed
  */
 
+/**
+ * @backupGlobals disabled
+ * @backupStaticAttributes disabled
+ */
 class FeedTest extends PHPUnit_Framework_TestCase {
 
     public function run(PHPUnit_Framework_TestResult $result = NULL) {
         $this->setPreserveGlobalState(false);
         return parent::run($result);
     }
-
+    
+    public function setUp() {
+        require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/auxiliary/feed/feed.class.php';
+    }
+    
     /**
      * @test
      * @runInSeparateProcess
      */
     public function getName_name_name() {
-        require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/auxiliary/feed/feed.class.php';
         $feed = new Feed('Harold', 'http://example.com/harold.rss');
         $this->assertEquals('Harold', $feed->get_name());
     }
@@ -34,9 +41,29 @@ class FeedTest extends PHPUnit_Framework_TestCase {
      * @runInSeparateProcess
      */
     public function getPath_url_url() {
-        require_once dirname(dirname(dirname(dirname(__DIR__)))) . '/auxiliary/feed/feed.class.php';
         $feed = new Feed('Harold', 'http://example.com/harold.rss');
         $this->assertEquals('http://example.com/harold.rss', $feed->get_path());
     }
 
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function getItems_missingRSS_false() {
+        $feed = new Feed('Harold', 'missing.rss');
+        $this->assertEquals($feed->get_items(), false);
+    }
+
+    /**
+     * @test
+     * @runInSeparateProcess
+     */
+    public function getItems_testRSS_arrayOfFeedItems() {
+        $feed = new Feed('Test RSS', __DIR__ . '/test.rss');
+        $items = $feed->get_items();
+        $this->assertEquals('Feed_Item', get_class($items[0]));
+        $this->assertEquals('Feed_Item', get_class($items[1]));
+        $this->assertEquals('Feed_Item', get_class($items[2]));
+        $this->assertEquals(count($items), 3);
+    }
 }
