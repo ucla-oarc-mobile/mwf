@@ -644,7 +644,8 @@ form .option {
 /* required label */
 span.required:after {
     content: "*";
-    color: red;
+    color: #536895;
+    padding-left:.2em;
 }
 
 /* invalid */
