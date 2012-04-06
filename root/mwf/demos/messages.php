@@ -45,28 +45,38 @@ echo Site_Decorator::content()
         ->add_header('Messages Demo')
         ->add_paragraph('The following is a demo of MWF Messages.')
         ->render();
-?>
 
-<!-- Messages -->
-<div class="content padded">
-    <h1 class="content-first">Content Messages</h1>
-    <p>Inline message <span class="message alert">alert</span>, <span class="message confirm">confirm</span>, <span class="message error">error</span>, <span class="message info">info</span>.</p>
-    <div>
-        <div class="message alert">This is an alert message inside a content</div>
-        <div class="message confirm">This is a confirm message inside a content</div>
-        <div class="message error">This is an error message inside a content</div>
-        <div class="message info">This is an info message inside a content</div>
-    </div>
-</div>
+//@todo Create a clean easy-to-use Decorator for Alerts API.
+echo Site_Decorator::content()
+        ->set_padded()
+        ->add_header('Content Messages')
+        ->add_paragraph(
+                array(
+                    'Inline message ',
+                    HTML_Decorator::tag('span', 'alert', array('class' => 'message alert')),
+                    ', ',
+                    HTML_Decorator::tag('span', 'confirm', array('class' => 'message confirm')),
+                    ', ',
+                    HTML_Decorator::tag('span', 'error', array('class' => 'message error')),
+                    ', ',
+                    HTML_Decorator::tag('span', 'info', array('class' => 'message info')),
+                    '.'))
+        ->add_section(
+                array(
+                    HTML_Decorator::tag('div', 'This is an alert message inside a content', array('class' => 'message alert')),
+                    HTML_Decorator::tag('div', 'This is an confirm message inside a content', array('class' => 'message confirm')),
+                    HTML_Decorator::tag('div', 'This is an error message inside a content', array('class' => 'message error')),
+                    HTML_Decorator::tag('div', 'This is an info message inside a content', array('class' => 'message info')) ))
+        ->render();
 
-<div class="message alert padded">This is a padded alert message</div>
-<div class="message confirm padded">This is a padded confirm message</div>
-<div class="message error">This is a not padded error message</div>
-<div class="message info">This is a not padded info message</div>
+echo HTML_Decorator::tag('div', 'This is a padded alert message', array('class'=>'message alert padded'))->render();
+echo HTML_Decorator::tag('div', 'This is a padded confirm message', array('class'=>'message confirm padded'))->render();
+echo HTML_Decorator::tag('div', 'This is not a padded error message', array('class'=>'message error'))->render();
+echo HTML_Decorator::tag('div', 'This is not a padded info message', array('class'=>'message info'))->render();
 
-<div id="alert-msg" class="message alert padded">This is an alert message from existing markup</div>
+echo HTML_Decorator::tag('div', 'This is an alert message from existing markup', array('id'=>'alert-msg','class'=>'message alert padded'))->render();
 
-<?php
+
 echo Site_Decorator::button()
         ->set_padded()
         ->add_option('Back To Demos', Config::get('global', 'site_url') . '/mwf/demos.php')

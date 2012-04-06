@@ -28,18 +28,18 @@ class Content_Site_Decorator extends Tag_HTML_Decorator
         $this->add_class('content');
     }
 
-    public function &set_padded($val = true)
+    public function set_padded($val = true)
     {
         $this->_padded = $val ? true : false;
         return $this;
     }
 
-    public function &add_header($inner, $params = array())
+    public function add_header($inner, $params = array())
     {
         return $this->add_inner_tag('h1', $inner, $params);
     }
 
-    public function &add_header_light($inner, $params = array())
+    public function add_header_light($inner, $params = array())
     {
         if(!isset($params['class']))
             $params['class'] = 'light';
@@ -49,26 +49,26 @@ class Content_Site_Decorator extends Tag_HTML_Decorator
         return $this->add_header($inner, $params);
     }
 
-    public function &add_subheader($inner, $params = array())
+    public function add_subheader($inner, $params = array())
     {
         return $this->add_inner_tag('h4', $inner, $params);
     }
 
-    public function &add_paragraph($inner, $params = array())
+    public function add_paragraph($inner, $params = array())
     {
         return $this->add_inner_tag('p', $inner, $params);
     }
 
-    public function &add_section($inner, $params = array())
+    public function add_section($inner, $params = array())
     {
         return $this->add_inner_tag('div', $inner, $params);
     }
 
-    public function render()
+    public function render($raw = false)
     {
         if($this->_padded)
             $this->add_class('padded');
 
-        return parent::render();
+        return parent::render($raw);
     }
 }

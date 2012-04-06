@@ -396,10 +396,10 @@ a.button, div.button a{
     text-align: center;
 }
 
-a.button:hover,
+.mwf_notmobile a.button:hover,
 a.button:focus,
 a.button:active,
-div.button a:hover,
+.mwf_notmobile div.button a:hover,
 div.button a:focus,
 div.button a:active{
     background-color: #ffb300;
@@ -452,7 +452,7 @@ form > fieldset {
 form > a.button,
 form > button,
 form > input,
-form > label,
+form > label:not(.option),
 form > select,
 form > textarea {
     margin-left: 10px;
@@ -461,10 +461,11 @@ form > textarea {
 /*
  * Forms Basic Elements
  */
-form label {
-    display: inline-block;
+form > label {
     margin-top: 1em;
 }
+
+
 
 form input,
 form select,
@@ -514,21 +515,21 @@ form button {
     padding: .5em 1em;
 }
 
-form input[type="submit"]:disabled,
-form input[type="reset"]:disabled,
-form button:disabled,
+form input[type="submit"][disabled="disabled"],
+form input[type="reset"][disabled="disabled"],
+form button[disabled="disabled"],
 form a.button.disabled {
     color: #888;
     cursor: default;
 }
 
-form input[type="submit"]:hover:disabled,
-form input[type="reset"]:hover:disabled,
-form button:hover:disabled,
+form input[type="submit"][disabled="disabled"]:hover,
+form input[type="reset"][disabled="disabled"]:hover,
+form button[disabled="disabled"]:hover,
 form a.button:hover.disabled,
-form input[type="submit"]:focus:disabled,
-form input[type="reset"]:focus:disabled,
-form button:focus:disabled,
+form input[type="submit"][disabled="disabled"]:focus,
+form input[type="reset"][disabled="disabled"]:focus,
+form button[disabled="disabled"]:focus,
 form a.button:focus.disabled {
     background-color: #e4e7ee;
 }
@@ -548,13 +549,13 @@ form input[type="submit"].primary,
 form input[type="reset"].primary,
 form button.primary,
 form a.button.primary,
-form input[type="submit"].primary:hover:disabled,
-form input[type="reset"].primary:hover:disabled,
-form button.primary:hover:disabled,
+form input[type="submit"][disabled="disabled"].primary:hover,
+form input[type="reset"][disabled="disabled"].primary:hover,
+form button.primary[disabled="disabled"]:hover,
 form a.button.primary:hover.disabled,
-form input[type="submit"].primary:focus:disabled,
-form input[type="reset"].primary:focus:disabled,
-form button.primary:focus:disabled,
+form input[type="submit"][disabled="disabled"].primary:focus,
+form input[type="reset"][disabled="disabled"].primary:focus,
+form button[disabled="disabled"].primary:focus,
 form a.button.primary:focus.disabled {
     background-color: #fbaf3f;
 }
@@ -574,13 +575,13 @@ form input[type="submit"].secondary,
 form input[type="reset"].secondary,
 form button.secondary,
 form a.button.secondary,
-form input[type="submit"].secondary:hover:disabled,
-form input[type="reset"].secondary:hover:disabled,
-form button.secondary:hover:disabled,
+form input[type="submit"][disabled="disabled"].secondary:hover,
+form input[type="reset"][disabled="disabled"].secondary:hover,
+form button[disabled="disabled"].secondary:hover,
 form a.button.secondary:hover.disabled,
-form input[type="submit"].secondary:focus:disabled,
-form input[type="reset"].secondary:focus:disabled,
-form button.secondary:focus:disabled,
+form input[type="submit"][disabled="disabled"].secondary:focus,
+form input[type="reset"][disabled="disabled"].secondary:focus,
+form button[disabled="disabled"].secondary:focus,
 form a.button.secondary:focus.disabled {
     background-color: #9caccf;
 }
@@ -603,28 +604,27 @@ form p,
 form a.button,
 form fieldset,
 form input,
+form label,
 form select,
 form textarea {
     display: block;
     width: 100%;
 }
 
+.option input {
+    display:inline;
+        width:auto;
+}
+
 /* short width form */
-form.short input {
+form.short input,
+form.short > label {
     display: inline;
     width: auto;
 }
 
 form .last {
     border-bottom: none;
-}
-
-form input[type="checkbox"],
-form input[type="radio"],
-form .option > label, 
-form label.option {
-    display: inline;
-    width: auto;
 }
 
 form > div,
@@ -641,20 +641,11 @@ form .option {
     border-bottom: none;
 }
 
-form .option.right {
-    text-align: right;
-}
-
-form .option.justify input[type="checkbox"],
-form .option.justify input[type="radio"]{
-    float: right;
-    margin-bottom: 0;
-}
-
 /* required label */
-form label.required {
-    background: transparent url('img/asterisk.png') no-repeat top right;
-    padding-right: 10px;
+span.required:after {
+    content: "*";
+    color: #536895;
+    padding-left:.2em;
 }
 
 /* invalid */
@@ -662,12 +653,14 @@ form .invalid {
     color: #a00;
 }
 
-form p.invalid {
-    background: transparent url('img/invalid.png') no-repeat 12px 4px;
-    border-bottom: none;
-    padding: 0 0 0 30px;
-    margin-bottom: 0;
-    width: auto;
+form span.invalid {
+    display: block;
+}
+
+form span.invalid:before {
+    content: '\26a0';
+    font-size: 1.5em;
+    vertical-align: middle;
 }
 
 form input.invalid,
@@ -698,25 +691,19 @@ form .time-field select {
     width: auto;
 }
 
-/* placeholder */
-form .placeholder {
-    display: none;
+/* Without styling, range does not display by default on Android 4.0 and below. */
+input[type='range']{
+    background: grey;
+    height:10px;
 }
 
-/* tooltip */
-form .tip {
-    display: block;
-    float: right;
-    overflow: hidden;
-    text-indent: -999em;
+input[type='range']::-webkit-slider-thumb{
+    background:black;
+    height:15px;
+    width:15px;
+    border-radius:15px;
 }
 
-form .tiptext {
-    display: block;
-    margin: 0 10px;
-    color: #999;
-    font-style: italic;
-}
 
 /* ------------------------------------------------------
  * multi level form

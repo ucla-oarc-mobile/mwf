@@ -16,7 +16,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110827
+ * @version 20120310
  * 
  * @uses HTTPS
  */
@@ -37,7 +37,7 @@ class JS
      * 
      * @var array
      */
-    private static $_external;
+    private static $_external = array();
     
     /**
      * Stores a set of loaded external scripts to prevent multiple imports.
@@ -52,12 +52,12 @@ class JS
      * 
      * @var array
      */
-    private static $_dependencies;
+    private static $_dependencies = array();
     
     /**
      * Extensions that import_key() will try to use for script inclusion.
      * 
-     * @var type 
+     * @var array
      */
     private static $_exts = array('.php', '.js');
     
@@ -65,7 +65,7 @@ class JS
      * Static, one-time firing initializer that defines the mappings for
      * external libraries and for dependencies.
      * 
-     * @return type 
+     * @return void
      */
     public static function init()
     {
@@ -75,18 +75,19 @@ class JS
         /**
          * External libraries by key
          */
-        self::$_external['jquery'] = 'https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js';
-        self::$_external['jquery_ui'] = 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js';
+        self::$_external['jquery'] = 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';
+        self::$_external['jquery_ui'] = 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js';
     
         /**
          * Dependencies by key
          */
         self::$_dependencies['jquery_ui'] = array('jquery');
+        self::$_dependencies['jquery_ui_touch_punch'] = array('jquery_ui');
         self::$_dependencies['transitions'] = array('jquery');
         self::$_dependencies['touch_transitions'] = array('transitions', 'jquery.swipe');
         self::$_dependencies['messages'] = array('jquery');
-        self::$_dependencies['forms'] = array('jquery', 'jquery.validation');
-        self::$_dependencies['tooltip'] = array('jquery', 'jquery.tooltip');
+        self::$_dependencies['formsPolyfills'] = array('jquery');
+        self::$_dependencies['configurableMenu'] = array('preferences');
     }
     
     /**
@@ -132,6 +133,8 @@ class JS
      * 
      * @param string $key
      * @return bool 
+     * 
+     * @todo Is this unused? Should it be deprecated, made private, removed?
      */
     public static function load_key($key)
     {
@@ -169,7 +172,7 @@ class JS
      * @param string $key
      * @return bool 
      */
-    public static function import_key($key)
+    private static function import_key($key)
     {
         /**
          * If full device, check each $_exts as assets/js/full/{$key}{$ext}.
@@ -180,7 +183,7 @@ class JS
             foreach(self::$_exts as $ext)
                 if(self::import_file('full/'.$key.$ext))
                     return true;
-                
+ 
         /**
          * If standard device, or if full device and not already returned, check
          * each $_exts as assets/js/full/{$key}{$ext}. If found, then use
@@ -202,7 +205,7 @@ class JS
      * @param string $filename
      * @return bool 
      */
-    public static function import_file($filename)
+    private static function import_file($filename)
     {
         /**
          * $filename is under assets/js
@@ -226,7 +229,7 @@ class JS
      * @param bool $allow_multiple
      * @return bool 
      */
-    public static function import_external($url, $allow_multiple = false)
+    private static function import_external($url, $allow_multiple = false)
     {
         /**
          * Return false if $url has already been loaded and $allow_multiple

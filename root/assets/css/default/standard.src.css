@@ -146,16 +146,16 @@ a.button,
 	border: none;
 }
 
-a.button:hover,
+.mwf_notmobile a.button:hover,
 a.button:focus,
 a.button:active,
-.button a:hover,
+.mwf_notmobile .button a:hover,
 .button a:focus,
 .button a:active,
-a.button.light:hover,
+.mwf_notmobile a.button.light:hover,
 a.button.light:focus,
 a.button.light:active,
-.button a.light:hover,
+.mwf_notmobile .button a.light:hover,
 .button a.light:focus,
 .button a.light:active {
 	background-color: #ffb300 !important;
@@ -235,29 +235,6 @@ form.padded {
 
 .content form {
     margin: 0;
-}
-
-/* tooltip */
-form .tip {
-    background: transparent url(img/forms-tip.png) center right no-repeat;
-    margin-top: 1em;
-    padding-right: 1.5em;
-}
-
-form .tooltip {
-    display: none;	
-    background: transparent url(img/forms-tip-bg.png) 0 0 no-repeat;
-    padding: 10px 15px;
-    height: 120px;
-    width:180px;
-    color: #fff;
-    font-style: normal;
-    text-align: left;
-}
-
-form .tooltip.bottom {
-    background-image: url(img/forms-tip-bg-down.png);
-    padding: 30px 15px;
 }
 
 /**
