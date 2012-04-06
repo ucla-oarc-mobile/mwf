@@ -30,16 +30,16 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function isMandatory_mandatory_true() {
-        $this->object->mandatory();
-        $this->assertSame(true, $this->object->is_mandatory());
+    public function isRequired_required_true() {
+        $this->object->required();
+        $this->assertSame(true, $this->object->is_required());
     }
 
     /**
      * @test
      */
-    public function isMandatory_notMandatory_false() {
-        $this->assertSame(false, $this->object->is_mandatory());
+    public function isRequired_notRequired_false() {
+        $this->assertSame(false, $this->object->is_required());
     }
 
     /**
@@ -60,8 +60,8 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function mandatory_void_requireRendered() {
-        $this->object->mandatory();
+    public function required_void_requireRendered() {
+        $this->object->required();
         $this->assertContains('required="required"', $this->object->render());
     }
 
@@ -129,25 +129,25 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function typeColor_mandatory_mandatoryIgnored() {
-        $this->object->type_color()->mandatory();
+    public function typeColor_required_requiredIgnored() {
+        $this->object->type_color()->required();
         $this->assertNotContains('required', $this->object->render());
     }
 
     /**
      * @test
      */
-    public function isMandatory_colorMandatory_notMandatory() {
-        $this->object->type_color()->mandatory();
-        $this->assertFalse($this->object->is_mandatory());
+    public function isRequired_colorrequired_notrequired() {
+        $this->object->type_color()->required();
+        $this->assertFalse($this->object->is_required());
     }
 
     /**
      * @test
      */
-    public function isMandatory_mandatoryColor_notMandatory() {
-        $this->object->mandatory()->type_color();
-        $this->assertFalse($this->object->is_mandatory());
+    public function isRequired_requiredColor_notrequired() {
+        $this->object->required()->type_color();
+        $this->assertFalse($this->object->is_required());
     }
 
     /**
@@ -468,24 +468,24 @@ class Input_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
      * size is 1, must have either an empty value attribute, or must have no 
      * text content.
      */
-    public function typeSelect_mandatoryNotMultipleSizeNotSetNoOptions_emptyOptionAdded() {
+    public function typeSelect_requiredNotMultipleSizeNotSetNoOptions_emptyOptionAdded() {
         $this->object->type_select()
-                ->mandatory();
+                ->required();
         $this->assertContains('<option value></option>', $this->object->render());
     }
 
     /**
      * @test
      * 
-     * See comment for typeSelect_mandatoryNotMultipleSizeNotSetNoOptions_emptyOptionAdded()
+     * See comment for typeSelect_requiredNotMultipleSizeNotSetNoOptions_emptyOptionAdded()
      */
-    public function typeSelect_mandatoryNotMultipleSizeNotSetOptions_emptyOptionAddedAsFirstOption() {
+    public function typeSelect_requiredNotMultipleSizeNotSetOptions_emptyOptionAddedAsFirstOption() {
         $this->object->type_select()
                 ->add_option(1, 'The Beatles')
                 ->add_option(2, 'The Rolling Stones')
                 ->add_option(3, 'The Who')
                 ->add_option(4, 'The Kinks')
-                ->mandatory();
+                ->required();
         $this->assertRegexp('/<select [^>]+><option value><\/option>/', $this->object->render());
     }
 

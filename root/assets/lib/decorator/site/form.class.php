@@ -111,7 +111,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
         if ($label) {
             $span_decorator = HTML_Decorator::tag('span', $label);
 
-            if ($input_decorator->is_mandatory()) {
+            if ($input_decorator->is_required()) {
                 $span_decorator->add_class('required');
             }
 

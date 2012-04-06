@@ -105,14 +105,14 @@ echo Site_Decorator::form()
 
 <?php
 $text_input = Site_Decorator::input('text-10', 'Name')
-        ->mandatory();
+        ->required();
 $select_input = Site_Decorator::input('select-group-10', 'Select')
         ->add_option(false, 'Select one...')
         ->add_option(1, 'The Beatles')
         ->add_option(2, 'The Rolling Stones')
         ->add_option(3, 'The Who')
         ->add_option(4, 'The Kinks')
-        ->mandatory();
+        ->required();
 $select_multiple_input = Site_Decorator::input('select-group-15', 'Select One Or More')
         ->type_select()
         ->multiple()
@@ -120,13 +120,13 @@ $select_multiple_input = Site_Decorator::input('select-group-15', 'Select One Or
         ->add_option(2, 'Tilly & the Wall')
         ->add_option(3, 'Angus & Julia Stone')
         ->add_option(4, 'Planets & Animals')
-        ->mandatory();
+        ->required();
 $textarea_input = Site_Decorator::input('textarea-10', 'Textarea')
         ->type_textarea()
-        ->mandatory();
+        ->required();
 $checkbox_input = Site_Decorator::input('checkbox-10', 'Checkbox')
         ->type_checkbox()
-        ->mandatory();
+        ->required();
 
 echo Site_Decorator::form()
         ->set_padded()
@@ -218,67 +218,67 @@ echo Site_Decorator::form()
 
 <?php
 $text_input_placeholder = Site_Decorator::input('input-10', 'Placeholder')
-        ->mandatory()
+        ->required()
         ->set_placeholder('Please enter text here');
-$text_input_mandatory = Site_Decorator::input('input-11', 'Required')
-        ->mandatory();
-$checkbox_input_mandatory = Site_Decorator::input('checkbox-15', 'Checkbox')
+$text_input_required = Site_Decorator::input('input-11', 'Required')
+        ->required();
+$checkbox_input_required = Site_Decorator::input('checkbox-15', 'Checkbox')
         ->type_checkbox()
-        ->mandatory();
+        ->required();
 $color_input = Site_Decorator::input('color-10', 'Color')
         ->type_color()
-        ->mandatory();
+        ->required();
 $search_input = Site_Decorator::input('search-10', 'Search')
         ->type_search()
-        ->mandatory();
+        ->required();
 $telephone_input = Site_Decorator::input('tel-10', 'Telephone')
         ->type_telephone()
-        ->mandatory();
+        ->required();
 $url_input = Site_Decorator::input('url-10', 'URL')
         ->type_url()
-        ->mandatory();
+        ->required();
 $email_input = Site_Decorator::input('email-10', 'Email')
         ->type_email()
-        ->mandatory();
+        ->required();
 $now = new DateTime('now');
 $five_years_ago = new DateTime("5 years ago");
 $five_years_from_now = new DateTime("5 years");
 $date_input = Site_Decorator::input('date-10', 'Date')
         ->type_date()
-        ->mandatory()
+        ->required()
         ->set_param('min', $five_years_ago->format('Y-m-d'))
         ->set_param('max', $five_years_from_now->format('Y-m-d'))
         ->set_value($now->format('Y-m-d'));
 $month_input = Site_Decorator::input('month-10', 'Month')
         ->type_month()
-        ->mandatory()
+        ->required()
         ->set_param('min', $five_years_ago->format('Y-m'))
         ->set_param('max', $five_years_from_now->format('Y-m'))
         ->set_value($now->format('Y-m'));
 $week_input = Site_Decorator::input('week-10', 'Week')
         ->type_week()
-        ->mandatory()
+        ->required()
         ->set_param('min', $five_years_ago->format('Y-\WW'))
         ->set_param('max', $five_years_from_now->format('Y-\WW'))
         ->set_value($now->format('Y-\WW'));
 
 $datetime_local_input = Site_Decorator::input('datetime-10', 'Datetime Local')
         ->type_datetime_local()
-        ->mandatory()
+        ->required()
         ->set_param('min', $five_years_ago->format('Y-m-d\TH:i'))
         ->set_param('max', $five_years_from_now->format('Y-m-d\TH:i'))
         ->set_value($now->format('Y-m-d\TH:i'));
 
 $time_input = Site_Decorator::input('time-10', 'Time')
         ->type_time()
-        ->mandatory()
+        ->required()
         ->set_param('min', $five_years_ago->format('H:i'))
         ->set_param('max', $five_years_from_now->format('H:i'))
         ->set_value($now->format('H:i'));
 
 $number_input = Site_Decorator::input('number-10', 'Number')
         ->type_number()
-        ->mandatory()
+        ->required()
         ->set_param('min', 0)
         ->set_param('max', 10)
         ->set_param('step', 2)
@@ -296,8 +296,8 @@ echo Site_Decorator::form()
         ->set_title('HTML5 Input Form')
         ->add_paragraph('This form demonstrates HTML5 input types, placeholder and various client side validation.')
         ->add_input($text_input_placeholder)
-        ->add_input($text_input_mandatory)
-        ->add_input($checkbox_input_mandatory)
+        ->add_input($text_input_required)
+        ->add_input($checkbox_input_required)
         ->add_input($color_input)
         ->add_input($search_input)
         ->add_input($number_input)

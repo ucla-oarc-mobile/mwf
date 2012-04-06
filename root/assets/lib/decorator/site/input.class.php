@@ -116,7 +116,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      *
      * @return boolean
      */
-    public function is_mandatory() {
+    public function is_required() {
         return (($this->_required && $this->_type !== 'color'));
     }
 
@@ -179,7 +179,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
      *
      * @return Input_Site_Decorator 
      */
-    public function mandatory() {
+    public function required() {
         $this->_required = true;
         return $this->set_param('required', 'required');
     }

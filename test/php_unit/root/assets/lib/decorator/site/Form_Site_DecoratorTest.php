@@ -147,9 +147,9 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function addCheckboxGroup_optionMandatory_checkboxRequiredRendered() {
+    public function addCheckboxGroup_optionRequired_checkboxRequiredRendered() {
         $options = array(
-            Site_Decorator::input(false, 'Checking this box is totally mandatory!')->mandatory()
+            Site_Decorator::input(false, 'Checking this box is totally required!')->required()
         );
         $this->object->add_checkbox_group(false, false, $options);
         $result = $this->object->render();
@@ -159,9 +159,9 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function addRadioGroup_optionMandatory_radioRequiredRendered() {
+    public function addRadioGroup_optionRequired_radioRequiredRendered() {
         $options = array(
-            Site_Decorator::input(false, 'Selecting a radio button is totally mandatory!')->mandatory()
+            Site_Decorator::input(false, 'Selecting a radio button is totally required!')->required()
         );
         $this->object->add_radio_group('radio-group-id', false, $options);
         $result = $this->object->render();
@@ -240,8 +240,8 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
     /**
      * @test
      */
-    public function addInput_colorMandatory_mandatoryIgnored() {
-        $color = Site_Decorator::input('foo', 'bar')->type_color()->mandatory();
+    public function addInput_colorRequired_requiredIgnored() {
+        $color = Site_Decorator::input('foo', 'bar')->type_color()->required();
         $this->object->add_input($color);
         $this->assertNotContains('required', $this->object->render());
     }
