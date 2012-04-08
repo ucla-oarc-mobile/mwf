@@ -22,7 +22,6 @@
     if (self) {
         // Custom initialization
         
-        
         //Initial page has not been loaded.
         self.initPageLoaded = NO;
     }
@@ -42,7 +41,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
+    
     
     [self.view insertSubview:self.webView    atIndex:0];
     [self.view insertSubview:self.splashView atIndex:4];
@@ -151,9 +150,9 @@
     
     //Indicate that at least one page has loaded.
     self.initPageLoaded = YES;
-
+    
     self.splashView.hidden = YES;
-
+    
     
 }
 
@@ -168,7 +167,17 @@
 {
     if (navigationType == UIWebViewNavigationTypeLinkClicked) 
         webView.scalesPageToFit=YES;
-    return YES;
+    
+    NSString *scheme = [[request URL] scheme];
+    
+    if ([scheme isEqualToString:@"http"] ||
+        [scheme isEqualToString:@"https"]) {
+        
+        return YES;
+    }
+    
+    [[UIApplication sharedApplication] openURL:[request URL]];
+    return NO;
 }
 
 - (void)dealloc {
