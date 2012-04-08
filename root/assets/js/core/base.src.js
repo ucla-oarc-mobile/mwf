@@ -7,9 +7,9 @@
  * @subpackage js
  *
  * @author ebollens
- * @copyright Copyright (c) 2010-11 UC Regents
+ * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111003
+ * @version 20120203
  *
  * @requires mwf
  * @requires mwf.site

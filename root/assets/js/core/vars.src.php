@@ -8,183 +8,167 @@
  * @subpackage js
  *
  * @author ebollens
- * @copyright Copyright (c) 2010-11 UC Regents
+ * @author trott
+ * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111108
+ * @version 20120226
  *
- * @uses Config
- * @uses HTTPS
- * 
- * @uses document.URL
+ * @uses JS_Vars_Helper
  */
-require_once(dirname(dirname(dirname(__FILE__))) . '/config.php');
-require_once(dirname(dirname(dirname(__FILE__))) . '/lib/https.class.php');
-require_once(dirname(dirname(dirname(__FILE__))) . '/lib/cookie.class.php');
 
-$prefix = Config::get('global', 'cookie_prefix');
+require_once(dirname(dirname(dirname(__FILE__))) . '/lib/js_vars_helper.class.php'); 
 
-$cookies = array('classification' => Cookie::get('classification'),
-    'user_agent' => Cookie::get('user_agent'),
-    'screen' => Cookie::get('screen'),
-    'override' => Cookie::get('override')
-);
-
-$cookies_arr = array();
-foreach ($cookies as $key => $value)
-    if (isset($value))
-        $cookies_arr[] = $prefix . $key;
-$existing_cookies_var = '["' . implode('","', $cookies_arr) . '"]';
-
-if (isset($cookies['override']))
-    $override_cookie_var = '"' . addslashes($cookies['override']) . '"';
-else
-    $override_cookie_var = 'false';
-
-if (isset($cookies['classification']))
-    $classification_cookie_var = '"' . addslashes($cookies['classification']) . '"';
-else
-    $classification_cookie_var = 'false';
-
-$domain_var = Config::get('global', 'cookie_domain');
-if ($domain_var && substr($domain_var, 0, 1) == '.')
-    $domain_var = substr($domain_var, 1);
-
-$domain_var = Config::get('global', 'site_assets_url');
-if (($pos = strpos($domain_var, '//')) !== false)
-    $domain_var = substr($domain_var, $pos + 2);
-if (($pos = strpos($domain_var, '/')) !== false)
-    $domain_var = substr($domain_var, 0, $pos);
-if (($pos = strpos($domain_var, ':')) !== false)
-    $domain_var = substr($domain_var, 0, $pos);
-?>
-
-var mwf=new function(){};
+?>var mwf=new function(){};
 
 mwf.site=new function(){
 
-this.root = '<?php echo HTTPS::is_https() ? HTTPS::convert_path(Config::get('global', 'site_url')) : Config::get('global', 'site_url'); ?>';
+    this.root = <?php echo JS_Vars_Helper::get_site_url(); ?>;
 
-this.asset = new function(){
+    this.asset = new function(){
 
-this.root = '<?php echo HTTPS::is_https() ? HTTPS::convert_path(Config::get('global', 'site_assets_url')) : Config::get('global', 'site_assets_url'); ?>';
+        this.root = <?php echo JS_Vars_Helper::get_site_asset_url(); ?>;
 
-};
-
-this.cookie = new function(){
-
-this.prefix = '<?php echo Config::get('global', 'cookie_prefix'); ?>';
-this.domain = <?php echo '\'' . $domain_var . '\''; ?>;
-this.exists = function(e){
-var cookies = <?php echo $existing_cookies_var; ?>;
-for(var i=0; i<cookies.length; i++)
-    if(cookies[i] == e) return true;
-    return false;
-    };
-    this.override = <?php echo $override_cookie_var; ?>;
-    this.classification = <?php echo $classification_cookie_var; ?>;
-
-    };
-
-    this.analytics = new function(){
-
-    this.key = <?php echo (Config::get('analytics', 'account') ? ('\'' . Config::get('analytics', 'account') . '\'') : 'null') ?>;
-
-    };
-
-    this.mobile = new function(){
-
-    this.maxWidth = <?php echo (Config::get('mobile', 'max_width') ? Config::get('mobile', 'max_width') : 799) ?>;
-    this.maxHeight = <?php echo (Config::get('mobile', 'max_height') ? Config::get('mobile', 'max_height') : 599) ?>;
-
-    };
-
-    this.local = new function(){
-
-    this.domain = (function(){ 
-    var p = document.URL, i;
-
-    if((i = p.indexOf('://')) !== false)
-    p = p.substring(i+3);
-    else if((i = p.indexOf('//')) === 0)
-    p = p.substring(2);
-
-    if((i = p.indexOf('/')) > -1)
-    p = p.substring(0, i);
-
-    if((i = p.indexOf(':')) > -1)
-    p = p.substring(0, i);
-
-    if((i = p.indexOf('.')) == 0)
-    p = p.substring(1);
-
-    return p;
-
-    })();
-
-    var _isSameOrigin = null;
-
-    this.isSameOrigin = function(){
-
-    if(_isSameOrigin === null) {
-
-    if(!this.domain || !mwf.site.cookie.domain) {
-
-    _is_same_origin = true;
-
-    } else{
-
-    var serviceProvider = "."+mwf.site.cookie.domain.toLowerCase();
-    var contentProvider = "."+this.domain.toLowerCase();
-
-    _isSameOrigin = contentProvider.substring(contentProvider.length - serviceProvider.length, serviceProvider.length) == serviceProvider;
-
-    }
-    }
-
-    return _isSameOrigin;
     };
 
     this.cookie = new function(){
 
-    var cookies = document.cookie.split(';');
+        this.prefix = <?php echo JS_Vars_Helper::get_cookie_prefix(); ?>;
 
-    this.exists = function(e){
+        this.domain = <?php echo  JS_Vars_Helper::get_cookie_domain(); ?>;
 
-    return this.value(e) !== false;
+        this.exists = function(e){
+
+            var cookies = <?php echo JS_Vars_Helper::get_existing_cookie_names(); ?>;
+
+            for(var i=0; i<cookies.length; i++)
+                if(cookies[i] == e) return true;
+
+            return false;
+        };
+
+        this.override = <?php echo JS_Vars_Helper::get_cookie('override'); ?>;
+
+        this.classification = <?php echo JS_Vars_Helper::get_cookie('classification'); ?>;
 
     };
 
-    this.value = function(e){
-
-    for(var i = 0; i < cookies.length; i++)
-    if(cookies[i].substr(0,cookies[i].indexOf("=")).replace(/^\s+|\s+$/g,"") == e)
-    return cookies[i].substr(cookies[i].indexOf("=")+1).replace(/^\s+|\s+$/g,"");
-
-    return false;
-
+    this.localStorage = new function(){
+        this.prefix = <?php echo JS_Vars_Helper::get_localstorage_prefix(); ?>;
     };
 
+    this.analytics = new function(){
+    this.key = <?php echo JS_Vars_Helper::get_analytics_key(); ?>;
+        this.pathKeys =  <?php echo JS_Vars_Helper::get_path_keys(); ?>;
     };
 
+    this.mobile = new function(){
+        this.maxWidth = <?php echo JS_Vars_Helper::get_mobile_max_width(); ?>;
+        this.maxHeight = <?php echo JS_Vars_Helper::get_mobile_max_height(); ?>;
+    };
+
+    this.local = new function(){
+    
+        this.root = <?php echo JS_Vars_Helper::get_local_site_url(); ?>;
+    
+        this.asset = new function(){ 
+        
+            this.root = <?php echo JS_Vars_Helper::get_local_site_asset_url(); ?>;
+            
+        };
+
+        this.domain = (function(){
+
+            var p = document.URL, i;
+
+            if((i = p.indexOf('://')) !== false)
+                p = p.substring(i+3);
+            else if((i = p.indexOf('//')) === 0)
+                p = p.substring(2);
+
+            if((i = p.indexOf('/')) > -1)
+                p = p.substring(0, i);
+
+            if((i = p.indexOf(':')) > -1)
+                p = p.substring(0, i);
+
+            if((i = p.indexOf('.')) == 0)
+                p = p.substring(1);
+
+            return p;
+
+        })();
+
+        var _isSameOrigin = null;
+
+        this.isSameOrigin = function(){
+
+            if(_isSameOrigin === null) {
+
+                if(!this.domain || !mwf.site.cookie.domain) {
+
+                    _isSameOrigin = true;
+
+                } else{
+
+                    var serviceProvider = "."+mwf.site.cookie.domain.toLowerCase();
+                    var contentProvider = "."+this.domain.toLowerCase();
+
+                    _isSameOrigin = contentProvider.substring(contentProvider.length - serviceProvider.length, serviceProvider.length) == serviceProvider;
+
+                }
+            }
+
+            return _isSameOrigin;
+
+        };
+
+        this.cookie = new function(){
+
+            var cookies = document.cookie.split(';');
+
+            this.exists = function(e){
+
+                return this.value(e) !== false;
+
+            };
+
+            this.value = function(e){
+
+                for(var i = 0; i < cookies.length; i++)
+                    if(cookies[i].substr(0,cookies[i].indexOf("=")).replace(/^\s+|\s+$/g,"") == e)
+                        return cookies[i].substr(cookies[i].indexOf("=")+1).replace(/^\s+|\s+$/g,"");
+
+                return false;
+
+            };
+
+        };
+
+    };
+    
+    this.redirect=function(target){
+        window.location=target;
+    };
+    
+    this.reload=function(){
+        document.location.reload();
     };
 
     // Deprecated
 
     this.domain=function(){
-
-    return this.local.domain;
-
+        return this.local.domain;
     };
 
     this.webroot=function(){
-    return this.root;
+        return this.root;
     };
 
     this.frontpage=function(){
-    return this.root+'/index.php';
+        return this.root+'/index.php';
     };
 
     this.webassetroot=function(){
-    return this.asset.root;
+        return this.asset.root;
     };
 };

@@ -16,6 +16,6 @@
  * @uses Config
  */
 
-require_once(dirname(__FILE__).DIRECTORY_SEPARATOR.'lib'.DIRECTORY_SEPARATOR.'config.class.php');
+require_once(dirname(__FILE__).'/lib/config.class.php');
 
 ?>

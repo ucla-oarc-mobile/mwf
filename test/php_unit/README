@@ -1,0 +1,9 @@
+The PHP unit tests depend on PHPUnit.  Install PHPUnit by running the following 
+commands with superuser privileges:
+
+    pear config-set auto_discover 1
+    pear install --alldeps pear.phpunit.de/PHPUnit
+
+You may need to upgrade PEAR first:
+
+    pear upgrade PEAR

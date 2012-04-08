@@ -6,9 +6,9 @@
  * @subpackage js
  *
  * @author ebollens
- * @copyright Copyright (c) 2010-11 UC Regents
+ * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111108
+ * @version 20120226
  *
  * @requires mwf
  * @requires mwf.site
@@ -25,21 +25,21 @@
  */
 
 mwf.server = new function(){
-    
-    this.cookieNameLocal = mwf.site.cookie.prefix+'server';
-    this.mustRedirect = false;
-    this.mustReload = false;
-    this.error = false;
-    
+
     /**
      * Local variables to minimize payload size in compression.
      */
     
     var site = mwf.site,
-        classification = mwf.classification,
-        userAgent = mwf.userAgent,
-        screen = mwf.screen;
-    
+    classification = mwf.classification,
+    userAgent = mwf.userAgent,
+    screen = mwf.screen;
+
+    //@todo: These properties are visible outside mwf.server. Should they be?
+    this.cookieNameLocal = site.cookie.prefix+'server';
+    this.mustRedirect = false;
+    this.mustReload = false;
+        
     this.init = function(){
         
         /**
@@ -53,7 +53,8 @@ mwf.server = new function(){
         
         /**
          * Set classification cookie if it doesn't already exist on server.
-         * We ch
+         * Set it if classification has changed (e.g., user turns on or off
+         *    something in their settings).
          */
         
         if(!site.cookie.exists(classification.cookieName) || site.cookie.classification != classificationCookie)
@@ -72,15 +73,7 @@ mwf.server = new function(){
         
         if(!site.cookie.exists(screen.cookieName))
             this.setCookie(screen.cookieName, screen.generateCookieContent());
-        
-        /**
-         * If an error is encountered in setting server variables, give up
-         * without redirecting/reloading to avoid infinite loop.
-         */
-        
-        if(this.error)
-            return;
-        
+
         /**
          * If the service provider doesn't have cookies, either (1) reload
          * the page if framework is of same-origin or device browser supports 
@@ -89,13 +82,15 @@ mwf.server = new function(){
          */
         
         if(this.mustReload && !mwf.override.isRedirecting){
-            document.location.reload();
+            site.reload();
         }else if(this.mustRedirect && !mwf.override.isRedirecting){
-            window.location = site.asset.root+'/passthru.php?return='+encodeURIComponent(window.location);
+            site.redirect(site.asset.root+'/passthru.php?return='+encodeURIComponent(window.location)+'&mode='+mwf.browser.getMode());
         }
         
     }
     
+
+    //@todo: setCookie() is visible from outside the object. Is that what we really want?
     this.setCookie = function(cookieName, cookieContent) {
     
         /**
@@ -103,7 +98,7 @@ mwf.server = new function(){
          * domain if this is a cross
          */
         
-        var isSameOrigin = mwf.site.local.isSameOrigin();
+        var isSameOrigin = site.local.isSameOrigin();
             
         /**
          * If not cross-domain or this is the first load and third party is
@@ -116,7 +111,7 @@ mwf.server = new function(){
              * Write the cookie with the proper suffix for service provider.
              */
             
-            document.cookie = cookieName + '=' + cookieContent+';path=/';
+            document.cookie = cookieName + '=' + encodeURIComponent(cookieContent)+';path=/';
             
             /**
              * Must reload the page to propagate the cookie to SP.
@@ -136,7 +131,6 @@ mwf.server = new function(){
         }
         
     }
-    
 }
 
 mwf.server.init();

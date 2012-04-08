@@ -8,9 +8,9 @@
  * @subpackage js
  *
  * @author ebollens
- * @copyright Copyright (c) 2010-11 UC Regents
+ * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111103
+ * @version 20120224
  *
  * @requires mwf
  * @requires mwf.site
@@ -51,12 +51,11 @@ mwf.override = new function(){
         
         
         /**
-         * If no support for cookies, then set isOverride false, since override
-         * requires a cookie, and then return early from this initialization.
+         * If no support for cookies, then return early since override requires
+         * a cookie.
          */
         if(!mwf.capability.cookie()) {
             
-            classification.isOverride = function(){ return false; }
             return false;
             
         }
@@ -109,20 +108,19 @@ mwf.override = new function(){
                  */
                 mwf.site.cookie.exists = function(){ return false; }
                 currentOverride = requestedOverride;
-                window.location = returnLocation;
+                mwf.site.redirect(returnLocation);
             
             /**
              * Redirect to the service provider.
              */
             } else {
                 
-                window.location = mwf.site.asset.root+'/passthru.php?override='+requestedOverride+'&return='+encodeURIComponent(returnLocation);
+                mwf.site.redirect('//'+mwf.site.cookie.domain+'/'+mwf.site.local.asset.root+'/passthru.php?override='+requestedOverride+'&return='+encodeURIComponent(returnLocation)+'&mode='+mwf.browser.getMode());
                 
             }
             
             /**
-             * Mark this as redirecting so that mwf.server does not rewrite 
-             * window.location as well.
+             * Mark this as redirecting so that mwf.server does not redirect too.
              */
             this.isRedirecting = true;
             
@@ -136,12 +134,11 @@ mwf.override = new function(){
     }
     
     /**
-     * If no current override, then set mwf.classification.isOverride() to a 
-     * false response and exit early - no need to define the wasX methods.
+     * If no current override, then exit early - no need to define the wasX 
+     * methods.
      */
     if(!currentOverride) {
     
-        classification.isOverride = function(){return false;};
         return;
         
     }
