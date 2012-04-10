@@ -19,6 +19,7 @@ License:
 
 TABLE OF CONTENTS
 
+Version 1.3.00          April 13, 2012
 Version 1.2.13          February 29, 2012
 Version 1.2.12          February 6, 2012
 Version 1.2.11          February 1, 2012
@@ -41,6 +42,74 @@ Version 1.1.03.alpha    July 20, 2011
 Version 1.1.02.alpha    June 23, 2011
 Version 1.1.01.alpha    June 16, 2011
 Version 1.1.00.alpha    May 20, 2011
+
+==============================================================================
+
+Version 1.3.00
+April 13, 2012
+
+* Add lean CSS markup entities [Roadmap: Framework v1.3]
+
+    * Deprecate -full suffixing on entities
+
+    * Deprecate content-, menu- and button- prefixing on entities
+
+    * Add -compat.css libraries for old syntax
+
+* Add Forms API with entities and Javascript [Roadmap: Framework v1.3]
+
+    * See https://github.com/ucla/mwf/wiki/Roadmap%3A-Framework-v1.3%3A-Forms
+
+* Add Messages UI [Roadmap: Framework v1.3]
+
+    * See https://github.com/ucla/mwf/wiki/Roadmap-Framework-v1.3-Messages
+
+* Add Interactivity API [Roadmap: Framework 1.3]
+
+    * Add target-trigger engine for markup-driven effects [#116]
+
+    * Add expandable/collapsible library [#116]
+
+    * See https://github.com/ucla/mwf/wiki/Roadmap%3A-Framework-v1.3%3A-JS
+                -Interactivity
+
+* Add customizable home page [Roadmap: Framework v1.3]
+
+* Add Preferences API [Roadmap: Framework v1.3]
+
+* Add Javascript unit tests [Roadmap: Framework v1.3]
+
+* Modifications to existing entity styles:
+
+    * Padded made the default context and .padded deprecated [#102]
+
+    * Removing padding through new entity .not-padded [#102]
+
+    * Support for proper h accessibility in menu, content and form [#101]
+
+    * Fixed bug in menu hover [#97]
+
+    * Added explicit .center and .left for alignment on menu
+
+* Fixes to the device telemetry stack
+
+    * userAgent.getBrowserEngineVersion() fix for iOS [#114]
+
+    * userAgent.getOSVersion() fix for Symbian [#112]
+
+    * userAgent.getOSVersion() fix for Blackberry [#110]
+
+    * Remove capability.flexbox() [#83]
+
+    * Updated Modernizr for improved capability detection [#76]
+
+* Fixes to Geolocation API
+
+    * Remove deprecated getPosition() [#87]
+
+    * Use error object rather than error message for errback [#86]
+
+* Refactor vars.php for testing and maintainability [#107]
 
 ==============================================================================
 
