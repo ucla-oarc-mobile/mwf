@@ -46,7 +46,8 @@
     margin: 0;
 }
 
-.content h1.light {
+.content h1.light,
+.content h2.light {
      border: 1px #dddddd;
      border-style: solid none none none;
 }

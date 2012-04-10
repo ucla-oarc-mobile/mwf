@@ -54,20 +54,23 @@
     -moz-border-radius: 0;
 }
 
-.content > h1 {
+.content > h1,
+.content > h2 {
     background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
     background: -moz-linear-gradient(#fff, #e5e5e5);
     background: -o-linear-gradient(top, #fff, #e5e5e5);
     background: linear-gradient(#fff, #e5e5e5);
 }
 
-.content > h1.light {
+.content > h1.light,
+.content > h2.light {
     background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
     background: -moz-linear-gradient(#fff, #e5e5e5);
     background: -o-linear-gradient(top, #fff, #e5e5e5);
     background: linear-gradient(#fff, #e5e5e5);
 }
-.content > h1.blue {
+.content > h1.blue,
+.content > h2.blue {
     background: -webkit-gradient(linear, left top, left bottom, from(#809FE2), to(#637CB0));
     background: -moz-linear-gradient(#809FE2, #637CB0);
     background: -o-linear-gradient(top, #809FE2, #637CB0);
@@ -104,21 +107,24 @@
  * Menu
  */
 
-.menu > h1 {
+.menu > h1,
+.menu > h2 {
     background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
     background: -moz-linear-gradient(#fff, #e5e5e5);
     background: -o-linear-gradient(top, #fff, #e5e5e5);
     background: linear-gradient(#fff, #e5e5e5);
 }
 
-.menu > h1.light {
+.menu > h1.light,
+.menu > h2.light {
     background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
     background: -moz-linear-gradient(#fff, #e5e5e5);
     background: -o-linear-gradient(top, #fff, #e5e5e5);
     background: linear-gradient(#fff, #e5e5e5);
 }
 
-.menu > h1.blue {
+.menu > h1.blue,
+.menu > h2.blue {
     background: -webkit-gradient(linear, left top, left bottom, from(#809FE2), to(#637CB0));
     background: -moz-linear-gradient(#809FE2, #637CB0);
     background: -o-linear-gradient(top, #809FE2, #637CB0);
