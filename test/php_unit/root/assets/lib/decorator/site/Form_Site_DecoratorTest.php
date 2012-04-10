@@ -36,7 +36,7 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
      */
     public function render_title_title() {
         $this->object->set_title('Totally Legit Title');
-        $this->assertContains('<h1>Totally Legit Title</h1>', $this->object->render());
+        $this->assertContains('<h2>Totally Legit Title</h2>', $this->object->render());
     }
 
     /**
