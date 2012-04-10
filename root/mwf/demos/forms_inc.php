@@ -1,4 +1,20 @@
 <?php
+/**
+ *
+ * @package mwf.demos
+ *
+ * @author ilin
+ * @author trott
+ * @copyright Copyright (c) 2010-12 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20120410
+ *
+ * @uses Decorator
+ * @uses Site_Decorator
+ * @uses Form_Site_Decorator
+ * @uses Input_Site_Decorator
+ */
+
 require_once(dirname(dirname(__DIR__)) . '/assets/lib/decorator.class.php');
 
 $submit = Site_Decorator::input()
@@ -9,7 +25,7 @@ $submit = Site_Decorator::input()
 <!-- short form -->
 
 <?php
-$text_input = Site_Decorator::input('text-1', 'Name');
+$text_input = Site_Decorator::input('text-1', 'Label')->set_size(16);
 
 echo Site_Decorator::form()
         ->set_short()
