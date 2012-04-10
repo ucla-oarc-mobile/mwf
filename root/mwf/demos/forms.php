@@ -41,14 +41,12 @@ echo Site_Decorator::header()
         ->render();
 
 echo Site_Decorator::content()
-        ->set_padded()
         ->add_header('Forms Without Polyfills')
         ->render();
 
 require('forms_inc.php');
 
 echo Site_Decorator::button()
-        ->set_padded()
         ->add_option('Back to Demos', Config::get('global', 'site_url') . '/mwf/demos.php')
         ->render();
 

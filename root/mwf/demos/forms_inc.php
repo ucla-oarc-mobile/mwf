@@ -12,7 +12,6 @@ $submit = Site_Decorator::input()
 $text_input = Site_Decorator::input('text-1', 'Name');
 
 echo Site_Decorator::form()
-        ->set_padded()
         ->set_short()
         ->set_title('Short Form')
         ->add_input($text_input)
@@ -24,7 +23,6 @@ echo Site_Decorator::form()
 
 <?php
 echo Site_Decorator::form()
-        ->set_padded()
         ->set_title('Option Form')
         ->add_checkbox_group('checkbox-group-1', 'Label for Checkbox Group', array(
             Site_Decorator::input('checkbox-1', 'One')->set_param('value', 1),
@@ -45,7 +43,6 @@ echo Site_Decorator::form()
 
 <?php
 echo Site_Decorator::form()
-        ->set_padded()
         ->set_title('Full Button Form')
         ->add_input(Site_Decorator::input()->type_button()->primary()->set_param('value', 'Primary Button'))
         ->add_input(Site_Decorator::input()->type_button()->secondary()->set_param('value', 'Secondary Button'))
@@ -60,7 +57,6 @@ echo Site_Decorator::form()
 
 <?php
 echo Site_Decorator::form()
-        ->set_padded()
         ->set_title('Textarea Form')
         ->add_input(Site_Decorator::input('textarea-1', 'Label for Textarea 1')->type_textarea())
         ->render();
@@ -93,7 +89,6 @@ $select_input_sized = Site_Decorator::input('select-group-3', 'Label for Sized S
         ->add_option(7, 'Rise of the Planet of the Apes');
 
 echo Site_Decorator::form()
-        ->set_padded()
         ->set_title('Select Form')
         ->add_input($select_input)
         ->add_input($select_input_multiple)
@@ -129,7 +124,6 @@ $checkbox_input = Site_Decorator::input('checkbox-10', 'Checkbox')
         ->required();
 
 echo Site_Decorator::form()
-        ->set_padded()
         ->set_title('Required Form')
         ->add_input($text_input)
         ->add_input($select_input)
@@ -157,7 +151,6 @@ $textarea_input = Site_Decorator::input('textarea-20', 'Textarea')
         ->type_textarea()
         ->invalid('Textarea error message goes here');
 echo Site_Decorator::form()
-        ->set_padded()
         ->set_title('Invalid Form')
         ->add_input($text_input)
         ->add_input($checkbox_input)
@@ -183,7 +176,6 @@ $textarea_input = Site_Decorator::input('textarea-30', 'Textarea')
         ->type_textarea()
         ->disable();
 echo Site_Decorator::form()
-        ->set_padded()
         ->set_title('Disabled Form')
         ->add_input($text_input)
         ->add_input($checkbox_input)
@@ -196,6 +188,7 @@ echo Site_Decorator::form()
 
 <?php
 echo Site_Decorator::form()
+        ->set_not_padded()
         ->set_title('Form That Is Not Padded')
         ->add_input(Site_Decorator::input('text-100', 'Label'))
         ->add_input(Site_Decorator::input()->type_submit()->set_param('value', 'Search'))
@@ -206,7 +199,6 @@ echo Site_Decorator::form()
 
 <?php
 echo Site_Decorator::form()
-        ->set_padded()
         ->set_title('Text content')
         ->add_subtitle('Subtitle')
         ->add_paragraph('Lorem ipsum doodah doodah.')
@@ -292,7 +284,6 @@ $range_input = Site_Decorator::input('range-10', 'Range')
         ->set_value(40);
 
 echo Site_Decorator::form()
-        ->set_padded()
         ->set_title('HTML5 Input Form')
         ->add_paragraph('This form demonstrates HTML5 input types, placeholder and various client side validation.')
         ->add_input($text_input_placeholder)

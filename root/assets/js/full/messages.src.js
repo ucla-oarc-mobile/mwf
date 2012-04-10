@@ -11,7 +11,7 @@
  * 
  * First way:
  * 
- * <div id="alert" class="message  padded alert">[text]</div>
+ * <div id="alert" class="message alert">[text]</div>
  * 
  * <script type="text/javascript">
  *   mwf.messages.modal({
@@ -107,8 +107,8 @@ mwf.messages.modal = function(options) {
             
             element += settings.type;
             
-            if (settings.padded) {
-                element += ' padded'
+            if (!settings.padded) {
+                element += ' not-padded'
             }
             
             element += '">';
@@ -126,15 +126,15 @@ mwf.messages.modal = function(options) {
             return;
         }
         
-        if (message.hasClass("padded")) {
-            settings.padded = true;
+        if (message.hasClass("not-padded")) {
+            settings.padded = false;
         }
             
         var mask = $('<div class="message-mask" />');
         var buttonClass = "message-button button";
             
-        if (settings.padded) {
-            buttonClass += " padded";
+        if (!settings.padded) {
+            buttonClass += " not-padded";
         }
             
         var button = $('<div class="' + buttonClass + '"><a href="#">OK</a></div>');

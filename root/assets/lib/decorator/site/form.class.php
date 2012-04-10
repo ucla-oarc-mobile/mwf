@@ -35,19 +35,19 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
         if ($title)
             $this->set_title($title);
     }
-
-    /**
-     * Sets the form's padded attribute.
-     * 
-     * @param boolean $val Defaults to true.
-     * @return Form_Site_Decorator 
-     */
-    public function set_padded($val = true) {
-        if ($val) {
-            $this->add_class('padded');
-        } else {
-            $this->remove_class('padded');
-        }
+    
+    public function &set_padded($val = true)
+    {
+        return $this->set_not_padded(!$val);
+    }
+    
+    public function &set_not_padded($val = true)
+    {
+        if($val)
+            $this->add_class('not-padded');
+        else
+            $this->remove_class('not-padded');
+        
         return $this;
     }
 

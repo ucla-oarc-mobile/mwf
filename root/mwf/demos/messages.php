@@ -48,7 +48,6 @@ echo Site_Decorator::content()
 
 //@todo Create a clean easy-to-use Decorator for Alerts API.
 echo Site_Decorator::content()
-        ->set_padded()
         ->add_header('Content Messages')
         ->add_paragraph(
                 array(
@@ -69,16 +68,15 @@ echo Site_Decorator::content()
                     HTML_Decorator::tag('div', 'This is an info message inside a content', array('class' => 'message info')) ))
         ->render();
 
-echo HTML_Decorator::tag('div', 'This is a padded alert message', array('class'=>'message alert padded'))->render();
-echo HTML_Decorator::tag('div', 'This is a padded confirm message', array('class'=>'message confirm padded'))->render();
-echo HTML_Decorator::tag('div', 'This is not a padded error message', array('class'=>'message error'))->render();
-echo HTML_Decorator::tag('div', 'This is not a padded info message', array('class'=>'message info'))->render();
+echo HTML_Decorator::tag('div', 'This is a padded alert message', array('class'=>'message alert'))->render();
+echo HTML_Decorator::tag('div', 'This is a padded confirm message', array('class'=>'message confirm'))->render();
+echo HTML_Decorator::tag('div', 'This is not a padded error message', array('class'=>'message error not-padded'))->render();
+echo HTML_Decorator::tag('div', 'This is not a padded info message', array('class'=>'message info not-padded'))->render();
 
-echo HTML_Decorator::tag('div', 'This is an alert message from existing markup', array('id'=>'alert-msg','class'=>'message alert padded'))->render();
+echo HTML_Decorator::tag('div', 'This is an alert message from existing markup', array('id'=>'alert-msg','class'=>'message alert'))->render();
 
 
 echo Site_Decorator::button()
-        ->set_padded()
         ->add_option('Back To Demos', Config::get('global', 'site_url') . '/mwf/demos.php')
         ->render();
 

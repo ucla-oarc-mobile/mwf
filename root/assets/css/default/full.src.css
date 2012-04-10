@@ -302,6 +302,10 @@ div.button a.light:active{
 form {
     border-radius: .5em;
 }
+ 
+form.not-padded {
+    border-radius: 0;
+}
 
 form,
 form .first,

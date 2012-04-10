@@ -229,11 +229,11 @@ a.button.light,
  */
 
 form {
-    margin: 0;
+    margin: 10px 10px 0 10px;
 }
 
-form.padded {
-    margin: 10px 10px 0 10px;
+form.not-padded {
+    margin: 0;
 }
 
 .content form {
@@ -247,14 +247,14 @@ form.padded {
 div.message {
     background-position: 99% 50%;
     background-repeat: no-repeat;
-    margin: 0;
     padding-right: 32px;
-}
-
-div.message.padded {
     margin-top: .6em;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+div.message.not-padded {
+    margin: 0;
 }
 
 div.message.alert {
