@@ -32,14 +32,18 @@
  * Content
  */
 
-.content.padded {
+.content {
     width: auto;
     margin: 10px 10px 0 10px;
     border: 1px solid #d0d0d0;
 }
 
-.content.padded > *:last-child {
+.content > *:last-child {
     border-bottom: none !important;
+}
+
+.content.not-padded {
+    margin: 0;
 }
 
 .content h1.light {
@@ -51,15 +55,19 @@
  * Menu
  */
 
-.menu.padded {
+.menu {
     margin: 10px 10px 0 10px;
     border: 1px solid #d0d0d0;
     width: auto;
 }
 
-.menu.padded a:last-child li,
-.menu.padded > *:last-child {
+.menu a:last-child li,
+.menu > *:last-child {
     border-bottom: none !important;
+}
+
+.menu.not-padded {
+    margin: 0;
 }
 
 /* The rel=external stuff is not solely for menus, but primarily. 
@@ -90,55 +98,49 @@ a[rel=external].no-ext-ind:after {
 .button {
     display: block;
     position: relative !important;
-    height: 2.8em;
     width: auto;
     overflow: hidden;
 }
 
-.button.padded{
-    margin: 10px 10px 0 10px;
+div.button {
+    padding-top: 10px;
+    height: 2.8em;
 }
 
-.button.padded, a.button.padded {
+a.button {
     border: 1px solid #d0d0d0;
+    margin: 10px 10px 0 10px;
 }
 
 .button a,
 .button a.light {
     position: absolute;
     width: auto;
-    border-left: 1px solid #aaa !important;
     overflow: hidden;
     white-space:  nowrap;
     padding: .5em 0 .4em 0;
 }
 
 .button a:first-child {
-    border-left: 0 !important;
     right: 50%;
-    width: 50%;
+    left: 10px;
+    width: auto;
+    border: 1px solid #d0d0d0;
 }
 
 .button a:last-child {
     left: 50%;
-    width: 50%;
+    right: 10px;
+    width: auto;
+    border: 1px solid #d0d0d0;
+    border-left: 0px;
 }
 
 .button a:first-child:last-child
 {
-    width: 100%;
-    left: 0;
-    right: 0;
-}
-
-.button.padded a:first-child {
-    left: 0;
     width: auto;
-}
-
-.button.padded a:last-child {
-    right: 0;
-    width: auto;
+    left: 10px;
+    right: 10px;
 }
 
 a.button,

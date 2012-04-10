@@ -9,7 +9,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111207
+ * @version 20120409
  *
  * @uses Decorator
  * @uses Tag_HTML_Decorator
@@ -33,10 +33,15 @@ class Button_Site_Decorator extends Tag_HTML_Decorator
     
     public function &set_padded($val = true)
     {
+        return $this->set_not_padded(!$val);
+    }
+    
+    public function &set_not_padded($val = true)
+    {
         if($val)
-            $this->add_class('padded');
+            $this->add_class('not-padded');
         else
-            $this->remove_class('padded');
+            $this->remove_class('not-padded');
         
         return $this;
     }

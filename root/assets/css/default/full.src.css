@@ -42,10 +42,16 @@
  * Content
  */
 
-.content.padded {
+.content {
     border-radius: .5em;
     -webkit-border-radius: .5em;
     -moz-border-radius: .5em;
+}
+
+.content.not-padded {
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
 }
 
 .content > h1 {
@@ -69,18 +75,29 @@
 
 }
 
-.content.padded > *:first-child {
+.content > *:first-child {
     -webkit-border-top-left-radius: .5em;
     -webkit-border-top-right-radius: .5em;
     -moz-border-radius-topleft: .5em;
     -moz-border-radius-topright: .5em;
 }
 
-.content.padded > *:last-child {
+.content > *:last-child {
     -webkit-border-bottom-left-radius: .5em;
     -webkit-border-bottom-right-radius: .5em;
     -moz-border-radius-bottomleft: .5em;
     -moz-border-radius-bottomright: .5em;
+}
+
+.content.not-padded > * {
+    -webkit-border-top-left-radius: 0;
+    -webkit-border-top-right-radius: 0;
+    -webkit-border-bottom-left-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+    -moz-border-radius-topleft: 0;
+    -moz-border-radius-topright: 0;
+    -moz-border-radius-bottomleft: 0;
+    -moz-border-radius-bottomright: 0;
 }
 
 /**
@@ -108,77 +125,114 @@
     background: linear-gradient(#809FE2, #637CB0);
 }
 
-.menu.padded {
+.menu {
     border-radius: .5em;
     -webkit-border-radius: .5em;
     -moz-border-radius: .5em;
 }
 
-.menu.padded > ol:first-child > li:first-child,
-.menu.padded > :first-child {
+.menu > ol:first-child > li:first-child,
+.menu > :first-child {
     -moz-border-radius-topleft: .5em;
     -moz-border-radius-topright: .5em;
     -webkit-border-top-left-radius: .5em;
     -webkit-border-top-right-radius: .5em;
 }
 
-.menu.padded > :first-child:last-child,
-.menu.padded li:last-child {
+.menu > :first-child:last-child,
+.menu li:last-child {
     -webkit-border-bottom-left-radius: .5em;
     -webkit-border-bottom-right-radius: .5em;
     -moz-border-radius-bottomleft: .5em;
     -moz-border-radius-bottomright: .5em;
 }
 
-.menu.padded > :first-child:last-child li:first-child a:hover,
-.menu.padded > :first-child:last-child li:first-child a:focus,
-.menu.padded > :first-child:last-child li:first-child a:active,
-.menu.padded > :first-child li:first-child a:hover,
-.menu.padded > :first-child li:first-child a:focus,
-.menu.padded > :first-child li:first-child a:active {
+.menu > :first-child:last-child li:first-child a:hover,
+.menu > :first-child:last-child li:first-child a:focus,
+.menu > :first-child:last-child li:first-child a:active,
+.menu > :first-child li:first-child a:hover,
+.menu > :first-child li:first-child a:focus,
+.menu > :first-child li:first-child a:active {
     -moz-border-radius-topleft: .5em;
     -moz-border-radius-topright: .5em;
     -webkit-border-top-left-radius: .5em;
     -webkit-border-top-right-radius: .5em;
 }
 
-.menu.padded li:last-child a:hover,
-.menu.padded li:last-child a:focus,
-.menu.padded li:last-child a:active {
+.menu li:last-child a:hover,
+.menu li:last-child a:focus,
+.menu li:last-child a:active {
     -webkit-border-bottom-left-radius: .5em;
     -webkit-border-bottom-right-radius: .5em;
     -moz-border-radius-bottomleft: .5em;
     -moz-border-radius-bottomright: .5em;
+}
+
+.menu.not-padded {
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+}
+
+.menu.not-padded > ol:first-child > li:first-child,
+.menu.not-padded > :first-child {
+    -moz-border-radius-topleft: 0;
+    -moz-border-radius-topright: 0;
+    -webkit-border-top-left-radius: 0;
+    -webkit-border-top-right-radius: 0;
+}
+
+.menu.not-padded > :first-child:last-child,
+.menu.not-padded li:last-child {
+    -webkit-border-bottom-left-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+    -moz-border-radius-bottomleft: 0;
+    -moz-border-radius-bottomright: 0;
+}
+
+.menu.not-padded > :first-child:last-child li:first-child a:hover,
+.menu.not-padded > :first-child:last-child li:first-child a:focus,
+.menu.not-padded > :first-child:last-child li:first-child a:active,
+.menu.not-padded > :first-child li:first-child a:hover,
+.menu.not-padded > :first-child li:first-child a:focus,
+.menu.not-padded > :first-child li:first-child a:active {
+    -moz-border-radius-topleft: 0;
+    -moz-border-radius-topright: 0;
+    -webkit-border-top-left-radius: 0;
+    -webkit-border-top-right-radius: 0;
+}
+
+.menu.not-padded li:last-child a:hover,
+.menu.not-padded li:last-child a:focus,
+.menu.not-padded li:last-child a:active {
+    -webkit-border-bottom-left-radius: 0;
+    -webkit-border-bottom-right-radius: 0;
+    -moz-border-radius-bottomleft: 0;
+    -moz-border-radius-bottomright: 0;
 }
 
 /**
  * Button
  */
 
-.button.padded {
-    border-radius: .5em;
-    -webkit-border-radius: .5em;
-    -moz-border-radius: .5em;
-}
-
 a.button,
-.button a {
+div.button a {
     background: -webkit-gradient(linear, left top, left bottom, from(#6883bc), to(#536895));
     background: -moz-linear-gradient(#6883bc, #536895);
     background: -o-linear-gradient(top, #6883bc, #536895);
     background: linear-gradient(#6883bc, #536895);
 }
 
-a.button.padded,
-.button.padded a:first-child {
+a.button,
+div.button a:first-child {
     -webkit-border-top-left-radius: .5em;
     -webkit-border-bottom-left-radius: .5em;
     -moz-border-radius-topleft: .5em;
     -moz-border-radius-bottomleft: .5em;
 }
 
-a.button.padded,
-div.button.padded a:last-child {
+a.button,
+div.button a:last-child {
     -webkit-border-top-right-radius: .5em;
     -webkit-border-bottom-right-radius: .5em;
     -moz-border-radius-topright: .5em;
@@ -392,11 +446,11 @@ form a.button.secondary:focus {
     border-radius: .5em;
 }
 
-.message-modal.message {
+.message-modal.message.not-padded {
     margin: 0;
 }
 
-.message-modal.message.padded {
+.message-modal.message {
     margin-top: .6em;
     margin-left: 10px;
     margin-right: 10px;
@@ -406,7 +460,7 @@ div.message-button {
     margin: 0;
 }
 
-div.message-button.padded {
+div.message-button {
     margin: 10px;
 }
 

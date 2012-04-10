@@ -161,101 +161,101 @@ echo Site_Decorator::menu()
             ->render();
 
 echo Site_Decorator::button()
-            ->set_padded()
+            ->set_not_padded()
             ->add_option('Option', '#')
             ->render();
 
 echo Site_Decorator::button()
-            ->set_padded()
+            ->set_not_padded()
             ->add_option('Option 1', '#')
             ->add_option('Option 2', '#')
             ->render();
 
 echo Site_Decorator::button()
-            ->set_padded()
+            ->set_not_padded()
             ->add_option_light('Option Light', '#')
             ->render();
 
 echo Site_Decorator::button()
-            ->set_padded()
+            ->set_not_padded()
             ->add_option_light('Option 1 Light', '#')
             ->add_option_light('Option 2 Light', '#')
             ->render();
 
 echo Site_Decorator::button()
-            ->set_padded()
+            ->set_not_padded()
             ->add_option_light('Option 1 Light', '#')
             ->add_option('Option 2', '#')
             ->render();
 
 echo Site_Decorator::content()
-            ->set_padded()
+            ->set_not_padded()
             ->add_header('Content Padded')
             ->render();
 
 echo Site_Decorator::content()
-            ->set_padded()
+            ->set_not_padded()
             ->add_header_light('Content Padded Light')
             ->render();
 
 echo Site_Decorator::content()
-            ->set_padded()
+            ->set_not_padded()
             ->add_header('Content Padded')
             ->add_paragraph('Text')
             ->add_section('Text')
             ->render();
 
 echo Site_Decorator::content()
-            ->set_padded()
+            ->set_not_padded()
             ->add_header_light('Content Padded Light')
             ->add_paragraph('Text')
             ->add_section('Text')
             ->render();
 
 echo Site_Decorator::content()
-            ->set_padded()
+            ->set_not_padded()
             ->add_paragraph('Text')
             ->add_section('Text')
             ->render();
 
 echo Site_Decorator::menu()
-            ->set_padded()
+            ->set_not_padded()
             ->set_title('Menu Padded')
             ->render();
 
 echo Site_Decorator::menu()
-            ->set_padded()
+            ->set_not_padded()
             ->set_title_light('Menu Padded Light')
             ->render();
 
 echo Site_Decorator::menu()
-            ->set_padded()
+            ->set_not_padded()
             ->set_detailed()
             ->set_title('Menu Padded Detailed')
             ->render();
 
 echo Site_Decorator::menu()
-            ->set_padded()
+            ->set_not_padded()
             ->set_detailed()
             ->set_title_light('Menu Padded Light Detailed')
             ->render();
 
 echo Site_Decorator::menu()
-            ->set_padded()
+            ->set_not_padded()
             ->set_title('Menu Padded')
             ->add_item('Item 1', '#')
             ->add_item('Item 2', '#')
             ->render();
 
 echo Site_Decorator::menu()
-            ->set_padded()
+            ->set_not_padded()
             ->set_title_light('Menu Padded Light')
             ->add_item('Item 1', '#')
             ->add_item('Item 2', '#')
             ->render();
 
 echo Site_Decorator::menu()
-            ->set_padded()
+            ->set_not_padded()
             ->set_detailed()
             ->set_center_aligned()
             ->set_title('Menu Padded Detailed Centered')
@@ -264,7 +264,7 @@ echo Site_Decorator::menu()
             ->render();
 
 echo Site_Decorator::menu()
-            ->set_padded()
+            ->set_not_padded()
             ->set_detailed()
             ->set_center_aligned()
             ->set_title_light('Menu Padded Light Detailed Centered')
@@ -273,7 +273,7 @@ echo Site_Decorator::menu()
             ->render();
 
 echo Site_Decorator::menu()
-            ->set_padded()
+            ->set_not_padded()
             ->set_left_aligned()
             ->set_title('Menu Padded Left-Aligned')
             ->add_item('Item 1', '#')
@@ -281,7 +281,7 @@ echo Site_Decorator::menu()
             ->render();
 
 echo Site_Decorator::menu()
-            ->set_padded()
+            ->set_not_padded()
             ->set_left_aligned()
             ->set_title_light('Menu Padded Light Left')
             ->add_item('Item 1', '#')
@@ -289,7 +289,7 @@ echo Site_Decorator::menu()
             ->render();
 
 echo Site_Decorator::menu()
-            ->set_padded()
+            ->set_not_padded()
             ->set_detailed()
             ->set_title('Menu Padded Detailed')
             ->add_item('Item 1<p>Description</p>', '#')
@@ -297,7 +297,7 @@ echo Site_Decorator::menu()
             ->render();
 
 echo Site_Decorator::menu()
-            ->set_padded()
+            ->set_not_padded()
             ->set_detailed()
             ->set_title_light('Menu Padded Light Detailed')
             ->add_item('Item 1<p>Description</p>', '#')
@@ -305,19 +305,19 @@ echo Site_Decorator::menu()
             ->render();
 
 echo Site_Decorator::menu()
-            ->set_padded()
+            ->set_not_padded()
             ->add_item('Item 1', '#')
             ->add_item('Item 2', '#')
             ->render();
 
 echo Site_Decorator::menu()
-            ->set_padded()
+            ->set_not_padded()
             ->add_item('Item 1', '#')
             ->add_item('Item 2', '#')
             ->render();
 
 echo Site_Decorator::menu()
-            ->set_padded()
+            ->set_not_padded()
             ->set_detailed()
             ->set_center_aligned()
             ->add_item('Item 1<p>Description</p>', '#')
@@ -325,7 +325,7 @@ echo Site_Decorator::menu()
             ->render();
 
 echo Site_Decorator::menu()
-            ->set_padded()
+            ->set_not_padded()
             ->set_detailed()
             ->set_center_aligned()
             ->add_item('Item 1<p>Description</p>', '#')
@@ -333,21 +333,21 @@ echo Site_Decorator::menu()
             ->render();
 
 echo Site_Decorator::menu()
-            ->set_padded()
+            ->set_not_padded()
             ->set_left_aligned()
             ->add_item('Item 1', '#')
             ->add_item('Item 2', '#')
             ->render();
 
 echo Site_Decorator::menu()
-            ->set_padded()
+            ->set_not_padded()
             ->set_detailed()
             ->add_item('Item 1<p>Description</p>', '#')
             ->add_item('Item 2<p>Description</p>', '#')
             ->render();
 
 echo Site_Decorator::button_full()
-        ->set_padded()
+        ->set_not_padded()
         ->add_option('Back To Demos', Config::get('global', 'site_url') . '/mwf/demos.php')
         ->render();
 

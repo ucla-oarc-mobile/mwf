@@ -9,7 +9,7 @@
  * @author trott
  * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120312
+ * @version 20120409
  *
  * @uses Decorator
  * @uses Tag_HTML_Decorator
@@ -21,7 +21,7 @@ require_once(dirname(dirname(dirname(__FILE__))) . '/classification.class.php');
 
 class Menu_Site_Decorator extends Tag_HTML_Decorator {
 
-    private $_padded = null;
+    private $_padded = true;
     private $_detailed = null;
     private $_homescreen = null;
     private $_title = false;
@@ -38,6 +38,10 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
     public function set_padded($val = true) {
         $this->_padded = $val ? true : false;
         return $this;
+    }
+    
+    public function set_not_padded($val = true){
+        return $this->set_padded(!$val);
     }
 
     public function set_detailed($val = true) {
@@ -112,10 +116,8 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
         elseif ($this->_detailed === false)
             $this->remove_class('detailed');
 
-        if ($this->_padded)
-            $this->add_class('padded');
-        elseif ($this->_padded === false)
-            $this->remove_class('padded');
+        if (!$this->_padded)
+            $this->add_class('not-padded');
 
         if ($this->_homescreen)
             $this->add_class('front')->set_param('id', 'main_menu');
