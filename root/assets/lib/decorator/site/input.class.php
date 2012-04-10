@@ -14,7 +14,7 @@
  * @implements Tag_ParamsInterface
  */
 require_once(dirname(__DIR__) . '/html_decorator.class.php');
-require_once(dirname(__DIR__) . '/html/Tag_ParamsInterface.php');
+require_once(dirname(__DIR__) . '/html/tag_paramsinterface.php');
 
 class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
 
