@@ -346,7 +346,7 @@ echo Site_Decorator::menu()
             ->add_item('Item 2<p>Description</p>', '#')
             ->render();
 
-echo Site_Decorator::button_full()
+echo Site_Decorator::button()
         ->set_not_padded()
         ->add_option('Back To Demos', Config::get('global', 'site_url') . '/mwf/demos.php')
         ->render();
