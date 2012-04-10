@@ -338,6 +338,22 @@ div.message.info {
 }
 
 /****************************************************************************
+ * Interactivity
+ */
+ 
+ /**
+  * Expandable
+  */
+ 
+.expandable.collapsed, .expandable .collapsed {
+    display: none;
+}
+
+.expandable.expanded, .expandable .expanded {
+    display: block;
+}
+
+/****************************************************************************
  * Special Styles
  */
 

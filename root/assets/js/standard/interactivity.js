@@ -35,24 +35,37 @@ mwf.standard.interactivity = new function(){
             var i = mwf.standard.interactivity,
                 target = this,
                 targetContainer = i.getHandlerElement(target),
+                targetIsContainer = $(target).length === $(targetContainer).length && $(target).length === $(target).filter($(targetContainer)).length,
                 handlerName = i.getHandlerName(target),
                 handlerEvent = i.getHandlerEvent(handlerName),
-                execHandler = i.getExecHandler(handlerName),
-                initHandler = i.getInitHandler(handlerName),
-                execContainerHandler = i.getExecContainerHandler(handlerName),
-                initContainerHandler = i.getInitContainerHandler(handlerName);
+                execHandler = i.getHandlerCallback(handlerName, 'exec'),
+                initHandler = i.getHandlerCallback(handlerName, 'init'),
+                execContainerBeforeHandler = i.getHandlerCallback(handlerName, 'execContainerBefore'),
+                initContainerBeforeHandler = i.getHandlerCallback(handlerName, 'initContainerBefore'),
+                execContainerAfterHandler = i.getHandlerCallback(handlerName, 'execContainerAfter'),
+                initContainerAfterHandler = i.getHandlerCallback(handlerName, 'initContainerAfter');
             
-            if(initContainerHandler)
-                initContainerHandler.call(targetContainer);
+            if(!$(target).hasClass('target'))
+                $(target).addClass('target');
+            
+            if(!targetIsContainer && initContainerBeforeHandler)
+                initContainerBeforeHandler.call(targetContainer);
             
             if(initHandler)
                 initHandler.call(target);
             
-            if(execContainerHandler)
-                $(trigger).bind(handlerEvent, function(){execContainerHandler.call(targetContainer)});
+            if(!targetIsContainer && initContainerAfterHandler)
+                initContainerAfterHandler.call(targetContainer);
+            
+            if(!targetIsContainer && execContainerBeforeHandler)
+                $(trigger).bind(handlerEvent, function(){execContainerBeforeHandler.call(targetContainer)});
             
             if(execHandler)
                 $(trigger).bind(handlerEvent, function(){execHandler.call(target)});
+            
+            if(!targetIsContainer && execContainerAfterHandler)
+                $(trigger).bind(handlerEvent, function(){execContainerAfterHandler.call(targetContainer)});
+            
             
         });
         
@@ -116,31 +129,7 @@ mwf.standard.interactivity = new function(){
         
     }
     
-    this.getExecHandler = function(name){
-        
-        return getHandlerCallback(name, 'exec');
-        
-    };
-
-    this.getInitHandler = function(name){
-        
-        return getHandlerCallback(name, 'init');
-        
-    };
-    
-    this.getExecContainerHandler = function(name){
-        
-        return getHandlerCallback(name, 'execContainer');
-        
-    };
-
-    this.getInitContainerHandler = function(name){
-        
-        return getHandlerCallback(name, 'initContainer');
-        
-    };
-    
-    var getHandlerCallback = function(name, type){
+    this.getHandlerCallback = function(name, type){
         
         return typeof handlers[name] == 'object' && typeof handlers[name].callbacks[type] == 'function' 
             ? handlers[name].callbacks[type] 
@@ -157,8 +146,6 @@ mwf.standard.interactivity = new function(){
         return c;
         
     };
-    
-    // can use multiple with .closest such as $('...').closest('.expandable', '.transitionable')
     
 };
 

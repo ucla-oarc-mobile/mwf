@@ -75,7 +75,7 @@ class JS
         /**
          * External libraries by key
          */
-        self::$_external['jquery'] = 'https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js';
+        self::$_external['jquery'] = 'http://localhost/mwf/root/assets/js/full/jquery.js';
         self::$_external['jquery_ui'] = 'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js';
     
         /**
@@ -88,6 +88,7 @@ class JS
         self::$_dependencies['forms'] = array('jquery', 'jquery.validation');
         self::$_dependencies['tooltip'] = array('jquery', 'jquery.tooltip');
         self::$_dependencies['interactivity'] = array('jquery');
+        self::$_dependencies['interactivity/expandable'] = array('interactivity');
     }
     
     /**
