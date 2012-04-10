@@ -40,7 +40,7 @@ class Content_Site_Decorator extends Tag_HTML_Decorator
 
     public function add_header($inner, $params = array())
     {
-        return $this->add_inner_tag('h1', $inner, $params);
+        return $this->add_inner_tag('h2', $inner, $params);
     }
 
     public function add_header_light($inner, $params = array())

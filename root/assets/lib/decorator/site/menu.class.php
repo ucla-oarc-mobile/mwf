@@ -65,7 +65,7 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
     }
 
     public function set_title($inner, $params = array()) {
-        $this->_title = $inner === false ? false : HTML_Decorator::tag('h1', $inner, $params);
+        $this->_title = $inner === false ? false : HTML_Decorator::tag('h2', $inner, $params);
         return $this;
     }
 

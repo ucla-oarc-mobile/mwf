@@ -74,7 +74,7 @@ class Form_Site_Decorator extends Tag_HTML_Decorator {
      * @return Form_Site_Decorator 
      */
     public function set_title($text, $params = array()) {
-        $this->_title = $text === false ? false : HTML_Decorator::tag('h1', $text, $params);
+        $this->_title = $text === false ? false : HTML_Decorator::tag('h2', $text, $params);
         return $this;
     }
 
