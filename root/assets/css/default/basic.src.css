@@ -711,19 +711,6 @@ form .time-field select {
     width: auto;
 }
 
-/* Without styling, range does not display by default on Android 4.0 and below. */
-input[type='range']{
-    background: grey;
-    height:10px;
-}
-
-input[type='range']::-webkit-slider-thumb{
-    background:black;
-    height:15px;
-    width:15px;
-    border-radius:15px;
-}
-
 
 /* ------------------------------------------------------
  * multi level form
