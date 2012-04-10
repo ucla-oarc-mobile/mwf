@@ -28,7 +28,15 @@ class Form_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
      */
     public function render_padded_padded() {
         $this->object->set_padded();
-        $this->assertContains('class="padded"', $this->object->render());
+        $this->assertNotContains('class="not-padded"', $this->object->render());
+    }
+    
+    /**
+     * @test
+     */
+    public function render_notPadded_notPadded() {
+        $this->object->set_not_padded();
+        $this->assertContains('class="not-padded"', $this->object->render());
     }
 
     /**
