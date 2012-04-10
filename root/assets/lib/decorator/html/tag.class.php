@@ -14,7 +14,7 @@
  * @uses Decorator
  */
 require_once(dirname(dirname(__DIR__)) . '/decorator.class.php');
-require_once(__DIR__) . '/Tag_ParamsInterface.php';
+require_once(__DIR__) . '/tag_paramsinterface.php';
 
 class Tag_HTML_Decorator extends Decorator implements Tag_ParamsInterface {
 
