@@ -1,1 +1,52 @@
-mwf.site.analytics.trackPageview=function(a){a=a||window.location.pathname+window.location.search+window.location.hash;if(mwf.site.analytics.key){_gaq.push(["_trackPageview",a])}for(var b=0;b<mwf.site.analytics.pathKeys.length;b++){if(a.substring(0,mwf.site.analytics.pathKeys[b].s.length)==mwf.site.analytics.pathKeys[b].s){_gaq.push(["t"+b+"._trackPageview",a])}}};var _gaq=_gaq||[];mwf.site.analytics.init=function(){if(mwf.site.analytics.key){_gaq.push(["_setAccount",mwf.site.analytics.key])}for(var a=0;a<mwf.site.analytics.pathKeys.length;a++){_gaq.push(["t"+a+"._setAccount",mwf.site.analytics.pathKeys[a].a])}if(mwf.userAgent.isNative()){_gaq.push(["_setCustomVar",1,"mwf_native_client",mwf.userAgent.getOS()])}mwf.site.analytics.trackPageview();if(_gaq.length!=0){(function(){var c=document.createElement("script");c.type="text/javascript";c.async=true;c.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(c,b)})()}};mwf.site.analytics.init();
+/**
+ *
+ * @author trott
+ * @copyright Copyright (c) 2010-12 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20120208
+ *
+ * @requires mwf.userAgent
+ */
+
+mwf.site.analytics.trackPageview = function(url) {
+    if (mwf.site.analytics.key) {
+        _gaq.push(["_trackPageview",url]);
+    }
+    
+    for (var i = 0; i < mwf.site.analytics.pathKeys.length; i++) {
+        if (url.substring(0,mwf.site.analytics.pathKeys[i].s.length) == mwf.site.analytics.pathKeys[i].s)
+            _gaq.push(["t"+i+"._trackPageview",url]);
+    }
+}
+
+
+var _gaq = _gaq || [];
+    
+if(mwf.site.analytics.key) {
+    _gaq.push(["_setAccount", mwf.site.analytics.key]);
+    _gaq.push(["_trackPageview"]);
+}
+    
+for (var i = 0; i < mwf.site.analytics.pathKeys.length; i++) {
+    _gaq.push(["t"+i+"._setAccount",mwf.site.analytics.pathKeys[i].a]);
+}
+    
+if (mwf.userAgent.isNative()) {
+    // Special tracking for native client.
+    // @todo: Make this configurable (on|off, at least) and customizable
+    //   (might want to track native container version number, for example)
+    // @todo: Possible to integration test this with PHP code?
+    _gaq.push(['_setCustomVar', 1, 'mwf_native_client', mwf.userAgent.getOS()]);       
+}
+    
+
+if (_gaq.length==0) {
+    (function() {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+}
