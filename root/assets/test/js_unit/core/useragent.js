@@ -66,6 +66,17 @@ test("mwf.userAgent.getOSVersion() for iPhone", function()
     navigator = oldNav;
 });
 
+test ("mwf.userAgent.getOSVersion() for iPad running iOS 5.1", function()
+{
+    var oldNav = navigator;
+    navigator = {
+        'userAgent':'Mozilla/5.0 (iPad; CPU OS 5_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9B176 Safari/7534.48.3'
+    };
+    var ua = new mwf.userAgent.constructor();
+    equal(ua.getOSVersion(), "5.1", "getOSVersion() should parse iOS 5.1 userAgent string");
+    navigator = oldNav;
+})
+
 test("mwf.userAgent.getOSVersion() for Blackberry 7.0", function()
 {
     var oldNav = navigator;

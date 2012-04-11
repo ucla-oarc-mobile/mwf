@@ -61,9 +61,10 @@ mwf.userAgent = new function() {
         switch(this.getOS())
         {
             case 'iphone_os':
-                s = ua.indexOf('iphone os')+10;
-                r = ua.substring(s, ua.indexOf(' ', s));
-                break;
+                x = ua.match(/(iphone|cpu) os ([\d_]+)/);
+                if (x!=null) 
+                    r = x[2];
+                break;               
             case 'blackberry':
                 x = ua.match(/^mozilla\/5\.0 \(blackberry;.* version\/([\d\.]+)/);
                 if (x!=null) {
