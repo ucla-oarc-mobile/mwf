@@ -9,10 +9,7 @@
  */
 
 mwf.site.analytics.trackPageview = function(url) {
-<<<<<<< HEAD
     url = url || window.location.pathname + window.location.search + window.location.hash; 
-=======
->>>>>>> c69a955... Enable function for in-page analytics (required for lightning touch).
     if (mwf.site.analytics.key) {
         _gaq.push(["_trackPageview",url]);
     }
@@ -25,7 +22,6 @@ mwf.site.analytics.trackPageview = function(url) {
 
 
 var _gaq = _gaq || [];
-<<<<<<< HEAD
 
 
 mwf.site.analytics.init = function() {
@@ -60,35 +56,3 @@ mwf.site.analytics.init = function() {
 }
 
 mwf.site.analytics.init();
-=======
-    
-if(mwf.site.analytics.key) {
-    _gaq.push(["_setAccount", mwf.site.analytics.key]);
-    _gaq.push(["_trackPageview"]);
-}
-    
-for (var i = 0; i < mwf.site.analytics.pathKeys.length; i++) {
-    _gaq.push(["t"+i+"._setAccount",mwf.site.analytics.pathKeys[i].a]);
-}
-    
-if (mwf.userAgent.isNative()) {
-    // Special tracking for native client.
-    // @todo: Make this configurable (on|off, at least) and customizable
-    //   (might want to track native container version number, for example)
-    // @todo: Possible to integration test this with PHP code?
-    _gaq.push(['_setCustomVar', 1, 'mwf_native_client', mwf.userAgent.getOS()]);       
-}
-    
-
-if (_gaq.length==0) {
-    (function() {
-        var ga = document.createElement('script');
-        ga.type = 'text/javascript';
-        ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(ga, s);
-    })();
-}
-
->>>>>>> c69a955... Enable function for in-page analytics (required for lightning touch).

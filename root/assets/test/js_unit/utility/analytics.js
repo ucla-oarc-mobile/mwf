@@ -4,35 +4,21 @@
  * @author trott
  * @copyright Copyright (c) 2012 UC Regents
  * @license http://mwf.ucla.edu/license
-<<<<<<< HEAD
  * @version 20120226
  *
  * @requires mwf
  * @requires mwf.site.analytics
  * @requires mwf.userAgent
-=======
- * @version 20120208
- *
- * @requires mwf
- * @requires mwf.site.analytics
->>>>>>> c69a955... Enable function for in-page analytics (required for lightning touch).
  * @requires qunit
  * 
  */
 
 module("utility/analytics.js", {
     setup: function() {
-<<<<<<< HEAD
         this._gaq_orig = _gaq;
         _gaq = [];
         this.key_orig = mwf.site.analytics.key;
         this.pathKeys_orig = mwf.site.analytics.pathKeys;
-=======
-         this._gaq_orig = _gaq;
-         _gaq = [];
-         this.key_orig = mwf.site.analytics.key;
-         this.pathKeys_orig = mwf.site.analytics.pathKeys;
->>>>>>> c69a955... Enable function for in-page analytics (required for lightning touch).
     },
     teardown: function() {
         _gaq = this._gaq_orig;
@@ -89,18 +75,12 @@ test("mwf.site.analytics.trackPageview() global key only", function()
 test("mwf.site.analytics.trackPageview() path key only, no match", function()
 {
     mwf.site.analytics.key = null;
-<<<<<<< HEAD
     mwf.site.analytics.pathKeys = [{
         a:"UA-XXXXXX-X", 
         s:"/foo/"
     }];
     mwf.site.analytics.trackPageview("/bar.html");
     same(_gaq, 
-=======
-    mwf.site.analytics.pathKeys = [{a:"UA-XXXXXX-X", s:"/foo/"}];
-    mwf.site.analytics.trackPageview("/bar.html");
-        same(_gaq, 
->>>>>>> c69a955... Enable function for in-page analytics (required for lightning touch).
         [], 
         "no reporting should occur if path key is set but path does not match");
 })
@@ -108,25 +88,18 @@ test("mwf.site.analytics.trackPageview() path key only, no match", function()
 test("mwf.site.analytics.trackPageview() path key only, match", function()
 {
     mwf.site.analytics.key = null;
-<<<<<<< HEAD
     mwf.site.analytics.pathKeys = [{
         a:"UA-XXXXXX-X", 
         s:"/foo/"
     }];
     mwf.site.analytics.trackPageview("/foo/bar.html");
     same(_gaq, 
-=======
-    mwf.site.analytics.pathKeys = [{a:"UA-XXXXXX-X", s:"/foo/"}];
-    mwf.site.analytics.trackPageview("/foo/bar.html");
-        same(_gaq, 
->>>>>>> c69a955... Enable function for in-page analytics (required for lightning touch).
         [["t0._trackPageview", "/foo/bar.html"]], 
         "reporting should occur if path key is set and path matches");
 })
 
 test("mwf.site.analytics.trackPageview() global and path keys, no path match", function()
 {
-<<<<<<< HEAD
     mwf.site.analytics.key = "UA-XXXXXX-X";
     mwf.site.analytics.pathKeys = [{
         a:"UA-YYYYYY-Y", 
@@ -134,19 +107,12 @@ test("mwf.site.analytics.trackPageview() global and path keys, no path match", f
     }];
     mwf.site.analytics.trackPageview("/bar/baz.html");
     same(_gaq, 
-=======
-mwf.site.analytics.key = "UA-XXXXXX-X";
-mwf.site.analytics.pathKeys = [{a:"UA-YYYYYY-Y", s:"/foo/"}];
-    mwf.site.analytics.trackPageview("/bar/baz.html");
-        same(_gaq, 
->>>>>>> c69a955... Enable function for in-page analytics (required for lightning touch).
         [["_trackPageview", "/bar/baz.html"]], 
         "reporting should occur for global key only");
 })
 
 test("mwf.site.analytics.trackPageview() global and path keys, path match", function()
 {
-<<<<<<< HEAD
     mwf.site.analytics.key = "UA-XXXXXX-X";
     mwf.site.analytics.pathKeys = [{
         a:"UA-YYYYYY-Y", 
@@ -154,12 +120,6 @@ test("mwf.site.analytics.trackPageview() global and path keys, path match", func
     }];
     mwf.site.analytics.trackPageview("/bar/baz.html");
     same(_gaq, 
-=======
-mwf.site.analytics.key = "UA-XXXXXX-X";
-mwf.site.analytics.pathKeys = [{a:"UA-YYYYYY-Y", s:"/bar/"}];
-    mwf.site.analytics.trackPageview("/bar/baz.html");
-        same(_gaq, 
->>>>>>> c69a955... Enable function for in-page analytics (required for lightning touch).
         [["_trackPageview", "/bar/baz.html"],["t0._trackPageview", "/bar/baz.html"]], 
         "reporting should occur if for both keys");
 })
@@ -167,7 +127,6 @@ mwf.site.analytics.pathKeys = [{a:"UA-YYYYYY-Y", s:"/bar/"}];
 test("mwf.site.analytics.trackPageview(), no global key, multiple path keys with no match", function()
 {
     mwf.site.analytics.key = null;
-<<<<<<< HEAD
     mwf.site.analytics.pathKeys = [{
         a:"UA-XXXXXX-X", 
         s:"/foo/"
@@ -177,11 +136,6 @@ test("mwf.site.analytics.trackPageview(), no global key, multiple path keys with
     }];
     mwf.site.analytics.trackPageview("/bar.html");
     same(_gaq, 
-=======
-    mwf.site.analytics.pathKeys = [{a:"UA-XXXXXX-X", s:"/foo/"},{a:"UA-ZZZZZZ-Z", s:"/bar/"}];
-    mwf.site.analytics.trackPageview("/bar.html");
-        same(_gaq, 
->>>>>>> c69a955... Enable function for in-page analytics (required for lightning touch).
         [], 
         "no reporting should occur");
 })
@@ -189,7 +143,6 @@ test("mwf.site.analytics.trackPageview(), no global key, multiple path keys with
 test("mwf.site.analytics.trackPageview(), global key, multiple path keys with no match", function()
 {
     mwf.site.analytics.key = "UA-YYYYYY-Y";
-<<<<<<< HEAD
     mwf.site.analytics.pathKeys = [{
         a:"UA-XXXXXX-X", 
         s:"/foo/"
@@ -199,11 +152,6 @@ test("mwf.site.analytics.trackPageview(), global key, multiple path keys with no
     }];
     mwf.site.analytics.trackPageview("/bar.html");
     same(_gaq, 
-=======
-    mwf.site.analytics.pathKeys = [{a:"UA-XXXXXX-X", s:"/foo/"},{a:"UA-ZZZZZZ-Z", s:"/bar/"}];
-    mwf.site.analytics.trackPageview("/bar.html");
-        same(_gaq, 
->>>>>>> c69a955... Enable function for in-page analytics (required for lightning touch).
         [["_trackPageview", "/bar.html"]], 
         "reporting should occur for global key only");
 })
@@ -211,7 +159,6 @@ test("mwf.site.analytics.trackPageview(), global key, multiple path keys with no
 test("mwf.site.analytics.trackPageview(), no global key, multiple path keys with single match", function()
 {
     mwf.site.analytics.key = null;
-<<<<<<< HEAD
     mwf.site.analytics.pathKeys = [{
         a:"UA-XXXXXX-X", 
         s:"/foo/"
@@ -221,11 +168,6 @@ test("mwf.site.analytics.trackPageview(), no global key, multiple path keys with
     }];
     mwf.site.analytics.trackPageview("/foo/bar.html");
     same(_gaq, 
-=======
-    mwf.site.analytics.pathKeys = [{a:"UA-XXXXXX-X", s:"/foo/"},{a:"UA-ZZZZZZ-Z", s:"/bar/"}];
-    mwf.site.analytics.trackPageview("/foo/bar.html");
-        same(_gaq, 
->>>>>>> c69a955... Enable function for in-page analytics (required for lightning touch).
         [["t0._trackPageview", "/foo/bar.html"]], 
         "reporting should occur only for matching key");
 })
@@ -233,7 +175,6 @@ test("mwf.site.analytics.trackPageview(), no global key, multiple path keys with
 test("mwf.site.analytics.trackPageview(), global key, multiple path keys with single match", function()
 {
     mwf.site.analytics.key = "UA-YYYYYY-Y";
-<<<<<<< HEAD
     mwf.site.analytics.pathKeys = [{
         a:"UA-XXXXXX-X", 
         s:"/foo/"
@@ -243,11 +184,6 @@ test("mwf.site.analytics.trackPageview(), global key, multiple path keys with si
     }];
     mwf.site.analytics.trackPageview("/foo/bar.html");
     same(_gaq, 
-=======
-    mwf.site.analytics.pathKeys = [{a:"UA-XXXXXX-X", s:"/foo/"},{a:"UA-ZZZZZZ-Z", s:"/bar/"}];
-    mwf.site.analytics.trackPageview("/foo/bar.html");
-        same(_gaq, 
->>>>>>> c69a955... Enable function for in-page analytics (required for lightning touch).
         [["_trackPageview", "/foo/bar.html"],["t0._trackPageview", "/foo/bar.html"]], 
         "reporting should occur only for global key and matching key");
 })
@@ -255,7 +191,6 @@ test("mwf.site.analytics.trackPageview(), global key, multiple path keys with si
 test("mwf.site.analytics.trackPageview(), no global key, multiple path keys with multiple matches", function()
 {
     mwf.site.analytics.key = null;
-<<<<<<< HEAD
     mwf.site.analytics.pathKeys = [{
         a:"UA-XXXXXX-X", 
         s:"/foo/bar/"
@@ -265,11 +200,6 @@ test("mwf.site.analytics.trackPageview(), no global key, multiple path keys with
     }];
     mwf.site.analytics.trackPageview("/foo/bar/baz.html");
     same(_gaq, 
-=======
-    mwf.site.analytics.pathKeys = [{a:"UA-XXXXXX-X", s:"/foo/bar/"},{a:"UA-ZZZZZZ-Z", s:"/foo/"}];
-    mwf.site.analytics.trackPageview("/foo/bar/baz.html");
-        same(_gaq, 
->>>>>>> c69a955... Enable function for in-page analytics (required for lightning touch).
         [["t0._trackPageview", "/foo/bar/baz.html"],["t1._trackPageview", "/foo/bar/baz.html"]], 
         "reporting should occur for multiple matching keys");
 })
@@ -277,7 +207,6 @@ test("mwf.site.analytics.trackPageview(), no global key, multiple path keys with
 test("mwf.site.analytics.trackPageview(), global key, multiple path keys with multiple matches", function()
 {
     mwf.site.analytics.key = "UA-YYYYYY-Y";
-<<<<<<< HEAD
     mwf.site.analytics.pathKeys = [{
         a:"UA-XXXXXX-X", 
         s:"/foo/bar/"
@@ -339,11 +268,4 @@ test("mwf.site.analytics constructor notes native app", function() {
             success=true;
     ok(success, 'analytics constructor notes native app');
     mwf.userAgent.isNative = saveIsNative;
-=======
-    mwf.site.analytics.pathKeys = [{a:"UA-XXXXXX-X", s:"/foo/bar/"},{a:"UA-ZZZZZZ-Z", s:"/foo/"},{a:"UA-AAAAAA-A", s:"/whatever/"}];
-    mwf.site.analytics.trackPageview("/foo/bar/baz.html");
-        same(_gaq, 
-        [["_trackPageview", "/foo/bar/baz.html"], ["t0._trackPageview", "/foo/bar/baz.html"], ["t1._trackPageview", "/foo/bar/baz.html"]], 
-        "reporting should occur for global key and multiple matching keys");
->>>>>>> c69a955... Enable function for in-page analytics (required for lightning touch).
 })
