@@ -7,14 +7,14 @@
  * @author trott
  * @copyright Copyright (c) 2012 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120322
+ * @version 20120410
  *
  * @uses Tag_HTML_Decorator
  * 
  * @implements Tag_ParamsInterface
  */
 require_once(dirname(__DIR__) . '/html_decorator.class.php');
-require_once(dirname(__DIR__) . '/html/Tag_ParamsInterface.php');
+require_once(dirname(__DIR__) . '/html/tag_paramsinterface.php');
 
 class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
 
@@ -423,13 +423,13 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
         $this->type_select();
 
         $tag = HTML_Decorator::tag('option', $label, array('value' => $value));
- 
+
         if ($prepend) {
             array_unshift($this->_options, $tag);
         } else {
             $this->_options[] = $tag;
         }
-        
+
         if ((count($this->_options) === 1) || $prepend) {
             $this->_first_option_value = $value;
             $this->_first_option_text = $label;
@@ -484,7 +484,7 @@ class Input_Site_Decorator extends Decorator implements Tag_ParamsInterface {
 
 
         /*
-         * HTML5 requires tha the first child option element of a select element 
+         * HTML5 requires that the first child option element of a select element 
          * with a required attribute and without a multiple attribute, and whose 
          * size is 1, must have either an empty value attribute, or must have no 
          * text content.
