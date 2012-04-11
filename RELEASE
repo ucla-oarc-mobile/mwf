@@ -99,6 +99,8 @@ April 13, 2012
 
     * userAgent.getOSVersion() fix for Blackberry [#110]
 
+    * userAgent.getOSVersion() fix for iPad 5.1 [#130]
+
     * Remove capability.flexbox() [#83]
 
     * Updated Modernizr for improved capability detection [#76]
