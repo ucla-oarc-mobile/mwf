@@ -7,3 +7,11 @@ Scenario: JS Unit Tests
   Given I am on the JS Unit Tests page
   Then I should see that all tests have passed
   And I should see that no tests have failed
+
+Scenario: mwf.userAgent does not leak variables into global space
+  Given I am on the JS Unit Tests page filtered for mwf.userAgent
+  Then I should see that all tests have passed
+  And I should see that no tests have failed
+  And I check the noglobals checkbox
+  Then I should see that all tests have passed
+  And I should see that no tests have failed
