@@ -172,7 +172,7 @@ mwf.userAgent = new function(optionalUAString) {
      * @return string
      */
     this.generateCookieContent = function(){
-        
+        var t;
         var cookie = '{';
         cookie += '"s":"'+uaString+'"';
         if(t = this.getOS())
