@@ -23,7 +23,7 @@ mwf.userAgent = new function(optionalUAString) {
      */
     this.cookieName = mwf.site.cookie.prefix + 'user_agent';
     
-    var uaString = optionalUAString ? optionalUAString : navigator.userAgent;
+    var uaString = typeof optionalUAString === 'undefined' ? navigator.userAgent : optionalUAString;
     var userAgent = uaString.toLowerCase();
     
     var userAgentSubstringExists = function(s){
