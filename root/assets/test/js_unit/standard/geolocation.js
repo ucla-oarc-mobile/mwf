@@ -156,28 +156,25 @@ test("mwf.standard.geolocation.isSupported()", function() {
     equal(mwf.standard.geolocation.isSupported(),true,"Geolocation is supported.");
 })
 
-test("mwf.touch.geolocation.getPosition(onSuccess,onError)", function() {
-    var saveNavigator = navigator;
-    navigator = new Object();
-    navigator.__proto__ = saveNavigator;
-    navigator.geolocation = new Object();
-    navigator.geolocation.getCurrentPosition=function(onSuccess,onError) {
+test("mwf.touch.geolocation.getPosition(onSuccess,onError)", function() {   
+    var geo = {};
+    geo.getCurrentPosition=function(onSuccess,onError) {
         onSuccess({coords:{latitude:1.11,longitude:2.22,accuracy:3}});
     }
     
     expect(1);
     QUnit.config.testTimeout = 5000;
     QUnit.stop();
-    mwf.touch.geolocation.getPosition(function(pos) {
+    var g = new mwf.standard.geolocation.constructor(geo);
+
+    g.getPosition(function(pos) {
         var receivedExpectedResultTypes = 
         typeof pos['latitude']=='number'
         && typeof pos['longitude']=='number'
         && typeof pos['accuracy']=='number';
         ok(receivedExpectedResultTypes, 'lat, long, and accuracy should be numbers');
         start();
-    });
-    
-    navigator = saveNavigator;
+    });    
 })
 
 test("mwf.touch.geolocation.getPosition(onSuccess) Geolocation unsupported", function() {
@@ -291,34 +288,30 @@ test("mwf.standard.geolocation.getCurrentPosition() unsupported with error callb
 });
 
 test("mwf.standard.geolocation.getCurrentPosition(onSuccess)", function() {
-    var saveNavigator = navigator;
-    navigator = new Object();
-    navigator.__proto__ = saveNavigator;
-    navigator.geolocation = new Object();
-    navigator.geolocation.getCurrentPosition=function(onSuccess,onError) {
+
+    var geo = {};
+    geo.getCurrentPosition=function(onSuccess,onError) {
         onSuccess({'coords':{'latitude':1.11,'longitude':2.22, 'accuracy':3}});
     }
+    var g = new mwf.standard.geolocation.constructor(geo);
    
     QUnit.config.testTimeout = 5000;
     QUnit.stop();
-    mwf.standard.geolocation.getCurrentPosition(function(pos) {
+    g.getCurrentPosition(function(pos) {
         equal(typeof pos['latitude'], 'number', 'latitude should be a number');
         equal(typeof pos['longitude'], 'number', 'longitude should be a number');
         equal(typeof pos['accuracy'], 'number', 'accuracy should be a number');
         start();
     });
-    navigator=saveNavigator;
 })
 
 test("mwf.standard.geolocation.getCurrentPosition(onSuccess) Geolocation unsupported", function() {
 
-    var getApi = mwf.standard.geolocation.getApi;
-    mwf.standard.geolocation.getApi = function() {
-        return null;
-    };
-
+    var geo = null;
+    var g = new mwf.standard.geolocation.constructor(geo);
+    
     try {
-        var rv = mwf.standard.geolocation.getCurrentPosition(function() {
+        var rv = g.getCurrentPosition(function() {
             ok(false, 'success callback should not trigger if geolocation is unsupported');
         });
         equal(typeof rv, 'undefined', 'getCurrentPosition() function should not return a value'); 
@@ -326,9 +319,6 @@ test("mwf.standard.geolocation.getCurrentPosition(onSuccess) Geolocation unsuppo
     catch(ex) {
         ok(false, 'getCurrentPosition() should not throw an exception if an onError handler is not '
             + 'provided and geolocation is unsupported');
-    }
-    finally {
-        mwf.standard.geolocation.getApi = getApi;
     }
 })
 
@@ -341,7 +331,7 @@ test("mwf.standard.geolocation.setHighAccuracy()", function() {
 })
 
 test("mwf.standard.geolocation.getApi()", function() {
-    equal(Object.prototype.toString.call(mwf.standard.geolocation.getApi()), "[object Geolocation]", 'modern phones support navigator.geolocation');
+    equal(typeof mwf.standard.geolocation.getApi(), "object", 'getApi() returns an object');
 })
 
 test("mwf.standard.geolocation.getApi() Google Gears", function() {

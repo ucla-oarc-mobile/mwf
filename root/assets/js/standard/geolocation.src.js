@@ -12,7 +12,7 @@
  *   @todo: For 2.0, do not return lat,long,accuracy.  Return the position object in its entirety instead.
  */
 
-mwf.touch.geolocation = new function()
+mwf.touch.geolocation = new function(optionalGeolocationObject)
 {
     var ERROR_MESSAGE = {
         GENERAL: 'Geolocation failure.',
@@ -40,7 +40,9 @@ mwf.touch.geolocation = new function()
     
     //The maximum time (in milliseconds) for which you are prepared to allow 
     //the device to try to obtain a Geo location.
-    var geoTimeout = 5000;
+    var geoTimeout = 5000;    
+    
+    var geolocationObject = typeof optionalGeolocationObject == "undefined" ? undefined : optionalGeolocationObject;
     
     /**
      * @deprecated (should be a private or protected method)
@@ -56,6 +58,9 @@ mwf.touch.geolocation = new function()
         return type;
     }
 
+    /**
+     * @deprecated (unnecessary)
+     */
     this.getTypeName = function()
     {
         switch(this.getType())
@@ -74,15 +79,20 @@ mwf.touch.geolocation = new function()
      */
     this.getApi = function()
     {
-        switch(this.getType())
-        {
-            case 1:
-                return navigator.geolocation;
-            case 2:
-                return google.gears.factory.create('beta.geolocation');
-            default:
-                return null;
+        if (typeof geolocationObject == "undefined") {
+            switch(this.getType())
+            {
+                case 1:
+                    geolocationObject = navigator.geolocation;
+                    break;
+                case 2:
+                    geolocationObject = google.gears.factory.create('beta.geolocation');
+                    break;
+                default:
+                    geolocationObject = null;
+            }
         }
+        return geolocationObject;
     }
 
     this.isSupported = function()
@@ -97,9 +107,8 @@ mwf.touch.geolocation = new function()
      * @return void
      */
     this.getPosition = function(onSuccess, onError)
-    {
+    {   
         var geo = this.getApi();
-        
         if(geo === null)
         {
             if(typeof onError != 'undefined') {
@@ -133,9 +142,9 @@ mwf.touch.geolocation = new function()
     }
     
     this.getCurrentPosition = function(onSuccess, onError)
-    {
+    {      
         var geo = this.getApi();
-        
+
         if(geo === null)
         {
             if(typeof onError == 'function')
@@ -168,7 +177,7 @@ mwf.touch.geolocation = new function()
     this.watchPosition = function(onSuccess, onError)
     {
         var geo = this.getApi();
-        
+
         if(!geo)
         {
             if(typeof onError == 'function') {
@@ -209,7 +218,7 @@ mwf.touch.geolocation = new function()
     this.clearWatch = function(watchID)
     {
         var geo = this.getApi();
-        
+
         if(geo !== null)
             geo.clearWatch(watchID);
     }
