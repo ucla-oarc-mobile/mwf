@@ -395,8 +395,8 @@ test("mwf.capability.websockets()", function()
     equal(typeof websockets, 'boolean', 'mwf.capability.websockets() should return a boolean');
 
     if ((os == 'iphone_os') || (os == 'android')) {
-        var osVersion = parseInt(mwf.userAgent.getOSVersion());
-        var supports = (os == 'iphone_os' && osVersion > 4 || osVersion.indexOf('4.2')==0 || osVersion.indexOf('4.3')==0);  
+        var osVersion = mwf.userAgent.getOSVersion();
+        var supports = (os == 'iphone_os' && parseInt(osVersion) > 4 || osVersion.indexOf('4.2')==0 || osVersion.indexOf('4.3')==0);  
         equal(websockets, supports, 'browser supports web sockets');
     }
 });
