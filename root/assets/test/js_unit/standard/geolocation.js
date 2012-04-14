@@ -260,8 +260,11 @@ test("mwf.standard.geolocation.getPosition() unsupported with error callback", f
         start();
     });
     
-    if (typeof saveGoogle != 'undefined')
+    if (typeof saveGoogle != 'undefined') {
         window.google = saveGoogle;
+    } else {
+        delete window.google;
+    }
 
     navigator = saveNavigator;    
 });
@@ -304,8 +307,11 @@ test("mwf.standard.geolocation.getCurrentPosition() unsupported with error callb
         start();
     });
     
-    if (typeof saveGoogle != 'undefined')
+    if (typeof saveGoogle != 'undefined') {
         window.google = saveGoogle;
+    } else {
+        delete window.google;
+    }
 
     navigator = saveNavigator;    
 });
@@ -393,8 +399,11 @@ test("mwf.standard.geolocation.getApi() Google Gears", function() {
 
     var api = newGeolocation.getApi();
     
-    if (typeof saveGoogle != 'undefined')
+    if (typeof saveGoogle != 'undefined') {
         window.google = saveGoogle;
+    } else {
+        delete window.google;
+    }
 
     navigator = saveNavigator;
     
@@ -491,8 +500,11 @@ test("mwf.standard.geolocation.watchPosition() unsupported with error callback",
         start();
     });
     
-    if (typeof saveGoogle != 'undefined')
+    if (typeof saveGoogle != 'undefined') {
         window.google = saveGoogle;
+    } else {
+        delete window.google;
+    }
 
     navigator = saveNavigator;    
 });
