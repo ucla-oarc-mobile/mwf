@@ -65,8 +65,11 @@ test("mwf.standard.geolocation.getType() Google Gears", function()
 
     var type = newGeolocation.getType();
     
-    if (typeof saveGoogle != 'undefined')
+    if (typeof saveGoogle != 'undefined') {
         window.google = saveGoogle;
+    } else {
+        delete window.google;
+    }
 
     navigator = saveNavigator;
     
@@ -114,8 +117,11 @@ test("mwf.standard.geolocation.getTypeName() Google Gears", function()
 
     var type = newGeolocation.getTypeName();
     
-    if (typeof saveGoogle != 'undefined')
+    if (typeof saveGoogle != 'undefined') {
         window.google = saveGoogle;
+    } else {
+        delete window.google;
+    }
 
     navigator = saveNavigator;
     
@@ -152,8 +158,11 @@ test("mwf.standard.geolocation.getTypeName() Unsupported", function()
 
     var type = newGeolocation.getTypeName();
     
-    if (typeof saveGoogle != 'undefined')
+    if (typeof saveGoogle != 'undefined') {
         window.google = saveGoogle;
+    } else {
+        delete window.google;
+    }
 
     navigator = saveNavigator;
     
