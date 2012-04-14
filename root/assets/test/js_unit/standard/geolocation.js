@@ -76,6 +76,12 @@ test("mwf.standard.geolocation.getTypeName()", function()
     equal(mwf.standard.geolocation.getTypeName(),"HTML5 Geolocation","getTypeName() should return HTML5 Geolocation for modern browsers");
 });
 
+test("mwf.standard.geolocation.getTypeName() Custom", function()
+{
+    var g = new mwf.standard.geolocation.constructor(null);
+    equal(g.getTypeName(),"Custom","getTypeName() should return Custom if we've overridden the geolocation object");
+});
+
 test("mwf.standard.geolocation.getTypeName() Google Gears", function()
 {
     var saveNavigator = navigator;

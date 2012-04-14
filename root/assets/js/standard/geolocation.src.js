@@ -50,7 +50,10 @@ mwf.touch.geolocation = new function(optionalGeolocationObject)
     this.getType = function()
     {
         if(type < 0)
-            type = navigator.geolocation
+            type =             
+            typeof geolocationObject != "undefined" 
+            ? 3
+            : navigator.geolocation
             ? 1
             : typeof google != 'undefined' && google.gears
             ? 2
@@ -69,6 +72,8 @@ mwf.touch.geolocation = new function(optionalGeolocationObject)
                 return 'HTML5 Geolocation';
             case 2:
                 return 'Google Gears';
+            case 3:
+                return "Custom";
             default:
                 return 'Unsupported';
         }
