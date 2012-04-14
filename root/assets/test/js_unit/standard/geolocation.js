@@ -16,20 +16,22 @@ module("standard/geolocation.js");
             
 test("mwf.standard.geolocation.getType() HTML Geolocation", function()
 {
-    var saveNavigator = navigator;
-    navigator = new Object();
-    navigator.__proto__ = saveNavigator;
-    Object.defineProperty(navigator, 'geolocation', {
-        get: function() {
-            return true;
-        }
-    });
+    var navigatorModified = false;
+    if (typeof navigator.geolocation=="undefined") {
+        navigatorModified = true;
+        Object.defineProperty(navigator, 'geolocation', {
+            get: function() {
+                return true;
+            }
+        });
+    }
     
     var newGeolocation = new mwf.standard.geolocation.constructor;
 
     var type = newGeolocation.getType();
-    navigator = saveNavigator;
-
+    if (navigatorModified) {
+        delete navigator.geolocation;
+    }
     strictEqual(type, 1, 'getType() should return 1 for HTML Geolocation');
 });
 
@@ -165,7 +167,13 @@ test("mwf.standard.geolocation.isSupported()", function() {
 test("mwf.touch.geolocation.getPosition(onSuccess,onError)", function() {   
     var geo = {};
     geo.getCurrentPosition=function(onSuccess,onError) {
-        onSuccess({coords:{latitude:1.11,longitude:2.22,accuracy:3}});
+        onSuccess({
+            coords:{
+                latitude:1.11,
+                longitude:2.22,
+                accuracy:3
+            }
+        });
     }
     
     expect(1);
@@ -175,9 +183,9 @@ test("mwf.touch.geolocation.getPosition(onSuccess,onError)", function() {
 
     g.getPosition(function(pos) {
         var receivedExpectedResultTypes = 
-        typeof pos['latitude']=='number'
-        && typeof pos['longitude']=='number'
-        && typeof pos['accuracy']=='number';
+            typeof pos['latitude']=='number'
+            && typeof pos['longitude']=='number'
+            && typeof pos['accuracy']=='number';
         ok(receivedExpectedResultTypes, 'lat, long, and accuracy should be numbers');
         start();
     });    
@@ -297,7 +305,13 @@ test("mwf.standard.geolocation.getCurrentPosition(onSuccess)", function() {
 
     var geo = {};
     geo.getCurrentPosition=function(onSuccess,onError) {
-        onSuccess({'coords':{'latitude':1.11,'longitude':2.22, 'accuracy':3}});
+        onSuccess({
+            'coords':{
+                'latitude':1.11,
+                'longitude':2.22, 
+                'accuracy':3
+            }
+        });
     }
     var g = new mwf.standard.geolocation.constructor(geo);
    
@@ -480,7 +494,13 @@ test("mwf.standard.geolocation.watchPosition() Geolocation supported and watchPo
     navigator.__proto__ = saveNavigator;
     navigator.geolocation = new Object();
     navigator.geolocation.watchPosition=function(onSuccess,onError) {
-        onSuccess({'coords':{'latitude':1.11,'longitude':2.22, 'accuracy':3}});
+        onSuccess({
+            'coords':{
+                'latitude':1.11,
+                'longitude':2.22, 
+                'accuracy':3
+            }
+        });
     }
    
     var newGeolocation = new mwf.standard.geolocation.constructor;
@@ -528,7 +548,10 @@ test("mwf.standard.geolocation.getCurrentPosition() Geolocation supported but er
     navigator.__proto__ = saveNavigator;
     navigator.geolocation = new Object();
     navigator.geolocation.getCurrentPosition=function(onSuccess,onError) {
-        onError({code:2,message:'Totally Lame Error Occurred! Bummer!'});
+        onError({
+            code:2,
+            message:'Totally Lame Error Occurred! Bummer!'
+        });
     }
    
     var newGeolocation = new mwf.standard.geolocation.constructor;
@@ -552,7 +575,10 @@ test("mwf.standard.geolocation.getPosition() Geolocation supported but error occ
     navigator.__proto__ = saveNavigator;
     navigator.geolocation = new Object();
     navigator.geolocation.getCurrentPosition=function(onSuccess,onError) {
-        onError({code:2,message:'Totally Lame Error Occurred! Bummer!'});
+        onError({
+            code:2,
+            message:'Totally Lame Error Occurred! Bummer!'
+        });
     }
    
     var newGeolocation = new mwf.standard.geolocation.constructor;
