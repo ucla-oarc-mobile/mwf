@@ -51,17 +51,12 @@ mwf.server = new function(){
         
         /**
          * Exit in the event that no_server_init is set as a query string
-         * parameter. This ensures that an infinite loop will not occur with
-         * passhthru.php, as it adds this parameter to the query string on
-         * reload of the originator.
+         * parameter. This helps to ensure that an infinite loop will not occur 
+         * as the framework adds this parameter to the query string on
+         * redirect back to the originator.
          */
-        var query = window.location.href.split('?')[1];
-        if(typeof query != 'undefined'){
-            var vars = query.split('&');
-            for(var i = 0; i < vars.length; i++){
-                if(vars[i].split('=')[0] == 'no_server_init')
-                    return;
-            }
+        if (/^(\?|.*&)no_server_init([\=\&].*)?$/.test(window.location.search)) {
+                return;
         }
         
         var classificationCookie = classification.generateCookieContent();
@@ -97,7 +92,11 @@ mwf.server = new function(){
          */
         
         if(this.mustReload && !mwf.override.isRedirecting){
-            site.reload();
+            var loc = window.location.href;
+            if(loc.indexOf('?') == -1) loc += "?";
+            if(loc.indexOf('?') < loc.length-1) loc += "&";
+            loc += "no_server_init";
+            site.redirect(loc);
         }else if(this.mustRedirect && !mwf.override.isRedirecting){
             site.redirect(site.asset.root+'/passthru.php?return='+encodeURIComponent(window.location)+'&mode='+mwf.browser.getMode());
         }

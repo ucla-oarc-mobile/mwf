@@ -1,13 +1,20 @@
 <!DOCTYPE html> 
-<!-- Before running, the two required entries in config/global.php need to be configured. -->
 <html>  
     <head>
         <title>MWF JS unit tests</title>
         <link rel="stylesheet" href="qunit/qunit.css" type="text/css"/>  
         <meta name="viewport" content="height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+        <!-- If no_server_init, reload without it. Its side effects can cause test failures. -->
+        <script>
+            if (/^(\?|.*&)no_server_init([\=\&].*)?$/.test(window.location.search)) {
+                window.location.href = window.location.href.replace("no_server_init","");
+            }
+        </script>
+
         <script src="../../js.php?standard_libs=geolocation+preferences&amp;full_libs=configurableMenu"></script>
         <script src="qunit/qunit.js"></script>  
-        
+
         <!-- JS files below contain the unit tests for the files that share their names -->
         <script src="core/server.js"></script>
         <script src="core/vars.php.js"></script>
