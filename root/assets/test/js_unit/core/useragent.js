@@ -21,7 +21,7 @@ test("mwf.userAgent.getOS()", function()
     ok(typeof os === 'string','getOS() should return a string');
     
     var expected_results = ['iphone_os', 'android','blackberry','windows phone os','windows mobile',
-        'symbian','webos','mac os x','windows nt','linux', ''];
+    'symbian','webos','mac os x','windows nt','linux', ''];
     
     ok(expected_results.indexOf(os) > -1, 'getOS() should be expected value: ' + os);
 });
@@ -41,6 +41,37 @@ test ("mwf.userAgent.getOSVersion() for iPad running iOS 5.1", function()
     };
     var ua = new mwf.userAgent.constructor();
     equal(ua.getOSVersion(), "5.1", "getOSVersion() should parse iOS 5.1 userAgent string");
+
+test("mwf.userAgent.getOSVersion() for iPhone", function()
+{
+    var oldNav = navigator;
+    navigator = {
+        'userAgent':'Mozilla/5.0 (iPod; U; CPU iPhone OS 4_3_3 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8J2 Safari/6533.18.5'
+    };
+    var ua = new mwf.userAgent.constructor();
+    equal(ua.getOSVersion(),"4.3.3","getOSVersion() should parse iOS 4.3.3 userAgent string");
+    navigator = oldNav;
+});
+
+test("mwf.userAgent.getOSVersion() for Blackberry 7.0", function()
+{
+    var oldNav = navigator;
+    navigator = {
+        'userAgent':'Mozilla/5.0 (BlackBerry; U; BlackBerry 9860; en-GB) AppleWebKit/534.11+ (KHTML, like Gecko) Version/7.0.0.296 Mobile Safari/534.11+'
+    };
+    var ua = new mwf.userAgent.constructor();
+    equal(ua.getOSVersion(),"7.0.0.296","getOSVersion() should parse Blackberry 7.0.0.296 userAgent string");
+    navigator = oldNav;
+});
+
+test("mwf.userAgent.getOSVersion() for Blackberry 5.0", function()
+{
+    var oldNav = navigator;
+    navigator = {
+        'userAgent':'BlackBerry9650/5.0.0.732 Profile/MIDP-2.1 Configuration/CLDC-1.1 VendorID/105'
+    };
+    var ua = new mwf.userAgent.constructor();
+    equal(ua.getOSVersion(),"5.0.0.732","getOSVersion() should parse Blackberry 5.0.0.732 userAgent string");
     navigator = oldNav;
 });
 
@@ -51,7 +82,7 @@ test("mwf.userAgent.getBrowser()", function()
     ok(typeof browser === 'string','getBrowser() should return a string');
     
     var expected_results = ['android_webkit', 'safari', 'chrome', 'iemobile', 'camino', 
-        'seamonkey', 'firefox', 'opera_mobi', 'opera_mini', ''];
+    'seamonkey', 'firefox', 'opera_mobi', 'opera_mini', ''];
     
     ok(expected_results.indexOf(browser) > -1, 'getBrowser() should be expected value: ' + browser);
 });
@@ -69,9 +100,13 @@ test("mwf.userAgent.getBrowserEngine()", function()
     var saveNavigator = navigator;
     navigator = new Object();
     navigator.__proto__ = saveNavigator;
-    Object.defineProperty(navigator, 'userAgent', { get: function() { return "unknown user agent"; }});
-    var newUserAgent = new mwf.userAgent.constructor;
-    var newBrowserEngine = newUserAgent.getBrowserEngine();
+    Object.defineProperty(navigator, 'userAgent', {
+        get: function() {
+            return "unknown user agent";
+        }
+    });
+var newUserAgent = new mwf.userAgent.constructor;
+var newBrowserEngine = newUserAgent.getBrowserEngine();
 
     strictEqual(newBrowserEngine, '', 'Unknown user agent should result in empty browserEngine: ' + newBrowserEngine);
 

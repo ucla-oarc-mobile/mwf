@@ -1,1 +1,209 @@
-mwf.userAgent=new function(){this.cookieName=mwf.site.cookie.prefix+"user_agent";var b=navigator.userAgent.toLowerCase();var a=function(c){return b.indexOf(c)!=-1};this.getOS=function(){if(b.match(/(iphone)|(ipad)|(ipod)/)!=null){return"iphone_os"}var d=0,c=["android","blackberry","windows phone os","windows mobile","symbian","webos","mac os x","windows nt","linux"];for(;d<c.length;d++){if(a(c[d])){return c[d]}}return""};this.getOSVersion=function(){var c=b,d,e="";switch(this.getOS()){case"iphone_os":x=c.match(/(iphone|cpu) os ([\d_]+)/);if(x!=null){e=x[2]}break;case"blackberry":if(c.substring(0,10)=="blackberry"){d=c.indexOf("/")+1;e=c.substring(d,c.indexOf(" ",d))}break;case"android":if((d=c.indexOf("android "))!=-1){d+=8;e=c.substring(d,Math.min(c.indexOf(" ",d),c.indexOf(";",d),c.indexOf("-",d)))}break;case"windows_phone":if((d=c.indexOf("windows phone os "))!=-1){d+=17;e=c.substring(d,c.indexOf(";",d))}break;case"windows_mobile":if((d=c.indexOf("windows mobile/"))!=-1){d+=15;e=c.substring(d,c.indexOf(";",d))}break;case"symbian":if((d=c.indexOf("symbianos/"))!=-1){d+=10;e=c.substring(d,c.indexOf(";",d))}else{if((d=c.indexOf("symbian/"))!=-1){d+=8;e="s"+c.substring(d,c.indexOf(";",d))}}break;case"webos":if((d=c.indexOf("webos/"))!=-1){d+=6;e=c.substring(d,Math.min(c.indexOf(";",d)))}break}return e.replace(/\_/g,".")};this.getBrowser=function(){if(a("safari")){return this.getOS()=="android"?"android_webkit":"safari"}var c=0,d=["chrome","iemobile","camino","seamonkey","firefox","opera_mobi","opera_mini"];for(;c<d.length;c++){if(a(d[c])){return d[c]}}return""};this.getBrowserEngine=function(){if(a("applewebkit")){return"webkit"}var d=0,c=["trident","gecko","presto","khtml"];for(;d<c.length;d++){if(a(c[d])){return c[d]}}return""};this.getBrowserEngineVersion=function(){var d=b,e;var c=function(g){var f=d.indexOf(g)+g.length;return d.substring(f,Math.min(d.indexOf(" ",f),d.indexOf(";",f)))};switch(this.getBrowserEngine()){case"webkit":return c("applewebkit/");case"trident":return c("trident/");case"gecko":return c("gecko/");case"presto":e=d.indexOf("presto/")+7;return d.substring(e,Math.min(d.indexOf("/",e),d.indexOf(" ",e),d.indexOf(")",e)))}return""};this.generateCookieContent=function(){var c="{";c+='"s":"'+navigator.userAgent+'"';if(t=this.getOS()){c+=',"os":"'+t+'"'}if(t=this.getOSVersion()){c+=',"osv":"'+t+'"'}if(t=this.getBrowser()){c+=',"b":"'+t+'"'}if(t=this.getBrowserEngine()){c+=',"be":"'+t+'"'}if(t=this.getBrowserEngineVersion()){c+=',"bev":"'+t+'"'}c+="}";return c}};
+/**
+ * Defines methods under mwf.userAgent that use the browser's user agent to 
+ * provide information about the operating system, browser and browser engine.
+ *
+ * @package core
+ * @subpackage js
+ *
+ * @author ebollens
+ * @copyright Copyright (c) 2010-11 UC Regents
+ * @license http://mwf.ucla.edu/license
+ * @version 20111213
+ * 
+ * @requires mwf.site
+ * 
+ * @uses nagivator.userAgent
+ */
+
+mwf.userAgent = new function() {
+    
+    /**
+     * Name of the user agent cookie that may be written to expose UA-based
+     * telemetry to the server.
+     */
+    this.cookieName = mwf.site.cookie.prefix+'user_agent';
+    
+    var userAgent = navigator.userAgent.toLowerCase();
+    
+    var userAgentSubstringExists = function(s){
+        return userAgent.indexOf(s) != -1;
+    }
+    
+    /**
+     * Determines the operating system from string or else returns an empty 
+     * string.
+     *
+     * @return string
+     */
+    this.getOS = function(){ 
+        if(userAgent.match(/(iphone)|(ipad)|(ipod)/) != null) 
+            return 'iphone_os';
+        
+        var i = 0,
+            osToTest = ['android','blackberry','windows phone os','windows mobile',
+                        'symbian','webos','mac os x','windows nt','linux'];
+                    
+        for(;i<osToTest.length;i++)
+            if(userAgentSubstringExists(osToTest[i]))
+                return osToTest[i];
+        
+        return '';
+    }
+    
+    /**
+     * Determines the operating system version from string or else returns 
+     * an empty string.
+     *
+     * @return string
+     */
+    this.getOSVersion = function(){ 
+        var ua = userAgent, s, r='', x;
+        switch(this.getOS())
+        {
+            case 'iphone_os':
+                x = ua.match(/(iphone|cpu) os ([\d_]+)/);
+                if (x!=null) 
+                    r = x[2];
+                break;
+            case 'blackberry':
+                x = ua.match(/^mozilla\/5\.0 \(blackberry;.* version\/([\d\.]+)/);
+                if (x[1]) {
+                    r = x[1];
+                    break;
+                }else if(ua.substring(0, 10) == 'blackberry'){
+                    s = ua.indexOf('/')+1;
+                    r = ua.substring(s, ua.indexOf(' ', s));
+                }
+                break;
+            case 'android':
+                if((s = ua.indexOf('android ')) != -1){
+                    s += 8;
+                    r = ua.substring(s, Math.min(ua.indexOf(' ', s), ua.indexOf(';', s), ua.indexOf('-', s)));
+                }
+                break;
+            case 'windows_phone':
+                if((s = ua.indexOf('windows phone os ')) != -1){
+                    s += 17;
+                    r = ua.substring(s, ua.indexOf(';', s));
+                }
+                break;
+            case 'windows_mobile':
+                if((s = ua.indexOf('windows mobile/')) != -1){
+                    s += 15;
+                    r = ua.substring(s, ua.indexOf(';', s));
+                }
+                break;
+            case 'symbian':
+                if((s = ua.indexOf('symbianos/')) != -1){
+                    s += 10;
+                    r = ua.substring(s, ua.indexOf(';', s));
+                }
+                else if((s = ua.indexOf('symbian/')) != -1){
+                    s += 8;
+                    r = "s"+ua.substring(s, ua.indexOf(';', s));
+                }
+                break;
+            case 'webos':
+                if((s = ua.indexOf('webos/')) != -1){
+                    s += 6;
+                    r = ua.substring(s, Math.min(ua.indexOf(';', s)));
+                }
+                break;
+        }
+        return r.replace(/\_/g,".");
+    }
+    
+    /**
+     * Determines the web browser from string or else returns an empty string.
+     *
+     * @return string
+     */
+    this.getBrowser = function(){
+        
+        if(userAgentSubstringExists('safari'))
+            return this.getOS() == 'android' ? 'android_webkit' : 'safari';
+
+        var i = 0,
+            browsersToTest = ['chrome','iemobile','camino','seamonkey','firefox','opera_mobi','opera_mini'];
+            
+        for(;i<browsersToTest.length;i++)
+            if(userAgentSubstringExists(browsersToTest[i]))
+                return browsersToTest[i];
+        
+        return '';
+    }
+    
+    /**
+     * Determines the web browser engine from string or else returns an empty 
+     * string.
+     *
+     * @return string
+     */
+    this.getBrowserEngine = function(){
+        
+        if(userAgentSubstringExists('applewebkit')) 
+            return 'webkit';
+        
+        var i = 0,
+            browserEnginesToTest = ['trident','gecko','presto','khtml'];
+            
+        for(;i<browserEnginesToTest.length;i++)
+            if(userAgentSubstringExists(browserEnginesToTest[i])) 
+                return browserEnginesToTest[i];
+        
+        return '';
+    }
+    
+    /**
+     * Determines the web browser engine version from string or else returns an 
+     * empty string.
+     *
+     * @return string
+     */
+    this.getBrowserEngineVersion = function(){
+        var ua = userAgent, s;
+        var userAgentAfterPatternToSpace = function(p){
+            var s = ua.indexOf(p)+p.length;
+            return ua.substring(s, Math.min(ua.indexOf(' ',s),ua.indexOf(';',s)));
+        }
+        switch(this.getBrowserEngine())
+        {
+            case 'webkit':
+                return userAgentAfterPatternToSpace('applewebkit/');
+            case 'trident':
+                return userAgentAfterPatternToSpace('trident/');
+            case 'gecko':
+                return userAgentAfterPatternToSpace('gecko/');
+            case 'presto':
+                s = ua.indexOf('presto/')+7;
+                return ua.substring(s, Math.min(ua.indexOf('/', s), ua.indexOf(' ', s), ua.indexOf(')', s)));
+        }
+        
+        return '';
+    }
+    
+    /**
+     * Generate JSON content passed into the cookie written by mwf.server.
+     * 
+     * @return string
+     */
+    this.generateCookieContent = function(){
+        
+        var cookie = '{';
+        cookie += '"s":"'+navigator.userAgent+'"';
+        if(t = this.getOS())
+            cookie += ',"os":"'+t+'"';
+        if(t = this.getOSVersion())
+            cookie += ',"osv":"'+t+'"';
+        if(t = this.getBrowser())
+            cookie += ',"b":"'+t+'"';
+        if(t = this.getBrowserEngine())
+            cookie += ',"be":"'+t+'"';
+        if(t = this.getBrowserEngineVersion())
+            cookie += ',"bev":"'+t+'"';
+        cookie += '}';
+        
+        return cookie;
+        
+    }
+};
