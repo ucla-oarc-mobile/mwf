@@ -57,8 +57,8 @@ test("mwf.server.init() same origin sets cookies", function()
         return "e=f"
     };
     
-    var saveReload = mwf.site.reload;
-    mwf.site.reload=function() {
+    var saveRedirect = mwf.site.redirect;
+    mwf.site.redirect=function() {
         return;
     };
     
@@ -74,12 +74,12 @@ test("mwf.server.init() same origin sets cookies", function()
     ok(/classification=a%3Db/i.test(document.cookie), 
         'classification cookie should be set and values encoded');
     ok(/user_agent=c%3Dd/i.test(document.cookie), 
-        'classification cookie should be set and values encoded');
+        'user_agend cookie should be set and values encoded');
     ok(/screen=e%3Df/i.test(document.cookie), 
-        'classification cookie should be set and values encoded');
+        'screen cookie should be set and values encoded');
     
     mwf.site.cookie.exists = saveCookieExists;
-    mwf.site.reload = saveReload;
+    mwf.site.redirect = saveRedirect;
     mwf.screen.generateCookieContent = saveScreen;
     mwf.userAgent.generateCookieContent = saveUserAgent;
     mwf.classification.generateCookieContent = saveClassification;
