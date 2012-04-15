@@ -19,7 +19,8 @@ License:
 
 TABLE OF CONTENTS
 
-Version 1.3.00          April 13, 2012
+Version 1.3.00          April 15, 2012
+Version 1.2.14          April 14, 2012
 Version 1.2.13          February 29, 2012
 Version 1.2.12          February 6, 2012
 Version 1.2.11          February 1, 2012
@@ -46,7 +47,7 @@ Version 1.1.00.alpha    May 20, 2011
 ==============================================================================
 
 Version 1.3.00
-April 13, 2012
+April 15, 2012
 
 * Add lean CSS markup entities [Roadmap: Framework v1.3]
 
@@ -112,6 +113,29 @@ April 13, 2012
     * Use error object rather than error message for errback [#86]
 
 * Refactor vars.php for testing and maintainability [#107]
+
+==============================================================================
+
+Version 1.2.14
+April 14, 2012
+
+* Fix to prevent infinite redirect loop with passthru.php [#122] [#133]
+
+* Fix to Tag_HTML_Decorator for "0" attribute [#120]
+
+* Fix to Tag_HTML_Decorator for add_inner_front() infinite loop [#118]
+
+* Back-merges from MWF 1.3:
+
+    * Fix to mwf.userAgent.getOSVersion() for iPad 5.1 [#130]
+
+    * Fix to mwf.userAgent.getOSVersion() for Blackberry [#110]
+
+    * Fix to mwf.userAgent.getOSVersion() for Symbian/WinMob [#112]
+
+    * Fix to mwf.userAgent.getBrowserEngineVersion() for iPhone [#114]
+
+* Addition of E_NOTICE on raw HTML input passed to decorators [#119]
 
 ==============================================================================
 

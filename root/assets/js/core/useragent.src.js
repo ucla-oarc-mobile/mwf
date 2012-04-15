@@ -42,7 +42,7 @@ mwf.userAgent = new function(optionalUAString) {
         
         var i = 0,
         osToTest = ['android','blackberry','windows phone os',
-        'symbian','webos','mac os x','windows nt','linux'];
+            'symbian','webos','mac os x','windows nt','linux'];
                     
         for(;i<osToTest.length;i++)
             if(userAgentSubstringExists(osToTest[i]))
@@ -65,7 +65,7 @@ mwf.userAgent = new function(optionalUAString) {
                 x = ua.match(/(iphone|cpu) os ([\d_]+)/);
                 if (x!=null) 
                     r = x[2];
-                break;               
+                break;
             case 'blackberry':
                 x = ua.match(/^mozilla\/5\.0 \(blackberry;.* version\/([\d\.]+)/);
                 if (x!=null) {

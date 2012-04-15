@@ -7,7 +7,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110519
+ * @version 20120313
  *
  * @uses Decorator
  * @uses Site_Decorator
@@ -124,7 +124,7 @@ of a University, all campuses would be covered under this license and directly
 affiliated schools, such as members of a higher education consortium, would also
 be covered under this license. In the case of a non-profit institution, all 
 subsidiaries and directly affiliated companies or entities would be covered.')
-            ->add_section(HTML_Decorator::tag('p', 'You agree:')->render() . $ol->render())
+            ->add_section(HTML_Decorator::tag('p', array('You agree:', $ol)))
             ->render();
 
 echo Site_Decorator::content()

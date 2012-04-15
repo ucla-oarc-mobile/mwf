@@ -2,7 +2,6 @@
 
 /**
  *
- *
  * @package decorator
  * @subpackage html_decorator
  *
@@ -80,7 +79,6 @@ class Tag_HTML_Decorator extends Decorator implements Tag_ParamsInterface {
         $this->_inner = array();
         return $this;
     }
-
 
     /**
      * Render the tag for output.

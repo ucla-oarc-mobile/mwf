@@ -63,6 +63,7 @@ test("mwf.userAgent.getOSVersion() for Blackberry 7.0", function()
 {
     var ua = new mwf.userAgent.constructor('Mozilla/5.0 (BlackBerry; U; BlackBerry 9860; en-GB) AppleWebKit/534.11+ (KHTML, like Gecko) Version/7.0.0.296 Mobile Safari/534.11+');
     equal(ua.getOSVersion(),"7.0.0.296","getOSVersion() should parse Blackberry 7.0.0.296 userAgent string");
+
 });
 
 test("mwf.userAgent.getOSVersion() for Blackberry 5.0", function()
@@ -170,5 +171,4 @@ test("mwf.userAgent.generateCookieContente() iPhone", function()
 test("mwf.userAgent.isNative()", function()
 {
     equal(mwf.userAgent.isNative(), false, 'Native should be false, unit tests not accessible from native container');
-
 });

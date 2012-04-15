@@ -11,7 +11,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111104
+ * @version 20120414
  *
  * @uses JS
  */
@@ -48,7 +48,18 @@ if(isset($_GET['mode']) && $_GET['mode'] == 'standards')
 
         foreach($core_filenames as $filename)
             JS::load('core/'.$filename);
-        echo 'window.location = "'.$_GET['return'].'"';
+        
+        $return  = $_GET['return'];
+        
+        if(strpos($return, '?') === false)
+            $return .= '?';
+        
+        if(strpos($return, '?') < strlen($return)-1)
+            $return .= '&';
+        
+        $return .= 'no_server_init';
+        
+        echo 'window.location = "'.$return.'"';
         
     }
         

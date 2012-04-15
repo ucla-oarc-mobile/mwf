@@ -7,7 +7,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20110519
+ * @version 20120313
  *
  * @uses Decorator
  * @uses Site_Decorator
@@ -22,27 +22,25 @@
  * @uses Body_End_HTML_Decorator
  * @uses HTML_End_HTML_Decorator
  */
-
-require_once(dirname(dirname(__FILE__)).'/assets/lib/decorator.class.php');
-require_once(dirname(dirname(__FILE__)).'/assets/config.php');
+require_once(dirname(dirname(__FILE__)) . '/assets/lib/decorator.class.php');
+require_once(dirname(dirname(__FILE__)) . '/assets/config.php');
 
 $contributors = array(
-
-                        'UC Los Angeles'=>array('Eric Bollens',
-                                      'Ed Sakabu',
-                                      'Mike Takahashi',
-                                      'Joseph Madella',
-                                      'Nate Emerson',
-                                      'Zorayr Khalapyan'
-                                     ),
-                        'UC Berkeley'=>array('Sara Leavitt'
-                                     ),
-                        'UC San Diego'=>array('Mojgan Amini',
-                                              'Ike Lin'
-                                     ),
-                        'UC San Francisco'=>array('Richard Trott'
-                                     )
-                    );
+    'UC Los Angeles' => array('Eric Bollens',
+        'Ed Sakabu',
+        'Mike Takahashi',
+        'Joseph Madella',
+        'Nate Emerson',
+        'Zorayr Khalapyan'
+    ),
+    'UC Berkeley' => array('Sara Leavitt'
+    ),
+    'UC San Diego' => array('Mojgan Amini',
+        'Ike Lin'
+    ),
+    'UC San Francisco' => array('Richard Trott'
+    )
+);
 
 echo HTML_Decorator::html_start()->render();
 
@@ -88,7 +86,7 @@ foreach($contributors as $campus=>$people)
     $contributions->add_paragraph($campus_contributors, array('style'=>'text-align:center;'));
 }
 
-$contributions->add_paragraph('Beyond direct contributions, the input and suggestions of numerous others have made the Mobile Web Framework possible.', array('style'=>'font-style:italic;'));
+$contributions->add_paragraph('Beyond direct contributions, the input and suggestions of numerous others have made the Mobile Web Framework possible.', array('style' => 'font-style:italic;'));
 
 echo $contributions->render();
 
