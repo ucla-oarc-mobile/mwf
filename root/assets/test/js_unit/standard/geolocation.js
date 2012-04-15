@@ -93,7 +93,6 @@ test("mwf.standard.geolocation.getType() Google Gears", function()
 
 test("mwf.standard.geolocation.getTypeName()", function()
 {
-    console.log(navigator.realGeolocation);
     equal(mwf.standard.geolocation.getTypeName(),"HTML5 Geolocation","getTypeName() should return HTML5 Geolocation for modern browsers");
 });
 
