@@ -12,37 +12,56 @@
  * 
  */
 
-module("standard/geolocation.js"); 
+module("standard/geolocation.js", {
+    setup: function() {
+        this.restoreNav = false;
+        this.saveNav = navigator;
+        this.saveGeo = navigator.geolocation;
+        this.proto = navigator.__proto__;
+        if (navigator = new Object()) {
+            this.restoreNav = true;
+            navigator.__proto__ = this.proto;
+        }
+        Object.defineProperty(navigator, 'geolocation', {
+            get: function() {
+                return navigator.realGeolocation;
+            },
+            configurable: true
+        });
+        navigator.realGeolocation = this.saveGeo;
+    },
+    teardown: function() {
+        if (this.restoreNav) {
+            navigator = this.saveNav;
+        }
+        navigator.realGeolocation = this.saveGeo;
+    }
+}); 
             
 test("mwf.standard.geolocation.getType() HTML Geolocation", function()
 {
-    var saveNavigator = navigator;
-    navigator = new Object();
-    navigator.__proto__ = saveNavigator;
-    Object.defineProperty(navigator, 'geolocation', {
-        get: function() {
-            return true;
-        }
-    });
+    var navigatorModified = false;
+    if (typeof navigator.geolocation=="undefined") {
+        navigatorModified = true;
+        Object.defineProperty(navigator, 'geolocation', {
+            get: function() {
+                return true;
+            }
+        });
+    }
     
     var newGeolocation = new mwf.standard.geolocation.constructor;
 
     var type = newGeolocation.getType();
-    navigator = saveNavigator;
-
+    if (navigatorModified) {
+        delete navigator.geolocation;
+    }
     strictEqual(type, 1, 'getType() should return 1 for HTML Geolocation');
 });
 
 test("mwf.standard.geolocation.getType() Google Gears", function()
 {
-    var saveNavigator = navigator;
-    navigator = new Object();
-    navigator.__proto__ = saveNavigator;
-    Object.defineProperty(navigator, 'geolocation', {
-        get: function() {
-            return false;
-        }
-    });
+    navigator.realGeolocation = undefined;
     
     var saveGoogle;
     if (typeof window.google != 'undefined') {
@@ -63,11 +82,12 @@ test("mwf.standard.geolocation.getType() Google Gears", function()
 
     var type = newGeolocation.getType();
     
-    if (typeof saveGoogle != 'undefined')
+    if (typeof saveGoogle != 'undefined') {
         window.google = saveGoogle;
+    } else {
+        delete window.google;
+    }
 
-    navigator = saveNavigator;
-    
     strictEqual(type, 2, 'getType() should return 2 for Google Gears');
 });
 
@@ -76,16 +96,15 @@ test("mwf.standard.geolocation.getTypeName()", function()
     equal(mwf.standard.geolocation.getTypeName(),"HTML5 Geolocation","getTypeName() should return HTML5 Geolocation for modern browsers");
 });
 
+test("mwf.standard.geolocation.getTypeName() Custom", function()
+{
+    var g = new mwf.standard.geolocation.constructor(null);
+    equal(g.getTypeName(),"Custom","getTypeName() should return Custom if we've overridden the geolocation object");
+});
+
 test("mwf.standard.geolocation.getTypeName() Google Gears", function()
 {
-    var saveNavigator = navigator;
-    navigator = new Object();
-    navigator.__proto__ = saveNavigator;
-    Object.defineProperty(navigator, 'geolocation', {
-        get: function() {
-            return false;
-        }
-    });
+    navigator.realGeolocation = undefined;
     
     var saveGoogle;
     if (typeof window.google != 'undefined') {
@@ -106,24 +125,18 @@ test("mwf.standard.geolocation.getTypeName() Google Gears", function()
 
     var type = newGeolocation.getTypeName();
     
-    if (typeof saveGoogle != 'undefined')
+    if (typeof saveGoogle != 'undefined') {
         window.google = saveGoogle;
-
-    navigator = saveNavigator;
+    } else {
+        delete window.google;
+    }
     
     strictEqual(type, 'Google Gears', 'getTypeName() should return Google Gears');
 });
 
 test("mwf.standard.geolocation.getTypeName() Unsupported", function()
 {
-    var saveNavigator = navigator;
-    navigator = new Object();
-    navigator.__proto__ = saveNavigator;
-    Object.defineProperty(navigator, 'geolocation', {
-        get: function() {
-            return false;
-        }
-    });
+    navigator.realGeolocation = undefined;
     
     var saveGoogle;
     if (typeof window.google != 'undefined') {
@@ -144,10 +157,11 @@ test("mwf.standard.geolocation.getTypeName() Unsupported", function()
 
     var type = newGeolocation.getTypeName();
     
-    if (typeof saveGoogle != 'undefined')
+    if (typeof saveGoogle != 'undefined') {
         window.google = saveGoogle;
-
-    navigator = saveNavigator;
+    } else {
+        delete window.google;
+    }
     
     strictEqual(type, 'Unsupported', 'getTypeName() should return Unsupported');
 });
@@ -156,28 +170,31 @@ test("mwf.standard.geolocation.isSupported()", function() {
     equal(mwf.standard.geolocation.isSupported(),true,"Geolocation is supported.");
 })
 
-test("mwf.touch.geolocation.getPosition(onSuccess,onError)", function() {
-    var saveNavigator = navigator;
-    navigator = new Object();
-    navigator.__proto__ = saveNavigator;
-    navigator.geolocation = new Object();
-    navigator.geolocation.getCurrentPosition=function(onSuccess,onError) {
-        onSuccess({coords:{latitude:1.11,longitude:2.22,accuracy:3}});
+test("mwf.touch.geolocation.getPosition(onSuccess,onError)", function() {   
+    var geo = {};
+    geo.getCurrentPosition=function(onSuccess,onError) {
+        onSuccess({
+            coords:{
+                latitude:1.11,
+                longitude:2.22,
+                accuracy:3
+            }
+        });
     }
     
     expect(1);
     QUnit.config.testTimeout = 5000;
     QUnit.stop();
-    mwf.touch.geolocation.getPosition(function(pos) {
+    var g = new mwf.standard.geolocation.constructor(geo);
+
+    g.getPosition(function(pos) {
         var receivedExpectedResultTypes = 
         typeof pos['latitude']=='number'
         && typeof pos['longitude']=='number'
         && typeof pos['accuracy']=='number';
         ok(receivedExpectedResultTypes, 'lat, long, and accuracy should be numbers');
         start();
-    });
-    
-    navigator = saveNavigator;
+    });    
 })
 
 test("mwf.touch.geolocation.getPosition(onSuccess) Geolocation unsupported", function() {
@@ -204,14 +221,7 @@ test("mwf.touch.geolocation.getPosition(onSuccess) Geolocation unsupported", fun
 
 test("mwf.standard.geolocation.getPosition() unsupported with error callback", function()
 {
-    var saveNavigator = navigator;
-    navigator = new Object();
-    navigator.__proto__ = saveNavigator;
-    Object.defineProperty(navigator, 'geolocation', {
-        get: function() {
-            return false;
-        }
-    });
+    navigator.realGeolocation = undefined;
     
     var saveGoogle;
     if (typeof window.google != 'undefined') {
@@ -240,22 +250,16 @@ test("mwf.standard.geolocation.getPosition() unsupported with error callback", f
         start();
     });
     
-    if (typeof saveGoogle != 'undefined')
+    if (typeof saveGoogle != 'undefined') {
         window.google = saveGoogle;
-
-    navigator = saveNavigator;    
+    } else {
+        delete window.google;
+    }
 });
 
 test("mwf.standard.geolocation.getCurrentPosition() unsupported with error callback", function()
 {
-    var saveNavigator = navigator;
-    navigator = new Object();
-    navigator.__proto__ = saveNavigator;
-    Object.defineProperty(navigator, 'geolocation', {
-        get: function() {
-            return false;
-        }
-    });
+    navigator.realGeolocation = false;
     
     var saveGoogle;
     if (typeof window.google != 'undefined') {
@@ -284,41 +288,44 @@ test("mwf.standard.geolocation.getCurrentPosition() unsupported with error callb
         start();
     });
     
-    if (typeof saveGoogle != 'undefined')
+    if (typeof saveGoogle != 'undefined') {
         window.google = saveGoogle;
-
-    navigator = saveNavigator;    
+    } else {
+        delete window.google;
+    }
 });
 
 test("mwf.standard.geolocation.getCurrentPosition(onSuccess)", function() {
-    var saveNavigator = navigator;
-    navigator = new Object();
-    navigator.__proto__ = saveNavigator;
-    navigator.geolocation = new Object();
-    navigator.geolocation.getCurrentPosition=function(onSuccess,onError) {
-        onSuccess({'coords':{'latitude':1.11,'longitude':2.22, 'accuracy':3}});
+
+    var geo = {};
+    geo.getCurrentPosition=function(onSuccess,onError) {
+        onSuccess({
+            'coords':{
+                'latitude':1.11,
+                'longitude':2.22, 
+                'accuracy':3
+            }
+        });
     }
+    var g = new mwf.standard.geolocation.constructor(geo);
    
     QUnit.config.testTimeout = 5000;
     QUnit.stop();
-    mwf.standard.geolocation.getCurrentPosition(function(pos) {
+    g.getCurrentPosition(function(pos) {
         equal(typeof pos['latitude'], 'number', 'latitude should be a number');
         equal(typeof pos['longitude'], 'number', 'longitude should be a number');
         equal(typeof pos['accuracy'], 'number', 'accuracy should be a number');
         start();
     });
-    navigator=saveNavigator;
 })
 
 test("mwf.standard.geolocation.getCurrentPosition(onSuccess) Geolocation unsupported", function() {
 
-    var getApi = mwf.standard.geolocation.getApi;
-    mwf.standard.geolocation.getApi = function() {
-        return null;
-    };
-
+    var geo = null;
+    var g = new mwf.standard.geolocation.constructor(geo);
+    
     try {
-        var rv = mwf.standard.geolocation.getCurrentPosition(function() {
+        var rv = g.getCurrentPosition(function() {
             ok(false, 'success callback should not trigger if geolocation is unsupported');
         });
         equal(typeof rv, 'undefined', 'getCurrentPosition() function should not return a value'); 
@@ -326,9 +333,6 @@ test("mwf.standard.geolocation.getCurrentPosition(onSuccess) Geolocation unsuppo
     catch(ex) {
         ok(false, 'getCurrentPosition() should not throw an exception if an onError handler is not '
             + 'provided and geolocation is unsupported');
-    }
-    finally {
-        mwf.standard.geolocation.getApi = getApi;
     }
 })
 
@@ -341,18 +345,11 @@ test("mwf.standard.geolocation.setHighAccuracy()", function() {
 })
 
 test("mwf.standard.geolocation.getApi()", function() {
-    equal(Object.prototype.toString.call(mwf.standard.geolocation.getApi()), "[object Geolocation]", 'modern phones support navigator.geolocation');
+    equal(typeof mwf.standard.geolocation.getApi(), "object", 'getApi() returns an object');
 })
 
 test("mwf.standard.geolocation.getApi() Google Gears", function() {
-    var saveNavigator = navigator;
-    navigator = new Object();
-    navigator.__proto__ = saveNavigator;
-    Object.defineProperty(navigator, 'geolocation', {
-        get: function() {
-            return false;
-        }
-    });
+    navigator.realGeolocation = false;
     
     var saveGoogle;
     if (typeof window.google != 'undefined') {
@@ -374,23 +371,17 @@ test("mwf.standard.geolocation.getApi() Google Gears", function() {
 
     var api = newGeolocation.getApi();
     
-    if (typeof saveGoogle != 'undefined')
+    if (typeof saveGoogle != 'undefined') {
         window.google = saveGoogle;
-
-    navigator = saveNavigator;
+    } else {
+        delete window.google;
+    }
     
     strictEqual(api, 'beta.geolocation success!', 'getApi() should call Google Gears factory');
 })
 
 test("mwf.standard.geolocation.getApi() Unsupported", function() {
-    var saveNavigator = navigator;
-    navigator = new Object();
-    navigator.__proto__ = saveNavigator;
-    Object.defineProperty(navigator, 'geolocation', {
-        get: function() {
-            return false;
-        }
-    });
+    navigator.realGeolocation = undefined;
     
     var saveGoogle;
     if (typeof window.google != 'undefined') {
@@ -405,8 +396,6 @@ test("mwf.standard.geolocation.getApi() Unsupported", function() {
     
     if (typeof saveGoogle != 'undefined')
         window.google = saveGoogle;
-
-    navigator = saveNavigator;
     
     strictEqual(api, null, 'getApi() should return null if Geolocation is unsupported');
 })
@@ -435,14 +424,7 @@ test("mwf.standard.geolocation.watchPosition(onSuccess) Geolocation unsupported"
 
 test("mwf.standard.geolocation.watchPosition() unsupported with error callback", function()
 {
-    var saveNavigator = navigator;
-    navigator = new Object();
-    navigator.__proto__ = saveNavigator;
-    Object.defineProperty(navigator, 'geolocation', {
-        get: function() {
-            return false;
-        }
-    });
+    navigator.realGeolocation = undefined;
     
     var saveGoogle;
     if (typeof window.google != 'undefined') {
@@ -472,19 +454,22 @@ test("mwf.standard.geolocation.watchPosition() unsupported with error callback",
         start();
     });
     
-    if (typeof saveGoogle != 'undefined')
+    if (typeof saveGoogle != 'undefined') {
         window.google = saveGoogle;
-
-    navigator = saveNavigator;    
+    } else {
+        delete window.google;
+    }
 });
 
 test("mwf.standard.geolocation.watchPosition() Geolocation supported and watchPosition() successful", function() {
-    var saveNavigator = navigator;
-    navigator = new Object();
-    navigator.__proto__ = saveNavigator;
-    navigator.geolocation = new Object();
     navigator.geolocation.watchPosition=function(onSuccess,onError) {
-        onSuccess({'coords':{'latitude':1.11,'longitude':2.22, 'accuracy':3}});
+        onSuccess({
+            'coords':{
+                'latitude':1.11,
+                'longitude':2.22, 
+                'accuracy':3
+            }
+        });
     }
    
     var newGeolocation = new mwf.standard.geolocation.constructor;
@@ -499,14 +484,9 @@ test("mwf.standard.geolocation.watchPosition() Geolocation supported and watchPo
         ok(false, 'error callback used when Geolocation unsupported')
         start(); 
     });
-    navigator = saveNavigator;  
 })
 
 test("mwf.standard.geolocation.watchPosition() Geolocation supported but error occurred", function() {
-    var saveNavigator = navigator;
-    navigator = new Object();
-    navigator.__proto__ = saveNavigator;
-    navigator.geolocation = new Object();
     navigator.geolocation.watchPosition=function(onSuccess,onError) {
         onError();
     }
@@ -523,16 +503,14 @@ test("mwf.standard.geolocation.watchPosition() Geolocation supported but error o
         ok(true, 'error callback used when Geolocation unsupported')
         start(); 
     });
-    navigator = saveNavigator;  
 })
 
 test("mwf.standard.geolocation.getCurrentPosition() Geolocation supported but error occurred", function() {
-    var saveNavigator = navigator;
-    navigator = new Object();
-    navigator.__proto__ = saveNavigator;
-    navigator.geolocation = new Object();
     navigator.geolocation.getCurrentPosition=function(onSuccess,onError) {
-        onError({code:2,message:'Totally Lame Error Occurred! Bummer!'});
+        onError({
+            code:2,
+            message:'Totally Lame Error Occurred! Bummer!'
+        });
     }
    
     var newGeolocation = new mwf.standard.geolocation.constructor;
@@ -547,16 +525,14 @@ test("mwf.standard.geolocation.getCurrentPosition() Geolocation supported but er
         ok(true, 'error callback used when Geolocation unsupported')
         start(); 
     });
-    navigator = saveNavigator;  
 })
 
 test("mwf.standard.geolocation.getPosition() Geolocation supported but error occurred", function() {
-    var saveNavigator = navigator;
-    navigator = new Object();
-    navigator.__proto__ = saveNavigator;
-    navigator.geolocation = new Object();
     navigator.geolocation.getCurrentPosition=function(onSuccess,onError) {
-        onError({code:2,message:'Totally Lame Error Occurred! Bummer!'});
+        onError({
+            code:2,
+            message:'Totally Lame Error Occurred! Bummer!'
+        });
     }
    
     var newGeolocation = new mwf.standard.geolocation.constructor;
@@ -571,7 +547,6 @@ test("mwf.standard.geolocation.getPosition() Geolocation supported but error occ
         ok(true, 'error callback used when Geolocation unsupported')
         start(); 
     });
-    navigator = saveNavigator;  
 })
 
 test("mwf.standard.geolocation.clearWatch()", function() {
