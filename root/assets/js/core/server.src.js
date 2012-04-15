@@ -55,13 +55,8 @@ mwf.server = new function(){
          * as the framework adds this parameter to the query string on
          * redirect back to the originator.
          */
-        var query = window.location.href.split('?')[1];
-        if(typeof query != 'undefined'){
-            var vars = query.split('&');
-            for(var i = 0; i < vars.length; i++){
-                if(vars[i].split('=')[0] == 'no_server_init')
-                    return;
-            }
+        if (/^.*[\?&]no_server_init([\=\&].*)?$/.test(window.location.search)) {
+                return;
         }
         
         var classificationCookie = classification.generateCookieContent();
