@@ -70,7 +70,7 @@ echo Site_Decorator::content()
                                 .HTML_Decorator::tag('a', 'sakabu@ats.ucla.edu',
                                     array('href'=>'mailto:sakabu@ats.ucla.edu')),
                             array('style'=>'text-align:center;'))
-            ->render();
+            ->render(true);
 
 $contributions = Site_Decorator::content()
                     ->set_padded()
@@ -88,7 +88,7 @@ foreach($contributors as $campus=>$people)
 
 $contributions->add_paragraph('Beyond direct contributions, the input and suggestions of numerous others have made the Mobile Web Framework possible.', array('style' => 'font-style:italic;'));
 
-echo $contributions->render();
+echo $contributions->render(true);
 
 echo Site_Decorator::button()
                 ->set_padded()
