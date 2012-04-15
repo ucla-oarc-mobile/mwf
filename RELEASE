@@ -54,7 +54,15 @@ April 14, 2012
 
 * Fix to Tag_HTML_Decorator for add_inner_front() infinite loop [#118]
 
-* Fix to mwf.userAgent.getOSVersion() for iPad 5.1 [#130]
+* Back-merges from MWF 1.3:
+
+    * Fix to mwf.userAgent.getOSVersion() for iPad 5.1 [#130]
+
+    * Fix to mwf.userAgent.getOSVersion() for Blackberry [#110]
+
+    * Fix to mwf.userAgent.getOSVersion() for Symbian/WinMob [#112]
+
+    * Fix to mwf.userAgent.getBrowserEngineVersion() for iPhone [#114]
 
 * Addition of E_NOTICE on raw HTML input passed to decorators [#119]
 
