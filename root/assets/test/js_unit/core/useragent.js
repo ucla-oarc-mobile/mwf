@@ -228,8 +228,3 @@ test("mwf.userAgent.generateCookieContente() iPhone", function()
 
     navigator = saveNavigator;
 })
-
-test("mwf.userAgent.isNative()", function()
-{
-    equal(mwf.userAgent.isNative(), false, 'Native should be false, unit tests not accessible from native container');
-});
