@@ -113,7 +113,7 @@ mwf.userAgent = new function() {
             return this.getOS() == 'android' ? 'android_webkit' : 'safari';
 
         var i = 0,
-        browsersToTest = ['chrome','iemobile','camino','seamonkey','firefox','opera_mobi','opera_mini'];
+        browsersToTest = ['chrome','iemobile','camino','seamonkey','firefox','opera mobi','opera mini'];
             
         for(;i<browsersToTest.length;i++)
             if(userAgentSubstringExists(browsersToTest[i]))
@@ -134,7 +134,7 @@ mwf.userAgent = new function() {
             return 'webkit';
         
         var i = 0,
-        browserEnginesToTest = ['trident','gecko','presto','khtml'];
+        browserEnginesToTest = ['trident','gecko','presto'];
             
         for(;i<browserEnginesToTest.length;i++)
             if(userAgentSubstringExists(browserEnginesToTest[i])) 

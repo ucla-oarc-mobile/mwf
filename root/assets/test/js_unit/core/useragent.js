@@ -21,7 +21,7 @@ test("mwf.userAgent.getOS()", function()
     ok(typeof os === 'string','getOS() should return a string');
     
     var expected_results = ['iphone_os', 'android','blackberry','windows phone os','windows mobile',
-    'symbian','webos','mac os x','windows nt','linux', ''];
+        'symbian','webos','mac os x','windows nt','linux', ''];
     
     ok(expected_results.indexOf(os) > -1, 'getOS() should be expected value: ' + os);
 });
@@ -41,6 +41,7 @@ test ("mwf.userAgent.getOSVersion() for iPad running iOS 5.1", function()
     };
     var ua = new mwf.userAgent.constructor();
     equal(ua.getOSVersion(), "5.1", "getOSVersion() should parse iOS 5.1 userAgent string");
+});
 
 test("mwf.userAgent.getOSVersion() for iPhone", function()
 {
@@ -126,9 +127,31 @@ test("mwf.userAgent.getBrowser()", function()
     ok(typeof browser === 'string','getBrowser() should return a string');
     
     var expected_results = ['android_webkit', 'safari', 'chrome', 'iemobile', 'camino', 
-    'seamonkey', 'firefox', 'opera_mobi', 'opera_mini', ''];
+        'seamonkey', 'firefox', 'opera_mobi', 'opera_mini', ''];
     
     ok(expected_results.indexOf(browser) > -1, 'getBrowser() should be expected value: ' + browser);
+});
+
+test("mwf.userAgent.getBrowser() Opera Mini", function ()
+{
+    var oldNav = navigator;
+    navigator = {
+        'userAgent':'Opera/9.50 (J2ME/MIDP; Opera Mini/4.0.10031/298; U; en)'
+    };
+    var ua = new mwf.userAgent.constructor();
+    equal(ua.getBrowser(),"opera mini","getBrowser() should detect Opera Mini");
+    navigator = oldNav;
+});
+
+test("mwf.userAgent.getBrowser() unknown browser", function ()
+{
+    var oldNav = navigator;
+    navigator = {
+        'userAgent':'NoBrowserYouRecognize/1.00 (J2ME/MIDP; Crazy Browser/4.0.10031/298; U; en)'
+    };
+    var ua = new mwf.userAgent.constructor();
+    equal(ua.getBrowser(),"","getBrowser() should return an empty string for unrecognized browsers");
+    navigator = oldNav;
 });
 
 test("mwf.userAgent.getBrowserEngine()", function()
@@ -141,6 +164,22 @@ test("mwf.userAgent.getBrowserEngine()", function()
     
     ok(expected_results.indexOf(browserEngine) > -1, 'getBrowserEngine() should be expected value: ' + browserEngine);
     
+    var saveNavigator = navigator;
+    navigator = new Object();
+    navigator.__proto__ = saveNavigator;
+    Object.defineProperty(navigator, 'userAgent', {
+        get: function() {
+            return "Opera/9.80 (J2ME/MIDP; Opera Mini/4.1.15082/22.414; U; en) Presto/2.5.25 Version/10.54";
+        }
+    });
+    var newUserAgent = new mwf.userAgent.constructor;
+    var newBrowserEngine = newUserAgent.getBrowserEngine();
+    strictEqual(newBrowserEngine, 'presto', 'getBrowserEngine() should detect Presto engine');
+    navigator = saveNavigator;
+});
+
+test("mwf.userAgent.getBrowserEngine() unknown userAgent string", function()
+{
     var saveNavigator = navigator;
     navigator = new Object();
     navigator.__proto__ = saveNavigator;
@@ -168,5 +207,29 @@ test("mwf.userAgent.generateCookieContent()", function()
 {   
     var re = /^\{\"s\":\".*\",\"os\":\".*\",\"osv\":\".*",\"b\":\".*\",\"be\":\".*\",\"bev\":\".*\"\}$/;
     var cookie = mwf.userAgent.generateCookieContent();
-    ok(re.exec(cookie), 'cookie should be in expected format');
+    ok(re.exec(cookie), 'cookie should be in expected format: ' + cookie);
+});
+
+test("mwf.userAgent.generateCookieContente() iPhone", function()
+{
+    var saveNavigator = navigator;
+    navigator = new Object();
+    navigator.__proto__ = saveNavigator;
+    Object.defineProperty(navigator, 'userAgent', {
+        get: function() {
+            return "Mozilla/5.0 (iPhone; CPU iPhone OS 5_0_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A405 Safari/7534.48.3";
+        }
+    });
+    var newUserAgent = new mwf.userAgent.constructor;
+    var cookie = newUserAgent.generateCookieContent();
+
+    strictEqual(cookie, '{"s":"Mozilla/5.0 (iPhone; CPU iPhone OS 5_0_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A405 Safari/7534.48.3","os":"iphone_os","osv":"5.0.1","b":"safari","be":"webkit","bev":"534.46"}', 
+    'iPhone cookie content should be set to correct values');
+
+    navigator = saveNavigator;
+});
+
+test("mwf.userAgent.isNative()", function()
+{
+    equal(mwf.userAgent.isNative(), false, 'Native should be false, unit tests not accessible from native container');
 });
