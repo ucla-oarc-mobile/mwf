@@ -55,7 +55,7 @@ mwf.server = new function(){
          * as the framework adds this parameter to the query string on
          * redirect back to the originator.
          */
-        if (/^.*[\?&]no_server_init([\=\&].*)?$/.test(window.location.search)) {
+        if (/^(\?|.*&)no_server_init([\=\&].*)?$/.test(window.location.search)) {
                 return;
         }
         

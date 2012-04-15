@@ -7,7 +7,7 @@
 
         <!-- If no_server_init, reload without it. Its side effects can cause test failures. -->
         <script>
-            if (/^.*[\?&]no_server_init([\=\&].*)?$/.test(window.location.search)) {
+            if (/^(\?|.*&)no_server_init([\=\&].*)?$/.test(window.location.search)) {
                 window.location.href = window.location.href.replace("no_server_init","");
             }
         </script>
