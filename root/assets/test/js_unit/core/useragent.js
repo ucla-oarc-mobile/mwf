@@ -224,10 +224,10 @@ test("mwf.userAgent.generateCookieContente() iPhone", function()
     var cookie = newUserAgent.generateCookieContent();
 
     strictEqual(cookie, '{"s":"Mozilla/5.0 (iPhone; CPU iPhone OS 5_0_1 like Mac OS X) AppleWebKit/534.46 (KHTML, like Gecko) Version/5.1 Mobile/9A405 Safari/7534.48.3","os":"iphone_os","osv":"5.0.1","b":"safari","be":"webkit","bev":"534.46"}', 
-    'iPhone cookie content should be set to correct values');
+        'iPhone cookie content should be set to correct values');
 
     navigator = saveNavigator;
-});
+})
 
 test("mwf.userAgent.isNative()", function()
 {

@@ -150,25 +150,9 @@ mwf.userAgent = new function() {
      * @return string
      */
     this.getBrowserEngineVersion = function(){
-        var ua = userAgent, s;
-        var userAgentAfterPatternToSpace = function(p){
-            var s = ua.indexOf(p)+p.length;
-            return ua.substring(s, Math.min(ua.indexOf(' ',s),ua.indexOf(';',s)));
-        }
-        switch(this.getBrowserEngine())
-        {
-            case 'webkit':
-                return userAgentAfterPatternToSpace('applewebkit/');
-            case 'trident':
-                return userAgentAfterPatternToSpace('trident/');
-            case 'gecko':
-                return userAgentAfterPatternToSpace('gecko/');
-            case 'presto':
-                s = ua.indexOf('presto/')+7;
-                return ua.substring(s, Math.min(ua.indexOf('/', s), ua.indexOf(' ', s), ua.indexOf(')', s)));
-        }
-        
-        return '';
+        var re = new RegExp(this.getBrowserEngine()+"/([\\d\\.]+)");
+        var result = re.exec(userAgent);
+        return result!=null ? result[1] : ''; 
     }
     
     /**
