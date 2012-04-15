@@ -75,6 +75,50 @@ test("mwf.userAgent.getOSVersion() for Blackberry 5.0", function()
     navigator = oldNav;
 });
 
+test("mwf.userAgent.getOSVersion() for Android", function()
+{
+    var oldNav = navigator;
+    navigator = {
+        'userAgent':'Mozilla/5.0 (Linux; U; Android 4.0.2; en-us; Galaxy Nexus Build/ICL53F) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30'
+    };
+    var ua = new mwf.userAgent.constructor();
+    equal(ua.getOSVersion(),"4.0.2","getOSVersion() should parse Android 4.0.2 userAgent string");
+    navigator = oldNav;
+});
+
+test("mwf.userAgent.getOSVersion() for Windows Phone OS", function()
+{
+    var oldNav = navigator;
+    navigator = {
+        'userAgent':'Mozilla/4.0 (compatible; MSIE 7.0; Windows Phone OS 7.0; Trident/3.1; IEMobile/7.0; DELL; Venue Pro)'
+    };
+    var ua = new mwf.userAgent.constructor();
+    equal(ua.getOSVersion(),"7.0","getOSVersion() should parse Windows Phone OS 7.0 userAgent string");
+    navigator = oldNav;
+});
+
+test("mwf.userAgent.getOSVersion() for Symbian OS", function()
+{
+    var oldNav = navigator;
+    navigator = {
+        'userAgent':'Nokia3650/1.0 SymbianOS/6.1 Series60/1.2 Profile/MIDP-1.0 Configuration/CLDC-1.0'
+    };
+    var ua = new mwf.userAgent.constructor();
+    equal(ua.getOSVersion(),"6.1","getOSVersion() should parse Symbian OS 6.1 userAgent string");
+    navigator = oldNav;
+});
+
+test("mwf.userAgent.getOSVersion() for WebOS", function()
+{
+    var oldNav = navigator;
+    navigator = {
+        'userAgent':'Mozilla/5.0 (webOS/1.4.5; U; en-US) AppleWebKit/532.2 (KHTML, like Gecko) Version/1.0 Safari/532.2 Pre/1.0'
+    };
+    var ua = new mwf.userAgent.constructor();
+    equal(ua.getOSVersion(),"1.4.5","getOSVersion() should parse WebOS 1.4.5 userAgent string");
+    navigator = oldNav;
+});
+
 test("mwf.userAgent.getBrowser()", function()
 {
     var browser = mwf.userAgent.getBrowser();
