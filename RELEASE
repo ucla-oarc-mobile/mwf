@@ -19,7 +19,7 @@ License:
 
 TABLE OF CONTENTS
 
-Version 1.3.00          April 15, 2012
+Version 1.3.00.beta     April 15, 2012
 Version 1.2.14          April 14, 2012
 Version 1.2.13          February 29, 2012
 Version 1.2.12          February 6, 2012
@@ -94,6 +94,10 @@ April 15, 2012
 
 * Fixes to the device telemetry stack
 
+    * Fix to prevent infinite redirect loop with passthru.php [#122] [#133]
+
+    * Fix to prevent infinite refresh loop on same domain [#135]
+
     * userAgent.getBrowserEngineVersion() fix for iOS [#114]
 
     * userAgent.getOSVersion() fix for Symbian [#112]
@@ -120,6 +124,8 @@ Version 1.2.14
 April 14, 2012
 
 * Fix to prevent infinite redirect loop with passthru.php [#122] [#133]
+
+* Fix to prevent infinite refresh loop on same domain [#134]
 
 * Fix to Tag_HTML_Decorator for "0" attribute [#120]
 
