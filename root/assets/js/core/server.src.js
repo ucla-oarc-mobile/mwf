@@ -8,7 +8,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120203
+ * @version 20120414
  *
  * @requires mwf
  * @requires mwf.site
@@ -47,6 +47,21 @@ mwf.server = new function(){
         
         if(!mwf.capability.cookie())
             return;
+        
+        /**
+         * Exit in the event that no_server_init is set as a query string
+         * parameter. This ensures that an infinite loop will not occur with
+         * passhthru.php, as it adds this parameter to the query string on
+         * reload of the originator.
+         */
+        var query = window.location.href.split('?')[1];
+        if(typeof query != 'undefined'){
+            var vars = query.split('&');
+            for(var i = 0; i < vars.length; i++){
+                if(vars[i].split('=')[0] == 'no_server_init')
+                    return;
+            }
+        }
         
         var classificationCookie = classification.generateCookieContent();
         
