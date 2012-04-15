@@ -97,7 +97,11 @@ mwf.server = new function(){
          */
         
         if(this.mustReload && !mwf.override.isRedirecting){
-            site.reload();
+            var loc = window.location.href;
+            if(loc.indexOf('?') == -1) loc += "?";
+            if(loc.indexOf('?') < loc.length-1) loc += "&";
+            loc += "no_server_init";
+            window.location = loc;
         }else if(this.mustRedirect && !mwf.override.isRedirecting){
             site.redirect(site.asset.root+'/passthru.php?return='+encodeURIComponent(window.location)+'&mode='+mwf.browser.getMode());
         }
