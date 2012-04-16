@@ -4,7 +4,7 @@ Given /^I am on the JS Unit Tests page$/ do
 end
 
 Given /^I am on the JS Unit Tests page filtered for (.*)$/ do |filter|
-  visit "http://localhost/assets/test/js_unit/?filter=#{filter}"
+  visit "http://localhost/assets/test/js_unit/results.html?filter=#{filter}"
   @results = find_by_id('qunit-testresult')
 end
 
