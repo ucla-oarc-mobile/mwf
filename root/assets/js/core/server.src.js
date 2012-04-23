@@ -8,7 +8,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120414
+ * @version 20120423
  *
  * @requires mwf
  * @requires mwf.site
@@ -92,11 +92,12 @@ mwf.server = new function(){
          */
         
         if(this.mustReload && !mwf.override.isRedirecting){
-            var loc = window.location.href;
+            var locArr = window.location.href.split('#'), loc = locArr[0];
             if(loc.indexOf('?') == -1) loc += "?";
             if(loc.indexOf('?') < loc.length-1) loc += "&";
             loc += "no_server_init";
-            site.redirect(loc);
+            locArr[0] = loc;
+            site.redirect(locArr.join('#'));
         }else if(this.mustRedirect && !mwf.override.isRedirecting){
             site.redirect(site.asset.root+'/passthru.php?return='+encodeURIComponent(window.location)+'&mode='+mwf.browser.getMode());
         }
