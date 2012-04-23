@@ -8,7 +8,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-12 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20120415
+ * @version 20120423
  *
  * @requires mwf
  * @requires mwf.site
@@ -62,7 +62,7 @@
             
             mustReload = true;
             
-            /**
+        /**
              * If third-party cookies aren't supported and this is cross domain,
              * then redirect through the SP and then back to CP.
              */  
@@ -119,20 +119,23 @@
     if(!site.cookie.exists(screen.cookieName))
         setCookie(screen.cookieName, screen.generateCookieContent());
 
+
     /**
-     * If the service provider doesn't have cookies, either (1) reload
-     * the page if framework is of same-origin or device browser supports 
-     * third-party cookies, or (2) redirect to the SP redirector. If the
-     * service provider already has cookies, then this isn't necessary.
-     */
+         * If the service provider doesn't have cookies, either (1) reload
+         * the page if framework is of same-origin or device browser supports 
+         * third-party cookies, or (2) redirect to the SP redirector. If the
+         * service provider already has cookies, then this isn't necessary.
+         */
         
     if(mustReload && !mwf.override.isRedirecting){
-        var loc = window.location.href;
+        var locArr = window.location.href.split('#'), loc = locArr[0];
         if(loc.indexOf('?') == -1) loc += "?";
         if(loc.indexOf('?') < loc.length-1) loc += "&";
         loc += "no_server_init";
-        site.redirect(loc);
+        locArr[0] = loc;
+        site.redirect(locArr.join('#'));
     }else if(mustRedirect && !mwf.override.isRedirecting){
         site.redirect(site.asset.root+'/passthru.php?return='+encodeURIComponent(window.location)+'&mode='+mwf.browser.getMode());
     }
+
 }());
