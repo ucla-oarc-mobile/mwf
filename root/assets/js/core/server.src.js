@@ -24,7 +24,7 @@
  * @requires /root/assets/js/core/screen.js
  */
 
-mwf.server = new function(){
+(function(){
 
     /**
      * Local variables to minimize payload size in compression.
@@ -35,23 +35,20 @@ mwf.server = new function(){
     userAgent = mwf.userAgent,
     screen = mwf.screen,
     mustRedirect = false,
-    mustReload = false;
-    
-    var setCookie = function(cookieName, cookieContent) {
+    mustReload = false,
+    setCookie = function(cookieName, cookieContent) {
     
         /**
          * Function to generate a cookie on the service provider, specifying a
          * domain if this is a cross
          */
-        
-        var isSameOrigin = site.local.isSameOrigin();
             
         /**
          * If not cross-domain or this is the first load and third party is
          * supported, then attempt to write the cookie to the SP directly.
          */
         
-        if(isSameOrigin){
+        if(site.local.isSameOrigin()){
             
             /**
              * Write the cookie with the proper suffix for service provider.
@@ -66,9 +63,9 @@ mwf.server = new function(){
             mustReload = true;
             
         /**
-         * If third-party cookies aren't supported and this is cross domain,
-         * then redirect through the SP and then back to CP.
-         */  
+             * If third-party cookies aren't supported and this is cross domain,
+             * then redirect through the SP and then back to CP.
+             */  
         
         } else {
             
@@ -76,71 +73,69 @@ mwf.server = new function(){
             
         }
         
-    }
+    };
     
-    this.init = function(){
+ 
         
-        /**
-         * Initialization requires cookies to store data - else simply exit.
-         */
+    /**
+     * Initialization requires cookies to store data - else simply exit.
+     */
         
-        if(!mwf.capability.cookie())
-            return;
+    if(!mwf.capability.cookie())
+        return;
         
-        /**
-         * Exit in the event that no_server_init is set as a query string
-         * parameter. This helps to ensure that an infinite loop will not occur 
-         * as the framework adds this parameter to the query string on
-         * redirect back to the originator.
-         */
-        if (/^(\?|.*&)no_server_init([\=\&].*)?$/.test(window.location.search)) {
-            return;
-        }
+    /**
+     * Exit in the event that no_server_init is set as a query string
+     * parameter. This helps to ensure that an infinite loop will not occur 
+     * as the framework adds this parameter to the query string on
+     * redirect back to the originator.
+     */
+    if (/^(\?|.*&)no_server_init([\=\&].*)?$/.test(window.location.search)) {
+        return;
+    }
         
-        var classificationCookie = classification.generateCookieContent();
+    var classificationCookie = classification.generateCookieContent();
         
-        /**
-         * Set classification cookie if it doesn't already exist on server.
-         * Set it if classification has changed (e.g., user turns on or off
-         *    something in their settings).
-         */
+    /**
+     * Set classification cookie if it doesn't already exist on server.
+     * Set it if classification has changed (e.g., user turns on or off
+     *    something in their settings).
+     */
         
-        if(!site.cookie.exists(classification.cookieName) || site.cookie.classification != classificationCookie)
-            setCookie(classification.cookieName, classificationCookie);
+    if(!site.cookie.exists(classification.cookieName) || site.cookie.classification != classificationCookie)
+        setCookie(classification.cookieName, classificationCookie);
         
-        /**
-         * Set user agent cookie if it doesn't already exist on server.
-         */
+    /**
+     * Set user agent cookie if it doesn't already exist on server.
+     */
         
-        if(!site.cookie.exists(userAgent.cookieName))
-            setCookie(userAgent.cookieName, userAgent.generateCookieContent());
+    if(!site.cookie.exists(userAgent.cookieName))
+        setCookie(userAgent.cookieName, userAgent.generateCookieContent());
         
-        /**
-         * Set screen cookie if it doesn't already exist on server.
-         */
+    /**
+     * Set screen cookie if it doesn't already exist on server.
+     */
         
-        if(!site.cookie.exists(screen.cookieName))
-            setCookie(screen.cookieName, screen.generateCookieContent());
+    if(!site.cookie.exists(screen.cookieName))
+        setCookie(screen.cookieName, screen.generateCookieContent());
 
-        /**
+
+    /**
          * If the service provider doesn't have cookies, either (1) reload
          * the page if framework is of same-origin or device browser supports 
          * third-party cookies, or (2) redirect to the SP redirector. If the
          * service provider already has cookies, then this isn't necessary.
          */
         
-        if(mustReload && !mwf.override.isRedirecting){
-            var locArr = window.location.href.split('#'), loc = locArr[0];
-            if(loc.indexOf('?') == -1) loc += "?";
-            if(loc.indexOf('?') < loc.length-1) loc += "&";
-            loc += "no_server_init";
-            locArr[0] = loc;
-            site.redirect(locArr.join('#'));
-        }else if(mustRedirect && !mwf.override.isRedirecting){
-            site.redirect(site.asset.root+'/passthru.php?return='+encodeURIComponent(window.location)+'&mode='+mwf.browser.getMode());
-        }
-        
+    if(mustReload && !mwf.override.isRedirecting){
+        var locArr = window.location.href.split('#'), loc = locArr[0];
+        if(loc.indexOf('?') == -1) loc += "?";
+        if(loc.indexOf('?') < loc.length-1) loc += "&";
+        loc += "no_server_init";
+        locArr[0] = loc;
+        site.redirect(locArr.join('#'));
+    }else if(mustRedirect && !mwf.override.isRedirecting){
+        site.redirect(site.asset.root+'/passthru.php?return='+encodeURIComponent(window.location)+'&mode='+mwf.browser.getMode());
     }
-}
 
-mwf.server.init();
+}());

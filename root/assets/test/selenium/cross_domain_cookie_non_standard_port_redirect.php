@@ -20,11 +20,11 @@ $_SERVER['HTTP_HOST'] = 'www.example.com:8080';
                 var stub = new function() { this.cookieName='foo'; this.generateCookieContent = function() { return;} }
                 mwf.classification = stub;
                 mwf.userAgent = stub;
-                mwf.screen = stub
-                mwf.site.cookie.exists = function() { return false; }
-                mwf.override = new function() { this.isRedirecting = false }
-                mwf.browser = new function() { this.getMode = function() {return 'mode'}}
-                mwf.site.redirect = function(target) {document.write('<div id="target">'+target+'</div>')}
+                mwf.screen = stub;
+                mwf.site.cookie.exists = function() { return false; };
+                mwf.override = new function() { this.isRedirecting = false };
+                mwf.browser = new function() { this.getMode = function() {return 'mode'}};
+                mwf.site.redirect = function(target) {document.write('<div id="target">'+target+'</div>')};
             <?php require_once(dirname(dirname(dirname(dirname(__FILE__)))).'/assets/js/core/server.js'); ?>
         </script>
     </head>
