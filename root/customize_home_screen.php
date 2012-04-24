@@ -54,8 +54,9 @@ if (Classification::is_full()) {
         $apps_rendered[$key] = '<label data-id="' . $encoded_key . '"><input id="' . $this_id . '" type="checkbox" checked>&nbsp;' .
                 htmlspecialchars($apps[$key]) .
                 '<span class="draggable-handle"></span></label>';
-        $disabled_apps_rendered[$key] = '<div data-id="' . $encoded_key . '"><input id="' . $this_id . '" type="checkbox"><label for="' . $this_id . '">' .
-                htmlspecialchars($apps[$key]) . '</label><div class="draggable-handle"></div></div>';
+        $disabled_apps_rendered[$key] = '<label data-id="' . $encoded_key . '"><input id="' . $this_id . '" type="checkbox">&nbsp;' .
+                htmlspecialchars($apps[$key]) . 
+                '<span class="draggable-handle"></span></label>';
     }
 
     //@todo Move JS to external file, include with JS handler (perhaps part of configurableMenu, perhaps not)
