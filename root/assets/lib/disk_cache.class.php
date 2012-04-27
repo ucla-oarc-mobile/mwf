@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Object that represents a cache. 
+ * Object that represents a disk cache. 
  * 
  * Examples:
  * 
  *   Get (or create) a cache labeled "rss".
- *     $rss_cache = new Cache('rss');
+ *     $rss_cache = new Disk_Cache('rss');
  *   Note that the label may only contain alphanumeric characters and underscores.
  * 
  *   Retrieve the cache directory for the cache labeled "rss". This is useful
@@ -62,6 +62,34 @@ class Disk_Cache {
         }
     }
 
+ 
+    /**
+     * Create or update an item in the cache.
+     * 
+     * @param mixed $item
+     * @param string $key
+     * 
+     * @returns boolean
+     */
+    public function put($key, $item) {
+        return file_put_contents($this->get_cache_path($key),
+                serialize($item),
+                LOCK_EX) !== false;
+    }
+    
+    /**
+     * Get an item from the cache.
+     * 
+     * @param string $key
+     */
+    public function get($key) {
+        $serialized = $this->get_raw($key);
+        if ($serialized !== false) {
+            return unserialize($serialized);
+        }
+        return false;
+    }
+    
     /**
      * Returns the cache directory path or the path to a file in the 
      * cache if $key is specified.
@@ -91,5 +119,3 @@ class Disk_Cache {
         return false;
     }
 }
-
-?>

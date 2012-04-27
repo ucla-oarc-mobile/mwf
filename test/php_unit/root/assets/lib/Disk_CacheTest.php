@@ -12,8 +12,8 @@
  * @uses Config
  * @uses Disk_Cache
  */
-class Disk_CacheTest extends PHPUnit_Framework_TestCase {
-
+class Disk_CacheTest extends PHPUnit_Framework_TestCase {    
+    
     public function run(PHPUnit_Framework_TestResult $result = NULL) {
         $this->setPreserveGlobalState(false);
         return parent::run($result);
@@ -45,4 +45,28 @@ class Disk_CacheTest extends PHPUnit_Framework_TestCase {
         rmdir($cache->get_cache_path());
     }
 
+    /**
+     * @runInSeparateProcess
+     * @test
+     */
+    public function get_empty_false() {
+        $cache = new Disk_Cache('test');
+        $cache_dir = $cache->get_cache_path();
+        $this->assertFalse($cache->get('foo'));
+        rmdir($cache->get_cache_path());
+    }
+    
+    /**
+     * @runInSeparateProcess
+     * @test
+     */
+    public function get_putFoo_foo() {
+        $cache = new Disk_Cache('test');
+        $cache_dir = $cache->get_cache_path();
+        $foo = array('foo'=>'bar');
+        $cache->put('baz', $foo);
+        $this->assertEquals($foo, $cache->get('baz'));
+        unlink($cache->get_cache_path('baz'));
+        rmdir($cache->get_cache_path());
+    }
 }
