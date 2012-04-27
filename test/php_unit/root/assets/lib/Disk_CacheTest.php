@@ -69,4 +69,19 @@ class Disk_CacheTest extends PHPUnit_Framework_TestCase {
         unlink($cache->get_cache_path('baz'));
         rmdir($cache->get_cache_path());
     }
+    
+    /**
+     * @runInSeparateProcess
+     * @test
+     */
+    public function get_maxAge1_false() {
+        $cache = new Disk_Cache('test');
+        $cache_dir = $cache->get_cache_path();
+        $foo = "test string";
+        $cache->put('test key', $foo);
+        sleep(2);
+        $this->assertFalse($cache->get('test key', 1));
+        unlink($cache->get_cache_path('test key'));
+        rmdir($cache->get_cache_path());
+    }
 }
