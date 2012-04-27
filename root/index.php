@@ -53,7 +53,7 @@ if (!isset($menu_names)) {
 
 $menu_ids = Config::get('frontpage', 'menu.id.' . $menu_section);
 $menu_urls = Config::get('frontpage', 'menu.url.' . $menu_section);
-$menu_restrictions = Config::get('frontpage', 'menu.restriction.' . $menu_section);
+$menu_classes = Config::get('frontpage', 'menu.class.' . $menu_section);
 $menu_externals = Config::get('frontpage', 'menu.external.' . $menu_section);
 
 $main_menu = ($menu_section == 'default');
@@ -64,8 +64,8 @@ $main_menu = ($menu_section == 'default');
 echo HTML_Decorator::html_start()->render();
 
 $head = Site_Decorator::head()->set_title(Config::get('global', 'title_text'));
-if ($main_menu && Config::get('frontpage','configurable_homescreen'))
-    $head->add_js_handler_library('full_libs','configurableMenu');
+if ($main_menu && Config::get('frontpage', 'configurable_homescreen'))
+    $head->add_js_handler_library('full_libs', 'configurableMenu');
 echo $head->render();
 
 echo HTML_Decorator::body_start($main_menu ? array('class' => 'front') : array())->render();
@@ -90,19 +90,20 @@ if ($main_menu)
     $menu->set_homescreen();
 
 foreach ($menu_names as $key => $menu_name) {
-    if (isset($menu_restrictions[$key])) {
-        $function = $menu_restrictions[$key];
-        if (!User_Agent::$function())
-            continue;
+
+    $list_item_attributes = array();
+    if (isset($menu_classes[$key])) {
+        $list_item_attributes['class'] = $menu_classes[$key];
     }
+    if (isset($menu_ids[$key])) {
+        $list_item_attributes['id'] = $menu_ids[$key];
+    }
+
     $link_attributes = array();
     if (isset($menu_externals[$key])) {
         if ($menu_externals[$key])
             $link_attributes['rel'] = 'external';
     }
-    $list_item_attributes = array();
-    if (isset($menu_ids[$key]))
-        $list_item_attributes['id'] = $menu_ids[$key];
 
     $menu->add_item($menu_name, $menu_urls[$key], $list_item_attributes, $link_attributes);
 }
@@ -123,7 +124,7 @@ if (!$main_menu)
  */
 $footer = Site_Decorator::default_footer();
 if ($main_menu && Classification::is_full())
-    $footer->add_footer_link('Customize Home Screen',"/customize_home_screen.php");
+    $footer->add_footer_link('Customize Home Screen', "/customize_home_screen.php");
 echo $footer->render();
 
 /**
