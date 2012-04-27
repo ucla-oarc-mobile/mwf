@@ -119,7 +119,6 @@ class Disk_Cache {
             $mtime = filemtime($file);
             if ($mtime) {
                 if ($mtime > time() - $max_age) {
-                    error_log("mtime: " . $mtime . " max_age: " . $max_age . " time:" . time());
                     return file_get_contents($file);
                 }
             }
