@@ -49,7 +49,9 @@ if(isset($_GET['mode']) && $_GET['mode'] == 'standards')
         foreach($core_filenames as $filename)
             JS::load('core/'.$filename);
         
-        $return  = $_GET['return'];
+        $returnArr = explode('#', $_GET['return']);
+        
+        $return = $returnArr[0];
         
         if(strpos($return, '?') === false)
             $return .= '?';
@@ -59,7 +61,9 @@ if(isset($_GET['mode']) && $_GET['mode'] == 'standards')
         
         $return .= 'no_server_init';
         
-        echo 'window.location = "'.$return.'"';
+        $returnArr[0] = $return;
+        
+        echo 'window.location = "'.implode('#', $returnArr).'"';
         
     }
         
