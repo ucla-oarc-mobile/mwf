@@ -149,7 +149,8 @@ mwf.override = new function(){
     var _full = classification.isFull(),
         _standard = classification.isStandard(),
         _basic = classification.isBasic(),
-        _mobile = classification.isMobile();
+        _mobile = classification.isMobile(),
+        _native = classification.isNative();
     
     /**
      * Define a set of mwf.classification.wasX methods.
@@ -158,6 +159,7 @@ mwf.override = new function(){
     classification.wasStandard = function(){return _standard;};
     classification.wasBasic = function(){return _basic;};
     classification.wasMobile = function(){return _mobile;};
+    classification.wasNative = function(){return _native;};
     
     /**
      * Redefine the mwf.classification.isX methods based on override. This set
