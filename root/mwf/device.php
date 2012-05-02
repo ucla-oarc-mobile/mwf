@@ -53,7 +53,7 @@ else
 
 echo HTML_Decorator::html_start()->render();
 
-echo Site_Decorator::head()->set_title('MWF About')->render();
+echo Site_Decorator::head()->set_title('MWF Device Telemetry')->render();
 
 echo HTML_Decorator::body_start()->render();
 
