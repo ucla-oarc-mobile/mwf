@@ -1,12 +1,12 @@
 <?php
 
 /**
- * Object that represents a cache. 
+ * Object that represents a disk cache. 
  * 
  * Examples:
  * 
  *   Get (or create) a cache labeled "rss".
- *     $rss_cache = new Cache('rss');
+ *     $rss_cache = new Disk_Cache('rss');
  *   Note that the label may only contain alphanumeric characters and underscores.
  * 
  *   Retrieve the cache directory for the cache labeled "rss". This is useful
@@ -63,11 +63,39 @@ class Disk_Cache {
     }
 
     /**
+     * Create or update an item in the cache.
+     * 
+     * @param mixed $item
+     * @param string $key
+     * 
+     * @return boolean
+     */
+    public function put($key, $item) {
+        return file_put_contents($this->get_cache_path($key), serialize($item), LOCK_EX) !== false;
+    }
+
+    /**
+     * Get an item from the cache.
+     * 
+     * @param string $key
+     * @param int $max_age
+     * 
+     * @return boolean
+     */
+    public function get($key, $max_age=3600) {
+        $serialized = $this->get_raw($key, $max_age);
+        if ($serialized !== false) {
+            return unserialize($serialized);
+        }
+        return false;
+    }
+
+    /**
      * Returns the cache directory path or the path to a file in the 
      * cache if $key is specified.
      * 
      * @param string $key 
-     * 
+     *
      * @return string
      */
     public function get_cache_path($key=null) {
@@ -81,15 +109,21 @@ class Disk_Cache {
      * Returns the raw contents of a cache file specified by $key.
      * 
      * @param string $key
+     * @param int $max_age
+     * 
      * @return string 
      */
-    public function get_raw($key) {
+    public function get_raw($key, $max_age=3600) {
         $file = $this->get_cache_path($key);
         if (file_exists($file)) {
-            return file_get_contents($file);
+            $mtime = filemtime($file);
+            if ($mtime) {
+                if ($mtime > time() - $max_age) {
+                    return file_get_contents($file);
+                }
+            }
         }
         return false;
     }
-}
 
-?>
+}

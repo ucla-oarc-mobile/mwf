@@ -42,3 +42,10 @@ test("mwf.classification.wasMobile()", function()
         typeof mwf.classification.wasMobile() === 'boolean', 
         'wasMobile() should return a Boolean or be undefined');
 });
+
+test("mwf.classification.wasNative()", function()
+{
+    ok(typeof mwf.classification.wasNative === 'undefined' ||
+        typeof mwf.classification.wasNative() === 'boolean',
+    'wasMobile() should return a Boolean or be undefined');
+});
