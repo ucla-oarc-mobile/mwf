@@ -64,7 +64,7 @@ $main_menu = ($menu_section == 'default');
 echo HTML_Decorator::html_start()->render();
 
 $head = Site_Decorator::head()->set_title(Config::get('global', 'title_text'));
-if ($main_menu && Config::get('frontpage', 'configurable_homescreen'))
+if ($main_menu && Config::get('frontpage', 'configurable_home_screen'))
     $head->add_js_handler_library('full_libs', 'configurableMenu');
 echo $head->render();
 
@@ -87,7 +87,7 @@ else
 $menu = Site_Decorator::menu()->set_padded()->set_detailed();
 
 if ($main_menu)
-    $menu->set_homescreen();
+    $menu->set_home_screen();
 
 foreach ($menu_names as $key => $menu_name) {
 
