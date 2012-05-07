@@ -67,7 +67,7 @@ class Menu_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
      */
     public function render_homescreenAndFull_jsObject() {
         require_once dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/config.class.php';
-        Config::set('frontpage', 'configurable_homescreen', true);
+        Config::set('frontpage', 'configurable_home_screen', true);
         Config::set('global', 'cookie_prefix', 'mwftest_');
         $_COOKIE['mwftest_classification'] = '{"mobile":false,"basic":true,"standard":true,"full":true,"native":false}';
         require_once dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/classification.class.php';
