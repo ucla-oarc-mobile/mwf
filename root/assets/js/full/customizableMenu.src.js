@@ -1,5 +1,5 @@
 /**
- * mwf.full.configurableMenu object that allows menu items to be determined by 
+ * mwf.full.customizableMenu object that allows menu items to be determined by 
  * the user.
  *
  * @package full
@@ -15,7 +15,7 @@
  * 
  */
 
-mwf.full.configurableMenu=function(prefsKey){
+mwf.full.customizableMenu=function(prefsKey){
      
     var getPrefsLists = function() {
         var keys = null;

@@ -64,8 +64,8 @@ $main_menu = ($menu_section == 'default');
 echo HTML_Decorator::html_start()->render();
 
 $head = Site_Decorator::head()->set_title(Config::get('global', 'title_text'));
-if ($main_menu && Config::get('frontpage', 'configurable_home_screen'))
-    $head->add_js_handler_library('full_libs', 'configurableMenu');
+if ($main_menu && Config::get('frontpage', 'customizable_home_screen'))
+    $head->add_js_handler_library('full_libs', 'customizableMenu');
 echo $head->render();
 
 echo HTML_Decorator::body_start($main_menu ? array('class' => 'front') : array())->render();

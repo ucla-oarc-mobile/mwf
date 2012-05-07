@@ -31,7 +31,7 @@ require_once(__DIR__ . '/assets/lib/classification.class.php');
 echo HTML_Decorator::html_start()->render();
 
 echo Site_Decorator::head()->set_title('Customize Home Screen')
-        ->add_js_handler_library('full_libs', 'configurableMenu')
+        ->add_js_handler_library('full_libs', 'customizableMenu')
         ->add_js_handler_library('full_libs', 'jquery_ui_touch_punch')
         ->render();
 
@@ -59,7 +59,7 @@ if (Classification::is_full()) {
                 '<span class="draggable-handle"></span></label>';
     }
 
-    //@todo Move JS to external file, include with JS handler (perhaps part of configurableMenu, perhaps not)
+    //@todo Move JS to external file, include with JS handler (perhaps part of customizableMenu, perhaps not)
     $js = 'var apps=' . json_encode($apps_rendered) . ';var disabledApps=' . json_encode($disabled_apps_rendered) . ';';
 
     echo Site_Decorator::form('Customize Home Screen')
@@ -81,7 +81,7 @@ if (Classification::is_full()) {
 
     echo HTML_Decorator::tag('script')
             ->add_inner($js .
-                    "var cm = mwf.full.configurableMenu('home_screen_layout');" .
+                    "var cm = mwf.full.customizableMenu('home_screen_layout');" .
                     "function saveMenu()" .
                     "{cm.reset();\$('#app_order').children().each(" .
                     "  function(index,element) {cm.setItemPosition(element.getAttribute('data-id'),index+1);" .
