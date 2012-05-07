@@ -131,8 +131,8 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
             $this->add_inner_front($this->_title);
         }
 
-        if ($this->_home_screen && Classification::is_full() && Config::get('frontpage', 'configurable_home_screen')) {
-            $js = 'mwf.full.configurableMenu("home_screen_layout").render("main_menu_list",' .
+        if ($this->_home_screen && Classification::is_full() && Config::get('frontpage', 'customizable_home_screen')) {
+            $js = 'mwf.full.customizableMenu("home_screen_layout").render("main_menu_list",' .
                     json_encode(
                             array_map(function($obj, $raw) {
                                         return $obj->render($raw);
