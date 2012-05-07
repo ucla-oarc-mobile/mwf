@@ -87,7 +87,7 @@ else
 $menu = Site_Decorator::menu()->set_padded()->set_detailed();
 
 if ($main_menu)
-    $menu->set_homescreen();
+    $menu->set_home_screen();
 
 foreach ($menu_names as $key => $menu_name) {
 
