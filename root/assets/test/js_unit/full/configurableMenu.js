@@ -29,10 +29,10 @@ module("full/configurableMenu.js", {
 
 test("mwf.full.configurableMenu render() no settings, object passed, returns everything", function()
 {    
-    var oldValue = mwf.standard.preferences.get('homescreen_layout',oldValue);
-    mwf.standard.preferences.clear('homescreen_layout');
+    var oldValue = mwf.standard.preferences.get('home_screen_layout',oldValue);
+    mwf.standard.preferences.clear('home_screen_layout');
     
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
     cm.render(
         "fake_main_menu",
         {
@@ -46,17 +46,17 @@ test("mwf.full.configurableMenu render() no settings, object passed, returns eve
         'No prefs set, should print all menu items');
 
     if (oldValue != null) {
-        mwf.standard.preferences.set('homescreen_layout',oldValue);
+        mwf.standard.preferences.set('home_screen_layout',oldValue);
     }
 });
 
 
 test("mwf.full.configurableMenu render() no settings, array passed, returns everything", function()
 {    
-    var oldValue = mwf.standard.preferences.get('homescreen_layout',oldValue);
-    mwf.standard.preferences.clear('homescreen_layout');
+    var oldValue = mwf.standard.preferences.get('home_screen_layout',oldValue);
+    mwf.standard.preferences.clear('home_screen_layout');
     
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
         
     cm.render(
         "fake_main_menu",
@@ -68,14 +68,14 @@ test("mwf.full.configurableMenu render() no settings, array passed, returns ever
         'No prefs set, should print all menu items');
 
     if (oldValue != null) {
-        mwf.standard.preferences.set('homescreen_layout',oldValue);
+        mwf.standard.preferences.set('home_screen_layout',oldValue);
     }
 });
 
 test("mwf.full.configurableMenu render() has settings, object passed", function()
 {    
-    var oldValue = mwf.standard.preferences.get('homescreen_layout');
-    mwf.standard.preferences.set('homescreen_layout',JSON.stringify({
+    var oldValue = mwf.standard.preferences.get('home_screen_layout');
+    mwf.standard.preferences.set('home_screen_layout',JSON.stringify({
         items:[{
             key:1,
             on:0
@@ -88,7 +88,7 @@ test("mwf.full.configurableMenu render() has settings, object passed", function(
         }]
     }));
     
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
     
     cm.render(
         "fake_main_menu",
@@ -104,15 +104,15 @@ test("mwf.full.configurableMenu render() has settings, object passed", function(
         'Prefs set to print just the middle item');
 
     if (oldValue != null) {
-        mwf.standard.preferences.set('homescreen_layout',oldValue);
+        mwf.standard.preferences.set('home_screen_layout',oldValue);
     }
 });
 
 
 test("mwf.full.configurableMenu render() has settings, array passed", function()
 {    
-    var oldValue = mwf.standard.preferences.get('homescreen_layout');
-    mwf.standard.preferences.set('homescreen_layout',JSON.stringify({
+    var oldValue = mwf.standard.preferences.get('home_screen_layout');
+    mwf.standard.preferences.set('home_screen_layout',JSON.stringify({
         items:[{
             key:0,
             on:1
@@ -125,7 +125,7 @@ test("mwf.full.configurableMenu render() has settings, array passed", function()
         }]
     }));
     
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
     
     cm.render(
         "fake_main_menu",
@@ -137,7 +137,7 @@ test("mwf.full.configurableMenu render() has settings, array passed", function()
         'Prefs set to print first and last menu items');
 
     if (oldValue != null) {
-        mwf.standard.preferences.set('homescreen_layout',oldValue);
+        mwf.standard.preferences.set('home_screen_layout',oldValue);
     }
 });
 
@@ -146,10 +146,10 @@ test("mwf.full.configurableMenu render() mangled settings, graceful handling", f
     var result = true;
     expect(1);
     
-    var oldValue = mwf.standard.preferences.get('homescreen_layout');
-    mwf.standard.preferences.set('homescreen_layout','["a]');
+    var oldValue = mwf.standard.preferences.get('home_screen_layout');
+    mwf.standard.preferences.set('home_screen_layout','["a]');
     
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
     
     try {
         cm.render(
@@ -160,7 +160,7 @@ test("mwf.full.configurableMenu render() mangled settings, graceful handling", f
         result = false;
     } finally {
         if (oldValue != null) {
-            mwf.standard.preferences.set('homescreen_layout',oldValue);
+            mwf.standard.preferences.set('home_screen_layout',oldValue);
         }
     }
         
@@ -170,8 +170,8 @@ test("mwf.full.configurableMenu render() mangled settings, graceful handling", f
 
 test("mwf.full.configurableMenu render() has settings, array passed", function()
 {    
-    var oldValue = mwf.standard.preferences.get('homescreen_layout');
-    mwf.standard.preferences.set('homescreen_layout',JSON.stringify({
+    var oldValue = mwf.standard.preferences.get('home_screen_layout');
+    mwf.standard.preferences.set('home_screen_layout',JSON.stringify({
         items:[{
             key:0,
             on:1
@@ -184,7 +184,7 @@ test("mwf.full.configurableMenu render() has settings, array passed", function()
         }]
     }));
     
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
     
     cm.render(
         "fake_main_menu",
@@ -200,14 +200,14 @@ test("mwf.full.configurableMenu render() has settings, array passed", function()
         'Prefs set, should print enabled items followed by unlisted items and not disabled items');
 
     if (oldValue != null) {
-        mwf.standard.preferences.set('homescreen_layout',oldValue);
+        mwf.standard.preferences.set('home_screen_layout',oldValue);
     }
 });
 
 test("mwf.full.configurableMenu render() disabled items sent", function()
 {
-    var oldValue = mwf.standard.preferences.get('homescreen_layout');
-    mwf.standard.preferences.set('homescreen_layout',JSON.stringify({
+    var oldValue = mwf.standard.preferences.get('home_screen_layout');
+    mwf.standard.preferences.set('home_screen_layout',JSON.stringify({
         items:[{
             key:0,
             on:1
@@ -220,7 +220,7 @@ test("mwf.full.configurableMenu render() disabled items sent", function()
         }]
     }));
     
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
     
     cm.render(
         "fake_main_menu",
@@ -241,13 +241,13 @@ test("mwf.full.configurableMenu render() disabled items sent", function()
         'Disabled items sent, should be rendered');
 
     if (oldValue != null) {
-        mwf.standard.preferences.set('homescreen_layout',oldValue);
+        mwf.standard.preferences.set('home_screen_layout',oldValue);
     }
 })
 
 test("mwf.full.configurableMenu enableItem() enable new item", function()
 {
-    var oldValue = mwf.standard.preferences.get('homescreen_layout');
+    var oldValue = mwf.standard.preferences.get('home_screen_layout');
     var initialPrefs = {
         items:[{
             key:1,
@@ -304,25 +304,25 @@ test("mwf.full.configurableMenu enableItem() enable new item", function()
             on:1
         }]
     };
-    mwf.standard.preferences.set('homescreen_layout',JSON.stringify(initialPrefs));
+    mwf.standard.preferences.set('home_screen_layout',JSON.stringify(initialPrefs));
 
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
 
     cm.enableItem(7,true);
     
-    var newPrefsString = mwf.standard.preferences.get('homescreen_layout');
+    var newPrefsString = mwf.standard.preferences.get('home_screen_layout');
     var newPrefs = JSON.parse(newPrefsString);
     deepEqual(newPrefs, expectedPrefs, "should add new item to enabled list");
 
     if (oldValue != null) {
-        mwf.standard.preferences.set('homescreen_layout',oldValue);
+        mwf.standard.preferences.set('home_screen_layout',oldValue);
     }
     
 });
 
 test("mwf.full.configurableMenu enableItem() disable new item", function()
 {
-    var oldValue = mwf.standard.preferences.get('homescreen_layout');
+    var oldValue = mwf.standard.preferences.get('home_screen_layout');
     var initialPrefs = {
         items:[{
             key:1,
@@ -379,26 +379,26 @@ test("mwf.full.configurableMenu enableItem() disable new item", function()
             on:0
         }]
     };
-    mwf.standard.preferences.set('homescreen_layout',JSON.stringify(initialPrefs));
+    mwf.standard.preferences.set('home_screen_layout',JSON.stringify(initialPrefs));
 
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
 
     cm.enableItem(7,false);
     
-    var newPrefsString = mwf.standard.preferences.get('homescreen_layout');
+    var newPrefsString = mwf.standard.preferences.get('home_screen_layout');
     var newPrefs = JSON.parse(newPrefsString);
 
     deepEqual(newPrefs, expectedPrefs, "should add new item to disabled list");
 
     if (oldValue != null) {
-        mwf.standard.preferences.set('homescreen_layout',oldValue);
+        mwf.standard.preferences.set('home_screen_layout',oldValue);
     }
     
 });
 
 test("mwf.full.configurableMenu enableItem() enable disabled item", function()
 {
-    var oldValue = mwf.standard.preferences.get('homescreen_layout');
+    var oldValue = mwf.standard.preferences.get('home_screen_layout');
     var initialPrefs = {
         items:[{
             key:1,
@@ -452,26 +452,26 @@ test("mwf.full.configurableMenu enableItem() enable disabled item", function()
         }]
     };
 
-    mwf.standard.preferences.set('homescreen_layout',JSON.stringify(initialPrefs));
+    mwf.standard.preferences.set('home_screen_layout',JSON.stringify(initialPrefs));
 
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
 
     cm.enableItem(4,true);
     
-    var newPrefsString = mwf.standard.preferences.get('homescreen_layout');
+    var newPrefsString = mwf.standard.preferences.get('home_screen_layout');
     var newPrefs = JSON.parse(newPrefsString);
     
     deepEqual(newPrefs, expectedPrefs, "should move disabled item to enabled list");
 
     if (oldValue != null) {
-        mwf.standard.preferences.set('homescreen_layout',oldValue);
+        mwf.standard.preferences.set('home_screen_layout',oldValue);
     }
     
 });
 
 test("mwf.full.configurableMenu enableItem() disable enabled item", function()
 {
-    var oldValue = mwf.standard.preferences.get('homescreen_layout');
+    var oldValue = mwf.standard.preferences.get('home_screen_layout');
     var initialPrefs = {
         items:[{
             key:1,
@@ -524,26 +524,26 @@ test("mwf.full.configurableMenu enableItem() disable enabled item", function()
             on:0
         }]
     };
-    mwf.standard.preferences.set('homescreen_layout',JSON.stringify(initialPrefs));
+    mwf.standard.preferences.set('home_screen_layout',JSON.stringify(initialPrefs));
 
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
 
     cm.enableItem(3,false);
     
-    var newPrefsString = mwf.standard.preferences.get('homescreen_layout');
+    var newPrefsString = mwf.standard.preferences.get('home_screen_layout');
     var newPrefs = JSON.parse(newPrefsString);
  
     deepEqual(newPrefs, expectedPrefs, "should move enabled item to disabled list");
 
     if (oldValue != null) {
-        mwf.standard.preferences.set('homescreen_layout',oldValue);
+        mwf.standard.preferences.set('home_screen_layout',oldValue);
     }
     
 });
 
 test("mwf.full.configurableMenu enableItem() enable enabled item", function()
 {
-    var oldValue = mwf.standard.preferences.get('homescreen_layout');
+    var oldValue = mwf.standard.preferences.get('home_screen_layout');
     
     var initialPrefs = {
         items:[{
@@ -598,26 +598,26 @@ test("mwf.full.configurableMenu enableItem() enable enabled item", function()
         }]
     };
     
-    mwf.standard.preferences.set('homescreen_layout',JSON.stringify(initialPrefs));
+    mwf.standard.preferences.set('home_screen_layout',JSON.stringify(initialPrefs));
 
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
 
     cm.enableItem(3,true);
     
-    var newPrefsString = mwf.standard.preferences.get('homescreen_layout');
+    var newPrefsString = mwf.standard.preferences.get('home_screen_layout');
     var newPrefs = JSON.parse(newPrefsString);
  
     deepEqual(newPrefs, expectedPrefs, "should do nothing with enabled item");
 
     if (oldValue != null) {
-        mwf.standard.preferences.set('homescreen_layout',oldValue);
+        mwf.standard.preferences.set('home_screen_layout',oldValue);
     }
     
 });
 
 test("mwf.full.configurableMenu enableItem() disable disabled item", function()
 {
-    var oldValue = mwf.standard.preferences.get('homescreen_layout');
+    var oldValue = mwf.standard.preferences.get('home_screen_layout');
     
     var initialPrefs = {
         items:[{
@@ -672,34 +672,34 @@ test("mwf.full.configurableMenu enableItem() disable disabled item", function()
         }]
     };
     
-    mwf.standard.preferences.set('homescreen_layout',JSON.stringify(initialPrefs));
+    mwf.standard.preferences.set('home_screen_layout',JSON.stringify(initialPrefs));
 
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
 
     cm.enableItem(4,false);
     
-    var newPrefsString = mwf.standard.preferences.get('homescreen_layout');
+    var newPrefsString = mwf.standard.preferences.get('home_screen_layout');
     var newPrefs = JSON.parse(newPrefsString);
 
     deepEqual(newPrefs, expectedPrefs, "should do nothing with disabled item");
 
     if (oldValue != null) {
-        mwf.standard.preferences.set('homescreen_layout',oldValue);
+        mwf.standard.preferences.set('home_screen_layout',oldValue);
     }
     
 });
 
 test("mwf.full.configurableMenu render() should not have side effects on passed array", function()
 {
-    var oldValue = mwf.standard.preferences.get('homescreen_layout');
-    mwf.standard.preferences.set('homescreen_layout',JSON.stringify({
+    var oldValue = mwf.standard.preferences.get('home_screen_layout');
+    mwf.standard.preferences.set('home_screen_layout',JSON.stringify({
         items:[{
             key:0,
             on:0
         }]
         }));
     
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
     
     var menuItems = ["foo", "bar", "baz"];
     cm.render(
@@ -710,13 +710,13 @@ test("mwf.full.configurableMenu render() should not have side effects on passed 
     deepEqual(menuItems, ["foo","bar","baz"], "render() should not have side effects on menuItems array");
     
     if (oldValue != null) {
-        mwf.standard.preferences.set('homescreen_layout',oldValue);
+        mwf.standard.preferences.set('home_screen_layout',oldValue);
     }
 })
 
 test("mwf.full.configurableMenu setItemPosition() moves item up", function()
 {
-    var oldValue = mwf.standard.preferences.get('homescreen_layout');
+    var oldValue = mwf.standard.preferences.get('home_screen_layout');
     var initialPrefs = {
         items:[
 
@@ -765,24 +765,24 @@ test("mwf.full.configurableMenu setItemPosition() moves item up", function()
         }
         ]
     }
-    mwf.standard.preferences.set('homescreen_layout',JSON.stringify(initialPrefs));
+    mwf.standard.preferences.set('home_screen_layout',JSON.stringify(initialPrefs));
     
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
     
     cm.setItemPosition(14,2);
     cm.setItemPosition(12,3);
     
-    var newPrefs = JSON.parse(mwf.standard.preferences.get('homescreen_layout'));
+    var newPrefs = JSON.parse(mwf.standard.preferences.get('home_screen_layout'));
     deepEqual(newPrefs,expectedPrefs);
         
     if (oldValue != null) {
-        mwf.standard.preferences.set('homescreen_layout',oldValue);
+        mwf.standard.preferences.set('home_screen_layout',oldValue);
     }
 });
 
 test("mwf.full.configurableMenu moveDown() moves item down", function()
 {
-    var oldValue = mwf.standard.preferences.get('homescreen_layout');
+    var oldValue = mwf.standard.preferences.get('home_screen_layout');
     var initialPrefs = {
         items:[
 
@@ -831,33 +831,33 @@ test("mwf.full.configurableMenu moveDown() moves item down", function()
         }
         ]
     };
-    mwf.standard.preferences.set('homescreen_layout',JSON.stringify(initialPrefs));
+    mwf.standard.preferences.set('home_screen_layout',JSON.stringify(initialPrefs));
     
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
     
     cm.setItemPosition(14,4);
     cm.setItemPosition(10,3);
     
-    deepEqual(JSON.parse(mwf.standard.preferences.get('homescreen_layout')),expectedPrefs);
+    deepEqual(JSON.parse(mwf.standard.preferences.get('home_screen_layout')),expectedPrefs);
         
     if (oldValue != null) {
-        mwf.standard.preferences.set('homescreen_layout',oldValue);
+        mwf.standard.preferences.set('home_screen_layout',oldValue);
     }
 });
 
 test("mwf.full.configurableMenu render() no settings, object passed, sets settings", function()
 {    
-    var oldValue = mwf.standard.preferences.get('homescreen_layout',oldValue);
-    mwf.standard.preferences.clear('homescreen_layout');
+    var oldValue = mwf.standard.preferences.get('home_screen_layout',oldValue);
+    mwf.standard.preferences.clear('home_screen_layout');
         
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
 
     cm.render(
         "fake_main_menu",
         ["foo","bar"]
         );
             
-    var prefResults = JSON.parse(mwf.standard.preferences.get('homescreen_layout'));
+    var prefResults = JSON.parse(mwf.standard.preferences.get('home_screen_layout'));
 
     deepEqual(prefResults.items[0],{
         key:0,
@@ -875,28 +875,28 @@ test("mwf.full.configurableMenu render() no settings, object passed, sets settin
         'render() should result in one pref setting per menu item');
 
     if (oldValue != null) {
-        mwf.standard.preferences.set('homescreen_layout',oldValue);
+        mwf.standard.preferences.set('home_screen_layout',oldValue);
     }
 });
 
 test("mwf.full.configurableMenu render() some settings, missing items set", function()
 {    
-    var oldValue = mwf.standard.preferences.get('homescreen_layout',oldValue);
-    mwf.standard.preferences.set('homescreen_layout',JSON.stringify({
+    var oldValue = mwf.standard.preferences.get('home_screen_layout',oldValue);
+    mwf.standard.preferences.set('home_screen_layout',JSON.stringify({
         items:[{
             key:1,
             on:1
         }]
     }));
                 
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
 
     cm.render(
         "fake_main_menu",
         ["foo","bar"]
         );
             
-    var prefResults = JSON.parse(mwf.standard.preferences.get('homescreen_layout'));
+    var prefResults = JSON.parse(mwf.standard.preferences.get('home_screen_layout'));
 
     deepEqual(prefResults.items[0],{
         key:1,
@@ -914,16 +914,16 @@ test("mwf.full.configurableMenu render() some settings, missing items set", func
         'render() should result in one pref setting per menu item');
 
     if (oldValue != null) {
-        mwf.standard.preferences.set('homescreen_layout',oldValue);
+        mwf.standard.preferences.set('home_screen_layout',oldValue);
     }
 });
 
 test("mwf.full.configurableMenu render() no settings, object passed, sets settings casting strings to ints", function()
 {    
-    var oldValue = mwf.standard.preferences.get('homescreen_layout',oldValue);
-    mwf.standard.preferences.clear('homescreen_layout');
+    var oldValue = mwf.standard.preferences.get('home_screen_layout',oldValue);
+    mwf.standard.preferences.clear('home_screen_layout');
         
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
 
     cm.render(
         "fake_main_menu",
@@ -933,7 +933,7 @@ test("mwf.full.configurableMenu render() no settings, object passed, sets settin
         }
         );
             
-    var prefResults = JSON.parse(mwf.standard.preferences.get('homescreen_layout'));
+    var prefResults = JSON.parse(mwf.standard.preferences.get('home_screen_layout'));
 
     deepEqual(prefResults.items[0],{
         key:0,
@@ -951,21 +951,21 @@ test("mwf.full.configurableMenu render() no settings, object passed, sets settin
         'render() should result in one pref setting per menu item');
 
     if (oldValue != null) {
-        mwf.standard.preferences.set('homescreen_layout',oldValue);
+        mwf.standard.preferences.set('home_screen_layout',oldValue);
     }
 });
 
 test("mwf.full.configurableMenu render() some settings, missing items set casting string to int", function()
 {    
-    var oldValue = mwf.standard.preferences.get('homescreen_layout',oldValue);
-    mwf.standard.preferences.set('homescreen_layout',JSON.stringify({
+    var oldValue = mwf.standard.preferences.get('home_screen_layout',oldValue);
+    mwf.standard.preferences.set('home_screen_layout',JSON.stringify({
         "items":[{
             key:1,
             on:1
         }]
     }));
     
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
         
     cm.render(
         "fake_main_menu",
@@ -975,7 +975,7 @@ test("mwf.full.configurableMenu render() some settings, missing items set castin
         }
         );
             
-    var prefResults = JSON.parse(mwf.standard.preferences.get('homescreen_layout'));
+    var prefResults = JSON.parse(mwf.standard.preferences.get('home_screen_layout'));
 
     deepEqual(prefResults.items[0],{
         key:1,
@@ -993,23 +993,23 @@ test("mwf.full.configurableMenu render() some settings, missing items set castin
         'render() should result in one pref setting per menu item');
 
     if (oldValue != null) {
-        mwf.standard.preferences.set('homescreen_layout',oldValue);
+        mwf.standard.preferences.set('home_screen_layout',oldValue);
     }
 });
 
 test("mwf.full.configurableMenu reset() removes settings", function()
 {
-    var oldValue = mwf.standard.preferences.get('homescreen_layout', oldValue);
-    mwf.standard.preferences.set('homescreen_layout',JSON.stringify({
+    var oldValue = mwf.standard.preferences.get('home_screen_layout', oldValue);
+    mwf.standard.preferences.set('home_screen_layout',JSON.stringify({
         "on":[1]
     }));
     
-    var cm = mwf.full.configurableMenu('homescreen_layout');
+    var cm = mwf.full.configurableMenu('home_screen_layout');
     cm.reset();
-    var prefResults = mwf.standard.preferences.get('homescreen_layout');
+    var prefResults = mwf.standard.preferences.get('home_screen_layout');
     strictEqual(prefResults,null,'clear() should remove preferences list');
     
     if (oldValue != null) {
-        mwf.standard.preferences.set('homescreen_layout',oldValue);
+        mwf.standard.preferences.set('home_screen_layout',oldValue);
     }
 })
