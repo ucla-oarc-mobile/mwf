@@ -23,7 +23,7 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
 
     private $_padded = true;
     private $_detailed = null;
-    private $_homescreen = null;
+    private $_home_screen = null;
     private $_title = false;
     private $_list = array();
     private $_align = false;
@@ -49,8 +49,8 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
         return $this;
     }
 
-    public function set_homescreen($val = true) {
-        $this->_homescreen = $val ? true : false;
+    public function set_home_screen($val = true) {
+        $this->_home_screen = $val ? true : false;
         return $this;
     }
 
@@ -119,9 +119,9 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
         if (!$this->_padded)
             $this->add_class('not-padded');
 
-        if ($this->_homescreen)
+        if ($this->_home_screen)
             $this->add_class('front')->set_param('id', 'main_menu');
-        elseif ($this->_homescreen === false)
+        elseif ($this->_home_screen === false)
             $this->remove_class('front');
 
         if ($this->_align)
@@ -131,8 +131,8 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
             $this->add_inner_front($this->_title);
         }
 
-        if ($this->_homescreen && Classification::is_full() && Config::get('frontpage', 'configurable_homescreen')) {
-            $js = 'mwf.full.configurableMenu("homescreen_layout").render("main_menu_list",' .
+        if ($this->_home_screen && Classification::is_full() && Config::get('frontpage', 'configurable_home_screen')) {
+            $js = 'mwf.full.configurableMenu("home_screen_layout").render("main_menu_list",' .
                     json_encode(
                             array_map(function($obj, $raw) {
                                         return $obj->render($raw);

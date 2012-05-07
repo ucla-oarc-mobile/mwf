@@ -50,12 +50,12 @@ class Menu_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
      * @test
      * @runInSeparateProcess
      */
-    public function setHomescreen_noParam_isHomescreen() {
+    public function setHomeScreen_noParam_isHomeScreen() {
         require dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/menu.class.php';
 
         $this->object = new Menu_Site_Decorator;
 
-        $this->object->set_homescreen();
+        $this->object->set_home_screen();
         $result = $this->object->render();
         $this->assertRegExp('/\bclass\=\"[^"]*\bfront\b/', $result);
         $this->assertRegExp('/\bid=\"main_menu\"[\s>]/', $result);
@@ -65,19 +65,19 @@ class Menu_Site_DecoratorTest extends PHPUnit_Framework_TestCase {
      * @test
      * @runInSeparateProcess
      */
-    public function render_homescreenAndFull_jsObject() {
+    public function render_homeScreenAndFull_jsObject() {
         require_once dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/config.class.php';
-        Config::set('frontpage', 'configurable_homescreen', true);
+        Config::set('frontpage', 'configurable_home_screen', true);
         Config::set('global', 'cookie_prefix', 'mwftest_');
         $_COOKIE['mwftest_classification'] = '{"mobile":false,"basic":true,"standard":true,"full":true,"native":false}';
         require_once dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/classification.class.php';
         require_once dirname(dirname(dirname(dirname(dirname(dirname(dirname(__DIR__))))))) . '/root/assets/lib/decorator/site/menu.class.php';
 
         $this->object = new Menu_Site_Decorator;
-        $this->object->set_homescreen();
+        $this->object->set_home_screen();
         $this->object->add_item('Foo', 'http://example.com/', array(), array(), 'foo_index');
         $this->object->add_item('Bar', 'http://musicroutes.com/', array(), array(), 'bar_index');
-        $this->assertRegExp('/\bmwf\.full\.configurableMenu\(\"homescreen_layout"\)\.render\(/', $this->object->render());
+        $this->assertRegExp('/\bmwf\.full\.configurableMenu\(\"home_screen_layout"\)\.render\(/', $this->object->render());
     }
 
 }

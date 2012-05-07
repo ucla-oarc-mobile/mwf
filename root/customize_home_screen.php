@@ -81,7 +81,7 @@ if (Classification::is_full()) {
 
     echo HTML_Decorator::tag('script')
             ->add_inner($js .
-                    "var cm = mwf.full.configurableMenu('homescreen_layout');" .
+                    "var cm = mwf.full.configurableMenu('home_screen_layout');" .
                     "function saveMenu()" .
                     "{cm.reset();\$('#app_order').children().each(" .
                     "  function(index,element) {cm.setItemPosition(element.getAttribute('data-id'),index+1);" .
