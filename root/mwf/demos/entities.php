@@ -346,6 +346,12 @@ echo Site_Decorator::menu()
             ->add_item('Item 2<p>Description</p>', '#')
             ->render();
 
+?>
+
+<a href="//m.ucsd.edu" id="button-top" class="button">Top Button</a>
+
+<?php
+
 echo Site_Decorator::button()
         ->set_not_padded()
         ->add_option('Back To Demos', Config::get('global', 'site_url') . '/mwf/demos.php')
