@@ -90,7 +90,6 @@ if ($main_menu)
     $menu->set_home_screen();
 
 foreach ($menu_names as $key => $menu_name) {
-
     $list_item_attributes = array();
     if (isset($menu_classes[$key])) {
         $list_item_attributes['class'] = $menu_classes[$key];
@@ -105,7 +104,7 @@ foreach ($menu_names as $key => $menu_name) {
             $link_attributes['rel'] = 'external';
     }
 
-    $menu->add_item($menu_name, $menu_urls[$key], $list_item_attributes, $link_attributes);
+    $menu->add_item($menu_name, $menu_urls[$key], $list_item_attributes, $link_attributes, $key);
 }
 
 echo $menu->render();
