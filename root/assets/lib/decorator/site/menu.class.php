@@ -132,12 +132,11 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
         }
 
         if ($this->_home_screen && Classification::is_full() && Config::get('frontpage', 'customizable_home_screen')) {
-            $js = 'mwf.full.customizableMenu("home_screen_layout").render("main_menu_list",' .
-                    json_encode(
-                            array_map(function($obj, $raw) {
-                                        return $obj->render($raw);
-                                    }, $this->_list, array_fill(0, count($this->_list), $raw))) . ');';
-
+            $js = 'mwf.cm = mwf.full.customizableMenu("home_screen_layout");';
+            foreach ($this->_list as $key=>$value) {
+                $js .= 'mwf.cm.addItem(' . json_encode($key) . ',' . json_encode($value->render($raw)) . ');';
+            }
+            $js .= 'mwf.cm.render("main_menu_list");';
             $this->add_inner(HTML_Decorator::tag('ol')->set_param('id', 'main_menu_list'));
             $this->add_inner(HTML_Decorator::tag('script', $js));
         } else {

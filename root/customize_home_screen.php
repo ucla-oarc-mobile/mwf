@@ -42,6 +42,7 @@ echo Site_Decorator::header()
         ->render();
 
 if (Classification::is_full()) {
+    $js = "var cm = mwf.full.customizableMenu('home_screen_layout');";
 
     $apps = Config::get('frontpage', 'menu.name.default');
     $ids = Config::get('frontpage', 'menu.id.default');
@@ -51,16 +52,15 @@ if (Classification::is_full()) {
 
         $this_id = htmlspecialchars($ids[$key]);
         $encoded_key = json_encode($key);
-        $apps_rendered[$key] = '<label data-id="' . $encoded_key . '"><input id="' . $this_id . '" type="checkbox" checked>&nbsp;' .
+        $enabled_markup = '<label data-id="' . $encoded_key . '"><input id="' . $this_id . '" type="checkbox" checked>&nbsp;' .
                 htmlspecialchars($apps[$key]) .
                 '<span class="draggable-handle"></span></label>';
-        $disabled_apps_rendered[$key] = '<label data-id="' . $encoded_key . '"><input id="' . $this_id . '" type="checkbox">&nbsp;' .
-                htmlspecialchars($apps[$key]) . 
+        $disabled_markup= '<label data-id="' . $encoded_key . '"><input id="' . $this_id . '" type="checkbox">&nbsp;' .
+                htmlspecialchars($apps[$key]) .
                 '<span class="draggable-handle"></span></label>';
-    }
+        $js .= 'cm.addItem(' . json_encode($key) . ',' . json_encode($enabled_markup) . ',' . json_encode($disabled_markup) . ');';
 
-    //@todo Move JS to external file, include with JS handler (perhaps part of customizableMenu, perhaps not)
-    $js = 'var apps=' . json_encode($apps_rendered) . ';var disabledApps=' . json_encode($disabled_apps_rendered) . ';';
+    }
 
     echo Site_Decorator::form('Customize Home Screen')
             ->set_padded()
@@ -81,13 +81,12 @@ if (Classification::is_full()) {
 
     echo HTML_Decorator::tag('script')
             ->add_inner($js .
-                    "var cm = mwf.full.customizableMenu('home_screen_layout');" .
                     "function saveMenu()" .
                     "{cm.reset();\$('#app_order').children().each(" .
                     "  function(index,element) {cm.setItemPosition(element.getAttribute('data-id'),index+1);" .
                     "cm.enableItem(element.getAttribute('data-id'),this.querySelector('[type=checkbox]').checked)})}" .
                     "function renderMenu()" .
-                    "{cm.render('app_order',apps, disabledApps)}" .
+                    "{cm.render('app_order')}" .
                     "renderMenu();" .
                     '$(function() { $( "#app_order" ).sortable({handle:".draggable-handle"}); $( "#app_order" ).disableSelection();});')
             ->render();
