@@ -346,11 +346,8 @@ echo Site_Decorator::menu()
             ->add_item('Item 2<p>Description</p>', '#')
             ->render();
 
-?>
-
-<a href="//m.ucsd.edu" id="button-top" class="button">Top Button</a>
-
-<?php
+echo HTML_Decorator::tag('a', 'Top Button', array('id'=>'button-top', 'class'=>'button', 'href'=>'/'))
+        ->render();
 
 echo Site_Decorator::button()
         ->set_not_padded()
