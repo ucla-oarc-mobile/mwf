@@ -346,6 +346,9 @@ echo Site_Decorator::menu()
             ->add_item('Item 2<p>Description</p>', '#')
             ->render();
 
+echo HTML_Decorator::tag('a', 'Top Button', array('id'=>'button-top', 'class'=>'button', 'href'=>'/'))
+        ->render();
+
 echo Site_Decorator::button()
         ->set_not_padded()
         ->add_option('Back To Demos', Config::get('global', 'site_url') . '/mwf/demos.php')
