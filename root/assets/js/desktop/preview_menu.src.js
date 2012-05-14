@@ -53,8 +53,8 @@ mwf.desktop.preview_menu = new function() {
     };
 };
 
-if(document.addEventListener) {
-    document.addEventListener('load', mwf.desktop.preview_menu.init, false);
-} else if(document.attachEvent) {
-    document.attachEvent('onload', mwf.desktop.preview_menu.init);
+if(window.addEventListener) {
+    window.addEventListener('load', mwf.desktop.preview_menu.init, false);
+} else if(window.attachEvent) {
+    window.attachEvent('onload', mwf.desktop.preview_menu.init);
 }
