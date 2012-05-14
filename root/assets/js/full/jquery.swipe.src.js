@@ -20,7 +20,7 @@
  * $version 0.1(a)
  */
 
-document.addEventListener('load', function(){
+window.addEventListener('load', function(){
 
     (function($) {
             $.fn.swipe = function(options) {
