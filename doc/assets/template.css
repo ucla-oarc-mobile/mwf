@@ -43,7 +43,7 @@ html, body {
     margin-left: 280px;
 }
 
-#menu, #content :first-child {
+#menu, #content h1:first-child {
     margin-top: 0;
     padding-top: 12px;
 }
@@ -58,4 +58,16 @@ html, body {
 
 #menu ul a {
     font-weight: normal;
+}
+
+pre {
+    white-space:pre-wrap;
+    margin: 0;
+    padding: 0;
+}
+
+.highlight {
+    border: 1px solid #ccc;
+    background-color: #eee;
+    padding: 8px;
 }

@@ -5,7 +5,7 @@ require_once(dirname(__FILE__).'/lib/url.php');
 
 Template::init();
 
-$page = isset($_GET['p']) ? $_GET['p'] : 'overview';
+$page = isset($_GET['p']) ? $_GET['p'] : 'overview/introduction';
 $path = dirname(__FILE__).'/content/'.$page.'.php';
 
 if(!file_exists($path))
