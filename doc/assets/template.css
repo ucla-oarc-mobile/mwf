@@ -43,6 +43,10 @@ html, body {
     margin-left: 280px;
 }
 
+#content ul li {
+	margin-bottom: 6px;
+}
+
 #menu, #content h1:first-child {
     margin-top: 0;
     padding-top: 12px;

@@ -102,9 +102,9 @@ $sitemap = array(
         'name'=>'System Administration',
         'pages'=>array(
                 'requirements'=>'Requirements &amp; Packages',
-                'installation'=>'Installation',
+                'installation'=>'Installation &amp; Customization',
                 'config'=>'Configuration Settings',
-                'customization'=>'Updates &amp; Customization'
+                'update'=>'Update Information'
             )
     ),
     
