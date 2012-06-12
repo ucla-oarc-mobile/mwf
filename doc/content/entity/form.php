@@ -111,7 +111,7 @@
     <h3>Select Input</h3>
     
     <pre class="highlight">
-&lt;labe&gt;
+&lt;label&gt;
     &lt;span&gt;Label Text&lt;/span&gt;
     &lt;select name="select-input"&gt;
         &lt;option value="1"&gt;One&lt;/option&gt;
