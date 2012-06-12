@@ -75,3 +75,7 @@ pre {
     background-color: #eee;
     padding: 8px;
 }
+
+.inactive {
+    color: #999;
+}

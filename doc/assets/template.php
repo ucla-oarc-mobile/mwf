@@ -61,13 +61,13 @@ $sitemap = array(
     'library'=>array(
         'name'=>'Javascript Libraries',
         'pages'=>array(
+                'geolocation'=>'Geolocation',
                 'trigger'=>'Target/Trigger Engine',
                 'touchable'=>'Touch Interactions Engine',
                 'expandable'=>'Expandable/Collapsable',
                 'accordion'=>'Accordion',
                 'transitionable'=>'Transitions',
-                'filterable'=>'On-page Filter',
-                'geolocation'=>'Geolocation'
+                'filterable'=>'On-page Filter'
             )
     ),
     
@@ -110,6 +110,28 @@ $sitemap = array(
     
 );
 
+$disabled = array('library/trigger'
+                 ,'library/touchable'
+                 ,'library/expandable'
+                 ,'library/accordion'
+                 ,'library/transitionable'
+                 ,'library/filterable'
+                 ,'extension/decorators'
+                 ,'extension/native'
+                 ,'extension/dts'
+                 ,'internal/scripts'
+                 ,'internal/directory'
+                 ,'internal/naming'
+                 ,'internal/dependencies'
+                 ,'internal/dts'
+                 ,'internal/config'
+                 ,'internal/cookie'
+                 ,'internal/path'
+                 ,'internal/image'
+                 ,'internal/cache'
+                 ,'internal/json'
+                 ,'internal/test');
+
 ?><!DOCTYPE html>
 <html>
     <head>
@@ -127,9 +149,20 @@ $sitemap = array(
                         <a href="#"><?php echo $category['name']; ?></a>
                         <?php if(isset($category['pages'])){ ?>
                         <ul<?php if($segments[0] == $category_key) echo ' class="active"'; ?>>
-                            <?php foreach($category['pages'] as $page_key=>$title){ ?>
-                            <li><a href="<?php echo URL::path($category_key.'/'.$page_key); ?>"><?php echo $title; ?></a></li>
-                            <?php } ?>
+                            <?php 
+                            
+                            foreach($category['pages'] as $page_key=>$title){ 
+                            
+                                if(in_array($category_key.'/'.$page_key, $disabled))
+                                {
+                                    echo '<li class="inactive">'.$title.'</li>';
+                                }
+                                else
+                                {
+                                    echo '<li><a href="'.URL::path($category_key.'/'.$page_key).'">'.$title.'</a></li>';
+                                }
+                                    
+                             } ?>
                         </ul>
                         <?php } ?>
                     </li>
