@@ -39,7 +39,8 @@ $sitemap = array(
                 'content'=>'Content',
                 'menu'=>'Menus',
                 'button'=>'Buttons',
-                'form'=>'Forms'
+                'form'=>'Forms',
+                'messages'=>'Messages'
             )
     ),
     
