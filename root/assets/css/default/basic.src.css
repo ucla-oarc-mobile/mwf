@@ -678,9 +678,8 @@ form span.invalid {
 }
 
 form span.invalid:before {
-    content: '\26a0';
+    content: url(img/invalid.png);
     font-size: 1.5em;
-    vertical-align: middle;
 }
 
 form input.invalid,
