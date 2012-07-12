@@ -147,28 +147,32 @@
 }
 
 .menu > :first-child:last-child,
-.menu li:last-child {
+.menu > ol > li:last-child,
+.menu > ul > li:last-child {
     -webkit-border-bottom-left-radius: .5em;
     -webkit-border-bottom-right-radius: .5em;
     -moz-border-radius-bottomleft: .5em;
     -moz-border-radius-bottomright: .5em;
 }
 
-.menu > :first-child:last-child li:first-child a:hover,
-.menu > :first-child:last-child li:first-child a:focus,
-.menu > :first-child:last-child li:first-child a:active,
-.menu > :first-child li:first-child a:hover,
-.menu > :first-child li:first-child a:focus,
-.menu > :first-child li:first-child a:active {
+.menu > :first-child:last-child > li:first-child a:hover,
+.menu > :first-child:last-child > li:first-child a:focus,
+.menu > :first-child:last-child > li:first-child a:active,
+.menu > :first-child > li:first-child a:hover,
+.menu > :first-child > li:first-child a:focus,
+.menu > :first-child > li:first-child a:active {
     -moz-border-radius-topleft: .5em;
     -moz-border-radius-topright: .5em;
     -webkit-border-top-left-radius: .5em;
     -webkit-border-top-right-radius: .5em;
 }
 
-.menu li:last-child a:hover,
-.menu li:last-child a:focus,
-.menu li:last-child a:active {
+.menu > ol > li:last-child > a:hover,
+.menu > ol > li:last-child > a:focus,
+.menu > ol > li:last-child > a:active,
+.menu > ul > li:last-child > a:hover,
+.menu > ul > li:last-child > a:focus,
+.menu > ul > li:last-child > a:active {
     -webkit-border-bottom-left-radius: .5em;
     -webkit-border-bottom-right-radius: .5em;
     -moz-border-radius-bottomleft: .5em;
@@ -191,28 +195,32 @@
 }
 
 .menu.not-padded > :first-child:last-child,
-.menu.not-padded li:last-child {
+.menu.not-padded > ol > li:last-child,
+.menu.not-padded > ul > li:last-child {
     -webkit-border-bottom-left-radius: 0;
     -webkit-border-bottom-right-radius: 0;
     -moz-border-radius-bottomleft: 0;
     -moz-border-radius-bottomright: 0;
 }
 
-.menu.not-padded > :first-child:last-child li:first-child a:hover,
-.menu.not-padded > :first-child:last-child li:first-child a:focus,
-.menu.not-padded > :first-child:last-child li:first-child a:active,
-.menu.not-padded > :first-child li:first-child a:hover,
-.menu.not-padded > :first-child li:first-child a:focus,
-.menu.not-padded > :first-child li:first-child a:active {
+.menu.not-padded > :first-child:last-child > li:first-child > a:hover,
+.menu.not-padded > :first-child:last-child > li:first-child > a:focus,
+.menu.not-padded > :first-child:last-child > li:first-child > a:active,
+.menu.not-padded > :first-child > li:first-child > a:hover,
+.menu.not-padded > :first-child > li:first-child > a:focus,
+.menu.not-padded > :first-child > li:first-child > a:active {
     -moz-border-radius-topleft: 0;
     -moz-border-radius-topright: 0;
     -webkit-border-top-left-radius: 0;
     -webkit-border-top-right-radius: 0;
 }
 
-.menu.not-padded li:last-child a:hover,
-.menu.not-padded li:last-child a:focus,
-.menu.not-padded li:last-child a:active {
+.menu.not-padded > ol > li:last-child > a:hover,
+.menu.not-padded > ol > li:last-child > a:focus,
+.menu.not-padded > ol > li:last-child > a:active,
+.menu.not-padded > ul > li:last-child > a:hover,
+.menu.not-padded > ul > li:last-child > a:focus,
+.menu.not-padded > ul > li:last-child > a:active {
     -webkit-border-bottom-left-radius: 0;
     -webkit-border-bottom-right-radius: 0;
     -moz-border-radius-bottomleft: 0;
@@ -224,7 +232,7 @@
  */
 
 a.button,
-div.button a {
+div.button > a {
     background: -webkit-gradient(linear, left top, left bottom, from(#6883bc), to(#536895));
     background: -moz-linear-gradient(#6883bc, #536895);
     background: -o-linear-gradient(top, #6883bc, #536895);
@@ -232,7 +240,7 @@ div.button a {
 }
 
 a.button,
-div.button a:first-child {
+div.button > a:first-child {
     -webkit-border-top-left-radius: .5em;
     -webkit-border-bottom-left-radius: .5em;
     -moz-border-radius-topleft: .5em;
@@ -240,7 +248,7 @@ div.button a:first-child {
 }
 
 a.button,
-div.button a:last-child {
+div.button > a:last-child {
     -webkit-border-top-right-radius: .5em;
     -webkit-border-bottom-right-radius: .5em;
     -moz-border-radius-topright: .5em;
@@ -248,8 +256,8 @@ div.button a:last-child {
 }
 
 a.button.light,
-div.button a.light,
-div.button.light a {
+div.button > a.light,
+div.button.light > a {
     background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
     background: -moz-linear-gradient(#fff, #e5e5e5);
     background: -o-linear-gradient(top, #fff, #e5e5e5);
@@ -260,15 +268,15 @@ div.button.light a {
 .mwf_notmobile a.button:hover,
 a.button:focus,
 a.button:active,
-.mwf_notmobile div.button a:hover,
-div.button a:focus,
-div.button a:active,
+.mwf_notmobile div.button > a:hover,
+div.button > a:focus,
+div.button > a:active,
 .mwf_notmobile a.button.light:hover,
 a.button.light:focus,
 a.button.light:active,
-.mwf_notmobile div.button a.light:hover,
-div.button a.light:focus,
-div.button a.light:active{
+.mwf_notmobile div.button > a.light:hover,
+div.button > a.light:focus,
+div.button > a.light:active{
     background: -webkit-gradient(linear, left top, left bottom, from(#ffc847), to(#ffb300));
     background: -moz-linear-gradient(#ffc847, #ffb300);
     background: -o-linear-gradient(top, #ffc847, #ffb300);
