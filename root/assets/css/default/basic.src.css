@@ -382,7 +382,7 @@ select {
 .menu.detailed li > a, 
 .menu.detailed li > p
 {
-    padding: .9em 2em .8em .9em;
+    padding: .9em 3em .8em .9em;
 }
 
 .menu .button a {
