@@ -98,7 +98,7 @@ echo Site_Decorator::menu()
             ->set_title('Menu Detailed Center')
             ->add_item('Item 1<p>Description</p>', '#')
             ->add_item('Item 2<p>Description</p>', '#')
-            ->render();
+            ->render(true);
 
 echo Site_Decorator::menu()
             ->set_detailed()
@@ -106,7 +106,7 @@ echo Site_Decorator::menu()
             ->set_title_light('Menu Light Detailed Center')
             ->add_item('Item 1<p>Description</p>', '#')
             ->add_item('Item 2<p>Description</p>', '#')
-            ->render();
+            ->render(true);
 
 echo Site_Decorator::menu()
             ->set_left_aligned()
@@ -127,14 +127,14 @@ echo Site_Decorator::menu()
             ->set_title('Menu Detailed')
             ->add_item('Item 1<p>Description</p>', '#')
             ->add_item('Item 2<p>Description</p>', '#')
-            ->render();
+            ->render(true);
 
 echo Site_Decorator::menu()
             ->set_detailed()
             ->set_title_light('Menu Light Detailed')
             ->add_item('Item 1<p>Description</p>', '#')
             ->add_item('Item 2<p>Description</p>', '#')
-            ->render();
+            ->render(true);
 
 echo Site_Decorator::menu()
             ->add_item('Item 1', '#')
@@ -146,7 +146,7 @@ echo Site_Decorator::menu()
             ->set_center_aligned()
             ->add_item('Item 1<p>Description</p>', '#')
             ->add_item('Item 2<p>Description</p>', '#')
-            ->render();
+            ->render(true);
 
 echo Site_Decorator::menu()
             ->set_left_aligned()
@@ -158,7 +158,7 @@ echo Site_Decorator::menu()
             ->set_detailed()
             ->add_item('Item 1<p>Description</p>', '#')
             ->add_item('Item 2<p>Description</p>', '#')
-            ->render();
+            ->render(true);
 
 echo Site_Decorator::button()
             ->set_not_padded()
@@ -261,7 +261,7 @@ echo Site_Decorator::menu()
             ->set_title('Menu Padded Detailed Centered')
             ->add_item('Item 1<p>Description</p>', '#')
             ->add_item('Item 2<p>Description</p>', '#')
-            ->render();
+            ->render(true);
 
 echo Site_Decorator::menu()
             ->set_not_padded()
@@ -270,7 +270,7 @@ echo Site_Decorator::menu()
             ->set_title_light('Menu Padded Light Detailed Centered')
             ->add_item('Item 1<p>Description</p>', '#')
             ->add_item('Item 2<p>Description</p>', '#')
-            ->render();
+            ->render(true);
 
 echo Site_Decorator::menu()
             ->set_not_padded()
@@ -294,7 +294,7 @@ echo Site_Decorator::menu()
             ->set_title('Menu Padded Detailed')
             ->add_item('Item 1<p>Description</p>', '#')
             ->add_item('Item 2<p>Description</p>', '#')
-            ->render();
+            ->render(true);
 
 echo Site_Decorator::menu()
             ->set_not_padded()
@@ -302,7 +302,7 @@ echo Site_Decorator::menu()
             ->set_title_light('Menu Padded Light Detailed')
             ->add_item('Item 1<p>Description</p>', '#')
             ->add_item('Item 2<p>Description</p>', '#')
-            ->render();
+            ->render(true);
 
 echo Site_Decorator::menu()
             ->set_not_padded()
@@ -322,7 +322,7 @@ echo Site_Decorator::menu()
             ->set_center_aligned()
             ->add_item('Item 1<p>Description</p>', '#')
             ->add_item('Item 2<p>Description</p>', '#')
-            ->render();
+            ->render(true);
 
 echo Site_Decorator::menu()
             ->set_not_padded()
@@ -330,7 +330,7 @@ echo Site_Decorator::menu()
             ->set_center_aligned()
             ->add_item('Item 1<p>Description</p>', '#')
             ->add_item('Item 2<p>Description</p>', '#')
-            ->render();
+            ->render(true);
 
 echo Site_Decorator::menu()
             ->set_not_padded()
@@ -344,7 +344,7 @@ echo Site_Decorator::menu()
             ->set_detailed()
             ->add_item('Item 1<p>Description</p>', '#')
             ->add_item('Item 2<p>Description</p>', '#')
-            ->render();
+            ->render(true);
 
 echo HTML_Decorator::tag('a', 'Top Button', array('id'=>'button-top', 'class'=>'button', 'href'=>'/'))
         ->render();
