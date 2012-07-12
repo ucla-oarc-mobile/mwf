@@ -141,7 +141,7 @@ class Menu_Site_Decorator extends Tag_HTML_Decorator {
             $this->add_inner(HTML_Decorator::tag('script', $js));
         } else {
             if (count($this->_list) > 0) {
-                $this->add_inner(HTML_Decorator::tag('ol', $this->_list));
+                $this->add_inner(HTML_Decorator::tag('ul', $this->_list));
             }
         }
 
