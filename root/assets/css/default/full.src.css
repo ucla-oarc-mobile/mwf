@@ -138,6 +138,7 @@
 }
 
 .menu > ol:first-child > li:first-child,
+.menu > ul:first-child > li:first-child,
 .menu > :first-child {
     -moz-border-radius-topleft: .5em;
     -moz-border-radius-topright: .5em;
@@ -181,6 +182,7 @@
 }
 
 .menu.not-padded > ol:first-child > li:first-child,
+.menu.not-padded > ul:first-child > li:first-child,
 .menu.not-padded > :first-child {
     -moz-border-radius-topleft: 0;
     -moz-border-radius-topright: 0;

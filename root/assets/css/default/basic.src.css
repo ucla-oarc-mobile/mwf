@@ -258,7 +258,7 @@ select {
     padding: .8em;
 }
 
-.content > * ol {
+.content > * ol, .content > * ul {
     margin: 0 1.5em;
     position: relative;
 }
@@ -316,7 +316,7 @@ select {
     color: #000;
 }
 
-.menu ol {
+.menu ol, .menu ul {
     list-style-type: none;
 }
 
