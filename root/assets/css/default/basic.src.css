@@ -267,12 +267,12 @@ select {
     margin-bottom: .5em;
 }
 
-.content .button a {
+.content > .button a {
     color: #2685BB;
     font-weight: bold;
 }
 
-.content .button a .label {
+.content > .button a .label {
     color: #777;
     font-weight: bold;
 }
@@ -296,7 +296,8 @@ select {
     border-bottom: 1px solid #ddd;
 }
 
-.menu li p {
+.menu > ul > li p, 
+.menu > ol > li p {
     font-weight: normal;
 }
 
@@ -316,77 +317,62 @@ select {
     color: #000;
 }
 
-.menu ol, .menu ul {
+.menu > ul, 
+.menu > ol {
     list-style-type: none;
 }
 
-.menu li {
-    background:url(img/list-arrow.png) no-repeat 95% center;
+.menu > ul > li,
+.menu > ol > li  {
     background-color: #fff;
     text-align: center;
     border-bottom: 1px solid #ddd;
 }
 
-.menu li a {
-    display: block;
-}
-
-.menu li:hover {
+.menu > ul > li:hover, 
+.menu > ol > li:hover {
     background-color: #eaf2fa;
 }
 
-.menu li a,
-.menu.detailed.center li a {
+.menu > ul > li > a, 
+.menu > ol > li > a {
+    display: block;
+    background:url(img/list-arrow.png) no-repeat 95% center;
+}
+
+.menu > ul > li > a,
+.menu > ol > li > a{
     padding: .9em 3em .8em 2em;
 }
 
-.menu li a h3,
-.menu li a h4 {
-    color: #1e6a95;
-}
-
-.menu li a:hover h3,
-.menu li a:focus h3,
-.menu li a:active h3,
-.menu li a:hover h4,
-.menu li a:focus h4,
-.menu li a:active h4 {
-    color: #494D69;
-}
-
-.menu li > p:first-child:last-child {
+.menu > ul > li > p:first-child:last-child
+.menu > ol > li > p:first-child:last-child {
     padding: .9em; /* singular paragraph text within li */
 }
 
-.menu.detailed p {
+.menu.detailed > ul > li > a > p,
+.menu.detailed > ol > li > a > p{
     color: #555;
 }
 
-.menu.left li,
-.menu.detailed li {
+.menu.left > ul > li,
+.menu.detailed > ol > li {
     text-align: left;
 }
 
-.menu.left li a {
+.menu.left > ul > li > a,
+.menu.left > ol > li > a {
     padding-left: .9em;
 }
 
-.menu.center li {
+.menu.center > ul > li,
+.menu.center > ol > li{
     text-align: center;
 }
 
-.menu.detailed li {
+.menu.detailed > ul > li,
+.menu.detailed > ol > li {
     font-size: 1em;
-}
-
-.menu.detailed li > a, 
-.menu.detailed li > p
-{
-    padding: .9em 3em .8em .9em;
-}
-
-.menu .button a {
-    color: #2685BB;
 }
 
 /**
@@ -398,7 +384,7 @@ a.button, div.button {
     margin: 0;
 }
 
-a.button, div.button a{
+a.button, div.button > a {
     border-bottom: 1px solid #aaa;
     padding: .5em 0 .4em 0;
     background-color: #536895;
@@ -409,12 +395,12 @@ a.button, div.button a{
     text-align: center;
 }
 
-.mwf_notmobile a.button:hover,
+a.button:hover,
 a.button:focus,
 a.button:active,
-.mwf_notmobile div.button a:hover,
-div.button a:focus,
-div.button a:active{
+div.button > a:hover,
+div.button > a:focus,
+div.button > a:active{
     background-color: #ffb300;
     color: #494D69;
 }
