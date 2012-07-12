@@ -147,28 +147,32 @@
 }
 
 .menu > :first-child:last-child,
-.menu li:last-child {
+.menu > ol > li:last-child,
+.menu > ul > li:last-child {
     -webkit-border-bottom-left-radius: .5em;
     -webkit-border-bottom-right-radius: .5em;
     -moz-border-radius-bottomleft: .5em;
     -moz-border-radius-bottomright: .5em;
 }
 
-.menu > :first-child:last-child li:first-child a:hover,
-.menu > :first-child:last-child li:first-child a:focus,
-.menu > :first-child:last-child li:first-child a:active,
-.menu > :first-child li:first-child a:hover,
-.menu > :first-child li:first-child a:focus,
-.menu > :first-child li:first-child a:active {
+.mwf_notmobile .menu > :first-child:last-child > li:first-child a:hover,
+.menu > :first-child:last-child > li:first-child a:focus,
+.menu > :first-child:last-child > li:first-child a:active,
+.mwf_notmobile .menu > :first-child > li:first-child a:hover,
+.menu > :first-child > li:first-child a:focus,
+.menu > :first-child > li:first-child a:active {
     -moz-border-radius-topleft: .5em;
     -moz-border-radius-topright: .5em;
     -webkit-border-top-left-radius: .5em;
     -webkit-border-top-right-radius: .5em;
 }
 
-.menu li:last-child a:hover,
-.menu li:last-child a:focus,
-.menu li:last-child a:active {
+.mwf_notmobile .menu > ol > li:last-child > a:hover,
+.menu > ol > li:last-child > a:focus,
+.menu > ol > li:last-child > a:active,
+.mwf_notmobile .menu > ul > li:last-child > a:hover,
+.menu > ul > li:last-child > a:focus,
+.menu > ul > li:last-child > a:active {
     -webkit-border-bottom-left-radius: .5em;
     -webkit-border-bottom-right-radius: .5em;
     -moz-border-radius-bottomleft: .5em;
@@ -191,28 +195,32 @@
 }
 
 .menu.not-padded > :first-child:last-child,
-.menu.not-padded li:last-child {
+.menu.not-padded > ol > li:last-child,
+.menu.not-padded > ul > li:last-child {
     -webkit-border-bottom-left-radius: 0;
     -webkit-border-bottom-right-radius: 0;
     -moz-border-radius-bottomleft: 0;
     -moz-border-radius-bottomright: 0;
 }
 
-.menu.not-padded > :first-child:last-child li:first-child a:hover,
-.menu.not-padded > :first-child:last-child li:first-child a:focus,
-.menu.not-padded > :first-child:last-child li:first-child a:active,
-.menu.not-padded > :first-child li:first-child a:hover,
-.menu.not-padded > :first-child li:first-child a:focus,
-.menu.not-padded > :first-child li:first-child a:active {
+.mwf_notmobile .menu.not-padded > :first-child:last-child > li:first-child > a:hover,
+.menu.not-padded > :first-child:last-child > li:first-child > a:focus,
+.menu.not-padded > :first-child:last-child > li:first-child > a:active,
+.mwf_notmobile .menu.not-padded > :first-child > li:first-child > a:hover,
+.menu.not-padded > :first-child > li:first-child > a:focus,
+.menu.not-padded > :first-child > li:first-child > a:active {
     -moz-border-radius-topleft: 0;
     -moz-border-radius-topright: 0;
     -webkit-border-top-left-radius: 0;
     -webkit-border-top-right-radius: 0;
 }
 
-.menu.not-padded li:last-child a:hover,
-.menu.not-padded li:last-child a:focus,
-.menu.not-padded li:last-child a:active {
+.mwf_notmobile .menu.not-padded > ol > li:last-child > a:hover,
+.menu.not-padded > ol > li:last-child > a:focus,
+.menu.not-padded > ol > li:last-child > a:active,
+.mwf_notmobile .menu.not-padded > ul > li:last-child > a:hover,
+.menu.not-padded > ul > li:last-child > a:focus,
+.menu.not-padded > ul > li:last-child > a:active {
     -webkit-border-bottom-left-radius: 0;
     -webkit-border-bottom-right-radius: 0;
     -moz-border-radius-bottomleft: 0;
@@ -224,7 +232,7 @@
  */
 
 a.button,
-div.button a {
+div.button > a {
     background: -webkit-gradient(linear, left top, left bottom, from(#6883bc), to(#536895));
     background: -moz-linear-gradient(#6883bc, #536895);
     background: -o-linear-gradient(top, #6883bc, #536895);
@@ -232,7 +240,7 @@ div.button a {
 }
 
 a.button,
-div.button a:first-child {
+div.button > a:first-child {
     -webkit-border-top-left-radius: .5em;
     -webkit-border-bottom-left-radius: .5em;
     -moz-border-radius-topleft: .5em;
@@ -240,7 +248,7 @@ div.button a:first-child {
 }
 
 a.button,
-div.button a:last-child {
+div.button > a:last-child {
     -webkit-border-top-right-radius: .5em;
     -webkit-border-bottom-right-radius: .5em;
     -moz-border-radius-topright: .5em;
@@ -248,8 +256,8 @@ div.button a:last-child {
 }
 
 a.button.light,
-div.button a.light,
-div.button.light a {
+div.button > a.light,
+div.button.light > a {
     background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e5e5e5));
     background: -moz-linear-gradient(#fff, #e5e5e5);
     background: -o-linear-gradient(top, #fff, #e5e5e5);
@@ -260,15 +268,15 @@ div.button.light a {
 .mwf_notmobile a.button:hover,
 a.button:focus,
 a.button:active,
-.mwf_notmobile div.button a:hover,
-div.button a:focus,
-div.button a:active,
+.mwf_notmobile div.button > a:hover,
+div.button > a:focus,
+div.button > a:active,
 .mwf_notmobile a.button.light:hover,
 a.button.light:focus,
 a.button.light:active,
-.mwf_notmobile div.button a.light:hover,
-div.button a.light:focus,
-div.button a.light:active{
+.mwf_notmobile div.button > a.light:hover,
+div.button > a.light:focus,
+div.button > a.light:active{
     background: -webkit-gradient(linear, left top, left bottom, from(#ffc847), to(#ffb300));
     background: -moz-linear-gradient(#ffc847, #ffb300);
     background: -o-linear-gradient(top, #ffc847, #ffb300);
@@ -288,7 +296,7 @@ div.button a.light:active{
     -webkit-border-radius: .5em;
 }
 
-#button-top:hover,
+.mwf_notmobile #button-top:hover,
 #button-top:active,
 #button-top:focus{
     background: -webkit-gradient(linear, left top, left bottom, from(#8296c0), to(#576c9c));
@@ -347,10 +355,10 @@ form input[type="submit"],
 form input[type="reset"],
 form button,
 form a.button,
-form input[type="submit"]:hover:disabled,
-form input[type="reset"]:hover:disabled,
-form button:hover:disabled,
-form a.button:hover.disabled,
+.mwf_notmobile form input[type="submit"]:hover:disabled,
+.mwf_notmobile form input[type="reset"]:hover:disabled,
+.mwf_notmobile form button:hover:disabled,
+.mwf_notmobile form a.button:hover.disabled,
 form input[type="submit"]:focus:disabled,
 form input[type="reset"]:focus:disabled,
 form button:focus:disabled,
@@ -364,10 +372,10 @@ form a.button:focus.disabled {
     text-shadow: 0 1px 1px #fff;
 }
 
-form input[type="submit"]:hover,
-form input[type="reset"]:hover,
-form button:hover,
-form a.button:hover,
+.mwf_notmobile form input[type="submit"]:hover,
+.mwf_notmobile form input[type="reset"]:hover,
+.mwf_notmobile form button:hover,
+.mwf_notmobile form a.button:hover,
 form input[type="submit"]:focus,
 form input[type="reset"]:focus,
 form button:focus,
@@ -382,10 +390,10 @@ form input[type="submit"].primary,
 form input[type="reset"].primary,
 form button.primary,
 form a.button.primary,
-form input[type="submit"].primary:hover:disabled,
-form input[type="reset"].primary:hover:disabled,
-form button.primary:hover:disabled,
-form a.button.primary:hover.disabled,
+.mwf_notmobile form input[type="submit"].primary:hover:disabled,
+.mwf_notmobile form input[type="reset"].primary:hover:disabled,
+.mwf_notmobile form button.primary:hover:disabled,
+.mwf_notmobile form a.button.primary:hover.disabled,
 form input[type="submit"].primary:focus:disabled,
 form input[type="reset"].primary:focus:disabled,
 form button.primary:focus:disabled,
@@ -396,10 +404,10 @@ form a.button.primary:focus.disabled {
     background: linear-gradient(#fcbe60, #faa422);
 }
 
-form input[type="submit"].primary:hover,
-form input[type="reset"].primary:hover,
-form button.primary:hover,
-form a.button.primary:hover,
+.mwf_notmobile form input[type="submit"].primary:hover,
+.mwf_notmobile form input[type="reset"].primary:hover,
+.mwf_notmobile form button.primary:hover,
+.mwf_notmobile form a.button.primary:hover,
 form input[type="submit"].primary:focus,
 form input[type="reset"].primary:focus,
 form button.primary:focus,
@@ -414,10 +422,10 @@ form input[type="submit"].secondary,
 form input[type="reset"].secondary,
 form button.secondary,
 form a.button.secondary,
-form input[type="submit"].secondary:hover:disabled,
-form input[type="reset"].secondary:hover:disabled,
-form button.secondary:hover:disabled,
-form a.button.secondary:hover.disabled,
+.mwf_notmobile form input[type="submit"].secondary:hover:disabled,
+.mwf_notmobile form input[type="reset"].secondary:hover:disabled,
+.mwf_notmobile form button.secondary:hover:disabled,
+.mwf_notmobile form a.button.secondary:hover.disabled,
 form input[type="submit"].secondary:focus:disabled,
 form input[type="reset"].secondary:focus:disabled,
 form button.secondary:focus:disabled,
@@ -428,10 +436,10 @@ form a.button.secondary:focus.disabled {
     background: linear-gradient(#9caccf, #869ac5);
 }
 
-form input[type="submit"].secondary:hover,
-form input[type="reset"].secondary:hover,
-form button.secondary:hover,
-form a.button.secondary:hover,
+.mwf_notmobile form input[type="submit"].secondary:hover,
+.mwf_notmobile form input[type="reset"].secondary:hover,
+.mwf_notmobile form button.secondary:hover,
+.mwf_notmobile form a.button.secondary:hover,
 form input[type="submit"].secondary:focus,
 form input[type="reset"].secondary:focus,
 form button.secondary:focus,

@@ -46,8 +46,8 @@
     margin: 0;
 }
 
-.content h1.light,
-.content h2.light {
+.content > h1.light,
+.content > h2.light {
      border: 1px #dddddd;
      border-style: solid none none none;
 }
@@ -62,9 +62,10 @@
     width: auto;
 }
 
-.menu a:last-child li,
+.menu > ul > li:last-child,
+.menu > ol > li:last-child,
 .menu > *:last-child {
-    border-bottom: none !important;
+    border-bottom: none;
 }
 
 .menu.not-padded {
@@ -113,8 +114,8 @@ a.button {
     margin: 10px 10px 0 10px;
 }
 
-.button a,
-.button a.light {
+.button > a,
+.button > a.light {
     position: absolute;
     width: auto;
     overflow: hidden;
@@ -122,14 +123,14 @@ a.button {
     padding: .5em 0 .4em 0;
 }
 
-.button a:first-child {
+.button > a:first-child {
     right: 50%;
     left: 10px;
     width: auto;
     border: 1px solid #d0d0d0;
 }
 
-.button a:last-child {
+.button > a:last-child {
     left: 50%;
     right: 10px;
     width: auto;
@@ -137,7 +138,7 @@ a.button {
     border-left: 0px;
 }
 
-.button a:first-child:last-child
+.button > a:first-child:last-child
 {
     width: auto;
     left: 10px;
@@ -145,49 +146,49 @@ a.button {
 }
 
 a.button,
-.button a {
+.button > a {
 	border: none;
 }
 
 .mwf_notmobile a.button:hover,
 a.button:focus,
 a.button:active,
-.mwf_notmobile .button a:hover,
-.button a:focus,
-.button a:active,
+.mwf_notmobile .button > a:hover,
+.button > a:focus,
+.button > a:active,
 .mwf_notmobile a.button.light:hover,
 a.button.light:focus,
 a.button.light:active,
-.mwf_notmobile .button a.light:hover,
-.button a.light:focus,
-.button a.light:active {
+.mwf_notmobile .button > a.light:hover,
+.button > a.light:focus,
+.button > a.light:active {
 	background-color: #ffb300 !important;
 	color: #494D69;
 }
 
 a.button.light,
-.button a.light,
-.button.light a {
+.button > a.light,
+.button.light > a {
 	background-color: #f6f6f6;
 	color: #555;
 }
 
 .button.next,
-.button .next {
+.button > .next {
 	padding: 10px 0px 10px 65px;
 	background:url(img/button-next.png) no-repeat center;
 }
 
 .button.previous,
-.button .previous {
+.button > .previous {
 	padding: 10px 0px 10px 65px;
 	background:url(img/button-previous.png) no-repeat center;
 }
 
 .button.next span,
 .button.previous span,
-.button .next span,
-.button .previous span {
+.button > .next span,
+.button > .previous span {
     display: none;
 }
 
@@ -216,7 +217,7 @@ a.button.light,
     font-weight: bold;
 }
 
-#button-top:hover,
+.mwf_notmobile #button-top:hover,
 #button-top:active,
 #button-top:focus{
     background-color: #576c9c !important;

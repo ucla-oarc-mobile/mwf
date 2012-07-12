@@ -186,7 +186,7 @@ select {
 #footer,
 #footer a,
 #footer a:visited,
-#footer a:hover {
+.mwf_notmobile #footer a:hover {
 	color: #666666;
 }
 
@@ -196,7 +196,7 @@ select {
 	border-bottom: 1px solid #666666;
 }
 
-#footer a:hover {
+.mwf_notmobile #footer a:hover {
 	border-bottom: none;
 }
 
@@ -267,12 +267,12 @@ select {
     margin-bottom: .5em;
 }
 
-.content .button a {
+.content > .button a {
     color: #2685BB;
     font-weight: bold;
 }
 
-.content .button a .label {
+.content > .button a .label {
     color: #777;
     font-weight: bold;
 }
@@ -296,7 +296,8 @@ select {
     border-bottom: 1px solid #ddd;
 }
 
-.menu li p {
+.menu > ul > li p, 
+.menu > ol > li p {
     font-weight: normal;
 }
 
@@ -316,77 +317,62 @@ select {
     color: #000;
 }
 
-.menu ol, .menu ul {
+.menu > ul, 
+.menu > ol {
     list-style-type: none;
 }
 
-.menu li {
-    background:url(img/list-arrow.png) no-repeat 95% center;
+.menu > ul > li,
+.menu > ol > li  {
     background-color: #fff;
     text-align: center;
     border-bottom: 1px solid #ddd;
 }
 
-.menu li a {
-    display: block;
-}
-
-.menu li:hover {
+.mwf_notmobile .menu > ul > li:hover, 
+.mwf_notmobile .menu > ol > li:hover {
     background-color: #eaf2fa;
 }
 
-.menu li a,
-.menu.detailed.center li a {
+.menu > ul > li > a, 
+.menu > ol > li > a {
+    display: block;
+    background:url(img/list-arrow.png) no-repeat 95% center;
+}
+
+.menu > ul > li > a,
+.menu > ol > li > a{
     padding: .9em 3em .8em 2em;
 }
 
-.menu li a h3,
-.menu li a h4 {
-    color: #1e6a95;
-}
-
-.menu li a:hover h3,
-.menu li a:focus h3,
-.menu li a:active h3,
-.menu li a:hover h4,
-.menu li a:focus h4,
-.menu li a:active h4 {
-    color: #494D69;
-}
-
-.menu li > p:first-child:last-child {
+.menu > ul > li > p:first-child:last-child
+.menu > ol > li > p:first-child:last-child {
     padding: .9em; /* singular paragraph text within li */
 }
 
-.menu.detailed p {
+.menu.detailed > ul > li > a > p,
+.menu.detailed > ol > li > a > p{
     color: #555;
 }
 
-.menu.left li,
-.menu.detailed li {
+.menu.left > ul > li,
+.menu.detailed > ol > li {
     text-align: left;
 }
 
-.menu.left li a {
+.menu.left > ul > li > a,
+.menu.left > ol > li > a {
     padding-left: .9em;
 }
 
-.menu.center li {
+.menu.center > ul > li,
+.menu.center > ol > li{
     text-align: center;
 }
 
-.menu.detailed li {
+.menu.detailed > ul > li,
+.menu.detailed > ol > li {
     font-size: 1em;
-}
-
-.menu.detailed li > a, 
-.menu.detailed li > p
-{
-    padding: .9em 3em .8em .9em;
-}
-
-.menu .button a {
-    color: #2685BB;
 }
 
 /**
@@ -398,7 +384,7 @@ a.button, div.button {
     margin: 0;
 }
 
-a.button, div.button a{
+a.button, div.button > a {
     border-bottom: 1px solid #aaa;
     padding: .5em 0 .4em 0;
     background-color: #536895;
@@ -412,9 +398,9 @@ a.button, div.button a{
 .mwf_notmobile a.button:hover,
 a.button:focus,
 a.button:active,
-.mwf_notmobile div.button a:hover,
-div.button a:focus,
-div.button a:active{
+.mwf_notmobile div.button > a:hover,
+div.button > a:focus,
+div.button > a:active{
     background-color: #ffb300;
     color: #494D69;
 }
@@ -542,10 +528,10 @@ form a.button.disabled {
     cursor: default;
 }
 
-form input[type="submit"][disabled="disabled"]:hover,
-form input[type="reset"][disabled="disabled"]:hover,
-form button[disabled="disabled"]:hover,
-form a.button:hover.disabled,
+.mwf_notmobile form input[type="submit"][disabled="disabled"]:hover,
+.mwf_notmobile form input[type="reset"][disabled="disabled"]:hover,
+.mwf_notmobile form button[disabled="disabled"]:hover,
+.mwf_notmobile form a.button:hover.disabled,
 form input[type="submit"][disabled="disabled"]:focus,
 form input[type="reset"][disabled="disabled"]:focus,
 form button[disabled="disabled"]:focus,
@@ -553,10 +539,10 @@ form a.button:focus.disabled {
     background-color: #e4e7ee;
 }
 
-form input[type="submit"]:hover,
-form input[type="reset"]:hover,
-form button:hover,
-form a.button:hover,
+.mwf_notmobile form input[type="submit"]:hover,
+.mwf_notmobile form input[type="reset"]:hover,
+.mwf_notmobile form button:hover,
+.mwf_notmobile form a.button:hover,
 form input[type="submit"]:focus,
 form input[type="reset"]:focus,
 form button:focus,
@@ -568,10 +554,10 @@ form input[type="submit"].primary,
 form input[type="reset"].primary,
 form button.primary,
 form a.button.primary,
-form input[type="submit"][disabled="disabled"].primary:hover,
-form input[type="reset"][disabled="disabled"].primary:hover,
-form button.primary[disabled="disabled"]:hover,
-form a.button.primary:hover.disabled,
+.mwf_notmobile form input[type="submit"][disabled="disabled"].primary:hover,
+.mwf_notmobile form input[type="reset"][disabled="disabled"].primary:hover,
+.mwf_notmobile form button.primary[disabled="disabled"]:hover,
+.mwf_notmobile form a.button.primary:hover.disabled,
 form input[type="submit"][disabled="disabled"].primary:focus,
 form input[type="reset"][disabled="disabled"].primary:focus,
 form button[disabled="disabled"].primary:focus,
@@ -579,10 +565,10 @@ form a.button.primary:focus.disabled {
     background-color: #fbaf3f;
 }
 
-form input[type="submit"].primary:hover,
-form input[type="reset"].primary:hover,
-form button.primary:hover,
-form a.button.primary:hover,
+.mwf_notmobile form input[type="submit"].primary:hover,
+.mwf_notmobile form input[type="reset"].primary:hover,
+.mwf_notmobile form button.primary:hover,
+.mwf_notmobile form a.button.primary:hover,
 form input[type="submit"].primary:focus,
 form input[type="reset"].primary:focus,
 form button.primary:focus,
@@ -594,10 +580,10 @@ form input[type="submit"].secondary,
 form input[type="reset"].secondary,
 form button.secondary,
 form a.button.secondary,
-form input[type="submit"][disabled="disabled"].secondary:hover,
-form input[type="reset"][disabled="disabled"].secondary:hover,
-form button[disabled="disabled"].secondary:hover,
-form a.button.secondary:hover.disabled,
+.mwf_notmobile form input[type="submit"][disabled="disabled"].secondary:hover,
+.mwf_notmobile form input[type="reset"][disabled="disabled"].secondary:hover,
+.mwf_notmobile form button[disabled="disabled"].secondary:hover,
+.mwf_notmobile form a.button.secondary:hover.disabled,
 form input[type="submit"][disabled="disabled"].secondary:focus,
 form input[type="reset"][disabled="disabled"].secondary:focus,
 form button[disabled="disabled"].secondary:focus,
@@ -605,10 +591,10 @@ form a.button.secondary:focus.disabled {
     background-color: #9caccf;
 }
 
-form input[type="submit"].secondary:hover,
-form input[type="reset"].secondary:hover,
-form button.secondary:hover,
-form a.button.secondary:hover,
+.mwf_notmobile form input[type="submit"].secondary:hover,
+.mwf_notmobile form input[type="reset"].secondary:hover,
+.mwf_notmobile form button.secondary:hover,
+.mwf_notmobile form a.button.secondary:hover,
 form input[type="submit"].secondary:focus,
 form input[type="reset"].secondary:focus,
 form button.secondary:focus,
