@@ -8,7 +8,7 @@
  * @author ebollens
  * @copyright Copyright (c) 2010-11 UC Regents
  * @license http://mwf.ucla.edu/license
- * @version 20111213
+ * @version 20120712
  * 
  * @requires mwf.site
  * 
@@ -162,7 +162,7 @@ mwf.userAgent = new function() {
      */
     this.generateCookieContent = function(){
         
-        var cookie = '{';
+        var t, cookie = '{';
         cookie += '"s":"'+navigator.userAgent+'"';
         if(t = this.getOS())
             cookie += ',"os":"'+t+'"';
