@@ -186,7 +186,7 @@ select {
 #footer,
 #footer a,
 #footer a:visited,
-#footer a:hover {
+.mwf_notmobile #footer a:hover {
 	color: #666666;
 }
 
@@ -196,7 +196,7 @@ select {
 	border-bottom: 1px solid #666666;
 }
 
-#footer a:hover {
+.mwf_notmobile #footer a:hover {
 	border-bottom: none;
 }
 
@@ -329,8 +329,8 @@ select {
     border-bottom: 1px solid #ddd;
 }
 
-.menu > ul > li:hover, 
-.menu > ol > li:hover {
+.mwf_notmobile .menu > ul > li:hover, 
+.mwf_notmobile .menu > ol > li:hover {
     background-color: #eaf2fa;
 }
 
@@ -528,10 +528,10 @@ form a.button.disabled {
     cursor: default;
 }
 
-form input[type="submit"][disabled="disabled"]:hover,
-form input[type="reset"][disabled="disabled"]:hover,
-form button[disabled="disabled"]:hover,
-form a.button:hover.disabled,
+.mwf_notmobile form input[type="submit"][disabled="disabled"]:hover,
+.mwf_notmobile form input[type="reset"][disabled="disabled"]:hover,
+.mwf_notmobile form button[disabled="disabled"]:hover,
+.mwf_notmobile form a.button:hover.disabled,
 form input[type="submit"][disabled="disabled"]:focus,
 form input[type="reset"][disabled="disabled"]:focus,
 form button[disabled="disabled"]:focus,
@@ -539,10 +539,10 @@ form a.button:focus.disabled {
     background-color: #e4e7ee;
 }
 
-form input[type="submit"]:hover,
-form input[type="reset"]:hover,
-form button:hover,
-form a.button:hover,
+.mwf_notmobile form input[type="submit"]:hover,
+.mwf_notmobile form input[type="reset"]:hover,
+.mwf_notmobile form button:hover,
+.mwf_notmobile form a.button:hover,
 form input[type="submit"]:focus,
 form input[type="reset"]:focus,
 form button:focus,
@@ -554,10 +554,10 @@ form input[type="submit"].primary,
 form input[type="reset"].primary,
 form button.primary,
 form a.button.primary,
-form input[type="submit"][disabled="disabled"].primary:hover,
-form input[type="reset"][disabled="disabled"].primary:hover,
-form button.primary[disabled="disabled"]:hover,
-form a.button.primary:hover.disabled,
+.mwf_notmobile form input[type="submit"][disabled="disabled"].primary:hover,
+.mwf_notmobile form input[type="reset"][disabled="disabled"].primary:hover,
+.mwf_notmobile form button.primary[disabled="disabled"]:hover,
+.mwf_notmobile form a.button.primary:hover.disabled,
 form input[type="submit"][disabled="disabled"].primary:focus,
 form input[type="reset"][disabled="disabled"].primary:focus,
 form button[disabled="disabled"].primary:focus,
@@ -565,10 +565,10 @@ form a.button.primary:focus.disabled {
     background-color: #fbaf3f;
 }
 
-form input[type="submit"].primary:hover,
-form input[type="reset"].primary:hover,
-form button.primary:hover,
-form a.button.primary:hover,
+.mwf_notmobile form input[type="submit"].primary:hover,
+.mwf_notmobile form input[type="reset"].primary:hover,
+.mwf_notmobile form button.primary:hover,
+.mwf_notmobile form a.button.primary:hover,
 form input[type="submit"].primary:focus,
 form input[type="reset"].primary:focus,
 form button.primary:focus,
@@ -580,10 +580,10 @@ form input[type="submit"].secondary,
 form input[type="reset"].secondary,
 form button.secondary,
 form a.button.secondary,
-form input[type="submit"][disabled="disabled"].secondary:hover,
-form input[type="reset"][disabled="disabled"].secondary:hover,
-form button[disabled="disabled"].secondary:hover,
-form a.button.secondary:hover.disabled,
+.mwf_notmobile form input[type="submit"][disabled="disabled"].secondary:hover,
+.mwf_notmobile form input[type="reset"][disabled="disabled"].secondary:hover,
+.mwf_notmobile form button[disabled="disabled"].secondary:hover,
+.mwf_notmobile form a.button.secondary:hover.disabled,
 form input[type="submit"][disabled="disabled"].secondary:focus,
 form input[type="reset"][disabled="disabled"].secondary:focus,
 form button[disabled="disabled"].secondary:focus,
@@ -591,10 +591,10 @@ form a.button.secondary:focus.disabled {
     background-color: #9caccf;
 }
 
-form input[type="submit"].secondary:hover,
-form input[type="reset"].secondary:hover,
-form button.secondary:hover,
-form a.button.secondary:hover,
+.mwf_notmobile form input[type="submit"].secondary:hover,
+.mwf_notmobile form input[type="reset"].secondary:hover,
+.mwf_notmobile form button.secondary:hover,
+.mwf_notmobile form a.button.secondary:hover,
 form input[type="submit"].secondary:focus,
 form input[type="reset"].secondary:focus,
 form button.secondary:focus,

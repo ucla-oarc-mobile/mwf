@@ -217,7 +217,7 @@ a.button.light,
     font-weight: bold;
 }
 
-#button-top:hover,
+.mwf_notmobile #button-top:hover,
 #button-top:active,
 #button-top:focus{
     background-color: #576c9c !important;
