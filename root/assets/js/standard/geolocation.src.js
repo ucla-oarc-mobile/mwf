@@ -12,7 +12,7 @@
  *   @todo: For 2.0, do not return lat,long,accuracy.  Return the position object in its entirety instead.
  */
 
-mwf.touch.geolocation = new function(optionalGeolocationObject)
+mwf.standard.geolocation = new function(optionalGeolocationObject)
 {
     var ERROR_MESSAGE = {
         GENERAL: 'Geolocation failure.',
@@ -238,3 +238,5 @@ mwf.touch.geolocation = new function(optionalGeolocationObject)
         highAccuracy = bool;
     }
 }
+
+mwf.touch.geolocation = mwf.standard.geolocation;
