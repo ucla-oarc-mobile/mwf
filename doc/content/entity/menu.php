@@ -8,7 +8,7 @@
 
 <h2>Intent</h2>
 
-<p>This entity can be employed by any module to create a menu. It contains <code>&lt;ol&gt;</code> entity inside as the ordered list has access key capabilities.</p>
+<p>This entity can be employed by any module to create a menu. It contains a <code>&lt;ul&gt;</code> or <code>&lt;ol&gt;</code> entity inside.</p>
 
 <h2>Example Code</h2>
 
@@ -17,7 +17,7 @@
 <div class="highlight">
 <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"menu detailed not-padded"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"light"</span><span class="nt">&gt;</span>{MENU_TITLE}<span class="nt">&lt;/h1&gt;</span> 
-    <span class="nt">&lt;ol&gt;</span> 
+    <span class="nt">&lt;ul&gt;</span> 
         <span class="nt">&lt;li&gt;</span>	
             <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{LINK_URL_1}"</span><span class="nt">&gt;</span> 
             {LINK_TITLE_1}
@@ -30,7 +30,7 @@
             <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{LINK_URL_3}"</span><span class="nt">&gt;</span> 
             {LINK_TITLE_3}
             <span class="nt">&lt;/a&gt;&lt;/li&gt;</span> 
-    <span class="nt">&lt;/ol&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
 </pre>
 </div>
