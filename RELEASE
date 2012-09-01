@@ -19,6 +19,7 @@ License:
 
 TABLE OF CONTENTS
 
+Version 1.3.03          August 31, 2012
 Version 1.3.02          July 12, 2012
 Version 1.3.01.rc       June 12, 2012
 Version 1.3.00.beta     April 15, 2012
@@ -45,6 +46,23 @@ Version 1.1.03.alpha    July 20, 2011
 Version 1.1.02.alpha    June 23, 2011
 Version 1.1.01.alpha    June 16, 2011
 Version 1.1.00.alpha    May 20, 2011
+
+==============================================================================
+
+Version 1.3.03
+August 31, 2012
+
+* Update LICENSE to BSD 3-clause [#161]
+
+* Fix bug in custom CSS loading within the CSS Handler [#159]
+
+* Android screen dimensions in mwf.screen always return false [#157]
+
+* Fix left-alignment CSS definition [#156]
+
+* Remove absolute link for customize home screen link [#153]
+
+* Update HTTP header Content-Type for PHP-based JS script files [#154]
 
 ==============================================================================
 
