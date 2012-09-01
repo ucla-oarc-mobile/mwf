@@ -25,7 +25,7 @@
  * Defines the file to be parsed as a Javascript file.
  */
 
-header('Content-Type: text/javascript');
+header('Content-Type: application/javascript');
 
 /**
  * Require necessary libraries.
