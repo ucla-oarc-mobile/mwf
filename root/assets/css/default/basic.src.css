@@ -355,10 +355,12 @@ select {
     color: #555;
 }
 
-.menu.left > ul > li,
-.menu.detailed > ol > li {
-    text-align: left;
-}
+ .menu.left > ul > li,
+ .menu.left > ol > li,
+ .menu.detailed > ul > li,
+ .menu.detailed > ol > li {
+     text-align: left;
+ }
 
 .menu.left > ul > li > a,
 .menu.left > ol > li > a {
