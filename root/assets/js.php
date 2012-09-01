@@ -41,7 +41,7 @@ $ext = '.js';
 
 header("Cache-Control: max-age=0, no-cache, no-store, must-revalidate");
 header("Expires: Wed, 11 Jan 1984 05:00:00 GMT");
-header('Content-Type: text/javascript');
+header('Content-Type: application/javascript');
 
 ?>/** Mobile Web Framework | http://mwf.ucla.edu */
 
