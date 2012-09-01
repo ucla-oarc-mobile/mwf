@@ -91,7 +91,7 @@ foreach ($classifications as $classification => $is_classification) {
 /**
  * Load URL-specified CSS files (minified) based on user agent.
  */
-foreach ($classifications as $is_classification) {
+foreach ($classifications as $classification=>$is_classification) {
     if ($is_classification && isset($_GET[$classification])) {
         foreach (explode(' ', $_GET[$classification]) as $file) {
             if (Path_Validator::is_safe($file, 'css') && $contents = Path::get_contents($file)) {
