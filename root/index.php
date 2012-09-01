@@ -123,7 +123,7 @@ if (!$main_menu)
  */
 $footer = Site_Decorator::default_footer();
 if ($main_menu && Classification::is_full() && Config::get('frontpage','customizable_home_screen'))
-    $footer->add_footer_link('Customize Home Screen', "/customize_home_screen.php");
+    $footer->add_footer_link('Customize Home Screen', "customize_home_screen.php");
 echo $footer->render();
 
 /**
