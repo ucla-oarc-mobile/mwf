@@ -24,13 +24,13 @@ mwf.screen = new function() {
     var ws = window.screen;
     
     /**
-     * Bug in Android 2.2-3 prevents it from returning accurate screen 
+     * Bug in Android prevent it from returning accurate screen 
      * dimensions, so bypass inaccurate values with false instead.
      * 
-     * @compat Android 2.2-3
+     * @compat Android
      */
     var version = mwf.userAgent.getOSVersion();
-    if(mwf.userAgent.getOS() == 'android' && (version.indexOf('2.2') == 0 || version.indexOf('2.3') == 0)) {
+    if(mwf.userAgent.getOS() == 'android') {
         ws = {width:false,height:false}
     }
     
