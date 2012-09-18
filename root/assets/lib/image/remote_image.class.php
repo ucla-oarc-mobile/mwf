@@ -34,8 +34,8 @@ class Remote_Image extends Image {
         }
 
         $unlink_path = FALSE;
-        $path = $this->_cache->get_cache_path($this->get_cache_key());
-        if (!file_exists($path)) {
+        $path = $this->_cache ? $this->_cache->get_cache_path($this->get_cache_key()) : false;
+        if (($path === false) || (!file_exists($path))) {
             /**
              * @compat 5.1
              */
@@ -124,8 +124,9 @@ class Remote_Image extends Image {
     }
 
     protected function get_gd_extension() {
-        $this->get_gd_image();
+        if ($this->_image_ext === null) {
+            $this->get_gd_image();
+        }
         return $this->_image_ext;
     }
-
 }
