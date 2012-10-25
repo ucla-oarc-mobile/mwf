@@ -57,12 +57,18 @@ abstract class Image {
             require_once(dirname(__FILE__) . '/image/local_image.class.php');
             return new Local_Image($image_path);
         }
-    }
+    } 
 
     protected function __construct($imagepath) {
         $this->_image_path = $imagepath;
 
-        $this->_cache = new Disk_Cache(Config::get('image', 'cache_name'));
+        try {
+            $this->_cache = new Disk_Cache(Config::get('image', 'cache_name'));
+        } catch (Exception $e) {
+            trigger_error($e->getMessage(), E_USER_WARNING);
+            $this->_cache = false;
+        }
+
         $this->_memory_limit = Config::get('image', 'memory_limit') ?
                 Config::get('image', 'memory_limit') : 33554432;
     }
@@ -76,9 +82,6 @@ abstract class Image {
     }
 
     public function get_mimetype() {
-        if ($this->_image_path === false)
-            return '';
-
         if ($this->get_gd_extension()) {
             return image_type_to_mime_type(constant('IMAGETYPE_' . strtoupper($this->get_gd_extension())));
         } else {
@@ -94,14 +97,16 @@ abstract class Image {
         if ($this->_image_path === false)
             return '';
 
-        $key = $this->get_cache_key();
+        if ($this->_cache) {
+            $key = $this->get_cache_key();
 
-        $image = $this->_cache->get_raw($key);
-        if ($image) {
-            return $image;
+            $image = $this->_cache->get_raw($key);
+            if ($image) {
+                return $image;
+            }
         }
 
-        if ($this->generate_image()) {
+        if ($this->generate_image() && $this->_cache) {
             $return = file_get_contents($this->_cache->get_cache_path($key));
             return $return ? $return : '';
         }
@@ -163,7 +168,8 @@ abstract class Image {
 
         $generated = imagecreatetruecolor($new_width, $new_height);
         if (imagecopyresampled($generated, $source, 0, 0, 0, 0, $new_width, $new_height, $width, $height)) {
-            return $savefunction($generated, $this->_cache->get_cache_path($this->get_cache_key()), $quality);
+            $save_path = $this->_cache ? $this->_cache->get_cache_path($this->get_cache_key()) : null;
+            return $savefunction($generated, $save_path, $quality);
         }
         
         return false;
