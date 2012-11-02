@@ -82,16 +82,6 @@
 
 <p>It is recommended that you configure your document root to be the <code>root/</code> directory of the MWF, keeping it isolated from other MWF folders such as <code>install/</code> and <code>config/</code>.</p>
 
-<p>The first step to installing is to run the following command:</p>
-
-<div class="highlight">
-<pre><span class="n">sudo</span> <span class="n">sh</span> <span class="n">install</span><span class="o">/</span><span class="n">install</span><span class="p">.</span><span class="n">sh</span>
-</pre>
-</div>
-
-
-<p>This will create <code>/var/mobile</code> and several directories under it for caching and other framework features that require the file system. These directories are relatively light. If you are not running a system that supports this, or you do not have <code>sudo</code>, you can still use the framework. You'll just need to take a look at the install script and create the directories with proper permissions where you intend to place them.</p>
-
 <p>Once this is done, then you'll want to modify configuration files in <code>config/</code>.</p>
 
 <p>The following two properties in <code>config/global.php</code> must be set:</p>
@@ -118,7 +108,7 @@
 <code>config/mobile.php</code> if you want to change the maximum screen dimensions for a device to be considered "mobile"</li>
 <li>
 <code>config/preview.php</code> with the domain under which the preview mode menu should appear</li>
-</ul><p>If you did not run <code>install/install.sh</code>, or have configured your directories in a different way, you will also need to set the image cache directory variable <code>cache_dir</code> in <code>config/image.php</code> to be a directory that is writable by the web server user.</p>
+</ul>
 
 <p>Once this is done, you should have a working copy of the framework.</p>
 
