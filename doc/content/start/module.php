@@ -18,7 +18,7 @@
     <p>These two tags will include a stylesheet and a javascript file that comprise the UCLA MWF in it's entirety, and once included, you have successfully implemented the Framework in your application. Although these are the only two tags the framework requires for inclusion, it is highly recommended that the following <code>&lt;meta&gt;</code> tag be included as well for uniform screen scaling across mobile devices:</p>
 
     <div class="highlight">
-    <pre><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"</span><span class="nt">&gt;</span>
+    <pre><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"</span><span class="nt">&gt;</span>
     </pre>
     </div>
 
@@ -75,16 +75,16 @@
 
     <h3>Menus</h3>
 
-    <p>To create a menu, simply create a div entity and give it <code>class="menu-full</code>. Within the <code>div.menu-full</code> entity, you can specify a menu header with an <code>&lt;h1&gt;</code> entity and build your menu with an ordered list (<code>&lt;ol&gt;</code>). </p>
+    <p>To create a menu, simply create a div entity and give it <code>class="menu"</code>. Within the <code>div.menu</code> entity, you can specify a menu header with an <code>&lt;h1&gt;</code> entity and build your menu with an ordered list (<code>&lt;ol&gt;</code> or <code>ul</code>). </p>
 
-    <p>By default, the <code>div.menu-full</code> entity will give a full-width menu with large, centered items. Additionally, you can use the the <code>menu-padded</code> and <code>menu-detailed</code> classes for more styling. The <code>menu-padded</code> class will add some padding around the menu, and give it rounded corners on devices that support it. The <code>menu-detailed</code> class will make the menu items left aligned and give them a slightly smaller font. This is useful for more detailed menus where each item may have additional associated text. </p>
+    <p>By default, the <code>div.menu</code> entity will give a full-width menu with large, centered items, some stylistic padding and rounded corners (where supported). Additionally, you can use the the <code>not-padded</code> and <code>detailed</code> classes for more styling. The <code>not-padded</code> class will remove the padding and rounded corners around the menu The <code>detailed</code> class will make the menu items left aligned and give them a slightly smaller font. This is useful for more detailed menus where each item may have additional associated text. </p>
 
     <p>See below for some example menus.</p>
 
     <div class="highlight">
-    <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"menu-full menu-padded"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"light menu-first"</span><span class="nt">&gt;</span>{MENU_TITLE}<span class="nt">&lt;/h1&gt;</span> 
-        <span class="nt">&lt;ol&gt;</span> 
+    <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"menu"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"light"</span><span class="nt">&gt;</span>{MENU_TITLE}<span class="nt">&lt;/h1&gt;</span> 
+        <span class="nt">&lt;ul&gt;</span> 
             <span class="nt">&lt;li&gt;</span>	
                 <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{LINK_URL_1}"</span><span class="nt">&gt;</span> 
                 {LINK_TITLE_1}
@@ -93,22 +93,21 @@
                 <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{LINK_URL_2}"</span><span class="nt">&gt;</span> 
                 {LINK_TITLE_2}
                 <span class="nt">&lt;/a&gt;&lt;/li&gt;</span> 
-            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"menu-last"</span><span class="nt">&gt;</span>	
+            <span class="nt">&lt;li</span><span class="nt">&gt;</span>	
                 <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{LINK_URL_3}"</span><span class="nt">&gt;</span> 
                 {LINK_TITLE_3}
                 <span class="nt">&lt;/a&gt;&lt;/li&gt;</span> 
-        <span class="nt">&lt;/ol&gt;</span>
+        <span class="nt">&lt;/ul&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
     </pre>
     </div>
 
-
-    <p>The preceding code is a simple padded menu that has three centered link items. This is a good solution for a simple broad navigation where each link item is a single phrase such as "Home" or "Contact Info". Especially noteworthy is the use of the <code>menu-first</code> and <code>menu-last</code> classes to delineate the first and last child entities of the menu. While not necessary for most devices, the use of these styles is highly recommended for backwards compatibility of devices that do not support the <code>:first-child</code> and <code>:last-child</code> CSS 2.1 pseudo-selectors.</p>
+    <p>The preceding code is a simple padded menu that has three centered link items. This is a good solution for a simple broad navigation where each link item is a single phrase such as "Home" or "Contact Info".</p>
 
     <div class="highlight">
-    <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"menu-full menu-detailed menu-padded"</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"light menu-first"</span><span class="nt">&gt;</span>{MENU_TITLE}<span class="nt">&lt;/h1&gt;</span> 
-        <span class="nt">&lt;ol&gt;</span> 
+    <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"menu detailed not-padded"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"light"</span><span class="nt">&gt;</span>{MENU_TITLE}<span class="nt">&lt;/h1&gt;</span> 
+        <span class="nt">&lt;ul&gt;</span> 
             <span class="nt">&lt;li&gt;</span>
                 <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{LINK_URL_1}"</span><span class="nt">&gt;</span> 
                 {LINK_TITLE_1}
@@ -119,37 +118,35 @@
                 {LINK_TITLE_2}
                  <span class="nt">&lt;br</span> <span class="nt">/&gt;&lt;span</span> <span class="na">class=</span><span class="s">"smallprint"</span><span class="nt">&gt;</span>{LINK2_EXTRA_TEXT}&gt;<span class="nt">&lt;/span&gt;&lt;/a&gt;</span>
             <span class="nt">&lt;/li&gt;</span> 
-            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"menu-last"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;li</span><span class="nt">&gt;</span>
                 <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{LINK_URL_3}"</span><span class="nt">&gt;</span> 
                 {LINK_TITLE_3}
                  <span class="nt">&lt;br</span> <span class="nt">/&gt;&lt;span</span> <span class="na">class=</span><span class="s">"smallprint"</span><span class="nt">&gt;</span>{LINK3_EXTRA_TEXT}&gt;<span class="nt">&lt;/span&gt;&lt;/a&gt;</span>
            <span class="nt">&lt;/li&gt;</span>
-        <span class="nt">&lt;/ol&gt;</span>
+        <span class="nt">&lt;/ul&gt;</span>
     <span class="nt">&lt;/div&gt;</span>
     </pre>
     </div>
 
 
-    <p>The preceding code shows an example of a more detailed menu using a menu with the <code>.menu-detailed</code> class as well as <code>span</code> elements with the <code>smallprint</code> class within the <code>&lt;a&gt;</code> tags of the list items to specify more content within each link. This can be used to give short descriptions of menu items used for articles or content links.</p>
+    <p>The preceding code shows an example of a more detailed menu using a menu with the <code>.detailed</code> class as well as <code>span</code> elements with the <code>smallprint</code> class within the <code>&lt;a&gt;</code> tags of the list items to specify more content within each link. This can be used to give short descriptions of menu items used for articles or content links.</p>
 
     <h3>Content</h3>
 
-    <p>To create a content area, simply create a <code>&lt;div&gt;</code> entity and give it <code>class="content-full</code>. By default, this will create a standalone content box entity that will be styled to display appropriately on various devices. </p>
+    <p>To create a content area, simply create a <code>&lt;div&gt;</code> entity and give it <code>class="content"</code>. By default, this will create a standalone content box entity that will be styled to display appropriately on various devices. </p>
 
-    <p>As with the menu, there is a <code>content-padded</code> class available for further styling, and the use of <code>content-first</code> and <code>content-last</code> classes is highly encouraged for graceful degradation.</p>
+    <p>As with the menu, there is a <code>not-padded</code> class available for further styling.</p>
 
-    <p>Within a <code>div.content-full</code> entity, <code>&lt;h1&gt;</code> and <code>&lt;p&gt;</code> elements will be treated as block level elements. If you have multiple paragraphs in the same block of content, it is recommended that you place the correlating <code>&lt;p&gt;</code> elements within a <code>&lt;div&gt;</code> so the paragraphs themselves are not treated as separate content blocks. </p>
-
-    <p>The <code>content-button</code> class can be applied to <code>&lt;div&gt;</code> elements for links (it is recommended that the contents of the <code>&lt;div&gt;</code> be wrapped in an <code>&lt;a&gt;</code> element), and <code>&lt;div.label&gt;</code> elements can be used within <code>&lt;div&gt;</code> elements to specify labels for content.</p>
-
+    <p>Within a <code>div.content</code> entity, <code>&lt;h1&gt;</code> and <code>&lt;p&gt;</code> direct child elements will be treated as block level elements. If you have multiple paragraphs in the same block of content, it is recommended that you place the correlating <code>&lt;p&gt;</code> elements within a <code>&lt;div&gt;</code> so the paragraphs themselves are not treated as separate content blocks. </p>
+    
     <p>See below for an example of a content area.</p>
 
     <div class="highlight">
-    <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-full content-padded"</span><span class="nt">&gt;</span> 
-        <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"content-first light"</span><span class="nt">&gt;</span>{CONTENT_TITLE}<span class="nt">&lt;/h1&gt;</span> 
+    <pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span> 
+        <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"light"</span><span class="nt">&gt;</span>{CONTENT_TITLE}<span class="nt">&lt;/h1&gt;</span> 
         <span class="nt">&lt;div&gt;</span>{CONTENT_BLOCK}<span class="nt">&lt;/div&gt;</span> 
         <span class="nt">&lt;p&gt;</span>{CONTENT_TEXT_BLOCK_1}<span class="nt">&lt;/p&gt;</span> 
-        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"content-last"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span><span class="nt">&gt;</span>
             <span class="nt">&lt;p&gt;</span>{CONTENT_TEXT_BLOCK_2_PARAGRAPH_1}<span class="nt">&lt;/p&gt;</span> 
             <span class="nt">&lt;p&gt;</span>{CONTENT_TEXT_BLOCK_2_PARAGRAPH_1}<span class="nt">&lt;/p&gt;</span> 
         <span class="nt">&lt;/div&gt;</span> 
